@@ -1,0 +1,285 @@
+SUBJECT: NATURAL LANGUAGE PROCESSING
+UNIT NO: 5
+UNIT NAME: PRAGMATICS AND DISCOURSE
+
+
+INDEX
+
+Lecture 31 – Syntactic and Semantic Constraints on Coreference
+Lecture 32 – Preferences in Pronoun Interpretation
+Lecture 33 – Lappin and Leass’ Algorithm for Pronoun Resolution
+
+
+LECTURE 31
+SYNTACTIC AND SEMANTIC CONSTRAINTS ON COREFERENCE
+
+
+REFERENCE RESOLUTION
+
+Reference resolution is the task of identifying all noun phrases that refer to the same real-world entity within a discourse.
+
+
+NUMBER AGREEMENT
+
+Referring expressions and their referents must agree in number.
+
+Examples:
+- John has a new Acura. It is red.
+- John has three new Acuras. They are red.
+
+Incorrect:
+- John has a new Acura. They are red.
+- John has three new Acuras. It is red.
+
+
+PERSON AND CASE AGREEMENT
+
+Person agreement requires consistency in grammatical person.
+
+First person: I, we  
+Second person: you  
+Third person: he, she, they  
+
+Examples:
+- You and I have an Acura. We love it.
+- John and Mary have Acuras. They love them.
+
+Incorrect:
+- John and Mary have Acuras. We love them.
+- You and I have an Acura. They love it.
+
+
+GENDER AGREEMENT
+
+Pronouns must agree in gender with their referents.
+
+Examples:
+- John has an Acura. He is attractive. (he = John)
+- John bought an Acura. It is attractive. (it = Acura)
+
+
+SYNTACTIC CONSTRAINTS
+
+Coreference is constrained by syntactic structure, especially within the same sentence.
+
+Reflexives:
+- himself, herself, themselves
+
+Examples:
+- John bought himself a new Acura. ✔
+- John bought him a new Acura. ✖
+
+- John said Bill bought him a new Acura. (him ≠ Bill)
+- John said Bill bought himself a new Acura. (himself = Bill)
+
+Additional examples:
+- John wanted a new car. Bill bought him a new Acura. (him = John)
+- John wanted a new car. He bought him a new Acura. (he = John, him ≠ John)
+- John placed the pamphlets next to himself. (himself = John)
+- John placed the pamphlets next to him. (him = John)
+
+
+SELECTIONAL RESTRICTIONS
+
+Verbs impose semantic constraints on their arguments, which can eliminate incorrect referents.
+
+Example:
+- John bought a new Acura. It drinks gasoline. (metaphorical violation)
+
+World knowledge is often required:
+- John parked his Acura in the garage. It is messy. (it = garage)
+- John parked his Acura in Beverly Hills. It is messy. (it = Beverly Hills)
+
+
+LECTURE 32
+PREFERENCES IN PRONOUN INTERPRETATION
+
+
+RECENCY
+
+Recently mentioned entities are more salient.
+
+Example:
+- John has an Integra. Bill has a Legend. Mary likes to drive it.
+(it = Legend)
+
+
+GRAMMATICAL ROLE
+
+Salience hierarchy:
+Subject > Object > Others
+
+Examples:
+- John went to the dealership with Bill. He bought an Integra. (he = John)
+- Bill went to the dealership with John. He bought an Integra. (he = Bill)
+- Bill and John went to the dealership. He bought an Integra. (ambiguous)
+
+
+REPEATED MENTION
+
+Entities mentioned repeatedly remain salient.
+
+Example:
+- John needed a car. He wanted something sporty.
+- Bill went with him to the dealership.
+- He bought an Integra.
+(he = John)
+
+
+PARALLELISM
+
+Parallel grammatical structures influence pronoun interpretation.
+
+Example:
+- Mary went with Sue to the Acura dealership.
+- Sally went with her to the Mazda dealership.
+(her = Sue)
+
+However, parallelism is not absolute:
+- Mary went with Sue to the dealership.
+- Sally warned her not to buy anything.
+(her = Mary)
+
+
+VERB SEMANTICS (IMPLICIT CAUSALITY)
+
+Certain verbs bias pronoun interpretation.
+
+Examples:
+- John telephoned Bill. He lost the pamphlet. (he = John)
+- John criticized Bill. He lost the pamphlet. (he = Bill)
+
+Thematic role bias:
+- John seized the pamphlet from Bill. He likes reading about cars. (he = John)
+- John passed the pamphlet to Bill. He likes reading about cars. (he = Bill)
+
+- The dealer admired John. He knows cars well. (he = John)
+- The dealer impressed John. He knows cars well. (he = dealer)
+
+
+LECTURE 33
+LAPPIN AND LEASS’ ALGORITHM FOR PRONOUN RESOLUTION
+
+
+OVERVIEW
+
+A salience-based algorithm for pronoun resolution using syntactic constraints and preferences.
+
+
+KEY COMPONENTS
+
+- Discourse model update
+- Evoked entities
+- Coreference equivalence classes
+- Salience computation
+- Pronoun resolution
+
+
+SALIENCE WEIGHTS (EXAMPLE VALUES)
+
+Recency: 100  
+Subject: 80  
+Existential: 70  
+Object: 50  
+Indirect object / oblique: 40  
+Non-adverbial PP: 50  
+Head noun: 80  
+Parallelism: +35  
+Cataphora: −175  
+
+Salience values are halved after each sentence.
+
+
+ARGUMENT ORDERING
+
+Implicit salience order:
+subject > existential predicate > object > indirect object > adverbial PP
+
+Example:
+On the sofa, the cat was eating bonbons.
+
+- sofa: 100 + 40 + 80 = 220
+- cat: 100 + 80 + 50 + 80 = 310
+- bonbons: 100 + 50 + 50 + 80 = 280
+
+
+SALIENCE UPDATE EXAMPLE
+
+Sentence:
+The bonbons were very tasty.
+
+Updated salience:
+- sofa: 70
+- cat: 155
+- bonbons: 450
+
+Sentence:
+They were a gift from an admirer.
+
+Updated salience:
+- sofa: 35
+- cat: 77.5
+- bonbons: 225 (+35)
+
+
+REFERENCE RESOLUTION PROCEDURE
+
+1. Collect potential antecedents (up to four sentences back)
+2. Remove candidates failing gender/number agreement
+3. Remove candidates violating syntactic constraints
+4. Add salience bonuses or penalties
+5. Select the referent with highest salience
+6. Break ties using proximity
+
+
+SOLUTION EXAMPLES
+
+They were a gift from an admirer.
+(they = bonbons)
+
+Reason:
+- Only plural candidate
+- Highest salience
+
+It ate them all.
+(it = cat)
+
+
+CENTERING THEORY (EXTENSION)
+
+Introduces discourse centers:
+- Backward-looking center Cb
+- Forward-looking centers Cf
+- Preferred center Cp
+
+Transition preferences:
+Continue > Retain > Smooth-Shift > Rough-Shift
+
+
+ALGORITHM SUMMARY
+
+- Generate all possible Cb–Cf combinations
+- Apply syntactic and semantic constraints
+- Rank transitions by preference
+- Select best reference assignment
+
+
+FINAL EXAMPLE
+
+John saw a beautiful Acura Integra.
+He showed it to Bob.
+He bought it.
+
+Resolved:
+- he → John
+- it → Acura Integra
+
+
+REFERENCES
+
+Daniel Jurafsky, James H. Martin  
+Speech and Language Processing, Second Edition  
+Prentice Hall, 2008
+
+Semantic Analysis in Natural Language Processing  
+https://www.youtube.com/watch?v=DPi5rfTX6mw

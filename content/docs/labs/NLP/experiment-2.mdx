@@ -1,0 +1,85 @@
+---
+title: Experiment 2
+description: Apply various text preprocessing techniques for any given text (Tokenization, Filtration & Script Validation).
+---
+
+import { FileText, Download, Terminal } from 'lucide-react';
+import { FloatingColabButton } from '@/components/ui/floating-colab-button';
+
+Objective: To understand text preprocessing techniques including tokenization, stop word removal, and script validation using NLTK.
+
+---
+
+### Prerequisites
+
+<Cards>
+  <Card 
+    icon={<Download />}
+    title="Install Python" 
+    description="Download Python for Windows"
+    href="https://www.python.org/downloads/"
+  />
+</Cards>
+
+<Callout icon={<Terminal />} title="Install NLTK">
+Open your terminal or command prompt and run:
+`pip install nltk`
+</Callout>
+
+### Perform
+
+1. Open your text editor or IDE (IDLE, VS Code, etc.).
+2. Create a new file named `exp2.py`.
+3. Paste the code below.
+4. Run the script.
+
+### Code
+
+```python
+import nltk
+import re
+import string
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+
+# Ensure necessary NLTK data is downloaded
+def ensure_nltk_resource(resource):
+    try:
+        nltk.data.find(resource)
+    except LookupError:
+        nltk.download(resource.split('/')[-1])
+
+ensure_nltk_resource('tokenizers/punkt')
+ensure_nltk_resource('corpora/stopwords')
+
+text = """
+Machine learning and Natural Language Processing
+enable computers to analyze and understand human language efficiently.
+"""
+
+# Tokenization
+tokens = word_tokenize(text)
+
+# Convert to lowercase
+tokens = [token.lower() for token in tokens]
+
+# Remove punctuation and numbers
+tokens = [
+    token for token in tokens
+    if token not in string.punctuation and not token.isdigit()
+]
+
+# Remove stop words
+stop_words = set(stopwords.words('english'))
+tokens = [token for token in tokens if token not in stop_words]
+
+# Script Validation (Keep only alphabetic tokens)
+tokens = [
+    token for token in tokens
+    if re.fullmatch(r'[a-zA-Z]+', token)
+]
+
+print(tokens)
+```
+
+<FloatingColabButton />

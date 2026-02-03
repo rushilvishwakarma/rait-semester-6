@@ -1,0 +1,95 @@
+---
+title: Experiment 1
+description: ML Project Setup & Reproducibility
+---
+
+import { Github, FolderPlus, FileCode, Terminal } from 'lucide-react';
+
+Objective: To set up a reproducible ML project using GitHub and Python environments.
+
+---
+
+### Prerequisites
+
+<Cards>
+  <Card 
+    icon={<Github />}
+    title="Install GitHub Desktop" 
+    description="The easiest way to use Git"
+    href="https://desktop.github.com/"
+  />
+</Cards>
+
+<Callout type="warn" title="Note on Script Names">
+  In standard examples (or your notes), you might see `train.py`. Here, we are using specific script names: `linear-regression.py` and `logistic-regression.py` to run multiple models.
+</Callout>
+
+### Procedure
+
+#### 1. Create Project Folder
+
+Create a new folder on your **Desktop** named `mlops-lab`.
+
+#### 2. Create Files
+
+Inside the `mlops-lab` folder, create the following files:
+
+**linear-regression.py**
+```python
+import pandas as pd
+from sklearn.linear_model import LinearRegression    
+X = [[1],[2],[3],[4]]
+y = [2,4,6,8] 
+model = LinearRegression().fit(X,y)
+print("Prediction for 5:", model.predict([[5]])[0])
+```
+
+**logistic-regression.py**
+```python
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+
+# Sample dataset (binary classification)
+# X represents features, y represents labels (0 or 1)
+X = [[1], [2], [3], [4]]
+y = [0, 0, 1, 1]
+
+# Train logistic regression model
+model = LogisticRegression().fit(X, y)
+
+# Make a prediction
+prediction = model.predict([[5]])[0]
+probability = model.predict_proba([[5]])[0]
+
+print("Prediction for 5:", prediction)
+print("Probability distribution:", probability)
+```
+
+**requirements.txt**
+```txt
+numpy
+pandas
+scikit-learn
+```
+
+#### 3. Push to GitHub
+
+1. Open **GitHub Desktop**.
+2. Go to `File` → `Add Local Repository`.
+3. Select the `mlops-lab` folder on your Desktop.
+4. GitHub Desktop will ask to create a repository. Click **Create Repository**.
+5. Add a summary (e.g., "Initial ML project setup").
+6. Click **Commit to main**.
+7. Click **Publish repository** to push it to GitHub.
+
+---
+
+### Run in Google Colab
+
+<Cards>
+  <Card 
+    title="Testing" 
+    description="Run the ML code in Google Colab"
+    href="/docs/labs/MLOps/experiment-1/colab-code"
+  />
+</Cards>

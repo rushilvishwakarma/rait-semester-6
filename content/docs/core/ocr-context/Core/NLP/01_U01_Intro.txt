@@ -1,0 +1,471 @@
+SUBJECT NAME NATURAL LANGUAGE PROCESSING
+UNIT NO 1
+UNIT NAME INTRODUCTION
+
+INDEX
+
+Lecture 1 – Why NLP, Generic NLP system
+Lecture 2 – Stages of NLP
+Lecture 3 – Challenges of NLP
+Lecture 4 – Applications of NLP
+
+
+UNIT NO 1 – INTRODUCTION
+
+
+LECTURE NO 1
+WHY NLP
+GENERIC NLP SYSTEM
+INTRODUCTION TO NATURAL LANGUAGE PROCESSING
+
+
+Natural Language
+
+Refers to the language spoken by people,
+e.g. English, Hindi, Marathi, Spanish, French, etc.,
+as opposed to artificial programming languages, like C, C++, Java, etc.
+
+
+Natural Language Processing
+
+Applications that deal with these natural languages in a way or another.
+
+
+INTRODUCTION TO NATURAL LANGUAGE PROCESSING
+
+The process of computer analysis of input provided in a human language (natural language), and conversion of this input into a useful form of representation.
+
+The field of NLP is primarily concerned with getting computers to perform useful and interesting tasks with human languages.
+
+The field of NLP is secondarily concerned with helping us come to a better understanding of human language.
+
+
+DEFINITION NLP
+
+The sub-domain of artificial intelligence concerned with the task of developing programs possessing some capability of ‘understanding’ a natural language in order to achieve some specific goal.
+
+A transformation from one representation (the input text) to another (internal representation).
+
+Understanding.
+
+
+FORMS OF NATURAL LANGUAGE PROCESSING
+
+The inputoutput of an NLP system can be
+- Written text
+- Speech
+
+During classes, our focus will be mainly on written text (not speech).
+
+To process written text, we need
+- Lexical, syntactic, semantic knowledge about the language
+- Discourse information, real world knowledge
+
+To process spoken language, we need everything required to process written text, plus the challenges of speech recognition and speech synthesis.
+
+
+WHY NATURAL LANGUAGE PROCESSING
+
+Huge amounts of data.
+Internet = at least 20 billion pages.
+Applications for processing large amounts of texts require NLP expertise.
+
+The applications in our day-to-day life are the obvious motivation.
+
+
+COMPONENTS OF NATURAL LANGUAGE PROCESSING
+
+Natural Language Understanding
+Mapping the given input in the natural language into a useful representation.
+Different levels of analysis required
+- Morphological analysis
+- Syntactic analysis
+- Semantic analysis
+- Discourse analysis
+
+Natural Language Generation
+Producing output in the natural language from some internal representation.
+Different levels of synthesis required
+- Deep planning (what to say)
+- Syntactic generation
+
+
+GOAL OF NATURAL LANGUAGE PROCESSING
+
+Engineering Goal
+Design, implement, and test systems that process natural languages (e.g., English, Hindi) for practical applications.
+
+
+WHERE DOES NLP FIT IN CS TAXONOMY
+
+
+GENERIC NLP SYSTEM
+
+
+LECTURE NO 2
+STAGES OF NLP
+STAGES OF NATURAL LANGUAGE PROCESSING
+
+
+STAGES  LEVELS OF NLP
+
+Morphological Analysis
+Individual words are analyzed into their components.
+
+Syntactic Analysis
+Linear sequences of words are transformed into structures that show how the words relate to each other.
+
+Semantic Analysis
+A transformation is made from the input text to an internal representation that reflects the meaning.
+
+Discourse Analysis
+Resolving references between sentences.
+
+Pragmatic Analysis
+To reinterpret what was said to what was actually meant.
+
+
+STEPS OF NATURAL LANGUAGE PROCESSING
+
+Morphology
+Concerns the way words are built up from smaller meaning-bearing units.
+Example truth + ful + ness
+
+Syntax
+Concerns how words are put together to form correct sentences and what structural role each word has.
+Example the dog ate my homework
+
+Semantics
+Concerns what words mean and how these meanings combine in sentences.
+Example plant (industrial plant  living organism)
+
+
+STEPS OF NATURAL LANGUAGE PROCESSING (CONTINUED)
+
+Pragmatics
+Concerns how sentences are used in different situations and how it affects interpretation.
+
+Discourse
+Concerns how preceding sentences affect interpretation of the next sentence.
+
+
+EXAMPLE
+
+Surface form
+I want to print Ali’s .init file
+
+Stems
+I (pronoun)
+want (verb)
+to (prep)
+print (verb)
+Ali (noun)
+’s (possessive)
+.init (adj)
+file (noun)
+
+
+MORPHOLOGY
+
+A morpheme is the smallest unit of language that has a distinctive meaning.
+This includes words, prefixes, suffixes, etc.
+
+Morphology is the study of the structure and meaning of morphemes.
+Rules and syntaxes govern how morphemes combine.
+
+
+EXAMPLE (STEMS)
+
+I (pronoun)
+want (verb)
+to (prep)
+print (verb)
+Ali (noun)
+’s (possessive)
+.init (adj)
+file (noun)
+
+
+SYNTACTIC ANALYSIS
+
+Parse tree
+Pro NP ADJ N
+Ali’s .init file
+
+This is the study of sentences, phrases, words, and their structure.
+Word order matters because it can change meaning.
+
+
+SEMANTIC NET
+
+
+SEMANTICS
+
+Study of meaning in language.
+
+Lexical Semantics
+Meaning of words and symbols.
+
+Compositional Semantics
+Meaning of phrases and sentences and how meanings combine.
+
+
+EXAMPLE
+
+Discourse
+To whom the pronoun ‘I’ refers
+To whom the proper noun ‘Ali’ refers
+
+Pragmatics
+What are the files to be printed
+Execute the command
+lpr alistuff.init
+
+
+DISCOURSE ANALYSIS
+
+Analyzes language across conversations (spoken, written, or signed).
+
+Pragmatics
+Study of meaning of utterances, including hidden or indirect meanings.
+
+
+LEXICON
+
+Lexicon is a vocabulary data bank containing language words and linguistic information.
+There are many online lexicons available.
+WordNet is a lexical database for English.
+Lexicon is nothing but a dictionary.
+
+
+LEXICON WORDNET
+
+Can we have one for Marathi
+
+
+QUIZ
+
+httpswww.flexiquiz.comSCN3890bbce-3bb7-4b1c-8df9-e86203807b08
+
+
+LECTURE NO 3
+CHALLENGES OF NLP
+
+
+WHY NL UNDERSTANDING IS HARD
+
+Natural language is rich and ambiguous.
+Issues include
+- Representing meaning
+- Mapping structures to meanings
+- Lexical ambiguity
+- Syntactic ambiguity
+- Pronoun interpretation
+- Contextual influence
+- Same meaning expressed differently
+- Unclear interaction among components
+
+
+AMBIGUITY
+
+Ambiguity is the ability to be understood in more than one way.
+
+Types of Ambiguity
+- Lexical
+- Syntactic
+- Semantic
+- Pragmatic
+
+
+LEXICAL AMBIGUITY
+
+Example
+silver as noun, adjective, verb
+She won two silver medals.
+She made a silver speech.
+Her worries had silvered her hair.
+
+
+SYNTACTIC AMBIGUITY
+
+Sentence parsed in different ways.
+Example
+The chicken is ready to eat.
+
+
+SEMANTIC AMBIGUITY
+
+Example
+The car hit the pole while it was moving.
+
+Possible interpretations
+- Car was moving
+- Pole was moving
+
+
+PHONETIC AMBIGUITY
+
+[ralt] = write, right, rite
+
+
+AMBIGUITY EXAMPLES
+
+Lexical
+can (noun, verb)
+
+Structural
+I saw the man with the telescope
+
+Semantic
+dish (plate, menu item)
+
+
+MORE EXAMPLES
+
+Time flies like an arrow.
+Fruit flies like a banana.
+
+
+PREPOSITIONAL PHRASE ATTACHMENT
+
+The boy saw the man on the mountain with a telescope.
+
+
+MULTIPLE INTERPRETATIONS
+
+I made her duck.
+
+Possible meanings
+- Cooked duck for her
+- Cooked her duck
+- Made a toy duck
+- Caused her to duck
+- Turned her into a duck
+
+duck noun or verb
+her dative or possessive
+make cook or create
+
+
+RESOLVING AMBIGUITIES
+
+Part-of-speech tagging
+Word-sense disambiguation
+Lexical disambiguation
+Probabilistic parsing
+
+
+GRAMMAR
+
+S → NP VP
+NP → DT N  DT N PP
+PP → P NP
+VP → V NP PP  V NP
+
+Sentence
+I saw a boy with a telescope
+
+
+PARSE TREES
+
+
+LECTURE NO 4
+APPLICATIONS OF NLP
+
+
+APPLICATIONS
+
+Machine Translation
+Question Answering
+Information Retrieval
+Text Categorization
+Text Summarization
+Sentiment Analysis
+
+
+APPLICATIONS (DETAIL)
+
+Speech processing
+Information extraction
+Machine translation
+Question answering
+Summarization
+
+
+MACHINE TRANSLATION
+
+Text-to-text translation
+Speech-to-speech translation
+
+Machine Translation (MT)
+Automated translation preserving meaning.
+
+
+QUESTION ANSWERING SYSTEMS
+
+Automatically answer questions in natural language.
+Returns precise answers.
+
+Example
+Q What is the birth place of Shree Krishna
+A Mathura
+
+
+INFORMATION RETRIEVAL
+
+Matching queries to documents.
+Examples
+Google, Yahoo, Altavista
+
+
+CROSS LANGUAGE INFORMATION RETRIEVAL (CLIR)
+
+Retrieve documents in languages different from query language.
+Uses dictionaries or machine translation.
+
+
+INFORMATION EXTRACTION
+
+Identify specific information from text.
+Convert unstructured text into structured data.
+
+
+TEXT CATEGORIZATION
+
+Automatic classification of documents.
+Uses
+Filtering
+Spam detection
+Survey coding
+
+
+TEXT SUMMARIZATION
+
+Reducing document length.
+Types
+Extractive
+Abstractive
+
+
+OTHER APPLICATIONS
+
+Sentiment analysis
+Text similarity detection
+Sarcasm detection
+Cross-lingual IR
+Author profiling
+Fake news detection
+
+
+REFERENCES
+
+Daniel Jurafsky, James H. Martin
+Speech and Language Processing, 2008
+httpwww.deepsky.com~merovechvoynichvoynich_manchu_reference_materialsPDFsjurafsky_martin.pdf
+
+Christopher D. Manning, Hinrich Schutze
+Foundations of Statistical Natural Language Processing, 1999
+httpswww.cs.vassar.edu~cs366docsManning_Schuetze_StatisticalNLP.pdf
+
+
+THANK YOU

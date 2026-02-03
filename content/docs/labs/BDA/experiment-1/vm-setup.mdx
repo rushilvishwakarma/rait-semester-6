@@ -1,0 +1,91 @@
+---
+title: VM Setup
+description: Installation and Setup of Cloudera Hadoop Environment using VirtualBox
+footer: false
+---
+
+import { Download, Terminal, AlertTriangle, Info, ArrowLeft } from 'lucide-react';
+
+# Installation and Setup of Cloudera Hadoop Environment using VirtualBox
+
+## AIM
+
+To install Oracle VirtualBox and set up the Cloudera QuickStart Virtual Machine in order to create a local Big Data (Hadoop) environment for executing Hadoop ecosystem commands.
+
+---
+
+## Prerequisites
+
+<Cards>
+  <Card 
+    icon={<Download />}
+    title="Oracle VirtualBox" 
+    description="Click Windows hosts under VirtualBox Platform Packages to download"
+    href="https://www.virtualbox.org/wiki/Downloads"
+  />
+  <Card 
+    icon={<Download />}
+    title="Cloudera QuickStart VM 5.12" 
+    description="Download the VM image (~5.49GB)"
+    href="https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.12.0-0-virtualbox.zip"
+  />
+</Cards>
+
+<Callout icon={<AlertTriangle />} title="System Requirements">
+- **RAM**: Minimum 8GB (16GB recommended)
+- **Disk Space**: At least 50GB free
+- **CPU**: Intel VT-x or AMD-V virtualization enabled in BIOS
+</Callout>
+
+<Callout icon={<Info />} title="Note">
+We are using version **5.12** instead of 5.4.2 mentioned in the Lab Manual for better stability. The VM is over 5GB, so the download will take some time.
+</Callout>
+
+---
+
+## Installation Steps
+
+1. **Install VirtualBox** — Download and run the installer.
+2. **Download Cloudera VM** — Use the link above (~5.49GB).
+3. **Extract the ZIP `cloudera-quickstart-vm-5.12.0-0-virtualbox.zip`** — Right-click → Extract All.
+4. **Open VirtualBox** → **File → Import Appliance** → Select the `.ovf` file → **Import**  (Next, Finish).
+5. **Start the VM** — Select it in the sidebar and click **Start**. (Allow Network Access if prompted).
+
+<Callout icon={<AlertTriangle />} title="Booting">
+Booting takes a long time, Please be patient. You may see Progressbar stuck at 100% beside **CentOS 6.7** Boot Logo for a while. You can check the logs using `Esc` key.
+</Callout>
+
+---
+
+## Recommended Settings (Optional)
+
+I recommend configuring these settings for a smoother experience **before starting the VM** (Right-click VM → Settings).
+
+1. **General → Advanced** (ensure you are detailed view/Expert mode):
+   - **Shared Clipboard**: Change to `Bidirectional`.
+   - **Drag'n'Drop**: Change to `Bidirectional`.
+
+<Callout type="warn" title="Resource Usage">
+Only change these if your host system has enough resources (keep sliders in the <span className="text-green-500 font-bold">Green</span> zone).
+</Callout>
+
+- **System → Motherboard**:
+  - **Base Memory**: Increase to `8192 MB` (8GB) or more.
+- **Display → Screen**:
+  - **Graphics Controller**: Change to `VMSVGA` and check **Enable 3D Acceleration**.
+  - **Video Memory**: Maximize to `128 MB` (or `256 MB` if that's available).
+
+---
+
+## Continue
+
+<Cards>
+  <Card 
+    icon={<ArrowLeft />}
+    title="Back to Experiment 1" 
+    description="Continue with the experiment"
+    href="/docs/labs/BDA/experiment-1"
+  />
+</Cards>
+
+---

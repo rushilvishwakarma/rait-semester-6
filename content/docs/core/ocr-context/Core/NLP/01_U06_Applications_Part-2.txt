@@ -1,0 +1,405 @@
+SUBJECT NAME: NATURAL LANGUAGE PROCESSING
+UNIT NO: 6
+UNIT NAME: APPLICATIONS
+
+
+INDEX
+
+Lecture 49 – Named Entity Recognition  
+Lecture 50 – Other Applications  
+Lecture 51 – Applications for Indian Regional Languages  
+Lecture 52 – Applications for Indian Regional Languages  
+
+
+UNIT NO: 6 – APPLICATIONS
+
+
+LECTURE 49
+NAMED ENTITY RECOGNITION (NER)
+
+
+NAMED ENTITY RECOGNITION
+
+Named Entity Recognition (NER), also known as entity identification, entity chunking, or entity extraction, is a subtask of information extraction.
+
+NER aims to locate and classify named entities in text into predefined categories such as:
+- Person names
+- Organizations
+- Locations
+- Time expressions
+- Quantities
+- Monetary values
+- Percentages
+
+
+NER APPROACHES
+
+NER systems use:
+- Linguistic grammar-based techniques
+- Statistical and machine learning models
+
+Grammar-based systems:
+- High precision
+- Low recall
+- Require extensive manual effort
+
+Statistical systems:
+- Require large annotated datasets
+- Semi-supervised approaches reduce annotation effort
+
+
+HOW NER WORKS
+
+NER consists of two main steps:
+
+1. Entity Detection  
+   Identifying words or sequences of words that form an entity  
+   Example: "The Great Lakes" is a single entity composed of three tokens  
+
+   Inside-Outside-Beginning (IOB) tagging is commonly used.
+
+2. Entity Classification  
+   Assigning detected entities to predefined categories
+
+
+COMMON ENTITY CATEGORIES
+
+Person:
+- Elvis Presley
+- Audrey Hepburn
+- David Beckham
+
+Organization:
+- Google
+- Mastercard
+- University of Oxford
+
+Time:
+- 2006
+- 16:34
+- 2 AM
+
+Location:
+- Trafalgar Square
+- MoMA
+- Machu Picchu
+
+Work of Art:
+- Hamlet
+- Guernica
+- Exile on Main St
+
+
+USES OF NER
+
+- Custom entity categories for domain-specific tasks
+- High-level overview of large text corpora
+- Understanding document themes
+- Grouping documents by relevance or similarity
+
+
+NER EXAMPLES
+
+<PERSON>Prof. Jerry Hobbs</PERSON> taught CS544 during <DATE>February 2010</DATE>  
+<PERSON>Jerry Hobbs</PERSON> killed his daughter in <LOCATION>Ohio</LOCATION>  
+<ORG>Hobbs Corporation</ORG> bought <ORG>FBK</ORG>
+
+Entity Categories Identified:
+- Person: Jerry Hobbs
+- Organization: Hobbs Corporation, FBK
+- Location: Ohio
+- Date: February 2010
+- Email: mkg@gmail.com
+- Website: www.usc.edu
+- Drug names: Paracetamol
+- Ship names: Queen Mary
+
+
+RULE-BASED NER
+
+Regular expressions are used to match patterns in text.
+
+Example requirement:
+- Starts with capital letter "P"
+- First word of the line
+- Second letter lowercase
+- Exactly three letters long
+- Third letter is a vowel
+
+Regex:
+^P[a-z][aeiou]
+
+
+COMMON REGEX SYMBOLS
+
+\w  → alphanumeric character  
+\d  → digit  
+\s  → whitespace  
+.   → wildcard  
+\b  → word boundary  
+^   → start of string  
+$   → end of string  
+?   → zero or one occurrence  
++   → one or more occurrences  
+
+Examples:
+A{1,5} → one to five A's  
+A{5,}  → five or more A's  
+A{5}   → exactly five A's
+
+
+RULE-BASED NER EXAMPLES
+
+Extract:
+- Telephone numbers
+- Emails
+- Capitalized names
+- Digit blocks separated by hyphens
+
+Basic Regex:
+(\d+-)+\d+
+
+Matches:
+- 900-865-1125
+- 725-1234
+
+Limitations:
+- Extracts SSN incorrectly (123-45-6789)
+- Misses formats like (800)865-CARE
+
+Improved Regex:
+(\d{3}[-\(]){1,2}[\dA-Z]{4}
+
+
+LOCATION EXTRACTION RULES
+
+Capitalized word + city-related terms:
+- city, center, river
+Example:
+New York City  
+Hudson River
+
+Capitalized word + street terms:
+- street, boulevard, avenue
+Example:
+Fifth Avenue
+
+
+CONTEXT-BASED RULES
+
+[PERSON] earned [MONEY]  
+Example: Frank earned $20
+
+[PERSON] joined [ORGANIZATION]  
+Example: Sam joined IBM
+
+[PERSON], [JOBTITLE]  
+Example: Mary, the teacher
+
+
+WHY SIMPLE RULES FAIL
+
+Capitalization issues:
+- Sentence beginnings are capitalized
+- Web titles use full capitalization
+- Nested entities contain lowercase words
+- All nouns capitalized in German
+
+Gazetteer limitations:
+- No complete list of names exists
+- New names emerge continuously
+
+Ambiguity:
+- Jordan (person vs location)
+- JFK (person vs airport)
+- May (person vs month)
+
+Entity Variations:
+- Zornitsa Kozareva
+- Prof. Kozareva
+- Zori
+
+
+LECTURE 50
+OTHER APPLICATIONS OF NLP
+
+
+OTHER APPLICATIONS
+
+- Sarcasm detection in Indian languages
+- Plagiarism detection
+- Aspect-based sentiment analysis of code-mixed text
+- Monolingual and multilingual author profiling
+- Fake news detection
+- OCR for Indian languages
+- Cross-lingual information extraction
+- Multilingual chatbots
+
+
+NLP APPLICATIONS IN PRACTICE
+
+Search Engines:
+- Google
+- Bing
+- Yahoo
+
+Information Extraction:
+- Monster.com
+- HotJobs.com
+
+Machine Translation:
+- Google Translate
+- Systran
+
+Question Answering:
+- Ask Jeeves
+- Quora
+- Chatbots
+
+Speech Recognition:
+- Google Now
+
+Text Categorization:
+- Spam email detection
+
+Text Summarization:
+- Open Text Summarizer
+
+E-commerce:
+- Amazon
+- Flipkart
+
+Social Media:
+- Fake news detection
+- Author profiling
+
+
+INDUSTRY SCENARIO
+
+- NLP improves precision, recall, and speed of search engines
+- Major companies run NLP R&D projects in India
+- IBM Research works on English–Hindi parallel corpora
+- Microsoft India has multilingual computing division
+- Google and Yahoo pursue Indian language search engines
+
+
+LECTURE 51
+APPLICATIONS FOR INDIAN REGIONAL LANGUAGES
+
+
+RULE-BASED MACHINE TRANSLATION SYSTEM
+
+A rule-based MT system translates text using:
+- Linguistic rules
+- Lexical mappings
+- Syntax and semantic analysis
+
+Example:
+Source Language: English  
+Target Language: Marathi
+
+
+COMPONENTS OF RULE-BASED MT
+
+- Rule set
+- Bilingual or multilingual lexicon
+- Processing software
+
+Types of Rule-Based MT:
+1. Direct Translation
+2. Interlingua Translation
+3. Transfer-Based Translation
+
+
+PROBLEM STATEMENT
+
+Translate an English document into Marathi using:
+- Pre-processing
+- Lexical analysis
+- Syntax analysis
+- Semantic analysis
+- Mapping rules
+
+Input:
+English document
+
+Output:
+Marathi document
+
+
+PROPOSED SYSTEM
+
+Machine Translation involves:
+- Morphology
+- Syntax
+- Semantics
+- Ambiguity handling
+
+Phases:
+1. Pre-processing
+2. Transfer and generation
+3. Post-processing
+
+
+OVERALL ALGORITHM
+
+- Accept English document
+- Apply POS tagging
+- Generate parse tree
+- Perform Named Entity Recognition
+- Identify thematic relations
+- Reorder tokens for target language
+- Use bilingual dictionary
+- Apply inflections
+- Generate Marathi sentence
+
+
+LECTURE 52
+APPLICATIONS FOR INDIAN REGIONAL LANGUAGES (CONTINUED)
+
+
+ENGLISH–MARATHI MT SYSTEM
+
+Input:
+English natural language query
+
+Output:
+Marathi translation
+
+
+PROCESS STEPS
+
+Step 1: Preprocessing  
+- Input selection
+- Text cleaning
+
+Step 2: POS Tagging  
+- Tag nouns, verbs, adjectives, etc.
+
+Step 3: Reordering Rules  
+- Assign syntactic structure
+
+Step 4: Language Translation  
+- Dictionary-based translation
+
+Step 5: Transliteration  
+- Handle unknown words
+
+Step 6: Inflection Handling  
+- Add suffixes
+- Correct grammar
+
+Step 7: Final Output  
+- Post-editing
+- Quality improvement
+
+
+REFERENCES
+
+Daniel Jurafsky, James H. Martin  
+Speech and Language Processing  
+Prentice Hall, 2008
+
+Christopher D. Manning, Hinrich Schütze  
+Foundations of Statistical Natural Language Processing  
+MIT Press, 1999

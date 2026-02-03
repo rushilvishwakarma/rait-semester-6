@@ -1,0 +1,307 @@
+SUBJECT NAME: NATURAL LANGUAGE PROCESSING
+UNIT NO: 5
+UNIT NAME: PRAGMATICS AND DISCOURSE
+
+
+INDEX
+
+Lecture 31 – Introduction to Pragmatics and Discourse
+Lecture 32 – Syntactic and Semantic Constraints on Coreference
+Lecture 33 – Lappin and Leass’ Algorithm for Pronoun Resolution
+
+
+UNIT NO: 5 – PRAGMATICS AND DISCOURSE
+
+
+LECTURE 31
+INTRODUCTION
+
+
+INTRODUCTION
+
+In Natural Language Processing (NLP), Pragmatics focuses on contextual meaning, speaker intent, and implied meaning beyond literal word interpretation. It enables understanding of sarcasm, indirect requests, politeness, and real-world assumptions.
+
+Discourse Analysis studies how sentences are connected to form coherent texts. It handles reference resolution, topic continuity, and overall text structure across sentences.
+
+Together, pragmatics and discourse allow NLP systems such as chatbots and assistants to understand how language is used in context, not just what words mean individually.
+
+
+PRAGMATICS IN NLP
+
+Focus:
+- Contextual meaning
+- Speaker intent
+- Implicature
+- Real-world knowledge
+
+Goal:
+Understand the “why” and “how” of language use in specific situations.
+
+Examples:
+- “Can you pass the salt?” interpreted as a polite request.
+- Detecting sarcasm or idiomatic expressions.
+- Applying Grice’s Maxims (Quantity, Quality, Relevance, Manner).
+
+
+DISCOURSE ANALYSIS IN NLP
+
+Focus:
+- Relationships between sentences
+- Coherence across utterances and paragraphs
+
+Goal:
+Maintain continuity and connected meaning in text.
+
+Examples:
+- Coreference resolution: “She” refers to “Riya”.
+- Understanding narrative flow and conversational turn-taking.
+
+
+HOW PRAGMATICS AND DISCOURSE WORK TOGETHER
+
+Discourse provides structural connections across text, while pragmatics adds intent and situational understanding.
+
+Example:
+A chatbot uses discourse analysis to track conversation history and pragmatics to infer user goals (e.g., booking a flight vs. asking for prices).
+
+
+WHY PRAGMATICS MATTERS
+
+Example 1:
+“Can you pull the car over?”
+Literal meaning: Are you capable of pulling the car?
+Pragmatic meaning: Please stop the car.
+
+Example 2:
+“Wow, that’s just what I needed.”
+Literal meaning: Positive sentiment.
+Pragmatic meaning: Sarcasm depending on context.
+
+Example 3:
+“Crack the window.”
+Pragmatic meaning: Open the window.
+
+
+ASPECTS OF PRAGMATICS
+
+1. Deixis  
+Words whose meaning depends on context.
+Examples:
+- me, here, yesterday
+- “Meet me here.”
+
+2. Implicature  
+More is communicated than explicitly stated.
+
+A. Conversational Implicature  
+Depends on cooperative principles.
+Example:
+A: I am out of gas.  
+B: The gas station is around the corner.
+
+B. Conventional Implicature  
+Attached directly to words.
+Example:
+“Abhishek is rich but sad.”
+
+3. Presupposition  
+Assumptions made by the speaker.
+Example:
+“Jane no longer writes fiction.”
+(Presupposes Jane once wrote fiction.)
+
+4. Speech Acts  
+Sentences that perform actions.
+Example:
+“I apologize.”
+
+5. Conversational Structure  
+Rules governing dialogue flow and turn-taking.
+
+
+LECTURE 32
+SYNTACTIC AND SEMANTIC CONSTRAINTS ON COREFERENCE
+
+
+COREFERENCE RESOLUTION
+
+Coreference resolution identifies expressions that refer to the same entity.
+
+It is essential for high-performing NLP systems.
+
+
+DISCOURSE MODEL
+
+Discourse Model:
+A mental model built incrementally containing entities, their properties, and relations.
+
+Referent:
+The discourse entity itself.
+
+Referring Expression:
+The linguistic phrase referring to a referent.
+
+Two expressions referring to the same entity are said to corefer.
+
+
+ANAPHORA
+
+Anaphora refers to entities already introduced in discourse.
+
+- First mention: Antecedent
+- Subsequent mentions: Anaphors
+- Single mention entities: Singletons
+
+Example:
+“The University of Illinois at Chicago is excellent. UIC has many faculty. The school is located downtown.”
+
+Coreference chain:
+{University of Illinois at Chicago, UIC, The school, it}
+
+
+COREFERENCE CHAINS
+
+A coreference chain is a set of expressions referring to the same entity.
+
+Example:
+{“University of Illinois at Chicago”, “UIC”, “The school”, “it”}
+
+
+SYNTACTIC AND SEMANTIC CONSTRAINTS
+
+
+1. Person and Case Agreement
+
+First person: I, we  
+Second person: you  
+Third person: he, she, they  
+
+Incorrect agreement blocks coreference.
+
+Example:
+“You and I have an Acura. We love it.”
+“You and I have an Acura. They love it.” (invalid)
+
+
+2. Gender Agreement
+
+Pronouns must match gender.
+
+Example:
+“John has an Acura. He is attractive.”
+“John has an Acura. It is attractive.” (it = Acura)
+
+
+3. Syntactic Constraints
+
+Reflexives must refer to local subjects.
+
+Example:
+“John bought himself a car.” ✔
+“John bought him a car.” ✖
+
+Constraints depend on sentence structure.
+
+
+4. Selectional Restrictions
+
+Verb semantics restrict possible referents.
+
+Example:
+“John bought a new Acura. It drinks gasoline.” (metaphorical)
+“John parked his Acura in the garage. It is messy.” (it = garage)
+
+
+PREFERENCES IN PRONOUN INTERPRETATION
+
+1. Recency  
+Recent entities are more salient.
+
+2. Grammatical Role  
+Subject > Object > Others
+
+3. Repeated Mention  
+Frequently mentioned entities remain salient.
+
+4. Parallelism  
+Pronouns prefer parallel grammatical roles.
+
+5. Verb Semantics (Implicit Causality)
+Certain verbs bias interpretation.
+- criticize → object biased
+- telephone → subject biased
+
+
+LECTURE 33
+LAPPIN AND LEASS’ ALGORITHM FOR PRONOUN RESOLUTION
+
+
+OVERVIEW
+
+A salience-based algorithm using syntactic constraints and preferences.
+
+
+KEY COMPONENTS
+
+- Discourse model update
+- Coreference equivalence classes
+- Salience computation
+- Pronoun resolution
+
+
+SALIENCE WEIGHTS (EXAMPLES)
+
+Recency: 100  
+Subject: 80  
+Object: 50  
+Indirect object: 40  
+Head noun: 80  
+Parallelism: +35  
+Cataphora: -175  
+
+Salience is halved after each sentence.
+
+
+ALGORITHM STEPS
+
+1. Collect potential referents (up to four sentences back)
+2. Remove candidates violating gender/number agreement
+3. Apply syntactic constraints
+4. Add salience values
+5. Select referent with highest salience
+6. Break ties using proximity
+
+
+EXAMPLE
+
+John saw a beautiful Acura Integra.
+He showed it to Bob.
+He bought it.
+
+Resolved references:
+- he → John
+- it → Acura Integra
+
+
+CENTERING THEORY (EXTENSION)
+
+Introduces discourse centers:
+- Backward-looking center (Cb)
+- Forward-looking centers (Cf)
+- Preferred center (Cp)
+
+Transition preferences:
+Continue > Retain > Smooth-Shift > Rough-Shift
+
+
+REFERENCES
+
+Daniel Jurafsky, James H. Martin  
+Speech and Language Processing  
+Prentice Hall, 2008
+
+Semantic Analysis in Natural Language Processing  
+https://www.youtube.com/watch?v=DPi5rfTX6mw
+
+
+THANK YOU

@@ -1,0 +1,327 @@
+SUBJECT NAME: NATURAL LANGUAGE PROCESSING
+MODULE NO: 2
+MODULE NAME: WORD LEVEL ANALYSIS
+
+
+INDEX
+
+Lecture 9  – Stemming vs Lemmatization
+Lecture 10 – Porter Stemmer
+Lecture 11 – Porter Stemmer
+Lecture 12 – N-Gram Language Model
+
+
+LECTURE 9
+STEMMING VS LEMMATIZATION
+
+
+STEMMING
+
+Stemming and lemmatization are text normalization techniques.
+
+Stemming is a particular case of tokenization that reduces inflected forms to a single base form or stem.
+
+Stemming algorithms are basic string-handling algorithms that depend on rules identifying affixes that can be stripped.
+
+Stemming algorithms work by cutting off the end or beginning of a word, considering a list of common prefixes and suffixes.
+
+This indiscriminate cutting can be successful in some cases but not always, which introduces limitations.
+
+Examples:
+
+Form       Suffix   Stem  
+studies    -es      studi  
+studying   -ing     study  
+niñas      -as      niñ  
+
+Stemming helps find morphological variants of a search term:
+stem, stemming, stemmed
+
+Stemming reduces index size and improves indexing-time efficiency.
+
+
+ADVANTAGES AND EXAMPLES OF STEMMING
+
+Advantages:
+- Faster search time
+- Index file compression
+
+Disadvantages:
+- Loss of information
+- May require storage of both stemmed and original forms
+
+Examples:
+lightweight → lightweight  
+natural → natur  
+language → languag  
+processing → process  
+
+
+AFFIX REMOVAL ALGORITHMS
+
+Affix removal algorithms remove prefixes and/or suffixes from terms to produce a stem.
+
+Rules:
+- Remove the longest possible string according to rules
+- Repeat until no further removal is possible
+
+The Porter algorithm is an affix removal stemmer.
+
+Example:
+indefinitely → definite
+
+Rules do not rely on lookup tables but on suffix-stripping rules, such as:
+- If word ends with "ed", remove "ed"
+- If word ends with "ing", remove "ing"
+- If word ends with "ly", remove "ly"
+
+
+LEMMATIZATION
+
+Lemmatization considers morphological analysis of words.
+
+It uses dictionaries to map inflected forms back to their lemma.
+
+Examples:
+
+Form       Morphological Info                              Lemma  
+studies    3rd person singular present of study            study  
+studying   Gerund of study                                 study  
+niñas      Feminine plural of niño                         niño  
+
+A lemma is the base form of all inflectional forms.
+A stem may not be a valid dictionary word.
+
+Dictionaries list lemmas, not stems.
+
+
+LEMMATIZATION PROCESS
+
+Lemmatization:
+- Determines part of speech first
+- Applies normalization rules based on POS
+
+Correct POS identification is crucial.
+
+Example:
+runs, running, ran → run
+
+WordNet examples:
+geese → goose  
+meanness → meanness  
+meaning → meaning  
+
+WordNet outperforms Porter stemmer in such cases.
+
+
+DIFFERENCE BETWEEN STEMMING AND LEMMATIZATION
+
+Stemming:
+- Root is called stem
+- Faster
+- Rule-based
+- May produce non-dictionary words
+- No lookup table
+- Example: studies → studi
+
+Lemmatization:
+- Root is called lemma
+- Slower
+- Dictionary-based
+- Produces valid dictionary words
+- Uses lookup table
+- Example: studies → study
+
+
+LECTURE 10 & 11
+PORTER STEMMER
+
+
+INTRODUCTION TO STEMMING ALGORITHM
+
+Goal:
+- Reduce unique words
+- Improve system performance
+- Improve recall
+
+Example:
+calculate, calculations, calculates, calculating → calculat
+
+Stemming removes suffixes and prefixes, sometimes recursively.
+
+
+PORTER STEMMER DEFINITIONS
+
+Consonant (c): letters other than A, E, I, O, U (Y depends on context)
+Vowel (v): letters not consonants
+
+C = sequence of consonants  
+V = sequence of vowels  
+
+(VC)^m defines the measure m
+
+m = number of vowel–consonant sequences
+
+
+WHAT IS m?
+
+m = 0 → TREE, TR, EE, Y, BY  
+m = 1 → TROUBLE, OATS, TREES, IVY  
+m = 2 → TROUBLES, PRIVATE, OATEN, ROBBERY  
+
+
+PORTER STEMMER RULE FORMAT
+
+(condition) S1 → S2
+
+Example:
+(m > 1) EMENT → ε  
+REPLACEMENT → REPLAC (m = 2)
+
+
+CONDITIONS
+
+m  : measure  
+*v : stem contains vowel  
+*d : stem ends with double consonant  
+*o : stem ends with CVC (second C ≠ W, X, Y)
+
+Logical combinations allowed using AND, OR, NOT.
+
+
+PORTER STEMMER STEPS
+
+Step 1a:
+SSES → SS      caresses → caress  
+IES → I        ponies → poni  
+SS → SS  
+S → ε          cats → cat  
+
+Step 1b:
+(m>0) EED → EE   agreed → agree  
+(v) ED → ε      plastered → plaster  
+(v) ING → ε     motoring → motor  
+
+Step 1c:
+(v) Y → I       happy → happi  
+
+
+Step 2:
+ATIONAL → ATE  
+IZATION → IZE  
+BILITI → BLE  
+
+Examples:
+relational → relate  
+generalization → generalize  
+sensibiliti → sensible  
+
+
+Step 3:
+ICATE → IC  
+FUL → ε  
+NESS → ε  
+
+triplicate → triplic  
+hopeful → hope  
+goodness → good  
+
+
+Step 4:
+(m>1) AL, ANCE, ENCE, ER, IC, ABLE, IVE, IZE → ε
+
+Examples:
+allowance → allow  
+dependent → depend  
+effective → effect  
+
+
+Step 5:
+(m>1) E → ε      probate → probat  
+(m>1 & *d & *L) remove one L  
+controll → control  
+
+
+EXAMPLES
+
+MULTIDIMENSIONAL → MULTIDIMENSION  
+CHARACTERIZATION → CHARACTERIZE → CHARACTER  
+ROTATIONAL → ROTATE  
+
+
+LECTURE 12
+LANGUAGE MODEL
+
+
+WHAT IS A LANGUAGE MODEL?
+
+A language model is a statistical tool that assigns probabilities to sequences of words.
+
+P(W) = P(w1, w2, ..., wn)
+
+Also predicts next word:
+P(w_n | w1 ... w_n-1)
+
+
+APPLICATIONS OF LANGUAGE MODELS
+
+- Autocomplete
+- Machine translation
+- Speech recognition
+- Handwriting recognition
+- Spelling correction
+- OCR
+
+
+N-GRAM LANGUAGE MODEL
+
+An N-gram is a sequence of N words.
+
+Unigram: no history  
+Bigram: one-word history  
+Trigram: two-word history  
+
+Example:
+Sentence: This is Big Data AI Book
+
+Unigram: This | is | Big | Data | AI | Book  
+Bigram: This is | is Big | Big Data | Data AI | AI Book  
+Trigram: This is Big | is Big Data | Big Data AI | Data AI Book  
+
+
+PROBABILISTIC MODEL
+
+Chain Rule:
+P(w1...wn) = ∏ P(wi | w1...wi-1)
+
+Markov Assumption:
+P(wi | w1...wi-1) ≈ P(wi | wi-k...wi-1)
+
+
+BIGRAM MODEL EXAMPLE
+
+Training corpus:
+<s> I am Sam </s>
+<s> Sam I am </s>
+
+P(I am Sam) =
+P(I|<s>) × P(am|I) × P(Sam|am) × P(</s>|Sam)
+
+
+ADVANTAGES AND DISADVANTAGES
+
+Advantages:
+- Easy to understand
+- Easy to implement
+- Extendable to higher n-grams
+
+Disadvantages:
+- Zero probability problem
+- Underflow due to multiplication
+
+Solutions:
+- Laplace smoothing
+- Log probabilities
+
+
+THANK YOU

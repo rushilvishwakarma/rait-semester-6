@@ -1,0 +1,367 @@
+SUBJECT NAME: NATURAL LANGUAGE PROCESSING
+UNIT NO: 3
+UNIT NAME: SYNTAX ANALYSIS
+
+
+INDEX
+
+Lecture 13 – N-gram Language Model
+Lecture 14 – N-gram for Spelling Correction
+Lecture 15 – Part-of-Speech Tagging (POS) – Tag Set for English (Penn Treebank)
+Lecture 16 – Rule-Based POS Tagging
+
+
+UNIT NO: 3 – SYNTAX ANALYSIS
+
+
+LECTURE NO: 15
+PART-OF-SPEECH TAGGING (POS)
+TAG SET FOR ENGLISH (PENN TREEBANK)
+
+
+SYNTAX ANALYSIS
+
+Syntax analysis or parsing is an important phase of NLP.
+The purpose of this phase is to derive exact or dictionary meaning from the text.
+
+Syntax refers to the arrangement of words in a sentence such that they make grammatical sense.
+
+In NLP, syntactic analysis is used to assess how natural language aligns with grammatical rules.
+
+Computer algorithms apply grammatical rules to groups of words and derive meaning.
+
+Syntactic analysis helps us understand the roles played by different words in a body of text.
+
+Example:
+“Innocent peacefully children sleep little”
+vs
+“Innocent little children sleep peacefully”
+
+
+AMBIGUITY IN LANGUAGE
+
+Example:
+I made her duck.
+
+Questions:
+How many interpretations does this sentence have?
+What are the reasons for ambiguity?
+How can ambiguity be resolved?
+
+
+AMBIGUITY EXPLANATION
+
+Some interpretations of:
+I made her duck.
+
+- I cooked duck for her.
+- I cooked duck belonging to her.
+- I created a toy duck which she owns.
+- I caused her to quickly lower her head or body.
+- I used magic and turned her into a duck.
+
+duck – morphologically and syntactically ambiguous (noun or verb)
+her – syntactically ambiguous (dative or possessive)
+make – semantically ambiguous (cook or create)
+make – syntactically ambiguous:
+- Transitive (takes a direct object)
+- Ditransitive (takes two objects)
+- Takes a direct object and a verb
+
+
+PART-OF-SPEECH TAGGING (POS)
+
+POS tagging is the process of assigning a part of speech (noun, verb, adjective, etc.) to each word in a sentence.
+
+It converts a sentence into:
+- a list of words
+- a list of tuples (word, tag)
+
+The descriptor is called a tag.
+
+Example:
+Book/VB that/DT flight/NN
+
+
+POS TAGGING DETAILS
+
+Each word has a part-of-speech tag describing its category.
+
+POS tags belong to:
+- Open classes: noun, verb, adjective, adverb
+- Closed classes: prepositions, determiners, conjunctions, pronouns, participles
+
+duck can be a noun or a verb.
+
+Duck! (verb)
+Duck is delicious for dinner. (noun)
+
+
+TAG SET FOR ENGLISH
+
+Parts of speech are divided into:
+- Open class types
+- Closed class types
+
+Open classes:
+Nouns, Verbs, Adjectives, Adverbs
+
+Closed classes:
+Determiners (a, an, the)
+Pronouns (she, he, I)
+Prepositions (on, under, over, near, by)
+
+
+CLOSED CLASS WORDS
+
+Closed class words differ more from language to language than open class words.
+
+Examples:
+Prepositions: on, under, over
+Particles: up, down, off
+Determiners: a, an, the
+Pronouns: she, who, I
+Conjunctions: and, but, or
+Auxiliary verbs: can, may, should
+
+
+TAGSET (GENERAL)
+
+[N]  Nouns
+[V]  Verbs
+[PR] Pronouns
+[JJ] Adjectives
+[RB] Adverbs
+[PP] Postpositions
+[PL] Participles
+[QT] Quantifiers
+[RP] Particles
+[PU] Punctuation
+
+Tagsets vary in size from a dozen to over 200 tags.
+Size depends on language, objectives, and purpose.
+
+
+PENN TREEBANK TAGSET
+
+Derived from the original 87-tag Brown Corpus tagset.
+
+Example:
+The/DT grand/JJ jury/NN commented/VBD on/IN a/DT number/NN of/IN other/JJ topics/NNS ./.
+
+The Penn Treebank tagset was selected from the original Brown Corpus tagset.
+
+
+PENN TREEBANK TAGSET (PARTIAL LIST)
+
+CC   Coordinating conjunction
+CD   Cardinal number
+DT   Determiner
+EX   Existential there
+FW   Foreign word
+IN   Preposition or subordinating conjunction
+JJ   Adjective
+JJR  Adjective, comparative
+JJS  Adjective, superlative
+LS   List item marker
+MD   Modal
+NN   Noun, singular or mass
+NNS  Noun, plural
+NNP  Proper noun, singular
+NNPS Proper noun, plural
+PDT  Predeterminer
+
+
+HOW DO WE ASSIGN POS TAGS?
+
+Examples:
+Time flies like an arrow.
+Fruit flies like a banana.
+
+Possible tag assignments:
+Time/N flies/V like/Prep an/Det arrow/N
+Fruit/N flies/N like/V a/Det banana/N
+Fruit/N flies/V like/V a/Det banana/N
+The/Det flies/N like/V a/Det banana/N
+
+
+WHY IS TAGGING HARD?
+
+Example:
+Book/VB that/DT flight/NN
+Can I read a book/NN on this flight?
+
+Book can be NN or VB.
+
+Example:
+He will race/VB the car.
+When will the race/NN end?
+
+On average, each word has about two possible POS tags.
+
+
+THE PROBLEM
+
+Words often belong to more than one word class.
+
+Examples:
+This is a nice day. (PRP)
+This day is nice. (DT)
+You can go this far. (RB)
+
+
+POS TAG AMBIGUITY (MULTILINGUAL)
+
+English:
+I bank on the bank on the river bank for my transactions.
+
+Hindi:
+Mujhe khaana khaana hai.
+
+Marathi:
+Puja devichi puja kar.
+
+
+LECTURE NO: 16
+RULE-BASED POS TAGGING
+
+
+POS TAGGING AND WSD
+
+Words often occur in different senses and POS categories.
+
+Example:
+She saw a bear.
+Your efforts will bear fruit.
+
+bear can be a noun or a verb.
+
+Word Sense Disambiguation (WSD) identifies which sense is used in context.
+
+
+CLASSIFICATION OF POS TAGGING APPROACHES
+
+Supervised POS Tagging:
+Uses pre-tagged corpora for training.
+
+Unsupervised POS Tagging:
+Automatically induces tagsets and rules (e.g., Baum–Welch algorithm).
+
+Partially Supervised:
+Combination of supervised and unsupervised methods.
+
+
+POS TAGGING ALGORITHMS
+
+Rule-based approaches
+Statistical approaches
+Hybrid approaches (e.g., Brill’s tagger)
+
+
+RULE-BASED POS TAGGING
+
+One of the oldest tagging techniques.
+
+Uses:
+- Lexicon or dictionary
+- Hand-written rules
+
+Disambiguation is done using linguistic features and context.
+
+Example:
+If the preceding word is an article, the following word must be a noun.
+
+
+RULE-BASED APPROACH
+
+Uses a set of handwritten rules and a lexicon.
+
+Two stages:
+1. Search – find possible tags from lexicon
+2. Disambiguation – apply rules
+
+Rules:
+- Lexical rules (word level)
+- Context-sensitive rules (sentence level)
+
+Transformation-based approaches use both handcrafted and learned rules.
+
+
+PROPERTIES OF RULE-BASED TAGGERS
+
+Knowledge-driven
+Rules are manually created
+Information is encoded as rules
+Typically around 1000 rules
+Language modeling and smoothing are explicitly defined
+
+
+BASIC IDEA
+
+Assign all possible tags to words.
+Remove incorrect tags using rules.
+
+Example rule:
+If word+1 is an adjective, adverb, or quantifier and the following word is a sentence boundary,
+and word-1 is not a verb like “consider”,
+then eliminate non-adverb tags.
+
+
+FIRST STAGE
+
+Assign each word a list of possible POS tags using a dictionary and morphological analysis.
+
+Example:
+She promised to back the bill
+
+Possible tags:
+PRP VBD TO VB DT NN
+
+
+SECOND STAGE
+
+Apply disambiguation rules to reduce possibilities.
+
+Example rule:
+IF VBD is an option and VBN follows "<start> PRP"
+THEN eliminate VBN.
+
+
+ENGTWOL RULE-BASED TAGGER
+
+Two-stage architecture:
+- Lexicon-based tagging using finite-state transducers
+- Hand-written disambiguation rules
+
+Goal:
+Reduce tags to a single POS per word.
+
+
+SOME RULES
+
+Determiner–Noun Rule:
+If an ambiguous word follows a determiner, tag it as a noun.
+
+
+ADVERBIAL-THAT RULE
+
+Given the word “that”:
+
+If the next word is an adjective, adverb, or quantifier,
+and the following word is a sentence boundary,
+and the previous word is not a verb like “consider”,
+
+Then eliminate non-adverb tags.
+Else eliminate the adverb tag.
+
+Examples:
+I consider that odd. (not ADV)
+I didn’t do that one. (not ADV)
+It isn’t that strange. (ADV)
+I didn’t do that well. (ambiguous)
+
+
+RULE-BASED POS TAGGER SYSTEM
+
+
+THANK YOU

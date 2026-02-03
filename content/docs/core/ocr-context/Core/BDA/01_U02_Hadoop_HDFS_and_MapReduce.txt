@@ -1,0 +1,287 @@
+
+========================================
+BIG DATA ANALYTICS
+UNIT 2: HADOOP HDFS AND MAPREDUCE
+========================================
+
+
+========================================
+LECTURE 7: DISTRIBUTED FILE SYSTEMS
+PHYSICAL ORGANIZATION OF COMPUTER NODES
+========================================
+
+
+----------------------------------------
+DISTRIBUTED FILE SYSTEM (DFS)
+----------------------------------------
+
+A Distributed File System (DFS) is a file system that allows access to files from multiple hosts over a computer network.
+
+Key features of DFS:
+- Access to files from multiple machines
+- Transparent replication of data
+- Fault tolerance
+
+Common types of Distributed File Systems:
+- Google File System (GFS)
+- Hadoop Distributed File System (HDFS)
+
+
+----------------------------------------
+WHAT IS A CLUSTER
+----------------------------------------
+
+In a Distributed File System, data is stored in a cluster.
+
+A cluster is a group of computers connected together through a network that work collectively as a single system.
+
+
+----------------------------------------
+WHY DISTRIBUTED FILE SYSTEM
+----------------------------------------
+
+Scenario 1:
+- A 4 GB file processed on a single machine takes approximately 4 hours.
+
+Scenario 2:
+- The same 4 GB file is distributed across 4 nodes.
+- Each node processes part of the file simultaneously.
+- Processing time is reduced to one-fourth of the original time.
+
+Thus, DFS improves performance through parallel processing.
+
+
+----------------------------------------
+GOOGLE FILE SYSTEM (GFS)
+----------------------------------------
+
+Google File System (GFS) is a scalable distributed file system developed by Google to handle large-scale data processing needs.
+
+GFS provides:
+- Fault tolerance
+- Reliability
+- Scalability
+- High performance across large networks
+
+
+----------------------------------------
+GFS CLUSTER COMPONENTS
+----------------------------------------
+
+GFS is organized into clusters. Each cluster may contain hundreds or thousands of machines.
+
+The three main entities in GFS are:
+- Client
+- Master Server
+- Chunk Server
+
+
+----------------------------------------
+CLIENT IN GFS
+----------------------------------------
+
+In GFS, a client is any entity that requests access to files.
+
+Clients can:
+- Read existing files
+- Modify files
+- Create new files
+
+Clients may be applications or other computers accessing the file system.
+
+
+----------------------------------------
+CHUNK SERVER IN GFS
+----------------------------------------
+
+Chunk servers are responsible for storing data chunks.
+
+Key characteristics:
+- Chunk servers send requested data directly to clients
+- Data is not routed through the master
+- Each chunk is stored multiple times for reliability
+
+Replication:
+- Default replication factor is 3
+- Replication factor is configurable by the client
+
+
+----------------------------------------
+CHUNKS IN GFS
+----------------------------------------
+
+Files in GFS are divided into chunks.
+
+Chunk properties:
+- Each chunk size is 64 MB
+- Each chunk has a unique 64-bit identifier
+- Chunks are stored across multiple chunk servers
+
+Chunks of a single file are distributed across different machines.
+
+
+----------------------------------------
+CHUNK REPLICAS
+----------------------------------------
+
+Each chunk is replicated to ensure durability and fault tolerance.
+
+Features:
+- Default replication factor is 3
+- Replicas are stored on different chunk servers
+- Ensures data availability during hardware failures
+
+
+----------------------------------------
+GFS MASTER
+----------------------------------------
+
+The GFS Master acts as the coordinator of the cluster.
+
+Responsibilities:
+- Maintains metadata (file names, chunk IDs, chunk locations)
+- Keeps an operation log
+- Manages access control
+- Tracks cluster state
+
+The master does not store actual file data.
+
+
+----------------------------------------
+HADOOP DISTRIBUTED FILE SYSTEM (HDFS)
+----------------------------------------
+
+HDFS is an open-source distributed file system inspired by GFS.
+
+Comparison between GFS and HDFS:
+
+GFS Master → NameNode  
+Shadow Master → Secondary NameNode  
+Chunks → Blocks  
+Chunk Server → DataNode  
+
+HDFS provides scalable and fault-tolerant storage for large datasets.
+
+
+========================================
+LECTURE 8: LARGE-SCALE FILE ORGANIZATION
+========================================
+
+
+----------------------------------------
+HDFS OVERVIEW
+----------------------------------------
+
+HDFS is designed to store very large files across multiple machines.
+
+It provides:
+- High throughput
+- Fault tolerance
+- Scalability using commodity hardware
+
+
+----------------------------------------
+HADOOP HIGH-LEVEL ARCHITECTURE
+----------------------------------------
+
+Hadoop consists of:
+- Master Nodes
+- Slave Nodes
+
+Master Nodes:
+- NameNode: Coordinates and manages HDFS metadata
+- JobTracker: Coordinates MapReduce processing
+
+Slave Nodes:
+- DataNode: Stores data blocks
+- TaskTracker: Executes MapReduce tasks
+
+
+----------------------------------------
+MASTER AND SLAVE RELATIONSHIP
+----------------------------------------
+
+- NameNode issues instructions to DataNodes
+- JobTracker issues instructions to TaskTrackers
+- Slave nodes perform storage and computation tasks
+
+
+----------------------------------------
+HADOOP ARCHITECTURE (REVISION)
+----------------------------------------
+
+- Hadoop uses a distributed computing model
+- Runs on low-cost commodity hardware
+- Operates on Linux-based systems
+- Computation is moved closer to data
+
+
+----------------------------------------
+HOW HADOOP WORKS (EXAMPLE)
+----------------------------------------
+
+Example:
+- A 4 TB dataset is stored in a Hadoop cluster with 4 nodes.
+- Data is divided into four parts of 1 TB each.
+- Each node stores one part of the data.
+- Parallel storage significantly reduces storage time.
+
+
+----------------------------------------
+DATA REPLICATION IN HDFS
+----------------------------------------
+
+To ensure high availability:
+- Each data block is replicated
+- Default replication factor is 3
+
+Rack awareness strategy:
+- Two replicas stored on the same rack
+- One replica stored on a different rack
+- Reduces latency and improves fault tolerance
+
+
+----------------------------------------
+HDFS DATA BLOCKS
+----------------------------------------
+
+Files in HDFS are stored as blocks.
+
+Block size:
+- Hadoop 1.x: 64 MB
+- Hadoop 2.x: 128 MB (default)
+
+All blocks are of equal size except the last block, which may be smaller.
+
+
+----------------------------------------
+WHY HDFS BLOCK SIZE IS 128 MB
+----------------------------------------
+
+Reasons for large block size:
+- HDFS handles massive datasets (TBs and PBs)
+- Smaller block sizes would increase metadata overhead
+- Managing millions of small blocks would degrade performance
+- Very large block sizes would reduce parallelism
+
+Thus, 128 MB is a balanced block size.
+
+
+----------------------------------------
+ADVANTAGES OF HDFS DATA BLOCKS
+----------------------------------------
+
+- Simplifies storage management
+- Enables storage of very large files
+- Supports fault tolerance through replication
+- Provides high availability
+
+Metadata handling:
+- NameNode maintains all metadata
+- DataNodes store blocks without managing metadata
+- Simplifies DataNode responsibilities
+
+
+========================================
+END OF UNIT 2
+========================================

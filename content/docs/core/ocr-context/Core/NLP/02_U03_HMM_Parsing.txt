@@ -1,0 +1,408 @@
+SUBJECT NAME: NATURAL LANGUAGE PROCESSING
+UNIT NO: 3
+UNIT NAME: SYNTAX ANALYSIS
+
+
+INDEX
+
+Lecture 16 – Parsing with CFG
+Lecture 17 – Sequence Labelling: HMM Model
+Lecture 18 – Sequence Labelling: HMM Model
+
+
+UNIT NO: 3 – SYNTAX ANALYSIS
+
+
+LECTURE NO: 16
+PARSING WITH CFG
+
+
+PARSING
+
+Two basic search strategies:
+- Top-down: start at the root of the tree
+- Bottom-up: start at the leaves
+
+
+TOP-DOWN PARSING
+
+Top-down parsing is goal-directed.
+
+A top-down parser starts with a list of constituents to be built.
+
+It rewrites the goals in the goal list by matching one against the left-hand side (LHS) of grammar rules and expanding it with the right-hand side (RHS), attempting to match the sentence to be derived.
+
+If a goal can be rewritten in several ways, there is a choice of which rule to apply (search problem).
+
+Can use depth-first or breadth-first search and goal ordering.
+
+Potential problems:
+- Uses rules that could never match the input
+- May loop on recursive rules (e.g., VP → VP PP)
+
+
+NOMINAL (NOM)
+
+NOM is the core part of a noun phrase.
+It typically consists of a noun or a noun with its modifiers.
+
+Example:
+“orange book”
+orange → adjective
+book → noun
+
+For example:
+The orange book
+The → Determiner
+Orange book → Nominal
+
+
+EXAMPLE OF TOP-DOWN PARSING
+
+Grammar rules:
+
+S → NP VP
+S → Aux NP VP
+S → VP
+
+NP → Det NOM
+NOM → Noun
+NOM → Noun NOM
+
+VP → Verb
+VP → Verb NP
+
+Det → that | this | a | the
+Noun → book | flight | meal | man
+Verb → book | include | read
+Aux → does
+
+Sentence:
+Book that flight.
+
+
+BOTTOM-UP PARSING
+
+Bottom-up parsing is data-directed.
+
+The initial goal list of a bottom-up parser is the string to be parsed.
+
+If a sequence in the goal list matches the RHS of a rule, then the sequence may be replaced by the LHS of the rule.
+
+Parsing is finished when the goal list contains only the start symbol.
+
+If multiple rules match, there is a choice of which rule to apply (search problem).
+
+Can use depth-first or breadth-first search.
+
+The standard presentation is shift-reduce parsing.
+
+Potential problems:
+- Builds structures that could never appear in a valid parse tree
+- May loop on epsilon productions (e.g., NP → ε)
+
+
+SHIFT-REDUCE PARSER
+
+Start with the sentence in an input buffer.
+
+Shift:
+Push the next input symbol onto the stack.
+
+Reduce:
+If the RHS of a rule appears on top of the stack, replace it with the LHS.
+
+If both shift and reduce are possible, choose arbitrarily.
+
+If the stack ends with only the start symbol, parsing succeeds.
+Otherwise, backtrack.
+
+
+SHIFT-REDUCE PARSING EXAMPLE
+
+Sentence: Book that flight
+
+Stack            Input            Action
+()               Book that flight shift
+(Book)           that flight      reduce: Verb → book
+(Verb)           that flight      shift
+(Verb that)      flight           reduce: Det → that
+(Verb Det)       flight           shift
+(Verb Det flight)                 reduce: Noun → flight
+(Verb Det Noun)                   reduce: NOM → Noun
+(Verb Det NOM)                    reduce: NP → Det NOM
+(Verb NP)                         reduce: VP → Verb NP
+(Verb)                            reduce: S → VP
+(S)                               SUCCESS
+
+
+TOP-DOWN VS BOTTOM-UP
+
+Top-down:
+- Only searches for trees that can be answers
+- Suggests trees inconsistent with words
+- Guarantees root is S
+- Does not guarantee match with input
+
+Bottom-up:
+- Only forms trees consistent with input
+- May create globally incorrect structures
+- Guarantees match with input
+- Does not guarantee S as root
+
+Hybrid approaches combine both.
+
+
+CONTEXT-FREE GRAMMARS (CFG)
+
+Also known as:
+- Phrase structure grammars
+- Backus–Naur Form
+
+Components:
+- Terminals (words)
+- Non-terminals (syntactic categories)
+- Rules
+
+
+FORMAL DEFINITION OF CFG
+
+A grammar G = ⟨T, N, S, R⟩
+
+T: Set of terminals (lexicon)
+N: Set of non-terminals
+P ⊂ N: Preterminals
+S: Start symbol
+R: Rules of the form X → γ
+
+A grammar G generates a language L.
+
+
+EXAMPLE CFG
+
+T = {that, this, a, the, man, book, flight, meal, include, read, does}
+
+N = {S, NP, NOM, VP, Det, Noun, Verb, Aux}
+
+S = S
+
+R:
+S → NP VP
+S → Aux NP VP
+S → VP
+NP → Det NOM
+NOM → Noun
+NOM → Noun NOM
+VP → Verb
+VP → Verb NP
+Det → that | this | a | the
+Noun → book | flight | meal | man
+Verb → book | include | read
+Aux → does
+
+
+GRAMMAR RULES (EXAMPLES)
+
+S → NP VP         I want a morning flight
+NP → Pronoun     I
+NP → Det Nominal
+Nominal → Nominal Noun   morning flight
+VP → Verb
+VP → Verb NP
+VP → Verb NP PP
+VP → Verb PP
+PP → Preposition NP     from Los Angeles
+
+
+DERIVATION
+
+A derivation is a sequence of grammar rules applied to a string that explains how the string is generated.
+
+
+CFG EXAMPLE
+
+s → np vp
+np → det n
+vp → tv np | iv
+det → the | a | an
+n → giraffe | apple
+iv → dreams
+tv → eats | dreams
+
+
+LIMITATIONS OF CFG
+
+CFGs cannot fully capture:
+- Agreement
+- Subcategorization
+- Movement
+
+
+NUMBER AGREEMENT
+
+Constraints between constituents.
+
+Examples:
+✔ This flight
+✔ Those flights
+✘ This flights
+✘ Those flight
+
+Verb agreement:
+✔ What flights leave in the morning?
+✘ What flight leave in the morning?
+
+
+AGREEMENT WITH FEATURES
+
+S → NP[sg] VP[sg]
+NP[sg] → Det[sg] Nom[sg]
+VP[sg] → Verb[sg] PP
+NP[pl] → Det[pl] NP[pl]
+
+This approach is correct but impractical due to grammar size.
+
+
+SUBCATEGORIZATION
+
+Verbs allow specific argument structures.
+
+Examples:
+VP → Verb             sleep
+VP → Verb NP          want a flight
+VP → Verb NP PP       leave Boston in the morning
+VP → Verb PP          leave on Thursday
+
+
+SUBCATEGORIZATION FRAMES
+
+sleep: John slept.
+find + NP: find a flight
+give + NP + NP: give me a fare
+help + NP + PP: help me with a flight
+prefer + TO-VP: prefer to leave
+told + S: was told United has a flight
+
+
+MOVEMENT
+
+Examples:
+I gave _ to the driver.
+How much did you think I gave _ to the driver?
+How much did you think he claimed that I said I gave _ to the driver?
+
+
+LECTURE NO: 20
+SEQUENCE LABELLING: HIDDEN MARKOV MODEL (HMM)
+
+
+SEQUENCE LABELLING
+
+Assign a label to each element in a sequence.
+
+Example:
+Input:  Paris is the capital of France
+Output: I     I  I   I       I  C
+
+Applications:
+- POS tagging
+- Chunking
+- Named Entity Recognition
+
+
+APPROACHES
+
+Dictionary-based
+Hidden Markov Model (HMM)
+Maximum Entropy
+Conditional Random Field (CRF)
+
+
+HMM MODEL
+
+We want:
+t = argmax P(w, t)
+
+Assumption:
+Current tag depends only on previous tag(s).
+
+Probabilities:
+P(ti | ti-1)   transition probability
+P(wi | ti)     emission probability
+
+
+BIGRAM AND TRIGRAM TAGGERS
+
+Bigram tagger:
+Depends on previous tag.
+
+Trigram tagger:
+Depends on previous two tags.
+
+Example:
+"clearly marked"
+
+
+HMM TAGGING
+
+Assign each word its most common tag.
+P(ti | wi) = freq(wi, ti) / freq(wi)
+
+
+HMM WITH TRANSITIONS
+
+P(ti | wi) = P(wi | ti) × P(ti | ti-1)
+
+Trigram:
+P(ti | ti-2, ti-1)
+
+
+HMM EXAMPLE
+
+Secretariat/NNP is/VBZ expected/VBN to/TO race/VB tomorrow/NN
+
+Compute:
+argmax P(tj | ti-1) P(wi | tj)
+
+
+HMM TAGGER PROCESS
+
+Collect labelled data.
+Create lookup table.
+Tag each word with most frequent POS.
+
+
+EMISSION PROBABILITIES
+
+Words → Noun / Modal / Verb
+Mary, Jane, Will, Spot, Can, See, Pat
+
+
+TRANSITION PROBABILITIES
+
+<S> → N, M
+N → M, V
+M → V
+V → N
+
+
+HIDDEN STATES
+
+Hidden Markov Model
+Hidden states = POS tags
+
+
+NUMBER OF POSSIBILITIES
+
+Sentence:
+Jane will spot Will
+
+Total possibilities: 81
+
+
+VIDEO
+
+https://www.youtube.com/watch?v=68hmUltbPnw
+
+
+THANK YOU

@@ -1,0 +1,119 @@
+---
+title: Experiment 1
+description: Study of R tool and basic commands to access text data.
+---
+
+import { FileText, Download } from 'lucide-react';
+
+Objective: To understand natural language processing and to learn how to apply basicalgorithms
+in this field.
+<Cards>
+  <Card 
+    icon={<FileText />} 
+    title="Official Resources" 
+    description="View the experiment document on Google Drive"
+    href="https://drive.google.com/file/d/1-faT5wCzLQwAZjNd4cu8xlyWjKF1tttU/view?usp=sharing" 
+  />
+</Cards>
+
+---
+
+### Prerequisites
+
+<Cards>
+  <Card 
+    icon={<Download />}
+    title="Install R" 
+    description="Download R for Windows"
+    href="https://cran.rstudio.com/bin/windows/base/release.html"
+  />
+  <Card 
+    icon={<Download />}
+    title="Install RStudio" 
+    description="Download RStudio Desktop for Windows"
+    href="https://posit.co/download/rstudio-desktop/"
+  />
+</Cards>
+<Callout
+  icon={<FileText />}
+  title="Create sample.txt"
+>
+Create a text file on your Desktop named `sample.txt` and add the following content: `Hello World`. Any text or file name also works.
+</Callout>
+
+### Perform
+1. Open **RStudio**.
+2. Create a new R script `Ctrl + Shift + N`. 
+3. Paste the code, Select All `Ctrl + A` and run it sequentially `Ctrl + Enter`.
+4. Locate and Pick the `sample.txt` you created earlier.
+
+### Code
+```r
+# BASIC R OPERATIONS
+x <- c(1, 2, 3, 4, 5, 6)
+sum(x)
+mean(x)
+median(x)
+sqrt(x)
+x^2
+seq(1, 10)
+
+# HISTOGRAM
+x <- c(2,4,4,6,6,5,5,7,3,7,3,8,9,6,4,3,4,4,6,2,2,1,2,4,6,6,8)
+hist(x, main = "Histogram", xlab = "Values", ylab = "Frequency")
+
+# SCATTER PLOT
+x <- c(1, 3, 5, 7, 9)
+y <- c(2, 4, 6, 8, 10)
+plot(x, y, main = "Scatter Plot", xlab = "X", ylab = "Y")
+
+# TIME PLOT
+plot(x, type = "b", main = "Time Plot", xlab = "Index", ylab = "X values")
+
+# REGULAR EXPRESSIONS
+grep("[a-zA-Z]", c(123, "abc"), value = TRUE)
+grep("(ab){2}", c("aabb", "abaaabab", "abab"), value = TRUE)
+grep("^(ab)", c("aabaa", "abaaabab", "bab"), value = TRUE)
+grep("(ab)$", c("aabaa", "abaaabab", "bab"), value = TRUE)
+
+# INSTALL PACKAGES (RUN ONCE)
+install.packages(c("tm", "SnowballC", "wordcloud", "RColorBrewer"))
+
+# LOAD LIBRARIES
+library(tm)
+library(SnowballC)
+library(wordcloud)
+library(RColorBrewer)
+
+# READ TEXT FILE
+text <- readLines(file.choose())
+
+# CREATE CORPUS
+docs <- Corpus(VectorSource(text))
+
+# CLEAN TEXT
+docs <- tm_map(docs, content_transformer(tolower))
+docs <- tm_map(docs, removeNumbers)
+docs <- tm_map(docs, removePunctuation)
+docs <- tm_map(docs, stripWhitespace)
+
+# TERM DOCUMENT MATRIX
+dtm <- TermDocumentMatrix(docs)
+m <- as.matrix(dtm)
+
+# WORD FREQUENCY
+v <- sort(rowSums(m), decreasing = TRUE)
+d <- data.frame(word = names(v), freq = v)
+
+# TOP WORDS
+head(d, 10)
+
+# WORD CLOUD
+wordcloud(words = d$word,
+          freq = d$freq,
+          min.freq = 1,
+          max.words = 200,
+          random.order = FALSE,
+          rot.per = 0.35,
+          colors = brewer.pal(8, "Dark2"))
+```

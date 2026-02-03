@@ -1,0 +1,391 @@
+SUBJECT NAME: NATURAL LANGUAGE PROCESSING
+UNIT NO: 6
+UNIT NAME: APPLICATIONS
+
+
+INDEX
+
+Lecture 45 – Question Answering System  
+Lecture 46 – Categorization  
+Lecture 47 – Summarization  
+Lecture 48 – Sentiment Analysis  
+
+
+UNIT NO: 6 – APPLICATIONS
+
+
+LECTURE 45
+QUESTION ANSWERING SYSTEM
+
+
+QUESTION ANSWERING SYSTEM (QAS)
+
+A Question Answering (QA) system is a task of automatically answering questions asked in natural language using either:
+- a pre-structured database, or
+- a collection of natural language documents.
+
+Unlike search engines that return full documents, a QA system presents only the requested information.
+
+The basic idea is that users ask questions in natural language and the system retrieves the most appropriate and correct answer.
+
+Example:
+Q: What is the birthplace of Shree Krishna?  
+A: Mathura
+
+
+FEATURES OF QAS
+
+A Question Answering System:
+- Provides precise answers to user questions
+- Returns concise and accurate responses
+- Does not return a list of documents
+
+A QA system consists of three main components:
+1. Question Processing
+2. Answer Retrieval
+3. Answer Generation
+
+
+EXAMPLE OF QA CONTEXT
+
+Context:
+Beyoncé Giselle Knowles-Carter (born September 4, 1981) is an American singer and actress. She rose to fame in the late 1990s as lead singer of Destiny's Child.
+
+Question:
+When did Beyoncé start becoming popular?
+
+Answer:
+In the late 1990s
+
+
+TYPES OF QUESTION ANSWERING SYSTEMS
+
+Closed-domain QAS:
+- Limited to a specific domain such as medicine, movies, or history
+
+Open-domain QAS:
+- Works across domains like search engines
+- Provides explicit answers from diverse sources
+
+
+QUESTION TYPES IN QAS
+
+Factoid Questions:
+- Simple factual answers
+
+Descriptive Questions:
+- Detailed explanations about a person, place, or event
+
+Yes/No Questions:
+- Answers are either yes or no
+
+
+TYPES OF QA SYSTEMS
+
+IR-based Question Answering:
+- Finds short text segments from documents or the web
+
+Knowledge-based Question Answering:
+- Maps natural language questions to structured queries
+- Uses databases and knowledge graphs
+- Employs semantic parsers
+- Uses query languages such as SQL or SPARQL
+
+Multi-source QA Systems:
+- Use multiple information sources
+- Example: IBM Watson
+
+
+QA SYSTEMS IN DAILY LIFE
+
+QA systems are part of everyday life through:
+- Siri
+- Google Assistant
+- Alexa
+- Cortana
+
+Common QA datasets:
+- Stanford Question Answering Dataset (SQuAD)
+- WikiQA
+- TREC-QA
+- NewsQA
+
+
+CHALLENGES IN QA SYSTEMS
+
+Lexical Gap:
+- Same meaning expressed in different ways
+
+Ambiguity:
+- Structural ambiguity (e.g., "flying planes")
+- Lexical ambiguity (e.g., "bank")
+
+Multilingualism:
+- Knowledge exists in multiple languages
+- Users ask questions in different languages
+
+
+LECTURE 46
+TEXT CATEGORIZATION
+
+
+NEED FOR TEXT CATEGORIZATION
+
+Rapid growth of internet data has led to massive text availability.
+
+Millions of documents exist in Indian regional languages such as:
+- Hindi
+- Marathi
+- Tamil
+- Telugu
+- Punjabi
+- Bengali
+- Urdu
+
+Manual classification is expensive and time-consuming.
+
+Automatic text categorization:
+- Improves accuracy
+- Saves time
+- Enhances document management and retrieval
+
+
+TEXT CATEGORIZATION
+
+Text categorization (also called text classification or topic spotting) is the task of automatically assigning documents to predefined categories.
+
+
+USES OF TEXT CATEGORIZATION
+
+- Content filtering
+- Spam filtering
+- Identification of document topics
+- Survey coding
+- Indexing of scientific articles
+
+
+TEXT CATEGORIZATION USE CASES
+
+- Sentiment analysis
+- Topic detection
+- Language detection
+- Email spam filtering
+- News categorization
+
+
+EXAMPLES
+
+Input: Review text  
+Output: Predicted rating  
+"I hated this place" → Class: 1 star
+
+Input: Email text  
+Output: Spam classification  
+"Dear Sir, I have 18 million dollars..." → Spam
+
+
+TYPES OF TEXT CATEGORIZATION SYSTEMS
+
+Supervised Learning:
+- Uses labeled data
+- Algorithms: Decision Trees, KNN, Naïve Bayes, Neural Networks, Regression, Vector-based methods
+
+Unsupervised Learning:
+- Uses clustering techniques
+- Algorithms: K-means, Suffix Tree Clustering, LINGO, SHOC
+
+Semi-supervised Learning:
+- Partial labeling of data
+
+
+CASE STUDY: MARATHI TEXT CATEGORIZATION
+
+Input:
+Marathi language text documents
+
+Processing Steps:
+- Input validation
+- Tokenization
+- Stop-word removal
+- Stemming
+- Morphological analysis
+- Feature extraction
+- Supervised learning
+- Ontology-based classification
+
+Output:
+Classified Marathi documents
+
+
+APPLICATIONS OF TEXT CATEGORIZATION
+
+- Web page classification
+- Journal indexing
+- Patent classification
+- Medical record coding
+- Email filtering
+- News tracking
+
+
+LECTURE 47
+TEXT SUMMARIZATION
+
+
+TEXT SUMMARIZATION
+
+Text summarization reduces the size of a document without changing its meaning.
+
+Automatic text summarization produces a concise and fluent summary while preserving key information.
+
+A good summary should be:
+- Coherent
+- Non-redundant
+- Grammatically correct
+
+
+TYPES OF TEXT SUMMARIZATION
+
+Extractive Summarization:
+- Selects key sentences or phrases
+- Does not modify original text
+
+Abstractive Summarization:
+- Generates new sentences
+- Paraphrases content like humans
+
+
+EXAMPLES
+
+Source Text:
+Joseph and Mary rode on a donkey to attend an event in Jerusalem. Mary gave birth to Jesus.
+
+Extractive Summary:
+Joseph and Mary attend event Jerusalem. Mary birth Jesus.
+
+Abstractive Summary:
+Joseph and Mary came to Jerusalem where Jesus was born.
+
+
+TEXT SUMMARIZATION PROCESS
+
+- Accept input document
+- Sentence and word tokenization
+- POS tagging and Named Entity Recognition
+- Sentence graph generation
+- Graph merging and reduction
+- Summary generation
+
+
+APPLICATIONS OF TEXT SUMMARIZATION
+
+- Information retrieval
+- Text categorization
+- Managing information overload
+- Time-saving summaries
+
+
+LECTURE 48
+SENTIMENT ANALYSIS
+
+
+SENTIMENT ANALYSIS
+
+Sentiment Analysis determines the emotional tone behind text.
+
+It identifies:
+- Opinions
+- Emotions
+- Attitudes
+
+Key attributes:
+- Polarity (positive, negative, neutral)
+- Subject
+- Opinion holder
+
+
+LEVELS OF SENTIMENT ANALYSIS
+
+Document-level:
+- Classifies sentiment of entire document
+
+Sentence-level:
+- Classifies sentiment of individual sentences
+
+Aspect-level:
+- Focuses on specific product features
+Example:
+"The battery life is too short."
+
+
+TYPES OF SENTIMENT ANALYSIS
+
+Standard Sentiment Analysis:
+Positive / Neutral / Negative
+
+Fine-grained Sentiment Analysis:
+Very Positive / Positive / Neutral / Negative / Very Negative
+
+Emotion Detection:
+- Happiness
+- Anger
+- Sadness
+
+Aspect-based Sentiment Analysis:
+- Focus on specific product aspects
+
+Intent Detection:
+- Identifies user intent
+Example:
+"Instagram keeps closing" → Request for assistance
+
+
+SENTIMENT CLASSIFICATION TECHNIQUES
+
+- Rule-based systems
+- Machine learning-based systems
+- Hybrid systems
+
+
+BASIC SENTIMENT ANALYSIS PROCESS
+
+- Tokenization
+- POS tagging
+- Sentiment phrase detection
+- Score assignment (-1 to +1)
+- Optional score aggregation
+
+
+EVALUATION METRICS
+
+Precision:
+Correctly predicted positives / total predicted positives
+
+Recall:
+Correctly predicted positives / total actual positives
+
+Accuracy:
+Correct predictions / total predictions
+
+
+APPLICATIONS OF SENTIMENT ANALYSIS
+
+- Customer feedback analysis
+- Social media monitoring
+- Market research
+- Survey analysis
+- Product review analysis
+- Service experience tracking
+
+
+REFERENCES
+
+Daniel Jurafsky, James H. Martin  
+Speech and Language Processing  
+Prentice Hall, 2008
+
+Christopher D. Manning, Hinrich Schütze  
+Foundations of Statistical Natural Language Processing  
+MIT Press, 1999
+
+
+THANK YOU

@@ -1,0 +1,101 @@
+---
+title: Experiment 2
+description: CI/CD with GitHub Actions
+---
+
+import { Github, FolderPlus, FileCode, CheckCircle } from 'lucide-react';
+import { Files, File, Folder } from 'fumadocs-ui/components/files';
+import { FloatingColabButton } from '@/components/ui/floating-colab-button';
+
+Objective: To automate ML training/testing pipeline using GitHub Actions.
+
+<Callout type="info">
+This experiment continues from **Experiment 1**. Make sure you have completed it first.
+</Callout>
+
+<Callout type="warn" title="Note on Script Names">
+  In the **Lab Manual**, you might see `train.py`. Here, we are using specific script names: `linear-regression.py` and `logistic-regression.py` to run multiple models.
+</Callout>
+
+---
+
+### Procedure
+
+#### 1. Create Workflow Folder
+
+Inside your `mlops-lab` folder, create the following folder structure:
+
+<Files>
+  <Folder name="mlops-lab" defaultOpen>
+    <Folder name=".github" defaultOpen>
+      <Folder name="workflows" defaultOpen>
+        <File name="ml_pipeline.yml" />
+      </Folder>
+    </Folder>
+    <File name="linear-regression.py" />
+    <File name="logistic-regression.py" />
+    <File name="requirements.txt" />
+  </Folder>
+</Files>
+
+#### 2. Create Workflow File
+
+Create a file named `ml_pipeline.yml` inside `.github/workflows/` and paste:
+
+```yaml title=".github/workflows/ml_pipeline.yml"
+name: ML Pipeline
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Linear Regression
+        run: python linear-regression.py
+
+      - name: Run Logistic Regression
+        run: python logistic-regression.py
+```
+
+#### 3. Push to GitHub
+
+1. Open **GitHub Desktop**.
+2. You should see the new `.github` folder with the workflow file.
+3. Add a summary (e.g., "Add CI/CD pipeline").
+4. Click **Commit to main**.
+5. Click **Push origin**.
+
+#### 4. Verify Pipeline
+
+1. Go to your repository on [github.com](https://github.com).
+2. Click on the **Actions** tab.
+3. You should see your "ML Pipeline" running.
+4. Click on it to view the logs and verify both scripts executed successfully.
+
+<Callout title="Verify Pipeline" icon={<Github />}>
+  Github --> Actions --> All workflows (workflow run) --> **ml_pipeline.yml**
+  
+  on: push
+  
+  <div className="flex items-center gap-2 text-green-500 mt-2">
+    <CheckCircle size={16} />
+    <span className="font-semibold">build</span>
+  </div>
+</Callout>
+
+<FloatingColabButton />

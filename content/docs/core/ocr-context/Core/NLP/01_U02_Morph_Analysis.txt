@@ -1,0 +1,376 @@
+SUBJECT NAME: NATURAL LANGUAGE PROCESSING
+UNIT NO: 2
+UNIT NAME: WORD LEVEL ANALYSIS
+
+
+INDEX – MODULE 2: WORD LEVEL ANALYSIS
+
+Lecture 5 – Morphological Analysis: Survey of English Morphology
+Lecture 6 – Inflectional Morphology and Derivational Morphology
+Lecture 7 – Regular Expressions, Finite Automata
+Lecture 8 – Finite State Transducers (FST), Morphological Parsing with FST
+
+
+MODULE 2: WORD LEVEL ANALYSIS
+
+
+LECTURE 5
+MORPHOLOGICAL ANALYSIS – SURVEY OF ENGLISH MORPHOLOGY
+
+
+MORPHOLOGY
+
+Morphology deals with the structure (syntax) of complex words and parts of words, also called morphemes, as well as with the semantics of their lexical meanings.
+
+Understanding how words are formed and what semantic properties they convey through their forms enables humans to recognize individual words and their meanings in discourse.
+
+Morpheme:
+The minimal meaning-bearing unit in a language.
+
+Morphology handles the formation of words using morphemes.
+
+Base form (stem, lemma): believe  
+Affixes (prefixes, suffixes, infixes): un-, -able, -ly
+
+
+MORPHOLOGICAL PARSING
+
+Morphological parsing is the task of recognizing the morphemes inside a word.
+
+Examples:
+hands  
+foxes  
+children  
+
+Morphological parsing is important for many NLP tasks:
+- Machine translation
+- Information retrieval
+- Syntactic parsing
+- Text simplification
+
+
+WORDS AND MORPHEMES
+
+In formal languages, words are arbitrary strings.
+
+In natural languages, words are composed of meaningful subunits called morphemes.
+
+Morphemes are abstract units that denote entities or relationships.
+
+Types of morphemes:
+- Stems: the core morpheme of a word
+- Affixes: add grammatical or semantic information (number, tense, etc.)
+
+Examples:
+cats = cat (stem) + s (suffix)  
+undo = un (prefix) + do (stem)
+
+
+WHY MORPHOLOGICAL ANALYSIS IS NEEDED
+
+Morphological analysis studies how words are composed from smaller meaning-bearing units.
+
+Applications include:
+- Spelling correction: reference
+- Hyphenation algorithms: refer-ence
+- Part-of-speech analysis: googler (noun), googling (verb)
+- Text-to-speech: grapheme-to-phoneme conversion
+- Pronunciation ambiguity: hothouse (/θ/ or /ð/)
+
+
+MORPHEMES AND WORD FORMATION
+
+Words can be formed using different morphological processes:
+
+Inflection:
+- Adds grammatical information
+- Does not change word class
+- Example: clean → cleaning (verb)
+
+Derivation:
+- Changes word class or meaning
+- Example: delight (verb) → delightful (adjective)
+
+Compounding:
+- Combines multiple stems
+- Example: classroom
+
+Cliticization:
+- Combines a word with a clitic
+- Example: I’ve = I + have
+
+
+STRUCTURE OF WORDS
+
+Words are orthographic tokens separated by whitespace.
+
+In some languages, word boundaries are unclear:
+- Chinese and Japanese have no whitespace
+- Turkish words may represent complete sentences
+
+Example (Turkish):
+uygarlastiramadiklarimizdanmissinizcasina  
+“behaving as if you are among those whom we could not civilize”
+
+Morphology studies word structure.  
+Syntax studies sentence structure.
+
+[These two levels interact closely in natural languages.]
+
+
+MORPHOLOGY AND SYNTAX
+
+Languages differ in how much information they pack into words.
+
+More morphology:
+- Less rigid syntax
+- Freer word order
+
+Example (Hindi):
+“John likes Mary”  
+All six word orders are possible due to rich morphological marking.
+
+
+WORD CREATION SYSTEMS
+
+Concatenative morphology:
+- Adds affixes to stems
+- Common in English
+
+Non-concatenative morphology:
+- Infixation (Tagalog): hingi → humingi
+- Templatic morphology (Arabic, Hebrew)
+
+Hebrew example:
+lmd → lamad (he studied)  
+lmd → limed (he taught)  
+lmd → lumad (he was taught)
+
+
+LECTURE 6
+INFLECTIONAL AND DERIVATIONAL MORPHOLOGY
+
+
+FREE AND BOUND MORPHEMES
+
+Free morphemes:
+- Can stand alone
+- Examples: girl, boy, weak, date
+
+Bound morphemes:
+- Cannot stand alone
+- Examples: -er, -s, -ling
+- Operate via derivation, inflection, and compounding
+
+
+TYPES OF MORPHOLOGY
+
+Inflection:
+- Same word class
+- Example: clean → cleaning
+
+Derivation:
+- Different word class
+- Example: delight → delightful
+
+Compounding:
+- Example: classroom
+
+Cliticization:
+- Example: I’ve = I + have
+
+
+DERIVATIONAL MORPHOLOGY
+
+Derivation forms new words by adding affixes to existing words.
+
+Prefixes:
+un-, pre-, post-, dis-, im-
+
+Suffixes:
+-age, -ing, -ful, -able, -ness, -hood, -ly
+
+
+DERIVATIONAL EXAMPLES
+
+like → dislike  
+like → likeable → unlikeable → unlikeableness  
+like → unlikeness  
+like → likely → likelihood → unlikelihood
+
+
+DERIVATIONAL MORPHOLOGY (NOUNS)
+
+-ation: computerize → computerization  
+-ee: appoint → appointee  
+-er: kill → killer  
+-ness: fuzzy → fuzziness
+
+
+DERIVATIONAL MORPHOLOGY (ADJECTIVES)
+
+-al: computation → computational  
+-able: embrace → embraceable  
+-less: clue → clueless
+
+
+VERB CLITICS
+
+am → ’m  
+are → ’re  
+is → ’s  
+have → ’ve  
+has → ’s  
+had → ’d  
+will → ’ll  
+would → ’d
+
+
+INFLECTIONAL MORPHOLOGY
+
+Inflection adapts words for grammatical usage without changing category.
+
+Expresses:
+- Tense
+- Number
+- Person
+- Aspect
+- Case
+
+Example:
+perform → performs → performed
+
+
+REGULAR AND IRREGULAR INFLECTION
+
+Regular plurals:
+cats, hats, tables
+
+Irregular plurals:
+mouse → mice  
+child → children  
+woman → women  
+tooth → teeth  
+ox → oxen  
+
+
+SUPPLETION
+
+go → went  
+good → better  
+bad → worse  
+
+[No phonological similarity between root and inflected form.]
+
+
+LECTURE 7
+REGULAR EXPRESSIONS
+
+
+REGULAR EXPRESSIONS
+
+A regular expression (RE) is a formal language for specifying patterns in text.
+
+Used in:
+- Search
+- Text processing
+- Pattern matching
+
+Example tool:
+UNIX grep
+
+
+BASIC RE PATTERNS
+
+Character classes:
+[A-Z], [a-z], [0-9]
+
+Ranges:
+[wW]oodchuck
+
+Negation:
+[^A-Z]
+
+Optionality:
+colou?r
+
+Wildcard:
+beg.n
+
+
+REPETITION OPERATORS
+
+* → zero or more  
++ → one or more  
+? → zero or one  
+
+
+ADVANCED OPERATORS
+
+\d → digit  
+\D → non-digit  
+\w → alphanumeric  
+\W → non-alphanumeric  
+\s → whitespace  
+\S → non-whitespace  
+
+
+LECTURE 8
+FINITE STATE TRANSDUCERS (FST)
+
+
+FINITE STATE AUTOMATA
+
+Regular expressions define regular languages.
+
+Finite State Automata (FSA):
+- Recognize strings
+- Accept or reject input
+
+
+FORMAL DEFINITION OF FSA
+
+Q: finite set of states  
+Σ: input alphabet  
+q₀: start state  
+F: final states  
+δ: transition function  
+
+
+FINITE STATE TRANSDUCERS
+
+FSTs map input strings to output strings.
+
+They represent relations, not functions.
+
+Used for:
+- Morphological parsing
+- Word generation
+- Lexical analysis
+
+
+INVERSION
+
+Inversion swaps input and output labels of a transducer.
+
+
+COMPOSITION
+
+If T₁ maps A → B and T₂ maps B → C,
+then T₁ ∘ T₂ maps A → C.
+
+
+FST FOR MORPHOLOGICAL PARSING
+
+Used for parsing English and Spanish word forms into lexical representations.
+
+
+OTHER APPLICATIONS OF FSTS
+
+- Spelling correction
+- Speech recognition
+- Machine translation
+- Weighted FSTs (probabilities)
+
+
+THANK YOU

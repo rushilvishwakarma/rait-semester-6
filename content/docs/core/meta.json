@@ -1,0 +1,15 @@
+{
+  "title": "Core",
+  "pages": [
+    "---Subjects---",
+    "AML",
+    "BDA",
+    "DL",
+    "NLP",
+    "DOE",
+    "---Curriculum---",
+    "academic-calendars/syllabus",
+    "academic-calendars/rait",
+    "academic-calendars/class-timetable"
+  ]
+}

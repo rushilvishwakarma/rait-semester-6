@@ -1,0 +1,113 @@
+---
+title: Experiment 1
+description: Installation and Setup of Cloudera Hadoop Environment using VirtualBox
+---
+
+import { FileText, Settings, Terminal, Lightbulb } from 'lucide-react';
+
+Aim: To install Oracle VirtualBox and set up the Cloudera QuickStart Virtual Machine in order to create a local Big Data (Hadoop) environment for executing Hadoop ecosystem commands.
+
+<Cards>
+  <Card 
+    icon={<Settings />} 
+    title="VM Setup" 
+    description="Installation and setup guide for VirtualBox and Cloudera"
+    href="/docs/labs/BDA/experiment-1/vm-setup" 
+  />
+  <Card 
+    icon={<Lightbulb />} 
+    title="How to Take Screenshots" 
+    description="To take a screenshot, pause the VM: Machine → Pause or Host + P (Host = Right Ctrl unless changed in preferences)"
+  />
+</Cards>
+
+---
+
+## Verify Hadoop is Running
+
+<Callout icon={<Terminal />} title="Check HDFS">
+In the VM terminal, run:
+```bash
+hadoop fs -ls /
+```
+
+Expected output (check the right side of each line):
+```
+/benchmarks
+/hbase
+/solr
+/tmp
+/user
+/var
+```
+If the output is similar that means its working properly.
+</Callout>
+
+### Perform
+Visit the following link using **Cloudera VM Browser** by typing in the address bar ...or copy the code below directly into the Cloudera VM terminal:
+
+<Tabs items={["Open in Cloudera VM Browser", "View full code"]}>
+  <Tab value="Open in Cloudera VM Browser">
+    https://pastebin.com/raw/kuw30VCb
+  </Tab>
+  <Tab value="View full code">
+    Run the following commands in your VM terminal:
+
+    ```bash
+    # Step 1: Verify HDFS is running
+    hadoop fs -ls /
+
+    # Step 2: Basic HDFS operations (Local to HDFS)
+    hadoop fs -mkdir -p /user/cloudera/BDA_Program
+
+    mkdir -p ~/BDA_C
+    cd ~/BDA_C
+
+    echo "hadoop programming" > bda_exp1.txt
+    cat bda_exp1.txt
+
+    hadoop fs -copyFromLocal bda_exp1.txt /user/cloudera/BDA_Program/
+
+    hadoop fs -ls /user/cloudera/BDA_Program/
+    hadoop fs -cat /user/cloudera/BDA_Program/bda_exp1.txt
+
+    hdfs dfs -get /user/cloudera/BDA_Program/bda_exp1.txt /home/cloudera
+    ls /home/cloudera
+
+    # Step 3: WordCount MapReduce program
+    cd ~
+
+    hdfs dfs -mkdir -p /user/cloudera/wordcount/input
+
+    echo -e "Hello I am GeeksforGeeks\nHello I am an Intern" > wc_input.txt
+
+    hdfs dfs -put wc_input.txt /user/cloudera/wordcount/input/
+
+    hdfs dfs -ls /user/cloudera/wordcount/input
+    hdfs dfs -cat /user/cloudera/wordcount/input/wc_input.txt
+
+    hadoop jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar wordcount /user/cloudera/wordcount/input /user/cloudera/wordcount/output
+
+    hdfs dfs -ls /user/cloudera/wordcount/output
+    hdfs dfs -cat /user/cloudera/wordcount/output/part-r-00000
+
+    hdfs dfs -copyToLocal /user/cloudera/wordcount/output/part-r-00000 ~/wc_result.txt
+    cat ~/wc_result.txt
+    ```
+  </Tab>
+</Tabs>
+
+### Inside the Cloudera VM
+
+1. **Open Browser** inside the VM.
+2. Go to: `http://localhost:8888`
+3. **Login**:
+   - Username: `cloudera`
+   - Password: `cloudera`
+
+You’ll land on the Hue dashboard.
+
+In Hue top-left, click:
+**Menu (≡) → Files → HDFS**
+
+![Hue Dashboard](/images/output-in-hue.png)

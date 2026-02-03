@@ -1,0 +1,310 @@
+CHAPTER 4
+LEXICAL SEMANTICS
+
+
+INTRODUCTION
+
+Semantic Analysis is a subfield of Natural Language Processing (NLP) that focuses on understanding the meaning of natural language.
+
+While understanding language appears effortless for humans, it is highly complex for machines due to ambiguity, subjectivity, and contextual dependence.
+
+Semantic Analysis attempts to capture the meaning of text by considering:
+- Context
+- Logical structure of sentences
+- Grammatical roles
+
+Lexical Semantic Analysis focuses specifically on understanding the meanings of individual words in context.
+
+
+LEXICAL SEMANTIC ANALYSIS
+
+Lexical Semantic Analysis involves identifying the meaning that each word contributes to a text.
+
+It typically corresponds to retrieving the dictionary meaning that a word is intended to carry in a given context.
+
+
+WHAT DO WORDS MEAN?
+
+Understanding individual word meaning depends on context.
+
+Example:
+- “Forward into the ocean.”
+- “She was leaning forward.”
+
+Although the word “forward” is the same, it carries different meanings depending on context.
+
+Lexical semantics studies:
+- Individual words in context
+- How word meanings relate to one another
+- Lexical relations between meanings
+
+
+WHAT IS LEXICAL SEMANTICS?
+
+Semantics:
+- Study of linguistic meaning
+
+Lexical Semantics:
+- Study of word meaning
+- Deals with a language’s lexicon (collection of words)
+- Represents each word and its meaning
+- Explains how word meanings are interrelated
+
+
+BASIC PROCESS OF NATURAL LANGUAGE UNDERSTANDING (NLU)
+
+Natural Language Understanding involves multiple stages:
+- Lexical analysis
+- Syntactic analysis
+- Semantic analysis
+- Discourse and pragmatic interpretation
+
+
+MEANING IN LANGUAGE
+
+Meaning in language is traditionally studied at three levels:
+- Meaning of discourse or text
+- Meaning of individual sentences or utterances
+- Meaning of individual words
+
+Lexical semantics focuses on the word level, which supports higher-level sentence and discourse interpretation.
+
+
+WORD MEANING
+
+In earlier models:
+- Verbs provided predicate-argument structures
+- Nouns were treated as constants
+
+However, word meaning involves more complexity, motivating lexical semantic analysis.
+
+
+PRELIMINARIES
+
+What is a word?
+- Types and tokens
+- Stems and roots
+- Inflected forms
+
+Lexeme:
+- An entry in the lexicon
+- Consists of a form and a single meaning representation
+
+Lexicon:
+- A collection of lexemes
+
+A lexeme includes:
+- Orthographic form
+- Phonological form
+- Meaning representation (sense)
+
+Example dictionary entries:
+- red (noun): the color of blood or a ruby
+- blood (noun): the red liquid circulating in animals
+
+
+RELATIONS AMONG LEXEMES AND THEIR SENSES
+
+Major lexical relations include:
+- Homonymy
+- Synonymy
+- Polysemy
+- Metonymy
+- Hyponymy / Hypernymy
+- Meronymy
+- Antonymy
+
+
+HOMONYMY
+
+Homonymy occurs when lexemes share the same form but have unrelated meanings.
+
+They may share:
+- Pronunciation
+- Spelling
+- Or both
+
+Example:
+- bat (wooden stick)
+- bat (flying mammal)
+
+
+SYNONYMY
+
+Synonymy refers to different words expressing related meanings.
+
+Examples:
+- cat, feline, Siamese cat
+
+True synonymy is rare:
+- Words often differ in usage
+- Carry different implications
+- Appear in different contexts
+
+
+POLYSEMY
+
+Polysemy occurs when a single word has multiple related meanings.
+
+Example:
+- bank (financial institution)
+- bank (building)
+- bank (place where money is stored)
+
+Example:
+- “That dog has floppy ears.”
+- “He has a good ear for jokes.”
+
+Polysemy differs from homonymy because meanings are related.
+
+
+METONYMY
+
+Metonymy uses one aspect of an entity to refer to the whole.
+
+Example:
+- “The White House released new figures today.”
+
+This implies the people within the White House, not the building itself.
+
+
+HYPONYMY AND HYPERNYMY
+
+ISA relationship between concepts.
+
+Examples:
+- hyponym(robin, bird)
+- hyponym(bird, animal)
+- hyponym(emus, bird)
+
+Definitions:
+- A is a hypernym of B if B is a type of A
+- A is a hyponym of B if A is a type of B
+
+
+BASIC-LEVEL CATEGORIES
+
+Folk biological categorization:
+
+- Unique beginner: plant, animal
+- Life form: tree, bush, flower
+- Generic (basic) level: pine, oak, maple
+- Specific level: white pine, ponderosa pine
+- Varietal level: western ponderosa pine
+
+The basic level:
+- Corresponds roughly to genus
+- Is the most cognitively salient
+- Aligns best with scientific taxonomy
+
+
+MERONYMY
+
+Meronymy represents part–whole relationships.
+
+Examples:
+- part-of(beak, bird)
+- part-of(bark, tree)
+
+Meronymy is conceptually transitive but not always lexically acceptable.
+
+Example:
+- The knob is part of the door.
+- The door is part of the house.
+- ? The knob is part of the house.
+
+
+ANTONYMY
+
+Antonymy represents lexical opposites.
+
+Examples:
+- antonym(large, small)
+- antonym(big, small)
+- antonym(big, little)
+
+However, not all size-related pairs are antonyms (large ≠ little).
+
+
+THESAURI AND LEXICAL RELATIONS
+
+- Polysemy: same word, different senses
+- Synonymy: different words, related senses
+
+Thesauri:
+- Group related words
+- Define relationships similar to lexical relations
+- Support semantic organization of vocabulary
+
+
+ONTOLOGY
+
+Ontology (general definition):
+- A branch of metaphysics concerned with the nature of being
+
+In computational linguistics:
+- A structured organization of concepts
+- Defines what exists in a domain
+- Does not necessarily specify all relations
+
+Related terms:
+- Taxonomy
+- Dictionary
+- Category structure
+
+Ontologies often function like advanced thesauri.
+
+
+LEXICAL RESOURCES
+
+Common lexical resources include:
+- Word lists
+- Online dictionaries
+- Corpora
+
+The most ambitious lexical resource is WordNet.
+
+
+WORDNET
+
+WordNet is:
+- A lexical database of English
+- Organized around synsets (sets of synonyms)
+
+A synset represents a single concept and includes:
+- Synonyms
+- A definition (gloss)
+- Usage examples
+
+WordNet contains separate databases for:
+- Nouns
+- Verbs
+- Adjectives
+- Adverbs
+
+Example:
+Verb sense of “table” meaning “to defer”:
+{postpone, hold over, table, shelve, set back, defer, remit, put off}
+
+For WordNet, the meaning of a word sense is defined by its synset.
+
+
+WORDNET STRUCTURE AND RELATIONS
+
+WordNet encodes lexical relations such as:
+- Synonymy
+- Hypernymy
+- Hyponymy
+- Meronymy
+- Antonymy
+
+These relations organize concepts into semantic networks.
+
+
+WORDNET USAGE
+
+WordNet is publicly available online and widely used for:
+- Semantic analysis
+- Word sense disambiguation
+- Lexical research
+- NLP applications

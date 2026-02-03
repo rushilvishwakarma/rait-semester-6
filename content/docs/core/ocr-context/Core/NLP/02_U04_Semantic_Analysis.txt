@@ -1,0 +1,442 @@
+SUBJECT NAME: NATURAL LANGUAGE PROCESSING
+UNIT NO: 4
+UNIT NAME: SEMANTIC ANALYSIS
+
+
+INDEX
+
+Lecture 22 – Semantic Attachments for Fragments of English Sentences and Noun Phrases
+Lecture 23 – Relations among Lexemes and Their Senses
+Lecture 24 – WordNet
+
+
+UNIT NO: 4 – SEMANTIC ANALYSIS
+
+
+LECTURE 22
+SEMANTIC ATTACHMENTS FOR FRAGMENTS OF ENGLISH
+
+
+SEMANTIC ATTACHMENTS
+
+Semantic attachments specify how to compute the meaning representation of a construction from the meanings of its constituent parts.
+
+They define the meaning representation assigned to grammatical constructions.
+
+
+ATTACHMENTS FOR SMALL ENGLISH FRAGMENTS
+
+- Sentence
+- Noun Phrase (NP)
+- Verb Phrase (VP)
+- Prepositional Phrase (PP)
+
+
+ATTACHMENTS FOR ENGLISH SENTENCES
+
+Example sentences:
+- Flight 487 serves lunch.
+- Serve lunch.
+- Does Flight 207 serve lunch?
+- Which flights serve lunch?
+
+All meaning representations contain propositions related to serving lunch on flights.
+
+
+DECLARATIVE SENTENCES
+
+Operators applied to First Order Predicate Calculus (FOPC):
+
+- DCL: Declarative
+- IMP: Imperative
+- YNQ: Yes–No Question
+- WHQ: WH Question
+
+Example:
+Flight 487 serves lunch.
+
+Grammar:
+S → NP VP  
+Semantic Attachment:
+DCL(VP.sem(NP.sem))
+
+Interpretation:
+A factual statement added to the knowledge base.
+
+
+GRAMMAR RULES WITH SEMANTIC ATTACHMENTS
+
+S → NP VP  
+{DCL(VP.sem(NP.sem))}
+
+S → VP  
+{IMP(VP.sem(DummyYou))}
+
+S → Aux NP VP  
+{YNQ(VP.sem(NP.sem))}
+
+S → WhWord NP VP  
+{WHQ(NP.sem.var, VP.sem(NP.sem))}
+
+Nom → Noun Nom  
+{λx Nom.sem(x) ∧ NN(Noun.sem)}
+
+PP → P NP  
+{P.sem(NP.sem)}
+
+P → on  
+{λyλx On(x,y)}
+
+Det → a  
+{∃}
+
+Nom → N  
+{λx Isa(x, N.sem)}
+
+
+IMPERATIVE SENTENCES
+
+Imperative sentences:
+- Begin with a verb phrase
+- Do not have an explicit subject
+
+Example:
+Serve lunch.
+
+Semantic representation:
+IMP(∃e Serving(e) ∧ Server(e, DummyYou) ∧ Served(e, Lunch))
+
+Imperatives are treated as speech acts requesting action.
+
+
+YES–NO QUESTIONS
+
+Example:
+Does Flight 207 serve lunch?
+
+Grammar:
+S → Aux NP VP
+
+Semantic representation:
+YNQ(∃e Serving(e) ∧ Server(e, Flt207) ∧ Served(e, Lunch))
+
+
+WH-QUESTIONS
+
+Example:
+Which flights serve lunch?
+
+Grammar:
+S → WhWord NP VP
+
+Semantic representation:
+WHQ(x, ∃e Serving(e) ∧ Server(e, x) ∧ Served(e, Lunch) ∧ Isa(x, Flight))
+
+
+NOUN PHRASES: COMPOUND NOMINALS
+
+Examples:
+- Flight schedule
+- Summer flight schedule
+
+Semantic representation:
+λx Isa(x, Schedule) ∧ NN(x, Flight)
+λx Isa(x, Schedule) ∧ NN(x, Flight) ∧ NN(x, Summer)
+
+
+GENITIVE NOUN PHRASES
+
+Examples:
+- Atlanta’s airport
+- Maharani’s menu
+
+Semantic representation:
+∃x Isa(x, Airport) ∧ GN(x, Atlanta)
+
+
+ADJECTIVE PHRASES
+
+Examples:
+- cheap restaurant
+- this restaurant is cheap
+
+Simple intersective semantics often fails:
+- small elephant
+- former friend
+- fake gun
+
+Correct approach:
+Represent adjectival modification using a general modification relation.
+
+Nominal → Adj Nominal  
+{λx Nom.sem(x) ∧ AM(x, Adj.sem)}
+
+Example:
+λx Isa(x, Restaurant) ∧ AM(x, Cheap)
+
+
+INFINITIVE VERB PHRASES
+
+Example:
+I told Harry to go to Maharani.
+
+Representation involves two events:
+- Telling event
+- Going event
+
+Harry participates in both events.
+
+Key issues:
+- Event structure
+- Shared arguments across events
+
+
+PREPOSITIONAL PHRASES (PP)
+
+Functions of PPs:
+1. Assert binary relations
+2. Signal arguments of verbs
+
+PP roles:
+- NP modifiers
+- VP modifiers
+- VP arguments
+
+
+PP AS NOMINAL MODIFIERS
+
+Example:
+A restaurant on Pearl
+
+Semantic representation:
+∃x Isa(x, Restaurant) ∧ On(x, Pearl)
+
+
+PP AS VP MODIFIERS
+
+Example:
+ate dinner in a hurry
+
+Semantic representation:
+∃e Eating(e) ∧ Eater(e, y) ∧ Eaten(e, Dinner) ∧ In(e, ∃h Hurry(h))
+
+
+LECTURE 23
+RELATIONS AMONG LEXEMES AND THEIR SENSES
+
+
+THREE PERSPECTIVES ON MEANING
+
+Lexical Semantics:
+- Meaning of individual words
+
+Formal (Compositional) Semantics:
+- Meaning of sentences
+
+Discourse / Pragmatics:
+- Meaning in context and interaction
+
+
+PRELIMINARIES
+
+Lexeme:
+- A pairing of a form with a single meaning
+
+Lexicon:
+- Collection of lexemes
+
+Lemma:
+- Canonical uninflected form
+- Part-of-speech specific
+
+Lemmatization:
+- Mapping word forms to lemmas
+
+
+SEMANTIC RELATIONSHIPS
+
+- Homonymy
+- Polysemy
+- Synonymy
+- Antonymy
+- Hypernymy
+- Hyponymy
+- Meronymy
+- Holonymy
+
+
+HOMONYMY
+
+Lexemes with:
+- Same form
+- Unrelated meanings
+
+Examples:
+- bank (river) vs bank (financial)
+- bat (animal) vs bat (sports equipment)
+
+Causes issues in:
+- Text-to-speech
+- Information retrieval
+- Machine translation
+- Speech recognition
+
+
+POLYSEMY
+
+Single lexeme with multiple related meanings.
+
+Examples:
+- bank (building, institution, service)
+- food bank
+
+Polysemy:
+- Very common
+- More frequent in verbs
+- Often hard to distinguish from homonymy
+
+
+SYNONYMY
+
+Words with similar meanings in some contexts.
+
+Examples:
+- couch / sofa
+- big / large
+- car / automobile
+
+Perfect synonymy is rare due to:
+- Register
+- Politeness
+- Usage constraints
+
+
+ANTONYMY
+
+Opposite senses along a dimension.
+
+Examples:
+- hot / cold
+- long / short
+- up / down
+
+Types:
+- Binary opposites
+- Gradable opposites
+- Reversives (rise/fall)
+
+
+HYPONYMY AND HYPERNYMY
+
+Hyponym:
+- More specific sense
+
+Hypernym:
+- More general sense
+
+Examples:
+- car → vehicle
+- mango → fruit
+- dog → animal
+
+Hyponymy properties:
+- Entailment
+- Transitivity
+
+
+MERONYMY AND HOLONYMY
+
+Part–whole relations.
+
+Examples:
+- wheel → car
+- nose → face
+
+
+LECTURE 24
+WORDNET
+
+
+WORDNET OVERVIEW
+
+WordNet is:
+- A hierarchical lexical database
+- An online thesaurus with dictionary features
+
+Lexical categories:
+- Nouns
+- Verbs
+- Adjectives
+- Adverbs
+
+
+WORDNET ACCESS
+
+Available online at:
+http://wordnetweb.princeton.edu/perl/webwn
+
+
+WORDNET ENTRY FORMAT
+
+Example: bass (noun)
+
+Senses include:
+- Musical range
+- Singer
+- Musical instrument
+- Fish
+
+Also includes adjective senses.
+
+
+WORDNET NOUN RELATIONS
+
+- Hypernym
+- Hyponym
+- Meronym
+- Holonym
+- Antonym
+- Instance relations
+
+
+WORDNET VERB RELATIONS
+
+- Hypernym
+- Troponym
+- Entailment
+- Antonym
+
+
+WORDNET HIERARCHIES
+
+Word senses organized in inheritance chains.
+
+Example:
+bass (singer) → musician → performer → person → entity
+
+bass (instrument) → instrument → artifact → physical object → entity
+
+
+SENSES AND SYNSETS
+
+A WordNet sense is represented by a synset:
+- Set of near-synonyms sharing a meaning
+
+Example:
+chump, fool, gull, patsy, sucker
+
+All share the same gloss:
+“A person who is gullible and easy to take advantage of”
+
+
+REFERENCES
+
+Daniel Jurafsky, James H. Martin  
+Speech and Language Processing  
+Prentice Hall, 2008
+
+Semantic Analysis in Natural Language Processing  
+https://www.youtube.com/watch?v=DPi5rfTX6mw
+
+
+THANK YOU

@@ -1,0 +1,349 @@
+========================================
+BIG DATA ANALYTICS
+UNIT 1: INTRODUCTION TO BIG DATA AND HADOOP
+========================================
+
+
+========================================
+LECTURE 1: INTRODUCTION TO BIG DATA
+========================================
+
+Big Data refers to data that is so large, fast, or complex that it becomes difficult to process using traditional data processing methods.
+
+Key questions addressed in Big Data:
+- What is Big Data?
+- How much data qualifies as Big Data?
+- Where does Big Data come from?
+- Who uses Big Data?
+- How does Big Data impact organizations?
+
+
+----------------------------------------
+WHAT IS BIG DATA
+----------------------------------------
+
+Data becomes “Big Data” when its size, speed, or complexity exceeds the ability of traditional systems to store, process, and analyze it efficiently.
+
+
+----------------------------------------
+DATA SIZE UNITS
+----------------------------------------
+
+1 byte (B) = 8 bits  
+1 kilobyte (KB) = 2^10 bytes = 1024 bytes  
+1 megabyte (MB) = 2^20 bytes = 1024 KB  
+1 gigabyte (GB) = 2^30 bytes = 1024 MB  
+1 terabyte (TB) = 2^40 bytes = 1024 GB  
+1 petabyte (PB) = 2^50 bytes = 1024 TB  
+1 exabyte (EB) = 2^60 bytes = 1024 PB  
+1 zettabyte (ZB) = 2^70 bytes = 1024 EB  
+1 yottabyte (YB) = 2^80 bytes = 1024 ZB
+
+
+----------------------------------------
+SOURCES OF BIG DATA
+----------------------------------------
+
+Big Data is generated from multiple sources, including:
+- Bank and credit card transactions
+- Social media platforms and networks
+- Web and e-commerce systems
+- Scientific instruments
+- Mobile devices
+- Sensor technologies and IoT networks
+
+
+----------------------------------------
+FACTS AND FIGURES
+----------------------------------------
+
+- By 2020, analysts predicted approximately 5,200 GB of data per person worldwide.
+- Around 500 million tweets are generated per day.
+- Large retailers process millions of customer transactions per hour.
+- Commercial airlines generate billions of transactions annually.
+- Stock exchanges generate terabytes of trade data every day.
+- Social media platforms ingest hundreds of terabytes of new data daily.
+- A single jet engine can generate over 10 TB of data in 30 minutes.
+
+
+----------------------------------------
+WHY BIG DATA IS IMPORTANT
+----------------------------------------
+
+The value of Big Data lies not in its volume but in how effectively it is analyzed and used. Big Data enables organizations to:
+- Improve decision-making
+- Discover patterns and trends
+- Increase operational efficiency
+- Enhance customer experiences
+
+
+========================================
+LECTURE 2: BIG DATA CHARACTERISTICS AND TYPES
+========================================
+
+
+----------------------------------------
+TYPES OF BIG DATA
+----------------------------------------
+
+Big Data is classified into three categories:
+- Structured Data
+- Unstructured Data
+- Semi-structured Data
+
+
+----------------------------------------
+STRUCTURED DATA
+----------------------------------------
+
+Structured data is data that:
+- Has a fixed schema
+- Is stored in tabular form
+- Can be easily queried using SQL
+
+Examples include relational database tables such as employee records, financial transactions, and inventory systems.
+
+Challenges arise when structured data grows to extremely large sizes, such as zettabytes.
+
+
+----------------------------------------
+UNSTRUCTURED DATA
+----------------------------------------
+
+Unstructured data:
+- Has no predefined format or schema
+- Is difficult to store and analyze
+- Includes text, images, videos, audio, and logs
+
+Organizations often possess large volumes of unstructured data but struggle to extract value from it.
+
+
+----------------------------------------
+SEMI-STRUCTURED DATA
+----------------------------------------
+
+Semi-structured data:
+- Contains elements of both structured and unstructured data
+- Does not conform to rigid relational schemas
+- Is commonly represented using formats like XML or JSON
+
+Example (XML):
+<rec><name>Prashant Rao</name><sex>Male</sex><age>35</age></rec>
+<rec><name>Seema R.</name><sex>Female</sex><age>41</age></rec>
+
+
+----------------------------------------
+BIG DATA CHARACTERISTICS (5 Vs)
+----------------------------------------
+
+Big Data is characterized by five dimensions:
+
+1. Volume  
+The enormous size of data generated and stored.
+
+2. Velocity  
+The speed at which data is generated, processed, and analyzed.
+
+3. Variety  
+The diversity of data types including structured, semi-structured, and unstructured data.
+
+4. Veracity  
+The trustworthiness and quality of data, including uncertainty and inconsistencies.
+
+5. Value  
+The ability to transform raw data into meaningful insights.
+
+
+========================================
+LECTURE 3: TRADITIONAL VS BIG DATA BUSINESS APPROACH
+========================================
+
+
+----------------------------------------
+TRADITIONAL DATA VS BIG DATA
+----------------------------------------
+
+Traditional Data:
+- Smaller volumes (GB)
+- Structured format
+- Centralized storage
+- RDBMS-based systems
+- Static schemas
+
+Big Data:
+- Very large volumes (TB, PB)
+- Semi-structured and unstructured formats
+- Distributed systems
+- HDFS and NoSQL storage
+- Dynamic schemas
+
+
+----------------------------------------
+TRADITIONAL TRANSACTIONS VS BIG DATA TRANSACTIONS
+----------------------------------------
+
+Traditional transactions:
+- OLTP systems
+- ACID-compliant
+- Structured data
+- Examples: orders, payments, refunds
+
+Big Data (non-transactional):
+- High velocity data
+- Generated from web activity and user behavior
+- Examples: shopping cart updates, clickstreams
+
+
+----------------------------------------
+TRADITIONAL ANALYTICS VS BIG DATA ANALYTICS
+----------------------------------------
+
+Traditional Analytics:
+- Structured and repeatable analysis
+- IT-driven data preparation
+- Predefined business questions
+
+Big Data Analytics:
+- Iterative and exploratory analysis
+- Platform-driven discovery
+- Business users explore new questions
+- Includes sentiment analysis and behavioral insights
+
+
+========================================
+LECTURE 4: CASE STUDIES OF BIG DATA SOLUTIONS
+========================================
+
+
+----------------------------------------
+APPLICATIONS OF BIG DATA
+----------------------------------------
+
+Big Data is applied in:
+- Healthcare
+- Finance
+- Telecommunications
+- Fraud detection
+- Traffic management
+- Retail analytics
+- Manufacturing
+- Security and surveillance
+
+
+----------------------------------------
+BIG DATA USE CASES
+----------------------------------------
+
+Key use cases include:
+- Big Data Exploration
+- 360-degree Customer View
+- Security and Intelligence
+- Operations Analysis
+- Data Warehouse Augmentation
+
+
+========================================
+LECTURE 5: CONCEPT OF HADOOP
+========================================
+
+
+----------------------------------------
+WHAT IS HADOOP
+----------------------------------------
+
+Hadoop is an open-source framework designed for:
+- Distributed storage
+- Distributed processing of large-scale data
+
+Key features:
+- Maintained by Apache
+- Created by Doug Cutting and Mike Cafarella in 2005
+- Named after a toy elephant
+
+
+----------------------------------------
+MOTIVATION FOR HADOOP
+----------------------------------------
+
+Limitations of earlier systems:
+- Single-core processing
+- Limited scalability
+- High power consumption
+
+Hadoop addresses these by:
+- Distributing computation
+- Moving computation closer to data
+- Using commodity hardware
+
+
+----------------------------------------
+HADOOP ASSUMPTIONS
+----------------------------------------
+
+- Hardware failures are expected
+- Batch processing is preferred
+- Large datasets are common
+- Write-once-read-many access model
+- High scalability and fault tolerance
+
+
+========================================
+LECTURE 6: HADOOP COMPONENTS AND ECOSYSTEM
+========================================
+
+
+----------------------------------------
+CORE HADOOP COMPONENTS
+----------------------------------------
+
+- Hadoop Common
+- HDFS (Hadoop Distributed File System)
+- YARN (Yet Another Resource Negotiator)
+- MapReduce
+
+
+----------------------------------------
+HDFS
+----------------------------------------
+
+HDFS:
+- Stores data across distributed nodes
+- Splits files into blocks
+- Replicates blocks (default replication factor = 3)
+- Uses NameNode and DataNodes
+
+
+----------------------------------------
+MAPREDUCE
+----------------------------------------
+
+MapReduce is a programming model for distributed processing.
+
+Phases:
+1. Map – Processes input key/value pairs
+2. Shuffle – Sorts and redistributes intermediate data
+3. Reduce – Aggregates results by key
+
+
+----------------------------------------
+HADOOP ECOSYSTEM
+----------------------------------------
+
+Common ecosystem tools:
+- Hive (SQL-like querying)
+- Pig (High-level scripting)
+- HBase (NoSQL database)
+- Sqoop (RDBMS data transfer)
+- Flume (Log ingestion)
+- Mahout (Machine learning)
+- ZooKeeper (Coordination service)
+
+
+----------------------------------------
+WHY HADOOP
+----------------------------------------
+
+- Highly scalable
+- Cost-effective
+- Fault tolerant
+- Designed for big data workloads

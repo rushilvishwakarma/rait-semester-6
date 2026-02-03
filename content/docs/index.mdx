@@ -1,13 +1,23 @@
 ---
-title: Hello World
-description: Your first document
+title: Documentation
+description: Welcome to the documentation
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+import { Brain, Database, Layers, GitBranch, MessageSquare, BookOpen, FlaskConical } from 'lucide-react';
 
-## What is Next?
+## Welcome
 
 <Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
+  <Card 
+    icon={<BookOpen />}
+    title="Core" 
+    description="Core Subjects"
+    href="/docs/core" 
+  />
+  <Card 
+    icon={<FlaskConical />}
+    title="Labs" 
+    description="Lab Subjects"
+    href="/docs/labs" 
+  />
 </Cards>

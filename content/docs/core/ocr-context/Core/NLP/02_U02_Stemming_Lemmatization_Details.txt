@@ -1,0 +1,373 @@
+Unit No:2 Word Level Analysis
+Faculty Name : Dr. Ekta Sarda
+
+Page 2 of 20
+
+Index - Module :2 Word Level Analysis
+Lecture 9 : Stemming Vs Lemmatization
+
+Lecture 10 : Porter Stemmer
+
+Lecture 11 : Porter Stemmer
+
+Lecture 12: N-Gram Language Model
+
+DY PATIL
+RAMSAO ADIK
+INSTITUTE OF
+TECHNOLOGY
+NAPS MUMBAI
+Module :2 Word Level Analysis
+
+Page 3 of 20
+
+Lecture 9
+
+Stemming Vs Lemmatization
+Page 4 of 20
+
+Stemming
+Stemming is the particular case of tokenization that reduces inflected forms to a single base form or stem
+Stemming is the process of producing morphological variants of a root/base word.
+(Recall our discussion of stem ~ base form ~ dictionary form ~ citation form)
+Stemming algorithms are basic string-handling algorithms, which depend on rules which identify affixes that can be stripped
+Module :2 Word Level Analysis
+
+DY PATIL
+RAMRAO ADIK
+INSTITUTE OF TECHNOLOGY
+NAVI MUMBAI
+
+Page 5 of 20
+
+Advantage and Example of Stemming
+
+Efficiency at search time and index file compression
+
+Information about the full terms will be lost or additional storage will be required to store both the stemmed and unstemmed forms.
+
+Example
+Lightweight-> lightweight
+Natural-> natur
+Language-> language
+processing->process
+
+D Y PATIL
+UNIVERSITY
+NAVI MUMBAI
+
+Module :2 Word Level Analysis
+
+Page 6 of 20
+
+Difference between Stemming and Lemmatization
+
+Stemming algorithms work by cutting off the end or the beginning of the word, taking into account a list of common prefixes and suffixes that can be found in an inflected word. This indiscriminate cutting can be successful in some occasions, but not always, and that is why we affirm that this approach presents some limitations. Below we illustrate the method with examples in both English and Spanish.
+Form	Suffix	Stem
+studies	-es	studi
+studying	-ing	study
+niñas	-as	niñ
+niñez	-ez	niñ
+Module :2 Word Level Analysis
+
+DY PATIL
+RAMKAO ADIK
+INSTITUTE OF
+TECHNOLOGY
+NAVI MUMBAI
+
+Page 7 of 20
+
+Lemmatization
+
+Lemmatization, on the other hand, takes into consideration the morphological analysis of the words. To do so, it is necessary to have detailed dictionaries which the algorithm can look through to link the form back to its lemma. Again, you can see how it works with the same example words.
+Form	Morphological information	Lemma
+studies	Third person, singular number, present tense of the verb study	study
+studying	Gerund of the verb study	study
+niñas	Feminine gender, plural number of the noun niño	niño
+niñez	Singular number of the noun niñez	niñez
+Another important difference to highlight is that a lemma is the base form of all its inflectional forms, whereas a stem isn't.
+
+This is why regular dictionaries are lists of lemmas, not stems.
+
+stem may not be an actual word whereas, lemma is an actual language word.
+
+Module :2 Word Level Analysis
+
+D Y PATIL
+RAMKAO ADIK
+INSTITUTE OF TECHNOLOGY
+NAVI MUMBAI
+
+Page 8 of 20
+
+Word	Stemming	Lemmatization
+information	inform	information
+informative	inform	informative
+computers	comput	computer
+feet	feet	foot
+D Y PATIL UNIVERSITY
+
+NAVI MUMBAI
+
+Module :2 Word Level Analysis
+
+Page 9 of 20
+
+“cats,” “cat's,” and “cats'” means taking away the suffixes “s,” “'s,” and “s'” to bring out the root word “cat.”
+
+“boat” would be the stem for [boat, boater, boating, boats].
+
+Stemming has its drawbacks. If given the token saw, stemming might always return saw, whereas lemmatization would likely return either see or saw depending on whether the use of the token was as a verb or a noun
+
+D Y PATIL UNIVERSITY NAVI MUMBAI
+
+Module :2 Word Level Analysis
+
+Page 10 of 20
+
+Introduction to Stemming Algorithm
+The goal of stemming is to improve performance and requires less system resources by reducing the number of unique words that a system has to contain.
+Stemming algorithms are used to improve the efficiency of the information system and to improve recall.
+It is important for a system to be able to categorize a word prior to making decision to stem it.
+Stemming of the words “calculate, calculations, calculates, calculating” to a single term (“calculat”) ensures whichever of those terms is entered by user, it is translated to the stem and finds all variants in any items they exist.
+Stemming Algorithms removes suffixes and prefixes, sometimes recursively to derive the final stem.
+nltk.stem package provides the implementation of the stemmer.
+Module :2 Word Level Analysis
+
+DY PATIL
+KAMKAO ADIK
+INSTITUTE OF TECHNOLOGY
+NAVI MUMBAI
+
+Page 11 of 20
+
+Three types of stemmers are as follows:
+
+Porter Stemmer
+Snowball Stemmer
+Lancaster Stemmer
+Module :2 Word Level Analysis
+
+D Y PATIL
+UNIVERSITY
+NAVI MUMBAI
+
+Page 12 of 20
+
+Porter Stemming Algorithm
+
+Definitions:
+CONSONANT: a letter other than A, E, I, O, U, and Y.
+VOWELS
+With this definition, all words are of the form:
+(
+C
+)
+(
+V
+C
+)
+m
+(
+V
+)
+(C)(VC) 
+m
+ (V)
+C=string of one or more consonants.
+V=string of one or more vowels.
+m=0 TREE, BY, TR
+m=1 TROUBLE, OATS, TREES, IVY
+m=2 TROUBLES, PRIVATE, OATEN, ORRERY.
+
+E.g.,
+T rouble
+C V C V
+DY PATIL
+RAMRAO ADIK
+INSTITUTE OF TECHNOLOGY
+NAVI MUMBAI
+
+Module :2 Word Level Analysis
+
+Page 13 of 20
+
+Porter Stemming Algorithm
+
+The rules are of the form: (condition) S1 -> S2 Where S1 and S2 are suffixes
+Conditions:
+m	The measure of the stem
+*S	The stem ends with S
+v	The stem contains a vowel
+*d	The stem ends with a double consonant
+*o	The stem ends in CVC (second C not W, X, or Y)
+Module :2 Word Level Analysis
+
+DY PATIL
+RAMKAO ADIK
+INSTITUTE OF
+TECHNOLOGY
+NAVI MUMBAI
+
+Page 14 of 20
+
+The Porter Stemmer: Step 1
+
+SSES -> SS
+caresses -> caress
+IES -> I
+ponies -> poni
+ties -> ti
+SS -> SS
+caress -> caress
+S -> ε
+cats -> cat
+DY PATIL
+RAMRAO ADIK
+INSTITUTE OF
+TECHNOLOGY
+NAVI MUMBAI
+
+Module :2 Word Level Analysis
+
+Page 15 of 20
+
+The Porter Stemmer: Step 2a
+(m>1) EED -> EE
+Condition verified: agreed -> agree
+Condition not verified: feed -> feed
+(V) ED -> ε
+Condition verified: plastered -> plaster
+Condition not verified: bled -> bled
+(V) ING -> ε
+Condition verified: motoring -> motor
+Condition not verified: sing -> sing
+Module :2 Word Level Analysis
+
+DY PATIL
+RAMRAO ADIK
+INSTITUTE OF
+TECHNOLOGY
+NAVI MUMBAI
+
+Page 16 of 20
+
+The Porter Stemmer: Step 2b
+
+(These rules are applied if second or third rule in 2a apply) AT->ATE
+
+conflat(ed) -> conflate
+BL -> BLE
+
+Troubl(ing) -> trouble
+
+(*d & ! (*L or *S or *Z)) -> single letter
+
+Condition verified: hopp(ing) -> hop, tann(ed) -> tan
+
+Condition not verified: fall(ing) -> fall
+
+(m=1 & *o) -> E
+
+Condition verified: fil(ing) -> file
+
+Condition not verified: fail -> fail
+
+DY PATIL
+KAMKAO ADIK
+INSTITUTE OF
+TECHNOLOGY
+NAVI MUMBAI
+
+Module :2 Word Level Analysis
+
+Page 17 of 20
+
+The Porter Stemmer: Steps 3 and 4
+
+Step 3: Y Elimination (V) Y -> I
+
+Condition verified: happy -> happi
+
+Condition not verified: sky -> sky
+
+Step 4: Derivational Morphology, I
+
+(m>0) ATIONAL -> ATE
+
+Relational -> relate
+
+(m>0) IZATION -> IZE
+
+generalization -> generalize
+
+(m>0) BILITI -> BLE
+
+sensibiliti -> sensible
+
+D Y PATIL
+KAMKAO ADIK
+INSTITUTE OF
+TECHNOLOGY
+NAVI MUMBAI
+
+Module :2 Word Level Analysis
+
+Page 18 of 20
+
+The Porter Stemmer: Steps 5 and 6
+
+Step 5: Derivational Morphology, II
+(m>0) ICATE -> IC
+triplicate -> triplic
+(m>0) FUL -> €
+hopeful -> hope
+(m>0) NESS -> €
+goodness -> good
+Step 6: Derivational Morphology, III
+(m>0) ANCE -> €
+allowance -> allow
+(m>0) ENT -> €
+dependent -> depend
+(m>0) IVE -> €
+effective -> effect
+Module :2 Word Level Analysis
+
+DY PATIL
+KAMKAO ADIK
+INSTITUTE OF
+TECHNOLOGY
+NAVI MUMBAI
+
+Page 19 of 20
+
+The Porter Stemmer: Step 7
+
+Step 7a
+(m>1) E -> ε
+probate -> probat
+(m=1 & !*o) NESS -> ε
+goodness -> good
+Step 7b
+(m>1 & *d & *L) -> single letter
+Condition verified: controll -> control
+Condition not verified: roll -> roll
+Module :2 Word Level Analysis
+
+DY PATIL
+RAMRAO ADIK
+INSTITUTE OF
+TECHNOLOGY
+NAVI MUMBAI
+
+Page 20 of 20
+
+Thank you
+
+D Y PATIL
+RAMSAO ADIK
+INSTITUTE OF TECHNOLOGY
+NAPU MUMBAI
+
+Module :2 Word Level Analysis

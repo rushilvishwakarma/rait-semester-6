@@ -1,0 +1,453 @@
+SUBJECT NAME: NATURAL LANGUAGE PROCESSING
+UNIT NO: 4
+UNIT NAME: SEMANTIC ANALYSIS
+
+
+INDEX
+
+Lecture 25 – Word Sense Disambiguation (WSD)
+Lecture 26 – Dictionary-Based WSD
+Lecture 27 – Machine Learning-Based WSD
+
+
+UNIT NO: 4 – SEMANTIC ANALYSIS
+
+
+LECTURE 25
+WORD SENSE DISAMBIGUATION (WSD)
+
+
+DEFINITIONS
+
+Word Sense Disambiguation (WSD) is the problem of selecting the correct sense of a word from a predefined set of possible senses, given its context.
+
+The sense inventory usually comes from a dictionary or thesaurus.
+
+Approaches include:
+- Knowledge-intensive methods
+- Supervised learning
+- Bootstrapping approaches
+
+Word Sense Discrimination differs from WSD:
+- It divides usages of a word into different meanings
+- Does not rely on an existing sense inventory
+- Uses unsupervised techniques
+
+
+COMPUTERS VS HUMANS
+
+Polysemy:
+- Most words have multiple meanings
+
+Humans:
+- Rarely experience ambiguity in daily communication
+
+Computers:
+- Lack inherent world knowledge
+- Cannot easily choose the correct meaning without context modeling
+
+
+FORMAL WSD DEFINITION
+
+Given:
+- A word in context
+- A fixed inventory of possible senses
+
+Task:
+- Decide which sense is correct with respect to the given context
+
+
+AMBIGUITY FOR HUMANS (HEADLINES)
+
+- DRUNK GETS NINE YEARS IN VIOLIN CASE
+- FARMER BILL DIES IN HOUSE
+- PROSTITUTES APPEAL TO POPE
+- STOLEN PAINTING FOUND BY TREE
+- RED TAPE HOLDS UP NEW BRIDGE
+- DEER KILL 300,000
+- RESIDENTS CAN DROP OFF TREES
+- INCLUDE CHILDREN WHEN BAKING COOKIES
+- MINERS REFUSE TO WORK AFTER DEATH
+
+
+AMBIGUITY FOR COMPUTERS
+
+Examples using the word “bank”:
+- The fisherman jumped off the bank into the water
+- The bank down the street was robbed
+- A bank of computers was devoted to this problem
+- The bank of the road is too steep
+- The plane took a bank to the left
+
+
+PRACTICAL APPLICATIONS OF WSD
+
+Machine Translation:
+- Translate “bill” correctly (invoice vs bird beak)
+
+Information Retrieval:
+- Search for “cricket” (sport vs insect)
+
+Question Answering:
+- Identify clarifications (George Miller: psychologist vs politician)
+
+Knowledge Acquisition:
+- Correctly store facts (Duluth, Minnesota vs Georgia)
+
+
+APPROACHES TO WSD
+
+- Dictionary-based / Knowledge-based
+- Supervised
+- Semi-supervised
+- Unsupervised
+
+Additional strategies:
+- Selectional association
+- Bootstrapping
+- Preferred selectional association
+
+
+LECTURE 26
+DICTIONARY-BASED WSD
+
+
+DICTIONARY-BASED WSD
+
+Dictionary-based (knowledge-based) WSD identifies the correct sense of a word using:
+- Definitions
+- Examples
+- Semantic relations from lexical resources
+
+Example ambiguity:
+- “bank” (river bank vs financial institution)
+
+Context words help identify the correct sense.
+
+
+HOW DICTIONARY-BASED WSD WORKS
+
+- Treats WSD as a classification task
+- Uses context words as features
+- Uses lexical resources such as WordNet
+
+
+COMMON WSD APPROACHES
+
+Supervised Methods:
+- Train classifiers on sense-tagged corpora
+
+Unsupervised Methods:
+- Cluster word occurrences (Word Sense Induction)
+
+Knowledge-Based Methods:
+- Use dictionary definitions (e.g., Lesk algorithm)
+
+Hybrid Methods:
+- Combine multiple techniques
+
+
+KNOWLEDGE-BASED WSD
+
+Resources:
+- Machine Readable Dictionaries (MRD)
+- Raw corpora
+
+Not required:
+- Manually annotated corpora
+
+Scope:
+- All open-class words
+
+
+MACHINE READABLE DICTIONARIES (MRD)
+
+Examples:
+- Oxford English Dictionary
+- Collins Dictionary
+- Longman Dictionary (LDOCE)
+
+Thesauri:
+- Roget Thesaurus
+
+Semantic Networks:
+- WordNet
+- EuroWordNet
+
+
+MRD CONTENT
+
+For each word:
+- List of meanings
+- Definitions
+- Usage examples
+
+Example: WordNet senses of “plant”
+- Industrial facility
+- Living organism
+- Planted evidence
+- Audience plant (actor)
+
+
+SEMANTIC RELATIONS IN WORDNET
+
+- Synonymy (synsets)
+- Hypernymy / Hyponymy
+- Meronymy / Holonymy
+- Antonymy
+- Entailment
+
+
+DICTIONARY-BASED WSD METHOD
+
+- Extract sense features from MRD
+- Extract context features
+- Compute overlap between sense and context
+- Select sense with maximum overlap
+
+
+LESK ALGORITHM (1986)
+
+Steps:
+1. Retrieve all sense definitions of the ambiguous word
+2. Compare definitions with definitions of context words
+3. Compute overlap
+4. Choose sense with maximum overlap
+
+
+LESK EXAMPLE 1: PINE CONE
+
+PINE:
+- Evergreen tree
+- To waste away
+
+CONE:
+- Solid geometric shape
+- Fruit of evergreen tree
+
+Best overlap:
+- Pine (tree) + Cone (fruit)
+
+
+LESK EXAMPLE 2
+
+Sentence:
+“Pine cones hanging in a tree”
+
+Correct sense:
+- Pine = evergreen tree
+
+
+LESK EXAMPLE 3
+
+Sentence:
+“On burning coal we get ash”
+
+Correct sense:
+- Ash = solid residue after burning
+
+
+BANK EXAMPLE
+
+Sentence:
+“The bank can guarantee deposits will cover future costs”
+
+Correct sense:
+- Bank = financial institution
+
+
+LECTURE 27
+MACHINE LEARNING-BASED WSD
+
+
+SUPERVISED WSD
+
+Assumption:
+- Context provides enough evidence for disambiguation
+
+Algorithms used:
+- Support Vector Machines
+- Memory-based learning
+- Neural Networks
+
+Limitation:
+- Requires large sense-tagged corpora
+- Knowledge acquisition bottleneck
+
+
+SUPERVISED WSD REQUIREMENTS
+
+- Sense inventory
+- Training corpus
+- Feature set
+- Classifier
+
+
+WSD TAGGING
+
+Each ambiguous word is tagged with a sense number.
+
+Example:
+I went to the bank/1 to deposit money  
+The bank/2 was muddy
+
+
+WORDNET SENSE INVENTORY (BASS)
+
+Examples:
+- Musical bass
+- Fish bass
+- Singing voice bass
+- Instrument bass
+
+
+SUPERVISED WSD TASK DEFINITION
+
+- Learn classifier from sense-tagged data
+- Assign correct sense to target word
+- Reduce WSD to a classification problem
+
+
+SUPERVISED METHODOLOGY
+
+Training Phase:
+- Annotate target words
+- Extract features (bag-of-words, POS, relations)
+- Train classifier
+
+Testing Phase:
+- Apply classifier to unseen instances
+
+
+CO-OCCURRENCE BAGS
+
+FINANCIAL BANK:
+- check, deposit, ATM, overdraft
+
+RIVER BANK:
+- river, muddy, fish, shore
+
+
+SIMPLE SUPERVISED ALGORITHM
+
+Count matches in context:
+- Financial words vs river words
+- Choose sense with higher count
+
+
+FEATURE VECTOR REPRESENTATION
+
+Context features:
+- Neighboring words
+- POS tags
+- Binary indicators
+
+
+SUPERVISED LEARNING ALGORITHMS
+
+- Support Vector Machines
+- Nearest Neighbor
+- Decision Trees
+- Decision Lists
+- Naïve Bayes
+- Perceptrons
+- Neural Networks
+- Graphical Models
+- Log-linear Models
+
+
+NAÏVE BAYESIAN CLASSIFIER
+
+Assumes:
+- Feature independence given sense
+
+Uses:
+- Bag-of-words features
+- Probability estimation from training data
+
+
+BAYESIAN INFERENCE
+
+P(S | F1...Fn) ∝ P(F1...Fn | S) × P(S)
+
+Choose sense with highest posterior probability
+
+
+NAÏVE BAYES DECISION RULE
+
+sense = argmax over S of:
+P(F1 | S) × ... × P(Fn | S) × P(S)
+
+
+DECISION LISTS
+
+Based on:
+- One sense per collocation
+
+Structure:
+- Ordered if-then rules
+- Each rule has a weight
+
+Training:
+- Compute log-likelihood scores
+
+Testing:
+- Highest scoring rule determines sense
+
+
+SEMI-SUPERVISED METHODS
+
+Bootstrapping approach:
+- Start with small seed data
+- Train classifier
+- Label confident new instances
+- Retrain iteratively
+
+Cross-lingual WSD:
+- Use bilingual corpora
+- Different translations imply different senses
+
+
+UNSUPERVISED METHODS
+
+Key idea:
+- Similar senses occur in similar contexts
+
+Approach:
+- Cluster word occurrences
+- Assign new instances to nearest cluster
+
+Advantages:
+- No manual annotation
+
+Limitations:
+- Lower accuracy
+- Hard to map clusters to dictionary senses
+
+
+CROSSWORD (SEMANTIC ANALYSIS)
+
+Across:
+- Lexical database: WordNet
+- Root form: Lemma
+- Study of meaning: Semantics
+- Predicate logic quantifiers: All / Some
+
+Down:
+- Subclass relation: Hyponymy
+- Dictionary-based algorithm: Lesk
+- Multiple meanings: Polysemy
+
+
+REFERENCES
+
+Daniel Jurafsky, James H. Martin  
+Speech and Language Processing  
+Prentice Hall, 2008
+
+Christopher D. Manning, Hinrich Schütze  
+Foundations of Statistical Natural Language Processing  
+MIT Press, 1999
+
+
+THANK YOU

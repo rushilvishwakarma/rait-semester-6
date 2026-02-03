@@ -1,0 +1,11 @@
+{
+  "title": "Labs",
+  "pages": [
+    "AML",
+    "BDA",
+    "DL",
+    "MLOps",
+    "NLP",
+    "DOE"
+  ]
+}
