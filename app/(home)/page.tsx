@@ -50,18 +50,10 @@ export default function HomePage() {
             height={140}
             className="dark:hidden pb-4"
           />
-          <Image
-            src="/logos/brand/logo-in-light-mode.svg"
-            alt="Logo"
-            width={160}
-            height={140}
-            className="hidden dark:block pb-4"
-          />
             <h1 className="text-4xl font-bold mb-3 text-white md:text-5xl">Semester 6</h1>
             <p className="text-white/80 text-lg mb-4">B.Tech CSE (AI & ML) • TE Sem 6</p>
-            <p>
-              This site is not affiliated with DY Patil University or RAIT.</p>
-              <p  className="text-white/60 text-sm max-w-md max-md:mx-auto">
+            <p className="text-white/60 max-w-md max-md:mx-auto"> This site is not affiliated with DY Patil University or RAIT.</p>
+              <p className="text-white/60 text-sm max-w-md max-md:mx-auto">
               Created by students, for students.
             </p>
           </div>
