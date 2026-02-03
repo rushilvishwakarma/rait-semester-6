@@ -19,7 +19,17 @@ interface TheoryCardProps {
 
 export function TheoryCard({ title, description, href, contextUrl }: TheoryCardProps) {
   const items = useMemo(() => {
-    const q = `Read the following and help me study it:\n\n[Content from: ${contextUrl}]`;
+    // Build the full URL for AI services to fetch
+    const fullContextUrl = typeof window !== 'undefined' 
+      ? new URL(contextUrl, window.location.origin).href 
+      : contextUrl;
+    
+    const q = `Read the content from this URL and help me study it: ${fullContextUrl}
+
+Topic: ${title}
+Description: ${description}
+
+Please fetch the content from the URL above and help me understand and study it.`;
     
     return [
       {
