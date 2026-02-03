@@ -27,7 +27,6 @@ const labSubjects = [
   { title: 'DL Lab', href: '/docs/labs/DL', icon: Brain },
   { title: 'MLOps Lab', href: '/docs/labs/MLOps', icon: GitBranch },
   { title: 'NLP Lab', href: '/docs/labs/NLP', icon: MessageSquare },
-  { title: 'DOE Lab', href: '/docs/labs/DOE', icon: Layers },
 ];
 
 const resources = [
@@ -134,6 +133,12 @@ export default function HomePage() {
           </div>
         </section>
       </div>
+
+      {/* Footer */}
+      <footer className="mt-16 border-t pt-6 pb-8 text-center text-sm text-fd-muted-foreground">
+        <p>Crafted by Feverdream</p>
+        <p className="mt-1 text-xs">Not affiliated with DY Patil University or RAIT</p>
+      </footer>
     </main>
   );
 }
