@@ -136,7 +136,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="mt-16 border-t pt-6 pb-8 text-center text-sm text-fd-muted-foreground">
         <p>Crafted by Feverdream</p>
-        <p className="mt-1 text-xs">Not affiliated with DY Patil University or RAIT</p>
+        <p className="mt-1 text-xs">Have questions or found an issue? <a href="https://tally.so/r/Bz764A" target="_blank" rel="noopener noreferrer" className="underline">Report it here</a>.</p>
       </footer>
     </main>
   );
