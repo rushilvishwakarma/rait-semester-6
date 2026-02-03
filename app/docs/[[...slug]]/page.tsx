@@ -22,13 +22,17 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const noFooterPages = ['labs/BDA/experiment-1/vm-setup', 'labs/BDA/experiment-1'];
   const showFooter = !noFooterPages.includes(slugPath);
 
+  // Construct GitHub URL for the source file
+  const githubBaseUrl = 'https://github.com/faraz-m-dev/rait-semester-6/blob/main/content';
+  const githubUrl = `${githubBaseUrl}${page.url}.mdx`;
+
   return (
     <DocsPage toc={page.data.toc} full={page.data.full} footer={{ enabled: showFooter }}>
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6">
         <LLMCopyButton markdownUrl={`${page.url}.mdx`} />
-        <ViewOptions markdownUrl={`${page.url}.mdx`} />
+        <ViewOptions markdownUrl={`${page.url}.mdx`} githubUrl={githubUrl} />
       </div>
       <DocsBody>
         <MDX

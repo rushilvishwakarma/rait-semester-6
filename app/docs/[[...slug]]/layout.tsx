@@ -24,7 +24,8 @@ export default async function Layout(props: {
         // Try to find the folder node (check both lowercase and title case)
         const modeNode = root.children.find((node) =>
             node.type === 'folder' && 
-            (node.name.toLowerCase() === mode || (node.$ref?.file && node.$ref.file.includes(`/${mode}/`)))
+            typeof node.name === 'string' &&
+            (node.name.toLowerCase() === mode || (node.$ref?.metaFile && node.$ref.metaFile.includes(`/${mode}/`)))
         );
 
         if (modeNode && modeNode.type === 'folder') {
