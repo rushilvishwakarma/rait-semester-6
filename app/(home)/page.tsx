@@ -44,11 +44,18 @@ export default function HomePage() {
         <div className="flex flex-col z-2 px-6 size-full md:p-12 max-md:items-center max-md:text-center py-12">
           <div className="w-full">
           <Image
-            src="/logos/brand/logo-in-dark-mode.svg"
+            src="/logos/brand/logo-in-light-mode.svg"
             alt="Logo"
-            width={160}
+            width={180}
             height={140}
             className="dark:hidden pb-4"
+          />
+          <Image
+            src="/logos/brand/logo-in-light-mode.svg"
+            alt="Logo"
+            width={180}
+            height={140}
+            className="hidden dark:block pb-4"
           />
             <h1 className="text-4xl font-bold mb-3 text-white md:text-5xl">Semester 6</h1>
             <p className="text-white/80 text-lg mb-4">B.Tech CSE (AI & ML) • TE Sem 6</p>
