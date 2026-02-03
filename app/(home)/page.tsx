@@ -14,19 +14,20 @@ import {
 import { HeroBackground } from './hero-background';
 
 const coreSubjects = [
-  { title: 'NLP', description: 'Natural Language Processing', href: '/docs/core/NLP', icon: MessageSquare },
   { title: 'BDA', description: 'Big Data Analytics', href: '/docs/core/BDA', icon: Database },
-  { title: 'DL', description: 'Deep Learning', href: '/docs/core/DL', icon: Brain },
-  { title: 'AML', description: 'Applied Machine Learning', href: '/docs/core/AML', icon: Cpu },
+  { title: 'NLP', description: 'Natural Language Processing', href: '/docs/core/NLP', icon: MessageSquare },
   { title: 'DOE', description: 'Design of Experiments', href: '/docs/core/DOE', icon: Layers },
+  { title: 'AML', description: 'Applied Machine Learning', href: '/docs/core/AML', icon: Cpu },
+  { title: 'DL', description: 'Deep Learning', href: '/docs/core/DL', icon: Brain },
 ];
 
 const labSubjects = [
-  { title: 'NLP Lab', href: '/docs/labs/NLP', icon: MessageSquare },
+  { title: 'AML Lab', href: '/docs/labs/AML', icon: Cpu },
   { title: 'BDA Lab', href: '/docs/labs/BDA', icon: Database },
   { title: 'DL Lab', href: '/docs/labs/DL', icon: Brain },
-  { title: 'AML Lab', href: '/docs/labs/AML', icon: Cpu },
   { title: 'MLOps Lab', href: '/docs/labs/MLOps', icon: GitBranch },
+  { title: 'NLP Lab', href: '/docs/labs/NLP', icon: MessageSquare },
+  { title: 'DOE Lab', href: '/docs/labs/DOE', icon: Layers },
 ];
 
 const resources = [
