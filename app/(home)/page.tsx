@@ -57,10 +57,10 @@ export default function HomePage() {
             height={140}
             className="hidden dark:block pb-4 mx-auto"
           />
-            <h1 className="text-4xl font-bold mb-3 text-white md:text-5xl">Semester 6</h1>
-            <p className="text-white/80 text-lg mb-4">B.Tech CSE (AI & ML) • TE Sem 6</p>
-            <p className="text-white/80 max-w-md mx-auto"> This site is not affiliated with DY Patil University or RAIT.</p>
-              <p className="text-white/80 text-sm max-w-md mx-auto">
+            <h1 className="text-4xl mb-3 text-white md:text-5xl">Semester 6</h1>
+            <p className="text-white text-lg mb-4">B.Tech CSE • AI & ML (TE)</p>
+            <p className="text-white max-w-md mx-auto mb-2"> This site is not affiliated with DY Patil University or Ramrao Adik Institute of Technology (RAIT).</p>
+              <p className="text-white/40 text-sm max-w-md mx-auto">
               Created by students, for students.
             </p>
           </div>

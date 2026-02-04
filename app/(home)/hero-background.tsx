@@ -15,11 +15,11 @@ export function HeroBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 -z-10">
+    <div className="absolute inset-0 -z-10 border border-muted-foreground rounded-2xl overflow-hidden">
       <GrainGradient
       style={{ width: '100%', height: '100%' }}
       colors={['#ff3d3d3e', '#ff4f6f69', '#a01c35', '#2b0007']}
-      colorBack={isDark ? '#000000' : '#F1F1F1'}
+      colorBack={isDark ? '#121212' : '#F1F1F1'}
       softness={0.5}
       intensity={0.5}
       noise={0.25}
