@@ -1,0 +1,106 @@
+---
+title: "LP Module 1: Introduction to Natural Language Processing"
+---
+
+## LECTURE 1: INTRODUCTION TO NLP
+
+### Q1. Explain Natural Language and Natural Language Processing (NLP).
+
+Natural Language refers to the languages that are **naturally spoken and written by humans** for communication. Examples include English, Hindi, Marathi, Spanish, and French. These languages evolve organically and are rich in structure, meaning, and ambiguity.
+
+Natural languages are different from **artificial or programming languages** such as C, C++, Java, and Python, which are designed for computers and follow strict syntactic rules. Due to their flexibility and context dependence, natural languages are difficult for machines to process directly.
+
+Natural Language Processing (NLP) is a **sub-domain of Artificial Intelligence** that focuses on enabling computers to analyze, understand, and generate human language. NLP involves converting natural language input into a useful internal representation that computers can process. The primary goal of NLP is to develop systems that can perform meaningful tasks using human language, while a secondary goal is to better understand how human language works.
+
+---
+
+### Q2. Define NLP / Explain the goals and importance of Natural Language Processing.
+
+Natural Language Processing is defined as the field of Artificial Intelligence concerned with developing programs that possess some capability of *understanding* natural language in order to achieve specific goals.
+
+The importance of NLP arises from the **huge amount of textual data** generated daily. The internet alone contains billions of web pages, emails, documents, and social media posts. Manual processing of such data is impossible, making automated language processing essential.
+
+NLP enables applications such as search engines, chatbots, machine translation, spam filtering, and sentiment analysis. The main goal of NLP is the **engineering goal**, which involves designing, implementing, and testing systems that can process natural languages effectively for real-world applications.
+
+---
+
+### Q3. Explain the forms and components of Natural Language Processing.
+
+The input and output of an NLP system can be in the form of **written text** or **speech**. Most NLP systems primarily focus on written text, as speech processing introduces additional challenges such as speech recognition and synthesis.
+
+NLP consists of two major components: **Natural Language Understanding (NLU)** and **Natural Language Generation (NLG)**. NLU focuses on mapping natural language input into a meaningful internal representation through multiple levels of analysis. NLG focuses on producing natural language output from an internal representation, involving decisions about content and sentence structure.
+
+To process natural language effectively, NLP systems require lexical, syntactic, semantic, discourse, and real-world knowledge.
+
+---
+
+## LECTURE 2: STAGES OF NLP
+
+### Q4. Explain the stages / levels / steps of Natural Language Processing.
+
+Natural Language Processing involves a sequence of processing stages that transform raw language input into meaningful representations. These stages are commonly referred to as the **levels or steps of NLP**.
+
+The first stage is **Morphological Analysis**, which analyzes the structure of words by breaking them into morphemes, the smallest meaningful units of language. For example, the word *truthfulness* consists of *truth + ful + ness*.
+
+The second stage is **Syntactic Analysis**, which examines sentence structure and grammatical relationships between words. It uses parse trees to represent sentence structure and ensures grammatical correctness.
+
+The third stage is **Semantic Analysis**, which focuses on extracting meaning from words and sentences. It resolves ambiguities and creates an internal representation of meaning.
+
+The fourth stage is **Discourse Analysis**, which considers how previous sentences affect the interpretation of the current sentence, including pronoun resolution and coherence.
+
+The final stage is **Pragmatic Analysis**, which interprets language based on context and speaker intention, helping determine what is actually meant rather than what is literally said.
+
+<Mermaid chart={`
+graph TD
+    A[Lexical Analysis] --> B[Syntactic Analysis]
+    B --> C[Semantic Analysis]
+    C --> D[Discourse Integration]
+    D --> E[Pragmatic Analysis]
+`} />
+---
+
+### Q5. Explain morphology, syntax, semantics, discourse, and pragmatics with examples.
+
+**Morphology** studies how words are formed from smaller meaning-bearing units.
+**Syntax** studies how words are arranged to form correct sentences and grammatical structures.
+**Semantics** studies the meaning of words and how meanings combine in sentences.
+**Discourse** studies how sentences are connected and how context affects interpretation across sentences.
+**Pragmatics** studies how meaning is influenced by context, intention, and real-world usage.
+
+Together, these components enable NLP systems to process language in a human-like manner.
+
+---
+
+## LECTURE 3: CHALLENGES OF NLP
+
+### Q6. Why is Natural Language Processing difficult? Explain ambiguity and its types.
+
+Natural Language Processing is difficult because **human language is complex, ambiguous, and context-dependent**. The same word or sentence can have multiple meanings depending on usage and situation.
+
+Ambiguity refers to the ability of language to be interpreted in more than one way. There are several types of ambiguity in NLP. **Lexical ambiguity** occurs when a word has multiple meanings, such as *silver* used as a noun, adjective, or verb. **Syntactic ambiguity** arises when a sentence can be parsed in different ways, such as *“The chicken is ready to eat.”*
+
+**Semantic ambiguity** occurs when a sentence has multiple interpretations at the meaning level, while **pragmatic ambiguity** depends on context and speaker intention. **Phonetic ambiguity** occurs in spoken language when different words sound the same, such as *write*, *right*, and *rite*.
+
+Resolving ambiguity is one of the biggest challenges in NLP.
+
+---
+
+### Q7. Explain methods for resolving ambiguity in NLP.
+
+Ambiguities in NLP are resolved using computational techniques such as **part-of-speech tagging**, **word sense disambiguation**, and **probabilistic parsing**.
+
+Statistical and machine learning approaches use context and probability to select the most likely interpretation of a sentence. These methods enable NLP systems to handle uncertainty and improve accuracy in language understanding.
+
+---
+
+## LECTURE 4: APPLICATIONS OF NLP
+
+### Q8. Explain the major applications of Natural Language Processing.
+
+Natural Language Processing has numerous real-world applications that enable effective human–computer interaction. **Machine Translation** automatically translates text or speech from one language to another while preserving meaning.
+
+**Question Answering systems** provide precise answers to questions expressed in natural language. **Information Retrieval** systems match user queries with relevant documents, as seen in search engines. **Cross-Language Information Retrieval** retrieves documents written in languages different from the query language.
+
+**Information Extraction** converts unstructured text into structured data. **Text Categorization** automatically classifies documents, while **Text Summarization** reduces document length using extractive or abstractive techniques. Other applications include sentiment analysis, fake news detection, and author profiling.
+
+

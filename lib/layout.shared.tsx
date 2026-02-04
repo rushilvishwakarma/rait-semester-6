@@ -1,5 +1,6 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import Image from 'next/image';
+import { Upload } from 'lucide-react';
 
 export function baseOptions(): BaseLayoutProps {
   return {
@@ -23,5 +24,17 @@ export function baseOptions(): BaseLayoutProps {
         </div>
       ),
     },
+    links: [
+      {
+        type: 'icon',
+        label: 'Upload Notes',
+        icon: <Upload />,
+        text: 'Upload',
+        url: '/upload',
+      },
+    ],
   };
 }
+
+
+

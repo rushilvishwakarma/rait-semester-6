@@ -10,8 +10,10 @@ import {
   Calendar,
   GraduationCap,
   Cpu,
+  Upload,
 } from 'lucide-react';
 import { HeroBackground } from './hero-background';
+import { Badge } from '@/components/ui/badge';
 
 const coreSubjects = [
   { title: 'BDA', description: 'Big Data Analytics', href: '/docs/core/BDA', icon: Database },
@@ -37,42 +39,48 @@ const resources = [
 
 export default function HomePage() {
   return (
-    <main className="mx-auto px-6 py-8">
+    <main className="w-full px-4 py-4">
       {/* Hero Section */}
-      <section className="relative min-h-[350px] overflow-hidden rounded-2xl mb-12">
+      <section className="relative min-h-[350px] overflow-hidden rounded-2xl mb-12 flex flex-col border">
         <HeroBackground />
-        <div className="flex flex-col items-center justify-center text-center z-2 px-6 size-full md:p-12 py-12 mix-blend-difference">
-          <div>
-          <Image
-            src="/logos/brand/logo-in-dark-mode.svg"
-            alt="Logo"
-            width={180}
-            height={140}
-            className="dark:hidden pb-4 invert mx-auto"
-          />
-          <Image
-            src="/logos/brand/logo-in-light-mode.svg"
-            alt="Logo"
-            width={180}
-            height={140}
-            className="hidden dark:block pb-4 mx-auto"
-          />
-            <h1 className="text-4xl mb-3 text-white md:text-5xl">Semester 6</h1>
-            <p className="text-white text-lg mb-4">B.Tech CSE • AI & ML (TE)</p>
-            <p className="text-white max-w-md mx-auto mb-2"> This site is not affiliated with DY Patil University or Ramrao Adik Institute of Technology (RAIT).</p>
-              <p className="text-white/40 text-sm max-w-md mx-auto">
-              Created by students, for students.
-            </p>
+        {/* Bottom gradient overlay */}
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-fd-background to-transparent z-1 pointer-events-none" />
+        {/* Centered Content */}
+        <div className="flex-1 flex flex-col items-center justify-center text-center z-2 px-6 py-12">
+          <div className="mix-blend-difference">
+            <Image
+              src="/logos/brand/logo-in-dark-mode.svg"
+              alt="Logo"
+              width={280}
+              height={140}
+              className="dark:hidden pb-4 mx-auto"
+            />
+            <Image
+              src="/logos/brand/logo-in-light-mode.svg"
+              alt="Logo"
+              width={280}
+              height={140}
+              className="hidden dark:block pb-4 mx-auto"
+            />
           </div>
+          <Badge variant="secondary">
+            B.Tech CSE • AI & ML (TE)
+          </Badge>
+        </div>
+        {/* Footer Disclaimer */}
+        <div className="z-2 px-6 pb-4 text-center">
+          <span className="text-fd-muted-foreground text-xs">
+            This platform is not affiliated with DY Patil University or Ramrao Adik Institute of Technology (RAIT).
+          </span>
         </div>
       </section>
 
       {/* Content */}
-      <div>
+      <div className='px-4'>
         {/* Core Subjects */}
         <section className="mb-12">
           <h2 className="text-xl font-semibold mb-4">Core Subjects</h2>
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {coreSubjects.map((subject) => (
               <Link
                 key={subject.title}
@@ -94,7 +102,7 @@ export default function HomePage() {
         {/* Labs */}
         <section className="mb-12">
           <h2 className="text-xl font-semibold mb-4">Labs</h2>
-          <div className="grid gap-4 sm:grid-cols-3 md:grid-cols-5">
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
             {labSubjects.map((lab) => (
               <Link
                 key={lab.title}
@@ -131,7 +139,27 @@ export default function HomePage() {
             ))}
           </div>
         </section>
+
+        {/* Crowdsource Section */}
+        <section className="mt-12">
+          <Link
+            href="/upload"
+            className="group flex items-center gap-4 rounded-xl border bg-fd-card p-5 transition-colors hover:bg-fd-accent"
+          >
+            <div className="rounded-lg border bg-fd-background p-3">
+              <Upload className="size-5 text-fd-muted-foreground" />
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold">Share and View Useful Resources</p>
+              <p className="text-sm text-fd-muted-foreground">
+                Share question banks, important Notes, and other verified resources
+              </p>
+            </div>
+          </Link>
+        </section>
       </div>
+
+
 
       {/* Footer */}
       <footer className="mt-16 border-t pt-6 pb-8 text-center text-sm text-fd-muted-foreground">

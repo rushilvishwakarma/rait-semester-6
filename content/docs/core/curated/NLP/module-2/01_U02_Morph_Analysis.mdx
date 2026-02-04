@@ -1,0 +1,172 @@
+---
+title: Morphological Analysis
+description: Morphology types, Regular expressions & finite automata
+---
+
+import { Highlight } from '@/components/highlight';
+
+## LECTURE 5: MORPHOLOGICAL ANALYSIS – SURVEY OF ENGLISH MORPHOLOGY
+
+### Q1. Explain Morphology, morphemes, and word formation in Natural Language Processing.
+
+Morphology deals with the <Highlight>**internal structure of words**</Highlight> and the way complex words are formed using smaller meaningful units called <Highlight>**morphemes**</Highlight>. It studies both the structural (syntactic) and semantic aspects of words.
+
+A **morpheme** is the smallest meaning-bearing unit in a language. Morphemes may represent entities, actions, or grammatical relationships. Morphology enables humans and machines to recognize words and understand their meanings in discourse.
+
+Words are formed using a **base form** (also called stem or lemma) along with **affixes** such as prefixes, suffixes, or infixes.
+Examples include *believe* (stem), *un-* (prefix), and *-able*, *-ly* (suffixes).
+
+<Mermaid chart={`
+graph TD
+    A[Word: unbelievable]
+    A --> B(Prefix: un-)
+    A --> C(Stem: believe)
+    A --> D(Suffix: -able)
+`} />
+
+Thus, morphology plays a fundamental role in understanding how words are constructed and interpreted in natural language.
+
+---
+
+### Q2. Explain morphological parsing and its importance in NLP.
+
+Morphological parsing is the task of <Highlight>**identifying and analyzing the morphemes inside a word**</Highlight>. It determines how a word is decomposed into its constituent morphemes.
+
+For example, words such as *hands*, *foxes*, and *children* contain morphemes that encode grammatical information like number. Morphological parsing identifies these internal components.
+
+<Mermaid chart={`
+graph LR
+    A[Input Word: children] --> B(Morphological Parser)
+    B --> C{Output}
+    C --> D[Stem: child]
+    C --> E[Suffix: -ren PLURAL]
+`} />
+
+Morphological parsing is important for several NLP applications such as <Highlight color="blue">machine translation, information retrieval, syntactic parsing, and text simplification</Highlight>. By breaking words into meaningful units, it improves the accuracy of higher-level language processing tasks.
+
+---
+
+### Q3. Explain words and morphemes with examples.
+
+In formal languages, words are treated as **arbitrary strings**. In contrast, in natural languages, words are composed of <Highlight>**meaningful subunits called morphemes**</Highlight>.
+
+Morphemes are abstract units that denote entities or relationships. They are classified into:
+
+* **Stems**, which carry the core meaning of a word
+* **Affixes**, which add grammatical or semantic information such as tense, number, or polarity
+
+Examples:
+*cats* = *cat* (stem) + *s* (suffix)
+*undo* = *un* (prefix) + *do* (stem)
+
+This distinction highlights the importance of <Highlight>morphemes in natural language understanding</Highlight>.
+
+---
+
+### Q4. Why is morphological analysis needed in NLP?
+
+Morphological analysis is required to understand how words are composed from smaller meaning-bearing units and how grammatical information is encoded within them.
+
+It is used in applications such as spelling correction, hyphenation algorithms, part-of-speech analysis, text-to-speech systems, and grapheme-to-phoneme conversion. It also helps resolve pronunciation ambiguities, such as the different pronunciations of *hothouse*.
+
+Thus, morphological analysis is essential for accurate word-level processing in NLP systems.
+
+---
+
+### Q5. Explain word structure, morphology–syntax interaction, and word creation systems.
+
+Words are orthographic tokens usually separated by whitespace. However, in some languages such as Chinese and Japanese, <Highlight color="blue">word boundaries are unclear</Highlight>, while in languages like Turkish, a single word may represent an entire sentence.
+
+Morphology studies <Highlight>**word structure**</Highlight>, whereas syntax studies <Highlight>**sentence structure**</Highlight>, and the two interact closely. Languages with rich morphology tend to have freer word order and less rigid syntax. For example, Hindi allows multiple word orders due to extensive morphological marking.
+
+Word creation systems include <Highlight>**concatenative morphology**</Highlight>, which attaches affixes to stems and is common in English, and <Highlight>**non-concatenative morphology**</Highlight>, such as infixation in Tagalog and templatic morphology in Arabic and Hebrew.
+
+---
+
+## LECTURE 6: INFLECTIONAL AND DERIVATIONAL MORPHOLOGY
+
+### Q6. Explain free and bound morphemes and types of morphology.
+
+Morphemes are classified as **free** or **bound**. Free morphemes can stand alone as independent words, such as *girl*, *boy*, and *weak*. Bound morphemes cannot stand alone and must attach to other morphemes, such as *-er*, *-s*, and *-ling*.
+
+Based on how morphemes are used, morphology is classified into inflection, derivation, compounding, and cliticization. These processes explain how words change form and function in a language.
+
+---
+
+### Q7. Differentiate between inflectional and derivational morphology with examples.
+
+<Highlight>**Inflectional morphology**</Highlight> modifies words to express grammatical features such as tense, number, person, aspect, and case without changing the word category.
+Example: *perform → performs → performed*
+
+Inflection may be regular or irregular. Regular plurals include *cats* and *tables*, while irregular plurals include *mouse → mice* and *child → children*. **Suppletion** occurs when there is no phonological similarity between forms, such as *go → went*.
+
+<Highlight>**Derivational morphology**</Highlight> creates new words by adding prefixes or suffixes and often changes word class or meaning.
+Examples include *delight → delightful* and *like → unlikeableness*.
+
+Thus, inflection adapts words grammatically, while derivation creates new lexical items.
+
+| Feature | Inflectional Morphology | Derivational Morphology |
+| :--- | :--- | :--- |
+| **Word Class** | **Unchanged** (Noun→Noun) | **Changes** (Verb→Noun) |
+| **Meaning** | Grammatical (Tense/Number) | New distinct word meaning |
+| **Examples** | *cats*, *walked* | *teacher*, *unhappy* |
+
+---
+
+## LECTURE 7: REGULAR EXPRESSIONS
+
+### Q8. Explain Regular Expressions and their operators.
+
+A **Regular Expression (RE)** is a formal language used to specify patterns in text. Regular expressions are widely used in search, text processing, and pattern matching.
+
+Basic constructs include character classes, ranges, negation, optional characters, and wildcards. Repetition operators such as `*`, `+`, and `?` specify how many times a pattern may occur.
+
+Advanced operators represent digits, whitespace, and alphanumeric characters. Tools such as UNIX *grep* extensively use regular expressions for efficient text processing.
+
+---
+
+## LECTURE 8: FINITE STATE AUTOMATA AND TRANSDUCERS
+
+### Q9. Explain Finite State Automata (FSA) and Finite State Transducers (FST).
+
+Regular expressions define **regular languages**, which are recognized by <Highlight>**Finite State Automata (FSA)**</Highlight>. An FSA processes input strings and either accepts or rejects them based on state transitions.
+
+Formally, an FSA consists of a finite set of states, an input alphabet, a start state, final states, and a transition function.
+
+A <Highlight>**Finite State Transducer (FST)**</Highlight> extends an FSA by mapping input strings to output strings. FSTs represent relations rather than simple acceptance and are widely used in <Highlight color="blue">morphological parsing, word generation, and lexical analysis</Highlight>.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div className="border p-4 rounded-lg">
+    <p className="text-center font-bold mb-2">FSA: Recognizer</p>
+    <Mermaid chart={`
+    graph LR
+        S0((Start)) -- c --> S1(( ))
+        S1 -- a --> S2(( ))
+        S2 -- t --> S3(((End)))
+    `} />
+    <p className="text-sm text-center text-muted-foreground mt-2">Accepts "cat"</p>
+  </div>
+
+  <div className="border p-4 rounded-lg">
+    <p className="text-center font-bold mb-2">FST: Transducer</p>
+    <Mermaid chart={`
+    graph LR
+        T0((Start)) -- c : c --> T1(( ))
+        T1 -- a : a --> T2(( ))
+        T2 -- t : t --> T3(((End)))
+    `} />
+    <p className="text-sm text-center text-muted-foreground mt-2">Maps "cat" ↔ "c-a-t"</p>
+  </div>
+</div>
+
+---
+
+### Q10. Explain FST operations and applications in NLP.
+
+Two important operations on FSTs are <Highlight>**inversion**</Highlight> and <Highlight>**composition**</Highlight>. Inversion swaps the input and output labels of a transducer, while composition combines two transducers to create a new mapping.
+
+FSTs are used for morphological parsing of languages such as English and Spanish. Other applications include spelling correction, speech recognition, machine translation, and probabilistic modeling using weighted FSTs.
+
+Thus, FSTs form the computational foundation of word-level analysis in NLP.
+
+---

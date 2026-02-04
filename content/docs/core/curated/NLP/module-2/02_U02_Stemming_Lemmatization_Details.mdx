@@ -1,0 +1,189 @@
+---
+title: Stemming vs Lemmatization
+description: Porter stemmer algorithm, detailed comparison
+---
+Perfect 👍
+I understand **“Same with this”** as:
+
+> 👉 **Do for Module 2 (Lectures 9–12) exactly what we did earlier**
+> – optimized
+> – reduced questions
+> – same depth
+> – exam-reframable
+> – clean Markdown
+> – **NO diagrams unless necessary (we’ll decide later)**
+
+Below is the **FINAL OPTIMIZED NOTES** for **Module 2 (Lecture 9–12)**.
+
+import { Highlight } from '@/components/highlight';
+
+---
+
+# NLP Module 2: Word Level Analysis
+
+## (Stemming, Lemmatization, Porter Stemmer, N-Gram Model)
+
+---
+
+## LECTURE 9: STEMMING VS LEMMATIZATION
+
+### Q11. Explain stemming and lemmatization. Compare them with examples.
+
+<Highlight>**Stemming**</Highlight> is the process of reducing inflected or derived words to a common <Highlight>**base form or stem**</Highlight> by removing prefixes or suffixes. It is a particular case of tokenization and is mainly a <Highlight>**string-based process**</Highlight>. Stemming algorithms use simple rule-based methods to strip affixes without considering the grammatical meaning of the word.
+
+The main advantage of stemming is **efficiency**. It improves search performance and index compression in information retrieval systems. However, stemming may produce stems that are **not valid dictionary words**, and some linguistic information may be lost.
+
+Examples of stemming:
+
+* *natural → natur*
+* *processing → process*
+* *lightweight → lightweight*
+
+<Highlight>**Lemmatization**</Highlight>, on the other hand, performs <Highlight>**morphological analysis**</Highlight> of words and reduces them to their <Highlight>**lemma**</Highlight>, which is the dictionary base form. Lemmatization requires detailed lexical knowledge and dictionaries to correctly identify the lemma based on context and grammatical role.
+
+Examples of lemmatization:
+
+* *studies → study*
+* *feet → foot*
+* *computers → computer*
+
+<br/>
+
+| Feature | Stemming | Lemmatization |
+| :--- | :--- | :--- |
+| **Method** | Rule-based (suffix stripping) | Dictionary-based (morphological analysis) |
+| **Outcome** | Stem (may not be valid word) | Lemma (valid dictionary word) |
+| **Speed** | Faster, simpler | Slower, computationally expensive |
+| **Accuracy** | Lower (over/under-stemming) | Higher (linguistically correct) |
+
+Thus, while stemming is faster and simpler, lemmatization is more accurate and linguistically informed. A **lemma is always a valid word**, whereas a stem may not be.
+
+---
+
+### Q12. Explain advantages, limitations, and examples of stemming.
+
+The main goal of stemming is to **improve system performance** by reducing the number of unique words that need to be processed and stored. By mapping multiple word forms to a single stem, stemming improves recall in information retrieval systems.
+
+Advantages of stemming include faster search time and reduced index size. For example, words such as *calculate, calculations, calculates,* and *calculating* can all be reduced to the stem *calculat*.
+
+However, stemming has limitations. Since it relies on indiscriminate affix removal, it may produce incorrect or ambiguous stems. For example, the word *saw* would always remain *saw* in stemming, whereas lemmatization could correctly identify it as *see* or *saw* depending on context.
+
+Thus, stemming trades linguistic accuracy for computational efficiency.
+
+---
+
+## LECTURE 10 & 11: PORTER STEMMER
+
+### Q13. Explain the concept, motivation, and types of stemming algorithms.
+
+Stemming algorithms aim to <Highlight>**reduce words to their base form**</Highlight> in order to improve efficiency and recall in text processing systems. By minimizing word variants, these algorithms help information systems match related terms more effectively.
+
+Stemming algorithms remove prefixes and suffixes, sometimes recursively, to derive a final stem. Popular implementations are available in tools such as the **nltk.stem** package.
+
+There are three main types of stemmers:
+
+* **Porter Stemmer**
+* **Snowball Stemmer**
+* **Lancaster Stemmer**
+
+Among these, the Porter Stemmer is the most widely used due to its balance between simplicity and effectiveness.
+
+---
+
+### Q14. Explain the Porter Stemming Algorithm and its basic definitions.
+
+The <Highlight>**Porter Stemming Algorithm**</Highlight> is a rule-based stemming algorithm that applies a series of suffix-stripping rules to words.
+
+It defines:
+
+* **Consonants (C)** as letters other than A, E, I, O, U, and Y
+* **Vowels (V)** as A, E, I, O, U, and Y
+
+Words are represented in the form:
+
+```
+(C)(VC)^m(V)
+```
+
+where *m* is the **measure**, representing the number of vowel–consonant sequences.
+
+Examples of measure values:
+
+* *m = 0*: TREE, BY
+* *m = 1*: TROUBLE, OATS
+* *m = 2*: TROUBLES, PRIVATE
+
+The algorithm applies rules only when specific conditions on *m* and word structure are satisfied.
+
+---
+
+### Q15. Explain the rules and steps of the Porter Stemming Algorithm.
+
+The Porter Stemmer applies rules of the form:
+
+```
+(condition) S1 → S2
+```
+
+where *S1* is the suffix to be replaced by *S2* if the condition is satisfied.
+
+Important conditions include:
+
+* **m**: measure of the stem
+* ***S**: stem ends with S
+* **v**: stem contains a vowel
+* ***d**: stem ends with a double consonant
+* ***o**: stem ends in CVC (excluding W, X, Y)
+
+The algorithm proceeds through multiple steps:
+
+* **Step 1**: Plural and past participle removal
+* **Steps 2–4**: Derivational morphology handling
+* **Steps 5–7**: Final suffix stripping and normalization
+
+Examples:
+
+* *caresses → caress*
+* *ponies → poni*
+* *happy → happi*
+* *generalization → generalize*
+
+Each step refines the word while preserving its core meaning.
+
+<Mermaid chart={`
+graph TD
+    A[Input Word] --> B{Step 1: Plurals/Past}
+    B --> C{Steps 2-4: Derivational}
+    C --> D{Steps 5-7: Final Stripping}
+    D --> E[Output Stem]
+`} />
+
+---
+
+## LECTURE 12: N-GRAM LANGUAGE MODEL
+
+### Q16. Explain the concept of N-Gram language models.
+
+An <Highlight>**N-gram language model**</Highlight> is a probabilistic model used to predict the likelihood of a word based on the previous *n − 1* words. It is widely used in NLP tasks such as <Highlight color="blue">speech recognition, machine translation, and text prediction</Highlight>.
+
+Common types of N-grams include:
+
+* **Unigram** (n = 1)
+* **Bigram** (n = 2)
+* **Trigram** (n = 3)
+
+<Mermaid chart={`
+graph LR
+    A[Unigram: 'New', 'York']
+    B[Bigram: 'New York']
+    C[Trigram: 'New York City']
+    style A stroke-width:0px
+    style B stroke-width:0px
+    style C stroke-width:0px
+`} />
+
+The model assumes that the probability of a word depends only on a limited context, making computation feasible for large datasets.
+
+N-gram models capture local word dependencies and form the foundation of many statistical NLP systems.
+
+---
