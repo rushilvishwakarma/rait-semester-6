@@ -2,6 +2,8 @@
 title: "BDA Module 1: Introduction to Big Data"
 ---
 
+import { Highlight } from '@/components/highlight';
+
 ## LECTURE 1: INTRODUCTION TO BIG DATA
 
 
@@ -22,7 +24,7 @@ Thus, Big Data is not only about handling large volumes of data, but also about 
 
 In Big Data analytics, data is measured using hierarchical storage units that represent increasing volumes of data. The smallest unit of data is a **bit**, and eight bits together form one **byte**. As data volume increases, larger units are used to represent it efficiently.
 
-One kilobyte (KB) is equal to 1024 bytes, while one megabyte (MB) consists of 1024 kilobytes. Similarly, one gigabyte (GB) equals 1024 megabytes and one terabyte (TB) equals 1024 gigabytes. In Big Data environments, data is commonly measured in much larger units such as **petabytes (PB)**, **exabytes (EB)**, **zettabytes (ZB)**, and **yottabytes (YB)**.
+One kilobyte (KB) is equal to 1024 bytes, while one megabyte (MB) consists of 1024 kilobytes. Similarly, one gigabyte (GB) equals 1024 megabytes and one terabyte (TB) equals 1024 gigabytes. In Big Data environments, data is commonly measured in much larger units such as <Highlight color="blue">**petabytes (PB)**, **exabytes (EB)**, **zettabytes (ZB)**, and **yottabytes (YB)**</Highlight>.
 
 Modern applications such as social media platforms, cloud services, and scientific research generate data at petabyte and exabyte scales. Traditional data processing systems struggle to handle such massive volumes, which is why Big Data technologies are required.
 
@@ -36,7 +38,7 @@ Big Data is generated from a wide range of sources in today’s interconnected d
 
 Another significant source is **social media platforms** such as Twitter, Facebook, and Instagram. These platforms generate enormous amounts of unstructured data in the form of posts, comments, images, and videos. **Web and e-commerce systems** also contribute heavily by recording user clicks, searches, browsing behavior, and purchase histories.
 
-Additionally, **mobile devices**, **sensor technologies**, and **Internet of Things (IoT) networks** generate continuous streams of real-time data. Scientific instruments and research experiments also produce large datasets that require Big Data processing techniques.
+Additionally, **mobile devices**, **sensor technologies**, and <Highlight color="blue">**Internet of Things (IoT) networks**</Highlight> generate continuous streams of real-time data. Scientific instruments and research experiments also produce large datasets that require Big Data processing techniques.
 
 Therefore, the variety and volume of data sources contribute to the rapid growth of Big Data across industries.
 
@@ -44,9 +46,9 @@ Therefore, the variety and volume of data sources contribute to the rapid growth
 
 ### Q4. Why is Big Data important?
 
-The importance of Big Data lies not in the volume of data generated, but in how effectively it is analyzed and utilized. Big Data enables organizations to make **better and faster decisions** by analyzing large datasets and identifying meaningful patterns and trends.
+The importance of Big Data lies not in the volume of data generated, but in how effectively it is analyzed and utilized. Big Data enables organizations to make <Highlight>**better and faster decisions**</Highlight> by analyzing large datasets and identifying meaningful patterns and trends.
 
-By using Big Data analytics, businesses can improve **operational efficiency** by optimizing processes, reducing costs, and minimizing risks. Big Data also enhances **customer experience** by enabling personalized recommendations, targeted marketing, and improved services.
+By using Big Data analytics, businesses can improve <Highlight color="blue">**operational efficiency**</Highlight> by optimizing processes, reducing costs, and minimizing risks. Big Data also enhances **customer experience** by enabling personalized recommendations, targeted marketing, and improved services.
 
 In sectors such as healthcare and finance, Big Data helps in early disease detection, fraud prevention, and risk analysis. Governments and organizations also use Big Data for traffic management, security, and policy planning.
 
@@ -59,7 +61,7 @@ Thus, Big Data is a powerful asset that drives innovation, efficiency, and compe
 
 ### Q5. Explain the types of Big Data.
 
-Big Data is broadly classified into three categories based on its structure and organization, namely **structured data**, **unstructured data**, and **semi-structured data**. This classification helps in understanding how data is stored, processed, and analyzed.
+Big Data is broadly classified into three categories based on its structure and organization, namely <Highlight>**structured data**, **unstructured data**, and **semi-structured data**</Highlight>. This classification helps in understanding how data is stored, processed, and analyzed.
 
 **Structured data** refers to data that follows a fixed schema and is organized in rows and columns. It is usually stored in relational database management systems and can be easily queried using SQL. Examples of structured data include employee records, banking transactions, and inventory databases. Although structured data is easy to manage, handling it becomes challenging when the data size grows to extremely large volumes.
 
@@ -73,19 +75,19 @@ Thus, Big Data systems must be capable of handling all three types of data effic
 
 ### Q6. Explain the characteristics of Big Data. (Also as Explain the challenges of Big Data)
 
-**(VERY IMPORTANT)**
+<Callout title="Very Important"></Callout>
 
-Big Data is defined by five key characteristics commonly known as the **5 V’s of Big Data**. These characteristics distinguish Big Data from traditional data systems.
+Big Data is defined by five key characteristics commonly known as the <Highlight>**5 V's of Big Data**</Highlight>. These characteristics distinguish Big Data from traditional data systems.
 
-The first characteristic is **Volume**, which refers to the massive amount of data generated from various sources such as social media, sensors, and online transactions. Data today is generated in terabytes and petabytes, far exceeding the capacity of traditional systems.
+The first characteristic is <Highlight>**Volume**</Highlight>, which refers to the massive amount of data generated from various sources such as social media, sensors, and online transactions. Data today is generated in terabytes and petabytes, far exceeding the capacity of traditional systems.
 
-The second characteristic is **Velocity**, which indicates the speed at which data is generated, transmitted, and processed. Examples include real-time data from stock markets, social media feeds, and IoT devices.
+The second characteristic is <Highlight>**Velocity**</Highlight>, which indicates the speed at which data is generated, transmitted, and processed. Examples include real-time data from stock markets, social media feeds, and IoT devices.
 
-The third characteristic is **Variety**, which represents the different forms of data such as structured, semi-structured, and unstructured data. Handling such diverse data types is a major challenge in Big Data analytics.
+The third characteristic is <Highlight>**Variety**</Highlight>, which represents the different forms of data such as structured, semi-structured, and unstructured data. Handling such diverse data types is a major challenge in Big Data analytics.
 
-The fourth characteristic is **Veracity**, which deals with the quality, accuracy, and reliability of data. Big Data often contains noise, inconsistencies, and uncertainty.
+The fourth characteristic is <Highlight>**Veracity**</Highlight>, which deals with the quality, accuracy, and reliability of data. Big Data often contains noise, inconsistencies, and uncertainty.
 
-The fifth characteristic is **Value**, which refers to the ability to extract meaningful and useful insights from raw data. Without value, large volumes of data have no practical significance.
+The fifth characteristic is <Highlight>**Value**</Highlight>, which refers to the ability to extract meaningful and useful insights from raw data. Without value, large volumes of data have no practical significance.
 
 ---
 
@@ -94,9 +96,9 @@ The fifth characteristic is **Value**, which refers to the ability to extract me
 
 ### Q7. Differentiate between traditional data and Big Data.
 
-Traditional data systems are designed to handle **small to moderate volumes of structured data** stored in centralized relational databases. These systems rely on fixed schemas and vertical scaling using powerful servers. They are mainly used for transactional processing and routine business operations.
+Traditional data systems are designed to handle **small to moderate volumes of structured data** stored in centralized relational databases. These systems rely on fixed schemas and <Highlight color="blue">vertical scaling</Highlight> using powerful servers. They are mainly used for transactional processing and routine business operations.
 
-In contrast, Big Data systems are designed to handle **very large volumes of structured, semi-structured, and unstructured data**. They use **distributed storage systems such as HDFS** and support horizontal scaling by adding more machines. Big Data systems operate on clusters of commodity hardware and are optimized for large-scale data analysis rather than simple transactions.
+In contrast, Big Data systems are designed to handle **very large volumes of structured, semi-structured, and unstructured data**. They use <Highlight>**distributed storage systems such as HDFS**</Highlight> and support horizontal scaling by adding more machines. Big Data systems operate on clusters of commodity hardware and are optimized for large-scale data analysis rather than simple transactions.
 
 Traditional systems are limited in scalability and flexibility, whereas Big Data systems provide high scalability, fault tolerance, and cost effectiveness. Therefore, Big Data systems are better suited for modern analytics-driven applications.
 
@@ -104,9 +106,9 @@ Traditional systems are limited in scalability and flexibility, whereas Big Data
 
 ### Q8. Traditional analytics vs Big Data analytics.
 
-Traditional analytics focuses on analyzing **structured data** using predefined queries and reports. The analysis process is usually **repeatable and predictable**, and data preparation is handled primarily by IT teams. Traditional analytics aims to answer known business questions based on historical data.
+Traditional analytics focuses on analyzing **structured data** using predefined queries and reports. The analysis process is usually <Highlight color="blue">**repeatable and predictable**</Highlight>, and data preparation is handled primarily by IT teams. Traditional analytics aims to answer known business questions based on historical data.
 
-Big Data analytics, on the other hand, is **exploratory and iterative** in nature. It allows analysts and business users to explore large and diverse datasets to discover unknown patterns and insights. Big Data analytics supports advanced techniques such as sentiment analysis, behavioral analysis, and predictive analytics.
+Big Data analytics, on the other hand, is <Highlight>**exploratory and iterative**</Highlight> in nature. It allows analysts and business users to explore large and diverse datasets to discover unknown patterns and insights. Big Data analytics supports advanced techniques such as sentiment analysis, behavioral analysis, and predictive analytics.
 
 Unlike traditional analytics, Big Data analytics handles real-time and high-velocity data and enables organizations to adapt quickly to changing business conditions.
 
@@ -114,7 +116,7 @@ Unlike traditional analytics, Big Data analytics handles real-time and high-velo
 
 ### Q9. Traditional transactions vs Big Data transactions.
 
-Traditional transaction systems are based on **OLTP (Online Transaction Processing)** models and are designed to handle structured transactional data. These systems follow **ACID properties** to ensure data consistency and reliability. Examples include order processing, billing, and payment systems.
+Traditional transaction systems are based on <Highlight color="blue">**OLTP (Online Transaction Processing)**</Highlight> models and are designed to handle structured transactional data. These systems follow <Highlight>**ACID properties**</Highlight> to ensure data consistency and reliability. Examples include order processing, billing, and payment systems.
 
 Big Data transactions are generally **non-transactional** and focus on capturing high-velocity data generated from user interactions and system events. Examples include clickstream data, website activity logs, and shopping cart updates. Such data does not always require strict ACID compliance.
 
@@ -130,7 +132,7 @@ Thus, while traditional systems focus on accuracy and consistency, Big Data syst
 
 Big Data has a wide range of applications across various industries. In **healthcare**, Big Data is used for disease prediction, patient monitoring, and personalized treatment plans. In **finance**, it supports fraud detection, risk analysis, and algorithmic trading.
 
-Retail and e-commerce companies use Big Data to create a **360-degree view of customers**, enabling personalized recommendations and targeted marketing. Big Data is also used in **security and intelligence** to detect threats and suspicious activities. In **operations analysis**, organizations analyze machine and process data to improve efficiency and reduce downtime.
+Retail and e-commerce companies use Big Data to create a <Highlight>**360-degree view of customers**</Highlight>, enabling personalized recommendations and targeted marketing. Big Data is also used in **security and intelligence** to detect threats and suspicious activities. In **operations analysis**, organizations analyze machine and process data to improve efficiency and reduce downtime.
 
 Big Data also supports **data warehouse augmentation**, where traditional data warehouses are enhanced with large and diverse datasets. These use cases demonstrate how Big Data transforms raw data into actionable insights.
 
@@ -140,11 +142,11 @@ Big Data also supports **data warehouse augmentation**, where traditional data w
 
 ### Q11. What is Hadoop? Explain its motivation / Explain scalability in Big Data - Hadoop.
 
-Hadoop is an **open-source framework** developed by the Apache Software Foundation for the **distributed storage and processing of large datasets**. It was created by Doug Cutting and Mike Cafarella in 2005 to address the challenges posed by rapidly growing data volumes.
+Hadoop is an <Highlight>**open-source framework**</Highlight> developed by the Apache Software Foundation for the <Highlight>**distributed storage and processing of large datasets**</Highlight>. It was created by Doug Cutting and Mike Cafarella in 2005 to address the challenges posed by rapidly growing data volumes.
 
 Traditional data processing systems rely on centralized architectures and vertical scaling, which involve upgrading hardware to handle increased data. Such systems suffer from limited scalability, high costs, and poor performance when dealing with large and diverse datasets. As data volumes grew to terabytes and petabytes, these systems became inefficient and difficult to manage.
 
-Hadoop was motivated by the need for a **scalable and cost-effective solution** for Big Data processing. It achieves scalability through **horizontal scaling**, where data and computation are distributed across multiple machines. New nodes can be added to the cluster as data grows, without disrupting existing operations. Hadoop also moves computation closer to data, reduces network overhead, and uses commodity hardware.
+Hadoop was motivated by the need for a **scalable and cost-effective solution** for Big Data processing. It achieves scalability through <Highlight>**horizontal scaling**</Highlight>, where data and computation are distributed across multiple machines. New nodes can be added to the cluster as data grows, without disrupting existing operations. Hadoop also moves computation closer to data, reduces network overhead, and uses <Highlight color="blue">commodity hardware</Highlight>.
 
 Thus, Hadoop provides a highly scalable, fault-tolerant platform suitable for Big Data workloads.
 
@@ -152,9 +154,9 @@ Thus, Hadoop provides a highly scalable, fault-tolerant platform suitable for Bi
 
 ### Q12. Explain Hadoop assumptions.
 
-Hadoop is designed based on several key assumptions. One major assumption is that **hardware failures are common**, and therefore the system must be fault tolerant. Hadoop achieves this through data replication.
+Hadoop is designed based on several key assumptions. One major assumption is that <Highlight>**hardware failures are common**</Highlight>, and therefore the system must be fault tolerant. Hadoop achieves this through data replication.
 
-Another assumption is that Hadoop workloads are primarily **batch-oriented**, meaning it is optimized for processing large datasets rather than real-time transactions. Hadoop also assumes a **write-once-read-many** access pattern, where data is written once and read multiple times.
+Another assumption is that Hadoop workloads are primarily <Highlight>**batch-oriented**</Highlight>, meaning it is optimized for processing large datasets rather than real-time transactions. Hadoop also assumes a <Highlight color="blue">**write-once-read-many**</Highlight> access pattern, where data is written once and read multiple times.
 
 Hadoop is designed to handle **very large datasets** and supports horizontal scalability by adding more nodes. These assumptions guide the design and architecture of Hadoop.
 
@@ -164,11 +166,11 @@ Hadoop is designed to handle **very large datasets** and supports horizontal sca
 
 ### Q13. Explain the core components of Hadoop.
 
-Hadoop consists of four core components that work together to support distributed data processing. **Hadoop Common** provides shared utilities and libraries required by other Hadoop modules.
+Hadoop consists of four core components that work together to support distributed data processing. <Highlight>**Hadoop Common**</Highlight> provides shared utilities and libraries required by other Hadoop modules.
 
-**HDFS (Hadoop Distributed File System)** is responsible for distributed storage. It splits large files into blocks and replicates them across multiple nodes to ensure fault tolerance. The **NameNode** manages metadata, while **DataNodes** store the actual data.
+<Highlight>**HDFS (Hadoop Distributed File System)**</Highlight> is responsible for distributed storage. It splits large files into blocks and replicates them across multiple nodes to ensure fault tolerance. The <Highlight color="blue">**NameNode**</Highlight> manages metadata, while <Highlight color="blue">**DataNodes**</Highlight> store the actual data.
 
-**YARN (Yet Another Resource Negotiator)** manages cluster resources and schedules jobs by allocating CPU and memory efficiently. **MapReduce** is the programming model used for distributed processing, where data is processed using Map and Reduce phases.
+<Highlight>**YARN (Yet Another Resource Negotiator)**</Highlight> manages cluster resources and schedules jobs by allocating CPU and memory efficiently. <Highlight>**MapReduce**</Highlight> is the programming model used for distributed processing, where data is processed using Map and Reduce phases.
 
 <Mermaid chart={`
 graph TD
@@ -202,7 +204,7 @@ graph TD
 
 ### Q14. Explain HDFS.
 
-HDFS is a distributed file system designed to store large datasets across multiple nodes in a Hadoop cluster. It divides files into fixed-size blocks and distributes them across DataNodes. Each block is replicated, typically three times, to ensure fault tolerance.
+HDFS is a distributed file system designed to store large datasets across multiple nodes in a Hadoop cluster. It divides files into <Highlight color="blue">fixed-size blocks</Highlight> and distributes them across DataNodes. Each block is <Highlight>replicated, typically three times</Highlight>, to ensure fault tolerance.
 
 The **NameNode** maintains metadata such as file names, block locations, and permissions, while **DataNodes** handle the actual storage. HDFS is optimized for high throughput rather than low latency and is suitable for batch processing of large datasets.
 
@@ -212,11 +214,11 @@ The **NameNode** maintains metadata such as file names, block locations, and per
 
 ### Q15. Explain MapReduce.
 
-MapReduce is a programming model used in Hadoop for processing large datasets in a distributed manner. It consists of three main phases: **Map**, **Shuffle**, and **Reduce**.
+MapReduce is a programming model used in Hadoop for processing large datasets in a distributed manner. It consists of three main phases: <Highlight>**Map**, **Shuffle**, and **Reduce**</Highlight>.
 
-In the Map phase, input data is processed and converted into intermediate key-value pairs. The Shuffle phase sorts and redistributes these pairs based on keys. In the Reduce phase, the data is aggregated to produce the final output.
+In the <Highlight color="blue">Map phase</Highlight>, input data is processed and converted into intermediate key-value pairs. The <Highlight color="blue">Shuffle phase</Highlight> sorts and redistributes these pairs based on keys. In the <Highlight color="blue">Reduce phase</Highlight>, the data is aggregated to produce the final output.
 
-MapReduce enables parallel processing and fault-tolerant computation across large clusters.
+MapReduce enables <Highlight>parallel processing</Highlight> and <Highlight>fault-tolerant computation</Highlight> across large clusters.
 
 <Mermaid chart={`
 graph LR
@@ -254,9 +256,9 @@ graph LR
 
 ### Q16. Explain the Hadoop ecosystem.
 
-The Hadoop ecosystem consists of tools that extend Hadoop’s capabilities. **Hive** provides SQL-like querying for large datasets, while **Pig** offers a high-level scripting language for data transformation. **HBase** is a NoSQL database that supports real-time read and write operations.
+The Hadoop ecosystem consists of tools that extend Hadoop's capabilities. <Highlight color="blue">**Hive**</Highlight> provides SQL-like querying for large datasets, while <Highlight color="blue">**Pig**</Highlight> offers a high-level scripting language for data transformation. <Highlight color="blue">**HBase**</Highlight> is a NoSQL database that supports real-time read and write operations.
 
-**Sqoop** is used to transfer data between Hadoop and relational databases, and **Flume** is used for log and data ingestion. **Mahout** supports machine learning applications, and **ZooKeeper** provides coordination and synchronization services.
+<Highlight color="blue">**Sqoop**</Highlight> is used to transfer data between Hadoop and relational databases, and <Highlight color="blue">**Flume**</Highlight> is used for log and data ingestion. <Highlight color="blue">**Mahout**</Highlight> supports machine learning applications, and <Highlight color="blue">**ZooKeeper**</Highlight> provides coordination and synchronization services.
 
 Together, these tools make Hadoop a complete Big Data processing platform.
 
@@ -264,7 +266,7 @@ Together, these tools make Hadoop a complete Big Data processing platform.
 
 ### Q17. Why Hadoop?
 
-Hadoop is preferred for Big Data processing because it is **highly scalable**, allowing organizations to add more nodes as data grows. It is **cost effective** since it runs on commodity hardware. Hadoop provides **fault tolerance** through data replication and automatic recovery.
+Hadoop is preferred for Big Data processing because it is <Highlight>**highly scalable**</Highlight>, allowing organizations to add more nodes as data grows. It is <Highlight>**cost effective**</Highlight> since it runs on commodity hardware. Hadoop provides <Highlight>**fault tolerance**</Highlight> through data replication and automatic recovery.
 
 It supports distributed storage and processing, making it suitable for handling massive datasets. Therefore, Hadoop is widely used for Big Data workloads in modern enterprises.
 
@@ -274,7 +276,7 @@ It supports distributed storage and processing, making it suitable for handling 
 
 Traditional data processing systems are designed to handle **small to moderate volumes of structured data** using centralized architectures. As data grows in size, speed, and complexity, these systems become inefficient and difficult to scale.
 
-Traditional systems rely on **single-server or vertically scaled architectures**, which require expensive hardware upgrades to handle increased data volumes. They are optimized for structured data stored in relational databases and struggle to manage semi-structured and unstructured data such as text, images, and logs. Additionally, traditional systems provide **limited fault tolerance**, meaning hardware failures can lead to data loss or system downtime.
+Traditional systems rely on **single-server or vertically scaled architectures**, which require expensive hardware upgrades to handle increased data volumes. They are optimized for structured data stored in relational databases and struggle to manage semi-structured and unstructured data such as text, images, and logs. Additionally, traditional systems provide <Highlight>**limited fault tolerance**</Highlight>, meaning hardware failures can lead to data loss or system downtime.
 
 Big Data requires distributed storage, parallel processing, and high scalability, which traditional systems are not designed to support. Therefore, traditional systems fail to efficiently store, process, and analyze Big Data.
 
@@ -282,9 +284,9 @@ Big Data requires distributed storage, parallel processing, and high scalability
 
 ### Q19. Batch processing vs Real-time processing (High-level comparison)
 
-Batch processing and real-time processing differ mainly in how and when data is processed. **Batch processing** involves collecting large volumes of data over a period of time and processing it together as a single job. It is optimized for high throughput and is commonly used for historical data analysis, reporting, and large-scale analytics.
+Batch processing and real-time processing differ mainly in how and when data is processed. <Highlight>**Batch processing**</Highlight> involves collecting large volumes of data over a period of time and processing it together as a single job. It is optimized for high throughput and is commonly used for historical data analysis, reporting, and large-scale analytics.
 
-**Real-time processing**, on the other hand, processes data **immediately as it is generated**. It is designed for low latency and quick responses, making it suitable for applications such as fraud detection, live monitoring, and real-time alerts.
+<Highlight>**Real-time processing**</Highlight>, on the other hand, processes data **immediately as it is generated**. It is designed for low latency and quick responses, making it suitable for applications such as fraud detection, live monitoring, and real-time alerts.
 
 Hadoop is primarily designed for **batch processing**, as it focuses on processing massive datasets efficiently rather than providing instant responses. Real-time systems prioritize speed, while batch systems prioritize scalability and accuracy over large datasets.
 
@@ -292,10 +294,10 @@ Hadoop is primarily designed for **batch processing**, as it focuses on processi
 
 ### Q20. Explain the concept of fault tolerance in Hadoop.
 
-**(VERY IMPORTANT)**
+<Callout title="Very Important"></Callout>
 
 Fault tolerance refers to the ability of a system to continue functioning correctly even when hardware or software failures occur. In large distributed systems like Hadoop, hardware failures are expected rather than exceptional.
 
-Hadoop achieves fault tolerance mainly through **data replication and task re-execution**. In HDFS, each data block is replicated across multiple DataNodes so that if one node fails, the data can still be accessed from another node. The NameNode monitors the health of DataNodes and ensures data availability.
+Hadoop achieves fault tolerance mainly through <Highlight>**data replication and task re-execution**</Highlight>. In HDFS, each data block is <Highlight color="blue">replicated across multiple DataNodes</Highlight> so that if one node fails, the data can still be accessed from another node. The NameNode monitors the health of DataNodes and ensures data availability.
 
-In MapReduce, if a task fails due to node failure, Hadoop automatically reassigns the task to another node. This automatic recovery mechanism ensures reliable processing without manual intervention, making Hadoop highly fault tolerant.
+In MapReduce, if a task fails due to node failure, Hadoop <Highlight color="blue">automatically reassigns the task to another node</Highlight>. This <Highlight>automatic recovery mechanism</Highlight> ensures reliable processing without manual intervention, making Hadoop highly fault tolerant.
