@@ -41,26 +41,26 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative min-h-[350px] overflow-hidden rounded-2xl mb-12">
         <HeroBackground />
-        <div className="flex flex-col z-2 px-6 size-full md:p-12 max-md:items-center max-md:text-center py-12">
-          <div className="w-full">
+        <div className="flex flex-col items-center justify-center text-center z-2 px-6 size-full md:p-12 py-12 mix-blend-difference">
+          <div>
           <Image
-            src="/logos/brand/logo-in-light-mode.svg"
+            src="/logos/brand/logo-in-dark-mode.svg"
             alt="Logo"
             width={180}
             height={140}
-            className="dark:hidden pb-4"
+            className="dark:hidden pb-4 invert mx-auto"
           />
           <Image
             src="/logos/brand/logo-in-light-mode.svg"
             alt="Logo"
             width={180}
             height={140}
-            className="hidden dark:block pb-4"
+            className="hidden dark:block pb-4 mx-auto"
           />
             <h1 className="text-4xl font-bold mb-3 text-white md:text-5xl">Semester 6</h1>
             <p className="text-white/80 text-lg mb-4">B.Tech CSE (AI & ML) • TE Sem 6</p>
-            <p className="text-white/60 max-w-md max-md:mx-auto"> This site is not affiliated with DY Patil University or RAIT.</p>
-              <p className="text-white/60 text-sm max-w-md max-md:mx-auto">
+            <p className="text-white/80 max-w-md mx-auto"> This site is not affiliated with DY Patil University or RAIT.</p>
+              <p className="text-white/80 text-sm max-w-md mx-auto">
               Created by students, for students.
             </p>
           </div>
@@ -136,7 +136,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="mt-16 border-t pt-6 pb-8 text-center text-sm text-fd-muted-foreground">
         <p>Crafted by Feverdream</p>
-        <p className="mt-1 text-xs">Have questions or found an issue? <a href="https://tally.so/r/Bz764A" target="_blank" rel="noopener noreferrer" className="underline">Report it here</a>.</p>
+        <p className="mt-1 text-xs">Have useful resources or found an issue? <a href="https://tally.so/r/Bz764A" target="_blank" rel="noopener noreferrer" className="underline">Contact us here</a>.</p>
       </footer>
     </main>
   );
