@@ -17,7 +17,7 @@ const coreSubjects = [
   { title: 'BDA', description: 'Big Data Analytics', href: '/docs/core/BDA', icon: Database },
   { title: 'NLP', description: 'Natural Language Processing', href: '/docs/core/NLP', icon: MessageSquare },
   { title: 'DOE', description: 'Design of Experiments', href: '/docs/core/DOE', icon: Layers },
-  { title: 'AML', description: 'Applied Machine Learning', href: '/docs/core/AML', icon: Cpu },
+  { title: 'AML', description: 'Advanced Machine Learning', href: '/docs/core/AML', icon: Cpu },
   { title: 'DL', description: 'Deep Learning', href: '/docs/core/DL', icon: Brain },
 ];
 
