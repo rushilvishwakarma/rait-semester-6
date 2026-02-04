@@ -2,28 +2,11 @@
 title: Stemming vs Lemmatization
 description: Porter stemmer algorithm, detailed comparison
 ---
-Perfect 👍
-I understand **“Same with this”** as:
-
-> 👉 **Do for Module 2 (Lectures 9–12) exactly what we did earlier**
-> – optimized
-> – reduced questions
-> – same depth
-> – exam-reframable
-> – clean Markdown
-> – **NO diagrams unless necessary (we’ll decide later)**
-
-Below is the **FINAL OPTIMIZED NOTES** for **Module 2 (Lecture 9–12)**.
 
 import { Highlight } from '@/components/highlight';
 
----
 
-# NLP Module 2: Word Level Analysis
 
-## (Stemming, Lemmatization, Porter Stemmer, N-Gram Model)
-
----
 
 ## LECTURE 9: STEMMING VS LEMMATIZATION
 
@@ -101,19 +84,19 @@ It defines:
 
 Words are represented in the form:
 
-```
+$$
 (C)(VC)^m(V)
-```
+$$
 
-where *m* is the **measure**, representing the number of vowel–consonant sequences.
+where $m$ is the **measure**, representing the number of vowel–consonant sequences.
 
 Examples of measure values:
 
-* *m = 0*: TREE, BY
-* *m = 1*: TROUBLE, OATS
-* *m = 2*: TROUBLES, PRIVATE
+* $m = 0$: TREE, BY
+* $m = 1$: TROUBLE, OATS
+* $m = 2$: TROUBLES, PRIVATE
 
-The algorithm applies rules only when specific conditions on *m* and word structure are satisfied.
+The algorithm applies rules only when specific conditions on $m$ and word structure are satisfied.
 
 ---
 
@@ -129,11 +112,11 @@ where *S1* is the suffix to be replaced by *S2* if the condition is satisfied.
 
 Important conditions include:
 
-* **m**: measure of the stem
-* ***S**: stem ends with S
-* **v**: stem contains a vowel
-* ***d**: stem ends with a double consonant
-* ***o**: stem ends in CVC (excluding W, X, Y)
+* `m`: measure of the stem
+* `*S`: stem ends with S
+* `*v`: stem contains a vowel
+* `*d`: stem ends with a double consonant
+* `*o`: stem ends in CVC (excluding W, X, Y)
 
 The algorithm proceeds through multiple steps:
 
@@ -151,11 +134,8 @@ Examples:
 Each step refines the word while preserving its core meaning.
 
 <Mermaid chart={`
-graph TD
-    A[Input Word] --> B{Step 1: Plurals/Past}
-    B --> C{Steps 2-4: Derivational}
-    C --> D{Steps 5-7: Final Stripping}
-    D --> E[Output Stem]
+graph LR
+    A[Input] --> B[Step 1] --> C[Steps 2-4] --> D[Steps 5-7] --> E[Stem]
 `} />
 
 ---
@@ -164,13 +144,13 @@ graph TD
 
 ### Q16. Explain the concept of N-Gram language models.
 
-An <Highlight>**N-gram language model**</Highlight> is a probabilistic model used to predict the likelihood of a word based on the previous *n − 1* words. It is widely used in NLP tasks such as <Highlight color="blue">speech recognition, machine translation, and text prediction</Highlight>.
+An <Highlight>**N-gram language model**</Highlight> is a probabilistic model used to predict the likelihood of a word based on the previous $n - 1$ words. It is widely used in NLP tasks such as <Highlight color="blue">speech recognition, machine translation, and text prediction</Highlight>.
 
 Common types of N-grams include:
 
-* **Unigram** (n = 1)
-* **Bigram** (n = 2)
-* **Trigram** (n = 3)
+* **Unigram** ($n = 1$)
+* **Bigram** ($n = 2$)
+* **Trigram** ($n = 3$)
 
 <Mermaid chart={`
 graph LR

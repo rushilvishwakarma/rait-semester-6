@@ -2,6 +2,7 @@ import { RootProvider } from 'fumadocs-ui/provider/next';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './global.css';
+import 'katex/dist/katex.css';
 import localFont from 'next/font/local';
 
 const ppMori = localFont({
