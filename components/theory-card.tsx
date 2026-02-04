@@ -15,9 +15,10 @@ interface TheoryCardProps {
   description: string;
   href: string;
   contextUrl: string;
+  curatedHref?: string;
 }
 
-export function TheoryCard({ title, description, href, contextUrl }: TheoryCardProps) {
+export function TheoryCard({ title, description, href, contextUrl, curatedHref }: TheoryCardProps) {
   const items = useMemo(() => {
     // Build the full URL for AI services to fetch
     const fullContextUrl = typeof window !== 'undefined' 
@@ -141,6 +142,22 @@ Please fetch the content from the URL above and help me understand and study it.
             ))}
           </PopoverContent>
         </Popover>
+        {curatedHref && (
+          <a
+            href={curatedHref}
+            className={cn(
+              buttonVariants({
+                color: 'secondary',
+                size: 'sm',
+                className: 'gap-2 text-xs',
+              }),
+              'no-underline'
+            )}
+          >
+            <FileText className="size-3.5" />
+            Curated Notes
+          </a>
+        )}
       </div>
     </div>
   );
