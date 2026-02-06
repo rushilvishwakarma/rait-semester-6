@@ -1,11 +1,227 @@
 'use client';
-import { useMemo, useState } from 'react';
-import { Check, ChevronDown, Copy, ExternalLinkIcon, MessageCircleIcon } from 'lucide-react';
+import { useMemo, useState, useEffect } from 'react';
+import { Check, ChevronDown, Copy, ExternalLink, ExternalLinkIcon, MessageCircleIcon, Settings, User } from 'lucide-react';
 import { cn } from '../lib/cn';
 import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
 import { buttonVariants } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
 import { cva } from 'class-variance-authority';
+import { usePathname } from 'next/navigation';
+
+// Map subject slugs to mydy.dypatil.edu subject IDs
+// Semester 6 subjects
+const MYDY_SUBJECT_MAP: Record<string, { id: number; name: string }> = {
+  'AML': { id: 8150, name: 'Advanced Machine Learning' },
+  'DL': { id: 8151, name: 'Deep Learning' },
+  'BDA': { id: 8154, name: 'Big Data Analytics' },
+  'NLP': { id: 8155, name: 'Natural Language Processing' },
+  'MLOps': { id: 8158, name: 'Skill Based Lab III ML Ops' },
+};
+
+const MYDY_CREDENTIALS_KEY = 'mydy_credentials';
+
+function getStoredCredentials(): { username: string; password: string } | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const stored = localStorage.getItem(MYDY_CREDENTIALS_KEY);
+    if (stored) {
+      return JSON.parse(stored);
+    }
+  } catch {
+    // Invalid JSON, clear it
+    localStorage.removeItem(MYDY_CREDENTIALS_KEY);
+  }
+  return null;
+}
+
+function storeCredentials(username: string, password: string) {
+  localStorage.setItem(MYDY_CREDENTIALS_KEY, JSON.stringify({ username, password }));
+}
+
+function clearCredentials() {
+  localStorage.removeItem(MYDY_CREDENTIALS_KEY);
+}
+
+export function MyDYButton() {
+  const pathname = usePathname();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [hasCredentials, setHasCredentials] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [pendingUrl, setPendingUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const creds = getStoredCredentials();
+    setHasCredentials(!!creds);
+    if (creds) {
+      setUsername(creds.username);
+      setPassword(creds.password);
+    }
+  }, []);
+
+  // Extract subject code from pathname (e.g., /docs/core/BDA/... -> BDA)
+  // Only show on core pages, not labs
+  const subjectCode = useMemo(() => {
+    const segments = pathname.split('/');
+    // Only show on /docs/core/[subject] paths, not labs
+    if (!pathname.includes('/docs/core/')) {
+      return null;
+    }
+    for (const code of Object.keys(MYDY_SUBJECT_MAP)) {
+      if (segments.includes(code)) {
+        return code;
+      }
+    }
+    return null;
+  }, [pathname]);
+
+  const subject = subjectCode ? MYDY_SUBJECT_MAP[subjectCode] : null;
+
+  if (!subject) {
+    return null; // Don't show button if not on a recognized subject page
+  }
+
+  const mydyUrl = `https://mydy.dypatil.edu/rait/course/view.php?id=${subject.id}`;
+
+  const handleButtonClick = () => {
+    if (hasCredentials) {
+      // Credentials cached, auto-login to MyDY
+      performMyDYLogin(username, password, mydyUrl);
+    } else {
+      // Show login dialog
+      setPendingUrl(mydyUrl);
+      setIsDialogOpen(true);
+    }
+  };
+
+  const performMyDYLogin = (email: string, pass: string, redirectUrl: string) => {
+    // Create a form that posts to MyDY login page
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://mydy.dypatil.edu/rait/login/index.php';
+
+    // Add login form fields (based on mydylms-client auth.py)
+    const fields = [
+      { name: 'uname_static', value: email },
+      { name: 'username', value: email },
+      { name: 'uname', value: email },
+      { name: 'password', value: pass },
+      { name: 'wantsurl', value: redirectUrl }, // Redirect after login
+    ];
+
+    fields.forEach(({ name, value }) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+  };
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (username && password) {
+      storeCredentials(username, password);
+      setHasCredentials(true);
+      setIsDialogOpen(false);
+      if (pendingUrl) {
+        performMyDYLogin(username, password, pendingUrl);
+        setPendingUrl(null);
+      }
+    }
+  };
+
+  const handleLogout = () => {
+    clearCredentials();
+    setHasCredentials(false);
+    setUsername('');
+    setPassword('');
+  };
+
+  return (
+    <>
+      <button
+        onClick={handleButtonClick}
+        className={cn(
+          buttonVariants({
+            color: 'secondary',
+            size: 'sm',
+            className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground',
+          }),
+        )}
+      >
+        <ExternalLink />
+        Open in MyDY
+        {hasCredentials && (
+          <>
+            <span className="mx-1 h-4 w-px bg-fd-border" />
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsDialogOpen(true);
+              }}
+              title="Edit credentials"
+              className="p-0.5 rounded hover:bg-fd-muted/50 transition-colors"
+            >
+              <Settings className="size-3" />
+            </span>
+          </>
+        )}
+      </button>
+
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="text-center text-lg font-semibold">MyDY Login</DialogTitle>
+            <DialogDescription className="text-center">
+              Credentials saved locally for quick access.
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handleLogin} className="mt-5 space-y-4">
+            <input
+              id="mydy-username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Student Email"
+              className="w-full rounded-xl border border-fd-border bg-fd-secondary/50 px-4 py-3 text-sm placeholder:text-fd-muted-foreground focus:outline-none focus:ring-2 focus:ring-fd-primary/50"
+              required
+              autoComplete="username"
+            />
+            <input
+              id="mydy-password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              className="w-full rounded-xl border border-fd-border bg-fd-secondary/50 px-4 py-3 text-sm placeholder:text-fd-muted-foreground focus:outline-none focus:ring-2 focus:ring-fd-primary/50"
+              required
+              autoComplete="current-password"
+            />
+            <button
+              type="submit"
+              className={cn(
+                buttonVariants({
+                  color: 'primary',
+                  size: 'sm',
+                  className: 'w-full py-3 rounded-xl font-medium',
+                }),
+              )}
+            >
+              Continue
+            </button>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
 
 const cache = new Map<string, string>();
 
@@ -212,7 +428,7 @@ export function ViewOptions({
           }),
         )}
       >
-        Open
+        AI Mode
         <ChevronDown className="size-3.5 text-fd-muted-foreground" />
       </PopoverTrigger>
       <PopoverContent className="flex flex-col">

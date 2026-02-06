@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { HeroBackground } from './hero-background';
 import { Badge } from '@/components/ui/badge';
+import { CourseProgressor } from '@/components/course-progressor';
 
 const coreSubjects = [
   { title: 'BDA', description: 'Big Data Analytics', href: '/docs/core/BDA', icon: Database },
@@ -140,22 +141,25 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Crowdsource Section */}
+        {/* Tools Section */}
         <section className="mt-12">
-          <a
-            href="https://drive.google.com/drive/folders/18lvCelrTUnlEdAvUNhU2FO4L62dnYcQf?usp=sharing"
-            className="group flex items-center gap-4 rounded-xl border bg-fd-card p-5 transition-colors hover:bg-fd-accent"
-          >
-            <div className="rounded-lg border bg-fd-background p-3">
-              <Upload className="size-5 text-fd-muted-foreground" />
-            </div>
-            <div className="flex-1">
-              <p className="font-semibold">Share and View Useful Resources</p>
-              <p className="text-sm text-fd-muted-foreground">
-                Share question banks, important Notes, and other verified resources
-              </p>
-            </div>
-          </a>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <a
+              href="https://drive.google.com/drive/folders/18lvCelrTUnlEdAvUNhU2FO4L62dnYcQf?usp=sharing"
+              className="group flex items-center gap-4 rounded-xl border bg-fd-card p-5 transition-colors hover:bg-fd-accent"
+            >
+              <div className="rounded-lg border bg-fd-background p-3">
+                <Upload className="size-5 text-fd-muted-foreground" />
+              </div>
+              <div className="flex-1">
+                <p className="font-semibold">Share and View Useful Resources</p>
+                <p className="text-sm text-fd-muted-foreground">
+                  Share question banks, important Notes, and other verified resources
+                </p>
+              </div>
+            </a>
+            <CourseProgressor />
+          </div>
         </section>
       </div>
 

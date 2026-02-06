@@ -4,6 +4,33 @@ description: MLOps (Labs)
 ---
 import { Github, CheckCircle } from 'lucide-react';
 
+<Tabs items={["Lab Syllabus", "List of Experiments"]}>
+  <Tab value="Lab Syllabus">
+    |  Module No. | Detailed Content | Hrs (26) | CO  |
+    | --- | --- | --- | --- |
+    |  1 | Introduction to MLOps: CI/CD Pipelines, MLOps lifecycle, Versioning & Reproducibility-Reproducibility using Git, Environment management with Conda, Basics of version control,Structure ML projects for maintainability | 04 | CO1  |
+    |  2 | CI/CD Automation with GitHub Actions & Jenkins for ML Pipelines: Continuous integration and deployment in MLOps workflows, Automate ML pipelines using GitHub Actions and Jenkins for model training and testing | 05 | CO2  |
+    |  3 | API Development and Serving Models with FastAPI + Docker: Build RESTful APIs for ML models using FastAPI and containerize them with Docker, Deploying inference services locally and online | 04 | CO3  |
+    |  4 | Experiment Tracking and Model Management with MLflow & DVC: Tools for tracking experiments (MLflow) and managing datasets/models (DVC), Explore logging parameters, metrics, and visualizing model runs across versions. | 03 | CO4  |
+    |  5 | Cloud Deployment using Azure ML & Google Vertex AI: Deploying ML models to production on cloud platforms - Model registry, endpoints, container deployment, and comparison of Azure ML and GCP Vertex AI features. | 05 | CO5  |
+    |  6 | End-to-End Cloud-Integrated MLOps Pipeline: Workflow from versioning and model development to cloud-based CI/CD deployment | 05 | CO6  |
+  </Tab>
+  <Tab value="List of Experiments">
+    | Sr. No. | Title of the Experiment | CO |
+    |--------|--------------------------|----|
+    | 1 | Set up ML project structure with Git and Conda. Offline: Git init, Conda, requirements. Online: Azure ML Environments. | CO1 |
+    | 2 | Automate training and testing using GitHub Actions. Offline: YAML CI on localhost. Online: GitHub Actions to Azure ML pipeline. | CO1, CO2 |
+    | 3 | Jenkins job to automate model training. Offline: Jenkins local job with scripts. Online: Trigger training on GCP Vertex AI. | CO2 |
+    | 4 | FastAPI-based ML inference API. Offline: FastAPI with Uvicorn. Online: Deploy to Azure App Services or GCP Cloud Run. | CO3 |
+    | 5 | Containerize ML API using Docker. Offline: Build and test locally. Online: Push to Azure Container Registry or GCP Artifact Registry and deploy on AKS or GKE. | CO3, CO5 |
+    | 6 | Track experiments using MLflow. Offline: MLflow UI on localhost. Online: MLflow integration with Azure ML. | CO4 |
+    | 7 | Manage data and models using DVC. Offline: DVC init and local tracking. Online: Remote storage on Azure or GCP. | CO4 |
+    | 8 | Evaluate and register models using MLflow Registry. Offline: Local SQLite-based registry. Online: Azure ML or Vertex AI registry. | CO4, CO5 |
+    | 9 | Deploy model as REST API using Docker. Offline: Docker-based local deployment. Online: Azure Online Endpoints or GCP AI Endpoints. | CO3, CO5 |
+    | 10 | End-to-End MLOps pipeline with CI/CD, versioning, deployment, and visualization. Offline: Fully local pipeline. Online: Azure ML or GCP CI/CD setup. | CO6 |
+  </Tab>
+</Tabs>
+
 <Cards>
   <Card
     icon={<Github />}
