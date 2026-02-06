@@ -4,7 +4,12 @@
 
 /* Dark mode color overrides */
 .dark {
-    --color-fd-primary: oklch(57.975% 0.16694 4.38);
+    --color-fd-primary: oklch(69.827% 0.20218 6.633);
+
+}
+
+.light {
+    --color-fd-primary: oklch(42.074% 0.14723 12.776);
 
 }
 
