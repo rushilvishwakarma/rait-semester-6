@@ -1,6 +1,12 @@
 @import 'tailwindcss';
-@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/solar.css';
 @import 'fumadocs-ui/css/preset.css';
+
+/* Dark mode color overrides */
+.dark {
+    --color-fd-primary: oklch(57.975% 0.16694 4.38);
+
+}
 
 /* Fumadocs sidebar tabs selected state fix */
 [data-slot="sidebar"] [data-selected],
