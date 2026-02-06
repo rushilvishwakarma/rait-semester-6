@@ -69,7 +69,7 @@ export default function HomePage() {
         </div>
         {/* Footer Disclaimer */}
         <div className="z-2 px-6 pb-4 text-center">
-          <span className="text-fd-muted-foreground text-xs">
+          <span className="text-fd-foreground/60 text-[0.6rem]">
             This platform is not affiliated with DY Patil University or Ramrao Adik Institute of Technology (RAIT).
           </span>
         </div>

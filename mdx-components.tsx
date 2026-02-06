@@ -5,10 +5,13 @@ import * as TabsComponents from 'fumadocs-ui/components/tabs';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 import { Mermaid } from '@/components/mermaid';
 
+import { CustomCallout } from '@/components/custom-callout';
+
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
     ...TabsComponents,
+    Callout: CustomCallout,
     FloatingColabButton,
     Mermaid,
     img: (props) => <ImageZoom {...(props as any)} />,
