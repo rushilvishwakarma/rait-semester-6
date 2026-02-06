@@ -1,10 +1,68 @@
 ---
 title: Class Timetable
-description: Class timetable (PDF)
+description: View or download the class timetables for AIML TE (A & B).
 ---
 
-This page embeds the Class Timetable PDF.
+import { Callout } from "fumadocs-ui/components/callout";
+import { ActionButton } from "@/components/action-button";
+import { FileText } from "lucide-react";
 
-<object data="/documents/class-timetable.pdf" type="application/pdf" width="100%" height="600">
-  <p>Your browser does not support embedded PDFs. You can <a href="/documents/class-timetable.pdf">download the class timetable here</a>.</p>
-</object>
+<Callout> Click to Zoom Image </Callout>
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+  <div className="flex flex-col items-center">
+    <h3 className="text-lg font-semibold mb-1">Division A</h3>
+    
+![AIML TE Division A Timetable](/images/timetables/AIML-A-TE-class-timetable_image.jpg)
+
+<div className="w-full mt-4">
+      <Callout title="Download AIML A Timetable" icon={<FileText />}>
+        <div className="flex flex-wrap gap-2 mt-2">
+          <ActionButton 
+            href="https://drive.google.com/file/d/1FjFKqW9Hovgxr9WFN03o8LMj3aqcuELI/view?usp=drive_link" 
+            label="PDF" 
+            icon="pdf" 
+          />
+          <ActionButton 
+            href="https://docs.google.com/document/d/1SfG51H1cZoPQcCMr0gAUkfyYpWGTnk4L/edit?usp=drive_link&ouid=111770354925696933914&rtpof=true&sd=true" 
+            label="Docx" 
+            icon="docx" 
+          />
+          <ActionButton 
+            href="https://drive.google.com/file/d/1W3pAwBr7fSELELxwX9lQHGXkg7floRdf/view?usp=drive_link" 
+            label="Source" 
+            icon="source" 
+          />
+        </div>
+      </Callout>
+    </div>
+  </div>
+
+  <div className="flex flex-col items-center">
+    <h3 className="text-lg font-semibold mb-1">Division B</h3>
+    
+![AIML TE Division B Timetable](/images/timetables/AIML-B-TE-class-timetable_image.jpg)
+
+<div className="w-full mt-4">
+      <Callout title="Download AIML B Timetable" icon={<FileText />}>
+        <div className="flex flex-wrap gap-2 mt-2">
+          <ActionButton 
+            href="https://drive.google.com/file/d/1B6DkStUwvbh3ETMLEjfyaDe-xx_wFYAZ/view?usp=drive_link" 
+            label="PDF" 
+            icon="pdf" 
+          />
+          <ActionButton 
+            href="https://docs.google.com/document/d/18P7lIYQ_8m81hl90C3_RhMj1h3RaYB2S/edit?usp=drive_link&ouid=111770354925696933914&rtpof=true&sd=true" 
+            label="Docx" 
+            icon="docx" 
+          />
+          <ActionButton 
+            href="https://drive.google.com/file/d/1Vyhs77ip40DlrvJBBIuNSEYWCpHdJY8p/view?usp=drive_link" 
+            label="Source" 
+            icon="source" 
+          />
+        </div>
+      </Callout>
+    </div>
+  </div>
+</div>

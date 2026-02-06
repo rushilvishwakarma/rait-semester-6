@@ -142,8 +142,8 @@ export default function HomePage() {
 
         {/* Crowdsource Section */}
         <section className="mt-12">
-          <Link
-            href="/upload"
+          <a
+            href="https://drive.google.com/drive/folders/18lvCelrTUnlEdAvUNhU2FO4L62dnYcQf?usp=sharing"
             className="group flex items-center gap-4 rounded-xl border bg-fd-card p-5 transition-colors hover:bg-fd-accent"
           >
             <div className="rounded-lg border bg-fd-background p-3">
@@ -155,7 +155,7 @@ export default function HomePage() {
                 Share question banks, important Notes, and other verified resources
               </p>
             </div>
-          </Link>
+          </a>
         </section>
       </div>
 

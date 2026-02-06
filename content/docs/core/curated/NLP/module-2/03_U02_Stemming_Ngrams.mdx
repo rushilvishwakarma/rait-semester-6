@@ -2,4 +2,92 @@
 title: N-gram Language Models
 description: Language modeling with N-grams
 ---
-Coming Soon
+
+import { Highlight } from '@/components/highlight';
+
+## LECTURE 12: LANGUAGE MODEL
+
+### Q16. Explain Language Models and N-Gram Language Models.
+
+A <Highlight>**language model**</Highlight> is a statistical model that assigns probabilities to sequences of words. It estimates how likely a sentence is and can also predict the <Highlight>**next word**</Highlight> in a sequence.
+
+Formally, for a sentence $W = (w_1, w_2, \dots, w_n)$:
+
+$$
+P(W) = P(w_1, w_2, \dots, w_n)
+$$
+
+Language models are widely used in applications such as <Highlight color="blue">autocomplete, machine translation, speech recognition, handwriting recognition, spelling correction, and OCR</Highlight>.
+
+An <Highlight>**N-gram language model**</Highlight> approximates these probabilities by considering only a limited context of the previous $n-1$ words (Markov assumption), making computation feasible for large datasets.
+
+Types of N-grams:
+
+* **Unigram** ($n = 1$): no context
+* **Bigram** ($n = 2$): one-word context
+* **Trigram** ($n = 3$): two-word context
+
+Example sentence: *This is Big Data AI Book*
+
+* Unigrams: This | is | Big | Data | AI | Book
+* Bigrams: This is | is Big | Big Data | Data AI | AI Book
+* Trigrams: This is Big | is Big Data | Big Data AI | Data AI Book
+
+<Mermaid chart={`
+graph LR
+    A[Unigram: 'New', 'York']
+    B[Bigram: 'New York']
+    C[Trigram: 'New York City']
+    style A stroke-width:0px
+    style B stroke-width:0px
+    style C stroke-width:0px
+`} />
+
+---
+
+### Q17. Explain Bigram probability computation, advantages, and limitations of N-gram models.
+
+Using the <Highlight>**chain rule**</Highlight>, the probability of a sentence is:
+
+$$
+P(w_1 \dots w_n) = \prod_{i=1}^{n} P(w_i \mid w_1 \dots w_{i-1})
+$$
+
+With the <Highlight>**Markov assumption**</Highlight>, this is approximated as:
+
+$$
+P(w_i \mid w_{i-1})
+$$
+
+<br/>
+
+**Bigram example** using the training corpus:
+
+```
+<s> I am Sam </s>
+<s> Sam I am </s>
+```
+
+The probability of *"I am Sam"* is computed as:
+
+$$
+P(I \mid \langle s \rangle) \times P(am \mid I) \times P(Sam \mid am) \times P(\langle /s \rangle \mid Sam)
+$$
+
+<br/>
+
+| Aspect | Details |
+| :--- | :--- |
+| **Advantages** | Simple, intuitive, easy to implement, extendable to higher-order models |
+| **Limitations** | Zero-probability problem for unseen sequences, underflow from multiplying small probabilities |
+| **Common Solutions** | Laplace (add-one) smoothing, log probabilities |
+
+<Mermaid chart={`
+graph TD
+    A[Training Corpus] --> B[Count N-grams]
+    B --> C[Compute Probabilities]
+    C --> D[Apply Smoothing]
+    D --> E[Language Model]
+`} />
+
+---
