@@ -222,7 +222,7 @@ export function CourseProgressor() {
         <>
             <button
                 onClick={() => setIsOpen(true)}
-                className="group flex items-center gap-4 rounded-xl border bg-fd-card p-5 transition-colors hover:bg-fd-accent text-left w-full shadow-sm"
+                className="group flex items-center gap-4 rounded-xl border bg-fd-card p-5 transition-colors hover:bg-fd-accent text-left w-full"
             >
                 <div className="rounded-lg border bg-fd-background p-3">
                     <PlayCircle className="size-5 text-fd-muted-foreground" />
@@ -239,8 +239,8 @@ export function CourseProgressor() {
                 <DialogContent className="sm:max-w-md">
                     <DialogHeader>
                         <div className="flex items-center justify-center gap-2 mb-2">
-                            <div className="p-2 bg-blue-100 dark:bg-blue-900/40 rounded-full">
-                                <Layers className="size-5 text-blue-600 dark:text-blue-400" />
+                            <div className="p-2 bg-[#a01c35]/10 dark:bg-[#a01c35]/30 rounded-full">
+                                <Layers className="size-5 text-[#a01c35] dark:text-[#ff3d3d]" />
                             </div>
                         </div>
                         <DialogTitle className="text-center text-xl">MyDY Progressor</DialogTitle>
