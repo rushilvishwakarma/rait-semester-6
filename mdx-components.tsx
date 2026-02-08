@@ -7,6 +7,8 @@ import { Mermaid } from '@/components/mermaid';
 
 import { CustomCallout } from '@/components/custom-callout';
 
+import { CuratedResources } from '@/components/curated-videos';
+
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
@@ -14,6 +16,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Callout: CustomCallout,
     FloatingColabButton,
     Mermaid,
+    CuratedResources,
+    CuratedVideos: CuratedResources,
     img: (props) => <ImageZoom {...(props as any)} />,
     ...components,
   };

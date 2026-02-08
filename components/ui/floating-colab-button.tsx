@@ -28,8 +28,8 @@ export function FloatingColabButton({ className, colabLink }: FloatingColabButto
             whileTap={{ scale: 0.95 }}
         >
             <Image
-                src="/logos/Google_Colaboratory.svg"
-                alt="Google Colab"
+                src="/logos/colaboratory.svg"
+                alt="Colab"
                 width={20}
                 height={20}
                 className="rounded-sm"

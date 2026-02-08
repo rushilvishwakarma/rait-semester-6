@@ -1,22 +1,29 @@
 ---
-title: "LP Module 1: Introduction to Natural Language Processing"
+title: "Introduction to Natural Language Processing"
 ---
 
+import { Highlight } from '@/components/highlight';
+
 ## LECTURE 1: INTRODUCTION TO NLP
+<CuratedVideos>
+https://youtu.be/boQTFk1BqbY?si=QScFV7c4ciilzR_a
+https://youtu.be/15JaZ6WoTS8?si=omQQC0LBrUXrkUmP
+https://www.youtube.com/watch?v=bPpwZxasJo0
+</CuratedVideos>
 
 ### Q1. Explain Natural Language and Natural Language Processing (NLP).
 
-Natural Language refers to the languages that are **naturally spoken and written by humans** for communication. Examples include English, Hindi, Marathi, Spanish, and French. These languages evolve organically and are rich in structure, meaning, and ambiguity.
+Natural Language refers to the languages that are **naturally spoken and written by humans** for communication. Examples include English, Hindi, Marathi, Spanish, and French. These languages <Highlight color="green">evolve organically</Highlight> and are <Highlight color="green">rich in structure, meaning, and ambiguity</Highlight>.
 
 Natural languages are different from **artificial or programming languages** such as C, C++, Java, and Python, which are designed for computers and follow strict syntactic rules. Due to their flexibility and context dependence, natural languages are difficult for machines to process directly.
 
-Natural Language Processing (NLP) is a **sub-domain of Artificial Intelligence** that focuses on enabling computers to analyze, understand, and generate human language. NLP involves converting natural language input into a useful internal representation that computers can process. The primary goal of NLP is to develop systems that can perform meaningful tasks using human language, while a secondary goal is to better understand how human language works.
+Natural Language Processing (NLP) is a **sub-domain of Artificial Intelligence** that focuses on enabling computers to analyze, understand, and generate human language. NLP involves converting natural language input into a useful internal representation that computers can process. <Highlight color="purple">The primary goal of NLP is to develop systems that can perform meaningful tasks using human language, while a secondary goal is to better understand how human language works.</Highlight>
 
 ---
 
 ### Q2. Define NLP / Explain the goals and importance of Natural Language Processing.
 
-Natural Language Processing is defined as the field of Artificial Intelligence concerned with developing programs that possess some capability of *understanding* natural language in order to achieve specific goals.
+Natural Language Processing is defined as the field of Artificial Intelligence  <Highlight color="green">concerned with developing programs</Highlight> that possess some capability of *understanding* natural language in order to achieve specific goals.
 
 The importance of NLP arises from the **huge amount of textual data** generated daily. The internet alone contains billions of web pages, emails, documents, and social media posts. Manual processing of such data is impossible, making automated language processing essential.
 
@@ -32,9 +39,35 @@ NLP consists of two major components: **Natural Language Understanding (NLU)** a
 
 To process natural language effectively, NLP systems require lexical, syntactic, semantic, discourse, and real-world knowledge.
 
+<Mermaid chart={`
+graph TB
+    NLP["NLP<br/>Natural Language Processing"]
+
+    subgraph NLP
+        direction LR
+
+        subgraph NLG["NLG<br/>Natural Language Generation"]
+        end
+
+        subgraph NLU["NLU<br/>Natural Language Understanding"]
+        end
+    end
+`} />
 ---
 
 ## LECTURE 2: STAGES OF NLP
+
+<Callout type="info" title="Similar Terms">
+- Morphological Analysis → breaks a word into morphemes (root, prefix, suffix).
+- Morphology Analysis → studies word-formation rules and patterns of a language.
+</Callout>
+<CuratedVideos>
+https://youtu.be/8L2WHPyCYvQ?si=263wcseUk37Fy2F6
+https://youtu.be/9VTRY5x7dts?si=0rDSjEmCKy3qqZSX
+https://youtu.be/S7Xka5Em07M?si=LtFXal2EGCjg9OAQ
+https://youtu.be/lGZBFOat_u8?si=fQEESWZ9XexVs4-w
+</CuratedVideos>
+
 
 ### Q4. Explain the stages / levels / steps of Natural Language Processing.
 
@@ -61,17 +94,22 @@ graph TD
 
 ### Q5. Explain morphology, syntax, semantics, discourse, and pragmatics with examples.
 
-**Morphology** studies how words are formed from smaller meaning-bearing units.
-**Syntax** studies how words are arranged to form correct sentences and grammatical structures.
-**Semantics** studies the meaning of words and how meanings combine in sentences.
-**Discourse** studies how sentences are connected and how context affects interpretation across sentences.
-**Pragmatics** studies how meaning is influenced by context, intention, and real-world usage.
+- **Morphology** studies how words are formed from smaller meaning-bearing units.
+- **Syntax** studies how words are arranged to form correct sentences and grammatical structures.
+- **Semantics** studies the meaning of words and how meanings combine in sentences.
+- **Discourse** studies how sentences are connected and how context affects interpretation across sentences.
+- **Pragmatics** studies how meaning is influenced by context, intention, and real-world usage.
 
 Together, these components enable NLP systems to process language in a human-like manner.
 
 ---
 
 ## LECTURE 3: CHALLENGES OF NLP
+<CuratedVideos>
+https://youtu.be/-vBxzjx9AYA?si=-IEw85Xq5FM7J6zm
+https://youtu.be/valCrseLKIo?si=G5WBP9OGaQbrCteF
+https://youtu.be/b0ZYwdzJg0M?si=xy5T-ZTz0ihhC3GJ
+</CuratedVideos>
 
 ### Q6. Why is Natural Language Processing difficult? Explain ambiguity and its types.
 
@@ -87,13 +125,23 @@ Resolving ambiguity is one of the biggest challenges in NLP.
 
 ### Q7. Explain methods for resolving ambiguity in NLP.
 
-Ambiguities in NLP are resolved using computational techniques such as **part-of-speech tagging**, **word sense disambiguation**, and **probabilistic parsing**.
+Ambiguity in NLP arises when a word or sentence has more than one possible interpretation. NLP systems resolve ambiguity using several computational methods.
 
-Statistical and machine learning approaches use context and probability to select the most likely interpretation of a sentence. These methods enable NLP systems to handle uncertainty and improve accuracy in language understanding.
+**Part-of-speech (POS) tagging** helps resolve syntactic ambiguity by assigning correct grammatical roles to words based on context.
+**Word Sense Disambiguation (WSD)** resolves lexical ambiguity by selecting the appropriate meaning of a word using surrounding context.
+**Probabilistic parsing** resolves structural ambiguity by choosing the most likely parse tree using statistical grammar rules.
+**Statistical and machine learning approaches** use probabilities and contextual features learned from large corpora to select the most likely interpretation.
+
+These methods enable NLP systems to handle uncertainty and improve language understanding accuracy.
 
 ---
 
 ## LECTURE 4: APPLICATIONS OF NLP
+<CuratedVideos>
+https://youtu.be/2c5yEybIaK4?si=Pg3sq44v0UrjF2SG
+https://youtu.be/N_cur630V3E?si=AzJ7b5SeQ8-nXcYb
+https://www.geeksforgeeks.org/nlp/natural-language-processing-overview/#:~:text=as%20information%20retrieval.-,Applications%20of%20Natural%20Language%20Processing%20(NLP),-Spam%20Filters%3A
+</CuratedVideos>
 
 ### Q8. Explain the major applications of Natural Language Processing.
 
@@ -102,5 +150,7 @@ Natural Language Processing has numerous real-world applications that enable eff
 **Question Answering systems** provide precise answers to questions expressed in natural language. **Information Retrieval** systems match user queries with relevant documents, as seen in search engines. **Cross-Language Information Retrieval** retrieves documents written in languages different from the query language.
 
 **Information Extraction** converts unstructured text into structured data. **Text Categorization** automatically classifies documents, while **Text Summarization** reduces document length using extractive or abstractive techniques. Other applications include sentiment analysis, fake news detection, and author profiling.
+
+
 
 

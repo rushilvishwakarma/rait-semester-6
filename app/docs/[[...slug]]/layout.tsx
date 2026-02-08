@@ -3,6 +3,8 @@ import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import { baseOptions } from '@/lib/layout.shared';
 import type { ReactNode } from 'react';
 import { BookOpen, FlaskConical } from 'lucide-react';
+import { CuratedResourcesToggle } from '@/components/curated-videos-client';
+import { ThemeToggle } from 'fumadocs-ui/components/layout/theme-toggle';
 
 export default async function Layout(props: {
     children: ReactNode;
@@ -58,7 +60,7 @@ export default async function Layout(props: {
           };
 
     return (
-        <DocsLayout tree={tree} {...baseOptions()} sidebar={sidebarProp}>
+        <DocsLayout tree={tree} {...baseOptions()} sidebar={sidebarProp} themeSwitch={{ component: <div className="flex items-center gap-0.5 ms-auto"><CuratedResourcesToggle /><ThemeToggle className="p-0" /></div> }}>
             {props.children}
         </DocsLayout>
     );
