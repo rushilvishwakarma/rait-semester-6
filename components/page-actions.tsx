@@ -293,9 +293,11 @@ export function ViewOptions({
   githubUrl: string;
 }) {
   const items = useMemo(() => {
-    const fullMarkdownUrl =
-      typeof window !== 'undefined' ? new URL(markdownUrl, window.location.origin) : 'loading';
-    const q = `Read ${fullMarkdownUrl}, I want to ask questions about it.`;
+    // Use the rendered page URL (without .mdx extension) instead of raw markdown URL
+    // AI tools can't read .mdx files directly - they need the actual rendered page
+    const pageUrl =
+      typeof window !== 'undefined' ? window.location.href.replace(/\.mdx$/, '') : 'loading';
+    const q = `Read ${pageUrl}, I want to ask questions about it.`;
 
     return [
       {
@@ -405,7 +407,7 @@ export function ViewOptions({
           </svg>
         ),
       },
-            {
+      {
         title: 'Open in NotebookLM',
         href: `https://notebooklm.google.com`,
         icon: <BookOpen />,

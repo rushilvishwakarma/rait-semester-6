@@ -5,17 +5,18 @@ title: Question Bank - Internal Assessment 1
 import { Highlight } from '@/components/highlight';
 
 <style>{`
-  .prose h3 {
+  .prose h2 {
     color: oklch(42.074% 0.14723 12.776);
   }
-  .dark .prose h3 {
+  .dark .prose h2 {
     color: oklch(69.827% 0.20218 6.633);
   }
 `}</style>
 
+
 # Module 1
 
-### Q1. Explain the concept of the Exponential Family of Distributions. Discuss its general form and significance.
+## Q1. Explain the concept of the Exponential Family of Distributions. Discuss its general form and significance.
 
 The **exponential family of distributions** is a class of probability distributions that can be written in a common mathematical form. Many important distributions such as Gaussian, Bernoulli, Binomial, Poisson, and Exponential belong to this family.
 
@@ -33,7 +34,7 @@ The exponential family provides a unified framework for probabilistic modeling. 
 
 ---
 
-### Q2. Describe the structure of a Generalized Linear Model (GLM).
+## Q2. Describe the structure of a Generalized Linear Model (GLM).
 
 A **Generalized Linear Model (GLM)** is an extension of linear regression that allows the response variable to follow distributions other than the normal distribution.
 
@@ -61,7 +62,7 @@ Thus, GLMs allow flexible modeling of different types of data using linear predi
 
 ---
 
-### Q3. What are link functions in GLMs? Why are different link functions used?
+## Q3. What are link functions in GLMs? Why are different link functions used?
 
 In a **Generalized Linear Model (GLM)**, a <Highlight color="blue">**link function**</Highlight> establishes a relationship between the **expected value of the response variable** and the **linear predictor**.
 
@@ -81,7 +82,7 @@ Thus, link functions provide <Highlight>**flexibility**</Highlight>, ensure vali
 
 ---
 
-### Q4. Explain Probit regression and compare it conceptually with Logistic regression.
+## Q4. Explain Probit regression and compare it conceptually with Logistic regression.
 
 **Probit regression** is a statistical model used for binary classification problems where the response variable takes values 0 or 1. It models the probability of the positive class using the **cumulative distribution function (CDF) of the standard normal distribution**.
 
@@ -99,7 +100,7 @@ Probit regression assumes the existence of an underlying <Highlight color="blue"
 
 ---
 
-### Q5. Discuss Multitask Learning (MTL). How does parameter sharing improve learning performance and generalization?
+## Q5. Discuss Multitask Learning (MTL). How does parameter sharing improve learning performance and generalization?
 
 **Multitask Learning (MTL)** is a learning paradigm in which multiple related tasks are learned simultaneously using a shared model. Instead of training separate models for each task, MTL allows tasks to share parameters and internal representations.
 
@@ -123,7 +124,7 @@ This is exactly how you should **write + think** in the exam.
 
 ---
 
-### Q6. Predict Graduate School Admission Probability Using a Probit Model
+## Q6. Predict Graduate School Admission Probability Using a Probit Model
 
 **Outcome variable**
 
@@ -205,7 +206,7 @@ Admission probability increases with higher GPA and attendance at a top-tier sch
 
 ---
 
-### Q7. Predict Loan Default Probability Using Logistic and Probit Models
+## Q7. Predict Loan Default Probability Using Logistic and Probit Models
 
 A bank wants to predict whether a customer will default on a loan based on their standardized income score $x$.
 
