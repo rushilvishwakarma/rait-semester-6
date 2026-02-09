@@ -146,3 +146,5 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* Print styles are injected programmatically by handleExportPDF in page-actions.tsx */

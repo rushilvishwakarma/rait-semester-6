@@ -1,6 +1,6 @@
 'use client';
 import { useMemo, useState, useEffect } from 'react';
-import { BookOpen, Check, ChevronDown, Copy, ExternalLink, ExternalLinkIcon, MessageCircleIcon, Settings, User } from 'lucide-react';
+import { BookOpen, Check, ChevronDown, Copy, ExternalLink, ExternalLinkIcon, MessageCircleIcon, Printer, Settings, User } from 'lucide-react';
 import { cn } from '../lib/cn';
 import { useCopyButton } from 'fumadocs-ui/utils/use-copy-button';
 import { buttonVariants } from './ui/button';
@@ -225,7 +225,7 @@ export function MyDYButton() {
 
 const cache = new Map<string, string>();
 
-export function LLMCopyButton({
+export function ExportButton({
   /**
    * A URL to fetch the raw Markdown/MDX content of page
    */
@@ -234,43 +234,159 @@ export function LLMCopyButton({
   markdownUrl: string;
 }) {
   const [isLoading, setLoading] = useState(false);
-  const [checked, onClick] = useCopyButton(async () => {
+  const [checked, setChecked] = useState(false);
+
+  const handleCopyMarkdown = async () => {
     const cached = cache.get(markdownUrl);
-    if (cached) return navigator.clipboard.writeText(cached);
+    if (cached) {
+      await navigator.clipboard.writeText(cached);
+      setChecked(true);
+      setTimeout(() => setChecked(false), 1500);
+      return;
+    }
 
     setLoading(true);
 
     try {
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          'text/plain': fetch(markdownUrl).then(async (res) => {
-            const content = await res.text();
-            cache.set(markdownUrl, content);
-
-            return content;
-          }),
-        }),
-      ]);
+      const res = await fetch(markdownUrl);
+      const content = await res.text();
+      cache.set(markdownUrl, content);
+      await navigator.clipboard.writeText(content);
+      setChecked(true);
+      setTimeout(() => setChecked(false), 1500);
     } finally {
       setLoading(false);
     }
-  });
+  };
+
+  const handleExportPDF = () => {
+    const isDark = document.documentElement.classList.contains('dark');
+
+    // Inject a print stylesheet that overrides everything
+    const style = document.createElement('style');
+    style.id = 'pdf-export-styles';
+    style.textContent = `
+      @media print {
+        /* Force background rendering */
+        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+        /* Hide all chrome */
+        #nd-nav, #nd-subnav, #nd-sidebar, #nd-sidebar-mobile,
+        #nd-toc, #nd-tocnav, footer, [role="search"],
+        [data-radix-popper-content-wrapper],
+        [data-pdf-hide] {
+          display: none !important;
+        }
+
+        /* Reset layout offsets */
+        :root {
+          --fd-banner-height: 0px !important;
+          --fd-nav-height: 0px !important;
+          --fd-tocnav-height: 0px !important;
+          --fd-toc-width: 0px !important;
+          --fd-sidebar-width: 0px !important;
+        }
+
+        html, body {
+          overflow: visible !important;
+          height: auto !important;
+        }
+
+        #nd-docs-layout {
+          padding-top: 0 !important;
+          padding-inline-start: 0 !important;
+          margin: 0 !important;
+        }
+
+        #nd-page {
+          padding-inline-end: 0 !important;
+          max-width: 100% !important;
+          width: 100% !important;
+        }
+
+        #nd-page article {
+          background: transparent !important;
+          border: none !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          margin: 0 !important;
+          padding-top: 0.5rem !important;
+          max-width: 100% !important;
+        }
+
+        ${isDark ? `
+          html, body { background: #121212 !important; color: #e5e5e5 !important; }
+        ` : `
+          html, body { background: #fff !important; color: #1a1a1a !important; }
+        `}
+
+        /* Remove page margins so browser header/footer (date, URL, title) are hidden */
+        @page { margin: 0; }
+        /* Use body padding instead for content spacing */
+        body { padding: 1.5cm !important; }
+
+        h1, h2, h3, h4 { break-after: avoid; }
+        pre, table, img, figure { break-inside: avoid; }
+        p, li { orphans: 3; widows: 3; }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Mark banner and action buttons for hiding
+    const banner = document.querySelector('.sticky.top-0.z-40') as HTMLElement;
+    if (banner) banner.setAttribute('data-pdf-hide', '');
+
+    // Find the action buttons row (the div right before DocsBody)
+    const actionBtns = document.querySelectorAll<HTMLElement>('#nd-page .flex.flex-row.border-b');
+    actionBtns.forEach(el => el.setAttribute('data-pdf-hide', ''));
+
+    // Also hide any floating elements
+    const floatingEls = document.querySelectorAll<HTMLElement>('[class*="floating"]');
+    floatingEls.forEach(el => el.setAttribute('data-pdf-hide', ''));
+
+    requestAnimationFrame(() => {
+      window.print();
+
+      // Cleanup
+      style.remove();
+      if (banner) banner.removeAttribute('data-pdf-hide');
+      actionBtns.forEach(el => el.removeAttribute('data-pdf-hide'));
+      floatingEls.forEach(el => el.removeAttribute('data-pdf-hide'));
+    });
+  };
 
   return (
-    <button
-      disabled={isLoading}
-      className={cn(
-        buttonVariants({
-          color: 'secondary',
-          size: 'sm',
-          className: 'gap-2 [&_svg]:size-3.5 [&_svg]:text-fd-muted-foreground',
-        }),
-      )}
-      onClick={onClick}
-    >
-      {checked ? <Check /> : <Copy />}
-      Copy Markdown
-    </button>
+    <Popover>
+      <PopoverTrigger
+        className={cn(
+          buttonVariants({
+            color: 'secondary',
+            size: 'sm',
+            className: 'gap-2',
+          }),
+        )}
+      >
+        Export
+        <ChevronDown className="size-3.5 text-fd-muted-foreground" />
+      </PopoverTrigger>
+      <PopoverContent className="flex flex-col print:hidden">
+        <button
+          disabled={isLoading}
+          onClick={handleCopyMarkdown}
+          className={cn(optionVariants(), 'w-full text-left cursor-pointer')}
+        >
+          {checked ? <Check /> : <Copy />}
+          Copy Markdown
+        </button>
+        <button
+          onClick={handleExportPDF}
+          className={cn(optionVariants(), 'w-full text-left cursor-pointer')}
+        >
+          <Printer className="size-4" />
+          Export as PDF
+        </button>
+      </PopoverContent>
+    </Popover>
   );
 }
 
