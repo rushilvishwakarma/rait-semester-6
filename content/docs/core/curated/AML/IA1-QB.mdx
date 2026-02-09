@@ -1,0 +1,130 @@
+---
+title: "AML IA1: Question Bank"
+---
+
+import { Highlight } from '@/components/highlight';
+
+## Internal Assessment 1 - Question Bank
+
+### Q1. Explain the concept of the Exponential Family of Distributions. Discuss its general form and significance.
+
+The **exponential family of distributions** is a class of probability distributions that can be written in a common mathematical form. Many important distributions such as Gaussian, Bernoulli, Binomial, Poisson, and Exponential belong to this family.
+
+The general form of an exponential family distribution is:
+
+$$
+p(y|\theta) = h(y)\exp\left(\eta(\theta)T(y) - A(\theta)\right)
+$$
+
+where:
+- $h(y)$ is the base measure,
+- $T(y)$ is the sufficient statistic,
+- $\eta(\theta)$ is the natural parameter, and
+- $A(\theta)$ is the log-partition function.
+
+**Significance:**
+
+The exponential family provides a unified framework for probabilistic modeling. It allows efficient parameter estimation using maximum likelihood, simplifies inference, and forms the theoretical basis of generalized linear models.
+
+---
+
+### Q2. Describe the structure of a Generalized Linear Model (GLM).
+
+A **Generalized Linear Model (GLM)** is an extension of linear regression that allows the response variable to follow distributions other than the normal distribution.
+
+A GLM consists of three components:
+
+1. **Random component**
+   
+   It specifies the probability distribution of the response variable, which must belong to the exponential family.
+
+2. **Systematic component**
+   
+   It is the linear predictor given by:
+   $$
+   \eta = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p = X\beta
+   $$
+
+3. **Link function**
+   
+   It connects the expected value of the response variable to the linear predictor:
+   $$
+   g(\mu) = \eta
+   $$
+
+Thus, GLMs allow flexible modeling of different types of data using linear predictors.
+
+---
+
+### Q3. What are link functions in GLMs? Why are different link functions used?
+
+In a **Generalized Linear Model (GLM)**, a <Highlight color="blue">**link function**</Highlight> establishes a relationship between the **expected value of the response variable** and the **linear predictor**.
+
+Mathematically, it is defined as:
+$$
+g(\mu) = \eta = X\beta
+$$
+where $\mu = E(y)$ is the mean of the response variable.
+
+The link function transforms the mean of the response variable so that it can be modeled as a linear combination of input variables. This transformation is necessary because many response variables do not have an unrestricted range.
+
+Different link functions are used because different response distributions have different constraints. For example:
+- Probabilities must lie between 0 and 1
+- Count data must be non-negative
+- Continuous variables may take any real value
+
+The link function ensures that predicted values satisfy these constraints.
+
+Thus, link functions provide <Highlight>**flexibility**</Highlight>, ensure valid predictions, and allow linear models to be applied to a wide range of response variables.
+
+---
+
+### Q4. Explain Probit regression and compare it conceptually with Logistic regression.
+
+**Probit regression** is a statistical model used for binary classification problems where the response variable takes values 0 or 1. It models the probability of the positive class using the **cumulative distribution function (CDF) of the standard normal distribution**.
+
+The probit model is expressed as:
+$$
+P(y=1|x) = \Phi(X\beta)
+$$
+where $\Phi(\cdot)$ denotes the standard normal CDF.
+
+Probit regression assumes the existence of an underlying <Highlight color="blue">**latent variable**</Highlight> that follows a normal distribution. The observed binary outcome depends on whether this latent variable crosses a threshold.
+
+**Comparison with Logistic Regression:**
+
+**Logistic regression**, in contrast, uses the logistic (sigmoid) function to model probabilities and assumes a logistic distribution for the error term. Although the link functions differ, both models yield very similar probability estimates in practice.
+
+**Key Differences:**
+- Logistic regression is often preferred because its coefficients are easier to interpret
+- Probit regression is commonly used in econometrics and Bayesian analysis
+- Both models perform similarly for most practical applications
+
+---
+
+### Q5. Discuss Multitask Learning (MTL). How does parameter sharing improve learning performance and generalization?
+
+**Multitask Learning (MTL)** is a learning paradigm in which multiple related tasks are learned simultaneously using a shared model. Instead of training separate models for each task, MTL allows tasks to share parameters and internal representations.
+
+The key idea behind MTL is <Highlight>**parameter sharing**</Highlight>, where common features learned from one task help improve learning in other tasks. Shared parameters act as a form of regularization and prevent the model from overfitting to a single task.
+
+**How Parameter Sharing Improves Performance:**
+
+1. **Knowledge Transfer**: Tasks with limited data benefit from related tasks with more data
+2. **Regularization**: Shared parameters prevent overfitting to individual tasks
+3. **Common Patterns**: The model captures underlying patterns across tasks
+4. **Improved Generalization**: The model becomes more robust by learning from multiple perspectives
+
+Parameter sharing improves learning performance by allowing tasks with limited data to benefit from related tasks with more data. It also improves generalization by capturing common underlying patterns across tasks.
+
+**Applications:**
+
+MTL produces more robust models and is widely used in domains such as:
+- Natural language processing
+- Computer vision
+- Recommendation systems
+- Speech recognition
+
+---
+
+(In progress from Question 6 onward)

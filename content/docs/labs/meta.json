@@ -2,9 +2,9 @@
   "title": "Labs",
   "pages": [
     "AML",
-    "BDA",
     "DL",
     "MLOps",
+    "BDA",
     "NLP",
     "DOE"
   ]

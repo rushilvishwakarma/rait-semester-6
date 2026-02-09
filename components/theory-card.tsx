@@ -13,12 +13,13 @@ const optionVariants = cva(
 interface TheoryCardProps {
   title: string;
   description: string;
-  href: string;
-  contextUrl: string;
+  href?: string;
+  contextUrl?: string;
   curatedHref?: string;
+  showAskAi?: boolean;
 }
 
-export function TheoryCard({ title, description, href, contextUrl, curatedHref }: TheoryCardProps) {
+export function TheoryCard({ title, description, href, contextUrl, curatedHref, showAskAi = true }: TheoryCardProps) {
   const items = useMemo(() => {
     // Build the full URL for AI services to fetch
     const fullContextUrl = typeof window !== 'undefined' 
@@ -98,50 +99,54 @@ Please fetch the content from the URL above and help me understand and study it.
       </div>
       
       <div className="flex items-center gap-2 mt-auto pt-3 border-t">
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn(
-            buttonVariants({
-              color: 'secondary',
-              size: 'sm',
-              className: 'gap-2 text-xs',
-            }),
-            'no-underline'
-          )}
-        >
-          <Presentation className="size-3.5" />
-          Open Presentation
-        </a>
-        <Popover>
-          <PopoverTrigger
+        {href && (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               buttonVariants({
                 color: 'secondary',
                 size: 'sm',
                 className: 'gap-2 text-xs',
               }),
+              'no-underline'
             )}
           >
-            Ask AI
-            <ChevronDown className="size-3 text-fd-muted-foreground" />
-          </PopoverTrigger>
-          <PopoverContent className="flex flex-col w-48">
-            {items.map((item, index) => (
-              <a
-                key={`${item.title}-${index}`}
-                href={item.href}
-                rel="noreferrer noopener"
-                target="_blank"
-                className={cn(optionVariants())}
-              >
-                {item.icon}
-                {item.title}
-              </a>
-            ))}
-          </PopoverContent>
-        </Popover>
+            <Presentation className="size-3.5" />
+            Open Presentation
+          </a>
+        )}
+        {showAskAi && (
+          <Popover>
+            <PopoverTrigger
+              className={cn(
+                buttonVariants({
+                  color: 'secondary',
+                  size: 'sm',
+                  className: 'gap-2 text-xs',
+                }),
+              )}
+            >
+              Ask AI
+              <ChevronDown className="size-3 text-fd-muted-foreground" />
+            </PopoverTrigger>
+            <PopoverContent className="flex flex-col w-48">
+              {items.map((item, index) => (
+                <a
+                  key={`${item.title}-${index}`}
+                  href={item.href}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  className={cn(optionVariants())}
+                >
+                  {item.icon}
+                  {item.title}
+                </a>
+              ))}
+            </PopoverContent>
+          </Popover>
+        )}
         {curatedHref && (
           <a
             href={curatedHref}

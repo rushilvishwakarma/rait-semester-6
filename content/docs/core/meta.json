@@ -2,11 +2,11 @@
   "title": "Core",
   "pages": [
     "---Subjects---",
+    "AML",
+    "DL",
     "BDA",
     "NLP",
     "DOE",
-    "AML",
-    "DL",
     "---Curriculum---",
     "internal-assessment-1",
     "academic-calendars/syllabus",

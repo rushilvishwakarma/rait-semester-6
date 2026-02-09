@@ -17,18 +17,18 @@ import { Badge } from '@/components/ui/badge';
 import { CourseProgressor } from '@/components/course-progressor';
 
 const coreSubjects = [
+  { title: 'AML', description: 'Advanced Machine Learning', href: '/docs/core/AML', icon: Cpu },
+  { title: 'DL', description: 'Deep Learning', href: '/docs/core/DL', icon: Brain },
   { title: 'BDA', description: 'Big Data Analytics', href: '/docs/core/BDA', icon: Database },
   { title: 'NLP', description: 'Natural Language Processing', href: '/docs/core/NLP', icon: MessageSquare },
   { title: 'DOE', description: 'Design of Experiments', href: '/docs/core/DOE', icon: Layers },
-  { title: 'AML', description: 'Advanced Machine Learning', href: '/docs/core/AML', icon: Cpu },
-  { title: 'DL', description: 'Deep Learning', href: '/docs/core/DL', icon: Brain },
 ];
 
 const labSubjects = [
   { title: 'AML Lab', href: '/docs/labs/AML', icon: Cpu },
-  { title: 'BDA Lab', href: '/docs/labs/BDA', icon: Database },
   { title: 'DL Lab', href: '/docs/labs/DL', icon: Brain },
   { title: 'MLOps Lab', href: '/docs/labs/MLOps', icon: GitBranch },
+  { title: 'BDA Lab', href: '/docs/labs/BDA', icon: Database },
   { title: 'NLP Lab', href: '/docs/labs/NLP', icon: MessageSquare },
 ];
 
@@ -42,7 +42,7 @@ export default function HomePage() {
   return (
     <main className="w-full px-4 py-4">
       {/* Hero Section */}
-      <section className="relative min-h-[350px] overflow-hidden rounded-2xl mb-12 flex flex-col border">
+      <section className="relative min-h-[350px] overflow-hidden rounded-2xl mb-12 flex flex-col border border-white/10 dark:border-black/10">
         <HeroBackground />
         {/* Bottom gradient overlay */}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-fd-background to-transparent z-1 pointer-events-none" />

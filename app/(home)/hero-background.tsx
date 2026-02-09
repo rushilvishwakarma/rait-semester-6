@@ -15,7 +15,7 @@ export function HeroBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 -z-10 border border-muted-foreground rounded-2xl overflow-hidden">
+    <div className="absolute inset-0 -z-10 border rounded-2xl overflow-hidden">
       <GrainGradient
         style={{ width: '100%', height: '100%' }}
         colors={['#ff3d3d3e', '#ff4f6f69', '#a01c35', '#2b0007']}
