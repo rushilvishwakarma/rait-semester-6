@@ -21,6 +21,8 @@ interface TheoryCardProps {
 
 export function TheoryCard({ title, description, href, contextUrl, curatedHref, showAskAi = true }: TheoryCardProps) {
   const items = useMemo(() => {
+    if (!contextUrl) return [];
+    
     // Build the full URL for AI services to fetch
     const fullContextUrl = typeof window !== 'undefined' 
       ? new URL(contextUrl, window.location.origin).href 
@@ -117,7 +119,7 @@ Please fetch the content from the URL above and help me understand and study it.
             Open Presentation
           </a>
         )}
-        {showAskAi && (
+        {showAskAi && contextUrl && (
           <Popover>
             <PopoverTrigger
               className={cn(
