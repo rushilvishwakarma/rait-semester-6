@@ -1,10 +1,19 @@
 ---
-title: "AML IA1: Question Bank"
+title: Question Bank - Internal Assessment 1
 ---
 
 import { Highlight } from '@/components/highlight';
 
-## Internal Assessment 1 - Question Bank
+<style>{`
+  .prose h3 {
+    color: oklch(42.074% 0.14723 12.776);
+  }
+  .dark .prose h3 {
+    color: oklch(69.827% 0.20218 6.633);
+  }
+`}</style>
+
+# Module 1
 
 ### Q1. Explain the concept of the Exponential Family of Distributions. Discuss its general form and significance.
 
@@ -17,10 +26,6 @@ p(y|\theta) = h(y)\exp\left(\eta(\theta)T(y) - A(\theta)\right)
 $$
 
 where:
-- $h(y)$ is the base measure,
-- $T(y)$ is the sufficient statistic,
-- $\eta(\theta)$ is the natural parameter, and
-- $A(\theta)$ is the log-partition function.
 
 **Significance:**
 
@@ -69,9 +74,6 @@ where $\mu = E(y)$ is the mean of the response variable.
 The link function transforms the mean of the response variable so that it can be modeled as a linear combination of input variables. This transformation is necessary because many response variables do not have an unrestricted range.
 
 Different link functions are used because different response distributions have different constraints. For example:
-- Probabilities must lie between 0 and 1
-- Count data must be non-negative
-- Continuous variables may take any real value
 
 The link function ensures that predicted values satisfy these constraints.
 
@@ -95,11 +97,6 @@ Probit regression assumes the existence of an underlying <Highlight color="blue"
 
 **Logistic regression**, in contrast, uses the logistic (sigmoid) function to model probabilities and assumes a logistic distribution for the error term. Although the link functions differ, both models yield very similar probability estimates in practice.
 
-**Key Differences:**
-- Logistic regression is often preferred because its coefficients are easier to interpret
-- Probit regression is commonly used in econometrics and Bayesian analysis
-- Both models perform similarly for most practical applications
-
 ---
 
 ### Q5. Discuss Multitask Learning (MTL). How does parameter sharing improve learning performance and generalization?
@@ -120,11 +117,262 @@ Parameter sharing improves learning performance by allowing tasks with limited d
 **Applications:**
 
 MTL produces more robust models and is widely used in domains such as:
-- Natural language processing
-- Computer vision
-- Recommendation systems
-- Speech recognition
+
+Absolutely. Below is a **rewritten, shortened, exam-ready version**, **including the question**, with **obvious steps compacted** and **no teaching chatter**.
+This is exactly how you should **write + think** in the exam.
 
 ---
+
+### Q6. Predict Graduate School Admission Probability Using a Probit Model
+
+**Outcome variable**
+
+* $Y = 1$: Admitted
+* $Y = 0$: Rejected
+
+**Predictors**
+
+* $X_1$: GPA (0.0–4.0)
+* $X_2$: Top-Tier School (1 = Yes, 0 = No)
+
+**Estimated Probit Coefficients**
+
+* Intercept: $\beta_0 = -3.5$
+* GPA: $\beta_1 = 1.0$
+* Top-Tier School: $\beta_2 = 0.4$
+
+## Solution
+
+#### Probit Model
+
+$$
+P(Y=1 \mid X) = \Phi(Z)
+$$
+
+$$
+Z = \beta_0 + \beta_1 X_1 + \beta_2 X_2
+$$
+
+Substituting coefficients:
+
+$$
+Z = -3.5 + 1.0X_1 + 0.4X_2
+$$
+
+---
+
+#### Case 1: GPA = 3.0, Not Top-Tier ($X_2 = 0$)
+
+$$
+Z = -3.5 + 3.0 + 0 = -0.5
+$$
+
+<Highlight color="green">**Probability of admission = 0.31**</Highlight>
+
+<Highlight color="green">**Final Decision: Rejected**</Highlight>
+
+---
+
+#### Case 2: GPA = 3.0, Top-Tier ($X_2 = 1$)
+
+$$
+Z = -3.5 + 3.0 + 0.4 = -0.1
+$$
+
+<Highlight color="green">**Probability of admission = 0.46**</Highlight>
+
+<Highlight color="green">**Final Decision: Rejected (borderline)**</Highlight>
+
+---
+
+#### Case 3: GPA = 4.0, Top-Tier ($X_2 = 1$)
+
+$$
+Z = -3.5 + 4.0 + 0.4 = 0.9
+$$
+
+<Highlight color="green">Probability of admission = 0.82</Highlight>
+
+<Highlight color="green">Final Decision: Admitted</Highlight>
+
+---
+
+#### Interpretation
+
+Admission probability increases with higher GPA and attendance at a top-tier school. The Probit model converts a linear score into probability using the standard normal cumulative distribution function.
+
+
+
+---
+
+### Q7. Predict Loan Default Probability Using Logistic and Probit Models
+
+A bank wants to predict whether a customer will default on a loan based on their standardized income score $x$.
+
+**Outcome variable:** $Y = 1$ → Customer defaults, $Y = 0$ → Customer does not default
+
+**Given coefficients:**
+- **Logistic:** $\beta_0 = -0.5$, $\beta_1 = 1.2$
+- **Probit:** $\beta_0 = -0.3$, $\beta_1 = 0.7$
+
+**Task:** Calculate the output probability for income score $x = 1$
+
+## Solution
+
+<div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem'}}>
+
+<div>
+
+### Logistic Regression
+
+**Model**
+$$
+P(Y=1|x) = \frac{1}{1 + e^{-Z}}
+$$
+
+where $Z = \beta_0 + \beta_1 x$
+
+**Substitute values**
+$$
+Z = -0.5 + 1.2(1) = 0.7
+$$
+
+**Calculate probability**
+$$
+P(Y=1) = \frac{1}{1 + e^{-0.7}}
+$$
+
+Using $e^{-0.7} \approx 0.496$:
+$$
+P(Y=1) = \frac{1}{1 + 0.496} \approx 0.668
+$$
+
+**Output**
+
+<Highlight color="green">**Probability ≈ 0.67**</Highlight>
+
+<Highlight color="green">**Prediction: Defaults** $(P > 0.5)$</Highlight>
+
+</div>
+
+<div>
+
+### Probit Regression
+
+**Model**
+$$
+P(Y=1|x) = \Phi(Z)
+$$
+
+where $Z = \beta_0 + \beta_1 x$
+
+**Substitute values**
+$$
+Z = -0.3 + 0.7(1) = 0.4
+$$
+
+**Calculate probability**
+$$
+P(Y=1) = \Phi(0.4)
+$$
+
+From standard normal Z-table:
+$$
+\Phi(0.4) \approx 0.655
+$$
+
+**Output**
+
+<Highlight color="green">**Probability ≈ 0.66**</Highlight>
+
+<Highlight color="green">**Prediction: Defaults** $(P > 0.5)$</Highlight>
+
+</div>
+
+</div>
+
+---
+
+#### Final Answer
+
+**Logistic Regression:** Probability ≈ **0.67** → <Highlight color="green">**Defaults**</Highlight>
+
+**Probit Regression:** Probability ≈ **0.66** → <Highlight color="green">**Defaults**</Highlight>
+
+Both models predict that the customer will **default** on the loan.
+
+---
+
+# Module 2 (Q1-Q5 only)
+
+### **Q1. Define Directed Graphical Models (DGMs). Explain how Bayesian Networks represent joint probability distributions.**
+
+Directed Graphical Models (DGMs) are probabilistic models that represent random variables using a **directed graph**. Each node represents a random variable, and directed edges represent probabilistic dependencies between variables.
+
+A **Bayesian Network** is a type of DGM whose graph is a **Directed Acyclic Graph (DAG)**. Each variable is associated with a conditional probability distribution given its parent variables.
+
+A Bayesian Network represents the joint probability distribution as a product of conditional probabilities:
+$$
+P(X_1, X_2, \dots, X_n) = \prod_{i=1}^{n} P(X_i \mid \text{Parents}(X_i))
+$$
+
+This factorization reduces complexity and allows efficient probabilistic reasoning.
+
+---
+
+### **Q2. Explain the concept of conditional independence in Directed Graphical Models with graphical intuition.**
+
+Conditional independence means that two variables are independent given knowledge of a third variable. Variables (X) and (Y) are conditionally independent given (Z) if:
+$$
+P(X, Y \mid Z) = P(X \mid Z)P(Y \mid Z)
+$$
+
+In Bayesian Networks, conditional independence is encoded by the graph structure. A node is conditionally independent of its non-descendants given its parents.
+
+Graphically, conditional independence is determined using **d-separation**, which checks whether all paths between two variables are blocked given observed variables. If all paths are blocked, the variables are conditionally independent.
+
+---
+
+### **Q3. Describe inference in Bayesian Networks. Why is exact inference difficult in large networks?**
+
+Inference in Bayesian Networks involves computing posterior probabilities of variables given observed evidence:
+$$
+P(X \mid E)
+$$
+
+Exact inference methods include variable elimination and belief propagation. These methods exploit the factorized structure of the network.
+
+However, exact inference becomes computationally difficult in large networks because intermediate computations grow **exponentially** with the number of variables. This leads to high time and memory requirements.
+
+Therefore, approximate inference methods such as sampling are often used in large Bayesian Networks.
+
+---
+
+### **Q4. Explain parameter learning in Directed Graphical Models. Differentiate between MLE and Bayesian estimation.**
+
+Parameter learning in DGMs involves estimating the conditional probability distributions of each node using data, assuming the network structure is known.
+
+In **Maximum Likelihood Estimation (MLE)**, parameters are chosen to maximize the likelihood of the observed data:
+$$
+\theta_{MLE} = \arg\max_\theta P(D \mid \theta)
+$$
+MLE relies only on data and does not use prior knowledge.
+
+In **Bayesian estimation**, parameters are treated as random variables with prior distributions:
+$$
+P(\theta \mid D) \propto P(D \mid \theta)P(\theta)
+$$
+Bayesian estimation incorporates prior knowledge and helps reduce overfitting.
+
+---
+
+### **Q5. What are Decision Diagrams? Explain their role and advantages.**
+
+Decision Diagrams are graph-based representations used to model decisions and probabilistic outcomes in a compact form. They represent decision variables, chance variables, and outcomes using directed graphs.
+
+In probabilistic graphical models, decision diagrams are used to efficiently represent conditional probability tables and decision policies. They reduce redundancy by sharing common substructures.
+
+Their advantages include reduced memory usage, faster inference, and better scalability, making them useful in decision-making systems and probabilistic modeling.
+
 
 (In progress from Question 6 onward)

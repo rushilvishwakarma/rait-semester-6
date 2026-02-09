@@ -17,9 +17,11 @@ interface TheoryCardProps {
   contextUrl?: string;
   curatedHref?: string;
   showAskAi?: boolean;
+  presentationLabel?: string;
+  curatedLabel?: string;
 }
 
-export function TheoryCard({ title, description, href, contextUrl, curatedHref, showAskAi = true }: TheoryCardProps) {
+export function TheoryCard({ title, description, href, contextUrl, curatedHref, showAskAi = true, presentationLabel = 'Open Presentation', curatedLabel = 'Curated Notes' }: TheoryCardProps) {
   const items = useMemo(() => {
     if (!contextUrl) return [];
     
@@ -116,7 +118,7 @@ Please fetch the content from the URL above and help me understand and study it.
             )}
           >
             <Presentation className="size-3.5" />
-            Open Presentation
+            {presentationLabel}
           </a>
         )}
         {showAskAi && contextUrl && (
@@ -162,7 +164,7 @@ Please fetch the content from the URL above and help me understand and study it.
             )}
           >
             <FileText className="size-3.5" />
-            Curated Notes
+            {curatedLabel}
           </a>
         )}
       </div>
