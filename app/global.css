@@ -147,4 +147,53 @@
     }
 }
 
+/* ===== Question Callout — auto-targets headings like Q1. Q2. Q10. Q99. etc. ===== */
+#nd-page .prose :is(h2, h3):is([id^="q0"],[id^="q1"],[id^="q2"],[id^="q3"],[id^="q4"],[id^="q5"],[id^="q6"],[id^="q7"],[id^="q8"],[id^="q9"]) {
+    background: transparent !important;
+    color: oklch(50.081% 0.17732 12.868) !important;
+    padding: 0.875rem 1.25rem !important;
+    margin-top: 2.5rem !important;
+    border: 1.5px solid oklch(42.074% 0.14723 12.776 / 0.25) !important;
+    border-radius: 4rem !important;
+    corner-shape: squircle !important;
+}
+
+.dark #nd-page .prose :is(h2, h3):is([id^="q0"],[id^="q1"],[id^="q2"],[id^="q3"],[id^="q4"],[id^="q5"],[id^="q6"],[id^="q7"],[id^="q8"],[id^="q9"]) {
+    background: transparent !important;
+    color: oklch(69.827% 0.20218 6.633) !important;
+    border: 1.5px solid oklch(69.827% 0.20218 6.633 / 0.3) !important;
+}
+
+/* ===== <Question> wrapper — opt-in callout for multi-line questions ===== */
+#nd-page .prose [data-question] {
+    background: transparent !important;
+    color: oklch(50.081% 0.17732 12.868) !important;
+    padding: 0.875rem 1.25rem !important;
+    margin-top: 2.5rem !important;
+    border: 1.5px solid oklch(42.074% 0.14723 12.776 / 0.25) !important;
+    border-radius: 4rem !important;
+    corner-shape: squircle !important;
+}
+
+#nd-page .prose [data-question] :is(h2, h3, p, strong, em, li, ul, ol, span, a) {
+    color: inherit !important;
+}
+
+#nd-page .prose [data-question] li::marker {
+    color: inherit !important;
+}
+
+.dark #nd-page .prose [data-question] {
+    color: oklch(69.827% 0.20218 6.633) !important;
+    border-color: oklch(69.827% 0.20218 6.633 / 0.3) !important;
+}
+
+/* Strip the auto-callout from headings that are INSIDE a <Question> wrapper */
+#nd-page .prose [data-question] :is(h2, h3):is([id^="q0"],[id^="q1"],[id^="q2"],[id^="q3"],[id^="q4"],[id^="q5"],[id^="q6"],[id^="q7"],[id^="q8"],[id^="q9"]) {
+    border: none !important;
+    padding: 0 !important;
+    margin-top: 0 !important;
+    border-radius: 0 !important;
+}
+
 /* Print styles are injected programmatically by handleExportPDF in page-actions.tsx */

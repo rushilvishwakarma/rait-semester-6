@@ -4,19 +4,10 @@ title: Question Bank - Internal Assessment 1
 
 import { Highlight } from '@/components/highlight';
 
-<style>{`
-  .prose h2 {
-    color: oklch(42.074% 0.14723 12.776);
-  }
-  .dark .prose h2 {
-    color: oklch(69.827% 0.20218 6.633);
-  }
-`}</style>
-
 
 # Module 1
 
-## Q1. Explain the concept of the Exponential Family of Distributions. Discuss its general form and significance.
+### Q1. Explain the concept of the Exponential Family of Distributions. Discuss its general form and significance.
 
 The **exponential family of distributions** is a class of probability distributions that can be written in a common mathematical form. Many important distributions such as Gaussian, Bernoulli, Binomial, Poisson, and Exponential belong to this family.
 
@@ -34,7 +25,7 @@ The exponential family provides a unified framework for probabilistic modeling. 
 
 ---
 
-## Q2. Describe the structure of a Generalized Linear Model (GLM).
+### Q2. Describe the structure of a Generalized Linear Model (GLM).
 
 A **Generalized Linear Model (GLM)** is an extension of linear regression that allows the response variable to follow distributions other than the normal distribution.
 
@@ -62,7 +53,7 @@ Thus, GLMs allow flexible modeling of different types of data using linear predi
 
 ---
 
-## Q3. What are link functions in GLMs? Why are different link functions used?
+### Q3. What are link functions in GLMs? Why are different link functions used?
 
 In a **Generalized Linear Model (GLM)**, a <Highlight color="blue">**link function**</Highlight> establishes a relationship between the **expected value of the response variable** and the **linear predictor**.
 
@@ -82,7 +73,7 @@ Thus, link functions provide <Highlight>**flexibility**</Highlight>, ensure vali
 
 ---
 
-## Q4. Explain Probit regression and compare it conceptually with Logistic regression.
+### Q4. Explain Probit regression and compare it conceptually with Logistic regression.
 
 **Probit regression** is a statistical model used for binary classification problems where the response variable takes values 0 or 1. It models the probability of the positive class using the **cumulative distribution function (CDF) of the standard normal distribution**.
 
@@ -100,7 +91,7 @@ Probit regression assumes the existence of an underlying <Highlight color="blue"
 
 ---
 
-## Q5. Discuss Multitask Learning (MTL). How does parameter sharing improve learning performance and generalization?
+### Q5. Discuss Multitask Learning (MTL). How does parameter sharing improve learning performance and generalization?
 
 **Multitask Learning (MTL)** is a learning paradigm in which multiple related tasks are learned simultaneously using a shared model. Instead of training separate models for each task, MTL allows tasks to share parameters and internal representations.
 
@@ -124,7 +115,7 @@ This is exactly how you should **write + think** in the exam.
 
 ---
 
-## Q6. Predict Graduate School Admission Probability Using a Probit Model
+### Q6. Predict Graduate School Admission Probability Using a Probit Model
 
 **Outcome variable**
 
@@ -206,7 +197,9 @@ Admission probability increases with higher GPA and attendance at a top-tier sch
 
 ---
 
-## Q7. Predict Loan Default Probability Using Logistic and Probit Models
+<LongQuestion>
+
+### Q7. Predict Loan Default Probability Using Logistic and Probit Models
 
 A bank wants to predict whether a customer will default on a loan based on their standardized income score $x$.
 
@@ -217,10 +210,10 @@ A bank wants to predict whether a customer will default on a loan based on their
 - **Probit:** $\beta_0 = -0.3$, $\beta_1 = 0.7$
 
 **Task:** Calculate the output probability for income score $x = 1$
+</LongQuestion>
 
-## Solution
 
-<div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem'}}>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
 <div>
 
@@ -302,6 +295,8 @@ $$
 
 Both models predict that the customer will **default** on the loan.
 
+
+
 ---
 
 # Module 2 (Q1-Q5 only)
@@ -315,6 +310,19 @@ A **Bayesian Network** is a type of DGM whose graph is a **Directed Acyclic Grap
 A Bayesian Network represents the joint probability distribution as a product of conditional probabilities:
 $$
 P(X_1, X_2, \dots, X_n) = \prod_{i=1}^{n} P(X_i \mid \text{Parents}(X_i))
+$$
+
+**Example:**
+
+<Mermaid chart={`graph LR
+  A[Cloudy] --> B[Sprinkler]
+  A --> C[Rain]
+  B --> D[Wet Grass]
+  C --> D
+`} />
+
+$$
+P(A, B, C, D) = P(A) \cdot P(B \mid A) \cdot P(C \mid A) \cdot P(D \mid B, C)
 $$
 
 This factorization reduces complexity and allows efficient probabilistic reasoning.
@@ -331,6 +339,50 @@ $$
 In Bayesian Networks, conditional independence is encoded by the graph structure. A node is conditionally independent of its non-descendants given its parents.
 
 Graphically, conditional independence is determined using **d-separation**, which checks whether all paths between two variables are blocked given observed variables. If all paths are blocked, the variables are conditionally independent.
+
+**Three canonical structures:**
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+<div>
+
+**Chain** — $A \perp C \mid B$
+
+<Mermaid chart={`graph LR
+  A --> B --> C
+`} />
+
+Observing B blocks the path.
+
+</div>
+
+<div>
+
+**Fork** — $B \perp C \mid A$
+
+<Mermaid chart={`graph LR
+  A --> B
+  A --> C
+`} />
+
+Observing the common cause A blocks the path.
+
+</div>
+
+<div>
+
+**Collider** — $A \perp C$ (but **not** given B)
+
+<Mermaid chart={`graph LR
+  A --> B
+  C --> B
+`} />
+
+Observing B *opens* the path (explaining away).
+
+</div>
+
+</div>
 
 ---
 
@@ -375,5 +427,134 @@ In probabilistic graphical models, decision diagrams are used to efficiently rep
 
 Their advantages include reduced memory usage, faster inference, and better scalability, making them useful in decision-making systems and probabilistic modeling.
 
+---
 
-(In progress from Question 6 onward)
+## **Q6. For the given relations:**
+
+• Weather (W) affects Road Condition (R)
+• Road Condition affects Accident (A)
+• Driver Alertness (D) affects Accident (A)
+• Accident affects Insurance Claim (C)
+
+**Answer the following:**
+a. Draw the DAG / Bayesian Network
+b. Write the joint probability distribution
+c. Identify any 2 conditional independencies using the graph
+
+---
+
+## **Answer:**
+
+### **(a) Directed Acyclic Graph (DAG / Bayesian Network)**
+
+<Mermaid chart={`graph LR
+  W[Weather] --> R[Road Condition]
+  R --> A[Accident]
+  D[Driver Alertness] --> A
+  A --> C[Insurance Claim]
+`} />
+
+---
+
+### **(b) Joint probability distribution**
+
+Using Bayesian Network factorization:
+
+$$
+P(W, R, D, A, C) = P(W) \cdot P(D) \cdot P(R \mid W) \cdot P(A \mid R, D) \cdot P(C \mid A)
+$$
+
+---
+
+### **(c) Any two conditional independencies**
+
+1. $W \perp A \mid R$
+   (Weather is conditionally independent of Accident given Road Condition)
+
+2. $D \perp W$
+   (Driver Alertness is independent of Weather)
+
+---
+
+## **Q7. For the given relations:**
+
+• Socioeconomic Status (S) affects Education Level (E)
+• Socioeconomic Status (S) affects Nutrition (N)
+• Education Level (E) affects Job Type (J)
+• Nutrition (N) affects Health Condition (H)
+• Job Type (J) affects Income (I)
+• Health Condition (H) affects Income (I)
+
+**Answer the following:**
+a. Draw the Directed Acyclic Graph (DAG)
+b. Write the joint probability distribution
+c. Write any three conditional independence relations
+
+---
+
+## **Answer:**
+
+### **(a) Directed Acyclic Graph (DAG)**
+
+<Mermaid chart={`graph LR
+  S[Socioeconomic Status] --> E[Education Level]
+  S --> N[Nutrition]
+  E --> J[Job Type]
+  N --> H[Health Condition]
+  J --> I[Income]
+  H --> I
+`} />
+
+---
+
+### **(b) Joint probability distribution**
+
+$$
+P(S, E, N, J, H, I) = P(S) \cdot P(E \mid S) \cdot P(N \mid S) \cdot P(J \mid E) \cdot P(H \mid N) \cdot P(I \mid J, H)
+$$
+
+---
+
+### **(c) Any three conditional independence relations**
+
+1. $E \perp N \mid S$
+2. $J \perp N \mid E$
+3. $I \perp S \mid J, H$
+
+---
+
+## **Q8. A sequence consists of 5 binary variables:**
+
+(a) Find the number of parameters required if modelled as a first-order Markov chain.
+(b) Find the number of parameters required if modelled as a DGM where each node has two parents.
+
+---
+
+## **Answer:**
+
+### **(a) First-order Markov chain**
+
+Structure:
+
+$$
+X_1 \rightarrow X_2 \rightarrow X_3 \rightarrow X_4 \rightarrow X_5
+$$
+
+- Initial probability $P(X_1)$: **1 parameter**
+- Transition probabilities: 4 transitions × 2 parameters each
+
+$$
+\boxed{9 \text{ parameters}}
+$$
+
+---
+
+### **(b) Directed Graphical Model with two parents per node**
+
+- Binary variables
+- Each node has 2 parents
+- Parameters per node $= 2^2 = 4$
+
+$$
+\boxed{20 \text{ parameters}}
+$$

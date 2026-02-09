@@ -8,6 +8,7 @@ import { Mermaid } from '@/components/mermaid';
 import { CustomCallout } from '@/components/custom-callout';
 
 import { CuratedResources } from '@/components/curated-videos';
+import { LongQuestion } from '@/components/question';
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -18,6 +19,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     Mermaid,
     CuratedResources,
     CuratedVideos: CuratedResources,
+    LongQuestion,
     img: (props) => <ImageZoom {...(props as any)} />,
     ...components,
   };
