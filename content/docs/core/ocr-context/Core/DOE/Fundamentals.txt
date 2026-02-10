@@ -1,0 +1,1607 @@
+B.TECH CSE (AI &amp; ML) - SEM VI
+
+COURSE CODE: 231CAUMM61
+
+# Design of Experiments
+
+(DOE)
+
+Module 1: Fundamentals
+
+"Plan. Experiment. Learn. Improve."
+
+INSTRUCTOR
+
+Prof. Dr. Sachin S. Shende
+
+DATE
+
+2026-01-13
+
+![img-0.jpeg](img-0.jpeg)
+
+# KEY FOCUS
+
+Mastering the statistical principles behind systematic industrial process improvement.
+
+MODULE 1 OVERVIEW
+
+# Module Objectives &amp; Course Outcome Mapping
+
+This foundational module equips you with the core statistical mindset and terminology required for systematic industrial experimentation.
+
+- **Understand Industrial Experimentation**
+Grasp the definition, importance, and systematic nature of DOE in manufacturing.
+
+- **Apply Statistical Thinking**
+Adopt a process-oriented mindset to recognize variation and use data for decisions.
+
+- **Master Core Principles**
+Learn Randomization, Replication, Blocking, Degrees of Freedom, and Quality Characteristics.
+
+# Topic Mapping Matrix
+
+![img-1.jpeg](img-1.jpeg)
+
+# KEY INSIGHT
+
+Module 1 builds the "vocabulary" and "grammar" of experimentation. Without these fundamentals, complex designs (Modules 3-4) cannot be properly interpreted.
+
+MAPPED TO:
+
+CO1: Foundation
+
+CO2: Analysis
+
+COURSE CURRICULUM OVERVIEW
+
+# Where Module 1 Fits
+
+Building the foundational statistical mindset before advancing to complex experimental designs.
+
+![img-2.jpeg](img-2.jpeg)
+
+Module 1 provides the mathematical "roots" that support the entire DOE tree structure.
+
+![img-3.jpeg](img-3.jpeg)
+
+![img-4.jpeg](img-4.jpeg)
+
+FUNDAMENTALS
+
+# What is Industrial Experimentation?
+
+"A series of planned, controlled changes to process input factors to observe and identify the reasons for changes in the output response."
+
+## Active Intervention
+
+Unlike observational studies, we deliberately manipulate variables (factors) to force the process to reveal its secrets.
+
+## Diverse Contexts
+
+Manufacturing: Welding speed, temperature. Service: Call center scripts, queue management. Digital: A/B testing on websites, ML model hyperparameters.
+
+The goal is always quantifiable process knowledge and improvement.
+
+BUSINESS IMPACT
+
+ROI Focus
+
+# Why Experiment? Value Drivers
+
+Experimentation is not just for research—it's a strategic driver for business performance. By systematically varying inputs, we unlock value at multiple levels of the organization.
+
+## Strategic Goal
+
+Move from "fire-fighting" (reactive) to "robust design" (proactive) to minimize long-term costs.
+
+- The higher up the pyramid, the greater the strategic advantage.
+
+![img-5.jpeg](img-5.jpeg)
+
+- Innovation
+New product discovery &amp; breakthrough performance
+
+- Robustness
+Consistent performance despite noise factors
+
+- Throughput
+Higher yield &amp; process efficiency
+
+- Cost &amp; Quality
+Defect reduction &amp; scrap elimination
+
+EXPERIMENTAL DESIGN CLASSIFICATION
+
+# Types of Industrial Experiments
+
+## Classification Matrix
+
+|  Category | Focus Area | Typical Example  |
+| --- | --- | --- |
+|  Screening | Identify key factors from many | Finding top 3 of 10 process variables  |
+|  Optimization | Find best settings for response | Maximizing yield via temp & pressure  |
+|  Robustness | Minimize variation from noise | Consistent output despite humidity  |
+|  Offline | Lab/Pilot scale (controlled) | R&D new product formulation  |
+|  Online | Real production (live) | A/B testing on website traffic  |
+|  Simulation | Computer models (virtual) | Digital Twin process tuning  |
+
+![img-6.jpeg](img-6.jpeg)
+
+## EXPERIMENT VOLUME BY TYPE
+
+- Screening
+- Optimization
+- Robustness
+- Validation
+
+## Physical vs. Simulation
+
+Digital Twins reduce physical run costs by 80%
+
+METHODOLOGY
+
+# Experiment Lifecycle
+
+A systematic approach to conducting industrial experiments ensures validity, reproducibility, and actionable insights.
+
+## Critical Insight
+
+Skipping the planning phases (Steps 1-3) is the most common cause of failed industrial experiments. "Measure twice, cut once" applies directly to DOE.
+
+## ROLES INVOLVED
+
+- Process Engineer / Domain Expert
+- Statistician / Data Scientist
+- Operator / Technician
+
+## PHASE 1: PLANNING
+
+### 01 Define Objective
+
+Identify problem, set goals, define scope.
+
+### 02 Select Factors/Levels
+
+Identify inputs (factors), settings (levels), and output (response).
+
+### 03 Choose Experimental Design
+
+Screening vs. Full Factorial vs. Response Surface based on constraints.
+
+## PHASE 2: EXECUTION
+
+### 04 Preparation
+
+Randomize run order, block nuisance factors, plan replication.
+
+### 05 Execute Experiment
+
+Run the trials, collect data, monitor for special causes.
+
+## PHASE 3: ANALYSIS &amp; ACTION
+
+### 06+
+
+- Analyze Data
+- Conclude
+- Standardize
+
+FUNDAMENTALS OF DOE
+
+PROCESS DIAGRAM (P-Diagram)
+
+# Factors, Levels &amp; Response Variables
+
+A successful experiment begins by clearly defining the inputs (factors) to vary and the outputs (responses) to measure, treating the process as a system.
+
+## Factors (Inputs / X's)
+
+Controllable: Parameters you change (e.g., Temp, Speed). Noise (Uncontrollable): External variables (e.g., Humidity, Batch). Can be Qualitative (Type A/B) or Quantitative (Values).
+
+## Levels
+
+The specific settings or values chosen for each factor in the experiment (e.g., Low (-1) and High (+1)).
+
+## Responses (Outputs / Y's)
+
+Critical to Quality (CTQ) characteristics measured to evaluate performance (e.g., Yield, Surface Finish, Defect Rate).
+
+- Ideally, choose responses that are continuous (measurable) rather than binary (pass/fail) for better statistical power.
+- Adjustable
+- Hard to Control
+- Measured Goal
+
+![img-7.jpeg](img-7.jpeg)
+
+PLANNING &amp; EXECUTION
+
+"Industrial experiments differ from lab science—real-world constraints dictate design choices."
+
+# Practical Constraints &amp; Risks
+
+## Common Industrial Constraints
+
+### Time &amp; Cost Constraints
+Experiments consume production time and raw materials.
+**Mitigation:** Use fractional designs or screening to reduce run count.
+
+### Downtime Windows
+Experiments may require stopping regular production.
+**Mitigation:** Plan experiments during maintenance shifts or low-demand periods.
+
+### Material/Batch Variability
+Inconsistent raw materials can mask factor effects.
+**Mitigation:** Use blocking techniques to account for batch-to-batch variation.
+
+### Operator Availability &amp; Skill
+Shift changes and skill gaps introduce noise.
+**Mitigation:** Standardize SOPs (Standard Operating Procedures) before starting.
+
+## Strategic Risk Management
+
+### Ethics &amp; Safety First
+Some factor levels may create unsafe conditions or unethical outcomes (e.g., poor quality products reaching customers).
+Review safety limits for all factors.
+Isolate experimental batches from shipping.
+
+### Digital Mitigation
+Before physical runs, use simulation or pilot tests to reduce risk.
+![img-8.jpeg](img-8.jpeg)
+
+**80% PLANNING EFFORT**
+**20% EXECUTION**
+
+COMPARISON
+
+## OFAT APPROACH
+
+![img-9.jpeg](img-9.jpeg)
+
+Changes one factor while holding others constant. Misses the true peak.
+
+## FACTORIAL APPROACH (DOE)
+
+![img-10.jpeg](img-10.jpeg)
+
+Varies factors simultaneously. Covers the entire design space.
+
+## TRADITIONAL METHOD
+
+# Pitfalls of One-Factor-at-a-Time (OFAT)
+
+- **Misses Interactions**
+OFAT assumes factors act independently. It fails to detect when the effect of one factor depends on the level of another (e.g., temperature only helps if pressure is high).
+
+- **Low Efficiency**
+Requires significantly more runs to achieve the same precision as a factorial design. DOE provides "more bang for the buck."
+
+- **Limited Coverage**
+Explores only a tiny fraction of the process space (the axes), leaving the corners and center—where optimal settings often hide—untested.
+
+- **Factorial Designs (DOE)** solve these issues by varying multiple factors simultaneously.
+
+AI/ML CONTEXT
+
+# DOE Integration in Data Science Workflows
+
+Systematic experimentation is not just for physical labs. It is the backbone of robust model development, hyperparameter tuning, and data-driven product decisions.
+
+# MLOps &amp; Experiment Tracking
+
+Tools like MLflow or Weights &amp; Biases use DOE principles to track hyperparameter combinations systematically rather than randomly.
+
+# A/B Testing &amp; Bandits
+
+Digital experimentation relies on randomization and blocking (segmentation) to isolate causal effects from user noise.
+
+# Data Generation Pipelines
+
+Design synthetic data generation using factorial designs to ensure training data covers all corner cases and interactions.
+
+# Workflow
+
+![img-11.jpeg](img-11.jpeg)
+DOE in the ML Lifecycle
+
+# WHY IT MATTERS
+
+"Random search is inefficient. Grid search is a full factorial design. Bayesian optimization is sequential DOE. The math is the same."
+
+#
+
+Your Role:
+
+Bridge the gap between statistical rigor and computational scale.
+
+B.Tech CSE (AI &amp; ML) - Sem VI
+
+Page 12
+
+# MODULE 1: FUNDAMENTALS
+
+## Industrial Examples of Experiments
+
+![img-12.jpeg](img-12.jpeg)
+
+### CNC Machining
+
+**INPUT FACTORS (X)**
+- Cutting Speed
+- Feed Rate
+
+↓
+
+**RESPONSE (Y)**
+- Surface Roughness (Ra)
+
+![img-13.jpeg](img-13.jpeg)
+
+### Wafer Etching
+
+**INPUT FACTORS (X)**
+- Plasma Dose
+- Temperature
+
+↓
+
+**RESPONSE (Y)**
+- Production Yield %
+
+![img-14.jpeg](img-14.jpeg)
+
+### Web Latency
+
+**INPUT FACTORS (X)**
+- Cache Size
+- Concurrency Level
+
+↓
+
+**RESPONSE (Y)**
+- P95 Latency (ms)
+
+B.Tech CSE (AI &amp; ML) - Sem VI
+
+Page 13
+
+# MODULE 1: FUNDAMENTALS
+
+# Mini Case Vignette: Paint Curing Oven
+
+![img-15.jpeg](img-15.jpeg)
+
+# Experiment Parameters
+
+![img-16.jpeg](img-16.jpeg)
+
+![img-17.jpeg](img-17.jpeg)
+
+# Next Steps
+
+Immediate action items
+
+Choose Design
+
+Plan Randomization
+
+SECTION 02
+
+# Statistical Thinking: The Mindset
+
+Shifting from intuition-based guesses to a disciplined framework of process understanding, variation analysis, and data-driven decisions.
+
+![img-18.jpeg](img-18.jpeg)
+Process View
+
+Work is a series of interconnected steps
+
+![img-19.jpeg](img-19.jpeg)
+Variation
+
+Recognizing and managing inherent uncertainty
+
+![img-20.jpeg](img-20.jpeg)
+Data Decisions
+
+Actions based on facts, not opinions
+
+In God we trust; all others must bring data. — W. Edwards Deming
+
+STATISTICAL THINKING
+
+# Variation: Common vs Special Causes
+
+## Common Cause Variation
+
+Inherent to the process system. Always present, predictable within limits.
+
+Systematic
+Noise
+Expected
+
+## Special Cause Variation
+
+Due to assignable, specific events. Unpredictable, indicates instability.
+
+Assignable
+Signal
+Actionable
+
+## Control Chart Example
+
+![img-21.jpeg](img-21.jpeg)
+
+- Common Cause (Within Limits)
+- Special Cause (Signal)
+
+DOE Goal: Distinguish signal (effect) from noise (common cause).
+
+METHODOLOGY
+
+# Statistical Thinking
+
+DOE is not a linear path but an iterative cycle of learning. Each experiment reduces uncertainty and refines the process model.
+
+## The Learning Loop
+
+The cycle doesn't end at "Validate". Use the knowledge gained to update hypotheses and plan the next, more precise experiment.
+
+## CORE PRINCIPLES
+
+- ☐ All work is a process
+- ☑ Variation exists everywhere
+- ☐ Data drives improvement
+
+## PHASE 1: PREPARATION
+
+### 01 Plan
+
+Define problem, select factors, choose design matrix.
+
+## PHASE 2: EXECUTION &amp; ANALYSIS
+
+### 02 Collect
+
+Run experiment, record data.
+
+### 03 Visualize
+
+Plot raw data, check stability.
+
+### 04 Model
+
+Fit equations, ANOVA.
+
+## 05 Validate
+
+Check residuals &amp; predictions.
+
+## PHASE 3: LEARNING LOOP
+
+## 0
+
+### Iterate
+
+Synthesize knowledge, update process, or plan next experiment.
+
+CONTINUOUS
+
+STATISTICAL THINKING
+
+# Sampling &amp; Measurement Systems (MSA)
+
+Before analyzing experimental data, we must validate the data collection process. If the "ruler" is broken, the data is meaningless ("Garbage In, Garbage Out").
+
+## Sampling Strategy
+
+Representativeness: Random sampling prevents bias. Sample Size (n): Larger samples reduce standard error (\$\\sigma\\sqrt{n}\$) and increase power.
+
+## Accuracy vs. Precision
+
+Accuracy (Bias): Difference between average measurement and true value. Precision (Variation): Spread of repeated measurements (Standard Deviation).
+
+## Gage R&amp;R (Precision Components)
+
+Repeatability: Variation from the gage (same part, same operator). Reproducibility: Variation from the operators (same part, different operators).
+
+Visualizing MSA Concepts
+
+Measurements
+
+![img-22.jpeg](img-22.jpeg)
+Precise, Biased
+
+Low Variance, Off Target
+
+![img-23.jpeg](img-23.jpeg)
+Accurate, Noisy
+
+High Variance, On Target
+
+## CRUCIAL INSIGHT
+
+In DOE, if your measurement error (noise) is too high, you may fail to detect significant factor effects (signal). Always perform MSA first.
+
+GOAL: Measurement System Variation &lt; 10% of Total Variation
+
+STATISTICAL FOUNDATIONS
+
+# Distributions &amp; Response Types
+
+## Data Types Mapping
+
+|  Response Type | Distribution | Typical Metrics  |
+| --- | --- | --- |
+|  Continuous | Normal (Gaussian) | Weight, Strength, Temp  |
+|  Counts | Poisson | Defects per unit, Accidents  |
+|  Proportions | Binomial | Pass/Fail %, Yield Rate  |
+|  Time-to-Event | Exponential / Weibull | Hours to Failure, Survival  |
+
+## Critical Insight:
+
+Matching the analysis method (ANOVA, Logistic Regression) to the correct response distribution is crucial for valid conclusions.
+
+![img-24.jpeg](img-24.jpeg)
+NORMAL
+
+![img-25.jpeg](img-25.jpeg)
+POISSON
+
+![img-26.jpeg](img-26.jpeg)
+BINOMIAL
+Fail
+Pass
+
+![img-27.jpeg](img-27.jpeg)
+EXPONENTIAL
+
+STATISTICAL THINKING
+
+![img-28.jpeg](img-28.jpeg)
+
+The Curve represents the full process variation.
+
+The Center is our Point Estimate.
+
+# Uncertainty: Estimates &amp; Intervals
+
+"A single number is virtually guaranteed to be wrong. We must quantify how wrong we might be."
+
+- Point Estimate (Best Guess)
+A single value (e.g., $\hat{x} = 24.5$) derived from sample data. Precise, but gives no indication of reliability or risk.
+
+- Confidence Interval (CI)
+A range for the True Mean ($\mu$). "We are 95% confident the process average is between 24.1 and 24.9."
+
+- Prediction Interval (PI)
+A range for a Single Future Value. Always wider than CI. "The next unit produced will fall between 22.0 and 27.0."
+
+▲ In industrial settings, Prediction Intervals are often more relevant for quality control than Confidence Intervals.
+
+ANALYSIS PHASE
+
+# Hypothesis Testing
+
+A structured framework to distinguish signal from noise. In DOE, it determines if factor effects are real or due to random chance.
+
+## Practical Insight
+
+Statistical Significance ≠ Practical Importance. A tiny effect can be "significant" with enough data, but useless for the business. Always check the effect size.
+
+## KEY METRICS
+
+- P-value: Probability of seeing the data if H0 is true.
+- s: Alpha: Risk tolerance for False Positives (Type I).
+- β: Beta: Risk of missing a real effect (Type II).
+
+## 1. Formulate Hypotheses
+
+Null (H0): Factor has NO effect (= 0).
+Alternative (H1): Factor has an effect (# 0).
+
+## 2. The Decision Rule (Compare P vs α)
+
+**T A C H O N E C I C D**
+REJECT H0
+"Statistically Significant"
+
+P-value ≥ 0.05
+FAIL TO REJECT H0
+"No Evidence of Effect"
+
+## 3. Decision Risks (Errors)
+
+|   | Truth: H0 is True (No Effect) | Truth: H0 is False (Real Effect)  |
+| --- | --- | --- |
+|  Reject H0 | Type I Error (α) False Positive | Correct Decision Power (1-β)  |
+|  Fail to Reject | Correct Decision True Negative | Type II Error (β) False Negative  |
+
+## 4. Final Verdict
+
+Is the effect Significant (statistically) AND Substantial (practically)? Action: Implement change only if both conditions are met.
+
+BASIC PRINCIPLES OF DOE
+
+# Why Randomize? The First Defense Against Bias
+
+Randomization is the "insurance policy" of experimental design. It protects your results from unknown or uncontrollable factors that change over time.
+
+## Neutralize Time Trends
+
+Prevents confusion between factor effects and time-dependent variables like tool wear, machine warm-up, or chemical degradation.
+
+## Mitigate Operator Effects
+
+Balances out fatigue, shift changes, or learning curve effects that typically occur during an experimental sequence.
+
+## Validate Statistics
+
+Ensures the "independence of errors" assumption required for ANOVA and t-tests is valid.
+
+---
+
+The "Lurking Variable" Problem
+
+RISK: SYSTEMATIC BIAS
+Time / Sequence →
+![img-29.jpeg](img-29.jpeg)
+
+Standard Order: Level B looks "better" just because Temp is higher. Effect is confounded.
+
+SOLUTION: RANDOMIZATION
+I ⊕ N C T N ⊕ N N N
+
+![img-30.jpeg](img-30.jpeg)
+
+Random Order: High/Low Temp affects A and B equally. True effect is preserved. preserved.
+
+## Practical Tip
+
+Always generate a randomized run sheet before starting. Don't let operators re-sort runs to "save setup time" without approval.
+
+"Block what you can, randomize what you cannot."
+
+# Effect of Replication on Estimate Stability
+
+Simulated Data: Means become more precise with n
+
+![img-31.jpeg](img-31.jpeg)
+
+## Visual Insight
+
+The chart demonstrates how increasing the number of replicates (n) reduces the variability of the mean estimate, shrinking the confidence interval and providing a "truer" picture of the process response.
+
+## DOE PRINCIPLES
+
+# Replication &amp; Precision
+
+"Replication is the independent repetition of each factor combination run, essential for estimating experimental error."
+
+## Estimate Pure Error
+
+Allows calculation of the true experimental error variance ($\backslash\sigma^{2}$) separate from lack-of-fit, enabling valid significance tests (F-tests).
+
+## Stabilize Estimates
+
+Reduces the standard error of the mean ($\sigma / n \vee$). More replicates = narrower confidence intervals and higher power to detect effects.
+
+## Replication vs. Repetition
+
+Replication: Full setup reset (captures setup error). Repetition: Multiple measures of same setup (only captures measurement error).
+
+EXPERIMENTAL DESIGN PRINCIPLE
+
+Precision Enhancement
+
+# Blocking to Handle Nuisance Factors
+
+Blocking is a technique used to eliminate the effect of known "nuisance" variables that influence the response but are not the primary interest of the experiment.
+
+## The Golden Rule
+
+"Block what you can, randomize what you cannot."
+
+- **Increases Precision**
+Removes block-to-block variation from the experimental error (MSE).
+
+- **Isolates Noise**
+Prevents nuisance factors (e.g., shifts, batches) from obscuring real effects.
+
+![img-32.jpeg](img-32.jpeg)
+
+SYSTEMATIC METHODOLOGY
+
+# Model Building for Predicting Response
+
+In DOE, we construct mathematical models to relate input factors to the output response, enabling prediction and optimization.
+
+## GENERAL LINEAR MODEL STRUCTURE
+
+$$
+y = \beta_ {0} + \Sigma \beta_ {i} x _ {i} + \Sigma \beta_ {i j} x _ {i} x _ {j} + \varepsilon
+$$
+
+- Intercept
+- Main Effects
+- Interactions
+- Error
+
+## Effect Hierarchy Principle
+
+Lower-order effects (main effects) are more likely to be significant than higher-order interactions.
+
+## Effect Sparsity (Parsimony)
+
+Only a few factors are typically active ("vital few"). The model should remain simple.
+
+## Residuals vs. Fitted Values
+
+![img-33.jpeg](img-33.jpeg)
+
+## Normal Probability Plot
+
+![img-34.jpeg](img-34.jpeg)
+
+Points on line indicate normal errors
+
+## VALIDATION CHECK
+
+Always validate model assumptions using residual diagnostics before interpreting effects.
+
+KEY STEP:
+
+Analysis Phase
+
+![img-35.jpeg](img-35.jpeg)
+OBSERVATIONAL (CORRELATION)
+
+EXPERIMENTAL (CAUSALITY)
+
+![img-36.jpeg](img-36.jpeg)
+
+AI/ML CONTEXT
+
+# DOE vs. Observational Studies in AI/ML
+
+"Correlation is not causation. DOE establishes causality through controlled intervention (do-calculus), unlike passive data mining."
+
+# Control &amp; Randomization
+
+Random assignment eliminates confounding variables (bias), isolating the true treatment effect. Essential for causal inference.
+
+# A/B Testing &amp; Bandits
+
+A/B Testing: Online randomized controlled trials (simple DOE). Multi-Armed Bandits: Adaptive experimentation balancing exploration vs. exploitation.
+
+# Data Efficiency
+
+Observational big data is often "noisy and confounded." DOE generates "small but high-quality" data designed to answer specific questions.
+
+In the Pearl Causal Hierarchy, DOE moves you from seeing (Association) to doing (Intervention).
+
+FUNDAMENTAL METHODOLOGY
+
+# Basic Principles of DOE
+
+The structural pillars that ensure experimental validity, reliability, and efficiency.
+
+![img-37.jpeg](img-37.jpeg)
+
+![img-38.jpeg](img-38.jpeg)
+
+![img-39.jpeg](img-39.jpeg)
+
+BASIC PRINCIPLES OF DOE
+
+# Factorial Thinking vs. OFAT Approach
+
+Traditional One-Factor-at-a-Time (OFAT) methods often fail to capture system complexity. Factorial designs change varying factors simultaneously to maximize information density.
+
+- **Interaction Detection**
+OFAT holds factors constant, blinding you to interactions. Factorial design reveals how factors influence each other.
+
+- **Statistical Efficiency**
+In factorial designs, every data point contributes to estimating every effect, providing higher precision per run.
+
+- **Broader Validity**
+Conclusions are valid over a range of experimental conditions (the "design space") rather than a single point.
+
+![img-40.jpeg](img-40.jpeg)
+
+FOCUS AREA:
+CO1: Principles
+CO2: Methodology
+
+# Efficiency Comparison
+
+To study k factors, OFAT explores only k directions from a baseline. Factorial Design explores the entire 2k hypercube volume.
+
+DESIGN TYPES
+
+#
+
+Factorial Design
+
+# 2k Full Factorial Overview
+
+## The Formula: N = 2k
+
+Investigates k factors at 2 levels each (Low/High). Total runs (N) grows exponentially with k.
+
+- **Main Effects**
+Effect of changing one factor while averaging across others.
+
+- **Interactions**
+When the effect of one factor depends on the level of another (e.g., AB, ABC).
+
+- **Efficiency**
+Orthogonal design allows independent estimation of all effects.
+
+```c
+// Example: k=3 factors
+N = 23 = 8 runs
+```
+
+Factor B (+)
+
+Design Space (k=3)
+- Run Point (+/-)
+- Factor Change
+
+Factor C (+)
+
+Factor A (+)
+
+MATHEMATICAL FOUNDATION
+
+# Coding Factors &amp; Orthogonality
+
+X¹
+
+## Design Matrix (2² Example)
+
+Natural vs. Coded Units
+
+|  Run | Temp (°C) (Natural) | X₁ (Coded) | Press (Psi) (Natural) | X₂ (Coded) | X₁X₂ (Interact)  |
+| --- | --- | --- | --- | --- | --- |
+|  1 | 100 (Low) | -1 | 50 (Low) | -1 | +1  |
+|  2 | 150 (High) | +1 | 50 (Low) | -1 | -1  |
+|  3 | 100 (Low) | -1 | 80 (High) | +1 | -1  |
+|  4 | 150 (High) | +1 | 80 (High) | +1 | +1  |
+|  SUM (Σ) |   | 0 |  | 0 | 0  |
+
+Transformation Formula:  $(x_j = \text{frac}\{\text{text}\{\text{Natural Value}\} - \text{text}\{\text(Center Point)}\} \} \text{text}\{\text{Range}\} / 2)$
+
+![img-41.jpeg](img-41.jpeg)
+
+## DESIGN SPACE GEOMETRY
+
+## Why Orthogonality Matters?
+
+When columns are orthogonal (sum of products = 0), the estimate of one factor's effect is independent of others. You can change factor A without messing up your knowledge of factor B.
+
+FULL FACTORIAL DESIGN STRUCTURE
+
+Design Matrix: Example 2³
+
+8
+
+# 8-Run Standard Order Matrix
+
+|  Run | Factor A | Factor B | Factor C | Notation  |
+| --- | --- | --- | --- | --- |
+|  1 | -1 | -1 | -1 | (1)  |
+|  2 | +1 | -1 | -1 | a  |
+|  3 | -1 | +1 | -1 | b  |
+|  4 | +1 | +1 | -1 | ab  |
+|  5 | -1 | -1 | +1 | c  |
+|  6 | +1 | -1 | +1 | ac  |
+|  7 | -1 | +1 | +1 | bc  |
+|  8 | +1 | +1 | +1 | abc  |
+
+# GEOMETRIC REPRESENTATION (THE CUBE)
+
+![img-42.jpeg](img-42.jpeg)
+
+Insight: The design covers all 8 corners of the cube, allowing estimation of all main effects and interactions.
+
+# Orthogonality &amp; Coding
+
+Factors are coded as -1 (low) and +1 (high) to ensure independence.
+
+√
+
+#
+
+ANALYSIS PHASE
+
+![img-43.jpeg](img-43.jpeg)
+
+Standardized Effect Pareto Chart
+
+- Bonferroni Limit (Critical t-value)
+Bars crossing the red line represent statistically significant factors (confidence level 95%).
+
+# Estimating Effects &amp; The Pareto Plot
+
+## Calculating Main Effects
+
+An effect is the change in the average response when a factor moves from its Low (-1) to High (+1) level.
+
+Effect = Average(Y at High) - Average(Y at Low)
+
+## Sparsity of Effects
+
+In most industrial experiments, the system is dominated by a few "vital" main effects and low-order interactions. The majority are "trivial many" noise.
+
+## Interpreting the Plot
+
+Magnitude: Length of bar indicates strength of influence.
+
+Significance: Effects exceeding the critical t-value limit (red line) are statistically significant.
+
+Prioritization: Focus process improvement efforts on the top factors.
+
+Use the Pareto plot to screen out non-active factors early.
+
+KEY INTERACTIONS &amp; METHODOLOGY
+
+# Interaction Plots and Interpretation
+
+An interaction exists when the effect of one factor on the response depends on the level of another factor. The interaction plot is the primary tool for visualizing this dependency.
+
+## The "Parallelism" Rule
+
+Parallel Lines: Factors are independent (No Interaction). Non-Parallel Lines: Interaction exists. The greater the divergence, the stronger the interaction.
+
+## Interaction Types
+
+Synergistic: Factors reinforce each other (response increases more than sum of parts).
+Antagonistic: Factors hinder each other (lines cross or converge strongly).
+
+## Interpretation Trap
+
+Do not interpret Main Effects in isolation if significant interactions are present. The "average" effect may be misleading.
+
+![img-44.jpeg](img-44.jpeg)
+No Interaction (Independent)
+Parallel
+
+![img-45.jpeg](img-45.jpeg)
+Strong Interaction
+Crossing
+
+CRITICAL INSIGHT:
+
+Interactions &gt; Main Effects
+
+MODEL VERIFICATION &amp; VALIDATION
+
+# Residual Diagnostics
+
+![img-46.jpeg](img-46.jpeg)
+1. Normal Probability Plot
+Check: Residuals should fall approximately along a straight line (the "fat pencil" test). Significant deviations indicate non-normality.
+
+![img-47.jpeg](img-47.jpeg)
+Assumption: Constant Variance
+
+![img-48.jpeg](img-48.jpeg)
+3. Residuals vs. Order
+Assumption: Independence
+
+EXECUTION PHASE
+
+"A well-documented run sheet is the bridge between statistical design and physical reality."
+
+# Randomization Plan &amp; Run Sheets
+
+## Execution Checklist
+
+### Generate Random Run Order
+
+Use software or random number tables to assign run order.
+
+&gt; Critical: Never run in standard order (e.g., all lows then all highs).
+
+### Manage Hard-to-Change Factors
+
+Identify setup constraints early. If randomization is restricted, switch to split-plot design.
+
+### Document All Deviations
+
+Record any unplanned events, delays, or parameter adjustments.
+
+&gt; Use the "Comments" column in the run sheet for real-time notes.
+
+### Pre-Run Verification
+
+Verify measurement system readiness and factor settings before first run.
+
+## Sample Run Sheet
+
+|  EXPERIMENT ID: EXP-2026-001 Date: Jan 13, 2026  |   |   |   |   |
+| --- | --- | --- | --- | --- |
+|  T J I A | STD ORDER ORDER | TEMP (°C) | PRESS (PSI) | RESPONSE  |
+|  1 | 4 | 180 (+) | 50 (+) | ____  |
+|  2 | 1 | 150 (-) | 30 (-) | ____  |
+|  3 | 3 | 150 (-) | 50 (+) | ____  |
+|  4 | 2 | 180 (+) | 30 (-) | ____  |
+|  Notes:
+Record environmental conditions (humidity, ambient temp) here...  |   |   |   |   |
+
+### Best Practice
+
+Print run sheets for operators to fill out manually, then digitize. Physical sheets
+Physical sheets encourage real-time note-taking.
+
+J I I MÁG G E I T I G
+
+DESIGN OF EXPERIMENTS
+
+Blocking in Factorial Designs
+
+Problem: Split a 23 Design into 2 Blocks
+
+## Methodology Steps
+
+### 1. Identify Design Parameters
+
+Determine the full factorial setup.
+
+Factors: A, B, C (k=3)
+Runs (N): 23 = 8
+Blocks Required: 2
+
+### 2. Select Confounding Effect
+
+Choose the highest order interaction to sacrifice.
+
+Select ABC. Information on ABC interaction will be lost (confounded with block effect).
+
+### 3. Apply Generator Rule
+
+Assign runs based on the sign of the interaction.
+
+Block 1: ABC = - (Negative)
+Block 2: ABC = + (Positive)
+
+## Allocation Table
+
+Generator: Sign(A × B × C)
+
+Block 1 (ABC = -)
+
+|  RUN | A | B | C | ABC  |
+| --- | --- | --- | --- | --- |
+|  ACA | - | - | - | -  |
+|  ab | + | + | AE | -  |
+|  ac | + | - | + | -  |
+|  bc | AE | + | + | -  |
+
+Block 2 (ABC = +)
+
+|  RUN | A | B | F | ABC  |
+| --- | --- | --- | --- | --- |
+|  a | + | - | - | +  |
+|  b | AE | + | - | +  |
+|  c | - | - | + | +  |
+|  abc | + | + | + | +  |
+
+## INTERPRETATION
+
+By grouping runs into two blocks based on the sign of ABC, any systematic difference between Block 1 and Block 2 (e.g., Day 1 vs Day 2) will affect the estimate of the ABC interaction only. The main effects (A, B, C) and two-factor interactions (AB, AC, BC) remain orthogonal to blocks and can be estimated cleanly.
+
+Split-Plot Design Structure
+
+ADVANCED CONCEPTS
+
+![img-49.jpeg](img-49.jpeg)
+
+# Hard-to-Change Factors (Split-Plot)
+
+"When randomization is restricted because one factor is expensive or difficult to adjust between every run."
+
+- **Whole Plots (Hard-to-Change)**
+Factors like furnace temperature or chemical batch that are set once and held constant while other factors are varied.
+
+- **Subplots (Easy-to-Change)**
+Factors like pressure or speed that can be randomized easily within each whole plot setting.
+
+- **Analysis Consequence**
+Results in two error terms: Whole Plot Error (larger) and Subplot Error (smaller). Standard analysis is invalid.
+
+1. Common in industrial settings like chemical processes, agriculture, and heat treatment.
+
+Visual representation of restricted randomization
+
+PROCESS SUSTAINABILITY
+
+"Documentation transforms experimental insights into permanent organizational knowledge."
+
+# Documenting &amp; Standardizing
+
+## Essential Documentation Artifacts
+
+1.  Pre-experiment Charter
+Formal document defining objectives, scope, team roles, and budget.
+[Planning Phase]
+
+2.  Risk Log &amp; Mitigation Plan
+Detailed list of potential failure modes and safety protocols.
+[Safety Critical]
+
+3.  Run Sheet &amp; Data Collection Form
+Randomized order run sheet with spaces for actual process values.
+[Execution Phase]
+
+4.  Final Analysis Report
+Comprehensive summary of statistical findings, models, and conclusions.
+[1 F000001]
+
+## Process Standardization
+
+![img-50.jpeg](img-50.jpeg)
+
+### SOP Updates
+Updating Standard Operating Procedures is the final critical step to lock in improvements.
+
+- ☑ Revise Parameters
+- ☑ Train Operators
+- ☑ Update Control Plans
+
+### Knowledge Lifecycle
+
+![img-51.jpeg](img-51.jpeg)
+
+![img-52.jpeg](img-52.jpeg)
+
+![img-53.jpeg](img-53.jpeg)
+
+STATISTICAL CONCEPTS
+
+# Degrees of Freedom
+
+Intuition: The currency of statistical estimation.
+
+![img-54.jpeg](img-54.jpeg)
+
+$$\text{df} = n - 1$$
+
+Constraint: The Mean ($\bar{x}$)
+
+"The number of independent pieces of information that go into the estimate of a parameter."
+
+11 NÓG JEVIÚG STATISTICAL FOUNDATIONS Concept: Why divide by n - 1?
+
+# Degrees of Freedom in Sample Variance
+
+## Logic Flow
+
+### 1 Define "Freedom to Vary"
+
+Start with n independent data points. Before any calculation, you have n degrees of freedom.
+
+Data Set: $\{\mathbf{x}_1,\mathbf{x}_2,\dots ,\mathbf{x}_n\}$
+
+Initial df = n
+
+### 2 Introduce Constraint
+
+To calculate variance $(s^2)$, we must first calculate the sample mean $(\overline{x})$.
+
+Constraint: The sum of deviations from the mean must equal zero. $\Sigma (x_i - \overline{x}) = 0$
+
+### 3 Determine Final DoF
+
+One value is no longer free to vary; it is determined by the others to satisfy the constraint.
+
+$$
+\text{FAVE } \hat{O} \text{ AÉ}
+$$
+
+## Numerical Example (n=5)
+
+Mean $(\overline{x}) = 30 / 5 = 6$
+
+|  ΓΕΓ ΔΥΛΕΙΗ / | VALUE (X) | ΙΔΕΙ ΑΠΛΑ | G ΔΥΛΕΙΗ / ΑΠΛΑ  |
+| --- | --- | --- | --- |
+|  Č | Č | 6 | Αζ  |
+|  Č | 4 | Ô | ΑČ  |
+|  Č | Ô | 6 | Č  |
+|  Ç | 8 | Ô | ΑČ  |
+|  D ΑΞΟΠΛΗΛΑ | Ê | 6 | Αζ  |
+|   |  | ΓΙ Ι Γ Δ G ΔΥΛΕΙΗ / Γ Ε Γ Γ Γ Γ Γ Ε Η Ι Ε | 0  |
+
+The deviation for the 5th observation must be $+4$ so the total sum equals $0(-4 \cdot 2 + 0 + 2 + ? = 0)$. It is not free to vary.
+
+## KEY TAKEAWAY
+
+Since calculating the mean uses up 1 degree of freedom (imposes 1 constraint), only $n - 1$ independent pieces of information remain to estimate the variance. Dividing by $n$ would underestimate the variability (b as)
+
+DEGREES OF FREEDOM
+
+DoF in Linear Models
+
+K
+
+# ANOVA Table Structure
+
+|  Source of Variation | Degrees of Freedom (df) | Formula  |
+| --- | --- | --- |
+|  Model (Regression) | dfmodel = p | p = number of predictors  |
+|  Residual (Error) | dferror = n - (p + 1) | Remaining df for estimating variance  |
+|  Total | dftotal = n - 1 | Total observations minus 1 (mean constraint)  |
+
+Note: In some notations, p includes the intercept. Here, p is the number of predictors, and 1 represents the intercept term $\beta_0$.
+
+# DOF PARTITIONING VISUALIZED
+
+![img-55.jpeg](img-55.jpeg)
+
+- Model (p)
+- Intercept
+- Error (n-p-1)
+
+$$
+n = p + 1 + \text{dferror}
+$$
+
+Total observations are "spent" on estimating parameters and error
+
+# The Trade-off
+
+Adding more predictors (increasing p) consumes degrees of freedom from the error term, potentially reducing the precision of variance estimation if n is small.
+
+STATISTICAL CURRENCY
+
+Decomposition Tree
+
+# DoF in 2k Factorial Designs
+
+Degrees of Freedom (DoF) represent the amount of independent information available to estimate effects and variability. In factorial designs, we "spend" this currency to buy knowledge about factors.
+
+## The Budget Rule
+
+Total Budget: N - 1 (where N is total runs)
+
+- Each 2-level factor costs 1 DoF.
+- Each interaction costs 1 DoF.
+- Remaining budget goes to Error.
+
+- Model DoF: Sum of all main effects &amp; interactions.
+- Error DoF: Crucial for ANOVA significance testing, testing.
+
+![img-56.jpeg](img-56.jpeg)
+
+DEGREES OF FREEDOM
+
+# Saturated vs Over-Specified Models
+
+Understanding the critical balance between model complexity and available data. A saturated model uses all degrees of freedom for estimation, leaving none for error assessment.
+
+## Saturated Model (0 Error DF)
+
+Number of parameters = Number of unique runs. Perfect fit to data (R² = 100%), but cannot test significance or estimate experimental error.
+
+## Balanced/Parsimonious Model
+
+Includes only significant terms. Retains sufficient degrees of freedom for error (Residual DF &gt; 0) to validate the model and perform hypothesis tests.
+
+## Remediation Strategies
+
+1. Replicate runs to add pure error DF.
+2. Sparsity of Effects: Assume higher-order interactions are negligible and pool them into error.
+
+## DF Balance Gauge
+
+![img-57.jpeg](img-57.jpeg)
+
+{value} DF Error
+
+## WARNING
+
+A saturated model fits noise as well as signal. Without error DF, you are "flying blind" regarding the true significance of your factors.
+
+Tip: Aim for at least 3-5 degrees of freedom for error to get a reliable estimate of noise.
+
+Impact of Error DoF on Precision
+
+Critical t-value (CI Width Factor) vs. DoF
+
+![img-58.jpeg](img-58.jpeg)
+
+The "Elbow" Effect
+
+Notice the sharp drop in interval width as DoF increases from 1 to 5. Beyond 10-15 DoF, the gains in precision diminish (law of diminishing returns).
+
+STATISTICAL PRINCIPLES
+
+# Power &amp; Precision vs. Degrees of Freedom
+
+## Tighter Confidence Intervals
+
+Confidence Intervals (CI) depend on the t-statistic. With few DoF, the t-distribution has "fat tails," resulting in large multiplier values and wide, uninformative intervals.
+
+Result: More DoF → Smaller t-value → Narrower CI (Higher Precision).
+
+## Higher Statistical Power
+
+Power is the probability of detecting a significant effect when one truly exists. Low Error DoF makes it harder to distinguish signal from noise, increasing Type II errors (missed discoveries).
+
+The Trade-off: Increasing DoF usually requires more experimental runs (replication), which increases cost. Aim for at least 10-15 Error DoF for a robust design.
+
+WORKED EXAMPLE
+
+DEGREES OF FREEDOM
+
+Calculating DoF: 23 Design
+
+Context: Full Factorial with 2 Replicates
+
+## Calculation Steps
+
+1.  Determine Total Runs (N)
+
+Calculate total observations based on factors, levels, and replication.
+
+Factors (k) = 3 (A, B, C)
+1. NOADE C
+1. NOANNACIDAE C
+N = 23 × 2 = 16 runs
+
+2.  Calculate Total DoF
+
+Degrees of freedom for the entire experiment.
+
+$\bar{N} \cap \bar{O} \cap \bar{O} \cap \bar{A} \subset \bar{C}$
+$\bar{N} \cap \bar{O} \cap \bar{O} \cap \bar{C} \subset \bar{C}$
+$\bar{C} = 15 \, \text{df}$
+
+3.  Partition Model &amp; Error
+
+Separate effects from residual error.
+
+dfModel = 2k - 1 = 7
+$\bar{N} \cap \bar{O} \cap \bar{O} \cap \bar{C} \subset \bar{C}$  $\bar{O} \cap \bar{O} \cap \bar{O} \cap \bar{C}$
+$\bar{N} \cap \bar{O} \cap \bar{O} \cap \bar{C} \subset \bar{C} \subset \bar{C}$
+
+## DoF Partition Tree
+
+TOTAL
+15
+
+MODEL EFFECTS
+7
+
+ERROR / RESIDUAL
+8
+
+Main (A,B,C)  $\bar{C}$
+2-Way (AB,AC,BC)  $\bar{C}$
+3-Way (ABC)  1
+
+$\frac{d\bar{F}}{e^r}$  comes from replication (pure error).
+
+ANOVA Table Skel eton
+I E CD
+
+|  Source | DF | Calculation  |
+| --- | --- | --- |
+|  Model | D | 23 - 1  |
+|  Residual Error | D | 16 - 1 - 7  |
+|  Total | 15 | N - 1  |
+
+## WHY THIS MATTERS?
+
+With 8 degrees of freedom for error, we have sufficient power to estimate the experimental noise and conduct valid significance tests (F-tests) for our 7 effects. A single replicate (8 runs) would result in 0 error df.
+
+MODEL VALIDATION TECHNIQUES
+
+# Lack-of-Fit Analysis &amp; Center Points
+
+Adding center points to a factorial design allows for an independent estimate of pure error and provides a check for non-linear (curvature) effects in the response surface.
+
+- **Center Points (0,0)**
+Experimental runs set at the midpoint of all factor levels. They do not alter the orthogonality of the design but provide degrees of freedom for pure error.
+
+- **Detecting Curvature**
+By comparing the average response at the center ($\bar{y}_C$) with the average of factorial points ($\bar{y}_F$), we test for quadratic effects: $H_0: \bar{y}_F - \bar{y}_C = 0$.
+
+- **Error Partitioning**
+Replication allows decomposition of Residual Sum of Squares ($SS_E$) into:
+```
+SS Pure Error (Replicates)
+SS Lack-of-Fit (Model Bias)
+```
+
+KEY FORMULA:
+```
+SS Residual = SS Pure Error + SS Lack-of-Fit
+```
+
+![img-59.jpeg](img-59.jpeg)
+Curvature Visualization
+Factor Level
+
+## Interpretation Rule
+If the P-value for Curvature is small (typically &lt; 0.05), the linear model is inadequate. A quadratic term (or response surface design like Central Composite) is needed.
+
+EXPERIMENTAL DESIGN STEP 3
+
+# Selecting Quality Characteristics
+
+Defining the "Y" variable: Choosing Critical-to-Quality (CTQ) metrics that align process outputs with customer requirements.
+
+![img-60.jpeg](img-60.jpeg)
+
+QUALITY CHARACTERISTICS
+
+# Response Selection Criteria
+
+Choosing the right output variable (response) is critical. A good response must be measurable, relevant, and capable of driving process improvement.
+
+## Key Principle
+
+"If you can't measure it, you can't improve it." But measuring the wrong thing with high precision is equally futile.
+
+## EVALUATION DIMENSIONS
+
+- Strategic Alignment
+- Measurement Capability
+- Resource Feasibility
+
+## PHASE 1: DEFINITION &amp; ALIGNMENT
+
+### 01
+
+#### Relevance
+
+Does it directly relate to customer needs (CTQs) or business goals?
+
+### 02
+
+#### Operational Definition
+
+Is there a clear, unambiguous standard for how to measure it?
+
+## PHASE 2: MEASUREMENT CAPABILITY
+
+### 03
+
+#### Measurability
+
+Can it be quantified? Continuous data is preferred over attribute data.
+
+### 04
+
+#### Sensitivity
+
+Can the metric detect small changes in process performance?
+
+### 05
+
+#### Repeatability &amp; Reproducibility
+
+Is the measurement system consistent across operators and time?
+
+## PHASE 3: PRACTICALITY
+
+### 06
+
+#### Cost &amp; Timeliness
+
+Can data be collected economically and quickly enough to be useful?
+
+#
+
+QUALITY CHARACTERISTICS &amp; METROLOGY
+
+"If you can't measure it reliably, you can't improve it. Validating measurement systems is the first step in DOE."
+
+# Measurement System Analysis (MSA)
+
+## Gage R&amp;R Study
+Priority
+Assess Repeatability (equipment variation) and Reproducibility (appraiser variation).
+1 MONTH E CCA COMMERCE AGREEMENT ACCESS ARE NONOPERMASING NONOCHROMATOOB
+
+## Bias &amp; Linearity
+Check accuracy against a reference standard across the operating range.
+ENCODE F MEMORY REPROD NOP QUALITY CHROMATOOB
+
+## Resolution &amp; Range
+Ensure the gauge can detect small changes and cover all factor levels.
+1 MONTH OR NE 1 MONTH REPROD COOP SIN N2CCC OMPON OONNCEBNOBONOON
+
+## Data Collection Plan
+Define who measures, when, how, and where data is recorded.
+1 MONTH OR NE TREATMENT
+
+# Measurement Quality Metrics
+
+![img-61.jpeg](img-61.jpeg)
+Components of Measurement Variation
+
+# Validation Criteria
+
+![img-62.jpeg](img-62.jpeg)
+
+"A poor measurement system can hide process improvements and waste experimental resources."
+
+RESPONSE OPTIMIZATION
+
+36
+
+# Multi-Response Considerations
+
+## Optimization Challenges
+
+|  Challenge | Description | Strategy  |
+| --- | --- | --- |
+|  Trade-offs | Improving one response hurts another (e.g., Yield vs. Speed) | Pareto optimization, Desirability Function  |
+|  Constraints | Physical limits or specifications must be met | Constrained optimization, Penalty functions  |
+|  Composite Desirability | Combining multiple metrics into a single score (0-1) | Geometric mean of individual desirabilities  |
+|  Weighting | Not all responses are equally important | Assign importance weights to each response  |
+
+Key Insight: Rarely can all responses be maximized simultaneously. The goal is to find the "sweet spot" where overall system performance is acceptable.
+
+## RESPONSE TRADE-OFF RADAR
+
+![img-63.jpeg](img-63.jpeg)
+
+- Scenario A: High Yield
+- Scenario B: Balanced
+- Scenario C: Low Cost
+
+E
+
+Scenario B: effort the best balance–maximizing desirability without violating critical constraints
+
+Composite Desirability (D)
+
+$$
+D = \left(d _ {1} \times d _ {2} \times \dots \times d _ {n}\right) ^ {*} (1 / n)
+$$
+
+MODULE 1 CONCLUSION
+
+Summary &amp; Practice
+
+^{}[]
+
+## Key Takeaways
+
+- Systematic Approach
+Industrial experimentation replaces ad-hoc trial-and-error (OFAT) with structured planning to understand process drivers.
+
+- Statistical Mindset
+Everything is a process with variation. We distinguish signal (special causes) from noise (common causes).
+
+- The DOE "Trident"
+Randomization removes bias; Replication measures error; Blocking manages nuisance factors.
+
+- Degrees of Freedom
+The "currency" of experimentation. You spend DoF to estimate effects; saving some for error is crucial.
+
+## Practice Problems
+
+**PROBLEM 1**
+Application
+
+**Web A/B Testing Setup**
+For an e-commerce checkout page optimization, identify 2 factors (with levels) and 1 primary response metric.
+
+**PROBLEM 2**
+F M B R O M D
+
+**DoF Computation**
+Calculate the Error Degrees of Freedom for a 2² Full Factorial Design with 3 Replicates.
+Hint: Total runs = 4 × 3 = 12.
+
+**PROBLEM 3**
+F (B R O M D) C (D O F B R)
+
+**Quality Characteristic Selection**
+A CNC turning process has high scrap. Choose the best CTQ: (A) "Visual appearance", (B) "Outer Diameter (mm)", or (C) "Pass/Fail count". Justify.
