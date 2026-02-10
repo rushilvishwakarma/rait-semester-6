@@ -1,0 +1,778 @@
+---
+title: Module 2 - Key Interactions and Systematic Methodology
+---
+
+Design of Experiments (DOE)
+Code 231CAUMM61
+
+# Module 2: Key Interactions and Systematic Methodology
+
+Analysis, Modeling, and Interpretation of Complex Experimental Factors
+
+
+Course
+B.Tech CSE (AI &amp; ML) - Sem VI
+
+
+Instructor
+Prof. Dr. Sachin S. Shende
+
+
+Focus
+Interaction Effects &amp; Analysis Tools
+
+
+Outcome
+Model &amp; Interpret Interactions
+
+# Learning Objectives
+
+1. Explain main effects vs interaction effects clearly
+2. Compute two-factor (2FI) interaction effects accurately
+3. Distinguish synergistic vs antagonistic interactions
+4. Identify key barriers to successful DOE application
+5. Apply a practical DOE methodology from start to finish
+6. Build and validate response prediction models with CIs
+
+# Introduction to Interactions in DOE
+
+Understanding how factors work together is crucial. In real-world systems, variables rarely act in isolation.
+
+
+## Factor Interplay
+
+Real systems demonstrate complex interplay between variables, not just isolated main effects.
+
+
+## Defining Interaction
+
+An interaction exists when the effect of Factor A depends on the level setting of Factor B.
+
+
+## Risk of Ignoring
+
+Failing to account for interactions can lead to incorrect conclusions and suboptimal process settings.
+
+
+## Optimization Criticality
+
+# What are Interaction Effects?
+
+An interaction effect occurs when one variable's impact depends on the state of another variable, defying simple additive logic.
+
+
+## Non-Additive Nature
+
+The combined effect of multiple factors is significantly different from the simple sum of their individual effects.
+
+
+## Measurement Method
+
+Mathematically calculated as the "difference of differences" in response values across various factor levels.
+
+
+## Direction &amp; Sensitivity
+
+Effects can be positive or negative; the magnitude indicates how sensitive the process is to specific combinations.
+
+
+## Universal Context
+
+Ubiquitous in complex environments including manufacturing lines, service operations, and
+
+# Types of Interaction Effects
+
+Interactions vary in complexity and nature. Identifying the specific type is crucial for correct model interpretation and process optimization.
+
+
+## Two-Factor (2FI)
+
+The most common interactions (e.g., AB, AC) involving just two variables. These are the primary focus of industrial experiments.
+
+
+## Higher-Order
+
+Complex interactions among 3+ factors (e.g., ABC). These are rare in practice and difficult to interpret mechanically.
+
+
+## Ordinal vs. Disordinal
+
+Ordinal interactions show non-crossing lines, while disordinal ones show crossing lines indicating an effect reversal.
+
+
+## Directional Nature
+
+Classified as synergistic (positive reinforcement) or antagonistic (negative interference) based on the combined outcome.
+
+# Main Effects vs Interaction Effects
+
+## Main Effects
+
+- Definition: Average change in response caused by changing a single factor alone.
+- Assumption: Factors operate independently of each other.
+- Model: Additive model works well ($Y = A + B$).
+- Focus: Simplest form of influence to analyze.
+
+## Interaction Effects
+
+- Definition: Change in a factor's effect dependent on another factor's level.
+- Reality: Factors influence each other (synergy/conflict).
+- Model: Additive model fails; requires interaction terms ($Y = A + B + AB$).
+- Design: Need factorial designs to detect properly.
+
+Visualizing Interactions – Part 1
+
+Analysis Tools
+
+
+Interaction Plot Example
+Response vs Factor A (at different levels of B)
+
+Factor A Settings
+Factor B: Low (-1) Factor B: High (+1)
+
+# Interaction Plots
+
+Plots response (Y) against levels of one factor (X1), with separate lines for levels of the second factor (X2).
+
+# Non-Parallel Lines
+
+The key indicator: if lines are not parallel, an interaction likely exists. Parallel lines suggest independence.
+
+# Use Coded Levels
+
+Using coded levels (-1, +1) simplifies interpretation of slope changes and magnitude direction.
+
+Advanced Patterns
+
+# Visualizing Interactions – Part 2
+
+Disordinal Interaction (Crossing)
+Effect Reversal: Lines Cross
+
+Factor A Settings
+Factor B: Low (-1) Factor B: High (+1)
+
+## Crossing Lines (Disordinal)
+
+Lines crossing indicate an "effect reversal." The optimal setting for Factor A flips depending on Factor B's level.
+
+## Fan-Shaped (Ordinal)
+
+Lines spreading out show the effect strengthening or weakening. The direction stays consistent, but magnitude varies.
+
+## Cube &amp; Screening Plots
+
+Cube plots visualize 3-factor effects spatially. Pareto plots rank effects to screen for significant interactions.
+
+# Two-Factor (2FI) Interaction: Introduction
+
+In 2k factorial designs, the Two-Factor Interaction (2FI) is the core component for understanding complex system behaviors beyond simple additive effects.
+
+
+## System Understanding
+
+2FI analysis reveals how two input variables jointly influence the response, critical for process characterization.
+
+
+## Standard Notation
+
+The interaction between Factor A and Factor B is typically denoted as $AB$ or $A \times B$.
+
+
+## Model Equation
+
+Represented as: $y = \beta_0 + \beta_{1X1} + \beta_{2X2} + \beta_{12X1X2} + \varepsilon$, where $\beta_{12}$ is the interaction coefficient.
+
+
+## Coded Levels
+
+Calculations use coded variable levels where Low = -1 and High = +1 to normalize scale effects.
+
+Calculating 2FI: Traditional Contrast Method
+
+Methodology
+
+INTERACTION EFFECT CALCULATION
+
+$$
+Effect(AB) = \bar{y}_{AB+} - \bar{y}_{AB-}
+$$
+
+COEFFICIENT CALCULATION (2²)
+
+$$
+b_{AB} = \frac Effect(AB)}{2}
+$$
+
+AB+ Runs where signs of A &amp; B match (+,+ or -,-)
+
+AB- Runs where signs of A &amp; B differ (+,- or - ,+)
+
+$\bar{y}$ Average response at those conditions
+
+1. Identify Cell Means
+
+Calculate average response (y) at each design corner (each combination of +/- levels).
+
+2. Group by Interaction Sign
+
+Multiply signs of A and B. Group runs where result is (+) vs result is (-).
+
+3. Compute Difference
+
+Subtract average of "low" interaction group from "high" interaction group.
+
+Note: For a full $2^2$ design with $n$ replicates, the divisor for coefficient is 2 (Effect/2).
+
+Alternative Method: Difference-of-Differences
+
+Calculation
+
+# CONDITIONAL SIMPLE EFFECTS
+
+$$
+SE_{A|B+} = y_{A+B+} - y_{A-B+}
+$$
+
+$$
+SE_{A|B-} = y_{A+B-} - y_{A-B-}
+$$
+
+# INTERACTION CALCULATION
+
+$$
+Effect(AB) = \frac{SE_{A|B+} - SE_{A|B-}}{2}
+$$
+
+SE(A|B+) Effect of A when B is High (+1)
+SE(A|B-) Effect of A when B is Low (-1)
+y Response value at specific corner
+
+1. Calculate A's Effect at B = +1
+Find the change in response due to Factor A given that Factor B is held at its high level.
+
+2. Calculate A's Effect at B = -1
+Find the change in response due to Factor A given that Factor B is held at its low level.
+
+3. Compute Difference &amp; Average
+Subtract the low-level effect from the high-level effect, then divide by 2 to center the interaction.
+
+$\mathfrak{S}$ Symmetry Property: Swapping A and B yields the same result. If A affects B, B affects A identically.
+
+Step-by-Step: Alternative 2FI Calculation
+
+1. Arrange Data
+Organize response data into a 2×2 Matrix (actors A × B).
+
+2. Effect of A (at B+)
+Calculate: y(A+,B+) - y(A-,B+)
+
+3. Effect of A (at B-)
+Calculate: y(A+,B-) - y(A-,B-)
+
+4. Compute Interaction
+Find difference: Step 2 - Step 3
+
+5. Scale Coefficient
+Convert to bAB by appropriate scaling ($\div 2$).
+
+# Synergistic Interactions: Definition
+
+Synergy occurs when the combined power of two factors working together exceeds the sum of their individual effects.
+
+
+## Super-Additive Effect
+
+The total response is significantly greater than what would be expected from adding individual main effects.
+
+
+## Positive Model Coefficient
+
+In a coded regression model, synergy is indicated by a positive coefficient (+bAB) for the interaction term.
+
+
+## Factor Complementarity
+
+Factors reinforce each other; increasing the level of one factor amplifies the benefits of the other.
+
+
+## High Performance
+
+Identifying synergy is crucial for pushing system limits and achieving maximum performance settings.
+
++
+
+# Synergistic Interactions: Examples
+
+Real-world cases where combined effect &gt; sum of individual effects
+
+## Manufacturing
+
+Combining Higher Temperature with an Optimized Catalyst in a chemical reactor.
+
+**Synergy Result**
+
+Yield boosts significantly beyond additive expectations.
+
+## Software Systems
+
+Implementing Data Caching alongside Query Optimization in database systems.
+
+**Synergy Result**
+
+Throughput multiplies as faster access meets efficient logic.
+
+## Indian Services
+
+UPI Integration combined with Aadhaar eKYC in BFSI sector onboarding.
+
+**Synergy Result**
+
+Customer acquisition time drops from days to minutes.
+
+# Antagonistic Interactions: Definition
+
+Unlike synergy, antagonistic interactions occur when factors conflict, resulting in a combined effect that is less than the sum of individual parts.
+
+
+## Less Than Additive
+
+The combined performance is significantly lower than predicting by simply adding individual main effects together.
+
+
+## Negative Coefficient
+
+In the coded regression model, the interaction term (bAB) typically carries a negative sign, reducing total response.
+
+
+## Diminishing Benefits
+
+Increasing one factor may dampen or restrict the benefits gained from increasing the other factor.
+
+
+## Trade-offs &amp; Constraints
+
+These interactions often signal physical limitations or necessary compromises between competing process variables.
+
+#
+
+# Antagonistic Interactions: Examples
+
+Cases where combined effect &lt; sum of individual effects (Conflict/Constraint)
+
+## Manufacturing
+
+Combining High Cutting Speed with High Feed Rate in machining operations.
+
+**Negative Result**
+Surface roughness increases drastically, degrading quality.
+
+## IT Operations
+
+Running Heavy Compression simultaneously with Real-time Encryption.
+
+**Trade-off**
+System latency spikes disproportionately; throughput drops.
+
+## Service Industry
+
+Aggressive Discounts offered during Peak Hour Load periods.
+
+**Service Failure**
+Overcrowding leads to poor service quality &amp; complaints.
+
+# Synergistic vs Antagonistic Interactions
+
+## Synergistic
+
+- Goal: Reinforce combined effects to maximize performance.
+- Strategy: Seek combined high levels (e.g., High Temp + High Pressure).
+- Control: Implement SOPs to lock in specific parameter settings.
+- Outcome: Multiplier effect; total benefit exceeds sum of parts.
+
+## Antagonistic
+
+- Goal: Manage conflict; find the "sweet spot" trade-off.
+- Design Tip: Explore mid-levels using response surface methods.
+- Control: Monitor closely to prevent drift into failure zones.
+- Outcome: Stability and risk mitigation; avoiding negative impacts.
+
+Barriers to Successful DOE – Part 1
+
+Statistical Challenges &amp; Common Pitfalls
+
+Critical Risks
+
+## Poor Measurement System
+High measurement error (Gage R&amp;R) masks real process effects.
+
+## Low Statistical Power
+Too few runs or high noise leads to missed significant factors.
+
+## Confounding Issues
+Poor design choice mixes main effects with interactions.
+
+## Assumption Violations
+Non-normality or non-constant variance invalidates analysis.
+
+## Lack of Randomization
+Systematic bias creeps in without proper run randomization.
+
+
+## Garbage In, Garbage Out
+Even the best analysis cannot fix a fundamentally flawed experimental design or poor data quality.
+
+Barriers to Successful DOE – Part 2
+
+Technical &amp; Sociological Dimensions
+
+Implementation Risks
+
+## Equipment Instability
+Drift, wear, or unplanned downtime disrupting run schedules.
+
+## Feasibility &amp; Safety
+Setting factor ranges that are dangerous or physically impossible.
+
+## Data Integrity Issues
+Manual entry errors, missing log values, or sensor failures.
+
+## Stakeholder Resistance
+Lack of buy-in or "HIPPO" decisions overriding data insights.
+
+## Indian Context Constraints
+Power quality fluctuations and supply chain delays affecting runs.
+
+
+## Operational Reality
+Success depends 20% on statistical design and 80% on execution discipline and team alignment.
+
+# Practical DOE Methodology: Overview
+
+A systematic approach ensures experimental success. Aligning DOE with established frameworks guarantees meaningful results.
+
+## Framework Alignment
+Integrate DOE within DMAIC (Six Sigma) or PDCA cycles to provide structure and ensure continuous improvement.
+
+## Define CTQ &amp; Metrics
+Clearly define Critical-to-Quality (CTQ) characteristics and success metrics before planning the experiment.
+
+## Detect Interactions
+Plan the design specifically to detect key interactions, ensuring the experimental power is sufficient.
+
+## Validate Learnings
+Always conduct confirmation runs to validate the model's predictions and ensure reproducibility.
+
+Step-by-Step DOE Methodology
+
+#
+
+1.  Problem Statement
+Define objective, scope &amp; CTQ.
+
+2.  Voice of Customer
+Select response variable (Y).
+
+3.  Brainstorm Xs
+Choose factors &amp; set levels.
+
+4.  Conduct MSA
+Verify Gage R&amp;R &amp; calibration.
+
+5.  Select Design
+Choose Full/Fractional factorial.
+
+6.  Plan Experiment
+Randomize runs &amp; run order.
+
+7.  Execute &amp; Record
+Collect data, note noise factors.
+
+8.  Analyze Results
+Perform ANOVA, analyze effects.
+
+9.  Optimize &amp; Confirm
+Predict optimum &amp; run tests.
+
+10. Control Plan
+Implement controls &amp; handover.
+
+# Analytical Tools for DOE – Part 1
+
+Robust statistical analysis is essential to validate experimental results. These core tools help separate signal from noise.
+
+
+## ANOVA (Analysis of Variance)
+
+Partition variability to test the statistical significance of main effects and 2-factor interactions.
+
+
+## Regression Analysis
+
+Build predictive models using coded variables $(-1, +1)$ to estimate coefficients for factors.
+
+
+## Residual Diagnostics
+
+Check assumptions of normality, constant variance, and independence to validate the model.
+
+
+## Lack-of-Fit Tests
+
+Determine if the current model is adequate or if higher-order terms are needed to explain variation.
+
+# Analytical Tools for DOE – Part 2
+
+Beyond statistical tests, robust visualization techniques and specialized software are indispensable for interpreting complex interaction effects effectively.
+
+## Screening Plots
+
+Half-normal and Pareto plots allow engineers to rapidly identify significant main effects and interactions from noise.
+
+## Interaction Graphs
+
+Line plots visualize how factor settings influence the response, revealing non-parallelism and effect strength.
+
+## Surface Visualization
+
+Contour and 3D surface plots provide a spatial map of the response landscape, critical for precise optimization.
+
+## Software Ecosystem
+
+Tools like Minitab, JMP, R, and Python (statsmodels) automate complex calculations and generate diagnostics.
+
+Model Building for Response: Introduction
+
+Modeling
+
+## REGRESSION MODEL (2 FACTORS)
+
+$$
+y = \beta_0 + \beta_A x_A + \beta_B x_B + \beta_{AB} x_A x_B
+$$
+
+## CODING TRANSFORMATION
+
+$$
+x_{coded} = \frac{x_{actual} - \text{Center}}{\text{Range}/2}
+$$
+
+- y Predicted Mean Response
+- β Regression Coefficients (Effects/2)
+- x Coded Variables (-1 to +1)
+
+## Primary Purpose
+
+To predict the mean response ($\hat{y}$) at any point and identify optimal factor settings.
+
+## Hierarchy Principle
+
+If an interaction $(x_A x_B)$ is significant, include main effects $(x_A, x_B)$ even if individually insignificant.
+
+## Parsimony (Simplicity)
+
+Select the simplest model that adequately fits the data. Remove terms that add noise but no value.
+
+&gt; Why Code Variables? Coding makes coefficients dimensionless and comparable (scale-independent stability).
+
+Model Building Process
+
+^{}[]
+
+1.  Specify Model
+Define candidate model with Main Effects and 2FIs.
+
+2.  Fit Model
+Estimate coefficients via Least Squares; check p-values.
+
+3.  Refine (Remove)
+Remove non-significant terms to ensure Parsimony.
+
+4.  Validate
+Check R² (adj), PRESS, and residual plots for adequacy.
+
+5.  Confirm
+Run confirmation experiments at the predicted Optimum.
+
+# Types of Response Models
+
+## Linear &amp; 2FI Models
+
+→ Main-Effects Only Used for screening. Assumes linearity and no interactions.
+
+→ 2FI (Two-Factor Interaction) Includes cross-products (AB). Essential for detecting synergy/antagonism.
+
+## Advanced Models
+
+→ Polynomial (Quadratic) Adds squared terms (e.g., $A^2$). Captures curvature, peaks, and valleys.
+
+→ Transformations Log(Y) or Box-Cox to stabilize variance or fit power laws.
+
+→ GLM (Generalized Linear) For non-normal data (e.g., binary pass/fail, defect counts).
+
+# Confidence Interval for Mean Response
+
+Confidence Intervals (CI) quantify the uncertainty in our predicted response. A point estimate $(\hat{y})$ is never exact; the CI provides the range where the true mean likely lies.
+
+---
+
+## Quantifies Uncertainty
+
+The CI defines the precision range for the predicted mean response $(\hat{y})$ at any specific design point $(x_0)$.
+
+---
+
+## Formula Components
+
+CI = $\hat{y} \pm t \times s \times \sqrt{h}$. It depends on the t-statistic, residual standard error (s), and leverage (h).
+
+---
+
+## Interpretation
+
+A narrow interval indicates precise estimates, while a wide interval suggests higher uncertainty and caution.
+
+---
+
+## Key Assumptions
+
+The calculation assumes a valid model structure and that errors are independent, normal, and have constant variance.
+
+#
+
+# Calculating Confidence Intervals: Steps
+
+1. **Fit Model &amp; Estimate s**
+Fit model to obtain residual standard error: s = \sqrt{MSE}
+
+2. **Define Settings (x₀)**
+Form coded vector x_0 including interaction terms.
+
+3. **Compute Leverage (h₀)**
+Calculate distance measure: h_0 = x_0'(X'X)^{-1}x_0
+
+4. **Select t-Statistic**
+Pick t_{\alpha/2}, df} based on desired confidence level (e.g., 95%).
+
+5. **Compute Interval**
+Final calculation: CI = \hat{y} \pm t \cdot s \cdot \sqrt{h_0}
+
+# Statistical Dimensions of DOE
+
+Ensuring experimental validity through rigorous statistical foundations is critical for defensible results.
+
+## The Three Fundamental Principles
+
+Randomization neutralizes bias, Replication estimates experimental error, and Blocking manages nuisance factors.
+
+## Power &amp; Sample Size
+
+Adequate runs ensure high statistical power to detect meaningful effects against the backdrop of process noise.
+
+## Aliasing &amp; Confounding
+
+In fractional designs, understanding the aliasing structure prevents misinterpreting confounded interaction effects.
+
+## Model &amp; Data Integrity
+
+Handling outliers, missing data, and validating model assumptions are vital for reliable predictions.
+
+# Technical Dimensions of DOE
+
+Beyond statistics, successful DOE implementation requires addressing practical technical realities, particularly in the Indian industrial context.
+
+
+## Factor Feasibility
+
+Define realistic factor ranges that are safe and technically feasible for equipment.
+
+
+## Setup &amp; Changeover
+
+Account for setup time and costs, which are critical in labor-intensive Indian units.
+
+
+## Environmental Controls
+
+Monitor noise variables like humidity and power quality fluctuations during runs.
+
+
+## Automation &amp; Logging
+
+Ensure sensors and automated data logging integrity to prevent manual errors.
+
+
+## MSA &amp; Calibration
+
+Validate the measurement system (Gage R&amp;R) and calibrate tools before execution.
+
+# Sociological Dimensions of DOE
+
+Successful DOE implementation goes beyond statistics. It requires managing the human and organizational factors that influence data quality.
+
+
+## Stakeholder Alignment
+
+Ensure management and operators agree on objectives to prevent resistance.
+
+
+## Training &amp; SOP Adherence
+
+Rigorous training ensures operators stick to protocols for consistent runs.
+
+
+## Incentives Strategy
+
+Align incentives to prioritize data quality rather than just production speed.
+
+
+## Change Management
+
+Document learnings to drive a cultural shift toward data-driven decisions.
+
+
+## Ethical Data Practices
+
+Maintain transparency and integrity in reporting, avoiding cherry-picked results.
+
+Module Complete
+
+# Module 2 Summary &amp; Key Takeaways
+
+- ☑ Interactions Matter: Real-world systems are rarely additive; interactions drive performance.
+- ☑ Calculate 2FIs: Use contrast method or difference-of-differences to quantify interaction strength.
+- ☑ Synergy vs Antagonism: Identify whether factors reinforce (synergy) or conflict (antagonism).
+- ☑ Disciplined Methodology: Follow structured steps (Plan, Design, Execute, Analyze) to avoid barriers.
+- ☑ Valid Models: Build regression models with significant terms only; validate assumptions.
+- ☑ Confidence Intervals: Always report estimates with CIs to quantify uncertainty and risk.
+
+## Core Message
+
+Successful DOE isn't just about running experiments—it's about systematically uncovering hidden interactions to make data-driven decisions.
+
+Next Step
+
+Apply to Project &amp; Case Studies
+
+Design of Experiments (DOE)
+
+# Module 2: Key Interactions and Systematic Methodology
+
+Analysis, Modeling, and Interpretation of Complex Experimental Factors
+
+
+Course
+B.Tech CSE (AI &amp; ML) - Sem VI
+
+
+Instructor
+Prof. Dr. Sachin S. Shende
+
+
+Focus
+Interaction Effects &amp; Analysis Tools
+
+
+Outcome
+Model &amp; Interpret Interactions
