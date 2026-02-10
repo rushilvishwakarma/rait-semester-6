@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import mermaid from 'mermaid';
 
 interface MermaidProps {
   chart: string;
@@ -14,6 +13,8 @@ export function Mermaid({ chart }: MermaidProps) {
   useEffect(() => {
     const renderChart = async () => {
       if (!containerRef.current) return;
+
+      const { default: mermaid } = await import('mermaid');
 
       // Detect dark mode
       const isDark = document.documentElement.classList.contains('dark');

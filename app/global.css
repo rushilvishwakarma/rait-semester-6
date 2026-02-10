@@ -197,3 +197,13 @@
 }
 
 /* Print styles are injected programmatically by handleExportPDF in page-actions.tsx */
+
+/* Make long KaTeX display math equations scrollable instead of causing layout shift */
+.katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.katex-display > .katex {
+    white-space: nowrap;
+}
