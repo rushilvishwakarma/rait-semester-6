@@ -9,7 +9,7 @@ import { Highlight } from '@/components/highlight';
 
 ### Q1. Explain the concept of the Exponential Family of Distributions. Discuss its general form and significance.
 
-The **exponential family of distributions** is a class of probability distributions that can be written in a common mathematical form. Many important distributions such as Gaussian, Bernoulli, Binomial, Poisson, and Exponential belong to this family.
+The **exponential family of distributions** is a broad class of probability distributions that can be expressed in a common mathematical form. Many widely used distributions such as **Gaussian, Bernoulli, Binomial, Poisson, Gamma, and Exponential** belong to this family.
 
 The general form of an exponential family distribution is:
 
@@ -19,37 +19,62 @@ $$
 
 where:
 
+- $h(y)$: **Base measure** — a non-negative function of the observation that acts as a scaling factor.
+- $\eta(\theta)$: **Natural (canonical) parameter** — a function of the distribution parameter that defines the distribution's shape.
+- $T(y)$: **Sufficient statistic** — captures all the information from the data needed for estimating $\theta$.
+- $A(\theta)$: **Log-partition function** — a normalization constant that ensures the distribution sums/integrates to 1.
+
+**Examples:**
+
+| Distribution | $\eta(\theta)$ | $T(y)$ | Use Case |
+|---|---|---|---|
+| Bernoulli | $\log\frac{p}{1-p}$ | $y$ | Binary outcomes |
+| Poisson | $\log(\lambda)$ | $y$ | Count data |
+| Gaussian | $\mu/\sigma^2$ | $y$ | Continuous data |
+
 **Significance:**
 
-The exponential family provides a unified framework for probabilistic modeling. It allows efficient parameter estimation using maximum likelihood, simplifies inference, and forms the theoretical basis of generalized linear models.
+The exponential family provides a **unified framework** for probabilistic modeling. It allows efficient parameter estimation using **maximum likelihood estimation (MLE)**, simplifies inference through the use of sufficient statistics, and forms the **theoretical foundation of Generalized Linear Models (GLMs)**. Its mathematical properties also enable conjugate priors in Bayesian analysis, making it central to both frequentist and Bayesian statistics.
 
 ---
 
 ### Q2. Describe the structure of a Generalized Linear Model (GLM).
 
-A **Generalized Linear Model (GLM)** is an extension of linear regression that allows the response variable to follow distributions other than the normal distribution.
+A **Generalized Linear Model (GLM)** is an extension of classical linear regression that allows the response variable to follow distributions other than the normal distribution. GLMs are used when the response variable is **binary, count, or positively skewed**.
 
-A GLM consists of three components:
+A GLM consists of **three components**:
 
-1. **Random component**
+1. **Random Component**
    
-   It specifies the probability distribution of the response variable, which must belong to the exponential family.
+   Specifies the probability distribution of the response variable ($Y$), which must belong to the **exponential family**.
+   $$
+   Y \sim \text{Exponential Family}
+   $$
+   Examples: Normal, Bernoulli, Binomial, Poisson, Exponential.
 
-2. **Systematic component**
+2. **Systematic Component**
    
-   It is the linear predictor given by:
+   The linear predictor, which represents a linear combination of the explanatory variables:
    $$
    \eta = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p = X\beta
    $$
 
-3. **Link function**
+3. **Link Function**
    
-   It connects the expected value of the response variable to the linear predictor:
+   A function that connects the mean of the response variable to the linear predictor:
    $$
    g(\mu) = \eta
    $$
+   where $\mu = E(Y)$. The link function ensures that predictions satisfy the constraints of the distribution.
 
-Thus, GLMs allow flexible modeling of different types of data using linear predictors.
+   Examples of link functions:
+   - **Identity link** ($g(\mu) = \mu$) → Normal / Linear regression
+   - **Logit link** ($g(\mu) = \log\frac{\mu}{1-\mu}$) → Logistic regression
+   - **Log link** ($g(\mu) = \log(\mu)$) → Poisson regression
+
+**Significance:**
+
+GLMs provide a **unified framework** for modeling different types of data (continuous, binary, count) while retaining the interpretability of linear models. They are widely used in statistics, machine learning, epidemiology, and economics.
 
 ---
 
@@ -65,9 +90,23 @@ where $\mu = E(y)$ is the mean of the response variable.
 
 The link function transforms the mean of the response variable so that it can be modeled as a linear combination of input variables. This transformation is necessary because many response variables do not have an unrestricted range.
 
-Different link functions are used because different response distributions have different constraints. For example:
+Different link functions are used because different response distributions have different **constraints on $\mu$**. For example:
 
-The link function ensures that predicted values satisfy these constraints.
+| Link Function | Formula | Used For | Constraint Handled |
+|---|---|---|---|
+| **Identity** | $g(\mu) = \mu$ | Normal regression | No constraint (continuous) |
+| **Logit** | $g(\mu) = \log\frac{\mu}{1-\mu}$ | Logistic regression | $\mu \in (0, 1)$ — probabilities |
+| **Log** | $g(\mu) = \log(\mu)$ | Poisson regression | $\mu > 0$ — count data |
+| **Probit** | $g(\mu) = \Phi^{-1}(\mu)$ | Binary classification | $\mu \in (0, 1)$ — probabilities |
+| **Inverse** | $g(\mu) = 1/\mu$ | Gamma regression | $\mu > 0$ — positive continuous |
+
+The link function ensures that predicted values satisfy these constraints and remain valid.
+
+**Why different link functions are important:**
+
+1. They ensure model predictions respect the **natural range** of the response variable.
+2. They provide **flexibility** to model diverse data types (binary, count, continuous) within the same GLM framework.
+3. The **canonical link** (default link for each distribution) simplifies parameter estimation and guarantees desirable statistical properties.
 
 Thus, link functions provide <Highlight>**flexibility**</Highlight>, ensure valid predictions, and allow linear models to be applied to a wide range of response variables.
 
@@ -83,35 +122,52 @@ P(y=1|x) = \Phi(X\beta)
 $$
 where $\Phi(\cdot)$ denotes the standard normal CDF.
 
-Probit regression assumes the existence of an underlying <Highlight color="blue">**latent variable**</Highlight> that follows a normal distribution. The observed binary outcome depends on whether this latent variable crosses a threshold.
+Probit regression assumes the existence of an underlying <Highlight color="blue">**latent variable**</Highlight> $y^*$ that follows a normal distribution. The observed binary outcome depends on whether this latent variable crosses a threshold:
+$$
+y = \begin{cases} 1 & \text{if } y^* > 0 \\ 0 & \text{otherwise} \end{cases}
+$$
 
 **Comparison with Logistic Regression:**
 
-**Logistic regression**, in contrast, uses the logistic (sigmoid) function to model probabilities and assumes a logistic distribution for the error term. Although the link functions differ, both models yield very similar probability estimates in practice.
+| Feature | Probit Regression | Logistic Regression |
+|---|---|---|
+| **Link Function** | Inverse normal CDF ($\Phi^{-1}$) | Logit ($\log\frac{p}{1-p}$) |
+| **Probability Function** | $\Phi(X\beta)$ | $\frac{1}{1+e^{-X\beta}}$ |
+| **Error Distribution** | Normal | Logistic |
+| **Tail Behavior** | Lighter tails (approaches 0/1 faster) | Heavier tails |
+| **Interpretability** | Less intuitive | Coefficients ≈ log-odds (more intuitive) |
+| **Results** | Very similar to logistic | Very similar to probit |
+
+Although the link functions differ, both models yield **very similar probability estimates** in practice. Logistic regression is more commonly used due to its interpretability (log-odds), while probit regression is preferred in econometrics and when normality of the latent variable is assumed.
 
 ---
 
 ### Q5. Discuss Multitask Learning (MTL). How does parameter sharing improve learning performance and generalization?
 
-**Multitask Learning (MTL)** is a learning paradigm in which multiple related tasks are learned simultaneously using a shared model. Instead of training separate models for each task, MTL allows tasks to share parameters and internal representations.
+**Multitask Learning (MTL)** is a learning paradigm in which multiple related tasks are learned **simultaneously** using a shared model. Instead of training separate models for each task, MTL allows tasks to share parameters and internal representations, leveraging commonalities across tasks.
 
-The key idea behind MTL is <Highlight>**parameter sharing**</Highlight>, where common features learned from one task help improve learning in other tasks. Shared parameters act as a form of regularization and prevent the model from overfitting to a single task.
+The key idea behind MTL is <Highlight>**parameter sharing**</Highlight>, which can be of two types:
+
+1. **Hard Parameter Sharing**: All tasks share the same hidden layers, with task-specific output layers. This is the most common approach and significantly reduces overfitting.
+2. **Soft Parameter Sharing**: Each task has its own model, but the parameters are regularized to encourage similarity between models.
 
 **How Parameter Sharing Improves Performance:**
 
-1. **Knowledge Transfer**: Tasks with limited data benefit from related tasks with more data
-2. **Regularization**: Shared parameters prevent overfitting to individual tasks
-3. **Common Patterns**: The model captures underlying patterns across tasks
-4. **Improved Generalization**: The model becomes more robust by learning from multiple perspectives
+1. **Knowledge Transfer**: Tasks with limited data benefit from related tasks with more data, improving accuracy on data-scarce tasks.
+2. **Regularization**: Shared parameters prevent overfitting to individual tasks by acting as an implicit regularizer.
+3. **Feature Learning**: The model learns more general and robust internal representations that capture common underlying patterns.
+4. **Improved Generalization**: The model becomes more robust by learning from multiple perspectives, reducing variance.
 
-Parameter sharing improves learning performance by allowing tasks with limited data to benefit from related tasks with more data. It also improves generalization by capturing common underlying patterns across tasks.
+**Examples / Applications:**
 
-**Applications:**
+- **NLP**: A single model jointly performing Named Entity Recognition, Part-of-Speech tagging, and sentiment analysis.
+- **Computer Vision**: A model simultaneously performing object detection, segmentation, and depth estimation.
+- **Healthcare**: Predicting multiple patient outcomes (readmission, mortality, length of stay) from the same patient data.
+- **Autonomous Driving**: Jointly learning steering angle, lane detection, and obstacle detection.
 
-MTL produces more robust models and is widely used in domains such as:
+**Significance:**
 
-Absolutely. Below is a **rewritten, shortened, exam-ready version**, **including the question**, with **obvious steps compacted** and **no teaching chatter**.
-This is exactly how you should **write + think** in the exam.
+MTL produces more robust and data-efficient models compared to single-task learning. It is especially beneficial when individual tasks have limited labeled data but share common structure with related tasks.
 
 ---
 <LongQuestion>
@@ -305,15 +361,17 @@ Both models predict that the customer will **default** on the loan.
 
 ---
 
-# Module 2 (Q1-Q5 only)
+# Module 2
 
 ## **Q1. Define Directed Graphical Models (DGMs). Explain how Bayesian Networks represent joint probability distributions.**
 
-<Highlight color="pink">Directed Graphical Models (DGMs) are probabilistic models that represent random variables using a **directed graph**.</Highlight> Each node represents a random variable, and directed edges represent probabilistic dependencies between variables.
+<Highlight color="pink">Directed Graphical Models (DGMs) are probabilistic models that represent random variables and their dependencies using a **directed graph**.</Highlight> Each **node** represents a random variable, and each **directed edge** (arrow) represents a direct probabilistic dependency between variables.
 
-A **Bayesian Network** is a type of DGM whose graph is a **Directed Acyclic Graph (DAG)**. Each variable is associated with a conditional probability distribution given its parent variables.
+A **Bayesian Network** is a specific type of DGM whose graph structure is a **Directed Acyclic Graph (DAG)** — meaning it has no cycles. Each variable in the network is associated with a **conditional probability distribution (CPD)** given its parent variables.
 
-A Bayesian Network represents the joint probability distribution as a product of conditional probabilities:
+**Joint Probability Representation:**
+
+A Bayesian Network represents the joint probability distribution of all variables as a **product of conditional probabilities**, exploiting the conditional independence structure encoded in the graph:
 $$
 P(X_1, X_2, \dots, X_n) = \prod_{i=1}^{n} P(X_i \mid \text{Parents}(X_i))
 $$
@@ -331,22 +389,31 @@ $$
 P(A, B, C, D) = P(A) \cdot P(B \mid A) \cdot P(C \mid A) \cdot P(D \mid B, C)
 $$
 
-This factorization reduces complexity and allows efficient probabilistic reasoning.
+Here, instead of needing $2^4 - 1 = 15$ parameters for a full joint distribution, the factorized form requires only **1 + 2 + 2 + 4 = 9** parameters, demonstrating the efficiency of Bayesian Networks.
+
+**Significance:**
+
+- **Compact representation**: Reduces the number of parameters needed to specify the joint distribution from exponential to manageable.
+- **Efficient reasoning**: Enables probabilistic inference (computing posterior probabilities given evidence).
+- **Interpretability**: The graph structure visually reveals causal/dependency relationships between variables.
+- **Applications**: Used in medical diagnosis, fault detection, spam filtering, and decision support systems.
 
 ---
 
 ## **Q2. Explain the concept of conditional independence in Directed Graphical Models with graphical intuition.**
 
-Conditional independence means that two variables are independent given knowledge of a third variable. Variables (X) and (Y) are conditionally independent given (Z) if:
+**Conditional independence** means that two random variables are statistically independent given knowledge of a third variable. Formally, variables $X$ and $Y$ are conditionally independent given $Z$ if:
 $$
 P(X, Y \mid Z) = P(X \mid Z)P(Y \mid Z)
 $$
 
-In Bayesian Networks, conditional independence is encoded by the graph structure. A node is conditionally independent of its non-descendants given its parents.
+This is denoted as $X \perp Y \mid Z$.
 
-Graphically, conditional independence is determined using **d-separation**, which checks whether all paths between two variables are blocked given observed variables. If all paths are blocked, the variables are conditionally independent.
+In **Bayesian Networks**, conditional independence is directly encoded by the graph structure. A fundamental property is the **local Markov property**: a node is conditionally independent of all its non-descendants given its parents.
 
-**Three canonical structures:**
+Graphically, conditional independence is determined using **d-separation**, which checks whether all paths between two nodes are "blocked" given a set of observed variables. If all paths are blocked, the variables are conditionally independent.
+
+**Three canonical structures (building blocks):**
 
 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
@@ -390,48 +457,119 @@ Observing B *opens* the path (explaining away).
 
 </div>
 
+**Significance of Conditional Independence:**
+
+- Reduces the number of parameters needed to specify the joint distribution.
+- Enables efficient inference algorithms (e.g., variable elimination, belief propagation).
+- Provides a principled way to reason about which variables influence each other.
+
 ---
 
 ## **Q3. Describe inference in Bayesian Networks. Why is exact inference difficult in large networks?**
 
-Inference in Bayesian Networks involves computing posterior probabilities of variables given observed evidence:
+**Inference** in Bayesian Networks involves computing the **posterior probability** of one or more variables given observed evidence:
 $$
-P(X \mid E)
+P(X \mid E) = \frac{P(X, E)}{P(E)}
 $$
 
-Exact inference methods include variable elimination and belief propagation. These methods exploit the factorized structure of the network.
+where $X$ is the query variable and $E$ is the observed evidence.
 
-However, exact inference becomes computationally difficult in large networks because intermediate computations grow **exponentially** with the number of variables. This leads to high time and memory requirements.
+**Exact Inference Methods:**
 
-Therefore, approximate inference methods such as sampling are often used in large Bayesian Networks.
+1. **Variable Elimination**: Systematically sums out (marginalizes) hidden variables one by one, exploiting the factorized structure of the network. The order of elimination affects efficiency.
+2. **Belief Propagation (Message Passing)**: Passes local messages between nodes in tree-structured graphs to compute marginal probabilities efficiently.
+
+**Why Exact Inference is Difficult in Large Networks:**
+
+Exact inference is **NP-hard** in general Bayesian Networks because:
+- Intermediate computations (factor tables) grow **exponentially** with the number of variables involved.
+- Networks with high **treewidth** (many interconnected variables) require summing over exponentially many variable combinations.
+- This leads to prohibitive **time and memory** requirements.
+
+**Approximate Inference Methods:**
+
+To handle large networks, approximate methods are used:
+- **Monte Carlo Sampling** (e.g., Gibbs sampling, Metropolis-Hastings): Generate random samples to estimate posterior distributions.
+- **Variational Inference**: Approximate the true posterior with a simpler distribution by minimizing KL divergence.
+- **Loopy Belief Propagation**: Applies message passing on graphs with cycles (approximate but often effective in practice).
+
+**Significance:**
+
+Inference is the core operation that makes Bayesian Networks useful — it allows us to reason under uncertainty, make predictions, diagnose causes from symptoms, and update beliefs as new evidence arrives.
 
 ---
 
 ## **Q4. Explain parameter learning in Directed Graphical Models. Differentiate between MLE and Bayesian estimation.**
 
-Parameter learning in DGMs involves estimating the conditional probability distributions of each node using data, assuming the network structure is known.
+**Parameter learning** in DGMs involves estimating the **conditional probability distributions (CPDs)** of each node using observed data, assuming the **network structure is already known**.
 
-In **Maximum Likelihood Estimation (MLE)**, parameters are chosen to maximize the likelihood of the observed data:
+**1. Maximum Likelihood Estimation (MLE):**
+
+Parameters are chosen to **maximize the likelihood** of the observed data:
 $$
 \theta_{MLE} = \arg\max_\theta P(D \mid \theta)
 $$
-MLE relies only on data and does not use prior knowledge.
 
-In **Bayesian estimation**, parameters are treated as random variables with prior distributions:
+MLE relies purely on observed data and does not incorporate any prior knowledge. For a Bayesian Network with complete data, MLE estimates are simply the **relative frequencies** from the data.
+
+*Example*: If out of 100 observations, Rain occurred 30 times, then $P(\text{Rain}) = 30/100 = 0.3$.
+
+**2. Bayesian Estimation:**
+
+Parameters are treated as **random variables** with prior distributions, and the posterior distribution is computed:
 $$
-P(\theta \mid D) \propto P(D \mid \theta)P(\theta)
+P(\theta \mid D) \propto P(D \mid \theta) \cdot P(\theta)
 $$
-Bayesian estimation incorporates prior knowledge and helps reduce overfitting.
+
+Bayesian estimation incorporates **prior knowledge** (e.g., Dirichlet priors) and produces a full posterior distribution over parameters, not just a point estimate.
+
+**Comparison:**
+
+| Feature | MLE | Bayesian Estimation |
+|---|---|---|
+| **Approach** | Maximize likelihood | Compute posterior distribution |
+| **Prior Knowledge** | Not used | Incorporated via prior $P(\theta)$ |
+| **Output** | Point estimate ($\hat{\theta}$) | Full posterior distribution |
+| **Small Data** | Prone to overfitting | Handles well due to priors |
+| **Large Data** | Works well | Converges to MLE |
+| **Complexity** | Simpler | More computationally intensive |
+
+**Significance:**
+
+Parameter learning is essential for building practical Bayesian Network models from data. MLE is preferred for large datasets due to simplicity, while Bayesian estimation is preferred when data is scarce or prior domain knowledge is available.
 
 ---
 
 ## **Q5. What are Decision Diagrams? Explain their role and advantages.**
 
-Decision Diagrams are graph-based representations used to model decisions and probabilistic outcomes in a compact form. They represent decision variables, chance variables, and outcomes using directed graphs.
+A **Decision Diagram** is a compact, graph-based data structure used to represent and evaluate **decision functions, Boolean functions, or conditional probability tables (CPTs)** in a structured and redundancy-free manner. They use directed acyclic graphs where internal nodes represent decision variables and leaf nodes represent outcomes or values.
 
-In probabilistic graphical models, decision diagrams are used to efficiently represent conditional probability tables and decision policies. They reduce redundancy by sharing common substructures.
+**Types of Decision Diagrams:**
 
-Their advantages include reduced memory usage, faster inference, and better scalability, making them useful in decision-making systems and probabilistic modeling.
+- **Binary Decision Diagram (BDD)**: Represents Boolean functions. Each internal node has two branches (True/False).
+- **Algebraic Decision Diagram (ADD)**: Extends BDDs to represent real-valued functions, commonly used to store CPTs in Bayesian Networks.
+- **Ordered Decision Diagram (ODD)**: Variables appear in a fixed order along every path, enabling efficient manipulation.
+
+**Role in Probabilistic Graphical Models:**
+
+1. They compactly represent **conditional probability tables** by merging identical sub-tables, reducing storage significantly.
+2. They support efficient **probabilistic inference** by enabling operations like marginalization and conditioning directly on the diagram structure.
+3. They are used to represent **decision policies** in influence diagrams and Markov decision processes.
+
+**Advantages:**
+
+| Advantage | Explanation |
+|---|---|
+| **Compact Representation** | Shares common sub-structures, reducing memory from exponential to polynomial in many cases |
+| **Faster Inference** | Operations on diagrams (sum, product) are more efficient than on flat tables |
+| **Scalability** | Handles large models where full probability tables would be infeasible |
+| **Canonicity** | Reduced ordered diagrams provide a unique (canonical) representation for a given function |
+
+**Example:** A CPT with 5 binary parents normally needs $2^5 = 32$ entries, but if many entries share the same value (context-specific independence), a decision diagram can represent it with far fewer nodes.
+
+**Significance:**
+
+Decision diagrams are essential tools in decision-making systems, probabilistic reasoning, and verification. They make it practical to work with large-scale probabilistic models that would otherwise be computationally intractable.
 
 ---
 <LongQuestion>
