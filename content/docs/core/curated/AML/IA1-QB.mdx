@@ -114,7 +114,7 @@ Absolutely. Below is a **rewritten, shortened, exam-ready version**, **including
 This is exactly how you should **write + think** in the exam.
 
 ---
-
+<LongQuestion>
 ### Q6. Predict Graduate School Admission Probability Using a Probit Model
 
 **Outcome variable**
@@ -132,8 +132,12 @@ This is exactly how you should **write + think** in the exam.
 * Intercept: $\beta_0 = -3.5$
 * GPA: $\beta_1 = 1.0$
 * Top-Tier School: $\beta_2 = 0.4$
+</LongQuestion>
 
-## Solution
+<Callout type="info">
+- Solution requires Z-Table values.
+- For CASIO fx-991ES PLUS (2nd Edition) calculator, `MODE` -> `STAT` (3) -> `1: 1-VAR` -> `AC` -> `SHIFT` and then press `1` -> `5: Distr` -> `1:P(`  -> Your input value comes here -> complete with `)` and ENTER `=`
+</Callout>
 
 #### Probit Model
 
@@ -303,7 +307,7 @@ Both models predict that the customer will **default** on the loan.
 
 ## **Q1. Define Directed Graphical Models (DGMs). Explain how Bayesian Networks represent joint probability distributions.**
 
-Directed Graphical Models (DGMs) are probabilistic models that represent random variables using a **directed graph**. Each node represents a random variable, and directed edges represent probabilistic dependencies between variables.
+<Highlight color="pink">Directed Graphical Models (DGMs) are probabilistic models that represent random variables using a **directed graph**.</Highlight> Each node represents a random variable, and directed edges represent probabilistic dependencies between variables.
 
 A **Bayesian Network** is a type of DGM whose graph is a **Directed Acyclic Graph (DAG)**. Each variable is associated with a conditional probability distribution given its parent variables.
 
