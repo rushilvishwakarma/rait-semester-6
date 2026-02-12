@@ -1,8 +1,9 @@
 import { Play, MonitorPlay, Globe, ExternalLink } from 'lucide-react';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { CuratedResourcesWrapper } from '@/components/curated-videos-client';
+import { CuratedResourcesWrapper, CarouselNav } from '@/components/curated-videos-client';
 import { YouTubeSearchButton } from '@/components/youtube-search-button';
 import { GfgSearchButton } from '@/components/gfg-search-button';
+import { cn } from '@/lib/cn';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -223,13 +224,16 @@ function stripEmojis(text: string): string {
 
 // --- Card components ---
 
-function VideoCard({ video }: { video: VideoData }) {
+function VideoCard({ video, fullWidth }: { video: VideoData; fullWidth?: boolean }) {
     return (
         <Link
             href={video.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex flex-row gap-4 rounded-2xl border bg-card text-card-foreground p-2 text-left hover:bg-accent/5 transition-colors w-[400px]"
+            className={cn(
+                "group flex flex-row gap-4 rounded-2xl border bg-card text-card-foreground p-2 text-left hover:bg-accent/5 transition-colors",
+                fullWidth ? "w-full flex-1" : "w-[400px]",
+            )}
         >
             <div className="relative aspect-video w-40 shrink-0 overflow-hidden rounded-xl bg-muted shadow-sm">
                 {video.thumbnail_url ? (
@@ -263,13 +267,16 @@ function VideoCard({ video }: { video: VideoData }) {
     );
 }
 
-function WebsiteCard({ site }: { site: WebsiteData }) {
+function WebsiteCard({ site, fullWidth }: { site: WebsiteData; fullWidth?: boolean }) {
     return (
         <Link
             href={site.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex flex-row gap-4 rounded-2xl border bg-card text-card-foreground p-2 text-left hover:bg-accent/5 transition-colors w-[400px]"
+            className={cn(
+                "group flex flex-row gap-4 rounded-2xl border bg-card text-card-foreground p-2 text-left hover:bg-accent/5 transition-colors",
+                fullWidth ? "w-full flex-1" : "w-[400px]",
+            )}
         >
             <div className="relative aspect-video w-40 shrink-0 overflow-hidden rounded-xl bg-muted shadow-sm">
                 {site.image ? (
@@ -318,10 +325,22 @@ export async function CuratedResources({ children }: { children: React.ReactNode
 
     if (links.length === 0) return null;
 
+    const fewItems = links.length <= 2;
+
     return (
         <CuratedResourcesWrapper>
         <div className="relative mt-4 not-prose mb-20">
+            <CarouselNav>
             <div className="rounded-3xl border bg-background/50 p-1 overflow-hidden">
+                {fewItems ? (
+                <div className="flex flex-col md:flex-row gap-1">
+                    {links.map((link) =>
+                        link.type === 'video'
+                            ? <VideoCard key={link.url} video={link} fullWidth />
+                            : <WebsiteCard key={link.url} site={link} fullWidth />
+                    )}
+                </div>
+                ) : (
                 <ScrollArea className="w-full whitespace-nowrap rounded-md">
                 <div className="flex w-max space-x-1">
                     {links.map((link) =>
@@ -330,9 +349,11 @@ export async function CuratedResources({ children }: { children: React.ReactNode
                             : <WebsiteCard key={link.url} site={link} />
                     )}
                 </div>
-                <ScrollBar orientation="horizontal" />
+                <ScrollBar orientation="horizontal" className="h-1.5 top-auto bottom-0 border-t-0" />
             </ScrollArea>
+                )}
             </div>
+            </CarouselNav>
 
             <SearchButtons />
         </div>

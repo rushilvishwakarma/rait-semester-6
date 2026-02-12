@@ -7,6 +7,11 @@ import './global.css';
 import 'katex/dist/katex.css';
 import localFont from 'next/font/local';
 import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://raitsem6.vercel.app'),
+};
 
 const googleSans = localFont({
   src: [

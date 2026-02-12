@@ -49,12 +49,12 @@ export default async function Layout(props: {
                   {
                       title: 'Core',
                       url: '/docs/core',
-                      icon: <BookOpen className="size-5" />,
+                      icon: <div className="size-full flex items-center justify-center"><BookOpen className="size-5" /></div>,
                   },
                   {
                       title: 'Labs',
                       url: '/docs/labs',
-                      icon: <FlaskConical className="size-5" />,
+                      icon: <div className="size-full flex items-center justify-center"><FlaskConical className="size-5" /></div>,
                   },
               ],
           };
