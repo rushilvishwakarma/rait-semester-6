@@ -1,0 +1,280 @@
+---
+title: Question Bank - Internal Assessment 1
+---
+
+import { Highlight } from '@/components/highlight';
+
+<CuratedVideos>
+https://youtu.be/9lRv01HDU0s?si=3IYz0upfhryr_uhT
+https://www.youtube.com/watch?v=Ygvskt5HadI
+</CuratedVideos>
+
+### Q1.Explain the relationship between Artificial Intelligence (AI), Machine Learning (ML), and Deep Learning (DL).
+
+Here is the relationship between **Artificial Intelligence (AI), Machine Learning (ML), and Deep Learning (DL)** in table form (without a feature column):
+
+| Artificial Intelligence (AI)                                                   | Machine Learning (ML)                                     | Deep Learning (DL)                                         |
+| ------------------------------------------------------------------------------ | --------------------------------------------------------- | ---------------------------------------------------------- |
+| Broad field focused on building intelligent systems                            | Subset of AI that allows systems to learn from data       | Subset of ML that uses deep neural networks                |
+| Includes rule-based systems, search algorithms, robotics, and learning methods | Uses algorithms to identify patterns and make predictions | Uses multi-layer neural networks to learn complex patterns |
+| Can work with or without learning from data                                    | Requires data to train models                             | Requires large amounts of data for training                |
+| Aims to simulate overall human intelligence                                    | Focuses on learning from experience                       | Focuses on automatic feature extraction                    |
+| Examples: Expert systems, game-playing AI                                      | Examples: Spam detection, recommendation systems          | Examples: Image recognition, speech recognition            |
+
+
+#### Relationship Hierarchy
+
+```
+AI
+ └── ML
+      └── DL
+```
+
+### Q2. Explain shallow and deep neural networks along with relevant deep learning terminologies.
+
+#### Shallow and Deep Neural Networks
+
+A shallow neural network contains only one hidden layer between the input and output layers. It is used for learning simple patterns and requires less computational power.
+
+A deep neural network contains two or more hidden layers. The multiple layers enable it to learn complex and hierarchical representations of data. Deep networks require large datasets and higher computational resources.
+
+The main difference between them is the number of hidden layers and learning capacity. Shallow networks are suitable for simple problems, whereas deep networks handle complex tasks.
+
+#### Relevant Deep Learning Terminologies
+
+A neuron is the basic processing unit. Weights determine the importance of inputs, and bias adjusts the output. An activation function introduces non-linearity. The loss function measures prediction error. Backpropagation updates weights using gradient descent.
+
+---
+
+### Q3. Distinguish between shallow and deep neural networks and explain the role of key deep learning terminologies in model training.
+
+#### Shallow and Deep Neural Networks
+
+A shallow neural network contains only one hidden layer between the input and output layers. It is used for learning simple patterns and requires less computational power.
+
+A deep neural network contains two or more hidden layers. The multiple layers enable it to learn complex and hierarchical representations of data. Deep networks require large datasets and higher computational resources.
+
+The main difference between them is the number of hidden layers and learning capacity. Shallow networks are suitable for simple problems, whereas deep networks handle complex tasks.
+
+#### Role of Key Deep Learning Terminologies in Model Training
+
+A neuron performs weighted summation of inputs. Weights are adjusted during training to minimize error, while bias improves flexibility. The activation function enables learning of complex patterns. The loss function calculates error. Backpropagation computes gradients and updates weights using gradient descent.
+
+---
+
+### Q4. Explain the bias–variance tradeoff in machine learning. 
+
+#### Bias–Variance Tradeoff in Machine Learning
+
+The **bias–variance tradeoff** describes the balance between two types of errors that affect the performance of a machine learning model: **bias error** and **variance error**.
+
+**Bias** refers to the error caused by overly simple assumptions in the model. A model with high bias fails to capture the underlying pattern of the data and leads to **underfitting**. Such models perform poorly on both training and testing data.
+
+**Variance** refers to the error caused by excessive sensitivity to small fluctuations in the training data. A model with high variance learns the training data too closely, including noise, and leads to **overfitting**. Such models perform well on training data but poorly on unseen data.
+
+The tradeoff arises because reducing bias usually increases variance, and reducing variance usually increases bias. An ideal model achieves a balance where both bias and variance are minimized to obtain good generalization performance.
+
+Thus, the goal in machine learning is to select a model complexity that provides the optimal balance between bias and variance, resulting in minimum prediction error on new data.
+
+
+---
+<LongQuestion>
+### Q5. Discuss the role of L1 and L2 regularization and early stopping in controlling overfitting.
+
+### Q12. Discuss various regularization and optimization techniques used in deep learning.
+</LongQuestion>
+
+Deep learning models often suffer from overfitting and slow convergence. Regularization techniques help reduce overfitting by controlling model complexity, while optimization techniques help minimize the loss function efficiently during training.
+
+Let the prediction of a model be:
+
+$$
+\hat{y} = w_1 x_1 + w_2 x_2 + \dots + w_m x_m + b
+$$
+
+where $w_j$ are weights and $b$ is bias.
+
+Let the original loss function (Mean Squared Error) be:
+
+$$
+L = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+$$
+
+---
+
+#### Regularization Techniques
+
+**L1 Regularization (Lasso):**
+
+$$
+L_{total} = L + \lambda \sum_{j=1}^{m} |w_j|
+$$
+
+It adds a penalty equal to the absolute values of weights.
+It forces some weights to become zero, performs feature selection, and reduces overfitting.
+
+**L2 Regularization (Ridge):**
+
+$$
+L_{total} = L + \lambda \sum_{j=1}^{m} w_j^2
+$$
+
+It adds a penalty equal to squared weights.
+It reduces large weight values and prevents the model from becoming too sensitive to training data.
+
+**Early Stopping:**
+
+Training is stopped when validation loss starts increasing while training loss continues decreasing.
+This prevents the model from learning noise in the training data.
+
+**Dropout:**
+
+Randomly deactivates neurons during training, reducing co-adaptation and improving generalization.
+
+---
+
+#### Optimization Techniques
+
+**Gradient Descent:**
+
+$$
+w = w - \eta \frac{\partial L}{\partial w}
+$$
+
+where $\eta$ is the learning rate.
+It updates weights in the direction of minimum loss.
+
+**Stochastic Gradient Descent (SGD):**
+
+Updates weights using one training sample at a time for faster convergence.
+
+**Adam Optimizer:**
+
+An adaptive optimization algorithm that adjusts learning rates for each parameter and improves convergence speed.
+
+---
+
+#### Conclusion
+
+Regularization techniques such as L1, L2, Early Stopping, and Dropout control overfitting by limiting model complexity. Optimization techniques such as Gradient Descent, SGD, and Adam efficiently minimize the loss function. Together, they ensure stable and effective training of deep learning models.
+
+---
+
+### Q6. How does dataset augmentation improve model generalization?
+
+Dataset augmentation is a technique used to artificially increase the size and diversity of a training dataset by applying transformations to existing data samples. It helps improve model generalization by reducing overfitting and making the model more robust.
+
+In dataset augmentation, new training examples are created using transformations such as rotation, flipping, scaling, cropping, noise addition, or brightness adjustment (in images). In text data, augmentation may include synonym replacement or paraphrasing.
+
+Dataset augmentation improves generalization in the following ways:
+
+1. **Increases Training Data Size:** By generating more variations of existing data, the model is exposed to more examples, reducing the chance of memorizing the training set.
+
+2. **Reduces Overfitting:** Since the model sees multiple variations of the same data, it learns general patterns instead of specific details or noise.
+
+3. **Improves Robustness:** The model becomes invariant to small changes in input, such as rotation or lighting in images.
+
+4. **Acts as Regularization:** Augmentation introduces controlled randomness, which behaves like a regularization technique and reduces variance.
+
+Thus, dataset augmentation enhances the model’s ability to perform well on unseen data by improving diversity, reducing variance, and encouraging learning of meaningful patterns rather than noise.
+
+---
+
+### Q7. Explain parameter sharing and injecting noise into input as regularization techniques in deep learning.
+
+Overfitting occurs when a deep learning model learns noise from training data and fails to generalize. Regularization techniques such as **parameter sharing** and **injecting noise into input** help reduce overfitting and improve generalization.
+
+---
+
+#### 1. Parameter Sharing
+
+Parameter sharing is a technique where the same set of weights is used across different parts of a model instead of learning separate weights for each connection.
+
+For example, in Convolutional Neural Networks (CNNs), a single filter (set of weights) is applied across different regions of an image. Instead of learning separate weights for every pixel location, the same weights are reused.
+
+If a filter has weights ( w ), the same ( w ) is applied at every spatial location.
+
+**Role in Regularization:**
+
+* Reduces the total number of parameters
+* Decreases model complexity
+* Prevents overfitting
+* Improves generalization
+
+By reducing the number of free parameters, the model becomes less likely to memorize training data.
+
+---
+
+#### 2. Injecting Noise into Input
+
+Injecting noise involves adding small random perturbations to input data during training.
+
+If input is ( x ), noisy input becomes:
+
+[
+x' = x + \epsilon
+]
+
+where ( \epsilon ) is small random noise (e.g., Gaussian noise).
+
+**Role in Regularization:**
+
+* Forces the model to learn stable patterns
+* Prevents reliance on exact input values
+* Improves robustness
+* Acts similar to data augmentation
+
+The model learns to make correct predictions even when inputs slightly vary, which improves generalization.
+
+---
+
+#### Conclusion
+
+Parameter sharing reduces the number of trainable parameters, thereby controlling model complexity. Injecting noise introduces variability during training, making the model robust to small changes. Both techniques act as regularization methods to reduce overfitting and improve generalization performance.
+
+---
+
+
+### Q9. What is greedy layer-wise pre-training? 
+
+Greedy layer-wise pre-training is a training strategy used in deep neural networks where each layer is trained **individually and sequentially**, one layer at a time, instead of training the entire network at once.
+
+It is called **“greedy”** because each layer is trained independently to optimize its own objective before moving to the next layer.
+
+---
+
+#### Working Procedure
+
+1. The first hidden layer is trained using the input data.
+2. Once trained, its weights are fixed.
+3. The output of the first layer becomes the input to the second layer.
+4. The second layer is trained.
+5. This process continues layer by layer.
+6. Finally, the entire network is fine-tuned using supervised learning (e.g., backpropagation).
+
+---
+
+#### Why It Is Used
+
+* Helps in training very deep networks
+* Provides good weight initialization
+* Reduces problems like vanishing gradients
+* Improves convergence
+
+This method was widely used before modern techniques like better initialization methods, ReLU activation, and Batch Normalization became common.
+
+---
+
+#### Conclusion
+
+Greedy layer-wise pre-training trains a deep network one layer at a time to learn meaningful feature representations before performing global fine-tuning, thereby improving stability and performance in deep learning models.
+
+---
+
+### Q8. Analyze the effectiveness of ensemble methods and dropout in reducing variance in deep learning models. Compare their working principles.
+### Q10. Explain its significance in training deep neural networks. Also, discuss the need for advanced activation functions.
+### Q11. Explain batch normalization in detail. How does it help in faster convergence and address internal covariate shift during training?
+### Q12. Discuss various regularization and optimization techniques used in deep learning.
+### Q13. Numerical based on FFNN and Regularization Techniques.
+### Q14. Calculate derivatives of Unipolar sigmoid activation and visualize both functions.
+### Q15. List all the types of activation functions. Explain in detail with an example.
