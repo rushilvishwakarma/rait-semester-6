@@ -24,11 +24,13 @@ Here is the relationship between **Artificial Intelligence (AI), Machine Learnin
 
 #### Relationship Hierarchy
 
-```
-AI
- └── ML
-      └── DL
-```
+<Mermaid chart={`graph TD
+  subgraph AI["Artificial Intelligence (AI)"]
+    subgraph ML["Machine Learning (ML)"]
+      DL["Deep Learning (DL)"]
+    end
+  end
+`} />
 
 ### Q2. Explain shallow and deep neural networks along with relevant deep learning terminologies.
 
@@ -192,7 +194,7 @@ Parameter sharing is a technique where the same set of weights is used across di
 
 For example, in Convolutional Neural Networks (CNNs), a single filter (set of weights) is applied across different regions of an image. Instead of learning separate weights for every pixel location, the same weights are reused.
 
-If a filter has weights ( w ), the same ( w ) is applied at every spatial location.
+If a filter has weights $w$, the same $w$ is applied at every spatial location.
 
 **Role in Regularization:**
 
@@ -209,13 +211,13 @@ By reducing the number of free parameters, the model becomes less likely to memo
 
 Injecting noise involves adding small random perturbations to input data during training.
 
-If input is ( x ), noisy input becomes:
+If input is $x$, noisy input becomes:
 
-[
+$$
 x' = x + \epsilon
-]
+$$
 
-where ( \epsilon ) is small random noise (e.g., Gaussian noise).
+where $\epsilon$ is small random noise (e.g., Gaussian noise).
 
 **Role in Regularization:**
 
@@ -271,10 +273,171 @@ Greedy layer-wise pre-training trains a deep network one layer at a time to lear
 
 ---
 
-### Q8. Analyze the effectiveness of ensemble methods and dropout in reducing variance in deep learning models. Compare their working principles.
 ### Q10. Explain its significance in training deep neural networks. Also, discuss the need for advanced activation functions.
+## Greedy Layer-Wise Pre-Training and Advanced Activation Functions
+
+### Greedy Layer-Wise Pre-Training
+
+Greedy layer-wise pre-training is a method used to train deep neural networks by training one layer at a time before training the entire network together. Each layer is trained individually using the output of the previous layer as input. After all layers are pre-trained, the whole network is fine-tuned using backpropagation.
+
+### Significance in Training Deep Neural Networks
+
+1. **Better Weight Initialization:** It provides good initial values for weights instead of random initialization.
+2. **Prevents Vanishing Gradient Problem:** Earlier deep networks suffered from gradient vanishing; layer-wise training reduces this issue.
+3. **Faster Convergence:** Since weights are initialized meaningfully, training becomes more stable and faster.
+4. **Improves Generalization:** Pre-training helps the model learn useful feature representations before supervised fine-tuning.
+5. **Useful for Limited Labeled Data:** It can be used with unsupervised learning, which is helpful when labeled data is scarce.
+
+Although modern techniques like ReLU activation, Batch Normalization, and improved optimizers have reduced the need for pre-training, it was very important in early deep learning models.
+
+---
+
+### Need for Advanced Activation Functions
+
+Activation functions introduce non-linearity into neural networks. Without them, the network would behave like a simple linear model regardless of the number of layers.
+
+Earlier activation functions such as Sigmoid and Tanh suffer from problems like:
+
+* Vanishing gradients
+* Slow convergence
+* Saturation at extreme values
+
+Advanced activation functions such as ReLU and its variants address these problems by:
+
+* Reducing vanishing gradient effects
+* Improving computational efficiency
+* Allowing faster training
+* Enabling deeper networks
+
+Thus, advanced activation functions are necessary to train deep neural networks effectively and achieve better performance.
+
+---
+
+### Conclusion
+
+Greedy layer-wise pre-training improves stability and initialization in deep networks, while advanced activation functions enable efficient gradient flow and faster convergence. Both contribute significantly to effective training of deep neural networks.
+
+---
+
+
+
+### Q8. Analyze the effectiveness of ensemble methods and dropout in reducing variance in deep learning models. Compare their working principles.
+
+High-variance models tend to overfit the training data. Ensemble methods and dropout reduce variance and improve generalization.
+
+**Ensemble Methods:**
+Ensemble methods combine predictions from multiple independently trained models. The final output is obtained by averaging or majority voting:
+
+$$
+f(x) = \frac{1}{k} \sum_{i=1}^{k} f_i(x)
+$$
+
+Averaging reduces variance because errors from individual models cancel out.
+
+**Dropout:**
+Dropout randomly deactivates a fraction of neurons during training. It prevents co-adaptation of neurons and forces the model to learn robust features. It acts like training many implicit subnetworks within a single model.
+
+---
+
+### Comparison
+
+| Basis              | Ensemble Methods                | Dropout                                     |
+| ------------------ | ------------------------------- | ------------------------------------------- |
+| Principle          | Combine multiple trained models | Randomly deactivate neurons during training |
+| Variance Reduction | Averaging reduces fluctuations  | Implicit averaging of subnetworks           |
+| Model Count        | Multiple models                 | Single model                                |
+| Computational Cost | High                            | Moderate                                    |
+| Usage              | Strong variance reduction       | Efficient regularization technique          |
+
+---
+
+
 ### Q11. Explain batch normalization in detail. How does it help in faster convergence and address internal covariate shift during training?
-### Q12. Discuss various regularization and optimization techniques used in deep learning.
+
+Batch Normalization is a technique used to normalize the inputs of each layer in a neural network during training. For every mini-batch, it adjusts the activations so that they have approximately zero mean and unit variance, followed by a learnable scaling and shifting step.
+
+Internal covariate shift refers to the change in distribution of inputs to a layer as the parameters of previous layers update during training. This makes learning slow because each layer has to continuously adapt to new input distributions.
+
+Batch normalization reduces this shift by keeping the input distribution of each layer stable. As a result:
+
+* Training becomes more stable.
+* Higher learning rates can be used.
+* Convergence becomes faster.
+* It slightly reduces overfitting.
+
+Thus, batch normalization improves training efficiency and accelerates convergence in deep neural networks.
+
+---
+
+### Q15. List all the types of activation functions. Explain in detail with an example.
+
+Activation functions introduce non-linearity into neural networks so that complex patterns can be learned.
+
+---
+
+### 1) Linear Activation
+
+$$
+f(x) = x
+$$
+
+Used in regression problems.
+Example: Predicting house prices.
+
+---
+
+### 2) Sigmoid Function
+
+$$
+f(x) = \frac{1}{1 + e^{-x}}
+$$
+
+Output range: $(0,1)$.
+Example: Binary classification (spam/not spam).
+
+---
+
+### 3) Tanh Function
+
+$$
+f(x) = \tanh(x)
+$$
+
+Output range: $(-1,1)$.
+Example: Hidden layers in neural networks.
+
+---
+
+### 4) ReLU (Rectified Linear Unit)
+
+$$
+f(x) = \max(0, x)
+$$
+
+Most widely used activation in deep networks.
+Example: Hidden layers in CNNs.
+
+---
+
+### 5) Softmax Function
+
+$$
+f(x_i) = \frac{e^{x_i}}{\sum_{j} e^{x_j}}
+$$
+
+Converts outputs into probabilities.
+Example: Multi-class classification.
+
+---
+
+### Conclusion
+
+Different activation functions are used depending on the task. ReLU is commonly used in hidden layers, while Sigmoid and Softmax are used in output layers.
+
+---
+
+
 ### Q13. Numerical based on FFNN and Regularization Techniques.
 ### Q14. Calculate derivatives of Unipolar sigmoid activation and visualize both functions.
-### Q15. List all the types of activation functions. Explain in detail with an example.
+
+---
