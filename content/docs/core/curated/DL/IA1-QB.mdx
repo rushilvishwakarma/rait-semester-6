@@ -36,15 +36,15 @@ Here is the relationship between **Artificial Intelligence (AI), Machine Learnin
 
 #### Shallow and Deep Neural Networks
 
-A shallow neural network contains only one hidden layer between the input and output layers. It is used for learning simple patterns and requires less computational power.
+A <Highlight color="blue">**shallow neural network**</Highlight> contains only one hidden layer between the input and output layers. It is used for learning simple patterns and requires less computational power.
 
-A deep neural network contains two or more hidden layers. The multiple layers enable it to learn complex and hierarchical representations of data. Deep networks require large datasets and higher computational resources.
+A <Highlight color="blue">**deep neural network**</Highlight> contains two or more hidden layers. The multiple layers enable it to learn complex and hierarchical representations of data. Deep networks require large datasets and higher computational resources.
 
-The main difference between them is the number of hidden layers and learning capacity. Shallow networks are suitable for simple problems, whereas deep networks handle complex tasks.
+The main difference between them is the <Highlight>**number of hidden layers**</Highlight> and learning capacity. Shallow networks are suitable for simple problems, whereas deep networks handle complex tasks.
 
 #### Relevant Deep Learning Terminologies
 
-A neuron is the basic processing unit. Weights determine the importance of inputs, and bias adjusts the output. An activation function introduces non-linearity. The loss function measures prediction error. Backpropagation updates weights using gradient descent.
+A <Highlight color="cyan">**neuron**</Highlight> is the basic processing unit. <Highlight color="cyan">**Weights**</Highlight> determine the importance of inputs, and <Highlight color="cyan">**bias**</Highlight> adjusts the output. An <Highlight color="cyan">**activation function**</Highlight> introduces non-linearity. The <Highlight color="cyan">**loss function**</Highlight> measures prediction error. <Highlight color="cyan">**Backpropagation**</Highlight> updates weights using gradient descent.
 
 ---
 
@@ -52,15 +52,15 @@ A neuron is the basic processing unit. Weights determine the importance of input
 
 #### Shallow and Deep Neural Networks
 
-A shallow neural network contains only one hidden layer between the input and output layers. It is used for learning simple patterns and requires less computational power.
+A <Highlight color="blue">**shallow neural network**</Highlight> contains only <Highlight>**one hidden layer**</Highlight> between the input and output layers. It is used for learning simple patterns and requires less computational power.
 
-A deep neural network contains two or more hidden layers. The multiple layers enable it to learn complex and hierarchical representations of data. Deep networks require large datasets and higher computational resources.
+A <Highlight color="blue">**deep neural network**</Highlight> contains <Highlight>**two or more hidden layers**</Highlight>. The multiple layers enable it to learn <Highlight color="green">**complex and hierarchical representations**</Highlight> of data. Deep networks require large datasets and higher computational resources.
 
 The main difference between them is the number of hidden layers and learning capacity. Shallow networks are suitable for simple problems, whereas deep networks handle complex tasks.
 
 #### Role of Key Deep Learning Terminologies in Model Training
 
-A neuron performs weighted summation of inputs. Weights are adjusted during training to minimize error, while bias improves flexibility. The activation function enables learning of complex patterns. The loss function calculates error. Backpropagation computes gradients and updates weights using gradient descent.
+A <Highlight color="cyan">**neuron**</Highlight> performs <Highlight color="orange">**weighted summation**</Highlight> of inputs. <Highlight color="cyan">**Weights**</Highlight> are adjusted during training to minimize error, while <Highlight color="cyan">**bias**</Highlight> improves flexibility. The <Highlight color="cyan">**activation function**</Highlight> enables learning of complex patterns. The <Highlight color="cyan">**loss function**</Highlight> calculates error. <Highlight color="cyan">**Backpropagation**</Highlight> computes gradients and updates weights using <Highlight color="orange">**gradient descent**</Highlight>.
 
 ---
 
@@ -68,15 +68,15 @@ A neuron performs weighted summation of inputs. Weights are adjusted during trai
 
 #### Bias–Variance Tradeoff in Machine Learning
 
-The **bias–variance tradeoff** describes the balance between two types of errors that affect the performance of a machine learning model: **bias error** and **variance error**.
+The <Highlight color="blue">**bias–variance tradeoff**</Highlight> describes the balance between two types of errors that affect the performance of a machine learning model: <Highlight color="orange">**bias error**</Highlight> and <Highlight color="orange">**variance error**</Highlight>.
 
-**Bias** refers to the error caused by overly simple assumptions in the model. A model with high bias fails to capture the underlying pattern of the data and leads to **underfitting**. Such models perform poorly on both training and testing data.
+**Bias** refers to the error caused by <Highlight color="red">**overly simple assumptions**</Highlight> in the model. A model with high bias fails to capture the underlying pattern of the data and leads to <Highlight color="red">**underfitting**</Highlight>. Such models perform poorly on both training and testing data.
 
-**Variance** refers to the error caused by excessive sensitivity to small fluctuations in the training data. A model with high variance learns the training data too closely, including noise, and leads to **overfitting**. Such models perform well on training data but poorly on unseen data.
+**Variance** refers to the error caused by <Highlight color="red">**excessive sensitivity to small fluctuations**</Highlight> in the training data. A model with high variance learns the training data too closely, including noise, and leads to <Highlight color="red">**overfitting**</Highlight>. Such models perform well on training data but poorly on unseen data.
 
-The tradeoff arises because reducing bias usually increases variance, and reducing variance usually increases bias. An ideal model achieves a balance where both bias and variance are minimized to obtain good generalization performance.
+The tradeoff arises because <Highlight>**reducing bias usually increases variance, and reducing variance usually increases bias**</Highlight>. An ideal model achieves a balance where both bias and variance are minimized to obtain good generalization performance.
 
-Thus, the goal in machine learning is to select a model complexity that provides the optimal balance between bias and variance, resulting in minimum prediction error on new data.
+Thus, the goal in machine learning is to select a model complexity that provides the <Highlight color="green">**optimal balance between bias and variance**</Highlight>, resulting in minimum prediction error on new data.
 
 
 ---
@@ -86,7 +86,7 @@ Thus, the goal in machine learning is to select a model complexity that provides
 ### Q12. Discuss various regularization and optimization techniques used in deep learning.
 </LongQuestion>
 
-Deep learning models often suffer from overfitting and slow convergence. Regularization techniques help reduce overfitting by controlling model complexity, while optimization techniques help minimize the loss function efficiently during training.
+Deep learning models often suffer from <Highlight color="red">**overfitting**</Highlight> and <Highlight color="red">**slow convergence**</Highlight>. <Highlight color="blue">**Regularization techniques**</Highlight> help reduce overfitting by controlling model complexity, while <Highlight color="blue">**optimization techniques**</Highlight> help minimize the loss function efficiently during training.
 
 Let the prediction of a model be:
 
@@ -113,7 +113,7 @@ L_{total} = L + \lambda \sum_{j=1}^{m} |w_j|
 $$
 
 It adds a penalty equal to the absolute values of weights.
-It forces some weights to become zero, performs feature selection, and reduces overfitting.
+It <Highlight color="green">**forces some weights to become zero**</Highlight>, performs feature selection, and reduces overfitting.
 
 **L2 Regularization (Ridge):**
 
@@ -122,16 +122,16 @@ L_{total} = L + \lambda \sum_{j=1}^{m} w_j^2
 $$
 
 It adds a penalty equal to squared weights.
-It reduces large weight values and prevents the model from becoming too sensitive to training data.
+It <Highlight color="green">**reduces large weight values**</Highlight> and prevents the model from becoming too sensitive to training data.
 
 **Early Stopping:**
 
-Training is stopped when validation loss starts increasing while training loss continues decreasing.
+Training is stopped when <Highlight color="orange">**validation loss starts increasing**</Highlight> while training loss continues decreasing.
 This prevents the model from learning noise in the training data.
 
 **Dropout:**
 
-Randomly deactivates neurons during training, reducing co-adaptation and improving generalization.
+<Highlight color="orange">**Randomly deactivates neurons**</Highlight> during training, reducing co-adaptation and improving generalization.
 
 ---
 
@@ -143,16 +143,16 @@ $$
 w = w - \eta \frac{\partial L}{\partial w}
 $$
 
-where $\eta$ is the learning rate.
+where $\eta$ is the <Highlight color="orange">**learning rate**</Highlight>.
 It updates weights in the direction of minimum loss.
 
 **Stochastic Gradient Descent (SGD):**
 
-Updates weights using one training sample at a time for faster convergence.
+Updates weights using <Highlight color="green">**one training sample at a time**</Highlight> for faster convergence.
 
 **Adam Optimizer:**
 
-An adaptive optimization algorithm that adjusts learning rates for each parameter and improves convergence speed.
+An <Highlight color="green">**adaptive optimization algorithm**</Highlight> that adjusts learning rates for each parameter and improves convergence speed.
 
 ---
 
@@ -164,9 +164,9 @@ Regularization techniques such as L1, L2, Early Stopping, and Dropout control ov
 
 ### Q6. How does dataset augmentation improve model generalization?
 
-Dataset augmentation is a technique used to artificially increase the size and diversity of a training dataset by applying transformations to existing data samples. It helps improve model generalization by reducing overfitting and making the model more robust.
+<Highlight color="blue">**Dataset augmentation**</Highlight> is a technique used to artificially increase the size and diversity of a training dataset by applying transformations to existing data samples. It helps improve <Highlight color="green">**model generalization**</Highlight> by reducing overfitting and making the model more robust.
 
-In dataset augmentation, new training examples are created using transformations such as rotation, flipping, scaling, cropping, noise addition, or brightness adjustment (in images). In text data, augmentation may include synonym replacement or paraphrasing.
+In dataset augmentation, new training examples are created using transformations such as <Highlight color="orange">**rotation, flipping, scaling, cropping, noise addition, or brightness adjustment**</Highlight> (in images). In text data, augmentation may include <Highlight color="orange">**synonym replacement or paraphrasing**</Highlight>.
 
 Dataset augmentation improves generalization in the following ways:
 
@@ -190,9 +190,9 @@ Overfitting occurs when a deep learning model learns noise from training data an
 
 #### 1. Parameter Sharing
 
-Parameter sharing is a technique where the same set of weights is used across different parts of a model instead of learning separate weights for each connection.
+<Highlight color="blue">**Parameter sharing**</Highlight> is a technique where the same set of weights is used across different parts of a model instead of learning separate weights for each connection.
 
-For example, in Convolutional Neural Networks (CNNs), a single filter (set of weights) is applied across different regions of an image. Instead of learning separate weights for every pixel location, the same weights are reused.
+For example, in <Highlight color="green">**Convolutional Neural Networks (CNNs)**</Highlight>, a single filter (set of weights) is applied across different regions of an image. Instead of learning separate weights for every pixel location, the <Highlight>**same weights are reused**</Highlight>.
 
 If a filter has weights $w$, the same $w$ is applied at every spatial location.
 
@@ -209,7 +209,7 @@ By reducing the number of free parameters, the model becomes less likely to memo
 
 #### 2. Injecting Noise into Input
 
-Injecting noise involves adding small random perturbations to input data during training.
+<Highlight color="blue">**Injecting noise**</Highlight> involves adding small random perturbations to input data during training.
 
 If input is $x$, noisy input becomes:
 
@@ -239,7 +239,7 @@ Parameter sharing reduces the number of trainable parameters, thereby controllin
 
 ### Q9. What is greedy layer-wise pre-training? 
 
-Greedy layer-wise pre-training is a training strategy used in deep neural networks where each layer is trained **individually and sequentially**, one layer at a time, instead of training the entire network at once.
+<Highlight color="blue">**Greedy layer-wise pre-training**</Highlight> is a training strategy used in deep neural networks where each layer is trained **individually and sequentially**, one layer at a time, instead of training the entire network at once.
 
 It is called **“greedy”** because each layer is trained independently to optimize its own objective before moving to the next layer.
 
@@ -248,11 +248,11 @@ It is called **“greedy”** because each layer is trained independently to opt
 #### Working Procedure
 
 1. The first hidden layer is trained using the input data.
-2. Once trained, its weights are fixed.
+2. Once trained, its <Highlight>**weights are fixed**</Highlight>.
 3. The output of the first layer becomes the input to the second layer.
 4. The second layer is trained.
 5. This process continues layer by layer.
-6. Finally, the entire network is fine-tuned using supervised learning (e.g., backpropagation).
+6. Finally, the entire network is <Highlight color="green">**fine-tuned using supervised learning**</Highlight> (e.g., backpropagation).
 
 ---
 
@@ -274,46 +274,45 @@ Greedy layer-wise pre-training trains a deep network one layer at a time to lear
 ---
 
 ### Q10. Explain its significance in training deep neural networks. Also, discuss the need for advanced activation functions.
-## Greedy Layer-Wise Pre-Training and Advanced Activation Functions
 
-### Greedy Layer-Wise Pre-Training
+#### Greedy Layer-Wise Pre-Training
 
 Greedy layer-wise pre-training is a method used to train deep neural networks by training one layer at a time before training the entire network together. Each layer is trained individually using the output of the previous layer as input. After all layers are pre-trained, the whole network is fine-tuned using backpropagation.
 
-### Significance in Training Deep Neural Networks
+#### Significance in Training Deep Neural Networks
 
-1. **Better Weight Initialization:** It provides good initial values for weights instead of random initialization.
-2. **Prevents Vanishing Gradient Problem:** Earlier deep networks suffered from gradient vanishing; layer-wise training reduces this issue.
-3. **Faster Convergence:** Since weights are initialized meaningfully, training becomes more stable and faster.
-4. **Improves Generalization:** Pre-training helps the model learn useful feature representations before supervised fine-tuning.
-5. **Useful for Limited Labeled Data:** It can be used with unsupervised learning, which is helpful when labeled data is scarce.
+1. <Highlight color="green">**Better Weight Initialization:**</Highlight> It provides good initial values for weights instead of random initialization.
+2. <Highlight color="orange">**Prevents Vanishing Gradient Problem:**</Highlight> Earlier deep networks suffered from gradient vanishing; layer-wise training reduces this issue.
+3. <Highlight color="green">**Faster Convergence:**</Highlight> Since weights are initialized meaningfully, training becomes more stable and faster.
+4. <Highlight color="green">**Improves Generalization:**</Highlight> Pre-training helps the model learn useful feature representations before supervised fine-tuning.
+5. <Highlight color="green">**Useful for Limited Labeled Data:**</Highlight> It can be used with unsupervised learning, which is helpful when labeled data is scarce.
 
 Although modern techniques like ReLU activation, Batch Normalization, and improved optimizers have reduced the need for pre-training, it was very important in early deep learning models.
 
 ---
 
-### Need for Advanced Activation Functions
+#### Need for Advanced Activation Functions
 
 Activation functions introduce non-linearity into neural networks. Without them, the network would behave like a simple linear model regardless of the number of layers.
 
-Earlier activation functions such as Sigmoid and Tanh suffer from problems like:
+Earlier activation functions such as <Highlight color="red">**Sigmoid and Tanh**</Highlight> suffer from problems like:
 
-* Vanishing gradients
+* <Highlight color="red">**Vanishing gradients**</Highlight>
 * Slow convergence
-* Saturation at extreme values
+* <Highlight color="red">**Saturation at extreme values**</Highlight>
 
-Advanced activation functions such as ReLU and its variants address these problems by:
+Advanced activation functions such as <Highlight color="green">**ReLU**</Highlight> and its variants address these problems by:
 
-* Reducing vanishing gradient effects
+* <Highlight color="green">**Reducing vanishing gradient effects**</Highlight>
 * Improving computational efficiency
-* Allowing faster training
+* <Highlight color="green">**Allowing faster training**</Highlight>
 * Enabling deeper networks
 
 Thus, advanced activation functions are necessary to train deep neural networks effectively and achieve better performance.
 
 ---
 
-### Conclusion
+#### Conclusion
 
 Greedy layer-wise pre-training improves stability and initialization in deep networks, while advanced activation functions enable efficient gradient flow and faster convergence. Both contribute significantly to effective training of deep neural networks.
 
@@ -321,12 +320,12 @@ Greedy layer-wise pre-training improves stability and initialization in deep net
 
 
 
-### Q8. Analyze the effectiveness of ensemble methods and dropout in reducing variance in deep learning models. Compare their working principles.
+#### Q8. Analyze the effectiveness of ensemble methods and dropout in reducing variance in deep learning models. Compare their working principles.
 
 High-variance models tend to overfit the training data. Ensemble methods and dropout reduce variance and improve generalization.
 
 **Ensemble Methods:**
-Ensemble methods combine predictions from multiple independently trained models. The final output is obtained by averaging or majority voting:
+<Highlight color="blue">**Ensemble methods**</Highlight> combine predictions from <Highlight color="green">**multiple independently trained models**</Highlight>. The final output is obtained by <Highlight color="orange">**averaging or majority voting**</Highlight>:
 
 $$
 f(x) = \frac{1}{k} \sum_{i=1}^{k} f_i(x)
@@ -335,11 +334,11 @@ $$
 Averaging reduces variance because errors from individual models cancel out.
 
 **Dropout:**
-Dropout randomly deactivates a fraction of neurons during training. It prevents co-adaptation of neurons and forces the model to learn robust features. It acts like training many implicit subnetworks within a single model.
+<Highlight color="blue">**Dropout**</Highlight> randomly deactivates a fraction of neurons during training. It prevents <Highlight color="orange">**co-adaptation of neurons**</Highlight> and forces the model to learn robust features. It acts like training <Highlight color="green">**many implicit subnetworks**</Highlight> within a single model.
 
 ---
 
-### Comparison
+#### Comparison
 
 | Basis              | Ensemble Methods                | Dropout                                     |
 | ------------------ | ------------------------------- | ------------------------------------------- |
@@ -352,87 +351,87 @@ Dropout randomly deactivates a fraction of neurons during training. It prevents 
 ---
 
 
-### Q11. Explain batch normalization in detail. How does it help in faster convergence and address internal covariate shift during training?
+#### Q11. Explain batch normalization in detail. How does it help in faster convergence and address internal covariate shift during training?
 
-Batch Normalization is a technique used to normalize the inputs of each layer in a neural network during training. For every mini-batch, it adjusts the activations so that they have approximately zero mean and unit variance, followed by a learnable scaling and shifting step.
+<Highlight color="blue">**Batch Normalization**</Highlight> is a technique used to normalize the inputs of each layer in a neural network during training. For every mini-batch, it adjusts the activations so that they have approximately <Highlight color="green">**zero mean and unit variance**</Highlight>, followed by a learnable scaling and shifting step.
 
-Internal covariate shift refers to the change in distribution of inputs to a layer as the parameters of previous layers update during training. This makes learning slow because each layer has to continuously adapt to new input distributions.
+<Highlight color="orange">**Internal covariate shift**</Highlight> refers to the change in distribution of inputs to a layer as the parameters of previous layers update during training. This makes learning slow because each layer has to continuously adapt to new input distributions.
 
 Batch normalization reduces this shift by keeping the input distribution of each layer stable. As a result:
 
-* Training becomes more stable.
-* Higher learning rates can be used.
-* Convergence becomes faster.
-* It slightly reduces overfitting.
+* <Highlight color="green">**Training becomes more stable**</Highlight>.
+* <Highlight color="green">**Higher learning rates can be used**</Highlight>.
+* <Highlight color="green">**Convergence becomes faster**</Highlight>.
+* It slightly <Highlight color="green">**reduces overfitting**</Highlight>.
 
 Thus, batch normalization improves training efficiency and accelerates convergence in deep neural networks.
 
 ---
 
-### Q15. List all the types of activation functions. Explain in detail with an example.
+#### Q15. List all the types of activation functions. Explain in detail with an example.
 
-Activation functions introduce non-linearity into neural networks so that complex patterns can be learned.
+<Highlight color="blue">**Activation functions**</Highlight> introduce <Highlight>**non-linearity**</Highlight> into neural networks so that complex patterns can be learned.
 
 ---
 
-### 1) Linear Activation
+#### 1) Linear Activation
 
 $$
 f(x) = x
 $$
 
-Used in regression problems.
+Used in <Highlight color="green">**regression problems**</Highlight>.
 Example: Predicting house prices.
 
 ---
 
-### 2) Sigmoid Function
+#### 2) Sigmoid Function
 
 $$
 f(x) = \frac{1}{1 + e^{-x}}
 $$
 
 Output range: $(0,1)$.
-Example: Binary classification (spam/not spam).
+Example: <Highlight color="green">**Binary classification**</Highlight> (spam/not spam).
 
 ---
 
-### 3) Tanh Function
+#### 3) Tanh Function
 
 $$
 f(x) = \tanh(x)
 $$
 
 Output range: $(-1,1)$.
-Example: Hidden layers in neural networks.
+Example: <Highlight color="green">**Hidden layers**</Highlight> in neural networks.
 
 ---
 
-### 4) ReLU (Rectified Linear Unit)
+#### 4) ReLU (Rectified Linear Unit)
 
 $$
 f(x) = \max(0, x)
 $$
 
-Most widely used activation in deep networks.
+<Highlight>**Most widely used activation**</Highlight> in deep networks.
 Example: Hidden layers in CNNs.
 
 ---
 
-### 5) Softmax Function
+#### 5) Softmax Function
 
 $$
 f(x_i) = \frac{e^{x_i}}{\sum_{j} e^{x_j}}
 $$
 
 Converts outputs into probabilities.
-Example: Multi-class classification.
+Example: <Highlight color="green">**Multi-class classification**</Highlight>.
 
 ---
 
-### Conclusion
+#### Conclusion
 
-Different activation functions are used depending on the task. ReLU is commonly used in hidden layers, while Sigmoid and Softmax are used in output layers.
+Different activation functions are used depending on the task. <Highlight color="green">**ReLU**</Highlight> is commonly used in hidden layers, while <Highlight color="orange">**Sigmoid**</Highlight> and <Highlight color="orange">**Softmax**</Highlight> are used in output layers.
 
 ---
 
