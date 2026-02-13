@@ -3,131 +3,108 @@ title: Question Bank - Internal Assessment 1
 ---
 
 import { Highlight } from '@/components/highlight';
+import { GreenDot } from '@/components/green-dot';
 import explainHdfsSvg from './module-1/explain-hdfs.svg';
 
 # BIG DATA ANALYTICS (BDA)
 
 # Module 1: Introduction to Big Data
 
-### Q1. What is Big Data? Discuss different sources that generate big data.
+### Q1. What is Big Data? Discuss different sources that generate big data. <GreenDot />
 
-**Big Data** refers to extremely large and complex datasets that are generated at a very high speed and cannot be efficiently processed using traditional data processing systems such as relational databases. As digital technologies have advanced, data is being produced continuously from multiple sources, making it difficult for conventional systems to store, manage, and analyze it effectively.
+Big Data refers to extremely large and complex datasets that are generated at a very high speed and cannot be efficiently processed using traditional data processing systems such as relational databases. As digital technologies have advanced, data is being produced continuously from multiple sources, making it difficult for conventional systems to store, manage, and analyze it effectively.
 
-The data becomes “Big Data” when its **size**, **speed of generation**, or **complexity** exceeds the capacity of traditional systems. Earlier systems were designed to handle structured data in limited volumes, whereas Big Data includes structured, semi-structured, and unstructured data such as text, images, videos, and sensor data.
+The data becomes “Big Data” when its **size**, **speed of generation**, or **complexity** exceeds the capacity of traditional systems. Earlier systems were designed to handle structured data in limited volumes, whereas Big Data includes structured, semi-structured, and unstructured data such as text, images, videos, and sensor data. This data is generated from online transactions, social media platforms, mobile devices, scientific experiments, and IoT sensors.
+
+Big Data plays a crucial role in modern organizations because it enables advanced analytics and data-driven decision-making. By analyzing Big Data, organizations can identify hidden patterns, predict trends, and gain deeper insights into customer behavior and business operations.
+
+Thus, Big Data is not only about handling large volumes of data, but also about extracting meaningful value from it using specialized tools and technologies.
 
 **Sources of Big Data:**
 
-1.  **Social Media**: Platforms like Facebook, Twitter, and Instagram generate massive amounts of unstructured data (posts, images, videos, comments) every second.
-2.  **IoT Devices**: Sensors in smart homes, industrial machines, and wearables continuously stream data about temperature, location, and health metrics.
-3.  **Transactional Data**: Banking, e-commerce, and retail sectors generate huge volumes of structured transactional records (payments, orders).
-4.  **Web Logs**: Clickstream data from websites tracks user behavior, page views, and interactions.
-5.  **Scientific Data**: Genomics, astronomy, and weather forecasting generate petabytes of complex data for research.
+Big Data is generated from a wide range of sources in today’s interconnected digital environment. One major source of Big Data is **banking and credit card transactions**, where millions of financial records are generated every second. These transactions include payments, transfers, and online purchases.
+
+Another significant source is **social media platforms** such as Twitter, Facebook, and Instagram. These platforms generate enormous amounts of unstructured data in the form of posts, comments, images, and videos. **Web and e-commerce systems** also contribute heavily by recording user clicks, searches, browsing behavior, and purchase histories.
+
+Additionally, **mobile devices**, **sensor technologies**, and <Highlight color="blue">**Internet of Things (IoT) networks**</Highlight> generate continuous streams of real-time data. Scientific instruments and research experiments also produce large datasets that require Big Data processing techniques.
+
+Therefore, the variety and volume of data sources contribute to the rapid growth of Big Data across industries.
 
 ---
 
-### Q2. How much data does it take to be called Big Data? With example explain various data measures.
+### Q2. How much data does it take to be called Big Data? With example explain various data measures. <GreenDot />
 
-There is no single fixed size that defines "Big Data," but it typically refers to datasets measuring in **Terabytes (TB)**, **Petabytes (PB)**, and beyond. In Big Data analytics, data is measured using hierarchical storage units that represent increasing volumes of data.
+In Big Data analytics, data is measured using hierarchical storage units that represent increasing volumes of data. The smallest unit of data is a **bit**, and eight bits together form one **byte**. As data volume increases, larger units are used to represent it efficiently.
 
-**Data Measures:**
+One kilobyte (KB) is equal to 1024 bytes, while one megabyte (MB) consists of 1024 kilobytes. Similarly, one gigabyte (GB) equals 1024 megabytes and one terabyte (TB) equals 1024 gigabytes. In Big Data environments, data is commonly measured in much larger units such as <Highlight color="blue">**petabytes (PB)**, **exabytes (EB)**, **zettabytes (ZB)**, and **yottabytes (YB)**</Highlight>.
 
-| Unit | Size | Example |
-| :--- | :--- | :--- |
-| **Bit** | 0 or 1 | A binary decision (Yes/No). |
-| **Byte** | 8 bits | A single character of text. |
-| **Kilobyte (KB)** | 1,024 bytes | A short email or text file. |
-| **Megabyte (MB)** | 1,024 KB | A high-quality photo or MP3 song. |
-| **Gigabyte (GB)** | 1,024 MB | A standard movie (HD). |
-| **Terabyte (TB)** | 1,024 GB | A hard drive storing 500 hours of video. |
-| **Petabyte (PB)** | 1,024 TB | All photos on Facebook (approx. per day). |
-| **Exabyte (EB)** | 1,024 PB | Total mobile internet traffic per month. |
-| **Zettabyte (ZB)** | 1,024 EB | Total global data created in a year. |
-| **Yottabyte (YB)** | 1,024 ZB | Theoretical scale (entire internet archive). |
+Modern applications such as social media platforms, cloud services, and scientific research generate data at petabyte and exabyte scales. Traditional data processing systems struggle to handle such massive volumes, which is why Big Data technologies are required.
 
-Modern applications generate data at <Highlight color="blue">**petabyte and exabyte scales**</Highlight>, which traditional systems (designed for GB/TB) struggle to handle.
+Hence, understanding data size units is essential to appreciate the scale and challenges associated with Big Data.
 
 ---
 
-### Q3. With example explain types of Big Data.
+### Q3. With example explain types of Big Data. <GreenDot />
 
-Big Data is broadly classified into three categories based on its structure and organization:
+Big Data is broadly classified into three categories based on its structure and organization, namely <Highlight>**structured data**, **unstructured data**, and **semi-structured data**</Highlight>. This classification helps in understanding how data is stored, processed, and analyzed.
 
-**1. Structured Data**
-   - Data that follows a **fixed schema** and is organized in rows and columns.
-   - It is highly organized and easily searchable.
-   - **Example**: Relational Database (RDBMS) tables storing employee records, banking transactions (AccountID, Amount, Date).
+**Structured data** refers to data that follows a fixed schema and is organized in rows and columns. It is usually stored in relational database management systems and can be easily queried using SQL. Examples of structured data include employee records, banking transactions, and inventory databases. Although structured data is easy to manage, handling it becomes challenging when the data size grows to extremely large volumes.
 
-**2. Unstructured Data**
-   - Data that **does not have a predefined format** or schema.
-   - It accounts for the majority of Big Data (estimated >80%).
-   - **Example**: Text documents, emails, social media posts, images, audio files, video content.
+**Unstructured data** does not have a predefined format or schema. It includes data such as text documents, emails, images, videos, audio files, and system logs. This type of data constitutes the majority of Big Data generated today. Traditional databases are not well suited to store or analyze unstructured data, making it a major challenge for organizations.
 
-**3. Semi-Structured Data**
-   - Data that does not follow a rigid schema but contains **tags or markers** to separate data elements.
-   - It lies between structured and unstructured data.
-   - **Example**: **XML** files, **JSON** documents used in web applications, NoSQL databases (MongoDB).
+**Semi-structured data** lies between structured and unstructured data. It does not follow rigid relational schemas but contains tags or markers to organize data elements. Common examples include XML and JSON files, which are widely used in web applications.
+
+Thus, Big Data systems must be capable of handling all three types of data efficiently.
 
 ---
 
-### Q4. What are the 5Vs of big data? Explain.
+### Q4. What are the 5Vs of big data? Explain. <GreenDot />
 
-Big Data is characterized by the **5 V's**, which distinguish it from traditional data:
+<Callout title="Very Important"></Callout>
 
-1.  <Highlight>**Volume**</Highlight>: Refers to the **massive scale** of data generated. It ranges from Terabytes to Zettabytes. *Example*: 400 hours of video overlapping uploaded to YouTube every minute.
-2.  <Highlight>**Velocity**</Highlight>: The **speed** at which data is generated, collected, and processed. Data flows in real-time or near real-time. *Example*: Stock market data, social media feeds ensuring split-second updates.
-3.  <Highlight>**Variety**</Highlight>: The **diversity** of data types. It includes structured (databases), semi-structured (XML/JSON), and unstructured (text/video) data.
-4.  <Highlight>**Veracity**</Highlight>: The **quality and trustworthiness** of the data. Big Data often contains noise, biases, or abnormalities that must be cleaned.
-5.  <Highlight>**Value**</Highlight>: The most important V. It refers to the **business value** or insights extracted from the data. Raw data is useless without analysis that leads to decision-making.
+Big Data is defined by five key characteristics commonly known as the <Highlight>**5 V's of Big Data**</Highlight>. These characteristics distinguish Big Data from traditional data systems.
 
----
+The first characteristic is <Highlight>**Volume**</Highlight>, which refers to the massive amount of data generated from various sources such as social media, sensors, and online transactions. Data today is generated in terabytes and petabytes, far exceeding the capacity of traditional systems.
 
-### Q5. Compare big data with traditional data.
+The second characteristic is <Highlight>**Velocity**</Highlight>, which indicates the speed at which data is generated, transmitted, and processed. Examples include real-time data from stock markets, social media feeds, and IoT devices.
 
-| Feature | Traditional Data | Big Data |
-| :--- | :--- | :--- |
-| **Volume** | Gigabytes (GB) to Terabytes (TB). Manageable. | Petabytes (PB) to Exabytes (EB). Massive. |
-| **Structure** | Mostly Structured (Relational Tables). | Structured, Semi-structured, and Unstructured. |
-| **Sources** | Internal (ERP, CRM, Transactions). | External (Social Media, IoT, Cloud, Web). |
-| **Integration** | Easy (ETL to Data Warehouse). | Difficult (Complex pipelines, Data Lakes). |
-| **Access** | Interaction (Batch/Near-time). | Batch, Real-time, Streaming. |
-| **Database** | RDBMS (SQL, Oracle, MySQL). | NoSQL, Hadoop, Spark. |
+The third characteristic is <Highlight>**Variety**</Highlight>, which represents the different forms of data such as structured, semi-structured, and unstructured data. Handling such diverse data types is a major challenge in Big Data analytics.
+
+The fourth characteristic is <Highlight>**Veracity**</Highlight>, which deals with the quality, accuracy, and reliability of data. Big Data often contains noise, inconsistencies, and uncertainty.
+
+The fifth characteristic is <Highlight>**Value**</Highlight>, which refers to the ability to extract meaningful and useful insights from raw data. Without value, large volumes of data have no practical significance.
 
 ---
 
-### Q6. How big data approach is different from traditional warehouse approach.
+### Q5. Compare big data with traditional data. <GreenDot />
 
-| Approach | Traditional Data Warehouse | Big Data Approach |
-| :--- | :--- | :--- |
-| **Purpose** | Historical reporting and analysis. | Exploratory analysis, predictive modeling, ML. |
-| **Data Types** | Highly structured, cleaned, aggregated. | Raw, granular, diverse (including unstructured). |
-| **Schema** | **Schema-on-Write** (Schema defined before data load). | **Schema-on-Read** (Schema applied when reading data). |
-| **Cost** | High (Enterprise hardware/licenses). | Lower (Commodity hardware, Open Source). |
-| **Processing** | Centralized, Scale-Up (Vertical). | Distributed, Scale-Out (Horizontal). |
-| **Flexibility** | Less flexible (Rigid schema). | Highly flexible (Agile, experimental). |
-| **Users** | Business Analysts (SQL). | Data Scientists, Engineers (Python/R/Java). |
+Traditional data systems are designed to handle **small to moderate volumes of structured data** stored in centralized relational databases. These systems rely on fixed schemas and <Highlight color="blue">vertical scaling</Highlight> using powerful servers. They are mainly used for transactional processing and routine business operations.
+
+In contrast, Big Data systems are designed to handle **very large volumes of structured, semi-structured, and unstructured data**. They use <Highlight>**distributed storage systems such as HDFS**</Highlight> and support horizontal scaling by adding more machines. Big Data systems operate on clusters of commodity hardware and are optimized for large-scale data analysis rather than simple transactions.
+
+Traditional systems are limited in scalability and flexibility, whereas Big Data systems provide high scalability, fault tolerance, and cost effectiveness. Therefore, Big Data systems are better suited for modern analytics-driven applications.
 
 ---
 
-### Q7. Discuss any 4 applications of big data in brief.
+### Q6. How big data approach is different from traditional warehouse approach. <GreenDot />
 
-1.  **Healthcare**:
-    - **Predictive Analytics**: Predicting disease outbreaks and patient readmissions.
-    - **Personalized Medicine**: Tailoring treatment plans based on a patient's genetic makeup (Genomics).
-    - **Electronic Health Records (EHR)**: Managing massive patient histories for better diagnosis.
+*Note: This answer is based on the comparison of Traditional Analytics vs Big Data Analytics.*
 
-2.  **Finance (BFSI)**:
-    - **Fraud Detection**: analyzing transaction patterns in real-time to identify anomalies and prevent fraud.
-    - **Risk Management**: Assessing credit risk and market risk using historical and external data.
-    - **Algorithmic Trading**: Making split-second trading decisions based on market data feeds.
+Traditional analytics focuses on analyzing **structured data** using predefined queries and reports. The analysis process is usually <Highlight color="blue">**repeatable and predictable**</Highlight>, and data preparation is handled primarily by IT teams. Traditional analytics aims to answer known business questions based on historical data.
 
-3.  **Retail & E-commerce**:
-    - **Recommendation Engines**: Suggesting products to users (e.g., "Customers who bought this also bought...") like Amazon/Netflix.
-    - **Customer Sentiment Analysis**: Analyzing reviews and social media to understand brand perception.
-    - **Inventory Management**: Optimizing supply chain and stock levels based on demand prediction.
+Big Data analytics, on the other hand, is <Highlight>**exploratory and iterative**</Highlight> in nature. It allows analysts and business users to explore large and diverse datasets to discover unknown patterns and insights. Big Data analytics supports advanced techniques such as sentiment analysis, behavioral analysis, and predictive analytics.
 
-4.  **Transportation & Logistics**:
-    - **Route Optimization**: Using GPS and traffic data to find the most efficient delivery routes (e.g., Uber, FedEx).
-    - **Predictive Maintenance**: Monitoring vehicle sensors to predict breakdowns before they happen.
+Unlike traditional analytics, Big Data analytics handles real-time and high-velocity data and enables organizations to adapt quickly to changing business conditions.
+
+---
+
+### Q7. Discuss any 4 applications of big data in brief. <GreenDot />
+
+Big Data has a wide range of applications across various industries. In **healthcare**, Big Data is used for disease prediction, patient monitoring, and personalized treatment plans. In **finance**, it supports fraud detection, risk analysis, and algorithmic trading.
+
+Retail and e-commerce companies use Big Data to create a <Highlight>**360-degree view of customers**</Highlight>, enabling personalized recommendations and targeted marketing. Big Data is also used in **security and intelligence** to detect threats and suspicious activities. In **operations analysis**, organizations analyze machine and process data to improve efficiency and reduce downtime.
+
+Big Data also supports **data warehouse augmentation**, where traditional data warehouses are enhanced with large and diverse datasets. These use cases demonstrate how Big Data transforms raw data into actionable insights.
 
 ---
 
@@ -151,43 +128,27 @@ Banks process millions of transactions daily. Traditional rule-based systems oft
 
 # Module 2: Hadoop & MapReduce
 
-### Q9. What is Hadoop? Explain Hadoop’s core components.
+### Q9. What is Hadoop? Explain Hadoop’s core components. <GreenDot />
 
-**Apache Hadoop** is an <Highlight>**open-source framework**</Highlight> that allows for the **distributed processing** of large datasets across clusters of computers using simple programming models. It is designed to scale up from single servers to thousands of machines, each offering local computation and storage.
+Hadoop is an <Highlight>**open-source framework**</Highlight> developed by the Apache Software Foundation for the <Highlight>**distributed storage and processing of large datasets**</Highlight>. It was created by *Doug Cutting* and *Mike Cafarella* in 2005 to address the challenges posed by rapidly growing data volumes.
 
 **Core Components:**
 
-1.  **Hadoop Common**: The common utilities and libraries that support the other Hadoop modules.
-2.  **HDFS (Hadoop Distributed File System)**:
-    - A distributed file system that provides <Highlight>**high-throughput access to application data**</Highlight>.
-    - It splits files into blocks and stores them across multiple nodes.
-    - Ensures **Fault Tolerance** via replication (default 3 replicas).
-3.  **YARN (Yet Another Resource Negotiator)**:
-    - The framework for **job scheduling** and **cluster resource management**.
-    - It decouples resource management from the processing model (MapReduce).
-4.  **MapReduce**:
-    - A YARN-based system for <Highlight>**parallel processing**</Highlight> of large datasets.
-    - It processes data in two phases: **Map** (filter/sort) and **Reduce** (summary).
+Hadoop consists of four core components that work together to support distributed data processing. <Highlight>**Hadoop Common**</Highlight> provides shared utilities and libraries required by other Hadoop modules.
+
+<Highlight>**HDFS (Hadoop Distributed File System)**</Highlight> is responsible for distributed storage. It splits large files into blocks and replicates them across multiple nodes to ensure fault tolerance. The <Highlight color="blue">**NameNode**</Highlight> manages metadata, while <Highlight color="blue">**DataNodes**</Highlight> store the actual data.
+
+<Highlight>**YARN (Yet Another Resource Negotiator)**</Highlight> manages cluster resources and schedules jobs by allocating CPU and memory efficiently. <Highlight>**MapReduce**</Highlight> is the programming model used for distributed processing, where data is processed using Map and Reduce phases.
 
 ---
 
-### Q10. Discuss Hadoop ecosystem.
+### Q10. Discuss Hadoop ecosystem. <GreenDot />
 
-The Hadoop Ecosystem is a collection of tools and technologies built on top of the Hadoop framework to support different stages of Big Data processing:
+The Hadoop ecosystem consists of tools that extend Hadoop's capabilities. <Highlight color="blue">**Hive**</Highlight> provides SQL-like querying for large datasets, while <Highlight color="blue">**Pig**</Highlight> offers a high-level scripting language for data transformation. <Highlight color="blue">**HBase**</Highlight> is a NoSQL database that supports real-time read and write operations.
 
-| Component | Description |
-| :--- | :--- |
-| **HDFS** | Storage layer. |
-| **YARN** | Resource Manager. |
-| **MapReduce** | Processing layer (Batch). |
-| **Hive** | **Data Warehousing** tool that facilitates reading, writing, and managing large datasets using SQL-like queries (**HQL**). |
-| **Pig** | High-level scripting platform for data transformation using **Pig Latin**. Good for ETL. |
-| **HBase** | A **NoSQL** column-oriented database that runs on top of HDFS. Supports **real-time** read/write. |
-| **Spark** | A fast, general-purpose engine for large-scale data processing. Supports in-memory processing (faster than MapReduce). |
-| **Sqoop** | Tool for transferring bulk data between Hadoop and **structured datastores** (RDBMS). |
-| **Flume** | Tool for efficiently collecting, aggregating, and moving large amounts of **log data** (unstructured). |
-| **ZooKeeper** | A centralized service for maintaining configuration information and providing **distributed synchronization**. |
-| **Oozie** | Workflow scheduler system to manage Hadoop jobs. |
+<Highlight color="blue">**Sqoop**</Highlight> is used to transfer data between Hadoop and relational databases, and <Highlight color="blue">**Flume**</Highlight> is used for log and data ingestion. <Highlight color="blue">**Mahout**</Highlight> supports machine learning applications, and <Highlight color="blue">**ZooKeeper**</Highlight> provides coordination and synchronization services.
+
+Together, these tools make Hadoop a complete Big Data processing platform.
 
 ---
 
@@ -210,28 +171,15 @@ The Hadoop Ecosystem is a collection of tools and technologies built on top of t
 
 ---
 
-### Q12. Explain architecture of HDFS.
+### Q12. Explain architecture of HDFS. <GreenDot />
 
-HDFS follows a <Highlight>**Master-Slave Architecture**</Highlight>:
+HDFS is a distributed file system designed to store large datasets across multiple nodes in a Hadoop cluster. It divides files into <Highlight color="blue">fixed-size blocks</Highlight> and distributes them across DataNodes. Each block is <Highlight>replicated, typically three times</Highlight>, to ensure fault tolerance.
 
-<div className="mx-auto max-w-3xl my-8">
-  <img src={explainHdfsSvg.src} alt="HDFS Architecture" className="w-full h-auto block dark:invert dark:hue-rotate-180 dark:contrast-[1.05]" />
+The **NameNode** maintains metadata such as file names, block locations, and permissions, while **DataNodes** handle the actual storage. HDFS is optimized for high throughput rather than low latency and is suitable for batch processing of large datasets.
+
+<div className="mx-auto max-w-2xl" style={{ aspectRatio: '1041/563' }}>
+  <img src={explainHdfsSvg.src} alt="HDFS architecture diagram" className="w-full h-full block dark:invert dark:hue-rotate-180 dark:contrast-[1.05]" />
 </div>
-
-1.  **NameNode (Master)**:
-    - Manages the **File System Namespace** (meta-data: file names, directory structure, permissions).
-    - Maintains the mapping of file blocks to DataNodes.
-    - Single point of failure (resolved by High Availability/Secondary NameNode).
-    - Does **not** store actual data.
-
-2.  **DataNode (Slave)**:
-    - Stores the actual **data blocks**.
-    - Performs read and write requests from file system clients.
-    - Sends **Heartbeats** and **Block Reports** to the NameNode to confirm availability.
-
-3.  **Secondary NameNode**:
-    - Helper node. It allows the NameNode to function better by periodically merging the **namespace image** and the **edit log**.
-    - It is **NOT** a backup NameNode (despite the name).
 
 ---
 
@@ -251,8 +199,6 @@ HDFS follows a <Highlight>**Master-Slave Architecture**</Highlight>:
     -   Runs on DataNodes.
     -   Executes the actual Map and Reduce tasks assigned by the JobTracker.
     -   Sends heartbeat signals to JobTracker to report health and progress.
-
-*(Note: In YARN (MRv2), JobTracker is replaced by **ResourceManager** and TaskTracker by **NodeManager** + **ApplicationMaster**)*.
 
 ---
 
@@ -291,8 +237,7 @@ class Reducer:
 
 ### Q15. Write MapReduce pseudo-code to count distinct words in the input file.
 
-**Goal**: Count the number of *distinct* (unique) words in a file. Note: This is different from Word Count (frequency). We just want the set of unique words. Or if the question implies counting how *many* unique words exist total. Usually "Count Distinct" implies finding the set of unique items. If we want the COUNT of distinct words, we need two stages or a single global counter.
-*Assuming the standard interpretation: List all unique words.*
+**Goal**: Count the number of *distinct* (unique) words in a file.
 
 **Pseudo-code:**
 
@@ -312,8 +257,6 @@ class Reducer:
         # To output the unique word:
         Emit(word, null) 
 ```
-
-*Note: The Reducer receives one call per unique key. By complying simply emitting the key, we achieve a distinct list. If we needed a numeric count of unique words, we'd need to pipe this output to a second job that counts the lines.*
 
 ---
 
@@ -345,14 +288,13 @@ Input: `key=(i,j), list_of_values=[('A', 1, vA1), ('B', 1, vB1), ('A', 2, vA2)..
 
 ---
 
-### Q17. Explain how files are stored in HDFS (as part of MapReduce context).
+### Q17. Explain how files are stored in HDFS (as part of MapReduce context). <GreenDot />
 
-In HDFS, files are stored as follows to facilitate MapReduce:
+*Note: This explanation focuses on HDFS storage as part of distributed processing.*
 
-1.  **Block Splitting**: Large files (e.g., 100 GB) are broken down into fixed-size blocks (default 128 MB or 256 MB).
-2.  **Distribution**: These blocks are distributed across various DataNodes in the cluster. This allows MapReduce to process these blocks in **parallel**.
-3.  **Data Locality**: MapReduce tries to schedule the Map task on the **same node** where the data block resides. This minimizes network congestion (Moving computation to data, not data to computation).
-4.  **Replication**: Each block is replicated (default 3x) to ensure availability. If a node running a Map task fails, the JobTracker/ResourceManager can restart the task on another node holding a replica of that block.
+HDFS is a distributed file system designed to store large datasets across multiple nodes in a Hadoop cluster. It divides files into <Highlight color="blue">fixed-size blocks</Highlight> and distributes them across DataNodes. Each block is <Highlight>replicated, typically three times</Highlight>, to ensure fault tolerance.
+
+The **NameNode** maintains metadata such as file names, block locations, and permissions, while **DataNodes** handle the actual storage. HDFS is optimized for high throughput rather than low latency and is suitable for batch processing of large datasets.
 
 ---
 
