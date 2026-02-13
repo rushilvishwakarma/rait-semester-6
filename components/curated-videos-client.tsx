@@ -23,7 +23,7 @@ interface CuratedResourcesContextType {
 
 const CuratedResourcesContext = createContext<CuratedResourcesContextType>({
   visible: true,
-  toggle: () => {},
+  toggle: () => { },
 });
 
 export function useCuratedResources() {
@@ -69,8 +69,8 @@ export function CuratedResourcesToggle({ className }: { className?: string }) {
         'inline-flex items-center justify-center rounded-full p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground',
         className,
       )}
-      aria-label={visible ? 'Hide curated resources' : 'Show curated resources'}
-      title={visible ? 'Hide curated resources' : 'Show curated resources'}
+      aria-label={visible ? 'Hide Curated Resources' : 'Show Curated Resources'}
+      title={visible ? 'Hide Curated Resources' : 'Show Curated Resources'}
       onClick={toggle}
     >
       {visible ? (

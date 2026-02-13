@@ -1,0 +1,409 @@
+---
+title: Question Bank - Internal Assessment 1
+---
+
+import { Highlight } from '@/components/highlight';
+import explainHdfsSvg from './module-1/explain-hdfs.svg';
+
+# BIG DATA ANALYTICS (BDA)
+
+# Module 1: Introduction to Big Data
+
+### Q1. What is Big Data? Discuss different sources that generate big data.
+
+**Big Data** refers to extremely large and complex datasets that are generated at a very high speed and cannot be efficiently processed using traditional data processing systems such as relational databases. As digital technologies have advanced, data is being produced continuously from multiple sources, making it difficult for conventional systems to store, manage, and analyze it effectively.
+
+The data becomes “Big Data” when its **size**, **speed of generation**, or **complexity** exceeds the capacity of traditional systems. Earlier systems were designed to handle structured data in limited volumes, whereas Big Data includes structured, semi-structured, and unstructured data such as text, images, videos, and sensor data.
+
+**Sources of Big Data:**
+
+1.  **Social Media**: Platforms like Facebook, Twitter, and Instagram generate massive amounts of unstructured data (posts, images, videos, comments) every second.
+2.  **IoT Devices**: Sensors in smart homes, industrial machines, and wearables continuously stream data about temperature, location, and health metrics.
+3.  **Transactional Data**: Banking, e-commerce, and retail sectors generate huge volumes of structured transactional records (payments, orders).
+4.  **Web Logs**: Clickstream data from websites tracks user behavior, page views, and interactions.
+5.  **Scientific Data**: Genomics, astronomy, and weather forecasting generate petabytes of complex data for research.
+
+---
+
+### Q2. How much data does it take to be called Big Data? With example explain various data measures.
+
+There is no single fixed size that defines "Big Data," but it typically refers to datasets measuring in **Terabytes (TB)**, **Petabytes (PB)**, and beyond. In Big Data analytics, data is measured using hierarchical storage units that represent increasing volumes of data.
+
+**Data Measures:**
+
+| Unit | Size | Example |
+| :--- | :--- | :--- |
+| **Bit** | 0 or 1 | A binary decision (Yes/No). |
+| **Byte** | 8 bits | A single character of text. |
+| **Kilobyte (KB)** | 1,024 bytes | A short email or text file. |
+| **Megabyte (MB)** | 1,024 KB | A high-quality photo or MP3 song. |
+| **Gigabyte (GB)** | 1,024 MB | A standard movie (HD). |
+| **Terabyte (TB)** | 1,024 GB | A hard drive storing 500 hours of video. |
+| **Petabyte (PB)** | 1,024 TB | All photos on Facebook (approx. per day). |
+| **Exabyte (EB)** | 1,024 PB | Total mobile internet traffic per month. |
+| **Zettabyte (ZB)** | 1,024 EB | Total global data created in a year. |
+| **Yottabyte (YB)** | 1,024 ZB | Theoretical scale (entire internet archive). |
+
+Modern applications generate data at <Highlight color="blue">**petabyte and exabyte scales**</Highlight>, which traditional systems (designed for GB/TB) struggle to handle.
+
+---
+
+### Q3. With example explain types of Big Data.
+
+Big Data is broadly classified into three categories based on its structure and organization:
+
+**1. Structured Data**
+   - Data that follows a **fixed schema** and is organized in rows and columns.
+   - It is highly organized and easily searchable.
+   - **Example**: Relational Database (RDBMS) tables storing employee records, banking transactions (AccountID, Amount, Date).
+
+**2. Unstructured Data**
+   - Data that **does not have a predefined format** or schema.
+   - It accounts for the majority of Big Data (estimated >80%).
+   - **Example**: Text documents, emails, social media posts, images, audio files, video content.
+
+**3. Semi-Structured Data**
+   - Data that does not follow a rigid schema but contains **tags or markers** to separate data elements.
+   - It lies between structured and unstructured data.
+   - **Example**: **XML** files, **JSON** documents used in web applications, NoSQL databases (MongoDB).
+
+---
+
+### Q4. What are the 5Vs of big data? Explain.
+
+Big Data is characterized by the **5 V's**, which distinguish it from traditional data:
+
+1.  <Highlight>**Volume**</Highlight>: Refers to the **massive scale** of data generated. It ranges from Terabytes to Zettabytes. *Example*: 400 hours of video overlapping uploaded to YouTube every minute.
+2.  <Highlight>**Velocity**</Highlight>: The **speed** at which data is generated, collected, and processed. Data flows in real-time or near real-time. *Example*: Stock market data, social media feeds ensuring split-second updates.
+3.  <Highlight>**Variety**</Highlight>: The **diversity** of data types. It includes structured (databases), semi-structured (XML/JSON), and unstructured (text/video) data.
+4.  <Highlight>**Veracity**</Highlight>: The **quality and trustworthiness** of the data. Big Data often contains noise, biases, or abnormalities that must be cleaned.
+5.  <Highlight>**Value**</Highlight>: The most important V. It refers to the **business value** or insights extracted from the data. Raw data is useless without analysis that leads to decision-making.
+
+---
+
+### Q5. Compare big data with traditional data.
+
+| Feature | Traditional Data | Big Data |
+| :--- | :--- | :--- |
+| **Volume** | Gigabytes (GB) to Terabytes (TB). Manageable. | Petabytes (PB) to Exabytes (EB). Massive. |
+| **Structure** | Mostly Structured (Relational Tables). | Structured, Semi-structured, and Unstructured. |
+| **Sources** | Internal (ERP, CRM, Transactions). | External (Social Media, IoT, Cloud, Web). |
+| **Integration** | Easy (ETL to Data Warehouse). | Difficult (Complex pipelines, Data Lakes). |
+| **Access** | Interaction (Batch/Near-time). | Batch, Real-time, Streaming. |
+| **Database** | RDBMS (SQL, Oracle, MySQL). | NoSQL, Hadoop, Spark. |
+
+---
+
+### Q6. How big data approach is different from traditional warehouse approach.
+
+| Approach | Traditional Data Warehouse | Big Data Approach |
+| :--- | :--- | :--- |
+| **Purpose** | Historical reporting and analysis. | Exploratory analysis, predictive modeling, ML. |
+| **Data Types** | Highly structured, cleaned, aggregated. | Raw, granular, diverse (including unstructured). |
+| **Schema** | **Schema-on-Write** (Schema defined before data load). | **Schema-on-Read** (Schema applied when reading data). |
+| **Cost** | High (Enterprise hardware/licenses). | Lower (Commodity hardware, Open Source). |
+| **Processing** | Centralized, Scale-Up (Vertical). | Distributed, Scale-Out (Horizontal). |
+| **Flexibility** | Less flexible (Rigid schema). | Highly flexible (Agile, experimental). |
+| **Users** | Business Analysts (SQL). | Data Scientists, Engineers (Python/R/Java). |
+
+---
+
+### Q7. Discuss any 4 applications of big data in brief.
+
+1.  **Healthcare**:
+    - **Predictive Analytics**: Predicting disease outbreaks and patient readmissions.
+    - **Personalized Medicine**: Tailoring treatment plans based on a patient's genetic makeup (Genomics).
+    - **Electronic Health Records (EHR)**: Managing massive patient histories for better diagnosis.
+
+2.  **Finance (BFSI)**:
+    - **Fraud Detection**: analyzing transaction patterns in real-time to identify anomalies and prevent fraud.
+    - **Risk Management**: Assessing credit risk and market risk using historical and external data.
+    - **Algorithmic Trading**: Making split-second trading decisions based on market data feeds.
+
+3.  **Retail & E-commerce**:
+    - **Recommendation Engines**: Suggesting products to users (e.g., "Customers who bought this also bought...") like Amazon/Netflix.
+    - **Customer Sentiment Analysis**: Analyzing reviews and social media to understand brand perception.
+    - **Inventory Management**: Optimizing supply chain and stock levels based on demand prediction.
+
+4.  **Transportation & Logistics**:
+    - **Route Optimization**: Using GPS and traffic data to find the most efficient delivery routes (e.g., Uber, FedEx).
+    - **Predictive Maintenance**: Monitoring vehicle sensors to predict breakdowns before they happen.
+
+---
+
+### Q8. What are the key use cases of big data? Explain any one use case of your interest.
+
+**Key Use Cases:**
+- Fraud Detection in Banking
+- Predictive Maintenance in Manufacturing.
+- Personalized Recommendations in Media (Netflix).
+- Customer Churn Prediction in Telecom.
+- Precision Agriculture.
+
+**Detailed Example: Fraud Detection in Banking**
+Banks process millions of transactions daily. Traditional rule-based systems often miss sophisticated fraud patterns or generate high false positives.
+- **Big Data Solution**: Banks ingest vast amounts of data—transaction history, location, device ID, spending behavior.
+- **Real-time Processing**: Using technologies like <Highlight color="blue">**Spark Streaming**</Highlight> or <Highlight color="blue">**Flink**</Highlight>, every transaction is scored against ML models trained on historical fraud data.
+- **Action**: If a transaction deviates from the user's normal pattern (e.g., high value transaction in a different country), it is flagged instantly for verification.
+- **Benefit**: Reduces financial loss and improves customer trust by preventing fraud before it settles.
+
+---
+
+# Module 2: Hadoop & MapReduce
+
+### Q9. What is Hadoop? Explain Hadoop’s core components.
+
+**Apache Hadoop** is an <Highlight>**open-source framework**</Highlight> that allows for the **distributed processing** of large datasets across clusters of computers using simple programming models. It is designed to scale up from single servers to thousands of machines, each offering local computation and storage.
+
+**Core Components:**
+
+1.  **Hadoop Common**: The common utilities and libraries that support the other Hadoop modules.
+2.  **HDFS (Hadoop Distributed File System)**:
+    - A distributed file system that provides <Highlight>**high-throughput access to application data**</Highlight>.
+    - It splits files into blocks and stores them across multiple nodes.
+    - Ensures **Fault Tolerance** via replication (default 3 replicas).
+3.  **YARN (Yet Another Resource Negotiator)**:
+    - The framework for **job scheduling** and **cluster resource management**.
+    - It decouples resource management from the processing model (MapReduce).
+4.  **MapReduce**:
+    - A YARN-based system for <Highlight>**parallel processing**</Highlight> of large datasets.
+    - It processes data in two phases: **Map** (filter/sort) and **Reduce** (summary).
+
+---
+
+### Q10. Discuss Hadoop ecosystem.
+
+The Hadoop Ecosystem is a collection of tools and technologies built on top of the Hadoop framework to support different stages of Big Data processing:
+
+| Component | Description |
+| :--- | :--- |
+| **HDFS** | Storage layer. |
+| **YARN** | Resource Manager. |
+| **MapReduce** | Processing layer (Batch). |
+| **Hive** | **Data Warehousing** tool that facilitates reading, writing, and managing large datasets using SQL-like queries (**HQL**). |
+| **Pig** | High-level scripting platform for data transformation using **Pig Latin**. Good for ETL. |
+| **HBase** | A **NoSQL** column-oriented database that runs on top of HDFS. Supports **real-time** read/write. |
+| **Spark** | A fast, general-purpose engine for large-scale data processing. Supports in-memory processing (faster than MapReduce). |
+| **Sqoop** | Tool for transferring bulk data between Hadoop and **structured datastores** (RDBMS). |
+| **Flume** | Tool for efficiently collecting, aggregating, and moving large amounts of **log data** (unstructured). |
+| **ZooKeeper** | A centralized service for maintaining configuration information and providing **distributed synchronization**. |
+| **Oozie** | Workflow scheduler system to manage Hadoop jobs. |
+
+---
+
+### Q11. What is HDFS? How files are written and read in HDFS?
+
+**HDFS (Hadoop Distributed File System)** is a scalable, fault-tolerant, distributed storage system designed to run on commodity hardware.
+
+**Write Mechanism:**
+1.  Client requests NameNode to create a file.
+2.  NameNode checks permissions and returns a list of DataNodes to store the first block.
+3.  Client writes data packet to the first DataNode.
+4.  DataNodes replicate the packet to the next DataNodes in the pipeline (Pipeline Replication).
+5.  Once all replicas are written, an acknowledgment is sent back to the client.
+
+**Read Mechanism:**
+1.  Client requests NameNode for the location of a file.
+2.  NameNode returns the list of DataNodes holding the blocks of the file.
+3.  Client reads blocks directly from the closest DataNode (Rack Awareness).
+4.  Client assembles the blocks to form the original file.
+
+---
+
+### Q12. Explain architecture of HDFS.
+
+HDFS follows a <Highlight>**Master-Slave Architecture**</Highlight>:
+
+<div className="mx-auto max-w-3xl my-8">
+  <img src={explainHdfsSvg.src} alt="HDFS Architecture" className="w-full h-auto block dark:invert dark:hue-rotate-180 dark:contrast-[1.05]" />
+</div>
+
+1.  **NameNode (Master)**:
+    - Manages the **File System Namespace** (meta-data: file names, directory structure, permissions).
+    - Maintains the mapping of file blocks to DataNodes.
+    - Single point of failure (resolved by High Availability/Secondary NameNode).
+    - Does **not** store actual data.
+
+2.  **DataNode (Slave)**:
+    - Stores the actual **data blocks**.
+    - Performs read and write requests from file system clients.
+    - Sends **Heartbeats** and **Block Reports** to the NameNode to confirm availability.
+
+3.  **Secondary NameNode**:
+    - Helper node. It allows the NameNode to function better by periodically merging the **namespace image** and the **edit log**.
+    - It is **NOT** a backup NameNode (despite the name).
+
+---
+
+### Q13. Discuss role of NameNode, Secondary NameNode, DataNode, JobTracker, TaskTracker.
+
+**HDFS Components:**
+-   **NameNode**: The "brain" of the cluster. Manages metadata (fsimage, edit logs). If NameNode goes down, the entire file system is inaccessible.
+-   **DataNode**: The "worker". Stores raw data blocks. Handles I/O operations.
+-   **Secondary NameNode**: Housekeeping node. Checkpoints the file system metadata to prevent the edit log from growing too large.
+
+**MapReduce Components (Classic/MRv1):**
+-   **JobTracker** (Master):
+    -   Accepts jobs from clients.
+    -   Assigns tasks (Map and Reduce) to TaskTrackers.
+    -   Monitors task progress and re-schedules failed tasks.
+-   **TaskTracker** (Slave):
+    -   Runs on DataNodes.
+    -   Executes the actual Map and Reduce tasks assigned by the JobTracker.
+    -   Sends heartbeat signals to JobTracker to report health and progress.
+
+*(Note: In YARN (MRv2), JobTracker is replaced by **ResourceManager** and TaskTracker by **NodeManager** + **ApplicationMaster**)*.
+
+---
+
+### Q14. Explain concept of MapReduce using an example. Write MapReduce pseudo-code for “Group by” “Aggregations” in a database.
+
+**MapReduce Concept**
+MapReduce is a programming model for processing large data sets with a parallel, distributed algorithm on a cluster.
+-   **Map Phase**: Takes specific input and transforms it into key/value pairs (`<k1, v1> → list(<k2, v2>)`).
+-   **Shuffle/Sort Phase**: Groups all strictly logical values by key.
+-   **Reduce Phase**: Takes those grouped key/value pairs and aggregates/summarizes them (`<k2, list(v2)> → <k3, v3>`).
+
+**Example: Group By & Aggregation**
+*Scenario*: Given a dataset of `Sales(Store, Amount)`, calculate Total Sales per Store. (SQL: `SELECT Store, SUM(Amount) FROM Sales GROUP BY Store`)
+
+**Pseudo-code:**
+
+```python
+class Mapper:
+    method Map(docid, record):
+        # record: "StoreA, 100"
+        Store, Amount = parse(record)
+        Emit(Store, Amount) 
+        # Output: <StoreA, 100>, <StoreB, 200>, <StoreA, 150>
+
+class Reducer:
+    method Reduce(Store, list_of_amounts):
+        # input: <StoreA, [100, 150]>
+        total_sales = 0
+        for amount in list_of_amounts:
+            total_sales += amount
+        Emit(Store, total_sales)
+        # Output: <StoreA, 250>
+```
+
+---
+
+### Q15. Write MapReduce pseudo-code to count distinct words in the input file.
+
+**Goal**: Count the number of *distinct* (unique) words in a file. Note: This is different from Word Count (frequency). We just want the set of unique words. Or if the question implies counting how *many* unique words exist total. Usually "Count Distinct" implies finding the set of unique items. If we want the COUNT of distinct words, we need two stages or a single global counter.
+*Assuming the standard interpretation: List all unique words.*
+
+**Pseudo-code:**
+
+```python
+class Mapper:
+    method Map(docid, text):
+        words = text.split()
+        for word in words:
+            # Emit word as key, value is null or dummy
+            Emit(word, null)
+
+class Reducer:
+    method Reduce(word, list_of_nulls):
+        # The fact that this reduce function is called means 'word' exists
+        # We process input <word, [null, null, null...]>
+        
+        # To output the unique word:
+        Emit(word, null) 
+```
+
+*Note: The Reducer receives one call per unique key. By complying simply emitting the key, we achieve a distinct list. If we needed a numeric count of unique words, we'd need to pipe this output to a second job that counts the lines.*
+
+---
+
+### Q16. Explain mapreduce algorithm for matrix multiplication.
+
+Matrix Multiplication $C = A \times B$. If matrix $A$ is size $L \times M$ and $B$ is $M \times N$.
+$C_{ij} = \sum_{k=1}^{M} A_{ik} \times B_{kj}$.
+
+**One-Step Approach (Common):**
+
+**Map Function:**
+The Mapper reads matrix elements.
+-   If element is from Matrix **A** $(i, k, value)$:
+    It is needed for every cell in row $i$ of the result matrix $C$.
+    For each $j$ from $1$ to $N$:
+    **Emit** `key=(i, j), value=('A', k, value)`
+-   If element is from Matrix **B** $(k, j, value)$:
+    It is needed for every cell in column $j$ of the result matrix $C$.
+    For each $i$ from $1$ to $L$:
+    **Emit** `key=(i, j), value=('B', k, value)`
+
+**Reduce Function:**
+The Reducer receives all values for a specific cell $(i, j)$ in the result matrix.
+Input: `key=(i,j), list_of_values=[('A', 1, vA1), ('B', 1, vB1), ('A', 2, vA2)...]`
+-   Initialize `sum = 0`
+-   Group values by index $k$.
+-   For each $k$, find $A_{ik}$ and $B_{kj}$. If both exist, multiply them ($A_{ik} \times B_{kj}$) and add to `sum`.
+-   **Emit** `key=(i, j), value=sum`
+
+---
+
+### Q17. Explain how files are stored in HDFS (as part of MapReduce context).
+
+In HDFS, files are stored as follows to facilitate MapReduce:
+
+1.  **Block Splitting**: Large files (e.g., 100 GB) are broken down into fixed-size blocks (default 128 MB or 256 MB).
+2.  **Distribution**: These blocks are distributed across various DataNodes in the cluster. This allows MapReduce to process these blocks in **parallel**.
+3.  **Data Locality**: MapReduce tries to schedule the Map task on the **same node** where the data block resides. This minimizes network congestion (Moving computation to data, not data to computation).
+4.  **Replication**: Each block is replicated (default 3x) to ensure availability. If a node running a Map task fails, the JobTracker/ResourceManager can restart the task on another node holding a replica of that block.
+
+---
+
+### Q18. Explain limitations of Hadoop.
+
+1.  **Latency**: Hadoop is designed for batch processing (high throughput). It is **not suitable for low-latency** or real-time queries (solved by Spark/Flink).
+2.  **Small Files Problem**: HDFS is inefficient at handling millions of tiny files because the NameNode must keep metadata for every file in memory, creating a bottleneck.
+3.  **Iterative Processing**: MapReduce writes intermediate results to disk after every job. This makes iterative algorithms (like Machine Learning / K-Means) very slow compared to in-memory engines like Spark.
+4.  **Security**: Hadoop's default security model is weak (originally assumed trusted environment). Kerberos is needed for strong authentication, which is complex to manage.
+5.  **Complexity**: Managing a Hadoop cluster requires significant operational expertise (tuning YARN, HDFS, JVMs).
+
+---
+
+### Q19. Construct stepwise MapReduce algorithm for word count application using simple text dataset.
+
+**Dataset**:
+`File 1`: "Apple Banana"
+`File 2`: "Apple Orange"
+
+**Step 1: Input Splits**
+The framework splits input files.
+-   Split 1: "Apple Banana"
+-   Split 2: "Apple Orange"
+
+**Step 2: Mapping**
+Mapper processes each line and emits `<word, 1>`.
+-   Mapper 1 (Split 1): 
+    -   Emit `<Apple, 1>`
+    -   Emit `<Banana, 1>`
+-   Mapper 2 (Split 2):
+    -   Emit `<Apple, 1>`
+    -   Emit `<Orange, 1>`
+
+**Step 3: Shuffling and Sorting**
+The framework groups values by key.
+-   Key: **Apple** -> List: `[1, 1]`
+-   Key: **Banana** -> List: `[1]`
+-   Key: **Orange** -> List: `[1]`
+
+**Step 4: Reducing**
+Reducer sums the counts for each key.
+-   Reducer(Apple, [1, 1]) -> `sum = 1+1 = 2`. Emit `<Apple, 2>`
+-   Reducer(Banana, [1]) -> `sum = 1`. Emit `<Banana, 1>`
+-   Reducer(Orange, [1]) -> `sum = 1`. Emit `<Orange, 1>`
+
+**Step 5: Output**
+Final result written to HDFS:
+```
+Apple   2
+Banana  1
+Orange  1
+```
+
+---
