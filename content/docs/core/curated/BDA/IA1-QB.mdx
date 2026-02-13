@@ -10,7 +10,7 @@ import explainHdfsSvg from './module-1/explain-hdfs.svg';
 
 # Module 1: Introduction to Big Data
 
-### Q1. What is Big Data? Discuss different sources that generate big data. <GreenDot />
+### Q1. What is Big Data? Discuss different sources that generate big data. / What is Big data? Explain types of Big data. <GreenDot />
 
 Big Data refers to extremely large and complex datasets that are generated at a very high speed and cannot be efficiently processed using traditional data processing systems such as relational databases. As digital technologies have advanced, data is being produced continuously from multiple sources, making it difficult for conventional systems to store, manage, and analyze it effectively.
 
@@ -44,7 +44,7 @@ Hence, understanding data size units is essential to appreciate the scale and ch
 
 ---
 
-### Q3. With example explain types of Big Data. <GreenDot />
+### Q3. With example explain types of Big Data. / What is Big data? Explain types of Big data. <GreenDot />
 
 Big Data is broadly classified into three categories based on its structure and organization, namely <Highlight>**structured data**, **unstructured data**, and **semi-structured data**</Highlight>. This classification helps in understanding how data is stored, processed, and analyzed.
 
@@ -58,7 +58,7 @@ Thus, Big Data systems must be capable of handling all three types of data effic
 
 ---
 
-### Q4. What are the 5Vs of big data? Explain. <GreenDot />
+### Q4. What are the 5Vs of big data? Explain. / Explain Big data characteristics. / What are 5vs in Big Data / Explain Big Data characteristics and its types. Discuss about its challenges. <GreenDot />
 
 <Callout title="Very Important"></Callout>
 
@@ -76,7 +76,7 @@ The fifth characteristic is <Highlight>**Value**</Highlight>, which refers to th
 
 ---
 
-### Q5. Compare big data with traditional data. <GreenDot />
+### Q5. Compare big data with traditional data. / Differentiate traditional data and big data. <GreenDot />
 
 Traditional data systems are designed to handle **small to moderate volumes of structured data** stored in centralized relational databases. These systems rely on fixed schemas and <Highlight color="blue">vertical scaling</Highlight> using powerful servers. They are mainly used for transactional processing and routine business operations.
 
@@ -86,7 +86,7 @@ Traditional systems are limited in scalability and flexibility, whereas Big Data
 
 ---
 
-### Q6. How big data approach is different from traditional warehouse approach. <GreenDot />
+### Q6. How big data approach is different from traditional warehouse approach. / Differentiate traditional and big data business approach. <GreenDot />
 
 *Note: This answer is based on the comparison of Traditional Analytics vs Big Data Analytics.*
 
@@ -128,7 +128,7 @@ Banks process millions of transactions daily. Traditional rule-based systems oft
 
 # Module 2: Hadoop & MapReduce
 
-### Q9. What is Hadoop? Explain Hadoop’s core components. <GreenDot />
+### Q9. What is Hadoop? Explain Hadoop’s core components. / Explain architecture of Hadoop. / Explain Core components of Hadoop. <GreenDot />
 
 Hadoop is an <Highlight>**open-source framework**</Highlight> developed by the Apache Software Foundation for the <Highlight>**distributed storage and processing of large datasets**</Highlight>. It was created by *Doug Cutting* and *Mike Cafarella* in 2005 to address the challenges posed by rapidly growing data volumes.
 
@@ -142,7 +142,7 @@ Hadoop consists of four core components that work together to support distribute
 
 ---
 
-### Q10. Discuss Hadoop ecosystem. <GreenDot />
+### Q10. Discuss Hadoop ecosystem. / Explain Hadoop Ecosystem with core components. Explain its Physical architecture. State Limitations of Hadoop. / Explain key-value and document store with example. <GreenDot />
 
 The Hadoop ecosystem consists of tools that extend Hadoop's capabilities. <Highlight color="blue">**Hive**</Highlight> provides SQL-like querying for large datasets, while <Highlight color="blue">**Pig**</Highlight> offers a high-level scripting language for data transformation. <Highlight color="blue">**HBase**</Highlight> is a NoSQL database that supports real-time read and write operations.
 
@@ -171,7 +171,7 @@ Together, these tools make Hadoop a complete Big Data processing platform.
 
 ---
 
-### Q12. Explain architecture of HDFS. <GreenDot />
+### Q12. Explain architecture of HDFS. / Explain HDFS architecture with a diagram / Describe the structure of HDFS in Hadoop ecosystem with a diagram. <GreenDot />
 
 HDFS is a distributed file system designed to store large datasets across multiple nodes in a Hadoop cluster. It divides files into <Highlight color="blue">fixed-size blocks</Highlight> and distributes them across DataNodes. Each block is <Highlight>replicated, typically three times</Highlight>, to ensure fault tolerance.
 
@@ -202,7 +202,7 @@ The **NameNode** maintains metadata such as file names, block locations, and per
 
 ---
 
-### Q14. Explain concept of MapReduce using an example. Write MapReduce pseudo-code for “Group by” “Aggregations” in a database.
+### Q14. Explain concept of MapReduce using an example. Write MapReduce pseudo-code for “Group by” “Aggregations” in a database. / What is MapReduce ? Explain How Map and Reduce Work? What is Shuffling in MapReduce? / What are various types relational algebra operations. Explain any four using Mapreduce.
 
 **MapReduce Concept**
 MapReduce is a programming model for processing large data sets with a parallel, distributed algorithm on a cluster.
@@ -260,7 +260,7 @@ class Reducer:
 
 ---
 
-### Q16. Explain mapreduce algorithm for matrix multiplication.
+### Q16. Explain mapreduce algorithm for matrix multiplication. / Write a Map reduce pseudo code matrix-vector multiplication. / Explain Matrix Vector Multiplication algorithm by MapReduce.
 
 Matrix Multiplication $C = A \times B$. If matrix $A$ is size $L \times M$ and $B$ is $M \times N$.
 $C_{ij} = \sum_{k=1}^{M} A_{ik} \times B_{kj}$.
@@ -308,7 +308,7 @@ The **NameNode** maintains metadata such as file names, block locations, and per
 
 ---
 
-### Q19. Construct stepwise MapReduce algorithm for word count application using simple text dataset.
+### Q19. Construct Stepwise MapReduce algorithm for word count application using simple text dataset.
 
 **Dataset**:
 `File 1`: "Apple Banana"
