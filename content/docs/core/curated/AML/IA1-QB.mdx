@@ -389,12 +389,13 @@ Instead of needing $2^4 - 1 = 15$ parameters for the full joint, this factorized
 
 **Significance:**
 
-- **Compact**: Far fewer parameters than a full joint distribution table.
-- **Efficient**: Enables probabilistic inference (answering queries given evidence).
+* **Compact:** Needs much fewer parameters than full joint table.
+* **Efficient:** Makes probability calculations faster.
 - **Interpretable**: The graph visually shows which variables depend on which.
 - **Applications**: Medical diagnosis, spam filtering, fault detection.
 
 ---
+
 
 ## **Q2. Explain the concept of conditional independence in Directed Graphical Models with graphical intuition.**
 
@@ -662,15 +663,27 @@ $$
 
 ### **(a) First-order Markov chain**
 
-Structure:
+Structure: $X_1 \rightarrow X_2 \rightarrow X_3 \rightarrow X_4 \rightarrow X_5$
 
+**1. Initial Probability $P(X_1)$:**
+- Number of parents ($m$) = 0
+- Parent configurations $q = 2^m = 2^0 = 1$
+- Binary variable requires $2 - 1 = 1$ independent parameter per configuration.
+- **Parameters = $1 \times 1 = 1$**
+
+**2. Transition Probabilities ($X_t \mid X_{t-1}$):**
+- For each node $X_2$ to $X_5$, number of parents ($m$) = 1
+- Parent configurations $q = 2^m = 2^1 = 2$
+- Parameters per node = $q \times (2 - 1) = 2$
+- For 4 transitions ($X_2, X_3, X_4, X_5$): $4 \times 2 = 8$ parameters.
+
+**Total Parameters:**
 $$
-X_1 \rightarrow X_2 \rightarrow X_3 \rightarrow X_4 \rightarrow X_5
+\text{Initial Probability} + (\text{Transitions} \times \text{Parameters per Transition})
 $$
-
-- Initial probability $P(X_1)$: **1 parameter**
-- Transition probabilities: 4 transitions × 2 parameters each
-
+$$
+1 + (4 \times 2) = 9
+$$
 $$
 \boxed{9 \text{ parameters}}
 $$
@@ -679,9 +692,13 @@ $$
 
 ### **(b) Directed Graphical Model with two parents per node**
 
-- Binary variables
-- Each node has 2 parents
-- Parameters per node $= 2^2 = 4$
+- Number of parents ($m$) = 2 for each node.
+- Parent configurations $q = 2^m = 2^2 = 4$.
+- Parameters per node = $q \times (2 - 1) = 4$.
+- For 5 nodes:
+$$
+5 \times 4 = 20
+$$
 
 $$
 \boxed{20 \text{ parameters}}
