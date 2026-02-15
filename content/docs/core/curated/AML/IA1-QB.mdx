@@ -491,47 +491,82 @@ Inference is what makes Bayesian Networks useful — it lets us predict outcomes
 
 ---
 
-## **Q4. Explain parameter learning in Directed Graphical Models. Differentiate between MLE and Bayesian estimation.**
+### **Q4. Explain parameter learning in Directed Graphical Models. Differentiate between MLE and Bayesian estimation.**
 
-**Parameter learning** means estimating the **conditional probability tables (CPTs)** of each node from data. We assume the network structure (graph) is already known.
+## Parameter Learning in Directed Graphical Models (DGM)
 
-**1. Maximum Likelihood Estimation (MLE):**
+In a Directed Graphical Model (like Bayesian Network), the structure shows dependencies between variables.
 
-Pick parameters that make the observed data **most likely**:
+**Parameter learning** means estimating the **conditional probability tables (CPTs)** from data.
+
+If structure is known, we only estimate:
+
 $$
-\theta_{MLE} = \arg\max_\theta P(D \mid \theta)
-$$
-
-With complete data, MLE = just counting frequencies.
-
-*Example*: If Rain happened 30 out of 100 times, then $P(\text{Rain}) = 0.3$.
-
-**2. Bayesian Estimation:**
-
-Treat parameters as random variables with a **prior distribution**, then update with data:
-$$
-P(\theta \mid D) \propto P(D \mid \theta) \cdot P(\theta)
+P(X_i \mid Parents(X_i))
 $$
 
-This gives a full distribution over parameters, not just one number.
-
-**Comparison:**
-
-| Feature | MLE | Bayesian |
-|---|---|---|
-| **Uses prior?** | No | Yes |
-| **Output** | Single value ($\hat{\theta}$) | Full distribution |
-| **Small data** | Can overfit | Handles well (prior helps) |
-| **Large data** | Works well | Converges to MLE |
-| **Complexity** | Simple | More complex |
-
-**Significance:**
-
-MLE is preferred for large datasets (simple & fast). Bayesian is preferred when data is limited or prior knowledge is available.
+Using training data.
 
 ---
 
-## **Q5. What are Decision Diagrams? Explain their role and advantages.**
+## 1) Maximum Likelihood Estimation (MLE)
+
+MLE estimates parameters by **maximizing likelihood of observed data**.
+
+For discrete case:
+
+$$
+\theta = \frac{\text{count of (child, parent)}}{\text{count of parent}}
+$$
+
+It simply uses frequency from data.
+
+**Features:**
+
+* Uses only observed data.
+* No prior knowledge.
+* Simple and fast.
+* Can give zero probability if event not seen.
+
+---
+
+## 2) Bayesian Estimation
+
+Bayesian method combines:
+
+* Prior belief (prior distribution)
+* Observed data
+
+Using Bayes rule:
+
+$$
+Posterior \propto Likelihood \times Prior
+$$
+
+Commonly uses **Dirichlet prior** for discrete variables.
+
+**Features:**
+
+* Avoids zero probabilities.
+* Works well with small data.
+* Incorporates prior knowledge.
+* More computationally complex.
+
+---
+
+## Difference Between MLE and Bayesian
+
+| MLE                       | Bayesian                    |
+| ------------------------- | --------------------------- |
+| Uses only data            | Uses prior + data           |
+| No prior assumption       | Requires prior              |
+| Can give zero probability | Avoids zero probability     |
+| Simpler                   | More robust with small data |
+
+---
+
+
+### **Q5. What are Decision Diagrams? Explain their role and advantages.**
 
 A **Decision Diagram** is a compact graph that represents **decision functions or probability tables** without redundancy. Internal nodes = decision/chance variables, leaf nodes = outcomes.
 
