@@ -320,7 +320,7 @@ Greedy layer-wise pre-training improves stability and initialization in deep net
 
 
 
-#### Q8. Analyze the effectiveness of ensemble methods and dropout in reducing variance in deep learning models. Compare their working principles.
+### Q8. Analyze the effectiveness of ensemble methods and dropout in reducing variance in deep learning models. Compare their working principles.
 
 High-variance models tend to overfit the training data. Ensemble methods and dropout reduce variance and improve generalization.
 
@@ -351,11 +351,12 @@ Averaging reduces variance because errors from individual models cancel out.
 ---
 
 
-#### Q11. Explain batch normalization in detail. How does it help in faster convergence and address internal covariate shift during training?
+### Q11. Explain batch normalization in detail. How does it help in faster convergence and address internal covariate shift during training?
 
-<Highlight color="blue">**Batch Normalization**</Highlight> is a technique used to normalize the inputs of each layer in a neural network during training. For every mini-batch, it adjusts the activations so that they have approximately <Highlight color="green">**zero mean and unit variance**</Highlight>, followed by a learnable scaling and shifting step.
+<Highlight color="blue">**Batch Normalization**</Highlight>: A technique used to normalize the inputs of each layer in a neural network during training. For every mini-batch, it adjusts the activations so that they have approximately <Highlight color="green">**zero mean and unit variance**</Highlight>, followed by a learnable scaling and shifting step.
 
-<Highlight color="orange">**Internal covariate shift**</Highlight> refers to the change in distribution of inputs to a layer as the parameters of previous layers update during training. This makes learning slow because each layer has to continuously adapt to new input distributions.
+<Highlight color="orange">**Internal covariate shift**</Highlight>: During training, as earlier layers update, the distribution of inputs to later layers keeps changing.
+Because of this, each layer must continuously adjust to new input distributions → training becomes slow.
 
 Batch normalization reduces this shift by keeping the input distribution of each layer stable. As a result:
 
@@ -368,7 +369,7 @@ Thus, batch normalization improves training efficiency and accelerates convergen
 
 ---
 
-#### Q15. List all the types of activation functions. Explain in detail with an example.
+### Q15. List all the types of activation functions. Explain in detail with an example.
 
 <Highlight color="blue">**Activation functions**</Highlight> introduce <Highlight>**non-linearity**</Highlight> into neural networks so that complex patterns can be learned.
 
