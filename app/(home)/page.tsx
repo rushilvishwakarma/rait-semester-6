@@ -22,7 +22,7 @@ const coreSubjects = [
   { title: 'DL', description: 'Deep Learning', href: '/docs/core/DL', icon: Brain },
   { title: 'BDA', description: 'Big Data Analytics', href: '/docs/core/BDA', icon: Database },
   { title: 'NLP', description: 'Natural Language Processing', href: '/docs/core/NLP', icon: MessageSquare },
-  { title: 'DoE', description: 'Design of Experiments', href: '/docs/core/DoE', icon: Layers },
+  { title: 'DoE', description: 'Design of Experiments', href: '/docs/core/DOE', icon: Layers },
 ];
 
 const labSubjects = [
