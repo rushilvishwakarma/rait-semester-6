@@ -4,7 +4,7 @@ COURSE CODE: 231CAUMM61
 
 # Design of Experiments
 
-(DOE)
+(DoE)
 
 Module 1: Fundamentals
 
@@ -31,7 +31,7 @@ MODULE 1 OVERVIEW
 This foundational module equips you with the core statistical mindset and terminology required for systematic industrial experimentation.
 
 - **Understand Industrial Experimentation**
-Grasp the definition, importance, and systematic nature of DOE in manufacturing.
+Grasp the definition, importance, and systematic nature of DoE in manufacturing.
 
 - **Apply Statistical Thinking**
 Adopt a process-oriented mindset to recognize variation and use data for decisions.
@@ -61,7 +61,7 @@ Building the foundational statistical mindset before advancing to complex experi
 
 ![img-2.jpeg](img-2.jpeg)
 
-Module 1 provides the mathematical "roots" that support the entire DOE tree structure.
+Module 1 provides the mathematical "roots" that support the entire DoE tree structure.
 
 ![img-3.jpeg](img-3.jpeg)
 
@@ -147,7 +147,7 @@ A systematic approach to conducting industrial experiments ensures validity, rep
 
 ## Critical Insight
 
-Skipping the planning phases (Steps 1-3) is the most common cause of failed industrial experiments. "Measure twice, cut once" applies directly to DOE.
+Skipping the planning phases (Steps 1-3) is the most common cause of failed industrial experiments. "Measure twice, cut once" applies directly to DoE.
 
 ## ROLES INVOLVED
 
@@ -187,7 +187,7 @@ Run the trials, collect data, monitor for special causes.
 - Conclude
 - Standardize
 
-FUNDAMENTALS OF DOE
+FUNDAMENTALS OF DoE
 
 PROCESS DIAGRAM (P-Diagram)
 
@@ -260,7 +260,7 @@ COMPARISON
 
 Changes one factor while holding others constant. Misses the true peak.
 
-## FACTORIAL APPROACH (DOE)
+## FACTORIAL APPROACH (DoE)
 
 ![img-10.jpeg](img-10.jpeg)
 
@@ -274,22 +274,22 @@ Varies factors simultaneously. Covers the entire design space.
 OFAT assumes factors act independently. It fails to detect when the effect of one factor depends on the level of another (e.g., temperature only helps if pressure is high).
 
 - **Low Efficiency**
-Requires significantly more runs to achieve the same precision as a factorial design. DOE provides "more bang for the buck."
+Requires significantly more runs to achieve the same precision as a factorial design. DoE provides "more bang for the buck."
 
 - **Limited Coverage**
 Explores only a tiny fraction of the process space (the axes), leaving the corners and center—where optimal settings often hide—untested.
 
-- **Factorial Designs (DOE)** solve these issues by varying multiple factors simultaneously.
+- **Factorial Designs (DoE)** solve these issues by varying multiple factors simultaneously.
 
 AI/ML CONTEXT
 
-# DOE Integration in Data Science Workflows
+# DoE Integration in Data Science Workflows
 
 Systematic experimentation is not just for physical labs. It is the backbone of robust model development, hyperparameter tuning, and data-driven product decisions.
 
 # MLOps &amp; Experiment Tracking
 
-Tools like MLflow or Weights &amp; Biases use DOE principles to track hyperparameter combinations systematically rather than randomly.
+Tools like MLflow or Weights &amp; Biases use DoE principles to track hyperparameter combinations systematically rather than randomly.
 
 # A/B Testing &amp; Bandits
 
@@ -302,11 +302,11 @@ Design synthetic data generation using factorial designs to ensure training data
 # Workflow
 
 ![img-11.jpeg](img-11.jpeg)
-DOE in the ML Lifecycle
+DoE in the ML Lifecycle
 
 # WHY IT MATTERS
 
-"Random search is inefficient. Grid search is a full factorial design. Bayesian optimization is sequential DOE. The math is the same."
+"Random search is inefficient. Grid search is a full factorial design. Bayesian optimization is sequential DoE. The math is the same."
 
 #
 
@@ -435,13 +435,13 @@ Actionable
 - Common Cause (Within Limits)
 - Special Cause (Signal)
 
-DOE Goal: Distinguish signal (effect) from noise (common cause).
+DoE Goal: Distinguish signal (effect) from noise (common cause).
 
 METHODOLOGY
 
 # Statistical Thinking
 
-DOE is not a linear path but an iterative cycle of learning. Each experiment reduces uncertainty and refines the process model.
+DoE is not a linear path but an iterative cycle of learning. Each experiment reduces uncertainty and refines the process model.
 
 ## The Learning Loop
 
@@ -521,7 +521,7 @@ High Variance, On Target
 
 ## CRUCIAL INSIGHT
 
-In DOE, if your measurement error (noise) is too high, you may fail to detect significant factor effects (signal). Always perform MSA first.
+In DoE, if your measurement error (noise) is too high, you may fail to detect significant factor effects (signal). Always perform MSA first.
 
 GOAL: Measurement System Variation &lt; 10% of Total Variation
 
@@ -583,7 +583,7 @@ ANALYSIS PHASE
 
 # Hypothesis Testing
 
-A structured framework to distinguish signal from noise. In DOE, it determines if factor effects are real or due to random chance.
+A structured framework to distinguish signal from noise. In DoE, it determines if factor effects are real or due to random chance.
 
 ## Practical Insight
 
@@ -621,7 +621,7 @@ FAIL TO REJECT H0
 
 Is the effect Significant (statistically) AND Substantial (practically)? Action: Implement change only if both conditions are met.
 
-BASIC PRINCIPLES OF DOE
+BASIC PRINCIPLES OF DoE
 
 # Why Randomize? The First Defense Against Bias
 
@@ -672,7 +672,7 @@ Simulated Data: Means become more precise with n
 
 The chart demonstrates how increasing the number of replicates (n) reduces the variability of the mean estimate, shrinking the confidence interval and providing a "truer" picture of the process response.
 
-## DOE PRINCIPLES
+## DoE PRINCIPLES
 
 # Replication &amp; Precision
 
@@ -714,7 +714,7 @@ SYSTEMATIC METHODOLOGY
 
 # Model Building for Predicting Response
 
-In DOE, we construct mathematical models to relate input factors to the output response, enabling prediction and optimization.
+In DoE, we construct mathematical models to relate input factors to the output response, enabling prediction and optimization.
 
 ## GENERAL LINEAR MODEL STRUCTURE
 
@@ -762,9 +762,9 @@ EXPERIMENTAL (CAUSALITY)
 
 AI/ML CONTEXT
 
-# DOE vs. Observational Studies in AI/ML
+# DoE vs. Observational Studies in AI/ML
 
-"Correlation is not causation. DOE establishes causality through controlled intervention (do-calculus), unlike passive data mining."
+"Correlation is not causation. DoE establishes causality through controlled intervention (do-calculus), unlike passive data mining."
 
 # Control &amp; Randomization
 
@@ -772,17 +772,17 @@ Random assignment eliminates confounding variables (bias), isolating the true tr
 
 # A/B Testing &amp; Bandits
 
-A/B Testing: Online randomized controlled trials (simple DOE). Multi-Armed Bandits: Adaptive experimentation balancing exploration vs. exploitation.
+A/B Testing: Online randomized controlled trials (simple DoE). Multi-Armed Bandits: Adaptive experimentation balancing exploration vs. exploitation.
 
 # Data Efficiency
 
-Observational big data is often "noisy and confounded." DOE generates "small but high-quality" data designed to answer specific questions.
+Observational big data is often "noisy and confounded." DoE generates "small but high-quality" data designed to answer specific questions.
 
-In the Pearl Causal Hierarchy, DOE moves you from seeing (Association) to doing (Intervention).
+In the Pearl Causal Hierarchy, DoE moves you from seeing (Association) to doing (Intervention).
 
 FUNDAMENTAL METHODOLOGY
 
-# Basic Principles of DOE
+# Basic Principles of DoE
 
 The structural pillars that ensure experimental validity, reliability, and efficiency.
 
@@ -792,7 +792,7 @@ The structural pillars that ensure experimental validity, reliability, and effic
 
 ![img-39.jpeg](img-39.jpeg)
 
-BASIC PRINCIPLES OF DOE
+BASIC PRINCIPLES OF DoE
 
 # Factorial Thinking vs. OFAT Approach
 
@@ -1498,7 +1498,7 @@ Can data be collected economically and quickly enough to be useful?
 
 QUALITY CHARACTERISTICS &amp; METROLOGY
 
-"If you can't measure it reliably, you can't improve it. Validating measurement systems is the first step in DOE."
+"If you can't measure it reliably, you can't improve it. Validating measurement systems is the first step in DoE."
 
 # Measurement System Analysis (MSA)
 
@@ -1579,7 +1579,7 @@ Industrial experimentation replaces ad-hoc trial-and-error (OFAT) with structure
 - Statistical Mindset
 Everything is a process with variation. We distinguish signal (special causes) from noise (common causes).
 
-- The DOE "Trident"
+- The DoE "Trident"
 Randomization removes bias; Replication measures error; Blocking manages nuisance factors.
 
 - Degrees of Freedom

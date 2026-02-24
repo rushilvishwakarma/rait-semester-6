@@ -11,6 +11,7 @@ import {
   GraduationCap,
   Cpu,
   Upload,
+  FileQuestion,
 } from 'lucide-react';
 import { HeroBackground } from './hero-background';
 import { Badge } from '@/components/ui/badge';
@@ -21,7 +22,7 @@ const coreSubjects = [
   { title: 'DL', description: 'Deep Learning', href: '/docs/core/DL', icon: Brain },
   { title: 'BDA', description: 'Big Data Analytics', href: '/docs/core/BDA', icon: Database },
   { title: 'NLP', description: 'Natural Language Processing', href: '/docs/core/NLP', icon: MessageSquare },
-  { title: 'DOE', description: 'Design of Experiments', href: '/docs/core/DOE', icon: Layers },
+  { title: 'DoE', description: 'Design of Experiments', href: '/docs/core/DoE', icon: Layers },
 ];
 
 const labSubjects = [
@@ -36,6 +37,7 @@ const resources = [
   { title: 'Syllabus', description: 'NEP-23 consolidated', href: '/docs/core/academic-calendars/syllabus', icon: BookOpen },
   { title: 'Academic Calendar', description: 'RAIT schedule', href: '/docs/core/academic-calendars/rait', icon: Calendar },
   { title: 'Timetable', description: 'Class schedule', href: '/docs/core/academic-calendars/class-timetable', icon: GraduationCap },
+  { title: 'Current Semester Question Papers', description: 'PYQs/Concluded Papers', href: '/docs/core/academic-calendars/question-papers', icon: FileQuestion },
 ];
 
 export default function HomePage() {
@@ -122,7 +124,7 @@ export default function HomePage() {
         {/* Resources */}
         <section>
           <h2 className="text-xl font-semibold mb-4">Resources</h2>
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-2">
             {resources.map((item) => (
               <Link
                 key={item.title}

@@ -32,8 +32,8 @@ export default function Layout({ children }: { children: ReactNode }) {
     <html lang="en" className={googleSans.className} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
         <CuratedResourcesProvider>
-        <RootProvider>
-          <Banner
+          <RootProvider>
+            {/* <Banner
             variant="rainbow"
             rainbowColors={[
               '#ec8e8e6e',
@@ -43,9 +43,9 @@ export default function Layout({ children }: { children: ReactNode }) {
             ]}
           >
             IA1 Exams begin 16th Feb 2026. <a href="/docs/core/internal-assessment-1" className="underline font-semibold ml-1">View Timetable</a>
-          </Banner>
-          {children}
-        </RootProvider>
+          </Banner> */}
+            {children}
+          </RootProvider>
         </CuratedResourcesProvider>
         <Analytics />
         <SpeedInsights />

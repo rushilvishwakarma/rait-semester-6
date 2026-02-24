@@ -6,11 +6,13 @@
     "DL",
     "BDA",
     "NLP",
-    "DOE",
+    "DoE",
     "---Curriculum---",
-    "internal-assessment-1",
     "academic-calendars/syllabus",
     "academic-calendars/rait",
-    "academic-calendars/class-timetable"
+    "academic-calendars/class-timetable",
+    "academic-calendars/question-papers",
+    "---Archived---",
+    "internal-assessment-1"
   ]
 }

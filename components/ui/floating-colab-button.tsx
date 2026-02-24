@@ -19,7 +19,7 @@ export function FloatingColabButton({ className, colabLink }: FloatingColabButto
             rel="noopener noreferrer"
             className={cn(
                 buttonVariants({ variant: 'outline', size: 'sm' }),
-                'fixed bottom-6 right-6 z-50 rounded-full shadow-lg inline-flex items-center gap-2 h-9 px-3 py-1.5 hover:no-underline no-underline',
+                'fixed bottom-6 right-6 z-50 rounded-full shadow-lg inline-flex items-center gap-2 h-9 px-3 py-1.5 hover:no-underline no-underline backdrop-blur-md bg-background/50',
                 className
             )}
             initial={{ scale: 0, opacity: 0 }}

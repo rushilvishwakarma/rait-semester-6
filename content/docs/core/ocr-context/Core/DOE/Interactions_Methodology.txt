@@ -2,7 +2,7 @@
 title: Module 2 - Key Interactions and Systematic Methodology
 ---
 
-Design of Experiments (DOE)
+Design of Experiments (DoE)
 Code 231CAUMM61
 
 # Module 2: Key Interactions and Systematic Methodology
@@ -30,11 +30,11 @@ Model &amp; Interpret Interactions
 1. Explain main effects vs interaction effects clearly
 2. Compute two-factor (2FI) interaction effects accurately
 3. Distinguish synergistic vs antagonistic interactions
-4. Identify key barriers to successful DOE application
-5. Apply a practical DOE methodology from start to finish
+4. Identify key barriers to successful DoE application
+5. Apply a practical DoE methodology from start to finish
 6. Build and validate response prediction models with CIs
 
-# Introduction to Interactions in DOE
+# Introduction to Interactions in DoE
 
 Understanding how factors work together is crucial. In real-world systems, variables rarely act in isolation.
 
@@ -398,7 +398,7 @@ Overcrowding leads to poor service quality &amp; complaints.
 - Control: Monitor closely to prevent drift into failure zones.
 - Outcome: Stability and risk mitigation; avoiding negative impacts.
 
-Barriers to Successful DOE – Part 1
+Barriers to Successful DoE – Part 1
 
 Statistical Challenges &amp; Common Pitfalls
 
@@ -423,7 +423,7 @@ Systematic bias creeps in without proper run randomization.
 ## Garbage In, Garbage Out
 Even the best analysis cannot fix a fundamentally flawed experimental design or poor data quality.
 
-Barriers to Successful DOE – Part 2
+Barriers to Successful DoE – Part 2
 
 Technical &amp; Sociological Dimensions
 
@@ -448,12 +448,12 @@ Power quality fluctuations and supply chain delays affecting runs.
 ## Operational Reality
 Success depends 20% on statistical design and 80% on execution discipline and team alignment.
 
-# Practical DOE Methodology: Overview
+# Practical DoE Methodology: Overview
 
-A systematic approach ensures experimental success. Aligning DOE with established frameworks guarantees meaningful results.
+A systematic approach ensures experimental success. Aligning DoE with established frameworks guarantees meaningful results.
 
 ## Framework Alignment
-Integrate DOE within DMAIC (Six Sigma) or PDCA cycles to provide structure and ensure continuous improvement.
+Integrate DoE within DMAIC (Six Sigma) or PDCA cycles to provide structure and ensure continuous improvement.
 
 ## Define CTQ &amp; Metrics
 Clearly define Critical-to-Quality (CTQ) characteristics and success metrics before planning the experiment.
@@ -464,7 +464,7 @@ Plan the design specifically to detect key interactions, ensuring the experiment
 ## Validate Learnings
 Always conduct confirmation runs to validate the model's predictions and ensure reproducibility.
 
-Step-by-Step DOE Methodology
+Step-by-Step DoE Methodology
 
 #
 
@@ -498,7 +498,7 @@ Predict optimum &amp; run tests.
 10. Control Plan
 Implement controls &amp; handover.
 
-# Analytical Tools for DOE – Part 1
+# Analytical Tools for DoE – Part 1
 
 Robust statistical analysis is essential to validate experimental results. These core tools help separate signal from noise.
 
@@ -522,7 +522,7 @@ Check assumptions of normality, constant variance, and independence to validate 
 
 Determine if the current model is adequate or if higher-order terms are needed to explain variation.
 
-# Analytical Tools for DOE – Part 2
+# Analytical Tools for DoE – Part 2
 
 Beyond statistical tests, robust visualization techniques and specialized software are indispensable for interpreting complex interaction effects effectively.
 
@@ -658,7 +658,7 @@ Pick t_{\alpha/2}, df} based on desired confidence level (e.g., 95%).
 5. **Compute Interval**
 Final calculation: CI = \hat{y} \pm t \cdot s \cdot \sqrt{h_0}
 
-# Statistical Dimensions of DOE
+# Statistical Dimensions of DoE
 
 Ensuring experimental validity through rigorous statistical foundations is critical for defensible results.
 
@@ -678,9 +678,9 @@ In fractional designs, understanding the aliasing structure prevents misinterpre
 
 Handling outliers, missing data, and validating model assumptions are vital for reliable predictions.
 
-# Technical Dimensions of DOE
+# Technical Dimensions of DoE
 
-Beyond statistics, successful DOE implementation requires addressing practical technical realities, particularly in the Indian industrial context.
+Beyond statistics, successful DoE implementation requires addressing practical technical realities, particularly in the Indian industrial context.
 
 
 ## Factor Feasibility
@@ -707,9 +707,9 @@ Ensure sensors and automated data logging integrity to prevent manual errors.
 
 Validate the measurement system (Gage R&amp;R) and calibrate tools before execution.
 
-# Sociological Dimensions of DOE
+# Sociological Dimensions of DoE
 
-Successful DOE implementation goes beyond statistics. It requires managing the human and organizational factors that influence data quality.
+Successful DoE implementation goes beyond statistics. It requires managing the human and organizational factors that influence data quality.
 
 
 ## Stakeholder Alignment
@@ -749,13 +749,13 @@ Module Complete
 
 ## Core Message
 
-Successful DOE isn't just about running experiments—it's about systematically uncovering hidden interactions to make data-driven decisions.
+Successful DoE isn't just about running experiments—it's about systematically uncovering hidden interactions to make data-driven decisions.
 
 Next Step
 
 Apply to Project &amp; Case Studies
 
-Design of Experiments (DOE)
+Design of Experiments (DoE)
 
 # Module 2: Key Interactions and Systematic Methodology
 
