@@ -5,6 +5,7 @@ import { buttonVariants } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { cva } from 'class-variance-authority';
 import { useMemo } from 'react';
+import { rainbowButtonVariants } from './ui/rainbow-button';
 
 const optionVariants = cva(
   'inline-flex items-center gap-2 rounded-full p-2 text-start text-sm text-fd-muted-foreground transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground [&_svg]:size-4',
@@ -24,19 +25,19 @@ interface TheoryCardProps {
 export function TheoryCard({ title, description, href, contextUrl, curatedHref, showAskAi = true, presentationLabel = 'Open Presentation', curatedLabel = 'Curated Notes' }: TheoryCardProps) {
   const items = useMemo(() => {
     if (!contextUrl) return [];
-    
+
     // Build the full URL for AI services to fetch
-    const fullContextUrl = typeof window !== 'undefined' 
-      ? new URL(contextUrl, window.location.origin).href 
+    const fullContextUrl = typeof window !== 'undefined'
+      ? new URL(contextUrl, window.location.origin).href
       : contextUrl;
-    
+
     const q = `Read the content from this URL and help me study it: ${fullContextUrl}
 
 Topic: ${title}
 Description: ${description}
 
 Please fetch the content from the URL above and help me understand and study it.`;
-    
+
     return [
       {
         title: 'View Raw Context',
@@ -101,7 +102,7 @@ Please fetch the content from the URL above and help me understand and study it.
           <p className="text-sm text-fd-muted-foreground">{description}</p>
         </div>
       </div>
-      
+
       <div className="flex items-center gap-2 mt-auto pt-3 border-t">
         {href && (
           <a
@@ -125,8 +126,7 @@ Please fetch the content from the URL above and help me understand and study it.
           <Popover>
             <PopoverTrigger
               className={cn(
-                buttonVariants({
-                  color: 'secondary',
+                rainbowButtonVariants({
                   size: 'sm',
                   className: 'gap-2 text-xs',
                 }),

@@ -8,6 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
 import { cva } from 'class-variance-authority';
 import { usePathname } from 'next/navigation';
+import { rainbowButtonVariants } from './ui/rainbow-button';
 
 // Map subject slugs to mydy.dypatil.edu subject IDs
 // Semester 6 subjects
@@ -542,14 +543,13 @@ export function ViewOptions({
     <Popover>
       <PopoverTrigger
         className={cn(
-          buttonVariants({
-            color: 'secondary',
+          rainbowButtonVariants({
             size: 'sm',
             className: 'gap-2',
           }),
         )}
       >
-        AI Mode
+        AI Overview
         <ChevronDown className="size-3.5 text-fd-muted-foreground" />
       </PopoverTrigger>
       <PopoverContent className="flex flex-col">
