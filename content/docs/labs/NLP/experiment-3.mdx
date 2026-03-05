@@ -1,0 +1,75 @@
+---
+title: Experiment 3
+description: Apply various other text preprocessing techniques for any given text. (Stop Word Removal, Lemmatization /Stemming).
+---
+
+import { FileText, Download, Terminal } from 'lucide-react';
+import { FloatingColabButton } from '@/components/ui/floating-colab-button';
+
+Objective: To understand text preprocessing techniques including tokenization, stop word removal, and script validation using NLTK.
+
+---
+
+### Prerequisites
+
+<Cards>
+  <Card 
+    icon={<Download />}
+    title="Install Python" 
+    description="Download Python for Windows"
+    href="https://www.python.org/downloads/"
+  />
+</Cards>
+
+<Callout icon={<Terminal />} title="Install NLTK">
+Open your terminal or command prompt and run:
+`pip install nltk`
+</Callout>
+
+### Perform
+
+1. Open your text editor or IDE (IDLE, VS Code, etc.).
+2. Create a new file named `exp2.py`.
+3. Paste the code below.
+4. Run the script.
+
+### Code
+
+```python
+import subprocess
+subprocess.run(["pip", "install", "-q", "nltk"])
+
+import nltk
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
+nltk.download('punkt', quiet=True)
+nltk.download('punkt_tab', quiet=True)
+
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+
+# Input 
+text = "The children are running and playing in the beautiful gardens every day"
+
+# Tokenize
+tokens = word_tokenize(text.lower())
+print("Original Tokens  :", tokens)
+
+# Stop Word Removal
+stop_words = set(stopwords.words('english'))
+filtered = [w for w in tokens if w.isalpha() and w not in stop_words]
+print("After Stopword Removal: ", filtered)
+
+# Stemming
+stemmer = PorterStemmer()
+stemmed = [stemmer.stem(w) for w in filtered]
+print("After Stemming :", stemmed)
+
+# Lemmatization
+lemmatizer = WordNetLemmatizer()
+lemmatized = [lemmatizer.lemmatize(w, pos='v') for w in filtered]
+print("After Lemmatization:", lemmatized)
+```
+
+<FloatingColabButton />

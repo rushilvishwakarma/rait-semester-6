@@ -1,0 +1,49 @@
+---
+title: Experiment 4
+description: Implement N-Gram (Bigram) model.
+---
+
+import { FileText, Download, Terminal } from 'lucide-react';
+import { FloatingColabButton } from '@/components/ui/floating-colab-button';
+
+Objective: To understand text preprocessing techniques including tokenization, stop word removal, and script validation using NLTK.
+
+---
+
+### Prerequisites
+
+<Cards>
+  <Card 
+    icon={<Download />}
+    title="Install Python" 
+    description="Download Python for Windows"
+    href="https://www.python.org/downloads/"
+  />
+</Cards>
+
+<Callout icon={<Terminal />} title="Install NLTK">
+Open your terminal or command prompt and run:
+`pip install nltk`
+</Callout>
+
+### Perform
+
+1. Open your text editor or IDE (IDLE, VS Code, etc.).
+2. Create a new file named `exp2.py`.
+3. Paste the code below.
+4. Run the script.
+
+### Code
+
+```python
+from nltk.util import ngrams
+
+sentence = input("Enter the sentence: ")
+tokens = sentence.split()
+n_grams = int(input("Enter 'n': "))
+
+output = list(ngrams(tokens, n_grams))
+print(output)
+```
+
+<FloatingColabButton />
