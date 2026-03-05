@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 import {
   Brain,
   Database,
@@ -12,32 +12,77 @@ import {
   Cpu,
   Upload,
   FileQuestion,
-} from 'lucide-react';
-import { HeroBackground } from './hero-background';
-import { Badge } from '@/components/ui/badge';
-import { CourseProgressor } from '@/components/course-progressor';
+} from "lucide-react";
+import { HeroBackground } from "./hero-background";
+import { Badge } from "@/components/ui/badge";
+import { CourseProgressor } from "@/components/course-progressor";
 
 const coreSubjects = [
-  { title: 'AML', description: 'Advanced Machine Learning', href: '/docs/core/AML', icon: Cpu },
-  { title: 'DL', description: 'Deep Learning', href: '/docs/core/DL', icon: Brain },
-  { title: 'BDA', description: 'Big Data Analytics', href: '/docs/core/BDA', icon: Database },
-  { title: 'NLP', description: 'Natural Language Processing', href: '/docs/core/NLP', icon: MessageSquare },
-  { title: 'DoE', description: 'Design of Experiments', href: '/docs/core/DOE', icon: Layers },
+  {
+    title: "AML",
+    description: "Advanced Machine Learning",
+    href: "/docs/core/AML",
+    icon: Cpu,
+  },
+  {
+    title: "DL",
+    description: "Deep Learning",
+    href: "/docs/core/DL",
+    icon: Brain,
+  },
+  {
+    title: "BDA",
+    description: "Big Data Analytics",
+    href: "/docs/core/BDA",
+    icon: Database,
+  },
+  {
+    title: "NLP",
+    description: "Natural Language Processing",
+    href: "/docs/core/NLP",
+    icon: MessageSquare,
+  },
+  {
+    title: "DoE",
+    description: "Design of Experiments",
+    href: "/docs/core/DOE",
+    icon: Layers,
+  },
 ];
 
 const labSubjects = [
-  { title: 'AML Lab', href: '/docs/labs/AML', icon: Cpu },
-  { title: 'DL Lab', href: '/docs/labs/DL', icon: Brain },
-  { title: 'MLOps Lab', href: '/docs/labs/MLOps', icon: GitBranch },
-  { title: 'BDA Lab', href: '/docs/labs/BDA', icon: Database },
-  { title: 'NLP Lab', href: '/docs/labs/NLP', icon: MessageSquare },
+  { title: "AML Lab", href: "/docs/labs/AML", icon: Cpu },
+  { title: "DL Lab", href: "/docs/labs/DL", icon: Brain },
+  { title: "MLOps Lab", href: "/docs/labs/MLOps", icon: GitBranch },
+  { title: "BDA Lab", href: "/docs/labs/BDA", icon: Database },
+  { title: "NLP Lab", href: "/docs/labs/NLP", icon: MessageSquare },
 ];
 
 const resources = [
-  { title: 'Syllabus', description: 'NEP-23 consolidated', href: '/docs/core/academic-calendars/syllabus', icon: BookOpen },
-  { title: 'Academic Calendar', description: 'RAIT schedule', href: '/docs/core/academic-calendars/rait', icon: Calendar },
-  { title: 'Timetable', description: 'Class schedule', href: '/docs/core/academic-calendars/class-timetable', icon: GraduationCap },
-  { title: 'Current Semester Question Papers', description: 'PYQs/Concluded Papers', href: '/docs/core/academic-calendars/question-papers', icon: FileQuestion },
+  {
+    title: "Syllabus",
+    description: "NEP-23 consolidated",
+    href: "/docs/core/academic-calendars/syllabus",
+    icon: BookOpen,
+  },
+  {
+    title: "Academic Calendar",
+    description: "RAIT schedule",
+    href: "/docs/core/academic-calendars/rait",
+    icon: Calendar,
+  },
+  {
+    title: "Timetable",
+    description: "Class schedule",
+    href: "/docs/core/academic-calendars/class-timetable",
+    icon: GraduationCap,
+  },
+  {
+    title: "Current Semester Question Papers",
+    description: "PYQs/Concluded Papers",
+    href: "/docs/core/academic-calendars/question-papers",
+    icon: FileQuestion,
+  },
 ];
 
 export default function HomePage() {
@@ -66,20 +111,19 @@ export default function HomePage() {
               className="hidden dark:block pb-4 mx-auto"
             />
           </div>
-          <Badge variant="secondary">
-            B.Tech CSE • AI & ML (TE)
-          </Badge>
+          <Badge variant="secondary">B.Tech CSE • AI & ML (TE)</Badge>
         </div>
         {/* Footer Disclaimer */}
         <div className="z-2 px-6 pb-4 text-center">
           <span className="text-fd-foreground/60 text-[0.6rem]">
-            This platform is not affiliated with DY Patil University or Ramrao Adik Institute of Technology (RAIT).
+            This platform is not affiliated with DY Patil University or Ramrao
+            Adik Institute of Technology (RAIT).
           </span>
         </div>
       </section>
 
       {/* Content */}
-      <div className='px-4'>
+      <div className="px-4">
         {/* Core Subjects */}
         <section className="mb-12">
           <h2 className="text-xl font-semibold mb-4">Core Subjects</h2>
@@ -88,14 +132,14 @@ export default function HomePage() {
               <Link
                 key={subject.title}
                 href={subject.href}
-                className="group flex items-center gap-4 rounded-xl border bg-fd-card p-5 transition-colors hover:bg-fd-accent"
+                className="group flex items-center gap-4 rounded-2xl bg-fd-card p-5 transition-colors hover:bg-fd-accent"
               >
-                <div className="rounded-lg border bg-fd-background p-3">
-                  <subject.icon className="size-5 text-fd-muted-foreground" />
-                </div>
+                <subject.icon className="size-6 text-fd-muted-foreground shrink-0" />
                 <div>
                   <p className="font-semibold">{subject.title}</p>
-                  <p className="text-sm text-fd-muted-foreground">{subject.description}</p>
+                  <p className="text-sm text-fd-muted-foreground">
+                    {subject.description}
+                  </p>
                 </div>
               </Link>
             ))}
@@ -110,11 +154,9 @@ export default function HomePage() {
               <Link
                 key={lab.title}
                 href={lab.href}
-                className="group flex flex-col items-center rounded-xl border bg-fd-card p-4 text-center transition-colors hover:bg-fd-accent"
+                className="group flex flex-col gap-2 items-center justify-center rounded-2xl bg-fd-card p-4 text-center transition-colors hover:bg-fd-accent"
               >
-                <div className="mb-2 rounded-lg border bg-fd-background p-2.5">
-                  <lab.icon className="size-5 text-fd-muted-foreground" />
-                </div>
+                <lab.icon className="size-6 text-fd-muted-foreground shrink-0" />
                 <p className="text-sm font-medium">{lab.title}</p>
               </Link>
             ))}
@@ -129,14 +171,14 @@ export default function HomePage() {
               <Link
                 key={item.title}
                 href={item.href}
-                className="group flex items-center gap-4 rounded-xl border bg-fd-card p-4 transition-colors hover:bg-fd-accent"
+                className="group flex items-center gap-4 rounded-2xl bg-fd-card p-4 transition-colors hover:bg-fd-accent"
               >
-                <div className="rounded-lg border bg-fd-background p-2.5">
-                  <item.icon className="size-5 text-fd-muted-foreground" />
-                </div>
+                <item.icon className="size-6 text-fd-muted-foreground shrink-0" />
                 <div>
                   <p className="font-medium">{item.title}</p>
-                  <p className="text-xs text-fd-muted-foreground">{item.description}</p>
+                  <p className="text-xs text-fd-muted-foreground">
+                    {item.description}
+                  </p>
                 </div>
               </Link>
             ))}
@@ -148,15 +190,14 @@ export default function HomePage() {
           <div className="grid gap-4 sm:grid-cols-2">
             <a
               href="https://drive.google.com/drive/folders/18lvCelrTUnlEdAvUNhU2FO4L62dnYcQf?usp=sharing"
-              className="group flex items-center gap-4 rounded-xl border bg-fd-card p-5 transition-colors hover:bg-fd-accent"
+              className="group flex items-center gap-4 rounded-2xl bg-fd-card p-5 transition-colors hover:bg-fd-accent"
             >
-              <div className="rounded-lg border bg-fd-background p-3">
-                <Upload className="size-5 text-fd-muted-foreground" />
-              </div>
+              <Upload className="size-6 text-fd-muted-foreground shrink-0" />
               <div className="flex-1">
                 <p className="font-semibold">Share and View Useful Resources</p>
                 <p className="text-sm text-fd-muted-foreground">
-                  Share question banks, important Notes, and other verified resources
+                  Share question banks, important Notes, and other verified
+                  resources
                 </p>
               </div>
             </a>
@@ -165,12 +206,13 @@ export default function HomePage() {
         </section>
       </div>
 
-
-
       {/* Footer */}
-      <footer className="mt-16 border-t pt-6 pb-8 text-center text-sm text-fd-muted-foreground">
+      <footer className="mt-16 border-t pt-6 pb-8 px-4 text-center text-sm text-fd-muted-foreground">
         <p>Crafted by Feverdream</p>
-        <p className="mt-1 text-xs">Have useful resources or found an issue? <a href="https://tally.so/r/Bz764A" target="_blank" rel="noopener noreferrer" className="underline">Contact us here</a>.</p>
+        <p className="mt-2 text-xs opacity-80">
+          LMS documents are accessible only by students using their university
+          email to prevent unauthorized distribution.
+        </p>
       </footer>
     </main>
   );

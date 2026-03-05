@@ -2,7 +2,7 @@
 title: Big Data Analytics
 description: BDA Labs
 ---
-import { Settings } from 'lucide-react';
+import { Settings, BookOpen } from 'lucide-react';
 
 ### Lab Syllabus
 |  Sr. No. | Title of the Experiment | CO  |
@@ -18,6 +18,10 @@ import { Settings } from 'lucide-react';
 |  9 | Implement any one Clustering algorithm (K-Means/CURE) using Map-Reduce. | CO5  |
 |  10 | Implementation of Real Time Recommendation Systems | CO6  |
 ---
+<Callout title="BigData Analysis Lab Manual" icon={<BookOpen />}>
+- Final Version: https://drive.google.com/file/d/1GNW_9OuZxJqd7Y_J19MR5ZBETAboOMq9/view?usp=sharing
+- Old Version: https://drive.google.com/file/d/112oSIBNxTom7HAeaNjzV2UFKOvNWh0xU/view?usp=sharing
+</Callout>
 
 <Cards>
   <Card
@@ -25,5 +29,23 @@ import { Settings } from 'lucide-react';
     title="Experiment 1"
     description="Install & configure Cloudera QuickStart VM and run basic HDFS operations."
     href="/docs/labs/BDA/experiment-1"
+  />
+  <Card
+    icon={<Settings />}
+    title="Experiment 2"
+    description="Write a program to implement word count program using MapReduce."
+    href="/docs/labs/BDA/experiment-2"
+  />
+  <Card
+    icon={<Settings />}
+    title="Experiment 3"
+    description="Implement Matrix multiplication using MapReduce."
+    href="/docs/labs/BDA/experiment-3"
+  />
+  <Card
+    icon={<Settings />}
+    title="Experiment 4"
+    description="Install and configure MongoDB/ Cassandra/ HBase/ Hypertable to execute NoSQL commands."
+    href="/docs/labs/BDA/experiment-4"
   />
 </Cards>

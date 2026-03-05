@@ -219,14 +219,12 @@ export function CourseProgressor() {
     };
 
     return (
-        <div>
+        <>
             <button
                 onClick={() => setIsOpen(true)}
-                className="group flex items-center gap-4 rounded-xl border bg-fd-card p-5 transition-colors hover:bg-fd-accent text-left w-full h-full"
+                className="group flex items-center gap-4 rounded-2xl bg-fd-card p-5 transition-colors hover:bg-fd-accent text-left w-full h-full"
             >
-                <div className="rounded-lg border bg-fd-background p-3">
-                    <PlayCircle className="size-5 text-fd-muted-foreground" />
-                </div>
+                <PlayCircle className="size-6 text-fd-muted-foreground shrink-0" />
                 <div className="flex-1">
                     <p className="font-semibold text-lg">Course Progressor</p>
                     <p className="text-sm text-fd-muted-foreground">
@@ -401,6 +399,6 @@ export function CourseProgressor() {
                     </div>
                 </DialogContent>
             </Dialog>
-        </div>
+        </>
     );
 }
