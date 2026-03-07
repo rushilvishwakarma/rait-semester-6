@@ -4,6 +4,7 @@ description: PYQs/Concluded Papers
 ---
 
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { FileText, Settings, Download } from 'lucide-react';
 
 ## Question Papers
 
@@ -60,3 +61,39 @@ import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 </Tab>
 
 </Tabs>
+
+## Solutions
+
+<Tabs items={["IA1", "MSE", "IA2", "ESE"]}>
+
+<Tab value="IA1">
+<Cards>
+  <Card
+    icon={<FileText />}
+    title="NLP Solution 1"
+    description="Internal Assessment 1 Solutions"
+    href="/docs/core/solutions/IA1/NLP/solution1"
+  />
+  <Card
+    icon={<FileText />}
+    title="NLP Solution 2"
+    description="Internal Assessment 1 Solution 2"
+    href="/docs/core/solutions/IA1/NLP/solution2"
+  />
+</Cards>
+</Tab>
+
+<Tab value="MSE">
+  Solutions will be updated after MSE.
+</Tab>
+
+<Tab value="IA2">
+  Solutions will be updated after IA2.
+</Tab>
+
+<Tab value="ESE">
+  Solutions will be updated after ESE.
+</Tab>
+
+</Tabs>
+

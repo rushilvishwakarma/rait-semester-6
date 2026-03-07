@@ -1,0 +1,143 @@
+---
+title: NLP Solution 1
+description: Internal Assessment 1 - Solutions for Natural Language Processing
+---
+
+# Simulated Example for IA1 (1)
+
+**Date:** 17/02/26
+
+| Q. No. | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | Total Marks |
+|-------|---|---|---|---|---|---|---|---|---|----|----|----|-------------|
+| Mark Awarded | 10 | 09 | | | | | | | | | | | 19 |
+
+---
+
+| Q1 | Solve any Two |
+|---|---|
+| i. | Define NLP. What are the different ambiguities in NLP. |
+| ii. | Explain N-gram Language model. |
+| iii. | Compare inflectional morphology and derivational morphology. |
+
+---
+<LongQuestion>
+## Q1 (i) Define NLP. What are the different ambiguities in NLP. 
+### (Awarded 5/5 marks)
+</LongQuestion>
+Natural language processing (NLP) is the part of artificial intelligence where the computer tries to learn the text and speech in human language.  
+It learns to read, write, and speak so that we can understand them easily.
+
+The main goal of natural language processing is to make communication between machines and humans easy.
+
+Ambiguity in natural language processing refers to the possibility of having more than one meaning for one word.
+
+---
+
+### Different types of ambiguities in Natural language Processing are:
+
+### (1) Lexical Ambiguity
+Lexical ambiguity refers to when one word has more than one meaning.
+
+For example:  
+"bat", now here, a bat can be a bird or sports equipment.
+
+---
+
+### (2) Parsing Ambiguity
+Parsing ambiguity in NLP refers to when one sentence can be interpreted in more than one grammatical way.
+
+For example:  
+"I saw a girl with a telescope"
+
+Here, it can mean they saw a girl holding a telescope or they saw a girl using a telescope.
+
+---
+
+### (3) Semantic Ambiguity
+Semantic ambiguity in NLP refers to when the structure of the sentence is correct, but the meaning is still unclear.
+
+For example:
+"I saw a girl with a telescope"
+
+The sentence is structurally correct, but the meaning is still unclear.
+
+---
+
+### (4) Pragmatic Ambiguity
+Pragmatic ambiguity refers to when the user's intentions are clear, but it depends on the situation and the context. Without context, NLP cannot process further.
+
+NLP needs proper context and needs to overcome all the ambiguities to give a proper output.
+
+---
+
+<Mermaid chart={`
+graph TD
+    A[Ambiguities in NLP] --> B(Lexical Ambiguity)
+    A --> C(Parsing Ambiguity)
+    A --> D(Semantic Ambiguity)
+    A --> E(Pragmatic Ambiguity)
+`} />
+
+---
+
+<LongQuestion>
+## Q1 (iii) Compare inflectional morphology and derivational morphology. 
+### (Awarded 5/5 marks)
+</LongQuestion>
+
+Morphology is the study of how words are formed and created. The smallest unit of morphology is called a morpheme. Morphology uses prefixes and suffixes to create words and also changes the form of the words.
+
+Example: 
+- happiness → happy + ness  
+- walk → walking.
+
+| Inflectional Morphology | Derivational Morphology |
+|-------------------------|-------------------------|
+| • Changes the form of the word (e.g., tenses and numbers). | • Adds prefix or suffix to the word. |
+| • Changes the base word into a new word but keeps the meaning of both words the same. | • Forms a new word with a new meaning or grammatical category, though often sharing the same base. |
+| • Changes the form of the word. | • Changes the grammatical category or core meaning. |
+| • **Example:** <br/> walk (base) → walks, walked, walking | • **Example:** <br/> Happy (base) → unhappy (prefix), happiness (suffix) |
+
+---
+
+| Q2   | Solve any Two                                                                                                    |
+| ---- | ---------------------------------------------------------------------------------------------------------------- |
+| i.   | Explain the various challenges in NLP.                                                                           |
+| ii.  | Differentiate between Stemming and Lemmatization.                                                                |
+| iii. | What are Regular Expression (RE)? Explain the meaning of the given RE: <br />• **a.** `[e^]` <br />• **b.** `[^A-Z]` |
+
+
+
+---
+
+<LongQuestion>
+## Q2 (i) Explain the various challenges in NLP.
+### (Awarded 4/5 marks)
+</LongQuestion>
+
+1. **Lexical Ambiguity:** A challenge when one word can have more than one meaning.  
+   *Example:* "cap" can be either headwear or a pen's lid.
+
+2. **Parsing Ambiguity:** A challenge when one sentence can have more than one grammatical meaning.  
+   *Example:* "I saw a girl with a telescope" (the sentence has more than one interpretation).
+
+3. **Semantic Ambiguity:** A challenge when the structure is correct but the meaning is still unclear.
+
+4. **Pragmatic Ambiguity:** A challenge when the context is missing. Without proper context, NLP steps (like the telescope example) cannot yield unique results.
+
+---
+
+<LongQuestion>
+## Q2 (ii) Differentiate between Stemming and Lemmatization.
+### (Awarded 5/5 marks)
+</LongQuestion>
+
+Stemming and lemmatization are methods used to reduce words to their base or root form.
+
+| Stemming | Lemmatization |
+|----------|---------------|
+| • Reduces word to base form without checking grammar/dictionary. | • Reduces words to base form (lemma) while checking grammar and context. |
+| • Output can be grammatically incorrect (e.g., "studi"). | • Output is a real word found in the dictionary. |
+| • Faster as it follows simple heuristic rules. | • Slower but more accurate as it uses morphological analysis. |
+| • Generally less precise than lemmatization. | • More precise and preferred for complex tasks. |
+| • **Example:** <br/> Studying → Studi <br/> Studies → Studi | • **Example:** <br/> Studies → Study <br/> Mice → Mouse |
