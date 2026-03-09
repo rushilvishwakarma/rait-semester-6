@@ -62,7 +62,7 @@ Visit the following link using **Cloudera VM Browser** by typing in the address 
 
 <Tabs items={["Open in Cloudera VM Browser", "View full code"]}>
   <Tab value="Open in Cloudera VM Browser">
-    https://pastebin.com/raw/kuw30VCb
+    https://pastebin.com/raw/6eipy6EK
   </Tab>
   <Tab value="View full code">
     Run the following commands in your VM terminal:
@@ -125,3 +125,26 @@ In Hue top-left, click:
 **Menu (≡) → Files → HDFS**
 
 ![Hue Dashboard](/images/output-in-hue.png)
+
+---
+
+## Cleanup Previous Data
+
+If you need to perform the experiment again, you can clean the previous data by running the following commands in the terminal:
+
+```bash
+# Clean previous HDFS data
+hdfs dfs -rm -r -f /user/cloudera/BDA_Program
+hdfs dfs -rm -r -f /user/cloudera/wordcount
+
+# Clean previous local files
+rm -rf ~/BDA_C
+rm -f ~/wc_input.txt
+rm -f ~/wc_result.txt
+rm -f ~/bda_exp1.txt
+rm -f /home/cloudera/bda_exp1.txt
+
+clear
+```
+
+And then perform the experiment again.
