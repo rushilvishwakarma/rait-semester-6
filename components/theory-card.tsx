@@ -212,7 +212,7 @@ Please fetch the content from the URL above and help me understand and study it.
             </div>
             <DialogTitle className="text-center text-xl">University Email Required</DialogTitle>
             <DialogDescription className="text-center text-sm mt-1">
-              When the next page opens, select your <strong className="text-fd-foreground">university email</strong> account to access this document.
+              On the next page, select your university email account to access this document.
             </DialogDescription>
           </DialogHeader>
 
