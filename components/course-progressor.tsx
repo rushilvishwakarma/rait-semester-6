@@ -222,7 +222,7 @@ export function CourseProgressor() {
         <>
             <button
                 onClick={() => setIsOpen(true)}
-                className="group flex items-center gap-4 rounded-2xl bg-fd-card p-5 transition-colors hover:bg-fd-accent text-left w-full h-full"
+                className="group flex items-center gap-4 rounded-2xl bg-fd-card p-5 transition-colors text-left w-full h-full"
             >
                 <PlayCircle className="size-6 text-fd-muted-foreground shrink-0" />
                 <div className="flex-1">

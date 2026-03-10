@@ -17,6 +17,7 @@ import { HeroBackground } from "./hero-background";
 import { Badge } from "@/components/ui/badge";
 import { CourseProgressor } from "@/components/course-progressor";
 import Hover from "@/components/hover";
+import Shine from "@/components/shine";
 
 const coreSubjects = [
   {
@@ -127,7 +128,9 @@ export default function HomePage() {
       <div className="px-4">
         {/* Core Subjects */}
         <section className="mb-12">
-          <h2 className="text-xl font-semibold mb-4">Core Subjects</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            <Shine text="Core Subjects" speed={3} color="var(--shiny-color)" shineColor="var(--shiny-shine)" />
+          </h2>
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {coreSubjects.map((subject) => (
               <Link key={subject.title} href={subject.href} className="block w-full">
@@ -149,7 +152,9 @@ export default function HomePage() {
 
         {/* Labs */}
         <section className="mb-12">
-          <h2 className="text-xl font-semibold mb-4">Labs</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            <Shine text="Labs" speed={3} color="var(--shiny-color)" shineColor="var(--shiny-shine)" />
+          </h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
             {labSubjects.map((lab) => (
               <Link key={lab.title} href={lab.href} className="block w-full">
@@ -166,7 +171,9 @@ export default function HomePage() {
 
         {/* Resources */}
         <section>
-          <h2 className="text-xl font-semibold mb-4">Resources</h2>
+          <h2 className="text-xl font-semibold mb-4">
+            <Shine text="Resources" speed={3} color="var(--shiny-color)" shineColor="var(--shiny-shine)" />
+          </h2>
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-2">
             {resources.map((item) => (
               <Link key={item.title} href={item.href} className="block w-full">
