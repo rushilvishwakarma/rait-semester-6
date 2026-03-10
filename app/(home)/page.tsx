@@ -16,6 +16,7 @@ import {
 import { HeroBackground } from "./hero-background";
 import { Badge } from "@/components/ui/badge";
 import { CourseProgressor } from "@/components/course-progressor";
+import Hover from "@/components/hover";
 
 const coreSubjects = [
   {
@@ -111,7 +112,7 @@ export default function HomePage() {
               className="hidden dark:block pb-4 mx-auto"
             />
           </div>
-          <Badge variant="secondary">B.Tech CSE • AI & ML (TE)</Badge>
+          <Badge variant="secondary">B.Tech CSE • AI &amp; ML (TE)</Badge>
         </div>
         {/* Footer Disclaimer */}
         <div className="z-2 px-6 pb-4 text-center">
@@ -129,18 +130,18 @@ export default function HomePage() {
           <h2 className="text-xl font-semibold mb-4">Core Subjects</h2>
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {coreSubjects.map((subject) => (
-              <Link
-                key={subject.title}
-                href={subject.href}
-                className="group flex items-center gap-4 rounded-2xl bg-fd-card p-5 transition-colors hover:bg-fd-accent"
-              >
-                <subject.icon className="size-6 text-fd-muted-foreground shrink-0" />
-                <div>
-                  <p className="font-semibold">{subject.title}</p>
-                  <p className="text-sm text-fd-muted-foreground">
-                    {subject.description}
-                  </p>
-                </div>
+              <Link key={subject.title} href={subject.href} className="block w-full">
+                <Hover className="h-full">
+                  <div className="flex items-center gap-4 p-5">
+                    <subject.icon className="size-6 text-fd-muted-foreground shrink-0" />
+                    <div>
+                      <p className="font-semibold">{subject.title}</p>
+                      <p className="text-sm text-fd-muted-foreground">
+                        {subject.description}
+                      </p>
+                    </div>
+                  </div>
+                </Hover>
               </Link>
             ))}
           </div>
@@ -151,13 +152,13 @@ export default function HomePage() {
           <h2 className="text-xl font-semibold mb-4">Labs</h2>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
             {labSubjects.map((lab) => (
-              <Link
-                key={lab.title}
-                href={lab.href}
-                className="group flex flex-col gap-2 items-center justify-center rounded-2xl bg-fd-card p-4 text-center transition-colors hover:bg-fd-accent"
-              >
-                <lab.icon className="size-6 text-fd-muted-foreground shrink-0" />
-                <p className="text-sm font-medium">{lab.title}</p>
+              <Link key={lab.title} href={lab.href} className="block w-full">
+                <Hover className="h-full">
+                  <div className="flex flex-col gap-2 items-center justify-center p-4 text-center h-full">
+                    <lab.icon className="size-6 text-fd-muted-foreground shrink-0" />
+                    <p className="text-sm font-medium">{lab.title}</p>
+                  </div>
+                </Hover>
               </Link>
             ))}
           </div>
@@ -168,18 +169,18 @@ export default function HomePage() {
           <h2 className="text-xl font-semibold mb-4">Resources</h2>
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-2">
             {resources.map((item) => (
-              <Link
-                key={item.title}
-                href={item.href}
-                className="group flex items-center gap-4 rounded-2xl bg-fd-card p-4 transition-colors hover:bg-fd-accent"
-              >
-                <item.icon className="size-6 text-fd-muted-foreground shrink-0" />
-                <div>
-                  <p className="font-medium">{item.title}</p>
-                  <p className="text-xs text-fd-muted-foreground">
-                    {item.description}
-                  </p>
-                </div>
+              <Link key={item.title} href={item.href} className="block w-full">
+                <Hover className="h-full">
+                  <div className="flex items-center gap-4 p-4 h-full">
+                    <item.icon className="size-6 text-fd-muted-foreground shrink-0" />
+                    <div>
+                      <p className="font-medium">{item.title}</p>
+                      <p className="text-xs text-fd-muted-foreground">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </Hover>
               </Link>
             ))}
           </div>
@@ -188,20 +189,23 @@ export default function HomePage() {
         {/* Tools Section */}
         <section className="mt-12">
           <div className="grid gap-4 sm:grid-cols-2">
-            <a
-              href="https://drive.google.com/drive/folders/18lvCelrTUnlEdAvUNhU2FO4L62dnYcQf?usp=sharing"
-              className="group flex items-center gap-4 rounded-2xl bg-fd-card p-5 transition-colors hover:bg-fd-accent"
-            >
-              <Upload className="size-6 text-fd-muted-foreground shrink-0" />
-              <div className="flex-1">
-                <p className="font-semibold">Share and View Useful Resources</p>
-                <p className="text-sm text-fd-muted-foreground">
-                  Share question banks, important Notes, and other verified
-                  resources
-                </p>
-              </div>
+            <a href="https://drive.google.com/drive/folders/18lvCelrTUnlEdAvUNhU2FO4L62dnYcQf?usp=sharing" className="block w-full">
+              <Hover className="h-full">
+                <div className="flex items-center gap-4 p-5 h-full">
+                  <Upload className="size-6 text-fd-muted-foreground shrink-0" />
+                  <div className="flex-1">
+                    <p className="font-semibold">Share and View Useful Resources</p>
+                    <p className="text-sm text-fd-muted-foreground">
+                      Share question banks, important Notes, and other verified
+                      resources
+                    </p>
+                  </div>
+                </div>
+              </Hover>
             </a>
-            <CourseProgressor />
+            <Hover className="h-full">
+              <CourseProgressor />
+            </Hover>
           </div>
         </section>
       </div>
