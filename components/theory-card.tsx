@@ -1,8 +1,9 @@
 'use client';
-import { FileText, ChevronDown, MessageCircleIcon, Presentation, X, GraduationCap } from 'lucide-react';
+import { FileText, ChevronDown, MessageCircleIcon, Presentation, GraduationCap, Info } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { buttonVariants } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
 import { cva } from 'class-variance-authority';
 import { useMemo, useState, useCallback } from 'react';
 import { rainbowButtonVariants } from './ui/rainbow-button';
@@ -201,73 +202,54 @@ Please fetch the content from the URL above and help me understand and study it.
         </div>
       </div>
 
-      {/* University Email Modal */}
-      {showModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          onClick={handleClose}
-        >
-          {/* Backdrop with blur */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-
-          {/* Modal content */}
-          <div
-            className="relative z-10 w-full max-w-md rounded-2xl border bg-fd-card p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={handleClose}
-              className="absolute top-4 right-4 rounded-full p-1 text-fd-muted-foreground hover:text-fd-foreground hover:bg-fd-muted transition-colors cursor-pointer"
-            >
-              <X className="size-4" />
-            </button>
-
-            <div className="flex flex-col items-center text-center gap-4">
-              <div className="rounded-full bg-fd-primary/10 p-3">
-                <GraduationCap className="size-8 text-fd-primary" />
-              </div>
-
-              <h3 className="text-lg font-semibold text-fd-foreground">
-                University Email Required
-              </h3>
-
-              <p className="text-sm text-fd-muted-foreground">
-                Select your <strong>university email</strong> on the next screen.
-                <span className="block mt-3 text-xs text-amber-600 dark:text-amber-400 font-medium bg-amber-50 dark:bg-amber-950/30 p-2 px-4 rounded-full">
-                  If asked to "Request Access", you chose the wrong email.
-                </span>
-              </p>
-
-              <div className="flex gap-3 w-full mt-2">
-                <button
-                  type="button"
-                  onClick={handleClose}
-                  className={cn(
-                    buttonVariants({
-                      color: 'secondary',
-                      className: 'flex-1 cursor-pointer font-medium',
-                    }),
-                  )}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="button"
-                  onClick={handleContinue}
-                  className={cn(
-                    buttonVariants({
-                      className: 'flex-1 cursor-pointer font-medium bg-fd-primary text-fd-primary-foreground hover:bg-fd-primary/90',
-                    }),
-                  )}
-                >
-                  Continue
-                </button>
+      <Dialog open={showModal} onOpenChange={(open) => { if (!open) handleClose(); }}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <div className="flex items-center justify-center mb-4">
+              <div className="rounded-full bg-fd-primary/10 p-4">
+                <GraduationCap className="size-9 text-fd-primary" />
               </div>
             </div>
+            <DialogTitle className="text-center text-xl">University Email Required</DialogTitle>
+            <DialogDescription className="text-center text-sm mt-1">
+              When the next page opens, select your <strong className="text-fd-foreground">university email</strong> account to access this document.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="mt-4 space-y-5">
+            <div className="flex items-start gap-3 bg-fd-muted/50 rounded-xl p-4 text-sm text-fd-muted-foreground">
+              <Info className="size-4 shrink-0 mt-0.5" />
+              <p>If you see "Request Access", you selected the wrong account. Go back and switch to your university email.</p>
+            </div>
+
+            <div className="flex gap-3 w-full pt-1">
+              <button
+                type="button"
+                onClick={handleClose}
+                className={cn(
+                  buttonVariants({
+                    color: 'secondary',
+                    className: 'flex-1 cursor-pointer',
+                  }),
+                )}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleContinue}
+                className={cn(
+                  buttonVariants({
+                    className: 'flex-1 cursor-pointer bg-fd-primary text-fd-primary-foreground hover:bg-fd-primary/90',
+                  }),
+                )}
+              >
+                Open Presentation
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
