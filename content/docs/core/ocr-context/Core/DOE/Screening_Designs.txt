@@ -1,0 +1,975 @@
+---
+title: Module 3 - Screening Designs
+---
+
+Design of Experiments (DoE)
+Code 231CAUMM61
+
+Experimental Design & Analysis
+
+Academic Year 2025-26
+
+Navigation
+
+# Learning Roadmap
+
+## 01 Introduction to Screening
+
+Fundamentals, purpose, and when to use screening designs
+
+## 02 Plackett-Burman Designs Designs
+
+Construction, structure, and applications of PB designs
+
+## 03 Geometric vs Non-Geometric
+
+Classification and comparison of design types
+
+## 04 Full Factorial Designs Designs
+
+$2^{2}, 2^{3}$, and $2^{4}$ factorial designs with examples
+
+## 05 Design Resolution Resolution
+
+Resolution III, IV, V and confounding patterns
+
+## 06 Yates Algorithm Algorithm
+
+Systematic effect calculation and ANOVA analysis
+
+## 07 Practical Applications Applications
+
+Case studies and real-world implementation across industries
+
+Chapter 01
+
+# Introduction to Screening Designs
+
+Understanding the fundamentals and purpose of screening in experimental design
+
+Chapter 01
+
+# What is Screening Design?
+
+Q
+
+## Definition
+
+A screening design is an experimental strategy that efficiently identifies significant factors from a large pool of potential variables by testing a carefully selected subset of all possible combinations.
+
+Q
+
+## Core Principle
+
+Separates the "vital few" factors that significantly impact the response from the "trivial many" that have negligible effects.
+
+Q
+
+## Efficiency Gain
+
+Reduces experimental runs dramatically while maintaining statistical validity. A 7-factor screening may need only 8 runs vs. 128 runs for full factorial.
+
+## Screening vs Full Factorial
+
+### Screening DOE
+
+✓ Tests subset of combinations  
+✓ Identifies main effects  
+✓ Minimal runs required  
+✗ Limited interaction info
+
+### Full Factorial
+
+✓ Tests ALL combinations  
+✓ Main + all interactions  
+✓ Maximum information  
+✗ Exponential run growth
+
+Fractional
+
+Complete
+
+Chapter 01
+
+# When to Use Screening Designs
+
+## 1 Large Number of Factors
+
+When investigating 7+ potential factors where full factorial becomes impractical due to exponential run requirements.
+
+## 2 Limited Resources
+
+Budget, time, or material constraints make comprehensive testing infeasible. Screening maximizes information per resource unit.
+
+## 3 Initial Exploration Phase
+
+Early-stage research where factor importance is unknown. Screening identifies which variables warrant deeper investigation.
+
+## 4 Preparation for Optimization
+
+Before conducting response surface methodology (RSM), screening narrows focus to significant factors for optimization studies.
+
+## Decision Flowchart
+
+Start: Define Objectives
+
+↓
+
+How many factors?
+
+≤ 4 factors  
+Full Factorial  
+≥ 5 factors  
+Screening DOE
+
+↓
+
+Follow-up with Detailed Study
+
+Chapter 01
+
+# Types of Screening Designs
+
+## Fractional Factorial Factorial
+
+A carefully selected fraction of full factorial runs that estimates main effects while sacrificing some interaction information.
+
+- Runs: 2' (k-p)
+- Resolution III-V
+- Some interactions estimable
+
+## Plackett-Burman Burman
+
+Highly economical designs where N is a multiple of 4, allowing up to N-1 factors to be screened in N runs.
+
+- Runs: 8, 12, 16, 20, 24...
+- Resolution III
+- Main effects only
+
+## Definitive Screening Screening
+
+Modern designs that can estimate main effects, quadratic effects, and two-factor interactions without follow-up runs.
+
+- Runs: 2m+1 or 2m+3
+- Three levels per factor
+- Quadratic effects included
+
+Design Comparison Matrix
+
+
+| Characteristic | Fractional Factorial | Plackett-Burman | Definitive Screening  |
+| -------------- | -------------------- | --------------- | --------------------- |
+| Best For       | 4-7 factors          | 7-23 factors    | 6+ factors, curvature |
+| Factor Levels  | 2 levels             | 2 levels        | 3 levels              |
+| Interactions   | Some estimable       | Not estimable   | All estimable         |
+| Efficiency     | Good                 | Excellent       | Very Good             |
+
+
+Chapter 02
+
+# Plackett-Burman Designs
+
+Exploring the most efficient screening design for many factors
+
+Chapter 02
+
+# Introduction to Plackett-Burman Designs
+
+## Historical Background
+
+Developed by Robin L. Plackett and J. Peter Burman in 1946 while working at the University of Liverpool. Published in the journal Biometrika.
+
+## Mathematical Definition
+
+PB designs are two-level fractional factorial designs where the number of runs N is a multiple of 4 (N = 4, 8, 12, 16, 20, 24...). Can study up to k = N-1 factors in N experimental runs.
+
+## Key Characteristics
+
+- Each factor at two levels: High (+1) and Low (-1)
+- Resolution III design
+- Main effects not confounded with each other
+- Main effects aliased with 2-factor interactions
+
+## Common PB Design Sizes
+
+
+| 8-Run Design                                                | 7 Factors  |
+| ----------------------------------------------------------- | ---------- |
+| Screens 7 factors in 8 runs vs. 128 runs for full factorial | &nbsp;     |
+| 12-Run Design                                               | 11 Factors |
+| Most popular PB design; screens 11 factors in 12 runs       | &nbsp;     |
+| 16-Run Design                                               | 15 Factors |
+| Screens 15 factors in 16 runs vs. 32,768 full factorial     | &nbsp;     |
+| 20-Run Design                                               | 19 Factors |
+| Screens 19 factors in 20 runs vs. 524,288 full factorial    | &nbsp;     |
+
+
+Chapter 02
+
+# Plackett-Burman Design Structure
+
+## Design Matrix Format
+
+N  
+Rows (N)  
+Number of experimental runs; N is multiple of 4
+
+k  
+Columns (k)  
+Number of factors; k ≤ N-1
+
+±  
+Entries  
++1 (high level) or -1 (low level)
+
+## Orthogonality Property
+
+PB designs are orthogonal arrays, meaning:  
+☑ Each column has equal +1 and -1 entries  
+☑ Dot product of any two columns is zero  
+☑ Main effects estimated independently  
+☑ Minimum variance for effect estimates
+
+## 12-Run PB Design Matrix (11 Factors)
+
+
+| Run | A   | B   | C   | D   | E   | F   | G   | H   | I   | J   | K   |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1   | +   | +   | -   | +   | +   | +   | -   | -   | -   | +   | -   |
+| 2   | -   | +   | +   | -   | +   | +   | +   | -   | -   | -   | +   |
+| 3   | +   | -   | +   | +   | -   | +   | +   | +   | -   | -   | -   |
+| 4   | -   | +   | -   | +   | +   | -   | +   | +   | +   | -   | -   |
+| 5   | -   | -   | +   | -   | +   | +   | -   | +   | +   | +   | -   |
+| 6   | -   | -   | -   | +   | -   | +   | +   | -   | +   | +   | +   |
+| 7   | +   | -   | -   | -   | +   | -   | +   | +   | -   | +   | +   |
+| 8   | +   | +   | -   | -   | -   | +   | -   | +   | +   | -   | +   |
+| 9   | +   | +   | +   | -   | -   | -   | +   | -   | +   | +   | -   |
+| 10  | -   | +   | +   | +   | -   | -   | -   | +   | -   | +   | +   |
+| 11  | +   | -   | +   | +   | +   | -   | -   | -   | +   | -   | +   |
+| 12  | -   | -   | -   | -   | -   | -   | -   | -   | -   | -   | -   |
+
+
+Note: + = High level (+1), - = Low level (-1). Last row is all minus for cyclical completion.
+
+Chapter 02
+
+# Constructing Plackett-Burman Designs
+
+## Cyclical Construction Method
+
+### 1. Define First Row
+
+Start with a specific pattern of +1 and -1 values for the first row. This pattern is derived from design generators.
+
+### 2. Cyclic Shift
+
+Each subsequent row is created by shifting the previous row one position to the right, wrapping the last element to the first position.
+
+### 3. Complete with All-Minus Row
+
+The final row (N-th row) consists entirely of -1 values to complete the orthogonal array.
+
+## Example: 8-Run PB Design Construction
+
+### Step 1: First Row Pattern
+
+++++-++-
+
+### Step 2: Cyclic Generation
+
+
+| Row 1: | ++++-++-   |
+| ------ | ---------- |
+| Row 2: | --++++-+-  |
+| Row 3: | ---++++-+  |
+| Row 4: | +---++++-  |
+| Row 5: | --+---++++ |
+| Row 6: | +-+---++   |
+| Row 7: | ++--+---+  |
+
+
+### Step 3: Final Row
+
+---
+
+Chapter 02
+
+# PB Design Example: 8 Runs for 7 Factors
+
+Complete 8-Run PB Design Matrix
+
+
+| Run | A   | B   | C   | D   | E   | F   | G   | Response |
+| --- | --- | --- | --- | --- | --- | --- | --- | -------- |
+| 1   | +   | +   | +   | -   | +   | -   | -   | y_{1}    |
+| 2   | -   | +   | +   | +   | -   | +   | -   | y_{2}    |
+| 3   | -   | -   | +   | +   | +   | -   | +   | y_{3}    |
+| 4   | +   | -   | -   | +   | +   | +   | -   | y_{4}    |
+| 5   | -   | +   | -   | -   | +   | +   | +   | y_{5}    |
+| 6   | +   | -   | +   | -   | -   | +   | +   | y_{6}    |
+| 7   | +   | +   | -   | +   | -   | -   | +   | y_{7}    |
+| 8   | -   | -   | -   | -   | -   | -   | -   | y_{8}    |
+
+
+Efficiency: Screens 7 factors in 8 runs vs. 128 runs for full 27 factorial (94% reduction)
+
+## Efficiency Comparison
+
+
+| Full Factorial (2^{7}) | 128 runs |
+| ---------------------- | -------- |
+| PB Design              | 8 runs   |
+| Run Reduction          | 94%      |
+
+
+## How to Read the Matrix
+
+1. Each row = one experimental run
+2. Each column = one factor (A–G)
+3. = Set factor at HIGH level
+4. – = Set factor at LOW level
+5. Conduct runs in random order
+
+Chapter 02
+
+# PB Design Example: 12 Runs for 11 Factors
+
+## 12-Run PB Design (11 Factors A-K)
+
+
+| Run | A   | B   | C   | D   | E   | F   | G   | H   | I   | J   | K   |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1   | +   | +   | -   | +   | +   | +   | -   | -   | -   | +   | -   |
+| 2   | -   | +   | +   | -   | +   | +   | +   | -   | -   | -   | +   |
+| 3   | +   | -   | +   | +   | -   | +   | +   | +   | -   | -   | -   |
+| 4   | -   | +   | -   | +   | +   | -   | +   | +   | +   | -   | -   |
+| 5   | -   | -   | +   | -   | +   | +   | -   | +   | +   | +   | -   |
+| 6   | -   | -   | -   | +   | -   | +   | +   | -   | +   | +   | +   |
+| 7   | +   | -   | -   | -   | +   | -   | +   | +   | -   | +   | +   |
+| 8   | +   | +   | -   | -   | -   | +   | -   | +   | +   | -   | +   |
+| 9   | +   | +   | +   | -   | -   | -   | +   | -   | +   | +   | -   |
+| 10  | -   | +   | +   | +   | -   | -   | -   | +   | -   | +   | +   |
+| 11  | +   | -   | +   | +   | +   | -   | -   | -   | +   | -   | +   |
+| 12  | -   | -   | -   | -   | -   | -   | -   | -   | -   | -   | -   |
+
+
+Most Popular PB Design: Widely used in industry for screening 7-11 factors efficiently
+
+## Practical Application
+
+**Example:** Food scientist studying 11 ingredient and process variables (A-K) impacting taste and texture of baked goods.
+
+- A-D: Ingredient quantities (flour, sugar, fat, eggs)
+- E-H: Process parameters (temp, time, speed, humidity)
+- I-K: Equipment settings (mixer, oven, cooling)
+
+## Analysis Outcome
+
+After conducting 12 runs and analyzing results, suppose factors B, D, G, and J show significant effects on product quality.
+
+**Next Steps:** Focus optimization experiments only on significant factors B, D, G, J—reducing complexity from 11 to 4 factors
+
+Chapter 02
+
+# Advantages and Limitations of PB Designs
+
+## Advantages
+
+- **Highly Economical**  
+Screens k factors in k+1 runs—maximum efficiency for resource-constrained experiments
+- **Efficient for Many Factors**  
+Ideal when investigating 7-23 factors where full factorial is impractical
+- **Orthogonally Balanced**  
+Each factor tested equally at high and low levels; main effects estimated independently
+- **Easy to Analyze**  
+Simple calculations using contrast method; compatible with standard statistical software
+
+## Limitations
+
+- ☐ **No Interaction Estimation**  
+Cannot estimate two-factor or higher-order interactions; assumes they are negligible
+- ☐ **Resolution III Confounding**  
+Main effects are aliased with two-factor interactions; risk of misinterpretation if interactions exist
+- ☐ **Limited Design Sizes**  
+Only available for N = 4, 8, 12, 16, 20, 24, 28, 32, 36, 40... (multiples of 4)
+- ☐ **No Error Degrees of Freedom**  
+When k = N-1 (saturated design), no degrees of freedom left to estimate pure error
+
+Chapter 03
+
+# Geometric vs Non-Geometric Designs
+
+Understanding the fundamental classification of screening designs
+
+Chapter 03
+
+# Geometric Designs
+
+## Definition
+
+Geometric designs are experimental designs where the number of runs N is a power of 2: N = 2^4k where k is an integer.
+
+## Common Geometric Design Sizes
+
+
+| 4       | 8       |
+| ------- | ------- |
+| 2² runs | 2³ runs |
+| 16      | 32      |
+| 2⁴ runs | 2⁵ runs |
+
+
+## Geometric Representation
+
+Can be visualized as vertices of a hypercube in k-dimensional space. Each vertex represents one experimental run.
+
+## 2³ Factorial as Geometric Cube
+
+![img-0.jpeg](img-0.jpeg)
+
+8 vertices = 8 experimental runs; 3 dimensions = 3 factors (A, B, C)
+
+Chapter 03
+
+# Non-Geometric Designs
+
+## Definition
+
+Non-geometric designs are experimental designs where N is a multiple of 4 but NOT a power of 2.
+
+## Common Non-Geometric Sizes
+
+
+| 12         | 20         | 24         |
+| ---------- | ---------- | ---------- |
+| 11 factors | 19 factors | 23 factors |
+| 28         | 36         | 40         |
+| 27 factors | 35 factors | 39 factors |
+
+
+## Alternative Names
+
+- **Hadamard Matrix Designs**: Based on Hadamard matrices
+- **Plackett-Burman Designs**: Most common non-geometric type
+
+## Key Characteristics
+
+- **Cannot be Represented as Cubes**  
+Unlike geometric designs, non-geometric designs don't correspond to hypercube vertices
+- **Cyclical Construction**  
+Built using cyclical shifting patterns rather than factorial combinations
+- **Same Orthogonality**  
+Maintain orthogonal properties for independent main effect estimation
+
+## When to Use Non-Geometric
+
+- → When number of factors falls between geometric sizes (e.g., 11 factors)
+- → Maximum economy is critical
+- → Only main effects are of interest
+- → Follow-up experiments will study interactions
+
+Chapter 03
+
+# Comparison: Geometric vs Non-Geometric
+
+Comprehensive Comparison Matrix
+
+
+| Characteristic           | Geometric Designs                         | Non-Geometric Designs                                   |
+| ------------------------ | ----------------------------------------- | ------------------------------------------------------- |
+| Number of Runs (N)       | N = 2^k (powers of 2)4, 8, 16, 32, 64...  | N = multiple of 4 (not power of 2)12, 20, 24, 28, 36... |
+| Maximum Factors          | k = N - 1 (saturated)                     | k = N - 1 (saturated)                                   |
+| Geometric Representation | Hypercube vertices                        | No geometric representation                             |
+| Construction Method      | Factorial combinations                    | Cyclical shifting patterns                              |
+| Resolution               | Can be III, IV, or V                      | Typically Resolution III                                |
+| Interaction Estimation   | Some designs allow interaction estimation | Main effects only                                       |
+| Examples                 | 2^k factorial, 2^(k-p) fractional         | Plackett-Burman designs                                 |
+
+
+Geometric Design Example
+
+2^4 factorial design: 16 runs for 4 factors. Can estimate all main effects and interactions (Resolution V).
+
+Non-Geometric Design Example
+
+12-run PB design: 12 runs for 11 factors. Estimates main effects only (Resolution III).
+
+Chapter 04
+
+# Full Factorial Designs
+
+Complete experimental designs for comprehensive factor analysis
+
+Chapter 04
+
+# Introduction to Full Factorial Designs
+
+![img-1.jpeg](img-1.jpeg)
+
+## Definition
+
+A full factorial design is an experimental design that includes all possible combinations of factor levels. For k factors each at 2 levels, requires 2^k experimental runs.
+
+## Complete Information
+
+- ☑ All main effects estimable
+- ☑ All two-factor interactions estimable
+- ☑ All higher-order interactions estimable
+- ☑ No confounding of effects
+
+## When to Use Full Factorial
+
+- → Number of factors is small (≤ 4)
+- → Interactions are suspected to be important
+- → Adequate resources available
+- → Optimization is the goal
+
+## Full Factorial Run Calculation
+
+### 2^k
+
+Total Experimental Runs
+
+
+| k = 2 factors | 4 runs  |
+| ------------- | ------- |
+| k = 3 factors | 8 runs  |
+| k = 4 factors | 16 runs |
+| k = 5 factors | 32 runs |
+| k = 6 factors | 64 runs |
+
+
+## Exponential Growth:
+
+Each additional factor doubles the number of required runs. This rapid growth makes full factorial designs impractical for many real-world scenarios with numerous factors.
+
+Chapter 04
+
+# 2² Full Factorial Design
+
+2² Factorial Design Matrix
+
+
+| Run | A   | B   | Yates Notation | Response (y) |
+| --- | --- | --- | -------------- | ------------ |
+| 1   | –   | –   | (1)            | 52           |
+| 2   | +   | –   | a              | 67.5         |
+| 3   | –   | +   | b              | 61           |
+| 4   | +   | +   | ab             | 65           |
+
+
+Yates Notation: (1) = both low; a = A high; b = B high; ab = both high
+
+## Effect Calculations
+
+### Main Effect A
+
+Effect of factor A averaged over B
+
+$$  
+A = \left[ (a + ab) - ((1) + b) \right] / 2  
+$$
+
+$$  
+A = \left[ (67.5 + 65) - (52 + 61) \right] / 2 = 9.75  
+$$
+
+### Main Effect B
+
+Effect of factor B averaged over A
+
+$$  
+B = \left[ (b + ab) - ((1) + a) \right] / 2  
+$$
+
+$$  
+B = \left[ (61 + 65) - (52 + 67.5) \right] / 2 = 3.25  
+$$
+
+### AB Interaction
+
+Difference in A effect at B+ vs B−
+
+$$  
+AB = [ab - b - a + (1)] / 2  
+$$
+
+$$  
+AB = [65 - 61 - 67.5 + 52] / 2 = -5.75  
+$$
+
+Chapter 04
+
+# 2³ Full Factorial Design
+
+## 2³ Factorial Design Matrix
+
+
+| Run | A   | B   | C   | Notation | Response |
+| --- | --- | --- | --- | -------- | -------- |
+| 1   | –   | –   | –   | (1)      | 45       |
+| 2   | +   | –   | –   | a        | 71       |
+| 3   | –   | +   | –   | b        | 48       |
+| 4   | +   | +   | –   | ab       | 65       |
+| 5   | –   | –   | +   | c        | 68       |
+| 6   | +   | –   | +   | ac       | 60       |
+| 7   | –   | +   | +   | bc       | 80       |
+| 8   | +   | +   | +   | abc      | 65       |
+
+
+8 runs test all combinations of 3 factors at 2 levels each
+
+## Effect Summary
+
+
+| Main Effect A   | 2.75  |
+| --------------- | ----- |
+| Main Effect B   | 6.50  |
+| Main Effect C   | 4.00  |
+| AB Interaction  | -7.50 |
+| AC Interaction  | -3.50 |
+| BC Interaction  | 1.00  |
+| ABC Interaction | -0.75 |
+
+
+## Interpretation
+
+- Factor B has the largest main effect (6.50)
+- AB interaction is significant (-7.50)
+- ABC interaction is small (-0.75)
+
+Chapter 04
+
+# 2⁴ Full Factorial Design
+
+## 2⁴ Factorial Design Matrix (16 Runs)
+
+
+| Run | A   | B   | C   | D   | Notation |
+| --- | --- | --- | --- | --- | -------- |
+| 1   | –   | –   | –   | –   | (1)      |
+| 2   | +   | –   | –   | –   | a        |
+| 3   | –   | +   | –   | –   | b        |
+| 4   | +   | +   | –   | –   | ab       |
+| 5   | –   | –   | +   | –   | c        |
+| 6   | +   | –   | +   | –   | ac       |
+| 7   | –   | +   | +   | –   | bc       |
+| 8   | +   | +   | +   | –   | abc      |
+| 9   | –   | –   | –   | +   | d        |
+| 10  | +   | –   | –   | +   | ad       |
+| 11  | –   | +   | –   | +   | bd       |
+| 12  | +   | +   | –   | +   | abd      |
+| 13  | –   | –   | +   | +   | cd       |
+| 14  | +   | –   | +   | +   | acd      |
+| 15  | –   | +   | +   | +   | bcd      |
+| 16  | +   | +   | +   | +   | abcd     |
+
+
+## Number of Effects in 2⁴ Design
+
+- Main Effects (A, B, C, D) 4
+- Two-Factor Interactions 6
+- Three-Factor Interactions 4
+- Four-Factor Interaction 1
+- **Total Effects** 15
+
+## Practical Example
+
+**Chemical Process:** Optimizing reaction yield with 4 factors:
+
+- A: Temperature (Low/High)
+- B: Pressure (Low/High)
+- C: Catalyst Concentration
+- D: Reaction Time
+
+Chapter 05
+
+# Design Resolution Resolution & Confounding
+
+Understanding aliasing and design quality metrics
+
+Chapter 05
+
+# Understanding Design Resolution
+
+## Definition
+
+Design resolution indicates how clearly effects can be separated in a fractional factorial design. Higher resolution = lower confounding = better design quality.
+
+## Resolution Interpretation Formula
+
+For a design of Resolution R:
+
+→ Main effects (order 1) are confounded with interactions of order R-1  
+→ Two-factor interactions (order 2) are confounded with interactions of order R-2
+
+### Example: Resolution IV Design
+
+Main effects confounded with 3-factor interactions (IV - 1 = III). Two-factor interactions confounded with each other (IV - 2 = II).
+
+## Resolution III
+
+☑ Main effects not confounded with each other  
+✗ Main effects aliased with 2-factor interactions  
+✗ 2-factor interactions aliased with main effects
+
+Use: Initial screening when interactions are negligible
+
+## Resolution IV
+
+☑ Main effects not confounded with each other  
+☑ Main effects not aliased with 2-factor interactions  
+✗ 2-factor interactions aliased with each other
+
+Use: Characterization when main effects are critical
+
+## Resolution V
+
+☑ Main effects not confounded with each other  
+☑ 2-factor interactions not confounded with each other  
+☑ Main effects not aliased with 2-factor or 3-factor interactions
+
+Use: Optimization when interactions are important
+
+Chapter 05
+
+# Confounding and Aliasing
+
+## Definition
+
+Confounding (or aliasing) occurs when two or more effects are mathematically intertwined and cannot be estimated separately. The estimated effect is actually a combination of multiple true effects.
+
+## Why Confounding Occurs
+
+1. **Fractional Factorial Designs**  
+Testing only a subset of full factorial runs creates mathematical relationships between effects
+2. **Design Generators**  
+The way additional factors are assigned to interaction columns determines confounding patterns
+3. **Trade-off for Efficiency**  
+Confounding is the price paid for reducing experimental runs
+
+## Confounding Examples
+
+### Resolution III Example
+
+In a 2'(7-4) fractional factorial (Resolution III):
+
+$$  
+A \rightarrow A + BC + DF + EG  
+$$
+
+$$  
+B \rightarrow B + AC + DG + EF  
+$$
+
+Main effect A is confounded with interactions BC, DF, EG
+
+### Resolution IV Example
+
+In a 2'(6-2) fractional factorial (Resolution IV):
+
+$$  
+A \rightarrow A + BCDE  
+$$
+
+$$  
+AB \rightarrow AB + CDE  
+$$
+
+Main effects clear of 2-factor interactions; 2-factor interactions confounded with each other
+
+### Resolution V Example
+
+In a 2'(5-1) fractional factorial (Resolution V):
+
+$$  
+A \rightarrow A + BCDE  
+$$
+
+$$  
+AB \rightarrow AB + CDE  
+$$
+
+Main effects and 2-factor interactions clear of each other
+
+Chapter 06
+
+# Yates Algorithm & Analysis
+
+Systematic methods for computing factorial effects
+
+Chapter 06
+
+# Yates Algorithm for Effect Calculation
+
+**What is Yates Algorithm?**
+
+A systematic computational method developed by Frank Yates for calculating factorial effects in 2^k designs. Efficient and programmable.
+
+## Step-by-Step Procedure
+
+1. **List Treatment Combinations**  
+Write all 2^k combinations in Yates standard order
+2. **Enter Response Totals**  
+Record total response for each combination
+3. **Create Stage Columns**  
+For each of k stages: add pairs (top half), subtract pairs (bottom half)
+4. **Final Column = Effect Totals**  
+Last column contains contrast totals for each effect
+5. **Calculate Effects**  
+Effect = Contrast / (2^(k-1) * n)
+
+## Yates Algorithm: 2³ Example
+
+
+| Treatment | Response | Stage 1 | Stage 2 | Stage 3 | Effect |
+| --------- | -------- | ------- | ------- | ------- | ------ |
+| (1)       | 52       | 119.5   | 245.5   | 529.9   | Mean   |
+| a         | 67.5     | 126     | 284     | 13.5    | A      |
+| b         | 61       | 148     | 19.5    | -5.5    | B      |
+| ab        | 65       | 136     | -6      | -25.5   | AB     |
+| c         | 72       | 15.5    | 6.5     | 38.5    | C      |
+| ac        | 76       | 4       | -12     | -25.5   | AC     |
+| bc        | 73       | 4       | -11.5   | -18.5   | BC     |
+| abc       | 63       | -10     | -14     | -2.5    | ABC    |
+
+
+**Interpretation:** Factor C has the largest effect (38.5), followed by A (13.5). AB interaction is significant (-25.5).
+
+Chapter 06
+
+# ANOVA for Factorial Designs
+
+
+| Source | SS    | df       | MS     | F      |
+| ------ | ----- | -------- | ------ | ------ |
+| A      | SSA   | 1        | MSA    | F_A    |
+| B      | SSB   | 1        | MSB    | F_B    |
+| C      | SSC   | 1        | MSC    | F_C    |
+| AB     | SSAB  | 1        | MSAB   | F_AB   |
+| AC     | SSAC  | 1        | MSAC   | F_AC   |
+| BC     | SSBC  | 1        | MSBC   | F_BC   |
+| ABC    | SSABC | 1        | MSABC  | F_ABC  |
+| Error  | SSE   | 2^k(n-1) | MSE    | &nbsp; |
+| Total  | SST   | 2^k·n-1  | &nbsp; | &nbsp; |
+
+
+Note: Each effect has 1 degree of freedom in 2-level factorial designs
+
+## Sum of Squares Formula
+
+From Yates Algorithm:
+
+$$  
+SS_{\text{effect}} = \frac{(\text{Contrast})^2}{N \times n}  
+$$
+
+Alternative:
+
+$$  
+SS_{\text{effect}} = \frac{n \times 2^k(k-2) \times (\text{Effect})^2}{k}  
+$$
+
+## Decision Rules
+
+- If $F > F_{\text{critical}}$ or $p < 0.05$, effect is significant
+- Use normal probability plot for unreplicated designs
+- Effects deviating from straight line are significant
+
+Chapter 06
+
+# Main Effects and Interaction Calculations
+
+## Main Effect Formula
+
+$$  
+\text{Effect} = \hat{y}*{\text{high}} - \hat{y}*{\text{low}}  
+$$
+
+Average response at high level minus average response at low level
+
+**Example: Main Effect of A**
+
+$$  
+A = \left[ \left(a + ab + ac + abc\right) - \left( (1) + b + c + bc \right) \right] / 4  
+$$
+
+## Two-Factor Interaction Formula
+
+$$  
+AB = \frac{1}{2} \left[ \left( A_{\text{effect}} \mid B + \right) - \left( A_{\text{effect}} \mid B - \right) \right]  
+$$
+
+Half the difference between A's effect at high B and A's effect at low B
+
+**Example: AB Interaction**
+
+$$  
+AB = \left[ ab - b - a + (1) \right] / 2  
+$$
+
+## Interpretation Guidelines
+
+↑ Positive Effect
+
+Increasing factor level increases response
+
+↓ Negative Effect
+
+Increasing factor level decreases response
+
+= Near Zero
+
+Factor has negligible effect on response
+
+## Interaction Interpretation
+
+✗ Zero Interaction
+
+Effect of one factor is consistent regardless of other factor
+
+≠ Non-Zero Interaction
+
+Effect of one factor depends on level of other factor
+
+⊆ Large Interaction
+
+Factors must be considered together, not independently
+
+Module 3 Complete
+
+# Key Takeaways & Applications
+
+## Q Screening Designs
+
+### Designs
+
+Efficiently identify significant factors from many candidates, separating the "vital few" from the "trivial many"
+
+## Q Plackett-Burman
+
+### Burman
+
+Maximum economy for factor screening; study k factors in k+1 runs with orthogonal balance
+
+## Q Full Factorial
+
+Complete information for critical factors; estimate all main effects and interactions without confounding
+
+## Q Design Resolution
+
+### Resolution
+
+Resolution III, IV, V determine confounding patterns; higher resolution = clearer effect separation
+
+## Q Yates Algorithm
+
+Systematic method for computing factorial effects; efficient and programmable for 2^k designs
+
+## Q Applications
+
+Enable data-driven process improvement across manufacturing, services, and research industries
+
+Design of Experiments empowers informed decision-making
+
+CSE-AIML | Semester 6

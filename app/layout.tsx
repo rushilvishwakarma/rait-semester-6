@@ -44,6 +44,18 @@ export default function Layout({ children }: { children: ReactNode }) {
           >
             IA1 Exams begin 16th Feb 2026. <a href="/docs/core/internal-assessment-1" className="underline font-semibold ml-1">View Timetable</a>
           </Banner> */}
+
+            <Banner
+              variant="rainbow"
+              rainbowColors={[
+                '#ec8e8e6e',
+                '#ff4f6f33',
+                '#7d112e3f',
+                '#2b00147f',
+              ]}
+            >
+              MSE Exams begin 23rd March 2026. <a href="/docs/core/mse-timetable" className="underline font-semibold ml-1">View Timetable</a>
+            </Banner>
             {children}
           </RootProvider>
         </CuratedResourcesProvider>
