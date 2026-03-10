@@ -211,7 +211,7 @@ Please fetch the content from the URL above and help me understand and study it.
               </div>
             </div>
             <DialogTitle className="text-center text-xl">University Email Required</DialogTitle>
-            <DialogDescription className="text-center text-sm mt-1">
+            <DialogDescription className="text-center text-sm mt-1 px-10 pb-3">
               On the next page, select your university email account to access this document.
             </DialogDescription>
           </DialogHeader>
