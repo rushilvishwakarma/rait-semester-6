@@ -22,10 +22,11 @@ import { Download, FileText } from 'lucide-react';
     href="https://drive.google.com/drive/folders/10ybr7KIc23nPMipPnHgapZ2clnkBqBfn?usp=sharing"
   />
 
-  <Card 
-    icon={<FileText />}
-    title="Output Document" 
-    description="Author: Nishant Narudkar"
-    href="https://drive.google.com/file/d/135_h295Ed4quBmUJMjeQwjo0DFQEUffx/view?usp=sharing"
-  />
+  <DocumentCard
+      title="Output Document"
+      href="https://drive.google.com/file/d/135_h295Ed4quBmUJMjeQwjo0DFQEUffx/view?usp=sharing"
+    >
+      View Document<br />
+      Author: <AuthorLink href="https://www.linkedin.com/in/nishant-narudkar-1b5225238/">Nishant Narudkar</AuthorLink>
+    </DocumentCard>
 </Cards>

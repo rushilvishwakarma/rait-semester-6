@@ -9,6 +9,8 @@ import { CustomCallout } from '@/components/custom-callout';
 
 import { CuratedResources } from '@/components/curated-videos';
 import { LongQuestion } from '@/components/question';
+import { DocumentCard } from '@/components/document-card';
+import { AuthorLink } from '@/components/author-link';
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
@@ -20,6 +22,8 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     CuratedResources,
     CuratedVideos: CuratedResources,
     LongQuestion,
+    DocumentCard,
+    AuthorLink,
     img: (props) => <ImageZoom {...(props as any)} />,
     ...components,
   };

@@ -22,17 +22,12 @@ import { FileText } from 'lucide-react';
     href="https://drive.google.com/file/d/1s3qnCFE_Im5E9CetyRZIvdtI-DWgW-DJ/view?usp=sharing"
   />
 
-  <Card 
-    icon={<FileText />}
-    title="Output Document" 
-    description="Author: Nishant Narudkar"
-    href="https://drive.google.com/file/d/1a1dtmSDV9sA_mY2mBR_SbedPiJVZ694E/view?usp=sharing"
-  />
+  <DocumentCard
+      title="Output Document"
+      href="https://drive.google.com/file/d/1a1dtmSDV9sA_mY2mBR_SbedPiJVZ694E/view?usp=sharing"
+    >
+      View Document<br />
+      Author: <AuthorLink href="https://www.linkedin.com/in/nishant-narudkar-1b5225238/">Nishant Narudkar</AuthorLink>
+    </DocumentCard>
 
-  <Card 
-    icon={<FileText />}
-    title="Author LinkedIn" 
-    description="Nishant Narudkar"
-    href="https://www.linkedin.com/in/nishant-narudkar-1b5225238/"
-  />
-</Cards>
+  </Cards>

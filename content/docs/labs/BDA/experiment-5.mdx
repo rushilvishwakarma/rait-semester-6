@@ -15,26 +15,21 @@ import { FileText } from 'lucide-react';
     href="https://drive.google.com/file/d/1GNW_9OuZxJqd7Y_J19MR5ZBETAboOMq9/view?usp=drive_link"
   />
 
-  <Card 
-    icon={<FileText />}
-    title="Output Document" 
-    description="Author: Kaniikesh"
-    href="https://drive.google.com/file/d/101MjVnntJ73eShku9-xwR9hrjYnhHhZo/view?usp=sharing"
-  />
+  <DocumentCard
+      title="Output Document"
+      href="https://drive.google.com/file/d/101MjVnntJ73eShku9-xwR9hrjYnhHhZo/view?usp=sharing"
+    >
+      View Document<br />
+      Author: <AuthorLink href="https://www.linkedin.com/in/kaniikeshraja/">Kaniikesh</AuthorLink>
+    </DocumentCard>
 
-  <Card 
-    icon={<FileText />}
-    title="Author LinkedIn" 
-    description="Kaniikesh"
-    href="https://www.linkedin.com/in/kaniikeshraja/"
-  />
-
-  <Card 
-    icon={<FileText />}
-    title="Journal Writing Part to refer (Made easy)" 
-    description="Provided to us by Peeyush Hota for making writing part and programs easier. Ignore the Code while writing in your Journal."
-    href="https://drive.google.com/drive/folders/1DenT2d7-tR74ImCK-BNgGiufBMLIiRiE?usp=sharing"
-  />
+  <DocumentCard
+      title="Journal Writing Part to refer (Made easy)"
+      href="https://drive.google.com/drive/folders/1DenT2d7-tR74ImCK-BNgGiufBMLIiRiE?usp=sharing"
+    >
+      View Document<br />
+      Provided to us by <AuthorLink href="https://www.linkedin.com/in/peeyush-hota-9502122b5/">Peeyush Hota</AuthorLink> for making writing part and programs easier. Ignore the Code while writing in your Journal.
+    </DocumentCard>
 </Cards>
 
 ---
