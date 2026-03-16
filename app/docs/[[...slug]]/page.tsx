@@ -10,6 +10,8 @@ import { getMDXComponents } from '@/mdx-components';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { ExportButton, ViewOptions, MyDYButton } from '@/components/page-actions';
+import VerifiedIcon from '@/components/verified-icon';
+import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '@/components/ui/tooltip';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -28,7 +30,23 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full} footer={{ enabled: showFooter }}>
-      <DocsTitle>{page.data.title}</DocsTitle>
+      <DocsTitle>
+        <TooltipProvider>
+          <span className="flex items-center gap-2">
+            {page.data.title}
+            {page.data.verified && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="inline-flex">
+                    <VerifiedIcon size={24} color="#3b82f6" />
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent>Submitted and Verified</TooltipContent>
+              </Tooltip>
+            )}
+          </span>
+        </TooltipProvider>
+      </DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <div className="flex flex-row gap-2 items-center border-b pt-2 pb-6">
         <ExportButton markdownUrl={`${page.url}.mdx`} />

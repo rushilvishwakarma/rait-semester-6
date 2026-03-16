@@ -54,7 +54,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 '#2b00147f',
               ]}
             >
-              Mid-Sem Exams (MSE) begin 23rd March 2026. <a href="/docs/core/mse-timetable" className="underline font-semibold ml-1">View Timetable</a>
+              MSE begin 23rd March 2026. <a href="/docs/core/mse-timetable" className="underline font-semibold ml-1">View Timetable</a>
             </Banner>
             {children}
           </RootProvider>

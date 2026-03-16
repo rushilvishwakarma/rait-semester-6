@@ -24,8 +24,190 @@ import { FileText } from 'lucide-react';
 
   <Card 
     icon={<FileText />}
-    title="Output Document" 
+    title="Reference Output Document" 
     description="Author: Nishant Narudkar"
     href="https://drive.google.com/file/d/1Rw2N-T4shrC7mNl-_9ipq6vZFk8RtfFP/view?usp=sharing"
   />
+
+  <Card 
+    icon={<FileText />}
+    title="Author LinkedIn" 
+    description="Nishant Narudkar"
+    href="https://www.linkedin.com/in/nishant-narudkar-1b5225238/"
+  />
+
+  <Card 
+    icon={<FileText />}
+    title="Journal Writing Part to refer (Made easy)" 
+    description="Provided to us by Peeyush Hota for making writing part and programs easier. Ignore the Code while writing in your Journal."
+    href="https://drive.google.com/drive/folders/1DenT2d7-tR74ImCK-BNgGiufBMLIiRiE?usp=sharing"
+  />
 </Cards>
+
+---
+
+## Step 1 — Download MongoDB
+
+1. Go to: **[https://www.mongodb.com/try/download/community](https://www.mongodb.com/try/download/community)**
+2. Select:
+
+   * Version: **8.2.5**
+   * Platform: **Windows**
+   * Package: **msi**
+3. Click **Download**
+
+---
+
+## Step 2 — Install MongoDB
+
+1. Double-click the `.msi` file
+2. Click **Next** → Accept license → Choose **Complete**
+3. On Service Configuration — leave everything default
+4. Uncheck **MongoDB Compass** (optional, saves time)
+5. Click **Install** → **Finish**
+
+---
+
+## Step 3 — Download & Install mongosh
+
+1. Go to: **[https://www.mongodb.com/try/download/shell](https://www.mongodb.com/try/download/shell)**
+2. Select: **Windows** → **msi**
+3. Download → double-click → Next → Install → Finish
+
+---
+
+## Step 4 — Create the data folder
+
+Open **Command Prompt as Administrator** and run:
+
+```bash
+mkdir C:\data\db
+```
+
+---
+
+## Step 5 — Add MongoDB to PATH
+
+1. Press `Win + S` → search **Environment Variables** → Open it
+2. Under **System Variables** → click **Path** → **Edit** → **New**
+3. Add:
+
+```
+C:\Program Files\MongoDB\Server\8.2\bin
+```
+
+4. Click **New** again and add:
+
+```
+C:\Users\YourName\AppData\Local\Programs\mongosh
+```
+
+*(Replace `YourName` with your Windows username)*
+
+5. Click **OK** on all windows
+
+---
+
+## Step 6 — Verify installation
+
+Close all terminals, open a **fresh Command Prompt** and run:
+
+```bash
+mongod --version
+mongosh --version
+```
+
+Both should print version numbers.
+
+---
+
+## Step 7 — Start MongoDB server
+
+Open **Command Prompt Window 1** and run:
+
+```bash
+mongod
+```
+
+Leave this window open.
+
+---
+
+## Step 8 — Open mongosh
+
+Open a **second Command Prompt Window** and run:
+
+```bash
+mongosh
+```
+
+You should see:
+
+```
+test>
+```
+
+---
+
+## Step 9 — Paste and run the experiment
+
+Once you see `test>`, paste this script:
+
+```js
+use("exp4_mongodb");
+
+db.createCollection("Students");
+print("Collections:"); print(db.getCollectionNames());
+
+db.StudentsInfo.insertOne({name:"Rushil", age:21, course:"BTech"});
+
+print("\n-- After insertOne --");
+db.StudentsInfo.find().forEach(printjson);
+
+db.StudentsInfo.insertMany([
+  {name:"Aarav", age:22},
+  {name:"Ishita", age:20},
+  {name:"Rohan", age:25}
+]);
+
+print("\n-- After insertMany --");
+db.StudentsInfo.find().forEach(printjson);
+
+print("\n-- findOne Rohan --");
+printjson(db.StudentsInfo.findOne({name:"Rohan"}));
+
+print("\n-- findOne from wrong collection (Students) --");
+printjson(db.Students.findOne({name:"Rohan"}));
+
+db.StudentsInfo.updateOne({name:"Aarav"},{$set:{age:23}});
+print("\n-- After updateOne Aarav age=23 --");
+db.StudentsInfo.find().forEach(printjson);
+
+db.StudentsInfo.deleteOne({name:"Rohan"});
+print("\n-- After deleteOne Rohan --");
+db.StudentsInfo.find().forEach(printjson);
+
+db.Students.drop();
+db.dropDatabase();
+
+use("company_db");
+db.employee.insertOne({
+  Emp_id: "1000rt",
+  Personal_details: {First_Name:"Rushil", Last_Name:"Mehta", DOB:"1999-05-12"},
+  Contact: {email:"rushil.mehta@gmail.com"},
+  Address: {city:"Mumbai"}
+});
+
+print("\n-- employee.find() --");
+db.employee.find().forEach(printjson);
+
+print("\n-- Projection: Address only --");
+db.employee.find({}, {Address:1}).forEach(printjson);
+```
+
+Hit **Enter** and everything runs.
+
+---
+
+**Note:**
+If `mongod` says it's already running, skip Step 7 and go directly to Step 8.

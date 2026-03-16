@@ -219,7 +219,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="mt-16 border-t pt-6 pb-8 px-4 text-center text-sm text-fd-muted-foreground">
-        <p>Crafted by Feverdream</p>
+        <p>Crafted by <a href="https://www.linkedin.com/in/rushil-vishwakarma/" target="_blank" rel="noreferrer" className="text-fd-primary underline">Rushil Vishwakarma</a></p>
         <p className="mt-2 text-xs opacity-80">
           LMS documents are accessible only by students using their university
           email to prevent unauthorized distribution.

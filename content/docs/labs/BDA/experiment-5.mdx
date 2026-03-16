@@ -18,7 +18,183 @@ import { FileText } from 'lucide-react';
   <Card 
     icon={<FileText />}
     title="Output Document" 
-    description="Author: Nishant Narudkar"
-    href="https://drive.google.com/file/d/1Rw2N-T4shrC7mNl-_9ipq6vZFk8RtfFP/view?usp=sharing"
+    description="Author: Kaniikesh"
+    href="https://drive.google.com/file/d/101MjVnntJ73eShku9-xwR9hrjYnhHhZo/view?usp=sharing"
+  />
+
+  <Card 
+    icon={<FileText />}
+    title="Author LinkedIn" 
+    description="Kaniikesh"
+    href="https://www.linkedin.com/in/kaniikeshraja/"
+  />
+
+  <Card 
+    icon={<FileText />}
+    title="Journal Writing Part to refer (Made easy)" 
+    description="Provided to us by Peeyush Hota for making writing part and programs easier. Ignore the Code while writing in your Journal."
+    href="https://drive.google.com/drive/folders/1DenT2d7-tR74ImCK-BNgGiufBMLIiRiE?usp=sharing"
   />
 </Cards>
+
+---
+
+## Step 1 — Download MongoDB
+
+1. Go to: **[https://www.mongodb.com/try/download/community](https://www.mongodb.com/try/download/community)**
+2. Select:
+
+   * Version: **8.2.5**
+   * Platform: **Windows**
+   * Package: **msi**
+3. Click **Download**
+
+---
+
+## Step 2 — Install MongoDB
+
+1. Double-click the `.msi` file
+2. Click **Next** → Accept license → Choose **Complete**
+3. On **Service Configuration** leave everything default
+4. Uncheck **MongoDB Compass** (optional)
+5. Click **Install** → **Finish**
+
+---
+
+## Step 3 — Download & Install mongosh
+
+1. Go to: **[https://www.mongodb.com/try/download/shell](https://www.mongodb.com/try/download/shell)**
+2. Select **Windows → MSI**
+3. Download → double-click → **Next → Install → Finish**
+
+---
+
+## Step 4 — Create the data folder
+
+Open **Command Prompt as Administrator** and run:
+
+```bash
+mkdir C:\data\db
+```
+
+---
+
+## Step 5 — Add MongoDB to PATH
+
+1. Press **Win + S**
+2. Search **Environment Variables**
+3. Open **Edit the system environment variables**
+4. Click **Environment Variables**
+
+Under **System Variables**
+
+1. Select **Path**
+2. Click **Edit**
+3. Click **New** and add
+
+```
+C:\Program Files\MongoDB\Server\8.2\bin
+```
+
+Add another path:
+
+```
+C:\Users\YourName\AppData\Local\Programs\mongosh
+```
+
+Replace **YourName** with your Windows username.
+
+Click **OK** on all windows.
+
+---
+
+## Step 6 — Verify installation
+
+Close terminals and open a **new Command Prompt**.
+
+Run:
+
+```bash
+mongod --version
+mongosh --version
+```
+
+Both should print version numbers.
+
+---
+
+## Step 7 — Start MongoDB server
+
+Open **Command Prompt Window 1** and run:
+
+```bash
+mongod
+```
+
+Leave this window open.
+
+---
+
+## Step 8 — Open mongosh
+
+Open **Command Prompt Window 2** and run:
+
+```bash
+mongosh
+```
+
+You should see:
+
+```
+test>
+```
+
+---
+
+## Step 9 — Paste and run the Experiment 5 script
+
+Once you see `test>`, paste this script:
+
+```js
+use("CRUD_DB");
+
+db;
+
+// Insert one
+db.students.insertOne({name:"Rushil", age:21, course:"BTech"});
+
+// Insert many
+db.students.insertMany([
+  {name:"Aarav", age:22, course:"AIML"},
+  {name:"Ishita", age:20, course:"CSE"}
+]);
+
+// Find all
+print("\n-- find() --");
+db.students.find().forEach(printjson);
+
+// find().pretty()
+print("\n-- find().pretty() --");
+db.students.find().forEach(printjson);
+
+// Delete Rushil
+db.students.deleteOne({name:"Rushil"});
+print("\n-- After deleteOne Rushil --");
+db.students.find().forEach(printjson);
+
+// Update Aarav age to 23
+db.students.updateOne({name:"Aarav"}, {$set:{age:23}});
+print("\n-- After updateOne Aarav age=23 --");
+db.students.find().forEach(printjson);
+
+// find().pretty() again after update
+print("\n-- find().pretty() after update --");
+db.students.find().forEach(printjson);
+```
+
+Press **Enter** and all commands will run sequentially.
+
+---
+
+**Note:**
+If `mongod` says MongoDB is already running, skip **Step 7** and directly open **mongosh**.

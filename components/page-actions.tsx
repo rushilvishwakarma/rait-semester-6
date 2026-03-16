@@ -61,12 +61,12 @@ export function MyDYButton() {
     }
   }, []);
 
-  // Extract subject code from pathname (e.g., /docs/core/BDA/... -> BDA)
-  // Only show on core pages, not labs
+  // Extract subject code from pathname (e.g., /docs/core/BDA/... or /docs/labs/BDA/... -> BDA)
+  // Show on both core pages and labs pages.
   const subjectCode = useMemo(() => {
     const segments = pathname.split('/');
-    // Only show on /docs/core/[subject] paths, not labs
-    if (!pathname.includes('/docs/core/')) {
+    // Only show on /docs/core/[subject] or /docs/labs/[subject] paths
+    if (!pathname.includes('/docs/core/') && !pathname.includes('/docs/labs/')) {
       return null;
     }
     for (const code of Object.keys(MYDY_SUBJECT_MAP)) {

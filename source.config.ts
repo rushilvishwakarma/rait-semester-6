@@ -4,6 +4,7 @@ import {
   frontmatterSchema,
   metaSchema,
 } from 'fumadocs-mdx/config';
+import { z } from 'zod';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
@@ -12,7 +13,9 @@ import rehypeKatex from 'rehype-katex';
 export const docs = defineDocs({
   dir: 'content/docs',
   docs: {
-    schema: frontmatterSchema,
+    schema: frontmatterSchema.extend({
+      verified: z.boolean().default(false),
+    }),
     postprocess: {
       includeProcessedMarkdown: true,
     },

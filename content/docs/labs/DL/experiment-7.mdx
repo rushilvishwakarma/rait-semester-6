@@ -1,0 +1,53 @@
+---
+title: Experiment 7
+description: Implement the Deep Learning Lab Experiment 7 as per syllabus.
+---
+
+import { Download, FileText } from 'lucide-react';
+import { FloatingColabButton } from '@/components/ui/floating-colab-button';
+
+## Resources
+<Cards>
+  <Card 
+    icon={<FileText />}
+    title="DL Lab Manual" 
+    description="View Document"
+    href="https://drive.google.com/file/d/1FimzHFZfbWqh9FpcsE1ugWNSs6X1MOv6/view?usp=sharing"
+  />
+
+  <Card 
+    icon={<Download />}
+    title="ipynb file (Import This)" 
+    description="View Notebook in drive"
+    href="https://drive.google.com/file/d/1YtiWfiJf35W6oT3zQMcfhUFrKG0TbbB5/view?usp=sharing"
+  />
+
+  <Card 
+    icon={<FileText />}
+    title="Reference Output" 
+    description="View Output"
+    href="https://drive.google.com/file/d/1P9GLe6UaImHZ8UP_4spGqm0KQL80Xm-g/view?usp=sharing"
+  />
+</Cards>
+
+## How to Import Notebook in Google Colab
+
+### Method 1: Open directly in Google Drive
+
+1. Click the notebook link above
+2. In Google Drive click the three dots menu (⋮) or right-click the file
+3. Select **"Open with" → "Google Colaboratory"**
+
+### Method 2: Download and Upload to Colab
+
+1. **Download the notebook:**
+   - Click on the notebook link above
+   - Click the **Download** button in Google Drive
+   - Save the `.ipynb` file to your computer
+
+2. **Upload to Colab:**
+   - Go to [https://colab.research.google.com](https://colab.research.google.com)
+   - Click **"File" → "Upload notebook"**
+   - Choose the downloaded `.ipynb` file
+
+<FloatingColabButton />
