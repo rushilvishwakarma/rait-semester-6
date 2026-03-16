@@ -224,6 +224,9 @@ export default function HomePage() {
           LMS documents are accessible only by students using their university
           email to prevent unauthorized distribution.
         </p>
+        <p className="mt-2 text-xs opacity-70">
+          Use at your own risk; the author is not responsible for any errors.
+        </p>
       </footer>
     </main>
   );
