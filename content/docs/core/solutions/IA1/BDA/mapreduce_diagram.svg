@@ -1,0 +1,139 @@
+<svg width="100%" viewBox="0 0 700 760" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <style>
+    svg { font-family: Arial, sans-serif; }
+    .box { fill: transparent; stroke: #555; stroke-width: 1px; rx: 6px; }
+    .lbl { font-size: 13px; fill: currentColor; }
+    .hdr { font-size: 14px; font-weight: bold; fill: currentColor; }
+    .arr { stroke: #888; stroke-width: 1.2px; fill: none; }
+    .dash { stroke: #888; stroke-width: 1px; stroke-dasharray: 5 4; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      .box  { stroke: #aaa; }
+      .lbl  { fill: #ddd; }
+      .hdr  { fill: #fff; }
+      .arr  { stroke: #aaa; }
+      .dash { stroke: #aaa; }
+    }
+  </style>
+</defs>
+
+<!-- ── STAGE HEADERS ── -->
+<text class="hdr" x="160" y="18" text-anchor="middle">Mapping</text>
+<text class="hdr" x="530" y="18" text-anchor="middle">Shuffling / Sorting</text>
+
+<!-- ══════════ MAP BOXES ══════════ -->
+
+<!-- Map Box 1: Hadoop is great -->
+<rect class="box" x="20" y="30" width="280" height="86" rx="6"/>
+<text class="lbl" x="160" y="56"  text-anchor="middle">(Hadoop, 1)</text>
+<text class="lbl" x="160" y="76"  text-anchor="middle">(is, 1)</text>
+<text class="lbl" x="160" y="96"  text-anchor="middle">(great, 1)</text>
+
+<!-- Map Box 2: Hadoop is not great -->
+<rect class="box" x="20" y="160" width="280" height="106" rx="6"/>
+<text class="lbl" x="160" y="184" text-anchor="middle">(Hadoop, 1)</text>
+<text class="lbl" x="160" y="204" text-anchor="middle">(is, 1)</text>
+<text class="lbl" x="160" y="224" text-anchor="middle">(not, 1)</text>
+<text class="lbl" x="160" y="244" text-anchor="middle">(great, 1)</text>
+
+<!-- Map Box 3: Hadoop is bad -->
+<rect class="box" x="20" y="320" width="280" height="86" rx="6"/>
+<text class="lbl" x="160" y="346" text-anchor="middle">(Hadoop, 1)</text>
+<text class="lbl" x="160" y="366" text-anchor="middle">(is, 1)</text>
+<text class="lbl" x="160" y="386" text-anchor="middle">(bad, 1)</text>
+
+<!-- ══════════ SHUFFLE BOXES ══════════ -->
+
+<!-- Shuffle 1: Hadoop x3 -->
+<rect class="box" x="370" y="30" width="310" height="86" rx="6"/>
+<text class="lbl" x="525" y="56"  text-anchor="middle">(Hadoop, 1)</text>
+<text class="lbl" x="525" y="76"  text-anchor="middle">(Hadoop, 1)</text>
+<text class="lbl" x="525" y="96"  text-anchor="middle">(Hadoop, 1)</text>
+
+<!-- Shuffle 2: is x3 -->
+<rect class="box" x="370" y="132" width="310" height="86" rx="6"/>
+<text class="lbl" x="525" y="158" text-anchor="middle">(is, 1)</text>
+<text class="lbl" x="525" y="178" text-anchor="middle">(is, 1)</text>
+<text class="lbl" x="525" y="198" text-anchor="middle">(is, 1)</text>
+
+<!-- Shuffle 3: great x2 -->
+<rect class="box" x="370" y="234" width="310" height="66" rx="6"/>
+<text class="lbl" x="525" y="258" text-anchor="middle">(great, 1)</text>
+<text class="lbl" x="525" y="278" text-anchor="middle">(great, 1)</text>
+
+<!-- Shuffle 4: not x1 -->
+<rect class="box" x="370" y="316" width="310" height="44" rx="6"/>
+<text class="lbl" x="525" y="343" text-anchor="middle">(not, 1)</text>
+
+<!-- Shuffle 5: bad x1 -->
+<rect class="box" x="370" y="376" width="310" height="44" rx="6"/>
+<text class="lbl" x="525" y="403" text-anchor="middle">(bad, 1)</text>
+
+<!-- ══════════ CROSSING ARROWS: Map → Shuffle ══════════ -->
+<!-- right edge of map boxes: x=300 -->
+
+<!-- Box 1 row y=56 (Hadoop) → Shuffle1 y=63 -->
+<line class="arr" x1="300" y1="56"  x2="368" y2="63"  marker-end="url(#arrow)"/>
+<!-- Box 1 row y=76 (is)     → Shuffle2 y=165 -->
+<line class="arr" x1="300" y1="76"  x2="368" y2="162" marker-end="url(#arrow)"/>
+<!-- Box 1 row y=96 (great)  → Shuffle3 y=255 -->
+<line class="arr" x1="300" y1="96"  x2="368" y2="252" marker-end="url(#arrow)"/>
+
+<!-- Box 2 row y=184 (Hadoop) → Shuffle1 y=76 -->
+<line class="arr" x1="300" y1="184" x2="368" y2="76"  marker-end="url(#arrow)"/>
+<!-- Box 2 row y=204 (is)     → Shuffle2 y=178 -->
+<line class="arr" x1="300" y1="204" x2="368" y2="178" marker-end="url(#arrow)"/>
+<!-- Box 2 row y=224 (not)    → Shuffle4 y=338 -->
+<line class="arr" x1="300" y1="224" x2="368" y2="335" marker-end="url(#arrow)"/>
+<!-- Box 2 row y=244 (great)  → Shuffle3 y=265 -->
+<line class="arr" x1="300" y1="244" x2="368" y2="265" marker-end="url(#arrow)"/>
+
+<!-- Box 3 row y=346 (Hadoop) → Shuffle1 y=89 -->
+<line class="arr" x1="300" y1="346" x2="368" y2="89"  marker-end="url(#arrow)"/>
+<!-- Box 3 row y=366 (is)     → Shuffle2 y=192 -->
+<line class="arr" x1="300" y1="366" x2="368" y2="192" marker-end="url(#arrow)"/>
+<!-- Box 3 row y=386 (bad)    → Shuffle5 y=398 -->
+<line class="arr" x1="300" y1="386" x2="368" y2="398" marker-end="url(#arrow)"/>
+
+<!-- ══════════ DIVIDER ══════════ -->
+<line class="dash" x1="20" y1="448" x2="680" y2="448"/>
+
+<!-- ── BOTTOM HEADERS ── -->
+<text class="hdr" x="160" y="474" text-anchor="middle">Reducing</text>
+<text class="hdr" x="530" y="474" text-anchor="middle">Final Result</text>
+
+<!-- ══════════ REDUCE BOXES ══════════ -->
+<rect class="box" x="20"  y="486" width="220" height="38" rx="6"/>
+<text class="lbl" x="130" y="510" text-anchor="middle">(Hadoop, 3)</text>
+
+<rect class="box" x="20"  y="534" width="220" height="38" rx="6"/>
+<text class="lbl" x="130" y="558" text-anchor="middle">(is, 3)</text>
+
+<rect class="box" x="20"  y="582" width="220" height="38" rx="6"/>
+<text class="lbl" x="130" y="606" text-anchor="middle">(great, 2)</text>
+
+<rect class="box" x="20"  y="630" width="220" height="38" rx="6"/>
+<text class="lbl" x="130" y="654" text-anchor="middle">(not, 1)</text>
+
+<rect class="box" x="20"  y="678" width="220" height="38" rx="6"/>
+<text class="lbl" x="130" y="702" text-anchor="middle">(bad, 1)</text>
+
+<!-- ══════════ FINAL RESULT BOX ══════════ -->
+<rect class="box" x="370" y="486" width="310" height="230" rx="6"/>
+<text class="lbl" x="525" y="526" text-anchor="middle">(Hadoop, 3)</text>
+<text class="lbl" x="525" y="566" text-anchor="middle">(is, 3)</text>
+<text class="lbl" x="525" y="606" text-anchor="middle">(great, 2)</text>
+<text class="lbl" x="525" y="646" text-anchor="middle">(not, 1)</text>
+<text class="lbl" x="525" y="686" text-anchor="middle">(bad, 1)</text>
+
+<!-- ══════════ REDUCE → FINAL RESULT ARROWS ══════════ -->
+<line class="arr" x1="240" y1="505" x2="368" y2="530" marker-end="url(#arrow)"/>
+<line class="arr" x1="240" y1="553" x2="368" y2="568" marker-end="url(#arrow)"/>
+<line class="arr" x1="240" y1="601" x2="368" y2="604" marker-end="url(#arrow)"/>
+<line class="arr" x1="240" y1="649" x2="368" y2="642" marker-end="url(#arrow)"/>
+<line class="arr" x1="240" y1="697" x2="368" y2="678" marker-end="url(#arrow)"/>
+
+</svg>

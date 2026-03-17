@@ -64,11 +64,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
         </DocsBody>
       </DocsPage>
 
-      {showFooter && (
-        <div className="mt-8 text-center text-xs text-fd-muted-foreground opacity-80">
-          Use at your own risk; the author is not responsible for any errors.
-        </div>
-      )}
+      {/* Footer disclaimer intentionally omitted here; homepage retains the disclaimer */}
     </>
   );
 }
