@@ -35,11 +35,7 @@ This saves time and resources in the early stages of process optimization.
 
 **Plackett-Burman (P-B) designs** are two-level screening designs. Their key feature is that the total number of runs **N is always a multiple of 4** (like 4, 8, 12, 16). They allow studying up to **k = N - 1 factors** using exactly N experimental runs.
 
-🟢 **(For 5 Marks — stop here after the following paragraph)**
-
 P-B designs use <Highlight color="green">**orthogonal arrays**</Highlight>, meaning each factor is tested equally at high (+1) and low (-1) levels. They are **Resolution III designs**, which means main effects are studied independently. They assume interactions between factors are negligible and focus only on **main effects**.
-
-🔥 **(Full Answer for 10 Marks — continue below)**
 
 #### Construction of an 8-Run P-B Design
 
@@ -287,8 +283,6 @@ An interaction happens when a factor's effect relies entirely on the setting of 
 **Problem:**
 An electronics factory faced massive reject rates because metal parts had inconsistent **surface hardness**. Tinkering with one variable at a time (OVAT) did not solve the issue, so they initiated a structured DoE study.
 
-🟢 **(For 5 Marks — stop here after the next section)**
-
 **Factors and Goals:**
 The team brainstormed 3 key process factors:
 - **A:** Power Input
@@ -296,8 +290,6 @@ The team brainstormed 3 key process factors:
 - **C:** Cooling Rate (Quench)
 
 The **goal (response)** was to systematically maximize Surface Hardness. They also thoroughly validated their measuring tools before starting.
-
-🔥 **(Full Answer for 10 Marks — continue below)**
 
 **The Experiment:**
 They ran a **2³ full design** (3 factors = 8 runs). You can easily write this 8-run matrix by doubling the alternating length for each column:
@@ -307,6 +299,21 @@ They ran a **2³ full design** (3 factors = 8 runs). You can easily write this 8
 - **Column B:** Alternates every **2** (`- - + + - - + +`)
 - **Column C:** Alternates every **4** (`- - - - + + + +`)
 </Callout>
+
+#### 8-Run Design Matrix (2³)
+
+| Run | A (Power) | B (Heating) | C (Cooling) | Response (Hardness) |
+|-----|-----------|-------------|-------------|---------------------|
+| 1   | -         | -           | -           | y1 |
+| 2   | +         | -           | -           | y2 |
+| 3   | -         | +           | -           | y3 |
+| 4   | +         | +           | -           | y4 |
+| 5   | -         | -           | +           | y5 |
+| 6   | +         | -           | +           | y6 |
+| 7   | -         | +           | +           | y7 |
+| 8   | +         | +           | +           | y8 |
+
+*(+ = High, - = Low)*
 
 Runs were conducted in **perfectly random order** to avoid bias from worker fatigue or afternoon room temperature shifts.
 
