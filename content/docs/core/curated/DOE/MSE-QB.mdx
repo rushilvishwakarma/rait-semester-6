@@ -43,10 +43,12 @@ P-B designs use <Highlight color="green">**orthogonal arrays**</Highlight>, mean
 
 #### Construction of an 8-Run P-B Design
 
-It is built using the **cyclical construction** method:
-- **Step 1:** The first row follows a specific pattern: `+ + + − + − −`
-- **Step 2:** Next rows shift the previous row one position to the right (cyclic shift).
-- **Step 3:** The very last (8th) row is filled entirely with **-1** values.
+It is built using the **cyclical construction** method. To draw the table quickly in an exam:
+
+> [!TIP] **The "3-1-1-2" Rule**
+> - **Step 1 (Row 1):** Memorize the **3-1-1-2** pattern: **3** Highs (`+ + +`), **1** Low (`-`), **1** High (`+`), **2** Lows (`- -`). This gives `+ + + - + - -`.
+> - **Step 2 (Rows 2 to 7):** Apply a cyclic shift. Take the last sign from the row above it, move it to the front, and push everything else one step to the right. (The signs shift diagonally).
+> - **Step 3 (Row 8):** Fill the last row entirely with Lows (`- - - - - - -`).
 
 #### Complete 8-Run Matrix (7 Factors: A to G)
 
@@ -110,6 +112,12 @@ A **2² full factorial design** tests **2 factors** at **2 levels each**. This r
 
 #### Design Matrix
 
+You can easily generate any full factorial matrix by alternating signs:
+
+> [!TIP] **Standard Alternating Pattern**
+> - **Column A:** Alternates every 1 row (`- + - +`)
+> - **Column B:** Alternates every 2 rows (`- - + +`)
+
 | Run | A | B | Notation | Result (Ra) |
 |-----|---|---|----------|-------------|
 | 1   | - | - | (1)      | 52          |
@@ -146,7 +154,15 @@ A **2⁴ full factorial design** uses **4 factors** at **2 levels**, needing <Hi
 - **C:** Catalyst Amount
 - **D:** Reaction Time
 
-#### The 16-Run Design Snapshot
+#### The Complete 16-Run Design Matrix
+
+To construct the matrix, simply follow the alternating pattern, doubling the group size for each new column:
+
+> [!TIP] **Standard Alternating Pattern**
+> - **Column A:** Alternates every **1** row (`- + - + - + ...`)
+> - **Column B:** Alternates every **2** rows (`- - + + - - ...`)
+> - **Column C:** Alternates every **4** rows (`- - - - + + ...`)
+> - **Column D:** Alternates every **8** rows (8 `-` then 8 `+`)
 
 | Run | A | B | C | D |
 |-----|---|---|---|---|
@@ -154,7 +170,17 @@ A **2⁴ full factorial design** uses **4 factors** at **2 levels**, needing <Hi
 | 2   | + | - | - | - |
 | 3   | - | + | - | - |
 | 4   | + | + | - | - |
-| 5-15| ... | ... | ... | ... |
+| 5   | - | - | + | - |
+| 6   | + | - | + | - |
+| 7   | - | + | + | - |
+| 8   | + | + | + | - |
+| 9   | - | - | - | + |
+| 10  | + | - | - | + |
+| 11  | - | + | - | + |
+| 12  | + | + | - | + |
+| 13  | - | - | + | + |
+| 14  | + | - | + | + |
+| 15  | - | + | + | + |
 | 16  | + | + | + | + |
 
 *(The - sign is Low level, and + sign is High level)*
@@ -271,7 +297,14 @@ The **goal (response)** was to systematically maximize Surface Hardness. They al
 🔥 **(Full Answer for 10 Marks — continue below)**
 
 **The Experiment:**
-They ran a **2³ full design** (3 factors = 8 runs). Runs were conducted in **perfectly random order** to avoid bias from worker fatigue or afternoon room temperature shifts. 
+They ran a **2³ full design** (3 factors = 8 runs). You can easily write this 8-run matrix by doubling the alternating length for each column:
+
+> [!TIP] **Standard Alternating Pattern**
+> - **Column A:** Alternates every **1** (`- + - + - + - +`)
+> - **Column B:** Alternates every **2** (`- - + + - - + +`)
+> - **Column C:** Alternates every **4** (`- - - - + + + +`)
+
+Runs were conducted in **perfectly random order** to avoid bias from worker fatigue or afternoon room temperature shifts.
 
 **Data Analysis:**
 Using statistical tools like ANOVA, they studied the results to separate true effects from random background noise.
