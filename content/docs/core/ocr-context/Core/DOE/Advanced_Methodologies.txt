@@ -1,0 +1,136 @@
+# Design of Experiments (DOE): Advanced Methodologies
+
+## Core Workflow
+1. **Control** – Manage environment (blocking, avoid confounding)  
+2. **Validation** – Verify measurement system (Gage R&R, P/T)  
+3. **Definition** – Select correct response variable  
+
+**[Image Description]**: A left-to-right arrow flow: *Control → Validation → Definition*
+
+---
+
+## Blocking (Eliminating Nuisance Factors)
+
+Blocking removes unwanted variation by grouping similar conditions.
+
+- Reduces experimental error
+- Example: Batch 1 vs Batch 2 (treated separately)
+
+**[Image Description]**: Two cubes labeled *Batch 1* and *Batch 2* with arrow “Nuisance Variation Removed”
+
+---
+
+## Confounding (Mixing of Effects)
+
+- Occurs when effects cannot be separated (e.g., A = BC)
+- Common in fractional factorial designs
+
+**[Image Description]**: Arrows from factors merging into one “Measured Effect” with warning symbol
+
+---
+
+## Design Resolution
+
+| Resolution | Meaning |
+|------------|--------|
+| III | Main effects confounded with 2-factor interactions |
+| IV | Main effects clear; 2-factor interactions confounded |
+| V | Main & 2-factor effects clear; only higher interactions confounded |
+
+---
+
+## Measurement System Analysis (MSA)
+
+Measurement = process (gage + method + operator + environment)
+
+### Precision vs Accuracy
+- **Precision**: repeatability  
+- **Accuracy**: closeness to true value  
+
+**[Image Description]**: Repeated measurements vs true reference line
+
+---
+
+## Bias & Stability
+
+- **Bias** = Observed avg − Reference value  
+- **Stability** = consistency over time  
+
+**[Image Description]**: Line fluctuating above a reference line showing bias gap
+
+---
+
+## Repeatability (EV)
+
+- Same operator, same gage, same part  
+- Measures equipment variation
+
+---
+
+## Reproducibility (AV)
+
+- Different operators, same setup  
+- Measures human variation
+
+---
+
+## Gage R&R
+
+\[
+R\&R = \sqrt{EV^2 + AV^2}
+\]
+
+- Total measurement variation  
+- Should be small vs process variation
+
+---
+
+## P/T Ratio
+
+\[
+P/T = \frac{6\sigma_{measurement}}{USL - LSL}
+\]
+
+- < 0.1 → Good  
+- > 0.3 → Unacceptable  
+
+---
+
+## Discrimination Ratio
+
+\[
+dr = \frac{1 + \rho}{1 - \rho}
+\]
+
+- Measures ability to detect variation  
+- Low value → “stepped” data (poor resolution)
+
+---
+
+## Selection of Quality Characteristics
+
+Guidelines:
+- Continuous
+- Monotonic
+- Additive
+- Customer-focused
+
+---
+
+## Types of Quality Characteristics
+
+| Type | Goal | Example |
+|------|------|--------|
+| Nominal-the-Best | Target value | Diameter |
+| Smaller-the-Better | Minimize | Noise |
+| Larger-the-Better | Maximize | Strength |
+
+---
+
+## Integrated Workflow (Practical)
+
+1. Validate measurement (Gage R&R)  
+2. Block nuisance factors (e.g., shift)  
+3. Choose better response (continuous over binary)  
+
+**Result**: Improved optimization and reduced waste

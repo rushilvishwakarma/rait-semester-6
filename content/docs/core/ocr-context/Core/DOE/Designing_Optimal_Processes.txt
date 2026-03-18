@@ -1,0 +1,180 @@
+# Industrial Experimentation: From Guesswork to Science
+
+## Traditional vs DOE
+- Traditional: trial-and-error, one variable at a time  
+- DOE: structured, simultaneous experimentation  
+
+**[Image Description]**: Comparison of two approaches—trial-and-error vs structured experimental design
+
+---
+
+## Manufacturing Process as a System
+
+- Inputs:
+  - **Controllable**: Speed, Pressure, Temperature  
+  - **Uncontrollable**: Humidity, Noise, Ambient Temp  
+- Output: Yield, Strength, Finish  
+
+**[Image Description]**: System box with inputs (left) → process → outputs (right)
+
+**Key Insight**: Identify “vital few” from “trivial many”
+
+---
+
+## OVAT (One Variable At a Time) – Problem
+
+- Changes one factor while holding others constant  
+- Misses interaction effects  
+- Leads to **local optimum**, not global  
+
+**[Image Description]**: Contour plot showing path stuck at local optimum while true optimum lies elsewhere
+
+---
+
+## DOE (Simultaneous Approach)
+
+**Definition**: Change multiple factors together to study effect on response  
+
+### Objectives
+- Exploration → understand behavior  
+- Estimation → quantify effects  
+- Confirmation → validate results  
+
+**[Image Description]**: Flow showing exploration → estimation → confirmation
+
+---
+
+## Interaction Effects
+
+### Scenario A: No Interaction
+- Lines parallel → effect independent  
+
+### Scenario B: Strong Interaction
+- Lines cross → effect depends on other factor  
+
+**[Image Description]**: Two graphs—parallel lines vs crossing lines (interaction present)
+
+**Insight**: Real systems often behave like Scenario B
+
+---
+
+## Business Value of DOE
+
+- Increase yield & stability  
+- Reduce time to market  
+- Lower cost (scrap, rework)  
+- Improve process understanding  
+
+---
+
+## Experiment Basics
+
+### Factors
+- Input variables (e.g., temperature)
+
+### Levels
+- Settings (low/high)
+
+### Response
+- Output (e.g., strength)
+
+### Design Matrix
+- Table of trials (combinations of factors)
+
+---
+
+## Principle 1: Randomization
+
+- Random order of experiments  
+- Avoid bias from time-based noise  
+
+**[Image Description]**: Ordered vs randomized runs showing noise averaging
+
+---
+
+## Principle 2: Replication vs Repetition
+
+- **Replication**: full rerun → captures real variation  
+- **Repetition**: repeated measurement → captures measurement error  
+
+**[Image Description]**:  
+- Replication: setup → run → measure (repeat entire process)  
+- Repetition: one run → measure multiple times  
+
+**Key Insight**: Replication proves effect is real
+
+---
+
+## Principle 3: Blocking
+
+- Group similar conditions (e.g., Batch A, Batch B)  
+- Removes nuisance variation from error  
+
+**[Image Description]**: Two blocks with averages compared; batch variation removed
+
+---
+
+## Measurement System Capability
+
+- Must be reliable before experimentation  
+
+### Gage R&R
+- Repeatability (equipment)  
+- Reproducibility (operator)  
+
+### P/T Ratio
+- < 10% → good  
+- > 30% → unacceptable  
+
+**[Image Description]**: Targets showing precise vs accurate measurement
+
+---
+
+## Selecting Quality Characteristics
+
+### Prefer Continuous Data
+- More information  
+- Smaller sample size  
+
+### Avoid Attribute Data
+- Binary (pass/fail)  
+- Less informative  
+
+**Rule**: Convert attribute → measurable if possible
+
+---
+
+## Design Resolution
+
+### Full Factorial
+- High cost, full detail  
+
+### Fractional Factorial
+- Lower cost, some confounding  
+
+| Resolution | Meaning |
+|-----------|--------|
+| III | Main effects confounded |
+| IV | Main clear, interactions confounded |
+| V | Main + interactions clear |
+
+---
+
+## Skills Required
+
+- Engineering (process knowledge)  
+- Statistical (design, analysis)  
+- Planning (resources, timeline)  
+- Teamwork  
+
+**Key Insight**: 80% planning, 20% analysis
+
+---
+
+## Summary: Process Optimization
+
+1. Hypothesis  
+2. Experiment (randomized, replicated, blocked)  
+3. Analyze interactions and effects  
+
+**[Image Description]**: Circular cycle showing hypothesis → experiment → analysis → optimization

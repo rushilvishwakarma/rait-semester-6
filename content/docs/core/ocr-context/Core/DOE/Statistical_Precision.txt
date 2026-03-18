@@ -1,0 +1,259 @@
+# STATISTICS USED IN DESIGN OF EXPERIMENTS
+
+From Industrial Engineering to Data Science: Moving from Intuition to Precision.  
+
+Based on the works of Jiju Antony & Genichi Taguchi.  
+
+Overview: Exploring, Estimating, and Confirming relationships in complex systems.
+
+---
+
+## EXECUTIVE SUMMARY: WHAT IS DOE?
+
+Design of Experiments (DoE) is a technique for exploring, estimating, and confirming relationships between input variables (factors) and output performance (response).
+
+- EXPLORE: Understanding the data structure from the process.  
+- ESTIMATE: Determining the specific effects of process variables.  
+- CONFIRM: Verifying predicted results through statistical validation.  
+
+**[Image Description]**: Inputs X1, X2, X3 entering a “Process (Black Box)” producing Output Y
+
+---
+
+## THE ENEMY OF EFFICIENCY: OVAT
+
+The One-Variable-At-a-Time Approach  
+
+The traditional approach involves varying one variable while keeping others fixed, then moving to the next.  
+
+This method depends on guesswork, luck, and intuition.
+
+### KEY FLAWS
+
+- Resource Heavy: Requires large resources to obtain limited information.  
+- False Optima: Often misses the true optimal condition.  
+- No Interaction Data: Cannot detect how factors influence each other.  
+
+**[Image Description]**: Sequential path varying X1 → X2 → X3 labeled slow and inefficient vs DOE simultaneous path
+
+---
+
+## THE OVAT DATA STRUCTURE
+
+| Trial | Temperature | Pressure | Yield |
+|------|-------------|----------|------|
+| 1 | T1 | P1 | 56% |
+| 2 | T1 | P2 | 64% |
+| 3 | T1 | P1 | 56% |
+| 4 | T2 | P1 | 61% |
+
+MISSING DATA:  
+What happens at T2 + P2?  
+OVAT cannot tell us.
+
+---
+
+## THE CRITICAL FLAW: INTERACTIONS
+
+When the effect of Factor A depends on Factor B.  
+
+An interaction exists when the effect of one factor (e.g., Pressure) on the response depends on the level of another factor (e.g., Temperature).
+
+- The Consequence: OVAT assumes independence. In complex systems, this leads to failure.
+
+**[Image Description]**:  
+- No interaction: parallel lines (Temp1, Temp2 vs Pressure)  
+- Interaction: crossing lines showing dependency
+
+---
+
+## THREE PILLARS OF EXPERIMENTAL DESIGN
+
+### 1. Randomization
+
+- Definition: Running trials in a random order rather than a set sequence.  
+- Statistical Purpose: To distribute the effect of extraneous, uncontrolled factors (noise) evenly. Ensures observations are independently distributed random variables.
+
+---
+
+### 2. Replication
+
+- Definition: Repetition of the entire experiment on different units.  
+- Statistical Purpose: To estimate experimental error (pure error) and determine if differences are statistically significant.
+
+---
+
+### 3. Blocking
+
+- Definition: A design technique to group homogeneous experimental units.  
+- Statistical Purpose: To eliminate the effect of nuisance factors (e.g., batches, shifts) from experimental error.  
+- Result: Increases precision of comparisons.
+
+**[Image Description]**: Nuisance factors grouped into a “Block” feeding separate experiments
+
+---
+
+## MEASUREMENT SYSTEMS
+
+The prerequisite to valid statistics.  
+
+Before DoE, we must validate the measurement system.
+
+- Repeatability: Same person, same part  
+- Reproducibility: Different people, same part  
+
+**[Image Description]**:  
+- High precision, low accuracy (cluster off target)  
+- High accuracy, low precision (spread around target)
+
+---
+
+## ANALYSIS OF VARIANCE (ANOVA)
+
+Partitioning the Variation.
+
+\[
+SS(\text{Total}) = SS(\text{Factors}) + SS(\text{Error})
+\]
+
+- Total variation in dataset  
+- Signal: variation due to factors  
+- Noise: variation due to randomness  
+
+**F-Ratio = Signal / Noise**  
+Large F → significant factor
+
+---
+
+## VALIDATING ASSUMPTIONS
+
+### Normal Probability Plot
+
+DoE assumes residuals are normally distributed.
+
+- Success: points follow straight line  
+- Failure: S-shape or outliers  
+
+**[Image Description]**: Points along straight line with one outlier marked
+
+---
+
+## SCREENING EFFECTS
+
+### Half-Normal Plot
+
+- Uses absolute effects  
+- Significant factors appear far from line  
+
+**[Image Description]**: Points with a few deviating strongly (significant factors)
+
+---
+
+## HYPOTHESIS TESTING
+
+Using t-test for coefficients:
+
+\[
+t_0 = \frac{\text{Coefficient}}{\text{Standard Error}}
+\]
+
+Reject H₀ if:
+\[
+|t_0| > t(\text{critical})
+\]
+
+- High t → significant variable  
+- Low t → noise  
+
+---
+
+## THE ANOVA TABLE
+
+| Source | SS | df | MS | F |
+|-------|----|----|----|---|
+| Factor A | SSA | k-1 | MSA | MSA/MSE |
+| Error | SSE | N-k | MSE | -- |
+| Total | SST | N-1 | -- | -- |
+
+Compare F with F-table → determine significance
+
+---
+
+## THE EXPERIMENTAL PROCESS: PART 1
+
+### 1. Problem Statement
+Define defect or performance issue  
+
+### 2. Factor Selection
+Brainstorm inputs, use fishbone diagrams  
+
+### 3. Response Selection
+Define output (e.g., Tensile Strength)  
+
+**[Image Description]**: Fishbone diagram (Man, Machine, Method, Material, Environment → Problem)
+
+---
+
+## TEAMWORK TOOLS
+
+Identifying variables using cause-and-effect diagrams  
+
+Team brainstorming identifies X variables before statistical analysis
+
+---
+
+## THE EXPERIMENTAL PROCESS: PART 2
+
+4. Design Choice (Full Factorial vs Taguchi)  
+5. Execution (randomized trials)  
+6. Analysis (ANOVA, regression)  
+7. Conclusion (confirmation runs)
+
+---
+
+## SIMPLE LINEAR REGRESSION
+
+\[
+Y = \beta_0 + \beta_1 X + e
+\]
+
+Method: Least squares (minimize squared residuals)
+
+**[Image Description]**: Scatter plot with regression line and vertical residuals
+
+---
+
+## MULTIPLE LINEAR REGRESSION
+
+\[
+\beta = (X'X)^{-1} X'Y
+\]
+
+Used for multiple inputs (X1, X2, … Xk)
+
+---
+
+## MODEL ADEQUACY
+
+- R²: explained variation  
+- Adjusted R²: penalizes unnecessary variables  
+
+**[Image Description]**: Balance scale showing Model Fit vs Complexity
+
+---
+
+## CASE STUDY: ELECTRONICS
+
+### Problem
+Optimize Surface Hardness (HRA)
+
+### Inputs
+- Power Potential (P)  
+- Scan Speed (S)  
+- Quench Rate (Q)  
+
+### Analysis
+- Tool: ANOVA  
+- Goal: Factor variance > Error variance  
+
+**[Image Description]**: Dataset/analysis representation for multiple factors

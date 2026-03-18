@@ -1,0 +1,240 @@
+# Design of Experiments for Engineers
+
+Moving from Guesswork to World-Class Process Optimization  
+
+Comprehensive Methodology based on the work of Jiju Antony  
+
+**[Image Description]**: Multiple inputs (X1, X2, … Xn) entering a PROCESS/SYSTEM box, producing output Y, with external “noise” variables (Z1, Z2, Zn) affecting the system.
+
+---
+
+## Explore
+Understanding the data and process behavior.
+
+## Estimate
+Determining the effects of factors on performance.
+
+## Confirm
+Verifying predicted results from the experiment.
+
+---
+
+# The Goal of Industrial Experimentation
+
+In any manufacturing process, the primary interest is exploring the relationship between Key Input Process Variables (Factors) and Output Performance Characteristics (Response). The objective is to identify the "vital few" variables from the "trivial many".
+
+## Control Factors (Inputs)
+
+- Cutting Speed  
+- Feed Rate  
+- Coolant Type  
+- Depth of Cut  
+
+**[Image Description]**: Inputs (factors) flowing into a system producing output (response)
+
+## Response (Output)
+
+- Surface Finish  
+
+## Key Concept
+
+### Engineering Objective
+
+Optimize the setting of the Control Factors to achieve the target Surface Finish with minimal variation.
+
+---
+
+# The Intuitive Trap: One-Variable-At-A-Time (OVAT)
+
+## The Intuition
+
+It feels logical to isolate a single cause by keeping all variables constant and moving one lever. This is the standard engineering approach.
+
+## The Reality
+
+OVAT depends on guesswork, luck, and intuition. It is resource-heavy and inefficient.
+
+“OVAT... may yield false optimum conditions for the process.”
+
+**[Image Description]**: Jagged red path vs smooth dotted curve labeled “True Optimum Path (DOE)” showing OVAT inefficiency
+
+---
+
+# The Fatal Flaw: Missing the Interaction Effect
+
+A Case Study in Temperature vs. Pressure
+
+## What OVAT Sees
+
+Trial 1: Temp T1, Pressure P1 = Yield 56%  
+Trial 2: Temp T1, Pressure P2 = Yield 64% (Best observed)  
+Trial 4: Temp T2, Pressure P1 = Yield 61%  
+
+Engineer looks in P2 and T1.  
+Assumes 64% is max.
+
+**[Image Description]**: Two lines (Temp T1 and T2) vs Pressure showing interaction (non-parallel lines)
+
+**[Image Description]**: Highlighted note that OVAT missed combination T2/P2
+
+---
+
+# Enter Design of Experiments (DOE)
+
+A statistical approach where deliberate changes are made to input variables simultaneously to observe and identify the reasons for changes in the output response.
+
+1920s - Sir Ronald Fisher  
+Rothamsted Agricultural Research. Separating fertilizer effects from soil conditions.  
+
+Mid-Century - Plackett & Burman / Box  
+Industrial application in chemical industries.  
+
+Modern Era - Taguchi & Shainin  
+Robust Design in Manufacturing. Focusing on variability reduction.  
+
+---
+
+# The ROI of Designed Experiments
+
+- Performance: Improved process yield, stability, and Cpk  
+- Strategic: Reduced process design and development time  
+- Financial: Reduced manufacturing costs, scrap, rework  
+- Human Factor: Improved engineering morale  
+
+**[Image Description]**: Four sections showing performance, strategic, financial, and human benefits
+
+---
+
+# Prerequisite Skills for Success
+
+Successful DOE is a convergence of four disciplines:
+
+- Engineering Skills (factor levels, measurement capability, control vs noise)  
+- Statistical Skills (design matrix, data analysis, interpretation)  
+- Planning Skills (budget, timeframe, people)  
+- Teamwork Skills (brainstorming, communication, alignment)  
+
+**[Image Description]**: Four overlapping circles (Venn diagram) with “Successful Experiment” at center
+
+---
+
+# Principle 1: Randomization
+
+Insurance against external noise.
+
+Standard Order (Non-Randomized)
+
+**[Image Description]**: Sequential runs (A A A B B B) affected by rising ambient temperature → biased result
+
+Randomized Order (DOE Standard)
+
+**[Image Description]**: Mixed sequence (A B B A B A) averaging out noise → valid conclusion
+
+Why Randomize?  
+To neutralize extraneous factors like humidity, machine warm-up, operator fatigue.
+
+“Failure to randomize... mitigates the statistical validity of an experiment.”
+
+---
+
+# Principle 2: Replication vs. Repetition
+
+Doing it twice vs. Measuring it twice.
+
+## Replication
+
+**[Image Description]**: Operator resetting machine and rerunning full experiment
+
+Captures SETUP variability + Measurement variability  
+
+Estimates Experimental Error  
+
+## Repetition
+
+**[Image Description]**: Same part measured repeatedly with same instrument
+
+Captures ONLY Measurement variability  
+
+Does not estimate Experimental Error  
+
+Without Replication, we cannot distinguish a true effect from background noise.
+
+---
+
+# Principle 3: Blocking
+
+Handling Nuisance Factors.
+
+Is there a Nuisance Factor? (e.g. Batches, Shifts)
+
+- No → Standard Randomization  
+- Unknown → RANDOMIZE (spread risk)  
+- Known → BLOCK (group homogeneous units)  
+
+Comparisons are made within blocks to eliminate nuisance variation from error.
+
+---
+
+# Understanding Confounding (Aliasing)
+
+Confounding occurs when the effect of one factor is mixed with another.
+
+## Signal Mixing
+
+**[Image Description]**: Two wave signals (Factor A and B) combining into one measured effect; impossible to separate contributions
+
+Warning: High confounding (low resolution) sacrifices clarity for speed.
+
+---
+
+# Degrees of Freedom (DoF)
+
+The Currency of Experimentation
+
+\[
+\mathrm{DoF} = \mathrm{N} - 1
+\]
+
+- Number of independent comparisons  
+- Each factor consumes DoF  
+- Must reserve DoF to estimate error  
+
+**[Image Description]**: Individuals connected showing limited comparisons (N-1 concept)
+
+---
+
+# Measurement System Analysis (MSA)
+
+"If you can't measure it, you can't improve it."
+
+\[
+\sigma^2(\text{Total}) = \sigma^2(\text{Product}) + \sigma^2(\text{Measurement})
+\]
+
+**[Image Description]**: Target diagrams showing precision vs accuracy differences
+
+---
+
+# Assessing Gauge R&R
+
+**[Image Description]**: Measurement error split into Repeatability (equipment variation) and Reproducibility (operator variation)
+
+## Precision-to-Tolerance Ratio
+
+\[
+P/T = \frac{6 \times \text{Measurement Error}}{\text{Tolerance}}
+\]
+
+- < 10%: Acceptable  
+- 10%–30%: Conditional  
+- > 30%: Unacceptable  
+
+---
+
+# The Strategic Methodology
+
+| Hypothesis | Experiment | Analysis | Interpretation | Conclusion |
+|-----------|-----------|----------|----------------|-----------|
+| Assumption motivating test | Planned trials (randomized/blocked) | Statistical evaluation | Physical meaning | Validate or reject |
+
+"Success relies on statistical thinking—combining graphical tools with engineering knowledge."

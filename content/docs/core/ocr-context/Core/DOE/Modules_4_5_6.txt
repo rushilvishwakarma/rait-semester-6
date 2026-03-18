@@ -1,0 +1,225 @@
+# Design of Experiment
+
+## Module 4
+
+# Fractional Factorial Designs
+
+In this module
+
+Construction of half-fraction designs, resolution, aliasing, $2^{(7-4)}$ example, and applications.
+
+Design of Experiments | Advanced Industrial Statistics
+
+March 10, 2026
+
+# What Are Fractional Factorial Designs?
+
+- **Subset of Full Factorial Runs**
+A fractional factorial design consists of a carefully chosen subset (fraction) of the experimental runs of a full 2k factorial design.
+
+- **Primary Purpose**
+Enables the study of many factors with significantly fewer trials, making it ideal for initial screening experiments.
+
+- **The Strategic Trade-off**
+Offers a dramatic reduction in runs (cost/time) at the expense of confounding certain effects (aliasing).
+
+- **Typical Use Case**
+Most effective in early stages when the number of factors (k) is large and budget is tight (Screening Phase).
+
+Module 4: Fractional Factorial Designs | Design of Experiments
+
+# Why Use Fractional Designs?
+
+![img-0.jpeg](img-0.jpeg)
+
+## Combating Exponential Growth
+
+Full factorial runs increase exponentially with factors (2k). For 7 factors, a full design requires 128 runs, while a fractional design can be done in just 8 or 16 runs.
+
+## Resource Efficiency
+
+Drastically reduces time, material costs, and equipment usage. This efficiency makes it feasible to screen many variables even with limited budgets.
+
+## Faster Learning Cycles
+
+Supports sequential experimentation strategies. Instead of one massive experiment, researchers can run smaller fractions to learn quickly and iterate.
+
+## Focus on Vital Effects
+
+Leverages the "Sparsity of Effects" principle: typically only main effects and large two-factor interactions drive process performance, which fractional designs target.
+
+Module 4: Fractional Factorial Designs | Design of Experiments
+
+# Confounding and Aliasing — Core Concepts
+
+## Aliasing
+
+Occurs when two or more effects are indistinguishable from each other because they change simultaneously in the design. We estimate the sum of these effects.
+
+## Complete Confounding
+
+When the correlation between two effects is $\pm 1$. In fractional designs, main effects are often deliberately confounded with higher-order interactions.
+
+## Partial Confounding
+
+Occurs in blocked designs where effects are confounded with block differences, or when design orthogonality is lost.
+
+![img-1.jpeg](img-1.jpeg)
+
+Module 4: Fractional Factorial Designs | Design of Experiments
+
+# Constructing a Half Fraction 2k-1
+
+## Choose Generators
+
+Select generators to define the fraction. For a 2k-1 design, choose the highest-order interaction (e.g., D = ABC for k = 4) to minimize aliasing of main effects.
+
+## Create Defining Relation
+
+Establish the defining relation I. This is formed by the product of the generator columns (e.g., I = ABCD). It determines the aliasing structure of the design.
+
+## Build Design Matrix
+
+Construct the basic design matrix for k-1 factors first (as a full factorial). Then, calculate the levels for the k-th factor using the generator relationship (e.g., D = A × B × C).
+
+## Finalize Experimental Plan
+
+Randomize the run order to mitigate nuisance variables. Include replicates or center points if necessary to estimate experimental error and check for curvature.
+
+# Design Resolution (III, IV, V)
+
+Resolution indicates the degree of confounding in a design. It is defined by the length of the shortest word in the defining relation.
+
+|  Resolution | Description & Confounding Pattern | Practical Implication  |
+| --- | --- | --- |
+|  III | **HIGH CONFOUNDING**
+Main effects are aliased with 2-Factor Interactions (2FIs).
+Example: A = BC | Use only for initial screening when you assume interactions are negligible. Risky if interactions are real.  |
+|  IV | **MODERATE CONFOUNDING**
+Main effects are clear of 2FIs.
+2FIs are aliased with other 2FIs.
+Example: A is clear, but AB = CD | Standard for screening. Allows estimation of main effects without bias from 2FIs. Need fold-over to separate 2FIs.  |
+|  V | **LOW CONFOUNDING**
+Main effects and 2FIs are clear of each other.
+2FIs are aliased with 3FIs.
+Example: AB = CDE | Excellent for characterization and optimization. Requires more runs but provides detailed insight into interactions.  |
+
+Module 4: Fractional Factorial Designs | Design of Experiments
+
+# Defining Relations and Alias Structures
+
+## The Defining Relation
+
+Constructed from the design generators. For a 24-1 design where $D = ABC$, the defining relation is $I = ABCD$. "I" acts as the identity element (like 1 in multiplication).
+
+## Calculating Aliases
+
+Multiply any effect by the defining relation to find its alias.
+
+Example: Effect $A \times I = A \times ABCD = A_2BCD = BCD$.
+
+## Interpretation
+
+The calculated coefficient actually estimates the sum of the effect and its aliases. If we calculate "AB", we are actually estimating \textbf{AB} + \textbf{CD}.
+
+## Alias Derivation Example (Resolution IV: I = ABCD)
+
+1. One-factor Interaction Example:
+
+```
+A   ×   ABCD   =   A²BCD → BCD   (Clear of 2FIs)
+```
+
+2. Two-Factor Interaction Example:
+
+```
+AB   ×   ABCD   =   A²B²CD → CD   (Confounded!)
+```
+
+Resulting Alias Chains (What we actually estimate)
+
+- [A] → A + BCD
+- [B] → B + ACD
+- [AB] → AB + CD
+
+Module 4: Fractional Factorial Designs | Design of Experiments
+
+# Example Setup: 27-4 Screening Design
+
+## Primary Objective
+Screen 7 distinct factors (A through G) to identify significant effects using only 16 experimental runs.
+
+## Fractional Efficiency
+Utilizes a 1/8th fraction of the full factorial design (27 = 128 runs), drastically reducing resource requirements while maintaining statistical validity for screening.
+
+## Generator Selection
+Select 4 independent generators to define the fraction, targeting at least Resolution IV design to ensure main effects are clear of 2-factor interactions.
+
+## Execution Plan
+Randomize the run order to minimize bias, include replicates for pure error estimation, and add 2–4 center points to check for curvature.
+
+Module 4: Fractional Factorial Designs | Design of Experiments
+
+# 2(7-4) Example — Analysis Roadmap
+
+## 1. Effect Estimation
+
+Calculate contrast sums for all 15 effects. Construct a half-normal or normal probability plot to visually separate vital few effects from trivial many (noise).
+
+## 2. Significance Screening
+
+Use Lenth's method (PSE) or pooled error from smallest effects to determine statistical significance (t-tests/ANOVA) without replicates.
+
+## 3. Alias Interpretation
+
+Consult alias structure (e.g., A + BCD). If 'A' is significant, is it really A or the interaction BCD? Apply sparsity of effects principle (main effects &gt; interactions).
+
+## 4. Decision: Confirm or Fold?
+
+If ambiguity remains (e.g., aliased 2FIs), perform a fold-over or run confirmation trials to resolve.
+
+![img-2.jpeg](img-2.jpeg)
+
+Module 4: Fractional Factorial Designs | Design of Experiments
+
+# Application Case I (Manufacturing)
+
+## Objective
+
+Reduce surface roughness (Ra) in a CNC turning operation to improve component finish and reduce downstream polishing.
+
+## Factors &amp; Levels
+
+- Spindle Speed (A)
+- Depth of Cut (C)
+- Coolant Type (E)
+- Material Batch (G)
+- Feed Rate (B)
+- Tool Nose Radius (D)
+- Fixture Type (F)
+- Operator (H)
+
+## Design Setup
+
+Design Type: 2^(7-4) Fractional Factorial (Resolution IV)
+Runs: 16 Runs + 2 Center Points (Total 18 runs)
+Generators: D=AB, E=AC, F=BC, G=ABC
+
+## Analysis &amp; Outcome
+
+- Main Effects: Spindle Speed (A) and Feed Rate (B) were identified as the most significant factors affecting Ra.
+- Interactions: A strong interaction was suspected. Since Res IV confounds 2FIs, a fold-over was performed to resolve aliasing.
+- Optimization: Settings adjusted to High Speed, Low Feed, and larger Tool Nose Radius.
+
+22% Reduction
+In Surface Roughness (Ra)
+
+Module 4: Fractional Factorial Designs | Design of Experiments
+
+# Application Case 2 (Process/Service)
+
+## Objective
+
+Shorten call-center Average Handle Time (AHT) to improve customer throughput without sacrificing satisfaction scores.
+
+... (file truncated for brevity)
