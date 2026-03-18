@@ -61,6 +61,7 @@ The **cyclical construction** method is used:
 | 7   | + | + | - | + | - | - | + | y7 |
 | 8   | - | - | - | - | - | - | - | y8 |
 
+
 *(+ = High level, - = Low level)*
 
 #### Industrial Example — Injection Moulding Process
@@ -118,6 +119,10 @@ A **2² full factorial design** involves **2 factors (k = 2)** at **2 levels eac
 | 3   | - | + | b        | 61     |
 | 4   | + | + | ab       | 65     |
 
+<div className="w-full flex justify-center my-6 [&_img]:invert [&_img]:dark:invert-0">
+  ![2^2 Full Factorial Design Space](/images/docs/DOE/MSE-QB/q4_2sq_factorial.svg)
+</div>
+
 #### Effect Calculations
 
 $$
@@ -140,6 +145,10 @@ $$
 **(5 Marks)**
 
 A **2⁴ full factorial design** involves **4 factors (k = 4)** each at **2 levels**, requiring <Highlight color="green">**N = 2⁴ = 16 experimental runs**</Highlight>. It allows estimation of **4 main effects, 6 two-factor interactions, 4 three-factor interactions, and 1 four-factor interaction** — a total of **15 estimable effects**.
+
+<div className="w-full flex justify-center my-6 [&_img]:invert [&_img]:dark:invert-0">
+  ![2^4 Full Factorial Design (Two Cubes)](/images/docs/DOE/MSE-QB/q5_2_4_factorial_cube.svg)
+</div>
 
 **Example:** Optimizing **reaction yield (%)** in a chemical process with 4 factors:
 - **A:** Temperature (Low/High)
@@ -201,8 +210,8 @@ Confounding arises because in a fractional design, we test only a **subset** of 
 
 **Example:** In a **27?4 fractional factorial design** (Resolution III), running only 8 of the possible 128 runs, the aliasing structure is:
 
-"c:\Users\vpceb\OneDrive\Desktop\Semester-6\rait-semester-6\content\docs\core\curated\DOE\MSE-QB\MSE-QB.mdx"A \rightarrow A + BC + DF + EG"c:\Users\vpceb\OneDrive\Desktop\Semester-6\rait-semester-6\content\docs\core\curated\DOE\MSE-QB\MSE-QB.mdx"
-"c:\Users\vpceb\OneDrive\Desktop\Semester-6\rait-semester-6\content\docs\core\curated\DOE\MSE-QB\MSE-QB.mdx"B \rightarrow B + AC + DG + EF"c:\Users\vpceb\OneDrive\Desktop\Semester-6\rait-semester-6\content\docs\core\curated\DOE\MSE-QB\MSE-QB.mdx"
+$$ A \rightarrow A + BC + DF + EG $$
+$$ B \rightarrow B + AC + DG + EF $$
 
 This means the **estimated effect of A** actually contains contributions from A itself **plus** the interactions BC, DF, and EG. If any of these interactions are truly significant, the engineer may **wrongly attribute** the effect to main factor A alone.
 
@@ -245,6 +254,10 @@ In DoE, a **two-factor interaction (2FI)** occurs when the effect of one factor 
     <ShieldX className="size-6" />
     <span className="text-sm font-medium">Antagonistic</span>
   </div>
+</div>
+
+<div className="w-full flex justify-center my-6 [&_img]:invert [&_img]:dark:invert-0">
+  ![Synergistic vs Antagonistic Interactions](/images/docs/DOE/MSE-QB/q8_synergistic_vs_antagonistic.svg)
 </div>
 
 | Parameter | Synergistic Interaction | Antagonistic Interaction |
