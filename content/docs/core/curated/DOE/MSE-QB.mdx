@@ -1,0 +1,323 @@
+---
+title: Question Bank - Mid Semester Exam Question Bank
+description: (From Section-A)
+---
+
+import { Highlight } from '@/components/highlight';
+import { Target, ListFilter, Beaker, FileSpreadsheet, Spline, Zap, ShieldAlert, Cpu, CheckCircle2, TrendingUp, Handshake, ShieldX, LineChart } from 'lucide-react';
+
+### Q1. Explain screening design with suitable example.
+**(5 Marks)**
+
+A **screening design** is an experimental strategy that efficiently identifies <Highlight color="green">significant factors</Highlight> from a large pool of potential variables by testing a carefully selected subset of all possible combinations. Its core principle is to separate the **"vital few"** factors that significantly impact the response from the **"trivial many"** that have negligible effects.
+
+When a process has many potential input factors (typically 5 or more), testing all combinations (full factorial) becomes impractical due to exponential run requirements. Screening designs drastically reduce the number of experimental runs while maintaining statistical validity. For example, screening **7 factors** requires only **8 runs** instead of the **128 runs** needed for a full 2⁷ factorial — a <Highlight color="pink">94% reduction in experimental effort</Highlight>.
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Target className="size-6" />
+    <span className="text-sm font-medium">Vital Few</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <ListFilter className="size-6" />
+    <span className="text-sm font-medium">Trivial Many</span>
+  </div>
+</div>
+
+**Example:** Consider a pharmaceutical tablet manufacturing process with 7 potential variables: binder concentration (A), compression force (B), mixing time (C), lubricant amount (D), granulation speed (E), drying temperature (F), and humidity (G). A screening design with 8 runs is conducted. After analysis, suppose factors A, B, and D show significant effects on tablet hardness. The engineer then focuses follow-up optimization experiments only on these three factors instead of all seven.
+
+Screening designs are the first phase in a sequential strategy — they narrow the focus so that detailed optimization (Response Surface Methodology) can be applied efficiently.
+
+---
+
+### Q2. What is P-B screening design? Explain with suitable example for N = 8.
+**(10 Marks)**
+
+**Plackett-Burman (P-B) designs** are two-level fractional factorial screening designs developed by Robin L. Plackett and J. Peter Burman in 1946. The defining feature is that the number of runs **N is always a multiple of 4** (N = 4, 8, 12, 16, 20 ...), and up to **k = N - 1 factors** can be studied in N experimental runs.
+
+🟢 **(For 5 Marks — stop here after the following paragraph)**
+
+P-B designs are <Highlight color="green">**orthogonal arrays**</Highlight>, meaning each factor is tested equally at high (+1) and low (-1) levels, and the dot product of any two columns equals zero. This ensures main effects are estimated **independently** of each other with minimum variance. P-B designs are **Resolution III**, so main effects are not confounded with each other, but they are aliased with two-factor interactions. Therefore, P-B designs assume that interactions are negligible — they estimate **main effects only**.
+
+🔥 **(Full Answer for 10 Marks — continue below)**
+
+#### Construction of an 8-Run P-B Design
+
+The **cyclical construction** method is used:
+- **Step 1:** Define the first row using a specific generator pattern: + + + − + − −
+- **Step 2:** Each subsequent row is created by shifting the previous row one position to the right (cyclic shift), with the last element wrapping to the first position.
+- **Step 3:** The final (8th) row consists entirely of **-1** values.
+
+#### Complete 8-Run P-B Design Matrix for 7 Factors (A to G)
+
+| Run | A | B | C | D | E | F | G | Response |
+|-----|---|---|---|---|---|---|---|----------|
+| 1   | + | + | + | - | + | - | - | y1 |
+| 2   | - | + | + | + | - | + | - | y2 |
+| 3   | - | - | + | + | + | - | + | y3 |
+| 4   | + | - | - | + | + | + | - | y4 |
+| 5   | - | + | - | - | + | + | + | y5 |
+| 6   | + | - | + | - | - | + | + | y6 |
+| 7   | + | + | - | + | - | - | + | y7 |
+| 8   | - | - | - | - | - | - | - | y8 |
+
+*(+ = High level, - = Low level)*
+
+#### Industrial Example — Injection Moulding Process
+
+A plastics engineer wants to screen 7 process variables affecting the **dimensional accuracy** of injection-moulded parts:
+- A: Melt Temperature | B: Injection Speed | C: Holding Pressure | D: Cooling Time | E: Mould Temperature | F: Back Pressure | G: Screw Speed
+
+Using the 8-run P-B design above, the engineer runs all 8 trials (in **randomized order**), records the dimensional deviation (response), and computes the **main effect** of each factor.
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Zap className="size-6" />
+    <span className="text-sm font-medium">94% Run Reduction</span>
+  </div>
+</div>
+
+The P-B design is most suitable when investigating **7 to 23 factors** under resource constraints, and where interactions are assumed to be negligible at the initial screening phase.
+
+---
+
+### Q3. With suitable example explain full factorial designs in DoE.
+**(5 Marks)**
+
+A <Highlight color="pink">**full factorial design**</Highlight> is an experimental design that includes **all possible combinations** of factor levels. For k factors each at 2 levels, the total number of experimental runs is **N = 2ᵏ**. Unlike screening designs, full factorial designs estimate **all main effects, all two-factor interactions (2FI), and all higher-order interactions** without any confounding.
+
+Full factorial designs are used when the number of factors is small (≤ 4), interactions are suspected to be important, and resources are adequate. Each additional factor **doubles** the number of runs.
+
+**Example:** Consider a **chemical reaction process** where two factors are studied:
+- **Factor A:** Temperature (Low/High)
+- **Factor B:** Pressure (Low/High)
+- **Response:** Reaction Yield (%)
+
+This is a **2² = 4 run** full factorial design. All four combinations — (A−B−), (A+B−), (A−B+), (A+B+) — are tested. Main effects of A and B, and the AB interaction, can all be estimated independently. This is not possible with OVAT (One-Variable-At-a-Time), which misses the interaction effect entirely.
+
+Full factorial designs provide **complete process knowledge** and form the basis for more advanced designs such as fractional factorials and response surface methods.
+
+---
+
+### Q4. Give one example of 2² full factorial design.
+**(5 Marks)**
+
+A **2² full factorial design** involves **2 factors (k = 2)** at **2 levels each**, resulting in **N = 2² = 4 experimental runs**. All main effects and the two-factor interaction can be estimated.
+
+**Example:** Optimizing surface finish (Ra) in a CNC turning process.
+- **Factor A:** Cutting Speed — Low (-) = 100 m/min, High (+) = 200 m/min
+- **Factor B:** Feed Rate — Low (-) = 0.1 mm/rev, High (+) = 0.3 mm/rev
+- **Response (y):** Surface Roughness Ra (µm)
+
+#### Design Matrix
+
+| Run | A | B | Notation | y (Ra) |
+|-----|---|---|----------|--------|
+| 1   | - | - | (1)      | 52     |
+| 2   | + | - | a        | 67.5   |
+| 3   | - | + | b        | 61     |
+| 4   | + | + | ab       | 65     |
+
+#### Effect Calculations
+
+$$
+\text{Main Effect A} = \frac{(a + ab) - ((1) + b)}{2} = \frac{(67.5 + 65) - (52 + 61)}{2} = \mathbf{9.75}
+$$
+
+$$
+\text{Main Effect B} = \frac{(b + ab) - ((1) + a)}{2} = \frac{(61 + 65) - (52 + 67.5)}{2} = \mathbf{3.25}
+$$
+
+$$
+\text{AB Interaction} = \frac{ab - b - a + (1)}{2} = \frac{65 - 61 - 67.5 + 52}{2} = \mathbf{-5.75}
+$$
+
+**Interpretation:** Cutting speed (A) has the largest effect on roughness (9.75). The negative AB interaction (-5.75) indicates that increasing both factors simultaneously reduces the expected combined benefit — an <Highlight color="blue">**antagonistic interaction**</Highlight> exists between speed and feed rate.
+
+---
+
+### Q5. With example explain 2⁴ full factorial design.
+**(5 Marks)**
+
+A **2⁴ full factorial design** involves **4 factors (k = 4)** each at **2 levels**, requiring <Highlight color="green">**N = 2⁴ = 16 experimental runs**</Highlight>. It allows estimation of **4 main effects, 6 two-factor interactions, 4 three-factor interactions, and 1 four-factor interaction** — a total of **15 estimable effects**.
+
+**Example:** Optimizing **reaction yield (%)** in a chemical process with 4 factors:
+- **A:** Temperature (Low/High)
+- **B:** Pressure (Low/High)
+- **C:** Catalyst Concentration (Low/High)
+- **D:** Reaction Time (Low/High)
+
+#### Design Matrix (Standard Order, 16 Runs)
+
+| Run | A | B | C | D | Notation |
+|-----|---|---|---|---|----------|
+| 1   | - | - | - | - | (1)      |
+| 2   | + | - | - | - | a        |
+| 3   | - | + | - | - | b        |
+| 4   | + | + | - | - | ab       |
+| 5   | - | - | + | - | c        |
+| 6   | + | - | + | - | ac       |
+| 7   | - | + | + | - | bc       |
+| 8   | + | + | + | - | abc      |
+| 9   | - | - | - | + | d        |
+| 10  | + | - | - | + | ad       |
+| 11  | - | + | - | + | bd       |
+| 12  | + | + | - | + | abd      |
+| 13  | - | - | + | + | cd       |
+| 14  | + | - | + | + | acd      |
+| 15  | - | + | + | + | bcd      |
+| 16  | + | + | + | + | abcd     |
+
+All 16 runs are conducted in **randomized order**. ANOVA is performed to identify which main effects and interactions are statistically significant. Due to the **effect sparsity principle**, typically a few main effects (e.g., A, C) and one or two interactions (e.g., AC) dominate.
+
+The 2⁴ design is the largest practical full factorial — beyond k = 4, **fractional factorial designs** are preferred to reduce run count while sacrificing estimation of higher-order interactions.
+
+---
+
+### Q6. Explain confounding with example.
+**(5 Marks)**
+
+<Highlight color="pink">**Confounding**</Highlight> (also called aliasing) occurs in fractional factorial designs when the effect of one factor or interaction is **mathematically mixed** with another effect, making it impossible to estimate them separately. It is the price paid for reducing experimental runs below the full factorial.
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <ShieldAlert className="size-6" />
+    <span className="text-sm font-medium">Resolution III</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <ShieldAlert className="size-6" />
+    <span className="text-sm font-medium">Resolution IV</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <CheckCircle2 className="size-6" />
+    <span className="text-sm font-medium">Resolution V</span>
+  </div>
+</div>
+
+Confounding arises because in a fractional design, we test only a **subset** of all possible combinations. The design generator determines which effects become confounded. The degree of confounding is described by **Design Resolution**:
+- **Resolution III:** Main effects confounded with 2-factor interactions.
+- **Resolution IV:** Main effects clear; 2-factor interactions confounded with each other.
+- **Resolution V:** Main effects and 2-factor interactions are all clear.
+
+**Example:** In a **27?4 fractional factorial design** (Resolution III), running only 8 of the possible 128 runs, the aliasing structure is:
+
+"c:\Users\vpceb\OneDrive\Desktop\Semester-6\rait-semester-6\content\docs\core\curated\DOE\MSE-QB\MSE-QB.mdx"A \rightarrow A + BC + DF + EG"c:\Users\vpceb\OneDrive\Desktop\Semester-6\rait-semester-6\content\docs\core\curated\DOE\MSE-QB\MSE-QB.mdx"
+"c:\Users\vpceb\OneDrive\Desktop\Semester-6\rait-semester-6\content\docs\core\curated\DOE\MSE-QB\MSE-QB.mdx"B \rightarrow B + AC + DG + EF"c:\Users\vpceb\OneDrive\Desktop\Semester-6\rait-semester-6\content\docs\core\curated\DOE\MSE-QB\MSE-QB.mdx"
+
+This means the **estimated effect of A** actually contains contributions from A itself **plus** the interactions BC, DF, and EG. If any of these interactions are truly significant, the engineer may **wrongly attribute** the effect to main factor A alone.
+
+**Practical implication:** In early-stage screening (Resolution III), confounding is acceptable since interactions are assumed negligible. As the study progresses, higher resolution designs or follow-up experiments are used to **de-alias** significant effects. The golden rule is: *"Never use a low-resolution design when you suspect interactions are present."*
+
+---
+
+### Q7. Explain importance of selecting quality characteristics for industrial experiments.
+**(5 Marks)**
+
+**Quality characteristics** (also called response variables or CTQs — Critical-to-Quality characteristics) are the measurable output variables chosen to evaluate process performance. Selecting the right quality characteristic is a <Highlight color="green">**foundational step**</Highlight> in DoE — if the wrong output is measured, the experiment will fail regardless of how well it is designed.
+
+The selection must follow key guidelines. The characteristic should be **continuous** (measurable on a scale) rather than attribute/binary (pass/fail), because continuous data carries more information, requires smaller sample sizes, and provides higher statistical power to detect factor effects. It should be **directly related to customer requirements** — a characteristic that does not reflect customer needs has no strategic value.
+
+The characteristic must also be **sensitive and monotonic** — it should clearly change in response to factor changes and have a definable direction of improvement. Three standard types are recognized:
+
+| Type | Goal | Example |
+|------|------|---------|
+| Nominal-the-Best | Hit a target value | Shaft diameter |
+| Smaller-the-Better | Minimize | Surface roughness, noise |
+| Larger-the-Better | Maximize | Tensile strength, yield |
+
+Finally, the quality characteristic must be **measurable with a valid and calibrated measurement system** (verified through Gage R&R). If measurement error is large relative to process variation, real factor effects will be masked — the experiment will detect noise instead of signal. As stated in the notes: *"If you can't measure it, you can't improve it."*
+
+Proper selection of quality characteristics ensures that experimental resources are invested in answering the right question for the right output.
+
+---
+
+### Q8. Give the difference between synergistic interaction and antagonistic interaction.
+**(5 Marks)**
+
+In DoE, a **two-factor interaction (2FI)** occurs when the effect of one factor on the response depends on the level of another factor. Interactions are classified as either <Highlight color="green">**synergistic**</Highlight> or <Highlight color="pink">**antagonistic**</Highlight> based on their direction and combined impact.
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Handshake className="size-6" />
+    <span className="text-sm font-medium">Synergistic</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <ShieldX className="size-6" />
+    <span className="text-sm font-medium">Antagonistic</span>
+  </div>
+</div>
+
+| Parameter | Synergistic Interaction | Antagonistic Interaction |
+|-----------|------------------------|--------------------------|
+| **Definition** | Combined effect of two factors **exceeds** the sum of individual effects | Combined effect is **less than** the sum of individual effects |
+| **Model Coefficient (bAB)** | **Positive** (+) | **Negative** (-) |
+| **Interaction Plot** | Lines diverge (fan-shaped); factors reinforce each other | Lines cross or strongly converge; factors conflict |
+| **Nature** | Super-additive; factors complement each other | Sub-additive; factors interfere with each other |
+| **Strategy** | Set both factors at High level to maximize response | Find a trade-off "sweet spot"; avoid extreme combined settings |
+| **Industrial Example** | High Temperature + Optimized Catalyst ? Yield boosts beyond additive expectation (chemical reactor) | High Cutting Speed + High Feed Rate ? Surface roughness degrades drastically (CNC machining) |
+| **IT Example** | Data Caching + Query Optimization ? Throughput multiplies (database) | Heavy Compression + Real-time Encryption ? Latency spikes, throughput drops |
+
+**Key Interpretation Rule:** In interaction plots, <Highlight color="blue">**parallel lines indicate no interaction**</Highlight>; non-parallel or crossing lines signal the presence of synergistic or antagonistic effects. When a significant interaction exists, main effects must **not** be interpreted in isolation — the combination of factor levels must be considered jointly for correct conclusions.
+
+---
+
+### Q9. Explain any one real-life case study for the application of DoE.
+**(10 Marks)**
+
+#### Case Study: Optimizing Surface Hardness in Electronics Component Manufacturing
+
+**Background and Problem Statement:**
+In an electronics manufacturing unit, the **surface hardness (HRA)** of metal components was inconsistent, leading to high rejection rates during quality inspection. The traditional One-Variable-At-a-Time (OVAT) approach had failed to identify the root cause. A structured DoE study was initiated to identify and optimize the key process variables.
+
+🟢 **(For 5 Marks — stop here after the next section)**
+
+**Factors and Response Variable:**
+Three controllable input factors were identified through team brainstorming using a cause-and-effect (fishbone) diagram:
+- **A:** Power Potential (P) — energy input to the process
+- **B:** Scan Speed (S) — rate of laser/heating movement
+- **C:** Quench Rate (Q) — rate of cooling after treatment
+
+The **response variable** selected was Surface Hardness (HRA) — a **continuous, larger-the-better** quality characteristic directly linked to component performance and customer specifications.
+
+**Measurement System Validation:**
+Before running experiments, a **Gage R&R (Measurement System Analysis)** was conducted on the hardness tester. The P/T ratio was verified to be below 10%, confirming the measurement system was acceptable.
+
+🔥 **(Full Answer for 10 Marks — continue below)**
+
+**Experimental Design:**
+A **2³ full factorial design** was selected with N = 8 runs (3 factors × 2 levels each). Each factor was set at a Low (-1) and High (+1) level. Experiments were conducted in **randomized order** to neutralize time-based noise factors such as operator fatigue and ambient temperature variation.
+
+**Data Collection and Analysis:**
+After running all 8 trials and recording HRA values, **ANOVA (Analysis of Variance)** was applied to partition total variation into:
+- Signal (variation due to factors A, B, C and their interactions)
+- Noise (experimental error)
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <LineChart className="size-6" />
+    <span className="text-sm font-medium">ANOVA Analysis</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <TrendingUp className="size-6" />
+    <span className="text-sm font-medium">Pareto Chart</span>
+  </div>
+</div>
+
+The F-ratio for each effect was computed. Effects with **F > F_critical (p < 0.05)** were declared statistically significant. A **Pareto chart of effects** was used to visually rank the factors.
+
+**Results and Findings:**
+- Factor **A (Power Potential)** had the largest main effect — increasing it significantly raised surface hardness.
+- Factor **C (Quench Rate)** was the second most significant.
+- The **AC interaction** was also significant, indicating a **synergistic interaction**: high power combined with high quench rate produced hardness values far exceeding what each factor achieved alone.
+- Factor B (Scan Speed) was found to be non-significant and was removed from the optimized process model.
+
+**Optimal Settings and Confirmation:**
+The predicted optimal settings were: **A = High, B = Low (or center), C = High.** A **confirmation run** at these settings was conducted. The observed HRA matched the model prediction within the confidence interval, validating the model.
+
+**Business Outcome:**
+After implementing the optimized process settings in the Standard Operating Procedure (SOP):
+- Surface hardness rejections reduced by over 60%.
+- Process yield and stability improved significantly.
+- The study demonstrated that DoE replaced weeks of trial-and-error with a structured 8-run experiment, delivering measurable ROI through **reduced scrap, reduced rework, and improved Cpk**.
+
+This case study illustrates how DoE — through proper factor selection, randomization, ANOVA, and interaction analysis — transforms industrial problem-solving from intuition-based guesswork to **data-driven, statistically validated process improvement**.
