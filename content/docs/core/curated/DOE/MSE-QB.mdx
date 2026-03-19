@@ -5,9 +5,15 @@ description: (From Section-A)
 
 import { Highlight } from '@/components/highlight';
 import { Target, ListFilter, Zap, ShieldAlert, CheckCircle2, TrendingUp, Handshake, ShieldX, LineChart } from 'lucide-react';
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { LongQuestion } from '@/components/question';
 
+
+---
+<LongQuestion>
 ### Q1. Explain screening design with suitable example.
-**(5 Marks)**
+### 5 Marks
+</LongQuestion>
 
 A **screening design** is an efficient experimental strategy used to identify <Highlight color="green">significant factors</Highlight> from many potential variables. It tests a carefully selected subset of combinations to separate the **"vital few"** factors (which have a large impact) from the **"trivial many"** (which have little to no effect).
 
@@ -29,13 +35,82 @@ Testing all factors (full factorial) is impractical when there are many variable
 This saves time and resources in the early stages of process optimization.
 
 ---
-
+<LongQuestion>
 ### Q2. What is P-B screening design? Explain with suitable example for N = 8.
-**(10 Marks)**
+### 10 Marks
+</LongQuestion>
 
 **Plackett-Burman (P-B) designs** are two-level screening designs. Their key feature is that the total number of runs **N is always a multiple of 4** (like 4, 8, 12, 16). They allow studying up to **k = N - 1 factors** using exactly N experimental runs.
 
 P-B designs use <Highlight color="green">**orthogonal arrays**</Highlight>, meaning each factor is tested equally at high (+1) and low (-1) levels. They are **Resolution III designs**, which means main effects are studied independently. They assume interactions between factors are negligible and focus only on **main effects**.
+
+<details>
+<summary style={{cursor:'pointer',fontWeight:500,fontSize:'0.875rem',color:'var(--color-text-secondary)',userSelect:'none',listStyle:'none',display:'flex',alignItems:'center',gap:'6px',margin:'12px 0 0'}}>
+  <span style={{fontSize:'0.7rem',opacity:0.6}}>▶</span> More Details — Orthogonal
+</summary>
+
+<div style={{marginTop:'12px'}}>
+
+> **Knowing A tells you nothing about B** — In an orthogonal array, the columns are statistically independent. The levels of factor A are completely uncorrelated with the levels of factor B across all runs, so estimating one factor's effect does not interfere with estimating another.
+
+<Tabs items={["L4 — 3 Factors", "L8 — 7 Factors", "L12 — 11 Factors"]}>
+
+<Tab value="L4 — 3 Factors">
+
+| Run | A | B | C |
+|-----|---|---|---|
+| R1  |  + |  + |  + |
+| R2  |  + |  − |  − |
+| R3  |  − |  + |  − |
+| R4  |  − |  − |  + |
+
+*(+ = High, − = Low)* · N = 4 · Max factors = 3 · Resolution III · Balance: 2+/2−
+
+</Tab>
+
+<Tab value="L8 — 7 Factors">
+
+| Run | A | B | C | D | E | F | G |
+|-----|---|---|---|---|---|---|---|
+| R1  |  + |  + |  + |  − |  + |  − |  − |
+| R2  |  + |  + |  − |  + |  − |  − |  + |
+| R3  |  + |  − |  + |  − |  − |  + |  + |
+| R4  |  + |  − |  − |  + |  + |  + |  − |
+| R5  |  − |  + |  − |  − |  + |  + |  + |
+| R6  |  − |  + |  + |  + |  − |  + |  − |
+| R7  |  − |  − |  + |  + |  + |  − |  + |
+| R8  |  − |  − |  − |  − |  − |  − |  − |
+
+*(+ = High, − = Low)* · N = 8 · Max factors = 7 · Resolution III · Balance: 4+/4−
+
+</Tab>
+
+<Tab value="L12 — 11 Factors">
+
+| Run | A | B | C | D | E | F | G | H | J | K | L |
+|-----|---|---|---|---|---|---|---|---|---|---|---|
+| R1  |  + |  + |  − |  + |  + |  + |  − |  − |  − |  + |  − |
+| R2  |  + |  − |  + |  + |  + |  − |  − |  − |  + |  − |  + |
+| R3  |  − |  + |  + |  + |  − |  − |  − |  + |  − |  + |  + |
+| R4  |  + |  + |  + |  − |  − |  − |  + |  − |  + |  + |  − |
+| R5  |  + |  + |  − |  − |  − |  + |  − |  + |  + |  − |  + |
+| R6  |  + |  − |  − |  − |  + |  − |  + |  + |  − |  + |  + |
+| R7  |  − |  − |  − |  + |  − |  + |  + |  − |  + |  + |  + |
+| R8  |  − |  − |  + |  − |  + |  + |  − |  + |  + |  + |  − |
+| R9  |  − |  + |  − |  + |  + |  − |  + |  + |  + |  − |  − |
+| R10 |  + |  − |  + |  + |  − |  + |  + |  + |  − |  − |  − |
+| R11 |  − |  + |  + |  − |  + |  + |  + |  − |  − |  − |  + |
+| R12 |  − |  − |  − |  − |  − |  − |  − |  − |  − |  − |  − |
+
+*(+ = High, − = Low)* · N = 12 · Max factors = 11 · Resolution III · Balance: 6+/6− · All 55 pairs orthogonal ✓
+
+</Tab>
+
+</Tabs>
+
+</div>
+
+</details>
 
 #### Construction of an 8-Run P-B Design
 
@@ -78,9 +153,10 @@ By using this 8-run P-B design, the engineer conducts just **8 trials** in rando
 This method is widely used to screen between **7 to 23 factors** efficiently when resources are limited.
 
 ---
-
+<LongQuestion>
 ### Q3. With suitable example explain full factorial designs in DoE.
-**(5 Marks)**
+### 5 Marks
+</LongQuestion>
 
 A <Highlight color="pink">**full factorial design**</Highlight> tests **all possible combinations** of different factor levels. If there are **k factors** tested at 2 levels each, the total runs required is **N = 2ᵏ**. 
 
@@ -96,9 +172,10 @@ This is a **2² design**, requiring **4 runs**. We test all four pairs: (Low, Lo
 This method perfectly identifies how Temperature and Pressure interact, providing **complete knowledge** of the process compared to tweaking only one variable at a time.
 
 ---
-
+<LongQuestion>
 ### Q4. Give one example of 2² full factorial design.
-**(5 Marks)**
+### 5 Marks
+</LongQuestion>
 
 A **2² full factorial design** tests **2 factors** at **2 levels each**. This requires **N = 2² = 4 runs**. It helps easily estimate the main factor effects and their two-way interaction.
 
@@ -136,9 +213,10 @@ You can easily generate any full factorial matrix by alternating signs:
 **Meaning:** Cutting speed (A) affects roughness the most. The negative interaction (-5.75) implies that raising *both* simultaneously lowers the expected benefit. This is an <Highlight color="blue">**antagonistic interaction**</Highlight>.
 
 ---
-
+<LongQuestion>
 ### Q5. With example explain 2⁴ full factorial design.
-**(5 Marks)**
+### 5 Marks
+</LongQuestion>
 
 A **2⁴ full factorial design** uses **4 factors** at **2 levels**, needing <Highlight color="green">**16 total runs**</Highlight>. It lets you study the main effects and all possible interactions between the 4 factors completely cleanly.
 
@@ -189,9 +267,10 @@ All runs are done in a **random order**. By analyzing the results, usually only 
 For more than 4 factors, this gets too massive, so **fractional designs** are often used instead to save time.
 
 ---
-
+<LongQuestion>
 ### Q6. Explain confounding with example.
-**(5 Marks)**
+### 5 Marks
+</LongQuestion>
 
 <Highlight color="pink">**Confounding**</Highlight> (also called aliasing) happens when the effect of one factor is **mixed up** with another factor's effect. Because they are grouped together mathematically, you cannot tell which one actually caused the result. This is a common trade-off when doing fewer runs to save time.
 
@@ -221,9 +300,10 @@ Confounding severity is defined by **Design Resolution**:
 If the B & C interaction is strong, an engineer might incorrectly assume Factor A is important. Therefore, you should avoid low-resolution designs if you know strong interactions exist.
 
 ---
-
+<LongQuestion>
 ### Q7. Explain importance of selecting quality characteristics for industrial experiments.
-**(5 Marks)**
+### 5 Marks
+</LongQuestion>
 
 **Quality characteristics** (or response variables) are the physical outputs measured to track process improvement. Choosing the correct one is a <Highlight color="green">**foundational step**</Highlight>. If you measure the wrong thing, your whole experiment is meaningless.
 
@@ -243,9 +323,10 @@ Three standard performance goals are:
 Picking the right metric ensures you are spending time answering the right question and correctly linking factor changes to desired outcomes.
 
 ---
-
+<LongQuestion>
 ### Q8. Give the difference between synergistic interaction and antagonistic interaction.
-**(5 Marks)**
+### 5 Marks
+</LongQuestion>
 
 An interaction happens when a factor's effect relies entirely on the setting of another factor. There are two main types: <Highlight color="green">**synergistic**</Highlight> and <Highlight color="pink">**antagonistic**</Highlight>.
 
@@ -274,9 +355,10 @@ An interaction happens when a factor's effect relies entirely on the setting of 
 **Important Rule:** In interaction graphs, <Highlight color="blue">**parallel lines mean no interaction**</Highlight>. If lines cross or aren't parallel, the factors interact, and you must analyze them as a pair rather than individually.
 
 ---
-
+<LongQuestion>
 ### Q9. Explain any one real-life case study for the application of DoE.
-**(10 Marks)**
+### 10 Marks
+</LongQuestion>
 
 #### Case: Optimizing Component Hardness in Electronics
 

@@ -3,12 +3,18 @@ title: Question Bank - Mid Semester Exam
 ---
 
 import { Highlight } from '@/components/highlight';
+import { QuestionDot } from '@/components/question-dot';
+
+
+## Refer Internal Assessment 1 Question Bank for Q1-17. This contains Q18-28
+
+---
 
 # BIG DATA ANALYTICS (BDA)
 
 # Module 3: NoSQL Systems
 
-### Q1. What is NOSQL? What are the business drivers for NoSQL? Discuss any two architectural patterns of NoSQL.
+### Q1. What is NOSQL? What are the business drivers for NoSQL? Discuss any two architectural patterns of NoSQL. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
 
 NoSQL, which stands for <Highlight>**"Not Only SQL"**</Highlight>, refers to a class of database management systems designed to handle large volumes of distributed data that do not follow a fixed relational schema. Unlike traditional relational databases (RDBMS), NoSQL systems are optimized for **horizontal scalability**, high availability, and flexible data models such as document, key-value, and graph-based structures.
 
@@ -34,7 +40,7 @@ Hence, choosing the right architectural pattern depends on the specific requirem
 
 ---
 
-### Q2. What are the types of NOSQL business drivers explain any two with example. / What are NoSQL business drivers? Explain.
+### Q2. What are the types of NOSQL business drivers explain any two with example. / What are NoSQL business drivers? Explain. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
 
 NoSQL business drivers represent the technical and operational requirements that lead organizations to move away from traditional relational databases. One major driver is <Highlight>**High Velocity Ingestion**</Highlight>, which refers to the ability to capture and process massive streams of data in real-time. This is crucial for applications that generate millions of events per second, such as IoT sensors or system logs.
 
@@ -48,7 +54,7 @@ Thus, these business drivers enable organizations to build more agile and perfor
 
 ---
 
-### Q3. Explain four ways that NoSQL system handles big data problems.
+### Q3. Explain four ways that NoSQL system handles big data problems. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
 
 NoSQL systems address the challenges of Big Data through several key techniques. The first way is <Highlight>**Horizontal Partitioning (Sharding)**</Highlight>, where data is distributed across multiple servers in a cluster. This allows the system to process large datasets in parallel and scale out by simply adding more commodity hardware to the network.
 
@@ -62,7 +68,7 @@ Therefore, these specialized techniques allow NoSQL systems to overcome the limi
 
 ---
 
-### Q4. Describe characteristics of a NoSQL database.
+### Q4. Describe characteristics of a NoSQL database. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
 
 The defining characteristic of a NoSQL database is its <Highlight>**Schema-less or Flexible Data Model**</Highlight>. Unlike relational databases that require a predefined schema, NoSQL systems allow for the storage of data in various formats such as documents, key-pair values, or graphs. This flexibility supports rapid development and handles semi-structured data effectively.
 
@@ -74,7 +80,7 @@ Thus, these characteristics make NoSQL databases highly suitable for modern, lar
 
 ---
 
-### Q5. Explain CAP Theorem and compare it with ACID properties.
+### Q5. Explain CAP Theorem and compare it with ACID properties. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
 
 <Callout title="Important Concept"></Callout>
 
@@ -88,7 +94,7 @@ While ACID guarantees absolute reliability within a transaction, the CAP theorem
 
 ---
 
-### Q6. Explain NoSQL Architectural patterns.
+### Q6. Explain NoSQL Architectural patterns. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
 
 NoSQL systems utilize various architectural patterns to manage data distribution. One primary pattern is the <Highlight>**Shared-Nothing Architecture**</Highlight>, where every node in the cluster is independent and has its own local resources. This pattern eliminates single points of failure and allows for massive parallel processing.
 
@@ -100,7 +106,7 @@ Hence, the choice of architectural pattern determines how the system balances th
 
 ---
 
-### Q7. Describe characteristics of NOSQL database. List the different types of NoSQL data stores. Explain any two with diagram.
+### Q7. Describe characteristics of NOSQL database. List the different types of NoSQL data stores. Explain any two with diagram. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
 
 NoSQL databases are characterized by their **flexible schemas**, **horizontal scalability**, and **high-performance** capabilities. They are designed to manage various data types across distributed clusters, providing a resilient foundation for Big Data applications.
 
@@ -123,7 +129,7 @@ Thus, by using different data stores, organizations can match their database tec
 
 ---
 
-### Q8. Agility is a Non-SQL business driver Justify.
+### Q8. Agility is a Non-SQL business driver Justify. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
 
 Agility is considered a primary driver for NoSQL because it enables <Highlight>**Rapid Development and Faster Deployment cycles**</Highlight>. In a traditional SQL environment, changing a data model often requires complex schema migrations and potential application downtime. NoSQL’s schema-less nature allows developers to add new fields and features instantly.
 
@@ -135,7 +141,7 @@ Hence, NoSQL provides the structural and operational flexibility that modern bus
 
 ---
 
-### Q9. Differentiate between master-slave versus peer-to peer architecture.
+### Q9. Differentiate between master-slave versus peer-to peer architecture. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
 
 Master-Slave and Peer-to-Peer are two different approaches to managing data in a cluster. In a <Highlight>**Master-Slave architecture**</Highlight>, there is a clear hierarchy where one node (Master) handles all writes and coordinates the updates to other nodes (Slaves). This simplifies data consistency but can create a write bottleneck at the master node.
 
@@ -152,7 +158,7 @@ Therefore, Master-Slave is often preferred for applications requiring tight cont
 
 ---
 
-### Q10. Explain shared-nothing architecture to analyse big data.
+### Q10. Explain shared-nothing architecture to analyse big data. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
 
 The **Shared-Nothing architecture** is a distributed computing design where each node in a cluster is entirely self-sufficient. Every node has its own <Highlight>**local CPU, RAM, and Disk storage**</Highlight>, and nodes communicate with each other exclusively through a high-speed network. There is no contention for shared memory or disk resources.
 
@@ -163,13 +169,3 @@ Frameworks like Hadoop and NoSQL databases like Cassandra utilize this pattern t
 Thus, shared-nothing architecture is the foundation of modern distributed systems, providing the scale and resilience required for Big Data analytics.
 
 ---
-
-### Q11. Explain Google File System.
-
-The <Highlight>**Google File System (GFS)**</Highlight> is a proprietary distributed file system developed by Google to provide efficient, reliable access to large volumes of data using clusters of commodity hardware. It was designed to handle files that are several terabytes in size and optimized for large sequential reads and data appends.
-
-GFS operates on a **Master-Slave architecture**, where a single Master node manages all metadata, while multiple ChunkServers store the actual data. Files are divided into **fixed-size chunks (64MB)**, and each chunk is replicated across at least three ChunkServers to ensure reliability and fault tolerance in the event of hardware failure.
-
-The design of GFS focuses on **High Throughput** rather than low latency, making it suitable for data-intensive processing tasks like web indexing. It also assumes that hardware failure is the norm rather than the exception, and thus includes robust automated recovery mechanisms.
-
-Hence, GFS provided the architectural blueprint for the **Hadoop Distributed File System (HDFS)** and remains a milestone in the development of distributed storage systems.
