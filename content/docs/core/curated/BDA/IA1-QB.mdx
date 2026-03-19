@@ -3,14 +3,14 @@ title: Question Bank - Internal Assessment 1
 ---
 
 import { Highlight } from '@/components/highlight';
-import { GreenDot } from '@/components/green-dot';
+import { QuestionDot } from '@/components/question-dot';
 import explainHdfsSvg from './module-1/explain-hdfs.svg';
 
 # BIG DATA ANALYTICS (BDA)
 
 # Module 1: Introduction to Big Data
 
-### Q1. What is Big Data? Discuss different sources that generate big data. / What is Big data? Explain types of Big data. <GreenDot />
+### Q1. What is Big Data? Discuss different sources that generate big data. / What is Big data? Explain types of Big data.
 
 Big Data refers to extremely large and complex datasets that are generated at a very high speed and cannot be efficiently processed using traditional data processing systems such as relational databases. As digital technologies have advanced, data is being produced continuously from multiple sources, making it difficult for conventional systems to store, manage, and analyze it effectively.
 
@@ -32,7 +32,7 @@ Therefore, the variety and volume of data sources contribute to the rapid growth
 
 ---
 
-### Q2. How much data does it take to be called Big Data? With example explain various data measures. <GreenDot />
+### Q2. How much data does it take to be called Big Data? With example explain various data measures.
 
 In Big Data analytics, data is measured using hierarchical storage units that represent increasing volumes of data. The smallest unit of data is a **bit**, and eight bits together form one **byte**. As data volume increases, larger units are used to represent it efficiently.
 
@@ -44,7 +44,7 @@ Hence, understanding data size units is essential to appreciate the scale and ch
 
 ---
 
-### Q3. With example explain types of Big Data. / What is Big data? Explain types of Big data. <GreenDot />
+### Q3. With example explain types of Big Data. / What is Big data? Explain types of Big data.
 
 Big Data is broadly classified into three categories based on its structure and organization, namely <Highlight>**structured data**, **unstructured data**, and **semi-structured data**</Highlight>. This classification helps in understanding how data is stored, processed, and analyzed.
 
@@ -58,7 +58,7 @@ Thus, Big Data systems must be capable of handling all three types of data effic
 
 ---
 
-### Q4. What are the 5Vs of big data? Explain. / Explain Big data characteristics. / What are 5vs in Big Data / Explain Big Data characteristics and its types. Discuss about its challenges. <GreenDot />
+### Q4. What are the 5Vs of big data? Explain. / Explain Big data characteristics. / What are 5vs in Big Data / Explain Big Data characteristics and its types. Discuss about its challenges. <QuestionDot color="green" text="Asked in IA1" />
 
 <Callout title="Very Important"></Callout>
 
@@ -76,7 +76,7 @@ The fifth characteristic is <Highlight>**Value**</Highlight>, which refers to th
 
 ---
 
-### Q5. Compare big data with traditional data. / Differentiate traditional data and big data. <GreenDot />
+### Q5. Compare big data with traditional data. / Differentiate traditional data and big data.
 
 Traditional data systems are designed to handle **small to moderate volumes of structured data** stored in centralized relational databases. These systems rely on fixed schemas and <Highlight color="blue">vertical scaling</Highlight> using powerful servers. They are mainly used for transactional processing and routine business operations.
 
@@ -86,7 +86,7 @@ Traditional systems are limited in scalability and flexibility, whereas Big Data
 
 ---
 
-### Q6. How big data approach is different from traditional warehouse approach. / Differentiate traditional and big data business approach. <GreenDot />
+### Q6. How big data approach is different from traditional warehouse approach. / Differentiate traditional and big data business approach. <QuestionDot color="green" text="Asked in IA1" />
 
 *Note: This answer is based on the comparison of Traditional Analytics vs Big Data Analytics.*
 
@@ -98,7 +98,7 @@ Unlike traditional analytics, Big Data analytics handles real-time and high-velo
 
 ---
 
-### Q7. Discuss any 4 applications of big data in brief. <GreenDot />
+### Q7. Discuss any 4 applications of big data in brief.
 
 Big Data has a wide range of applications across various industries. In **healthcare**, Big Data is used for disease prediction, patient monitoring, and personalized treatment plans. In **finance**, it supports fraud detection, risk analysis, and algorithmic trading.
 
@@ -128,7 +128,7 @@ Banks process millions of transactions daily. Traditional rule-based systems oft
 
 # Module 2: Hadoop & MapReduce
 
-### Q9. What is Hadoop? Explain Hadoop’s core components. / Explain architecture of Hadoop. / Explain Core components of Hadoop. <GreenDot />
+### Q9. What is Hadoop? Explain Hadoop’s core components. / Explain architecture of Hadoop. / Explain Core components of Hadoop.
 
 Hadoop is an <Highlight>**open-source framework**</Highlight> developed by the Apache Software Foundation for the <Highlight>**distributed storage and processing of large datasets**</Highlight>. It was created by *Doug Cutting* and *Mike Cafarella* in 2005 to address the challenges posed by rapidly growing data volumes.
 
@@ -142,7 +142,7 @@ Hadoop consists of four core components that work together to support distribute
 
 ---
 
-### Q10. Discuss Hadoop ecosystem. / Explain Hadoop Ecosystem with core components. Explain its Physical architecture. State Limitations of Hadoop. / Explain key-value and document store with example. <GreenDot />
+### Q10. Discuss Hadoop ecosystem. / Explain Hadoop Ecosystem with core components. Explain its Physical architecture. State Limitations of Hadoop. / Explain key-value and document store with example. <QuestionDot color="green" text="Asked in IA1" />
 
 The Hadoop ecosystem consists of tools that extend Hadoop's capabilities. <Highlight color="blue">**Hive**</Highlight> provides SQL-like querying for large datasets, while <Highlight color="blue">**Pig**</Highlight> offers a high-level scripting language for data transformation. <Highlight color="blue">**HBase**</Highlight> is a NoSQL database that supports real-time read and write operations.
 
@@ -171,7 +171,7 @@ Together, these tools make Hadoop a complete Big Data processing platform.
 
 ---
 
-### Q12. Explain architecture of HDFS. / Explain HDFS architecture with a diagram / Describe the structure of HDFS in Hadoop ecosystem with a diagram. <GreenDot />
+### Q12. Explain architecture of HDFS. / Explain HDFS architecture with a diagram / Describe the structure of HDFS in Hadoop ecosystem with a diagram.
 
 HDFS is a distributed file system designed to store large datasets across multiple nodes in a Hadoop cluster. It divides files into <Highlight color="blue">fixed-size blocks</Highlight> and distributes them across DataNodes. Each block is <Highlight>replicated, typically three times</Highlight>, to ensure fault tolerance.
 
@@ -202,7 +202,7 @@ The **NameNode** maintains metadata such as file names, block locations, and per
 
 ---
 
-### Q14. Explain concept of MapReduce using an example. Write MapReduce pseudo-code for “Group by” “Aggregations” in a database. / What is MapReduce ? Explain How Map and Reduce Work? What is Shuffling in MapReduce? / What are various types relational algebra operations. Explain any four using Mapreduce.
+### Q14. Explain concept of MapReduce using an example. Write MapReduce pseudo-code for “Group by” “Aggregations” in a database. / What is MapReduce ? Explain How Map and Reduce Work? What is Shuffling in MapReduce? / What are various types relational algebra operations. Explain any four using Mapreduce. <QuestionDot color="green" text="Asked in IA1" />
 
 **MapReduce Concept**
 MapReduce is a programming model for processing large data sets with a parallel, distributed algorithm on a cluster.
@@ -260,7 +260,7 @@ class Reducer:
 
 ---
 
-### Q16. Explain mapreduce algorithm for matrix multiplication. / Write a Map reduce pseudo code matrix-vector multiplication. / Explain Matrix Vector Multiplication algorithm by MapReduce.
+### Q16. Explain mapreduce algorithm for matrix multiplication. / Write a Map reduce pseudo code matrix-vector multiplication. / Explain Matrix Vector Multiplication algorithm by MapReduce. <QuestionDot color="green" text="Asked in IA1" />
 
 Matrix Multiplication $C = A \times B$. If matrix $A$ is size $L \times M$ and $B$ is $M \times N$.
 $C_{ij} = \sum_{k=1}^{M} A_{ik} \times B_{kj}$.
@@ -288,7 +288,7 @@ Input: `key=(i,j), list_of_values=[('A', 1, vA1), ('B', 1, vB1), ('A', 2, vA2)..
 
 ---
 
-### Q17. Explain how files are stored in HDFS (as part of MapReduce context). <GreenDot />
+### Q17. Explain how files are stored in HDFS (as part of MapReduce context).
 
 *Note: This explanation focuses on HDFS storage as part of distributed processing.*
 
