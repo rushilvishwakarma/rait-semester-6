@@ -1,0 +1,363 @@
+---
+title: Question Bank - Mid-Semester Exam
+---
+
+import { Highlight } from '@/components/highlight';
+import { LongQuestion } from '@/components/question';
+
+# Module 1 — Fundamentals of Neural Networks
+
+<LongQuestion>
+### Q1. What is Perceptron Learning?
+</LongQuestion>
+
+<Highlight color="blue">**Perceptron Learning**</Highlight> is a supervised machine learning algorithm used for <Highlight color="green">**binary classification**</Highlight>. It learns a <Highlight color="green">**linear decision boundary**</Highlight> (a straight line or hyperplane) to separate data into two classes.
+
+#### Model
+
+$$y_{in} = \sum_{i=0}^{n} w_i x_i \quad (x_0 = 1, \; w_0 = b)$$
+
+$$\text{Output} = \begin{cases} 1 & y_{in} \geq \theta \\ 0 & y_{in} < \theta \end{cases}$$
+
+#### Learning Rule
+
+$$w_i^{(\text{new})} = w_i^{(\text{old})} + \alpha \,(t - y)\, x_i$$
+
+#### Algorithm
+
+1. Initialize weights $W$ and bias $b$ to small random values
+2. For each training sample:
+   - Compute $y_{in} = b + \sum w_i x_i$
+   - Apply threshold to get output $y$
+   - Update: $w_i \leftarrow w_i + \alpha(t - y)x_i$
+3. Repeat until all samples are classified correctly
+
+<div className="w-full flex justify-center my-6">
+  <img 
+    src="/images/docs/DL/MSE-QB/Q1_Perceptron.png" 
+    alt="Perceptron Structure" 
+    className="dark:invert dark:hue-rotate-180" 
+  />
+</div>
+
+---
+
+<LongQuestion>
+### Q2. Describe the Delta Learning Rule in Neural Networks
+</LongQuestion>
+
+The <Highlight color="blue">**Delta Learning Rule**</Highlight> is a supervised learning rule used to <Highlight color="cyan">**update weights**</Highlight> in order to <Highlight color="green">**minimize the error**</Highlight> between the target output and the actual output. It is based on <Highlight color="orange">**gradient descent**</Highlight>.
+
+#### Model
+
+$$y_{in} = \sum_{i=0}^{n} w_i x_i \quad (x_0 = 1)$$
+
+$$y = f(y_{in})$$
+
+#### Error Function
+
+$$E = \frac{1}{2}(t - y)^2$$
+
+#### Learning Rule
+
+$$w_{\text{new}} = w_{\text{old}} - \alpha \, \Delta E \qquad \text{where} \quad \Delta E = \frac{\partial E}{\partial w}$$
+
+#### Expanded Form
+
+$$w_i \leftarrow w_i + \alpha\,(t - y)\,x_i$$
+
+#### Algorithm
+
+1. Initialize weights $W$
+2. For each training sample:
+   - Compute output $y$
+   - Compute error $E = \frac{1}{2}(t-y)^2$
+   - Compute gradient $\Delta E = \frac{\partial E}{\partial w}$
+   - Update: $w_{\text{new}} = w_{\text{old}} - \alpha \,\Delta E$
+3. Repeat until error is minimized
+
+---
+
+<LongQuestion>
+### Q3. How Does a Shallow Neural Network Perform Binary Classification?
+</LongQuestion>
+
+A <Highlight color="blue">**shallow neural network**</Highlight> (one hidden layer + one output layer) performs <Highlight color="green">**binary classification**</Highlight> by transforming input features into a probability value using <Highlight color="cyan">**weighted layers**</Highlight> and <Highlight color="cyan">**activation functions**</Highlight>.
+
+#### Forward Propagation
+
+$$A^{[0]} = X$$
+
+$$Z^{[1]} = W^{[1]} A^{[0]} + b^{[1]}, \qquad A^{[1]} = f^{[1]}(Z^{[1]}) \quad \text{(ReLU / tanh)}$$
+
+$$Z^{[2]} = W^{[2]} A^{[1]} + b^{[2]}, \qquad A^{[2]} = \sigma(Z^{[2]}) \quad \text{(Sigmoid)}$$
+
+#### Decision Rule
+
+$$\hat{y} = \begin{cases} 1 & A^{[2]} \geq 0.5 \\ 0 & A^{[2]} < 0.5 \end{cases}$$
+
+#### Training
+
+**Loss (Binary Cross-Entropy):**
+$$\mathcal{L} = -\left[t \log A^{[2]} + (1-t)\log(1 - A^{[2]})\right]$$
+
+**Weight Update:**
+$$W^{[l]} \leftarrow W^{[l]} - \alpha \frac{\partial \mathcal{L}}{\partial W^{[l]}}, \qquad b^{[l]} \leftarrow b^{[l]} - \alpha \frac{\partial \mathcal{L}}{\partial b^{[l]}}$$
+
+Repeat for multiple epochs until convergence.
+
+<div className="w-full flex justify-center my-6">
+  <img 
+    src="/images/docs/DL/MSE-QB/Q3_ShallowNN.png" 
+    alt="Shallow Neural Network" 
+    className="dark:invert dark:hue-rotate-180" 
+  />
+</div>
+
+---
+
+<LongQuestion>
+### Q4. Activation Functions: Types and Properties
+</LongQuestion>
+
+<Highlight color="blue">**Activation functions**</Highlight> introduce <Highlight color="green">**non-linearity**</Highlight>, enabling learning of complex patterns (e.g., Sigmoid, Tanh, ReLU).
+
+#### 1. Unipolar Sigmoid
+
+$$f(z) = \frac{1}{1 + e^{-z}}$$
+
+| Property   | Value                              |
+| ---------- | ---------------------------------- |
+| Range      | $(0,\ 1)$                          |
+| At $z=0$   | $f(0) = 0.5$                       |
+| Derivative | $f'(z) = f(z)\cdot(1 - f(z))$      |
+| Use        | Binary classification output layer |
+| Problem    | <Highlight color="red">**Vanishing gradient**</Highlight> for large $z$   |
+
+#### 2. Bipolar Sigmoid (Tanh-variant)
+
+$$f(z) = \frac{1 - e^{-z}}{1 + e^{-z}}$$
+
+| Property | Value |
+|----------|-------|
+| Range | $(-1,\ +1)$ |
+| At $z=0$ | $f(0) = 0$ (zero-centred) |
+| Derivative | $f'(z) = \tfrac{1}{2}(1 - f(z)^2)$ |
+| Use | Hidden layers; better gradient flow than unipolar |
+| Problem | <Highlight color="red">**Vanishing gradient**</Highlight> (softer than unipolar) |
+
+#### 3. <Highlight color="orange">**ReLU**</Highlight> (Rectified Linear Unit)
+
+$$f(z) = \max(0,\ z)$$
+
+| Property | Value |
+|----------|-------|
+| Range | $[0,\ +\infty)$ |
+| Derivative | $f'(z) = 1$ if $z > 0$, else $0$ |
+| Use | Most common hidden-layer activation |
+| Advantage | No vanishing gradient for $z > 0$; computationally cheap |
+| Problem | "Dead neuron" — stuck at 0 if $z < 0$ always |
+
+#### 4. Linear (Identity)
+
+$$f(z) = z$$
+
+| Property | Value |
+|----------|-------|
+| Range | $(-\infty,\ +\infty)$ |
+| Derivative | $f'(z) = 1$ everywhere |
+| Use | Regression output layer |
+| Problem | Stacking linear layers adds no expressive power |
+
+<div className="w-full flex justify-center my-6">
+  <img 
+    src="/images/docs/DL/MSE-QB/Q4_ActivationFunctions.png" 
+    alt="Activation Functions" 
+    className="dark:invert dark:hue-rotate-180" 
+  />
+</div>
+
+---
+
+<LongQuestion>
+### Q5. Distinguish Between Linearly Separable and Nonlinearly Separable Problems
+</LongQuestion>
+
+| Property | Linearly Separable | Non-Linearly Separable |
+|----------|--------------------|------------------------|
+| **Definition** | A <Highlight color="green">**single hyperplane**</Highlight> correctly partitions all classes | No single hyperplane achieves correct classification |
+| **Decision boundary** | Straight line (2D) / plane (nD) | Curved, piecewise, or non-convex boundary |
+| **Single-layer perceptron** | Converges in finite epochs | <Highlight color="red">**Never converges**</Highlight> — oscillates indefinitely |
+| **Examples** | AND, OR, NOT, NAND, NOR | XOR, XNOR, concentric circles |
+| **Network required** | Single-layer perceptron | <Highlight color="blue">**Multi-layer perceptron (MLP)**</Highlight> |
+| **Feature space** | Classes lie on opposite sides of a hyperplane | Classes are interspersed / interleaved |
+
+<div className="w-full flex justify-center my-6">
+  <img 
+    src="/images/docs/DL/MSE-QB/Q5_Separable.png" 
+    alt="Linearly vs Nonlinearly Separable" 
+    className="dark:invert dark:hue-rotate-180" 
+  />
+</div>
+
+---
+
+<LongQuestion>
+### Q6. Describe Forward and Backward Propagation in ANN
+</LongQuestion>
+
+Training an ANN involves two main processes: <Highlight color="blue">**Forward Propagation**</Highlight> and <Highlight color="blue">**Backward Propagation**</Highlight>.
+
+#### Forward Propagation
+
+Input $A^{[0]} = X$ is passed through the network layer by layer:
+
+$$Z^{[l]} = W^{[l]} A^{[l-1]} + b^{[l]}, \qquad A^{[l]} = f\!\left(Z^{[l]}\right)$$
+
+Final layer produces prediction $\hat{y} = A^{[L]}$, and loss is computed:
+
+$$\mathcal{L} = \frac{1}{2}(y - \hat{y})^2$$
+
+#### Backward Propagation
+
+Error is propagated backward using the <Highlight color="orange">**chain rule**</Highlight>:
+
+$$\frac{\partial \mathcal{L}}{\partial W} = \frac{\partial \mathcal{L}}{\partial A} \cdot \frac{\partial A}{\partial Z} \cdot \frac{\partial Z}{\partial W}$$
+
+#### Weight Update
+
+$$W^{[l]} \leftarrow W^{[l]} - \eta \,\frac{\partial \mathcal{L}}{\partial W^{[l]}}, \qquad b^{[l]} \leftarrow b^{[l]} - \eta \,\frac{\partial \mathcal{L}}{\partial b^{[l]}}$$
+
+where $\eta$ is the <Highlight color="orange">**learning rate**</Highlight>.
+
+<div className="w-full flex justify-center my-6">
+  <img 
+    src="/images/docs/DL/MSE-QB/Q6_ForwardBackward.png" 
+    alt="Forward and Backward Propagation" 
+    className="dark:invert dark:hue-rotate-180" 
+  />
+</div>
+
+---
+
+<LongQuestion>
+### Q7. What Are the Optimization Techniques Used in Deep Learning?
+</LongQuestion>
+
+<Highlight color="blue">**Optimization techniques**</Highlight> are algorithms used to minimize the loss function by adjusting weights during training.
+
+#### (i) Gradient Descent (GD)
+
+$$W = W - \eta \frac{\partial L}{\partial W}$$
+
+- Uses the **entire dataset** to compute the gradient before updating weights.
+- Drawback: Very slow for large datasets.
+
+#### (ii) <Highlight color="orange">**Stochastic Gradient Descent (SGD)**</Highlight>
+
+- Updates weights after **each individual training example**.
+- Faster than Batch GD but introduces **noise** in updates.
+
+#### (iii) <Highlight color="orange">**Mini-Batch Gradient Descent**</Highlight>
+
+- Gradients are computed over **small batches**.
+- Most commonly used in practice.
+
+#### (iv) Advanced Optimizers
+
+- **Momentum:** Accelerates gradient descent by adding a fraction of the previous update.
+- <Highlight color="orange">**Adam**</Highlight>: Adjusts learning rates dynamically using moving averages of gradients.
+- **RMSprop:** Scales learning rates for each parameter separately.
+
+| Optimizer | Update Frequency | Key Feature |
+|-----------|-----------------|-------------|
+| Batch GD | After full dataset | Stable but slow |
+| SGD | After each sample | Fast but noisy |
+| Mini-Batch GD | After each mini-batch | Balanced; most used |
+| Momentum | Per batch | Faster convergence |
+| Adam | Per batch | Adaptive learning rate |
+| RMSprop | Per batch | Handles varying gradients |
+
+---
+
+<LongQuestion>
+### Q8. Differentiate Between L1 and L2 Regularization Techniques
+</LongQuestion>
+
+#### <Highlight color="blue">**L1 Regularization (Lasso)**</Highlight>
+
+$$\mathcal{L}_{L1} = L(w) + \frac{\lambda}{2m} \sum \|w\|$$
+
+- Adds the **absolute value** of weights to the loss function.
+- Produces <Highlight color="green">**sparse solutions**</Highlight> (weights → 0); performs <Highlight color="green">**implicit feature selection**</Highlight>.
+
+#### <Highlight color="blue">**L2 Regularization (Ridge / Weight Decay)**</Highlight>
+
+$$\mathcal{L}_{L2} = L(w) + \lambda \sum w^2$$
+
+- Adds the **squared value** of weights; shrinks all weights but never to exactly zero.
+- Generally preferred in deep learning as **weight decay**.
+
+| Property | L1 Regularization | L2 Regularization |
+|----------|------------------|------------------|
+| **Penalty term** | $\lambda\sum\|w\|$ | $\lambda\sum w^2$ |
+| **solution type** | <Highlight color="green">**Sparse**</Highlight> (weights → 0) | Non-sparse (shrinks) |
+| **Feature selection** | Yes (implicit) | No |
+| **Robustness** | Robust to outliers | Not robust |
+| **Constraint region** | Diamond-shaped | Circular |
+
+---
+
+<LongQuestion>
+### Q9. Explain the Bias-Variance Tradeoff
+</LongQuestion>
+
+The <Highlight color="blue">**bias–variance tradeoff**</Highlight> decomposes the mean square error as:
+$$E\left[(y - \hat{f}(x))^2\right] = \text{Bias}^2 + \text{Variance} + \sigma^2$$
+
+- **High Bias:** Overly simple model → <Highlight color="red">**Underfitting**</Highlight>.
+- **High Variance:** Overly complex model → <Highlight color="red">**Overfitting**</Highlight>.
+
+<div className="w-full flex justify-center my-6">
+  <img 
+    src="/images/docs/DL/MSE-QB/Q9_BiasVariance.png" 
+    alt="Bias-Variance Tradeoff" 
+    className="dark:invert dark:hue-rotate-180" 
+  />
+</div>
+
+---
+
+<LongQuestion>
+### Q10. Loss Function Numericals (MSE & Regularization)
+</LongQuestion>
+
+#### 10.1 <Highlight color="blue">**MSE Loss**</Highlight> + <Highlight color="cyan">**Backpropagation**</Highlight>
+**Given:** $\hat{y} = 0.8, t = 1, w = 0.5, x = 2, \eta = 0.1$
+
+1. **Compute Loss:** $\mathcal{L} = \frac{1}{2}(0.8 - 1)^2 = 0.02$
+2. **Gradient w.r.t. prediction:** $\frac{\partial \mathcal{L}}{\partial \hat{y}} = -0.2$
+3. **Gradient w.r.t. weight:** $\frac{\partial \mathcal{L}}{\partial w} = -0.2 \times 2 = -0.4$
+4. **Weight Update:** $w_{\text{new}} = 0.5 - 0.1 \times (-0.4) = \boxed{0.54}$
+
+#### 10.2 <Highlight color="blue">**L2**</Highlight> & <Highlight color="blue">**L1 Regularization**</Highlight>
+**Given:** Base Loss $= 5, W = [2, -3], \lambda = 0.1$
+
+- **L2:** $\mathcal{L}_{\text{L2}} = 5 + 0.1 \times (4+9) = \boxed{6.3}$
+- **L1:** $\mathcal{L}_{\text{L1}} = 5 + 0.1 \times (2+3) = \boxed{5.5}$
+
+---
+
+<LongQuestion>
+### Q11. Activation Function Numericals
+</LongQuestion>
+
+#### 11.1 Sigmoid
+For $z = 2$:
+$$\sigma(2) = \frac{1}{1 + e^{-2}} \approx \boxed{0.8808}$$
+$$\sigma'(z) = 0.8808 \times (1 - 0.8808) \approx \boxed{0.1050}$$
+
+#### 11.2 <Highlight color="orange">**Tanh**</Highlight>
+For $z = 1$:
+$$\tanh(1) \approx \boxed{0.7616}$$
+$$\tanh'(z) = 1 - (0.7616)^2 \approx \boxed{0.4200}$$
