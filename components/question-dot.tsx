@@ -23,15 +23,13 @@ interface QuestionDotProps {
 export function QuestionDot({ color = "green", text = "Marked" }: QuestionDotProps) {
     const bgClass = colorMap[color] ?? `bg-gradient-to-br from-${color}-400 to-${color}-600 shadow-sm`;
     return (
-        <TooltipProvider>
-            <Tooltip>
-                <TooltipTrigger asChild>
-                    <span className={`inline-block w-3 h-3 ${bgClass} rounded-full ml-2 cursor-help align-middle mb-1`} />
-                </TooltipTrigger>
-                <TooltipContent>
-                    <p>{text}</p>
-                </TooltipContent>
-            </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+            <TooltipTrigger asChild>
+                <span className={`inline-block w-3 h-3 ${bgClass} rounded-full ml-2 cursor-help align-middle mb-1`} />
+            </TooltipTrigger>
+            <TooltipContent>
+                <p>{text}</p>
+            </TooltipContent>
+        </Tooltip>
     )
 }

@@ -1,0 +1,418 @@
+---
+title: Question Bank - Mid-Semester Exam
+---
+
+import { Highlight } from '@/components/highlight';
+import { QuestionDot } from '@/components/question-dot';
+import { LongQuestion } from '@/components/question';
+
+# Module 1 — Generalized Linear Models
+
+<LongQuestion>
+
+### Q1. Explain the three fundamental components of a Generalized Linear Model (GLM) using mathematical notation: <QuestionDot color="yellow" text="Part of IA1-QB as well" />
+
+a) What does the **random component** specify about the response variable?
+b) How are predictor variables combined in the **systematic component**?
+c) What is the role of the **link function**, and how does it connect the random and systematic components?
+
+</LongQuestion>
+
+A **Generalized Linear Model (GLM)** extends linear regression so that the response variable can follow distributions **other than Normal** (e.g., binary, count data).
+
+A GLM has **three components**:
+
+1. **Random Component**
+
+   The probability distribution of the response variable $Y$, which must belong to the **exponential family** (e.g., Normal, Bernoulli, Poisson).
+   $$
+   Y \sim \text{Exponential Family}
+   $$
+   It specifies the **conditional distribution** of the response given predictors. The choice depends on the nature of data (binary → Bernoulli, counts → Poisson, continuous → Gaussian).
+
+2. **Systematic Component**
+
+   A linear combination of input variables (the linear predictor):
+   $$
+   \eta = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p = X\beta
+   $$
+   Predictor variables are combined as a **weighted linear sum** through their coefficients.
+
+3. **Link Function**
+
+   Connects the mean $\mu = E(Y)$ to the linear predictor:
+   $$
+   g(\mu) = \eta
+   $$
+   It **transforms** the expected value so it can be expressed as a linear function of predictors and keeps predictions within a valid range.
+
+   Common link functions:
+   - **Identity** ($g(\mu) = \mu$) → Linear regression
+   - **Logit** ($g(\mu) = \log\frac{\mu}{1-\mu}$) → Logistic regression
+   - **Log** ($g(\mu) = \log(\mu)$) → Poisson regression
+
+---
+
+<LongQuestion>
+
+### Q2. COVID-19 Public Health Researcher <QuestionDot color="yellow" text="Part of IA1-QB as well" />
+
+A public health researcher studies the number of new COVID-19 cases reported daily in a city. The predictors are: 
+
+* Temperature (°C)
+* Vaccination rate (%)
+* Public holiday (Yes/No)
+
+a) Which probability distribution from the exponential family is most appropriate for the response variable? Justify your choice.
+b) Write the complete GLM formulation, including the probability distribution, the linear predictor, and the link function.
+c) If the coefficient for vaccination rate is estimated as −0.05, interpret this value in context.
+
+</LongQuestion>
+
+#### (a) Distribution Choice
+
+The response is **daily count of new COVID-19 cases** — discrete, non-negative integers. The most appropriate distribution is **Poisson**:
+
+$$
+Y \sim \text{Poisson}(\lambda)
+$$
+
+**Justification:** Poisson is the standard exponential family distribution for **count data**, modeling the rate of events occurring in a fixed time period (one day).
+
+---
+
+#### (b) Complete GLM Formulation
+
+**Probability Distribution (Random Component):**
+$$
+Y_i \sim \text{Poisson}(\lambda_i)
+$$
+
+**Linear Predictor (Systematic Component):**
+$$
+\eta_i = \beta_0 + \beta_1 \cdot \text{Temperature}_i + \beta_2 \cdot \text{VaccinationRate}_i + \beta_3 \cdot \text{PublicHoliday}_i
+$$
+
+**Link Function** (canonical log link for Poisson):
+$$
+\log(\lambda_i) = \eta_i
+\quad \Rightarrow \quad
+\lambda_i = \exp(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3)
+$$
+
+---
+
+#### (c) Interpretation of $\beta_2 = -0.05$
+
+Since the link is **log**, coefficients are interpreted multiplicatively:
+
+$$
+e^{-0.05} \approx 0.951
+$$
+
+<Highlight color="green">**Interpretation:** Each 1% increase in vaccination rate is associated with a **4.9% decrease** in expected daily cases, holding other predictors constant. This confirms vaccination's protective effect.</Highlight>
+
+---
+
+# Module 2 — Directed Graphical Models
+
+<LongQuestion>
+
+### Q3. Define Directed Graphical Models (DGMs), also known as Bayesian Networks. <QuestionDot color="yellow" text="Part of IA1-QB as well" />
+
+a) How is the structure of a DGM represented graphically?
+b) Write the general formula for factorizing the joint probability distribution in a Bayesian Network.
+c) What is the Markov property that allows this factorization?
+
+</LongQuestion>
+
+<Highlight color="pink">**Directed Graphical Models (DGMs)** are probabilistic models that use a **directed graph** to show dependencies between random variables.</Highlight> Each **node** = a variable, each **arrow** = a dependency.
+
+A **Bayesian Network** is a DGM whose graph is a **DAG (Directed Acyclic Graph)** — no cycles.
+
+**(a) Graphical Structure:**
+
+Represented as a **Directed Acyclic Graph (DAG)** where nodes are random variables and directed edges (arrows) encode direct dependencies. No cycles are allowed.
+
+**(b) Joint Probability Factorization:**
+
+$$
+P(X_1, X_2, \dots, X_n) = \prod_{i=1}^{n} P(X_i \mid \text{Parents}(X_i))
+$$
+
+**Example:**
+
+<Mermaid chart={`graph LR
+  A[Cloudy] --> B[Sprinkler]
+  A --> C[Rain]
+  B --> D[Wet Grass]
+  C --> D
+`} />
+
+$$
+P(A, B, C, D) = P(A) \cdot P(B \mid A) \cdot P(C \mid A) \cdot P(D \mid B, C)
+$$
+
+Instead of $2^4 - 1 = 15$ parameters for the full joint, this needs only **9** parameters.
+
+**(c) Markov Property:**
+
+The **local Markov property**: a node is **conditionally independent of all non-descendants given its parents**. Once parent values are known, no other non-descendant adds information about that node. This enables the compact factorization above.
+
+---
+
+<LongQuestion>
+
+### Q4. Explain the concept of **conditional independence** in Directed Graphical Models. <QuestionDot color="yellow" text="Part of IA1-QB as well" />
+
+What does it mean for two variables $X$ and $Y$ to be conditionally independent given a third variable $Z$? Express this using mathematical notation.
+
+</LongQuestion>
+
+**Conditional independence** means two variables don't affect each other once we know a third variable. Formally, $X$ and $Y$ are conditionally independent given $Z$ if:
+
+$$
+P(X, Y \mid Z) = P(X \mid Z)P(Y \mid Z)
+$$
+
+Written as: $X \perp Y \mid Z$.
+
+In Bayesian Networks, the graph structure directly encodes conditional independencies. We use **d-separation** to check: if all paths between two nodes are "blocked" by observed variables, they are conditionally independent.
+
+**Three basic structures:**
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+<div>
+
+**Chain** — $A \perp C \mid B$
+
+<Mermaid chart={`graph LR
+  A --> B --> C
+`} />
+
+Observing B blocks the path.
+
+</div>
+
+<div>
+
+**Fork** — $B \perp C \mid A$
+
+<Mermaid chart={`graph LR
+  A --> B
+  A --> C
+`} />
+
+Observing common cause A blocks the path.
+
+</div>
+
+<div>
+
+**Collider** — $A \perp C$ (but **not** given B)
+
+<Mermaid chart={`graph LR
+  A --> B
+  C --> B
+`} />
+
+Observing B *opens* the path (explaining away).
+
+</div>
+
+</div>
+
+---
+
+<LongQuestion>
+
+### Q5. Consider the following relationships: <QuestionDot color="yellow" text="Part of IA1-QB as well" />
+
+* Intelligence (I) → Grades (G)
+* Intelligence (I) → Test Score (T)
+* Study Hours (H) → Grades (G)
+* Study Hours (H) → Test Score (T)
+* Grades (G) → Scholarship (S)
+* Test Score (T) → Scholarship (S)
+
+a) Draw the Directed Acyclic Graph (DAG) representing this scenario.
+b) Write the joint probability distribution using Bayesian Network factorization.
+
+</LongQuestion>
+
+### (a) Directed Acyclic Graph (DAG)
+
+<Mermaid chart={`graph LR
+  I[Intelligence] --> G[Grades]
+  I --> T[Test Score]
+  H[Study Hours] --> G
+  H --> T
+  G --> S[Scholarship]
+  T --> S
+`} />
+
+---
+
+### (b) Joint probability distribution
+
+Using Bayesian Network factorization:
+
+$$
+P(I, H, G, T, S) = P(I) \cdot P(H) \cdot P(G \mid I, H) \cdot P(T \mid I, H) \cdot P(S \mid G, T)
+$$
+
+---
+
+# Module 3 — Mixture Models and EM Algorithm
+
+<LongQuestion>
+
+### Q6. Mixture Models Introduction
+
+**What is a mixture model? Explain its basic structure using a mathematical expression.**
+
+Consider a practical scenario:
+An e-commerce company has collected data on customer purchase amounts. Analysis reveals two distinct patterns—some customers consistently make small purchases (e.g., under 20 Rs), while others make large purchases (e.g., over 100 Rs).
+
+**Answer the following:**
+
+* Which distribution from the GLM family (Gaussian, Poisson, or Binomial) would be appropriate to model this purchase amount data?
+* Justify your choice based on the nature of the data and the properties of the distributions.
+
+</LongQuestion>
+
+A **mixture model** is a probabilistic model used to represent the presence of **subpopulations within an overall population**.
+Instead of assuming all data comes from a single distribution, it assumes the data is generated from a **combination of multiple distributions**, each with its own parameters.
+
+---
+
+### Mathematical Expression
+
+$$
+p(x) = \sum_{k=1}^{K} \pi_k \, p(x \mid \theta_k)
+$$
+
+* $K$: number of components
+* $\pi_k$: mixing coefficient (weight of component $k$)
+* $p(x \mid \theta_k)$: component distribution
+
+---
+
+### Main Components
+
+1. **Component Distributions ($p(x \mid \theta_k)$)**
+
+   * Individual distributions forming the mixture
+   * Each represents a **cluster/subpopulation**
+
+2. **Mixing Coefficients ($\pi_k$)**
+
+   * Probability that a data point belongs to component $k$
+   * Properties:
+     $$
+     0 \le \pi_k \le 1,\quad \sum_{k=1}^{K} \pi_k = 1
+     $$
+
+3. **Parameters of Each Component ($\theta_k$)**
+   For Gaussian mixture:
+
+   * $\mu_k$ (Mean): center of cluster
+   * $\Sigma_k$ (Covariance): spread and shape of cluster
+
+---
+
+**Appropriate Distribution:**
+Gaussian (Normal) distribution
+
+---
+
+### Justification:
+
+Purchase amount is **continuous data** (it can take any value like 10.5, 120.75, etc.), so Gaussian distribution is suitable.
+
+The data shows **two groups of customers**:
+
+* Small spenders
+* Large spenders
+
+This means the data has **two patterns**, which can be modeled using a **mixture of Gaussian distributions** (one for each group).
+
+**Poisson distribution** is not suitable because it is used for **count data** (like number of items bought).
+
+**Binomial distribution** is not suitable because it is used for **yes/no or success/failure type data**.
+
+
+<LongQuestion>
+
+### Q7. Parameter Estimation in Mixture Models
+
+- Describe what happens in the Expectation (E) step and the Maximization (M) step.
+- Why is this estimation challenging when the component labels are unknown?
+- What is the name of the algorithm that solves this problem, and what property does it guarantee about the likelihood at each iteration?
+
+
+</LongQuestion>
+
+### Parameter estimation for mixture models follows an iterative two-step procedure.
+
+**(a) Describe what happens in the Expectation (E) step and the Maximization (M) step.**
+
+Using **Gaussian Mixture Models (GMM):**
+GMM represents data as a **weighted sum of Gaussian distributions**:
+$$
+P(x) = \sum_{k=1}^{K} \pi_k \, N(\mu_k, \Sigma_k)
+$$
+
+**E-Step:**
+
+* Compute **responsibility ($\gamma_{nk}$)**
+* It is the probability that data point $x_n$ belongs to cluster $k$
+* Uses current parameters $(\pi_k, \mu_k, \Sigma_k)$
+* Assigns **soft probabilities (soft clustering)**
+
+**M-Step:**
+
+* Update parameters using responsibilities
+
+$$
+\mu_k^{\text{new}} = \frac{1}{N_k} \sum_{n=1}^{N} \gamma_{nk} x_n
+$$
+
+$$
+\Sigma_k^{\text{new}} = \frac{1}{N_k} \sum_{n=1}^{N} \gamma_{nk} (x_n - \mu_k^{\text{new}})(x_n - \mu_k^{\text{new}})^T
+$$
+
+$$
+\pi_k^{\text{new}} = \frac{N_k}{N}, \quad N_k = \sum_{n=1}^{N} \gamma_{nk}
+$$
+
+---
+
+**(b) Why is this estimation challenging when the component labels are unknown?**
+
+* The **true cluster labels are hidden (latent variables)**
+* We do not know which data point belongs to which Gaussian
+* Hence, direct parameter estimation is difficult
+
+---
+
+**(c) What is the name of the algorithm that solves this problem, and what property does it guarantee?**
+
+* The algorithm is **Expectation-Maximization (EM)**
+* It guarantees that the **likelihood never decreases** at each iteration (monotonic increase)
+* Converges to a **local optimum**
+
+
+---
+
+<LongQuestion>
+
+### Q8. Gaussian Mixture Model Height Dataset
+
+a) Write the probability density function of a **two-component Gaussian Mixture Model**, clearly defining all parameters.
+b) In the EM algorithm, define the **responsibility** $\gamma_{ik}$. How is it computed?
+
+</LongQuestion>
+
+
