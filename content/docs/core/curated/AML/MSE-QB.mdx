@@ -354,54 +354,75 @@ This means the data has **two patterns**, which can be modeled using a **mixture
 
 </LongQuestion>
 
-### Parameter estimation for mixture models follows an iterative two-step procedure.
-
-**(a) Describe what happens in the Expectation (E) step and the Maximization (M) step.**
+### Answer
 
 Using **Gaussian Mixture Models (GMM):**
-GMM represents data as a **weighted sum of Gaussian distributions**:
-$$
-P(x) = \sum_{k=1}^{K} \pi_k \, N(\mu_k, \Sigma_k)
-$$
+GMM is a probabilistic model that represents data as a **combination of multiple Gaussian distributions** and performs **soft clustering**, where each data point has a probability of belonging to each cluster.
 
-**E-Step:**
-
-* Compute **responsibility ($\gamma_{nk}$)**
-* It is the probability that data point $x_n$ belongs to cluster $k$
-* Uses current parameters $(\pi_k, \mu_k, \Sigma_k)$
-* Assigns **soft probabilities (soft clustering)**
-
-**M-Step:**
-
-* Update parameters using responsibilities
-
+The overall probability is given by:
 $$
-\mu_k^{\text{new}} = \frac{1}{N_k} \sum_{n=1}^{N} \gamma_{nk} x_n
-$$
-
-$$
-\Sigma_k^{\text{new}} = \frac{1}{N_k} \sum_{n=1}^{N} \gamma_{nk} (x_n - \mu_k^{\text{new}})(x_n - \mu_k^{\text{new}})^T
-$$
-
-$$
-\pi_k^{\text{new}} = \frac{N_k}{N}, \quad N_k = \sum_{n=1}^{N} \gamma_{nk}
+P(x) = \sum_{k=1}^{K} \pi_k , N(\mu_k, \Sigma_k)
 $$
 
 ---
 
-**(b) Why is this estimation challenging when the component labels are unknown?**
+### Expectation (E) Step
 
-* The **true cluster labels are hidden (latent variables)**
+In this step, we calculate the **responsibility $(\gamma_{nk})$**, which is the probability that data point $x_n$ belongs to cluster $k$.
+
+* Uses current values of $\pi_k, \mu_k, \Sigma_k$
+* Assigns **soft probabilities (not fixed labels)**
+* Shows the idea of **soft clustering in GMM**
+
+---
+
+### Maximization (M) Step
+
+In this step, we update the parameters of each component (such as mean, covariance, and mixing weights) using the probabilities computed in the E-step.
+The goal is to maximize the likelihood of the data given these updated parameters.
+
+In this step, we update the parameters using the responsibilities:
+
+$$
+N_k = \sum_{n=1}^{N} \gamma_{nk}
+$$
+
+$$
+\mu_k = \frac{1}{N_k} \sum_{n=1}^{N} \gamma_{nk} x_n
+$$
+
+$$
+\Sigma_k = \frac{1}{N_k} \sum_{n=1}^{N} \gamma_{nk} (x_n - \mu_k)(x_n - \mu_k)^T
+$$
+
+$$
+\pi_k = \frac{N_k}{N}
+$$
+
+The goal is to maximize the likelihood using these updated parameters.
+
+This is basically a **weighted average of data points** for each cluster.
+
+---
+
+### Why is estimation challenging?
+
+* The **cluster labels are hidden (latent variables)**
 * We do not know which data point belongs to which Gaussian
-* Hence, direct parameter estimation is difficult
+* So, we cannot directly estimate parameters → we estimate probabilities instead
 
 ---
 
-**(c) What is the name of the algorithm that solves this problem, and what property does it guarantee?**
+### Algorithm Used
 
-* The algorithm is **Expectation-Maximization (EM)**
-* It guarantees that the **likelihood never decreases** at each iteration (monotonic increase)
-* Converges to a **local optimum**
+**Expectation-Maximization (EM) Algorithm**
+
+---
+
+### Property of EM Algorithm
+
+* At each iteration, the **likelihood increases or stays the same**
+* This ensures **steady convergence** to a (local) optimum
 
 
 ---
