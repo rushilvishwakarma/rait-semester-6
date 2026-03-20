@@ -354,8 +354,6 @@ This means the data has **two patterns**, which can be modeled using a **mixture
 
 </LongQuestion>
 
-### Answer
-
 Using **Gaussian Mixture Models (GMM):**
 GMM is a probabilistic model that represents data as a **combination of multiple Gaussian distributions** and performs **soft clustering**, where each data point has a probability of belonging to each cluster.
 
@@ -436,4 +434,36 @@ b) In the EM algorithm, define the **responsibility** $\gamma_{ik}$. How is it c
 
 </LongQuestion>
 
+#### (a) Probability Density Function for 2-Component GMM
+
+For two components:
+
+[
+P(x) = \pi_1 , N(x \mid \mu_1, \sigma_1^2) + \pi_2 , N(x \mid \mu_2, \sigma_2^2)
+]
+
+**Where:**
+
+* (\pi_1, \pi_2) → Mixing weights, such that (\pi_1 + \pi_2 = 1)
+* (N(x \mid \mu_k, \sigma_k^2)) → Gaussian distribution for component (k)
+* (\mu_1, \mu_2) → Means of the two components
+* (\sigma_1^2, \sigma_2^2) → Variances
+* (x) → Height value
+
+---
+
+#### (b) Responsibility (\gamma_{ik})
+
+The responsibility (\gamma_{ik}) is the **probability that data point (x_i) belongs to component (k)**.
+
+[
+\gamma_{ik} = \frac{\pi_k , N(x_i \mid \mu_k, \sigma_k^2)}{\pi_1 , N(x_i \mid \mu_1, \sigma_1^2) + \pi_2 , N(x_i \mid \mu_2, \sigma_2^2)}
+]
+
+**Explanation:**
+
+* Numerator → probability of (x_i) from component (k)
+* Denominator → total probability from both components
+
+So, (\gamma_{ik}) gives a **soft assignment** of each data point to clusters.
 
