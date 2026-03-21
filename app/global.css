@@ -242,4 +242,23 @@
     white-space: nowrap;
 }
 
-
+
+/* Opt-in diagram inversion (avoids dimming during zoom transition) */
+.dark .invert-dark-mode {
+    filter: invert(1) hue-rotate(180deg) !important;
+}
+:root:not(.dark) .invert-light-mode {
+    filter: invert(1) hue-rotate(180deg) !important;
+}
+
+
+/* Opt-in diagram inversion using alt-text matching */
+.dark img[alt*="{invert-dark}"],
+.dark [data-rmiz-modal-img][alt*="{invert-dark}"] {
+    filter: invert(1) hue-rotate(180deg) !important;
+}
+:root:not(.dark) img[alt*="{invert-light}"],
+:root:not(.dark) [data-rmiz-modal-img][alt*="{invert-light}"] {
+    filter: invert(1) !important;
+}
+

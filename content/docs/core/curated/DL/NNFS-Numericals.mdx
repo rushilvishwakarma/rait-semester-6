@@ -4,7 +4,6 @@ description: Perceptron learning tables and neural network forward pass worked e
 ---
 
 import { Highlight } from '@/components/highlight';
-import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 
 > All arithmetic verified by Python (NumPy). Tables and matrices are exact.
 
@@ -131,7 +130,7 @@ import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 - **3I** = 3 input neurons
 - **4L** = 4 total layers (Input → Hidden₁ → Hidden₂ → Output)
 
-<ImageZoom src="/images/docs/DL/NNFS/arch_3I4L.png" alt="3I-4L Architecture" className="my-6 mx-auto bg-transparent dark:invert dark:hue-rotate-180" zoomInProps={{ className: 'dark:invert dark:hue-rotate-180' }} />
+![3I-4L Architecture {invert-dark}](/images/docs/DL/NNFS/arch_3I4L.png)
 
 ### Architecture 4I-3N-2L
 
@@ -139,7 +138,7 @@ import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 - **3N** = 3 neurons in the hidden layer
 - **2L** = 2 output neurons
 
-<ImageZoom src="/images/docs/DL/NNFS/arch_4I3N2L.png" alt="4I-3N-2L Architecture" className="my-6 mx-auto bg-transparent dark:invert dark:hue-rotate-180" zoomInProps={{ className: 'dark:invert dark:hue-rotate-180' }} />
+![4I-3N-2L Architecture {invert-dark}](/images/docs/DL/NNFS/arch_4I3N2L.png)
 
 ---
 
@@ -151,7 +150,7 @@ import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 - $Z^{[L]} = W^{[L-1]} \times A^{[L-1]}$, then $A^{[L]} = f^{[L]}(Z^{[L]})$
 - With 3+ output rows → **Softmax**; with 2 rows → **Sigmoid**.
 
-<ImageZoom src="/images/docs/DL/NNFS/arch_2layer.png" alt="Two-Layer Architecture" className="my-6 mx-auto bg-transparent dark:invert dark:hue-rotate-180" zoomInProps={{ className: 'dark:invert dark:hue-rotate-180' }} />
+![Two-Layer Architecture {invert-dark}](/images/docs/DL/NNFS/arch_2layer.png)
 
 ### Q13: Probability at Output of NN
 
