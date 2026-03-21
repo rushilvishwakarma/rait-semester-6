@@ -1,0 +1,160 @@
+---
+title: QB Questions 2020–21
+description: Past exam CNN numericals and formula reference for DL MSE.
+---
+
+import { Highlight } from '@/components/highlight';
+import { TheoryCard } from '@/components/theory-card';
+
+<div className="grid gap-4 sm:grid-cols-2 mb-6">
+  <TheoryCard
+    title="NNFS-Based Numericals"
+    description="Perceptron learning tables (Q1–Q11) and neural network forward pass solutions (Q13–Q19)."
+    curatedLabel="View Numericals"
+    curatedHref="/docs/core/curated/DL/NNFS-Numericals"
+    showAskAi={false}
+  />
+</div>
+
+# QB Questions 2020–21
+
+## 1. Common Formulas (Use for ANY CNN Question)
+
+| Layer | Formula |
+|-------|---------|
+| **Conv params** | $(k \times k \times C_{in} + 1) \times C_{out}$ |
+| **Output size** | $\left\lfloor \dfrac{n - k + 2p}{s} \right\rfloor + 1$ |
+| **Pooling** | No parameters. Output size: $\left\lfloor \dfrac{n - k}{s} \right\rfloor + 1$ |
+| **Flatten** | $H \times W \times C$ |
+| **Fully connected** | $(\text{input} \times \text{output}) + \text{output}$ |
+
+#### Special Cases
+
+- **Same padding** → output size same as input
+- **No padding** → $(n - k + 1)$
+- **Pool (2×2, stride 2)** → roughly $n/2$
+
+#### Input Channels Rule
+
+| Input Type | Channels |
+|-----------|----------|
+| Grayscale / X-ray / spectrogram | <Highlight color="orange">**1**</Highlight> |
+| RGB image | <Highlight color="green">**3**</Highlight> |
+
+---
+
+## 2. Question — Music Genre CNN
+
+Design a CNN for music genre classification (5 genres: Jazz, Pop, Rock, Classical, Metal) from a Fourier magnitude image.
+
+| Layer | Configuration |
+|-------|--------------|
+| Input | 256 windows × 200 frequency bins (spectrogram → 1 channel) |
+| Conv1 | 5 kernels of (5×5), stride 2 |
+| Pool1 | Max-pooling (2×2), stride 3 |
+| Conv2 | 10 kernels of (3×3), zero padding, stride 2 |
+| Pool2 | Min-pooling (2×2), stride 2 |
+| Flatten | — |
+| Dense1 | 50 neurons |
+| Dropout | 50% drop |
+| Dense2 | 10 neurons |
+| Output | 5 genres |
+
+---
+
+## 3. Full Solution
+
+### Step 1 — Input
+
+$$\text{Input} = 256 \times 200 \times 1 \quad \text{(spectrogram = 1 channel)}$$
+
+---
+
+### Step 2 — Conv1 (5 filters, 5×5, stride 2)
+
+**Parameters:**
+$$\text{Params} = (5 \times 5 \times 1 + 1) \times 5 = 26 \times 5 = \boxed{130}$$
+
+**Output size:**
+$$H = \left\lfloor \frac{256 - 5}{2} \right\rfloor + 1 = 126, \qquad W = \left\lfloor \frac{200 - 5}{2} \right\rfloor + 1 = 98$$
+
+$$\Rightarrow \boxed{126 \times 98 \times 5}$$
+
+---
+
+### Step 3 — Pool1 (2×2, stride 3)
+
+$$H = \left\lfloor \frac{126 - 2}{3} \right\rfloor + 1 = 42, \qquad W = \left\lfloor \frac{98 - 2}{3} \right\rfloor + 1 = 33$$
+
+$$\Rightarrow \boxed{42 \times 33 \times 5} \quad \text{(no parameters)}$$
+
+---
+
+### Step 4 — Conv2 (10 filters, 3×3, padding=1, stride 2)
+
+**Parameters:**
+$$\text{Params} = (3 \times 3 \times 5 + 1) \times 10 = 46 \times 10 = \boxed{460}$$
+
+**Output size** (same padding formula with $p=1$):
+$$H = \left\lfloor \frac{42 - 3 + 2}{2} \right\rfloor + 1 = 21, \qquad W = \left\lfloor \frac{33 - 3 + 2}{2} \right\rfloor + 1 = 17$$
+
+$$\Rightarrow \boxed{21 \times 17 \times 10}$$
+
+---
+
+### Step 5 — Pool2 (2×2, stride 2)
+
+$$H = \left\lfloor \frac{21 - 2}{2} \right\rfloor + 1 = 10, \qquad W = \left\lfloor \frac{17 - 2}{2} \right\rfloor + 1 = 8$$
+
+$$\Rightarrow \boxed{10 \times 8 \times 10} \quad \text{(no parameters)}$$
+
+---
+
+### Step 6 — Flatten
+
+$$10 \times 8 \times 10 = \boxed{800 \text{ neurons}}$$
+
+---
+
+### Step 7 — Dense Layers
+
+**Dense1** (800 → 50):
+$$800 \times 50 + 50 = \boxed{40{,}050}$$
+
+**Dropout** → <Highlight color="orange">No parameters</Highlight>
+
+**Dense2** (50 → 10):
+$$50 \times 10 + 10 = \boxed{510}$$
+
+**Output** (10 → 5 genres):
+$$10 \times 5 + 5 = \boxed{55}$$
+
+---
+
+## Final Answer
+
+| Layer | Params |
+|-------|--------|
+| Conv1 | 130 |
+| Pool1 | 0 |
+| Conv2 | 460 |
+| Pool2 | 0 |
+| Flatten | 0 |
+| Dense1 | 40,050 |
+| Dropout | 0 |
+| Dense2 | 510 |
+| Output | 55 |
+| **Total** | <Highlight color="green">**41,205**</Highlight> |
+
+$$\boxed{\text{Total Trainable Parameters} = 41{,}205}$$
+
+---
+
+## Quick Reference (Memory Aid)
+
+- **Conv** → small params (kernel × channels + bias) × filters
+- **Pool** → shrinks size only, **no params**
+- **Flatten** → just multiply $H \times W \times C$
+- **Dense** → biggest param count: inputs × outputs + bias
+
+> **Key insight:** The Dense layers almost always dominate total parameter count!
