@@ -241,6 +241,7 @@
 .katex-display>.katex {
     white-space: nowrap;
 }
+
 /* Fix: Ensure zoomed SVG images maintain inversion in light mode */
 :root:not(.dark) [data-rmiz-modal-img][src$=".svg"],
 :root:not(.dark) [data-rmiz-modal-content] img[src$=".svg"] {
@@ -251,6 +252,12 @@
 .dark [data-rmiz-modal-overlay="visible"] {
     background-color: rgba(0, 0, 0, 1) !important;
 }
+
 .dark [data-rmiz-modal-overlay="hidden"] {
     background-color: rgba(0, 0, 0, 0) !important;
 }
+
+/* Opt-in: invert diagram image in the zoom overlay (only when .diagram-zoom class is set via zoomInProps) */
+.dark .diagram-zoom {
+    filter: invert(1) hue-rotate(180deg);
+}

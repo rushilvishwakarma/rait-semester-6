@@ -1,4 +1,4 @@
----
+﻿---
 title: Question Bank - Mid-Semester Exam
 ---
 
@@ -64,7 +64,7 @@ Repeat for multiple epochs until convergence.
   <ImageZoom
     src="/images/docs/DL/MSE-QB/Q3_ShallowNN.png"
     alt="Shallow Neural Network"
-    zoomInProps={{ className: 'dark:invert dark:hue-rotate-180' }}
+    zoomInProps={{ className: 'diagram-zoom' }}
   />
 </div>
 
@@ -83,7 +83,13 @@ Repeat for multiple epochs until convergence.
 | **Network required** | Single-layer perceptron | <Highlight color="blue">**Multi-layer perceptron (MLP)**</Highlight> |
 | **Feature space** | Classes lie on opposite sides of a hyperplane | Classes are interspersed / interleaved |
 
-<div className="flex justify-center my-6">`n  <img src="/images/docs/DL/MSE-QB/Q5_Separable.png" alt="Linearly vs Nonlinearly Separable" className="dark:invert dark:hue-rotate-180" />`n</div>
+<div className="flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
+  <ImageZoom
+    src="/images/docs/DL/MSE-QB/Q5_Separable.png"
+    alt="Linearly vs Nonlinearly Separable"
+    zoomInProps={{ className: 'diagram-zoom' }}
+  />
+</div>
 
 ---
 
@@ -197,7 +203,13 @@ $$E\left[(y - \hat{f}(x))^2\right] = \text{Bias}^2 + \text{Variance} + \sigma^2$
 - **High Bias:** Overly simple model → <Highlight color="red">**Underfitting**</Highlight>.
 - **High Variance:** Overly complex model → <Highlight color="red">**Overfitting**</Highlight>.
 
-<div className="flex justify-center my-6">`n  <img src="/images/docs/DL/MSE-QB/Q9_BiasVariance.png" alt="Bias-Variance Tradeoff" className="dark:invert dark:hue-rotate-180" />`n</div>
+<div className="flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
+  <ImageZoom
+    src="/images/docs/DL/MSE-QB/Q9_BiasVariance.png"
+    alt="Bias-Variance Tradeoff"
+    zoomInProps={{ className: 'diagram-zoom' }}
+  />
+</div>
 
 ---
 
@@ -262,7 +274,13 @@ $$W^{[l]} \leftarrow W^{[l]} - \eta \,\frac{\partial \mathcal{L}}{\partial W^{[l
 
 where $\eta$ is the <Highlight color="orange">**learning rate**</Highlight>.
 
-<div className="flex justify-center my-6">`n  <img src="/images/docs/DL/MSE-QB/Q6_ForwardBackward.png" alt="Forward and Backward Propagation" className="dark:invert dark:hue-rotate-180" />`n</div>
+<div className="flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
+  <ImageZoom
+    src="/images/docs/DL/MSE-QB/Q6_ForwardBackward.png"
+    alt="Forward and Backward Propagation"
+    zoomInProps={{ className: 'diagram-zoom' }}
+  />
+</div>
 
 ---
 
@@ -352,7 +370,7 @@ $$\text{Output} = \begin{cases} 1 & y_{in} \geq \theta \\ -1 & y_{in} < \theta \
   <ImageZoom
     src="/images/docs/DL/MSE-QB/Q1_Perceptron.png"
     alt="Perceptron Structure"
-    zoomInProps={{ className: 'dark:invert dark:hue-rotate-180' }}
+    zoomInProps={{ className: 'diagram-zoom' }}
   />
 </div>
 
