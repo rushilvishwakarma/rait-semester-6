@@ -59,8 +59,8 @@ $$W^{[l]} \leftarrow W^{[l]} - \alpha \frac{\partial \mathcal{L}}{\partial W^{[l
 
 Repeat for multiple epochs until convergence.
 
-<div className="w-full flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
-  ![Shallow Neural Network](/images/docs/DL/MSE-QB/Q3_ShallowNN.png)
+<div className="flex justify-center my-6">
+  <img src="/images/docs/DL/MSE-QB/Q3_ShallowNN.png" alt="Shallow Neural Network" className="dark:invert dark:hue-rotate-180" />
 </div>
 
 ---
@@ -78,9 +78,7 @@ Repeat for multiple epochs until convergence.
 | **Network required** | Single-layer perceptron | <Highlight color="blue">**Multi-layer perceptron (MLP)**</Highlight> |
 | **Feature space** | Classes lie on opposite sides of a hyperplane | Classes are interspersed / interleaved |
 
-<div className="w-full flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
-  ![Linearly vs Nonlinearly Separable](/images/docs/DL/MSE-QB/Q5_Separable.png)
-</div>
+<div className="flex justify-center my-6">`n  <img src="/images/docs/DL/MSE-QB/Q5_Separable.png" alt="Linearly vs Nonlinearly Separable" className="dark:invert dark:hue-rotate-180" />`n</div>
 
 ---
 
@@ -194,9 +192,7 @@ $$E\left[(y - \hat{f}(x))^2\right] = \text{Bias}^2 + \text{Variance} + \sigma^2$
 - **High Bias:** Overly simple model → <Highlight color="red">**Underfitting**</Highlight>.
 - **High Variance:** Overly complex model → <Highlight color="red">**Overfitting**</Highlight>.
 
-<div className="w-full flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
-  ![Bias-Variance Tradeoff](/images/docs/DL/MSE-QB/Q9_BiasVariance.png)
-</div>
+<div className="flex justify-center my-6">`n  <img src="/images/docs/DL/MSE-QB/Q9_BiasVariance.png" alt="Bias-Variance Tradeoff" className="dark:invert dark:hue-rotate-180" />`n</div>
 
 ---
 
@@ -261,9 +257,7 @@ $$W^{[l]} \leftarrow W^{[l]} - \eta \,\frac{\partial \mathcal{L}}{\partial W^{[l
 
 where $\eta$ is the <Highlight color="orange">**learning rate**</Highlight>.
 
-<div className="w-full flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
-  ![Forward and Backward Propagation](/images/docs/DL/MSE-QB/Q6_ForwardBackward.png)
-</div>
+<div className="flex justify-center my-6">`n  <img src="/images/docs/DL/MSE-QB/Q6_ForwardBackward.png" alt="Forward and Backward Propagation" className="dark:invert dark:hue-rotate-180" />`n</div>
 
 ---
 
@@ -349,8 +343,8 @@ $$y_{in} = \sum_{i=0}^{n} w_i x_i \quad (x_0 = 1, \; w_0 = b)$$
 
 $$\text{Output} = \begin{cases} 1 & y_{in} \geq \theta \\ -1 & y_{in} < \theta \end{cases} \quad \text{(Bipolar)}$$
 
-<div className="w-full flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
-  ![Perceptron Structure](/images/docs/DL/MSE-QB/Q1_Perceptron.png)
+<div className="flex justify-center my-6">
+  <img src="/images/docs/DL/MSE-QB/Q1_Perceptron.png" alt="Perceptron Structure" className="dark:invert dark:hue-rotate-180" />
 </div>
 
 #### Example: Bipolar AND Gate
