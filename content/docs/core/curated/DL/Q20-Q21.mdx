@@ -6,7 +6,7 @@ description: CNN numericals and formula reference for DL MSE.
 import { Highlight } from '@/components/highlight';
 
 
-## 1. Common Formulas (Use for ANY CNN Question)
+## Common Formulas (Use for ANY CNN Question)
 
 | Layer | Formula |
 |-------|---------|
@@ -31,7 +31,109 @@ import { Highlight } from '@/components/highlight';
 
 ---
 
-## 2. Question — Music Genre CNN
+## 20. Question — COVID-19 X-ray CNN
+
+Design a CNN for classifying subjects as COVID-19 patients or healthy subjects based on chest X-ray images having width & height of 150 pixels each. The feature extractor uses 3 blocks of convolutional + pooling layers. Convolutional layers have (3, 3) kernel and increasing by a factor of 4, starting with 2. First two layers use zero padding. The pooling layer calculates average over (2, 2) pixels. Total four fully-connected layers are cascaded to predict output probability. Neurons in each layer are reduced by a factor of 4. Calculate number of trainable parameters for each layer and CNN.
+
+---
+
+## 3. Solution (very simple thinking)
+
+### Step 1 — Start
+
+Image = **150×150×1** (X-ray → grayscale → 1 channel)
+
+---
+
+### Step 2 — Filters
+
+“start with 2, increase ×4”
+→ **2, 8, 32**
+
+---
+
+### Step 3 — Conv params (just plug numbers)
+
+* Conv1
+  $$
+  (9 \times 1 + 1) \times 2 = 20
+  $$
+
+* Conv2
+  $$
+  (9 \times 2 + 1) \times 8 = 152
+  $$
+
+* Conv3
+  $$
+  (9 \times 8 + 1) \times 32 = 2336
+  $$
+
+**Total conv = 2508**
+
+---
+
+### Step 4 — Size after pooling (just divide by 2 each time)
+
+150 → 75 → 37 → 17
+
+Final = **17×17×32**
+
+---
+
+### Step 5 — Flatten
+
+$$
+17 \times 17 \times 32 = 9248
+$$
+
+---
+
+### Step 6 — FC layers (divide by 4 each time)
+
+9248 → 2312 → 578 → 144 → 36 → 1
+
+---
+
+### Step 7 — FC params
+
+* FC1 → 21,383,688
+* FC2 → 1,336,914
+* FC3 → 83,376
+* FC4 → 5,220
+* Output → 37
+
+**Total FC = 22,809,235**
+
+---
+
+## Final Answer (write this)
+
+* Conv = **2508**
+* FC = **22,809,235**
+
+$$
+\boxed{22{,}811{,}743}
+$$
+
+---
+
+## Even simpler way to think
+
+* Conv = small numbers
+* FC = huge numbers
+
+Just remember:
+
+* filters → 2, 8, 32
+* size → keep halving
+* FC → keep dividing by 4
+
+That’s it.
+
+---
+
+## 21. Question — Music Genre CNN
 
 Design a CNN for music genre classification (5 genres: Jazz, Pop, Rock, Classical, Metal) from a Fourier magnitude image.
 
@@ -50,7 +152,7 @@ Design a CNN for music genre classification (5 genres: Jazz, Pop, Rock, Classica
 
 ---
 
-## 3. Full Solution
+## 5. Full Solution
 
 ### Step 1 — Input
 
