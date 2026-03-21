@@ -1,10 +1,9 @@
-﻿---
+---
 title: NNFS-Based Numericals Q1-Q19
 description: Perceptron learning tables and neural network forward pass worked examples for all gate configurations.
 ---
 
 import { Highlight } from '@/components/highlight';
-import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 
 > All arithmetic verified by Python (NumPy). Tables and matrices are exact.
 
@@ -131,12 +130,8 @@ import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 - **3I** = 3 input neurons
 - **4L** = 4 total layers (Input → Hidden₁ → Hidden₂ → Output)
 
-<div className="flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
-  <ImageZoom
-    src="/images/docs/DL/NNFS/arch_3I4L.png"
-    alt="3I-4L Architecture"
-    zoomInProps={{ className: 'diagram-zoom' }}
-  />
+<div className="w-full flex justify-center my-6 [&_img]:invert [&_img]:dark:invert-0 [&_img]:hue-rotate-180 [&_img]:dark:hue-rotate-0">
+  ![3I-4L Architecture](/images/docs/DL/NNFS/arch_3I4L.png)
 </div>
 
 ### Architecture 4I-3N-2L
@@ -145,12 +140,8 @@ import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 - **3N** = 3 neurons in the hidden layer
 - **2L** = 2 output neurons
 
-<div className="flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
-  <ImageZoom
-    src="/images/docs/DL/NNFS/arch_4I3N2L.png"
-    alt="4I-3N-2L Architecture"
-    zoomInProps={{ className: 'diagram-zoom' }}
-  />
+<div className="w-full flex justify-center my-6 [&_img]:invert [&_img]:dark:invert-0 [&_img]:hue-rotate-180 [&_img]:dark:hue-rotate-0">
+  ![4I-3N-2L Architecture](/images/docs/DL/NNFS/arch_4I3N2L.png)
 </div>
 
 ---
@@ -163,12 +154,8 @@ import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 - $Z^{[L]} = W^{[L-1]} \times A^{[L-1]}$, then $A^{[L]} = f^{[L]}(Z^{[L]})$
 - With 3+ output rows → **Softmax**; with 2 rows → **Sigmoid**.
 
-<div className="flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
-  <ImageZoom
-    src="/images/docs/DL/NNFS/arch_2layer.png"
-    alt="Two-Layer Architecture"
-    zoomInProps={{ className: 'diagram-zoom' }}
-  />
+<div className="w-full flex justify-center my-6 [&_img]:invert [&_img]:dark:invert-0 [&_img]:hue-rotate-180 [&_img]:dark:hue-rotate-0">
+  ![Two-Layer Architecture](/images/docs/DL/NNFS/arch_2layer.png)
 </div>
 
 ### Q13: Probability at Output of NN

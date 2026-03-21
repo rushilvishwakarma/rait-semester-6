@@ -5,7 +5,6 @@ description: CNN numericals and formula reference for DL MSE.
 
 import { Highlight } from '@/components/highlight';
 
-
 ## Common Formulas (Use for ANY CNN Question)
 
 | Layer | Formula |
@@ -135,8 +134,6 @@ That’s it.
 
 Design a CNN for music genre classification (5 genres: Jazz, Pop, Rock, Classical, Metal) from a Fourier magnitude image.
 
-![CNN Parameters Formula](/images/docs/DL/MSE-QB/cnn_params_formula.svg)
-
 | Layer | Configuration |
 |-------|--------------|
 | Input | 256 windows × 200 frequency bins (spectrogram → 1 channel) |
@@ -152,6 +149,10 @@ Design a CNN for music genre classification (5 genres: Jazz, Pop, Rock, Classica
 
 ---
 
+<div className="w-full flex justify-center my-6 [&_img]:invert [&_img]:dark:invert-0 [&_img]:hue-rotate-180 [&_img]:dark:hue-rotate-0">
+  ![CNN Parameters Formula](/images/docs/DL/MSE-QB/cnn_params_formula.svg)
+</div>
+
 ### Step 1 — Input
 
 $$\text{Input} = 256 \times 200 \times 1 \quad \text{(spectrogram = 1 channel)}$$
@@ -165,7 +166,8 @@ $$\text{Params} = (5 \times 5 \times 1 + 1) \times 5 = 26 \times 5 = \boxed{130}
 
 **Output size:**
 $$O = \left\lfloor \frac{n-k+2p}{s} \right\rfloor + 1$$
-$$H = \left\lfloor \frac{256 - 5}{2} \right\rfloor + 1 = 126, \qquad W = \left\lfloor \frac{200 - 5}{2} \right\rfloor + 1 = 98$$
+$$\therefore H = \left\lfloor \frac{256 - 5}{2} \right\rfloor + 1 = 126$$
+$$W = \left\lfloor \frac{200 - 5}{2} \right\rfloor + 1 = 98$$
 
 $$\Rightarrow \boxed{126 \times 98 \times 5}$$
 
@@ -174,7 +176,8 @@ $$\Rightarrow \boxed{126 \times 98 \times 5}$$
 ### Step 3 — Pool1 (2×2, stride 3)
 
 $$O = \left\lfloor \frac{n-k+2p}{s} \right\rfloor + 1$$
-$$H = \left\lfloor \frac{126 - 2}{3} \right\rfloor + 1 = 42, \qquad W = \left\lfloor \frac{98 - 2}{3} \right\rfloor + 1 = 33$$
+$$\therefore H = \left\lfloor \frac{126 - 2}{3} \right\rfloor + 1 = 42$$
+$$W = \left\lfloor \frac{98 - 2}{3} \right\rfloor + 1 = 33$$
 
 $$\Rightarrow \boxed{42 \times 33 \times 5} \quad \text{(no parameters)}$$
 
@@ -187,7 +190,8 @@ $$\text{Params} = (3 \times 3 \times 5 + 1) \times 10 = 46 \times 10 = \boxed{46
 
 **Output size** (same padding formula with $p=1$):
 $$O = \left\lfloor \frac{n-k+2p}{s} \right\rfloor + 1$$
-$$H = \left\lfloor \frac{42 - 3 + 2}{2} \right\rfloor + 1 = 21, \qquad W = \left\lfloor \frac{33 - 3 + 2}{2} \right\rfloor + 1 = 17$$
+$$\therefore H = \left\lfloor \frac{42 - 3 + 2}{2} \right\rfloor + 1 = 21$$
+$$W = \left\lfloor \frac{33 - 3 + 2}{2} \right\rfloor + 1 = 17$$
 
 $$\Rightarrow \boxed{21 \times 17 \times 10}$$
 
@@ -196,7 +200,8 @@ $$\Rightarrow \boxed{21 \times 17 \times 10}$$
 ### Step 5 — Pool2 (2×2, stride 2)
 
 $$O = \left\lfloor \frac{n-k+2p}{s} \right\rfloor + 1$$
-$$H = \left\lfloor \frac{21 - 2}{2} \right\rfloor + 1 = 10, \qquad W = \left\lfloor \frac{17 - 2}{2} \right\rfloor + 1 = 8$$
+$$\therefore H = \left\lfloor \frac{21 - 2}{2} \right\rfloor + 1 = 10$$
+$$W = \left\lfloor \frac{17 - 2}{2} \right\rfloor + 1 = 8$$
 
 $$\Rightarrow \boxed{10 \times 8 \times 10} \quad \text{(no parameters)}$$
 
