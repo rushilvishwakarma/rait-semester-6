@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 330" width="800" height="330">
+  <defs>
+    <style>
+      .mc { fill: #222222; }
+      .sc { fill: #555555; }
+      .formula { font-family: 'Georgia', 'Times New Roman', serif; font-style: italic; }
+      .upright  { font-family: 'Georgia', 'Times New Roman', serif; font-style: normal; }
+    </style>
+  </defs>
+
+  <!-- ═══ FORMULA ═══ -->
+  <text x="60"  y="142" font-size="70" class="formula mc" text-anchor="middle">(</text>
+  <text x="106" y="136" font-size="46" class="formula mc" text-anchor="middle">K</text>
+  <text x="126" y="148" font-size="22" class="formula mc" text-anchor="middle">h</text>
+  <text x="164" y="136" font-size="34" class="upright mc" text-anchor="middle">×</text>
+  <text x="210" y="136" font-size="46" class="formula mc" text-anchor="middle">K</text>
+  <text x="230" y="148" font-size="22" class="formula mc" text-anchor="middle">w</text>
+  <text x="268" y="136" font-size="34" class="upright mc" text-anchor="middle">×</text>
+  <text x="312" y="136" font-size="46" class="formula mc" text-anchor="middle">C</text>
+  <text x="332" y="148" font-size="22" class="formula mc" text-anchor="middle">in</text>
+  <text x="374" y="136" font-size="38" class="upright mc" text-anchor="middle">+</text>
+  <text x="408" y="136" font-size="46" class="upright mc" text-anchor="middle">1</text>
+  <text x="444" y="142" font-size="70" class="formula mc" text-anchor="middle">)</text>
+  <text x="488" y="136" font-size="34" class="upright mc" text-anchor="middle">×</text>
+  <text x="534" y="136" font-size="46" class="formula mc" text-anchor="middle">C</text>
+  <text x="556" y="148" font-size="22" class="formula mc" text-anchor="middle">out</text>
+
+  <!-- ═══ CURLY BRACE: Kh × Kw ═══ -->
+  <path d="M 88,162 C 88,180 138,170 168,185 C 200,170 248,180 248,162"
+        fill="none" stroke="#555555" stroke-width="1.8" stroke-linecap="round"/>
+  <text x="168" y="205" font-size="13.5" class="upright sc" text-anchor="middle">kernel / filter size</text>
+
+  <!-- ═══ CURLY BRACE: Cout ═══ -->
+  <path d="M 514,162 C 514,180 534,172 546,185 C 558,172 578,180 578,162"
+        fill="none" stroke="#555555" stroke-width="1.8" stroke-linecap="round"/>
+  <text x="546" y="202" font-size="13.5" class="upright sc" text-anchor="middle">number of</text>
+  <text x="546" y="219" font-size="13.5" class="upright sc" text-anchor="middle">kernels / filters</text>
+
+  <!-- ═══ ARROW: input channels → C_in (straight up) ═══ -->
+  <line x1="322" y1="255" x2="322" y2="172" stroke="#555555" stroke-width="1.8"/>
+  <polygon points="322,160 317,172 327,172" fill="#555555"/>
+  <text x="322" y="270" font-size="13.5" class="upright sc" text-anchor="middle">input</text>
+  <text x="322" y="287" font-size="13.5" class="upright sc" text-anchor="middle">channels</text>
+
+  <!-- ═══ ARROW: bias — diagonal from top-right label down to "1" at x=408 ═══ -->
+  <!-- label at (460,28), tip at (410, 96) pointing down-left -->
+  <text x="475" y="28" font-size="13.5" class="upright sc" text-anchor="middle">bias</text>
+  <!-- line from just below label to just above arrowhead tip -->
+  <line x1="463" y1="36" x2="416" y2="93" stroke="#555555" stroke-width="1.8"/>
+  <!-- arrowhead tip at (410,100), line direction: dx=-53, dy=64, len≈83 -->
+  <!-- unit: (-0.639, 0.771), perp: (-0.771, -0.639) -->
+  <!-- back from tip by 9: (410+5.75, 100-6.94) = (415.75, 93.06) -->
+  <!-- left: (415.75 - 0.771*4, 93.06 - 0.639*4) = (412.67, 90.50) -->
+  <!-- right:(415.75 + 0.771*4, 93.06 + 0.639*4) = (418.83, 95.62) -->
+  <polygon points="410,101 412.67,90.50 418.83,95.62" fill="#555555"/>
+
+</svg>
