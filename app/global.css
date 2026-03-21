@@ -253,12 +253,12 @@
 
 
 /* Opt-in diagram inversion using alt-text matching */
-.dark img[alt*="{invert-dark}"],
-.dark [data-rmiz-modal-img][alt*="{invert-dark}"] {
+.dark img[alt*="#invert-dark"],
+.dark [data-rmiz-modal-img][alt*="#invert-dark"] {
     filter: invert(1) hue-rotate(180deg) !important;
 }
-:root:not(.dark) img[alt*="{invert-light}"],
-:root:not(.dark) [data-rmiz-modal-img][alt*="{invert-light}"] {
+:root:not(.dark) img[alt*="#invert-light"],
+:root:not(.dark) [data-rmiz-modal-img][alt*="#invert-light"] {
     filter: invert(1) !important;
 }
 
