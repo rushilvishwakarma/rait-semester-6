@@ -36,49 +36,146 @@ Design a CNN for classifying subjects as COVID-19 patients or healthy subjects b
 
 ---
 
-### Step 1 — Start
+## Solution (mapped exactly to question statements)
 
-Image = **150×150×1** (X-ray → grayscale → 1 channel)
+### **“images having width & height of 150 pixels each”**
 
----
+$$
+H = 150, W = 150
+$$
 
-### Step 2 — Filters
+### **“X-ray images”**
 
-“start with 2, increase ×4”
-→ **2, 8, 32**
+Grayscale
+$$
+C_{in} = 1
+$$
 
----
-
-### Step 3 — Conv params (just plug numbers)
-
-* Conv1
-  $$
-  (9 \times 1 + 1) \times 2 = 20
-  $$
-
-* Conv2
-  $$
-  (9 \times 2 + 1) \times 8 = 152
-  $$
-
-* Conv3
-  $$
-  (9 \times 8 + 1) \times 32 = 2336
-  $$
-
-**Total conv = 2508**
+So input:
+$$
+150 \times 150 \times 1
+$$
 
 ---
 
-### Step 4 — Size after pooling (just divide by 2 each time)
+## **“The feature extractor uses 3 blocks of convolutional + pooling layers”**
 
-150 → 75 → 37 → 17
-
-Final = **17×17×32**
+$$
+\text{Block 1: Conv1} \rightarrow \text{Pool1}
+$$
+$$
+\text{Block 2: Conv2} \rightarrow \text{Pool2}
+$$
+$$
+\text{Block 3: Conv3} \rightarrow \text{Pool3}
+$$
 
 ---
 
-### Step 5 — Flatten
+## **“Convolutional layers have (3,3) kernel”**
+
+$$
+k = 3
+$$
+
+---
+
+## **“increasing by a factor of 4, starting with 2”**
+
+$$
+2, 8, 32
+$$
+
+---
+
+## **Block 1**
+
+### Conv1
+
+(filters = 2, padding = same)
+$$
+(3 \times 3 \times 1 + 1) \times 2 = 20
+$$
+
+Output:
+$$
+150 \times 150 \times 2
+$$
+
+### Pool1 (2×2)
+
+$$
+150 \rightarrow 75
+$$
+
+Output:
+$$
+75 \times 75 \times 2
+$$
+
+---
+
+## **Block 2**
+
+### Conv2
+
+(filters = 8, padding = same)
+$$
+(3 \times 3 \times 2 + 1) \times 8 = 152
+$$
+
+Output:
+$$
+75 \times 75 \times 8
+$$
+
+### Pool2
+
+$$
+75 \rightarrow 37
+$$
+
+Output:
+$$
+37 \times 37 \times 8
+$$
+
+---
+
+## **Block 3**
+
+### Conv3
+
+(filters = 32, no padding)
+
+$$
+n - k + 1 = 37 - 3 + 1 = 35
+$$
+
+Params:
+$$
+(3 \times 3 \times 8 + 1) \times 32 = 2336
+$$
+
+Output:
+$$
+35 \times 35 \times 32
+$$
+
+### Pool3
+
+$$
+35 \rightarrow 17
+$$
+
+Output:
+$$
+17 \times 17 \times 32
+$$
+
+---
+
+## **Flatten**
 
 $$
 17 \times 17 \times 32 = 9248
@@ -86,47 +183,62 @@ $$
 
 ---
 
-### Step 6 — FC layers (divide by 4 each time)
+## **“Total four fully-connected layers”**
 
-9248 → 2312 → 578 → 144 → 36 → 1
-
----
-
-### Step 7 — FC params
-
-* FC1 → 21,383,688
-* FC2 → 1,336,914
-* FC3 → 83,376
-* FC4 → 5,220
-* Output → 37
-
-**Total FC = 22,809,235**
+FC1, FC2, FC3, FC4
 
 ---
 
-## Final Answer (write this)
+## **“Neurons reduced by factor of 4”**
 
-* Conv = **2508**
-* FC = **22,809,235**
+$$
+9248 \rightarrow 2312 \rightarrow 578 \rightarrow 144 \rightarrow 36
+$$
+
+---
+
+### FC1
+
+$$
+9248 \times 2312 + 2312 = 21{,}383{,}688
+$$
+
+### FC2
+
+$$
+2312 \times 578 + 578 = 1{,}336{,}914
+$$
+
+### FC3
+
+$$
+578 \times 144 + 144 = 83{,}376
+$$
+
+### FC4
+
+$$
+144 \times 36 + 36 = 5{,}220
+$$
+
+---
+
+### Output (binary)
+
+$$
+36 \times 1 + 1 = 37
+$$
+
+---
+
+## **Final Answer**
+
+* Conv total = **2508**
+* FC total = **22,809,235**
 
 $$
 \boxed{22{,}811{,}743}
 $$
-
----
-
-## Even simpler way to think
-
-* Conv = small numbers
-* FC = huge numbers
-
-Just remember:
-
-* filters → 2, 8, 32
-* size → keep halving
-* FC → keep dividing by 4
-
-That’s it.
 
 ---
 

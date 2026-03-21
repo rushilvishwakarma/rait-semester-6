@@ -168,20 +168,20 @@ $$\sum w^2 = 4 + 9 + 1 = 14 \qquad \Rightarrow \qquad \mathcal{L}_{L2} = 10 + 0.
 
 In Machine Learning, **bias** can refer to errors arising from incorrect assumptions or flawed data collection.
 
-#### Types of Biases
+#### Types of Biases (Mnemonic: **SCEMA**)
 
-1. <Highlight color="orange">**Selection Bias:**</Highlight> Training data is not representative of the real population (e.g., training only on urban images for a global model).
-2. <Highlight color="orange">**Confirmation Bias:**</Highlight> Interpreting results to confirm pre-existing assumptions while ignoring contradictory evidence.
-3. <Highlight color="orange">**Measurement Bias:**</Highlight> Systematic errors in how data was recorded, labeled, or classified.
-4. <Highlight color="orange">**Exclusion Bias:**</Highlight> Certain groups or data points are unintentionally excluded from the dataset.
-5. <Highlight color="orange">**Algorithm Bias:**</Highlight> The model's inductive assumptions (e.g., linearity) cause systematic errors regardless of data size.
+1. <Highlight color="orange">**S - Selection Bias:**</Highlight> Training data is not representative of the real population (e.g., training only on urban images for a global model).
+2. <Highlight color="orange">**C - Confirmation Bias:**</Highlight> Interpreting results to confirm pre-existing assumptions while ignoring contradictory evidence.
+3. <Highlight color="orange">**E - Exclusion Bias:**</Highlight> Certain groups or data points are unintentionally excluded from the dataset.
+4. <Highlight color="orange">**M - Measurement Bias:**</Highlight> Systematic errors in how data was recorded, labeled, or classified.
+5. <Highlight color="orange">**A - Algorithm Bias:**</Highlight> The model's inductive assumptions (e.g., linearity) cause systematic errors regardless of data size.
 
-#### Impact on Learning
+#### Impact on Learning (Mnemonic: **PUSS**)
 
-- <Highlight color="red">**Poor Generalization:**</Highlight> Model performs well on training data but fails on real-world, diverse inputs.
-- <Highlight color="red">**Unfairness:**</Highlight> Discriminatory outcomes for underrepresented groups.
-- <Highlight color="red">**Skewed Accuracy:**</Highlight> High training accuracy but total failure in production.
-- **Systematic Error:** Unlike variance, bias errors are consistent and not reducible by more training data alone.
+- <Highlight color="red">**P - Poor Generalization:**</Highlight> Model performs well on training data but fails on real-world, diverse inputs.
+- <Highlight color="red">**U - Unfairness:**</Highlight> Discriminatory outcomes for underrepresented groups.
+- <Highlight color="red">**S - Skewed Accuracy:**</Highlight> High training accuracy but total failure in production.
+- <Highlight color="red">**S - Systematic Error:**</Highlight> Unlike variance, bias errors are consistent and not reducible by more training data alone.
 
 The <Highlight color="blue">**Bias–Variance Tradeoff**</Highlight> formalizes this:
 
@@ -322,6 +322,8 @@ Flattens feature maps and connect every neuron to every output class. Produces f
 
 **6. <Highlight color="blue">Output Layer (Softmax)</Highlight>**  
 Converts raw scores to class probabilities for multi-class classification.
+
+![CNN Architecture Mnemonic](/mnemonics/icap.jpg)
 
 ---
 
