@@ -5,6 +5,7 @@ title: Question Bank - Mid-Semester Exam
 import { Highlight } from '@/components/highlight';
 import { LongQuestion } from '@/components/question';
 import { TheoryCard } from '@/components/theory-card';
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 
 # Module 1 — Fundamentals of Neural Networks
 
@@ -59,8 +60,12 @@ $$W^{[l]} \leftarrow W^{[l]} - \alpha \frac{\partial \mathcal{L}}{\partial W^{[l
 
 Repeat for multiple epochs until convergence.
 
-<div className="flex justify-center my-6">
-  <img src="/images/docs/DL/MSE-QB/Q3_ShallowNN.png" alt="Shallow Neural Network" className="dark:invert dark:hue-rotate-180" />
+<div className="flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
+  <ImageZoom
+    src="/images/docs/DL/MSE-QB/Q3_ShallowNN.png"
+    alt="Shallow Neural Network"
+    zoomInProps={{ className: 'dark:invert dark:hue-rotate-180' }}
+  />
 </div>
 
 ---
@@ -343,8 +348,12 @@ $$y_{in} = \sum_{i=0}^{n} w_i x_i \quad (x_0 = 1, \; w_0 = b)$$
 
 $$\text{Output} = \begin{cases} 1 & y_{in} \geq \theta \\ -1 & y_{in} < \theta \end{cases} \quad \text{(Bipolar)}$$
 
-<div className="flex justify-center my-6">
-  <img src="/images/docs/DL/MSE-QB/Q1_Perceptron.png" alt="Perceptron Structure" className="dark:invert dark:hue-rotate-180" />
+<div className="flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
+  <ImageZoom
+    src="/images/docs/DL/MSE-QB/Q1_Perceptron.png"
+    alt="Perceptron Structure"
+    zoomInProps={{ className: 'dark:invert dark:hue-rotate-180' }}
+  />
 </div>
 
 #### Example: Bipolar AND Gate

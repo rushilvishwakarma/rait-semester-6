@@ -4,6 +4,7 @@ description: Perceptron learning tables and neural network forward pass worked e
 ---
 
 import { Highlight } from '@/components/highlight';
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 
 > All arithmetic verified by Python (NumPy). Tables and matrices are exact.
 
@@ -130,8 +131,12 @@ import { Highlight } from '@/components/highlight';
 - **3I** = 3 input neurons
 - **4L** = 4 total layers (Input → Hidden₁ → Hidden₂ → Output)
 
-<div className="flex justify-center my-6">
-  <img src="/images/docs/DL/NNFS/arch_3I4L.png" alt="3I-4L Architecture" className="dark:invert dark:hue-rotate-180" />
+<div className="flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
+  <ImageZoom
+    src="/images/docs/DL/NNFS/arch_3I4L.png"
+    alt="3I-4L Architecture"
+    zoomInProps={{ className: 'dark:invert dark:hue-rotate-180' }}
+  />
 </div>
 
 ### Architecture 4I-3N-2L
@@ -140,8 +145,12 @@ import { Highlight } from '@/components/highlight';
 - **3N** = 3 neurons in the hidden layer
 - **2L** = 2 output neurons
 
-<div className="flex justify-center my-6">
-  <img src="/images/docs/DL/NNFS/arch_4I3N2L.png" alt="4I-3N-2L Architecture" className="dark:invert dark:hue-rotate-180" />
+<div className="flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
+  <ImageZoom
+    src="/images/docs/DL/NNFS/arch_4I3N2L.png"
+    alt="4I-3N-2L Architecture"
+    zoomInProps={{ className: 'dark:invert dark:hue-rotate-180' }}
+  />
 </div>
 
 ---
@@ -154,8 +163,12 @@ import { Highlight } from '@/components/highlight';
 - $Z^{[L]} = W^{[L-1]} \times A^{[L-1]}$, then $A^{[L]} = f^{[L]}(Z^{[L]})$
 - With 3+ output rows → **Softmax**; with 2 rows → **Sigmoid**.
 
-<div className="flex justify-center my-6">
-  <img src="/images/docs/DL/NNFS/arch_2layer.png" alt="Two-Layer Architecture" className="dark:invert dark:hue-rotate-180" />
+<div className="flex justify-center my-6 [&_img]:dark:invert [&_img]:dark:hue-rotate-180">
+  <ImageZoom
+    src="/images/docs/DL/NNFS/arch_2layer.png"
+    alt="Two-Layer Architecture"
+    zoomInProps={{ className: 'dark:invert dark:hue-rotate-180' }}
+  />
 </div>
 
 ### Q13: Probability at Output of NN
