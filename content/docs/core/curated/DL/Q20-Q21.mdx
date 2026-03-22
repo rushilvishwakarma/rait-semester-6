@@ -30,7 +30,7 @@ import { Highlight } from '@/components/highlight';
 
 ---
 
-## 20. Question — COVID-19 X-ray CNN
+### 20. Question — COVID-19 X-ray CNN
 
 Design a CNN for classifying subjects as COVID-19 patients or healthy subjects based on chest X-ray images having width & height of 150 pixels each. The feature extractor uses 3 blocks of convolutional + pooling layers. Convolutional layers have (3, 3) kernel and increasing by a factor of 4, starting with 2. First two layers use zero padding. The pooling layer calculates average over (2, 2) pixels. Total four fully-connected layers are cascaded to predict output probability. Neurons in each layer are reduced by a factor of 4. Calculate number of trainable parameters for each layer and CNN.
 
@@ -233,12 +233,14 @@ $$
 
 ## **Final Answer**
 
-* Conv total = **2508**
-* FC total = **22,809,235**
+### Conv Parameters
+$$20 + 152 + 2336 = 2508$$
 
-$$
-\boxed{22{,}811{,}743}
-$$
+### FC Parameters
+$$21{,}383{,}688 + 1{,}336{,}914 + 83{,}376 + 5{,}220 + 37 = 22{,}809{,}235$$
+
+### Total Parameters
+$$\text{Total} = 2508 + 22{,}809{,}235 = \boxed{22{,}811{,}743}$$
 
 ---
 
@@ -294,6 +296,10 @@ $$\Rightarrow \boxed{42 \times 33 \times 5} \quad \text{(no parameters)}$$
 ---
 
 ### Step 4 — Conv2 (10 filters, 3×3, padding=1, stride 2)
+
+<Callout type="info">
+  $$C_{in}^{(\text{next})} = C_{out}^{(\text{previous})}$$
+</Callout>
 
 **Parameters:**
 $$\text{Params} = (3 \times 3 \times 5 + 1) \times 10 = 46 \times 10 = \boxed{460}$$
