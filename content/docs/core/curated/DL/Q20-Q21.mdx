@@ -29,11 +29,11 @@ import { Highlight } from '@/components/highlight';
 | RGB image | <Highlight color="green">**3**</Highlight> |
 
 ---
-
+<LongQuestion>
 ### 20. Question — COVID-19 X-ray CNN
 
 Design a CNN for classifying subjects as COVID-19 patients or healthy subjects based on chest X-ray images having width & height of 150 pixels each. The feature extractor uses 3 blocks of convolutional + pooling layers. Convolutional layers have (3, 3) kernel and increasing by a factor of 4, starting with 2. First two layers use zero padding. The pooling layer calculates average over (2, 2) pixels. Total four fully-connected layers are cascaded to predict output probability. Neurons in each layer are reduced by a factor of 4. Calculate number of trainable parameters for each layer and CNN.
-
+</LongQuestion>
 ---
 
 ## Solution (mapped exactly to question statements)
@@ -221,9 +221,7 @@ $$
 144 \times 36 + 36 = 5{,}220
 $$
 
----
-
-### Output (binary)
+### Output
 
 $$
 36 \times 1 + 1 = 37
@@ -243,7 +241,7 @@ $$21{,}383{,}688 + 1{,}336{,}914 + 83{,}376 + 5{,}220 + 37 = 22{,}809{,}235$$
 $$\text{Total} = 2508 + 22{,}809{,}235 = \boxed{22{,}811{,}743}$$
 
 ---
-
+<LongQuestion>
 ## 21. Question — Music Genre CNN
 
 Design a CNN for music genre classification (5 genres: Jazz, Pop, Rock, Classical, Metal) from a Fourier magnitude image.
@@ -260,6 +258,7 @@ Design a CNN for music genre classification (5 genres: Jazz, Pop, Rock, Classica
 | Dropout | 50% drop |
 | Dense2 | 10 neurons |
 | Output | 5 genres |
+</LongQuestion>
 
 ---
 
