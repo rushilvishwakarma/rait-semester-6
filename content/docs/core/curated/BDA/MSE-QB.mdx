@@ -14,7 +14,7 @@ import { QuestionDot } from '@/components/question-dot';
 
 # Module 3: NoSQL Systems
 
-### Q1. What is NOSQL? What are the business drivers for NoSQL? Discuss any two architectural patterns of NoSQL. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
+### Q1. What is NOSQL? What are the business drivers for NoSQL? Discuss any two architectural patterns of NoSQL.
 
 NoSQL, which stands for <Highlight>**"Not Only SQL"**</Highlight>, is a database system designed to handle large, distributed data without a fixed schema. Unlike traditional databases, NoSQL is optimized for **horizontal scalability**, high availability, and flexible data models.
 
@@ -36,7 +36,7 @@ Another is the <Highlight color="blue">**Shared-Nothing architecture**</Highligh
 
 ---
 
-### Q2. What are the types of NOSQL business drivers explain any two with example. / What are NoSQL business drivers? Explain. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
+### Q2. What are the types of NOSQL business drivers explain any two with example. / What are NoSQL business drivers? Explain.
 
 One major NoSQL driver is <Highlight>**High Velocity Ingestion**</Highlight>, the ability to process massive continuous data streams in real-time. This is crucial for IoT sensors or system logs generating millions of events.
 
@@ -48,7 +48,7 @@ For instance, an **e-commerce platform** using MongoDB can store diverse user pr
 
 ---
 
-### Q3. Explain four ways that NoSQL system handles big data problems. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
+### Q3. Explain four ways that NoSQL system handles big data problems.
 
 NoSQL systems address the challenges of Big Data through several key techniques. The first way is <Highlight>**Horizontal Partitioning (Sharding)**</Highlight>, where data is distributed across multiple servers in a cluster. This allows the system to process large datasets in parallel and scale out by simply adding more commodity hardware to the network.
 
@@ -60,7 +60,7 @@ Thirdly, they use <Highlight>**Eventual Consistency models**</Highlight>, updati
 
 Finally, <Highlight color="blue">**Columnar Storage**</Highlight> stores data in columns rather than rows, boosting analytical query speed and providing better data compression to manage huge datasets efficiently
 
-### Q4. Describe characteristics of a NoSQL database. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
+### Q4. Describe characteristics of a NoSQL database.
 
 The defining characteristic of a NoSQL database is its <Highlight>**Schema-less or Flexible Data Model**</Highlight>. Unlike relational databases that require a predefined schema, NoSQL systems allow for the storage of data in various formats such as documents, key-pair values, or graphs. This flexibility supports rapid development and handles semi-structured data effectively.
 
@@ -72,7 +72,7 @@ Thus, these characteristics make NoSQL databases highly suitable for modern, lar
 
 ---
 
-### Q5. Explain CAP Theorem and compare it with ACID properties. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
+### Q5. Explain CAP Theorem and compare it with ACID properties.
 
 <Callout title="Important Concept"></Callout>
 
@@ -86,7 +86,7 @@ While ACID guarantees absolute reliability within a transaction, the CAP theorem
 
 ---
 
-### Q6. Explain NoSQL Architectural patterns. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
+### Q6. Explain NoSQL Architectural patterns.
 
 NoSQL systems utilize various architectural patterns to manage data distribution. One primary pattern is the <Highlight>**Shared-Nothing Architecture**</Highlight>, where every node in the cluster is independent and has its own local resources. This pattern eliminates single points of failure and allows for massive parallel processing.
 
@@ -98,7 +98,7 @@ Hence, the choice of architectural pattern determines how the system balances th
 
 ---
 
-### Q7. Describe characteristics of NOSQL database. List the different types of NoSQL data stores. Explain any two with diagram. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
+### Q7. Describe characteristics of NOSQL database. List the different types of NoSQL data stores. Explain any two with diagram.
 
 NoSQL databases are characterized by their **flexible schemas**, **horizontal scalability**, and **high-performance** capabilities. They are designed to manage various data types across distributed clusters, providing a resilient foundation for Big Data applications.
 
@@ -121,7 +121,7 @@ Thus, by using different data stores, organizations can match their database tec
 
 ---
 
-### Q8. Agility is a Non-SQL business driver Justify. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
+### Q8. Agility is a Non-SQL business driver Justify.
 
 Agility is considered a primary driver for NoSQL because it enables <Highlight>**Rapid Development and Faster Deployment cycles**</Highlight>. In a traditional SQL environment, changing a data model often requires complex schema migrations and potential application downtime. NoSQL’s schema-less nature allows developers to add new fields and features instantly.
 
@@ -133,7 +133,7 @@ Hence, NoSQL provides the structural and operational flexibility that modern bus
 
 ---
 
-### Q9. Differentiate between master-slave versus peer-to peer architecture. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
+### Q9. Differentiate between master-slave versus peer-to peer architecture.
 
 Master-Slave and Peer-to-Peer are two different approaches to managing data in a cluster. In a <Highlight>**Master-Slave architecture**</Highlight>, there is a clear hierarchy where one node (Master) handles all writes and coordinates the updates to other nodes (Slaves). This simplifies data consistency but can create a write bottleneck at the master node.
 
@@ -150,7 +150,7 @@ Therefore, Master-Slave is often preferred for applications requiring tight cont
 
 ---
 
-### Q10. Explain shared-nothing architecture to analyse big data. <QuestionDot color="yellow" text="Part of MSE-QB as well" />
+### Q10. Explain shared-nothing architecture to analyse big data.
 
 The **Shared-Nothing architecture** is a distributed computing design where each node in a cluster is entirely self-sufficient. Every node has its own <Highlight>**local CPU, RAM, and Disk storage**</Highlight>, and nodes communicate with each other exclusively through a high-speed network. There is no contention for shared memory or disk resources.
 
