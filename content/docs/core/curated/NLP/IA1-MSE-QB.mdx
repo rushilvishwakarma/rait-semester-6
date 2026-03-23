@@ -4,6 +4,7 @@ description: Compact Q&A covering all MSE and IA1 important topics for NLP
 ---
 
 import { Highlight } from '@/components/highlight';
+import { LongQuestion } from '@/components/question';
 import { BookOpen } from 'lucide-react';
 import { QuestionDot } from '@/components/question-dot';
 
@@ -15,7 +16,9 @@ These notes are compiled from OCR context, curated content, and high-scoring stu
 
 ## MSE Important Topics (Ordered by Priority)
 
-### Q4. Explain POS Tagging in NLP, its tag sets, and why it is difficult. (🔴 Priority 1)
+<LongQuestion>
+
+</LongQuestion>
 
 <Highlight>**Part-of-Speech (POS) Tagging**</Highlight> is the process of identifying the correct grammatical category for every word in a sentence. It labels whether a word is a Noun, a Verb, an Adjective, an Adverb, etc.
 
@@ -32,7 +35,9 @@ Tagging is difficult because human languages are highly ambiguous. A single word
 
 ---
 
-### Q5. What are the different approaches to POS Tagging? Explain Rule-Based POS Tagging. (🔴 Priority 1)
+<LongQuestion>
+
+</LongQuestion>
 
 Because POS tagging is difficult, different methods were invented to train computers to do it.
 
@@ -54,7 +59,9 @@ So, in "the book", the rule forcefully throws away the 'Verb' tag, leaving the c
 
 ---
 
-### Q6. Explain POS Tagging using Hidden Markov Models (HMM). (🔴 Priority 1)
+<LongQuestion>
+
+</LongQuestion>
 
 <Highlight>**Hidden Markov Models (HMM)**</Highlight> represent the Statistical approach to POS Tagging. Instead of a human writing strict rules, the computer calculates the probability of what the tag should be, based on millions of past sentences it has read.
 
@@ -73,7 +80,9 @@ For an entire sentence, the computer multiplies these probabilities together acr
 
 ---
 
-### Q3. What is Context-Free Grammar (CFG) in NLP? Explain with an example. (🔴 Priority 2)
+<LongQuestion>
+
+</LongQuestion>
 
 A <Highlight>**Context-Free Grammar (CFG)**</Highlight> is a set of logical rules used to build grammatically correct sentences. Think of it like a formula for producing a proper English sentence.
 
@@ -111,7 +120,9 @@ CFG is very powerful but it has a weakness: it struggles with complex grammatica
 
 ---
 
-### Q11. Explain the Stages / Levels of NLP with examples. (🟡 Priority 3)
+<LongQuestion>
+
+</LongQuestion>
 
 Whenever text goes into an NLP system, it is processed deeply through five sequential stages:
 
@@ -140,7 +151,9 @@ Whenever text goes into an NLP system, it is processed deeply through five seque
 
 ---
 
-### Q14. How is ambiguity resolved in NLP? Explain methods. (🟡 Priority 4)
+<LongQuestion>
+
+</LongQuestion>
 
 Resolving ambiguity is critical because if NLP picks the wrong meaning, the entire output to the user will be completely incorrect. NLP systems use four main methods to resolve these massive ambiguity problems:
 
@@ -160,7 +173,9 @@ To understand hidden intentions (like sarcasm, or answering "Can you pass the sa
 
 ---
 
-### Q8. Explain major Applications of NLP. (🟢 Priority 5)
+<LongQuestion>
+
+</LongQuestion>
 
 Natural Language Processing is used everywhere today to solve real world problems. Here are the main applications:
 
@@ -184,7 +199,9 @@ Natural Language Processing is used everywhere today to solve real world problem
 
 ---
 
-### Q1. What are Regular Expressions in NLP? Explain with operators and examples. / What are Regular Expression(RE)? Explain the meaning of the given RE: a. [e^] b. [^A-Z] <QuestionDot color="green" text="Asked in IA1" />
+<LongQuestion>
+
+</LongQuestion>
 
 A **Regular Expression (RE)** is a <Highlight>**simple and formal language used to match text patterns**</Highlight> inside strings. Just like how we use a search box to find a file, NLP uses regular expressions to find specific words or letters in a large amount of text.
 
@@ -208,7 +225,9 @@ Regular expressions are widely used for finding emails in a text, cleaning up me
 
 ---
 
-### Q2. What are N-gram Language Models? Explain with examples and limitations. / Explain N-gram Language model. <QuestionDot color="green" text="Asked in IA1" />
+<LongQuestion>
+
+</LongQuestion>
 
 A <Highlight>**language model**</Highlight> goes through a text to calculate the probability of a word sequence. It answers the question: *"What is the most likely next word after this sentence?"*
 
@@ -236,7 +255,9 @@ $$
 
 ---
 
-### Q7. What is POS Tag Ambiguity? Give examples.
+<LongQuestion>
+
+</LongQuestion>
 
 <Highlight>**POS tag ambiguity**</Highlight> occurs when one single word has the potential to belong to two or more different grammatical categories (Parts of Speech). Because computers initially don't understand context, this causes major confusion.
 
@@ -260,7 +281,9 @@ In all these cases, without understanding the surrounding words, it is impossibl
 
 ## IA1 Important Topics
 
-### Q9. What is Natural Language? Define Natural Language Processing (NLP). / Define NLP. <QuestionDot color="green" text="Asked in IA1" />
+<LongQuestion>
+
+</LongQuestion>
 
 **Natural Language** is the normal language naturally spoken and written by human beings for communication. 
 Examples include Hindi, English, French, and Marathi. 
@@ -275,7 +298,9 @@ These languages are completely different from programming languages (like C++, J
 
 ---
 
-### Q10. What are the components of NLP? Distinguish NLU from NLG.
+<LongQuestion>
+
+</LongQuestion>
 
 NLP has two main, heavily distinct components to process language:
 
@@ -291,7 +316,9 @@ This is the **"Writing and Speaking"** part of NLP. Once the computer has proces
 
 ---
 
-### Q12. What is a Generic NLP System? Explain the roles of different knowledge types.
+<LongQuestion>
+
+</LongQuestion>
 
 A **Generic NLP System** is basically the pipeline engine that takes human language, runs it through various knowledge bases, and outputs computer understanding.
 
@@ -305,7 +332,9 @@ To successfully process human text, the NLP system requires **5 types of knowled
 
 ---
 
-### Q13. What are the different types of Ambiguity in NLP? Give examples. / What are the different ambiguities in NLP. <QuestionDot color="green" text="Asked in IA1" />
+<LongQuestion>
+
+</LongQuestion>
 
 <Highlight>**Ambiguity**</Highlight> happens when a sentence or a word has more than one meaning. It is one of the hardest challenges to solve in NLP.
 
@@ -334,7 +363,9 @@ There are five major types of ambiguity:
 
 ---
 
-### Q15. What is Morphology in NLP? Explain Morphemes and Morphological Analysis.
+<LongQuestion>
+
+</LongQuestion>
 
 **Morphology** is the deep study of how words are formed, created, and structured. 
 
@@ -351,7 +382,9 @@ It has three morphemes:
 
 ---
 
-### Q16. What are the different morphological processes? Differentiate Inflectional vs Derivational Morphology. / Compare inflectional morphology and derivational morphology. <QuestionDot color="green" text="Asked in IA1" />
+<LongQuestion>
+
+</LongQuestion>
 
 There are two major ways that words are altered and formed in the English language.
 
@@ -370,7 +403,9 @@ Here is a clear comparison between the two:
 
 ---
 
-### Q17. What is Stemming? What is Lemmatization? Compare them with examples. / Differentiate between Stemming and Lemmatization. <QuestionDot color="green" text="Asked in IA1" />
+<LongQuestion>
+
+</LongQuestion>
 
 Both Stemming and Lemmatization are techniques used in NLP to chop the ends off of words to reduce them back to their base, root form. However, they do it in very different ways.
 
@@ -384,7 +419,9 @@ Both Stemming and Lemmatization are techniques used in NLP to chop the ends off 
 
 ---
 
-### Q18. Explain the Porter Stemming Algorithm.
+<LongQuestion>
+
+</LongQuestion>
 
 The **Porter Stemmer** is the most famous and widely used algorithm to perform "Stemming" on text. 
 
