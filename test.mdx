@@ -13,7 +13,9 @@ These notes are compiled from OCR context, curated content, and high-scoring stu
 
 ---
 
-## MSE Important Topics (Ordered by Priority)
+## MSE Important Topics
+
+---
 
 ### Q4. Explain POS Tagging in NLP, its tag sets, and why it is difficult. (🔴 Priority 1)
 
@@ -73,90 +75,25 @@ For an entire sentence, the computer multiplies these probabilities together acr
 
 ---
 
-### Q3. What is Context-Free Grammar (CFG) in NLP? Explain with an example. (🔴 Priority 2)
+### Q7. What is POS Tag Ambiguity? Give examples.
 
-A <Highlight>**Context-Free Grammar (CFG)**</Highlight> is a set of logical rules used to build grammatically correct sentences. Think of it like a formula for producing a proper English sentence.
+<Highlight>**POS tag ambiguity**</Highlight> occurs when one single word has the potential to belong to two or more different grammatical categories (Parts of Speech). Because computers initially don't understand context, this causes major confusion.
 
-CFG helps machines understand the structure of a sentence (which part is the subject, the verb, etc).
+**Examples of Ambiguous Words in English:**
 
-It consists of 4 main parts:
-1. **Terminals (T):** The actual, final words in the dictionary (e.g., *book, flight, man, the*).
-2. **Non-terminals (N):** The grammatical categories or placeholders (e.g., Noun, Verb, NounPhrase).
-3. **Start symbol (S):** The starting point, usually an entire Sentence.
-4. **Rules (R):** The instructions that tell how a Non-terminal converts into Terminals.
+1. **Duck:**
+   - As a Noun: "Look at the cute **duck** in the pond." (An animal).
+   - As a Verb: "You need to **duck** to avoid the ball." (Action of lowering the head).
 
-**Example of CFG Rules:**
-- `Sentence → NounPhrase + VerbPhrase`
-- `NounPhrase → Determiner + Noun`
-- `VerbPhrase → Verb + NounPhrase`
-- `Determiner → "the" | "a"`
-- `Verb → "reads" | "books"`
-- `Noun → "man" | "book"`
+2. **Watch:**
+   - As a Noun: "My gold **watch** is broken." (An object that tells time).
+   - As a Verb: "I will **watch** the movie tonight." (Action of looking).
 
-**Example Tree Structure:**
-Using the rules above, the sentence "the man reads a book" can be mapped accurately:
+3. **Race:**
+   - As a Noun: "He won the car **race**." (An event).
+   - As a Verb: "I will **race** you to the end of the street." (An action).
 
-<Mermaid chart={`graph TD
-    S[Sentence] --> NP[NounPhrase]
-    S --> VP[VerbPhrase]
-    NP --> Det1[Determiner: the]
-    NP --> N1[Noun: man]
-    VP --> V[Verb: reads]
-    VP --> NP2[NounPhrase]
-    NP2 --> Det2[Determiner: a]
-    NP2 --> N2[Noun: book]
-`} />
-
-CFG is very powerful but it has a weakness: it struggles with complex grammatical rules like gender and plural agreement.
-
----
-
-### Q11. Explain the Stages / Levels of NLP with examples. (🟡 Priority 3)
-
-Whenever text goes into an NLP system, it is processed deeply through five sequential stages:
-
-1. **Morphological Analysis (Word Level):**
-   The computer breaks large words down into their smallest meaningful parts (morphemes).
-   *Example:* `Truthfulness` is split into `Truth` + `ful` + `ness`.
-
-2. **Syntactic Analysis (Grammar Level):**
-   The computer checks if the sentence follows strict language grammar rules using sentence parse trees. It checks if the verbs and nouns are correctly placed.
-
-3. **Semantic Analysis (Meaning Level):**
-   The computer figures out the literal dictionary meaning of the sentence and handles words that have multiple meanings.
-   *Example:* Decoding if "Apple" means the fruit or the technology company.
-
-4. **Discourse Analysis (Sentence Level):**
-   The computer connects the current sentence to the previous sentences to figure out pronouns.
-   *Example:* If sentence 1 is "Rahul bought a car" and sentence 2 is "He drove it", Discourse analysis connects "He" to "Rahul".
-
-5. **Pragmatic Analysis (Context Level):**
-   The computer uncovers the hidden intention of the sentence based on human situational context.
-   *Example:* If a user says "Can you pass the salt?", they aren't asking if you possess the physical capability to lift salt. They are requesting you to give it to them.
-
-<Mermaid chart={`graph LR
-    A[Morphological] --> B[Syntactic] --> C[Semantic] --> D[Discourse] --> E[Pragmatic]
-`} />
-
----
-
-### Q14. How is ambiguity resolved in NLP? Explain methods. (🟡 Priority 4)
-
-Resolving ambiguity is critical because if NLP picks the wrong meaning, the entire output to the user will be completely incorrect. NLP systems use four main methods to resolve these massive ambiguity problems:
-
-#### 1. Resolving Syntactic Ambiguity using POS Tagging
-When a word like `book` or `race` can be multiple things, NLP uses **Part-of-Speech (POS) Tagging**. It looks closely at the words immediately before and after the ambiguous word. 
-*Example:* In the sentence "I will book the flight", the presence of "will" before "book" triggers a grammatical rule that categorizes "book" as an Action/Verb, destroying the incorrect interpretation that it is a paper object.
-
-#### 2. Resolving Lexical/Semantic Ambiguity using Word Sense Disambiguation (WSD)
-When a word is definitively a Noun, but has two meanings (like `bank` being a river bank vs `bank` being a financial building), NLP uses **WSD**. 
-WSD scans the rest of the paragraph for context clues. If words like "money", "deposit", and "loan" are in the same paragraph, it mathematical calculates that "financial building" is the correct definition.
-
-#### 3. Resolving Parsing Ambiguity using Probabilistic parsing
-When a whole sentence can be interpreted in two ways (like the telescope example), the NLP system uses **Probabilistic Parsing**. It builds a syntax tree for BOTH possible meanings. Then, it checks an massive database of billions of real-world sentences to calculate which meaning happens more often in real life. It picks the tree with the highest probability.
-
-#### 4. Resolving Pragmatic Ambiguity using Context Tracking
-To understand hidden intentions (like sarcasm, or answering "Can you pass the salt?"), the computer must use **Pragmatics**. It tracks the history of the conversation and uses a "Real-World Knowledge Base" to understand human situational context, realizing it is a request for an object rather than a yes-or-no question.
+In all these cases, without understanding the surrounding words, it is impossible for an NLP system to know which form is being used.
 
 ---
 
@@ -184,81 +121,9 @@ Natural Language Processing is used everywhere today to solve real world problem
 
 ---
 
-### Q1. What are Regular Expressions in NLP? Explain with operators and examples. / What are Regular Expression(RE)? Explain the meaning of the given RE: a. [e^] b. [^A-Z] <QuestionDot color="green" text="Asked in IA1" />
-
-A **Regular Expression (RE)** is a <Highlight>**simple and formal language used to match text patterns**</Highlight> inside strings. Just like how we use a search box to find a file, NLP uses regular expressions to find specific words or letters in a large amount of text.
-
-They are very important in Natural Language Processing for tasks like searching text, cleaning data, and checking if a word fits a certain grammatical rule.
-
-**Basic rule operators and symbols:**
-
-| Operator | What it does | Example | Result |
-| :--- | :--- | :--- | :--- |
-| `[A-Z]` | Finds any capital letter | `[Ww]oodchuck` | Matches `Woodchuck` or `woodchuck` |
-| `[^A-Z]` | Negation (Finds anything EXCEPT capital letters) | `[^A-Z]at` | Matches `cat`, `bat`, but NOT `Cat` |
-| `[e^]` | Matches either the letter 'e' or the character '^' literally (since '^' is not at the start) | `m[e^]t` | Matches `met` or `m^t` |
-| `?` | Optional character (0 or 1 time) | `colou?r` | Matches `color` or `colour` |
-| `.` | Wildcard (Matches any single character) | `beg.n` | Matches `began`, `begin`, `begun` |
-| `*` | Zero or more times | `ab*` | Matches `a`, `ab`, `abb`, `abbb` |
-| `+` | One or more times | `ab+` | Matches `ab`, `abb`, `abbb` (but NOT just `a`) |
-| `\d` | Finds any digit | `\d\d` | Matches `12`, `99` |
-
-**Applications:**
-Regular expressions are widely used for finding emails in a text, cleaning up messy data, and creating rules for morphological parsers.
-
----
-
-### Q2. What are N-gram Language Models? Explain with examples and limitations. / Explain N-gram Language model. <QuestionDot color="green" text="Asked in IA1" />
-
-A <Highlight>**language model**</Highlight> goes through a text to calculate the probability of a word sequence. It answers the question: *"What is the most likely next word after this sentence?"*
-
-An **N-gram model** is a simple version of this. Instead of looking at the entire paragraph, it looks at only a fixed number of previous words (called the window). This helps the computer run much faster.
-
-**Different Types of N-grams:**
-
-1. **Unigram (N=1):** The model only looks at 1 word at a time. It ignores all previous words.  
-   *Example sentence "I love coding":* `[I]`, `[love]`, `[coding]`
-2. **Bigram (N=2):** The model looks at the current word and 1 previous word.  
-   *Example:* `[I love]`, `[love coding]`
-3. **Trigram (N=3):** The model looks at 2 previous words.  
-   *Example:* `[I love coding]`
-
-**How it works (The Formula):**
-To guess the next word in a Bigram model, it uses a simple probability formula based on how many times it saw the two words together in the past:
-
-$$
-P(word_2 \mid word_1) = \frac{\text{Count}(word_1, word_2)}{\text{Count}(word_1)}
-$$
-
-**Limitations & Solutions:**
-- **The Zero Probability Problem:** If an N-gram model has never seen a specific pair of words before (like "purple alien"), it will give a 0% probability, breaking the whole calculation.
-- **Solution:** We use **Smoothing** (like Laplace Add-1 smoothing) which gives a tiny bit of probability (like 0.001) to unseen words so the system doesn't crash.
-
----
-
-### Q7. What is POS Tag Ambiguity? Give examples.
-
-<Highlight>**POS tag ambiguity**</Highlight> occurs when one single word has the potential to belong to two or more different grammatical categories (Parts of Speech). Because computers initially don't understand context, this causes major confusion.
-
-**Examples of Ambiguous Words in English:**
-
-1. **Duck:**
-   - As a Noun: "Look at the cute **duck** in the pond." (An animal).
-   - As a Verb: "You need to **duck** to avoid the ball." (Action of lowering the head).
-
-2. **Watch:**
-   - As a Noun: "My gold **watch** is broken." (An object that tells time).
-   - As a Verb: "I will **watch** the movie tonight." (Action of looking).
-
-3. **Race:**
-   - As a Noun: "He won the car **race**." (An event).
-   - As a Verb: "I will **race** you to the end of the street." (An action).
-
-In all these cases, without understanding the surrounding words, it is impossible for an NLP system to know which form is being used.
-
----
-
 ## IA1 Important Topics
+
+---
 
 ### Q9. What is Natural Language? Define Natural Language Processing (NLP). / Define NLP. <QuestionDot color="green" text="Asked in IA1" />
 
@@ -288,6 +153,35 @@ This is the **"Reading and Listening"** part of NLP. It focuses on taking an inp
 This is the **"Writing and Speaking"** part of NLP. Once the computer has processed a thought in its own machine code, it must convert it back into an English sentence to present to the user.
 - It involves deep planning on *what to say* and syntactic generation on *how to build the grammar of the sentence properly*.
 - *Goal:* Successfully produce a human-sounding response.
+
+---
+
+### Q11. Explain the Stages / Levels of NLP with examples. (🟡 Priority 3)
+
+Whenever text goes into an NLP system, it is processed deeply through five sequential stages:
+
+1. **Morphological Analysis (Word Level):**
+   The computer breaks large words down into their smallest meaningful parts (morphemes).
+   *Example:* `Truthfulness` is split into `Truth` + `ful` + `ness`.
+
+2. **Syntactic Analysis (Grammar Level):**
+   The computer checks if the sentence follows strict language grammar rules using sentence parse trees. It checks if the verbs and nouns are correctly placed.
+
+3. **Semantic Analysis (Meaning Level):**
+   The computer figures out the literal dictionary meaning of the sentence and handles words that have multiple meanings.
+   *Example:* Decoding if "Apple" means the fruit or the technology company.
+
+4. **Discourse Analysis (Sentence Level):**
+   The computer connects the current sentence to the previous sentences to figure out pronouns.
+   *Example:* If sentence 1 is "Rahul bought a car" and sentence 2 is "He drove it", Discourse analysis connects "He" to "Rahul".
+
+5. **Pragmatic Analysis (Context Level):**
+   The computer uncovers the hidden intention of the sentence based on human situational context.
+   *Example:* If a user says "Can you pass the salt?", they aren't asking if you possess the physical capability to lift salt. They are requesting you to give it to them.
+
+<Mermaid chart={`graph LR
+    A[Morphological] --> B[Syntactic] --> C[Semantic] --> D[Discourse] --> E[Pragmatic]
+`} />
 
 ---
 
@@ -331,6 +225,26 @@ There are five major types of ambiguity:
 
 5. **Pragmatic Ambiguity:**
    When the user's intentions are clear but only if you have contextual knowledge of the situation. Without knowing the context, the computer is confused.
+
+---
+
+### Q14. How is ambiguity resolved in NLP? Explain methods. (🟡 Priority 4)
+
+Resolving ambiguity is critical because if NLP picks the wrong meaning, the entire output to the user will be completely incorrect. NLP systems use four main methods to resolve these massive ambiguity problems:
+
+#### 1. Resolving Syntactic Ambiguity using POS Tagging
+When a word like `book` or `race` can be multiple things, NLP uses **Part-of-Speech (POS) Tagging**. It looks closely at the words immediately before and after the ambiguous word. 
+*Example:* In the sentence "I will book the flight", the presence of "will" before "book" triggers a grammatical rule that categorizes "book" as an Action/Verb, destroying the incorrect interpretation that it is a paper object.
+
+#### 2. Resolving Lexical/Semantic Ambiguity using Word Sense Disambiguation (WSD)
+When a word is definitively a Noun, but has two meanings (like `bank` being a river bank vs `bank` being a financial building), NLP uses **WSD**. 
+WSD scans the rest of the paragraph for context clues. If words like "money", "deposit", and "loan" are in the same paragraph, it mathematical calculates that "financial building" is the correct definition.
+
+#### 3. Resolving Parsing Ambiguity using Probabilistic parsing
+When a whole sentence can be interpreted in two ways (like the telescope example), the NLP system uses **Probabilistic Parsing**. It builds a syntax tree for BOTH possible meanings. Then, it checks an massive database of billions of real-world sentences to calculate which meaning happens more often in real life. It picks the tree with the highest probability.
+
+#### 4. Resolving Pragmatic Ambiguity using Context Tracking
+To understand hidden intentions (like sarcasm, or answering "Can you pass the salt?"), the computer must use **Pragmatics**. It tracks the history of the conversation and uses a "Real-World Knowledge Base" to understand human situational context, realizing it is a request for an object rather than a yes-or-no question.
 
 ---
 
@@ -399,3 +313,15 @@ It classifies words by their sequences of vowels and consonants. Based on how ma
 Because of this brutal set of rules, the Porter algorithm is incredibly fast, but predictably creates non-dictionary words as its final output.
 
 ---
+
+### Q19. Explain the various challenges in NLP. <QuestionDot color="green" text="Asked in IA1" />
+
+Natural Language Processing faces several massive challenges because human languages are inherently messy, illogical, and heavily dependent on context. Computers struggle with this because they run on strict logic. 
+
+**Main Challenges:**
+1. **Ambiguity:** This is the absolute biggest challenge. Words often have multiple meanings depending entirely on context. For example, "I saw a bat" (A flying animal or a wooden stick?).
+2. **Context and Sarcasm:** Understanding the true intention behind words. A computer struggles to understand sarcasm like, "Oh, brilliant idea," when it is meant as an insult. 
+3. **Synonyms:** Humans use many different words to mean the exact same thing (e.g., *buy, purchase, acquire*), which forces the system to learn vast vocabularies to group identical meanings.
+4. **Incorrect Spelling and Grammar:** Humans constantly make typos, use slang ("gonna", "imma"), and break grammatical rules when tweeting or texting. NLP models must be trained to handle this dirty data.
+5. **Lack of Resources for certain Languages:** While English has massive datasets to train AI models, thousands of other languages (like tribal languages or regional dialects) have practically zero digital data available for computers to learn from.
+

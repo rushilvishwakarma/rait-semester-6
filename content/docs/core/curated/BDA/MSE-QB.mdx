@@ -14,65 +14,9 @@ import { QuestionDot } from '@/components/question-dot';
 
 # Module 3: NoSQL Systems
 
-### Q1. What is NOSQL? What are the business drivers for NoSQL? Discuss any two architectural patterns of NoSQL.
+## MSE Important Topics (Ordered by Priority)
 
-NoSQL, which stands for <Highlight>**"Not Only SQL"**</Highlight>, is a database system designed to handle large, distributed data without a fixed schema. Unlike traditional databases, NoSQL is optimized for **horizontal scalability**, high availability, and flexible data models.
-
-It emerged to manage **Big Data**, which is often unstructured and generated rapidly. NoSQL stores data across commodity hardware clusters, offering a cost-effective solution for modern applications.
-
-Thus, it complements SQL by delivering high performance for data-intensive workloads.
-
-**Business Drivers for NoSQL:**
-
-The primary drivers include <Highlight color="blue">**elastic scalability**</Highlight> and **low-latency performance**, allowing systems to handle sudden traffic spikes without expensive hardware upgrades.
-
-Another driver is **schema agility**, letting teams modify data structures quickly without complex migrations. Additionally, the **cost-effectiveness** of running on regular servers reduces ownership costs.
-
-**Architectural Patterns of NoSQL:**
-
-One pattern is <Highlight>**Master-Slave replication**</Highlight>, where a master node handles writes and slave nodes replicate data to serve reads. This provides **read scalability** and keeps data available if a slave fails.
-
-Another is the <Highlight color="blue">**Shared-Nothing architecture**</Highlight>, where every node is independent with its own resources. Data is distributed across nodes, removing bottlenecks and enabling **linear scalability** and high fault tolerance.
-
----
-
-### Q2. What are the types of NOSQL business drivers explain any two with example. / What are NoSQL business drivers? Explain.
-
-One major NoSQL driver is <Highlight>**High Velocity Ingestion**</Highlight>, the ability to process massive continuous data streams in real-time. This is crucial for IoT sensors or system logs generating millions of events.
-
-For example, a **smart city telemetry system** using Cassandra can ingest data from thousands of traffic sensors instantly, a task where traditional databases would fail due to the heavy write load.
-
-Another driver is <Highlight color="blue">**Complex and Hierarchical Data management**</Highlight>. NoSQL document stores easily hold nested or varying records (like JSON) without rigid tables and joins.
-
-For instance, an **e-commerce platform** using MongoDB can store diverse user profiles—some with multiple addresses and different order histories—allowing the data model to evolve easily.
-
----
-
-### Q3. Explain four ways that NoSQL system handles big data problems.
-
-NoSQL systems address the challenges of Big Data through several key techniques. The first way is <Highlight>**Horizontal Partitioning (Sharding)**</Highlight>, where data is distributed across multiple servers in a cluster. This allows the system to process large datasets in parallel and scale out by simply adding more commodity hardware to the network.
-
-The first way NoSQL handles Big Data is <Highlight>**Horizontal Partitioning (Sharding)**</Highlight>, distributing data across multiple servers. This enables parallel processing and easy scaling by adding standard hardware.
-
-The second method uses <Highlight color="blue">**Write-Optimized Storage engines**</Highlight>, batching multiple writes into a single sequential operation. This drastically improves write speeds for high-velocity data.
-
-Thirdly, they use <Highlight>**Eventual Consistency models**</Highlight>, updating replicas asynchronously. This ensures high availability and fast responses, prioritizing uptime over instant synchronization.
-
-Finally, <Highlight color="blue">**Columnar Storage**</Highlight> stores data in columns rather than rows, boosting analytical query speed and providing better data compression to manage huge datasets efficiently
-
-### Q4. Describe characteristics of a NoSQL database.
-
-The defining characteristic of a NoSQL database is its <Highlight>**Schema-less or Flexible Data Model**</Highlight>. Unlike relational databases that require a predefined schema, NoSQL systems allow for the storage of data in various formats such as documents, key-pair values, or graphs. This flexibility supports rapid development and handles semi-structured data effectively.
-
-Another core characteristic is **Horizontal Scalability**. NoSQL databases are designed to be distributed across many nodes, allowing they to handle increased load by adding more servers rather than upgrading a single machine. This distributed nature also provides **High Availability and Fault Tolerance**, ensuring the system remains operational even if several nodes fail.
-
-Additionally, NoSQL systems often provide **Tunable Consistency**, allowing developers to choose the level of consistency required for different operations. This is often based on the **CAP Theorem**, where the system prioritizes Availability and Partition Tolerance over immediate Consistency.
-
-Thus, these characteristics make NoSQL databases highly suitable for modern, large-scale applications that require agility, resilience, and performance.
-
----
-
-### Q5. Explain CAP Theorem and compare it with ACID properties.
+ (🔴 Priority 1)
 
 <Callout title="Important Concept"></Callout>
 
@@ -86,19 +30,7 @@ While ACID guarantees absolute reliability within a transaction, the CAP theorem
 
 ---
 
-### Q6. Explain NoSQL Architectural patterns.
-
-NoSQL systems utilize various architectural patterns to manage data distribution. One primary pattern is the <Highlight>**Shared-Nothing Architecture**</Highlight>, where every node in the cluster is independent and has its own local resources. This pattern eliminates single points of failure and allows for massive parallel processing.
-
-Another widely used pattern is <Highlight color="blue">**Master-Slave (Primary-Replica) Replication**</Highlight>. In this setup, a master node coordinates all write operations and replicates them to several slave nodes. This pattern is highly effective for read-heavy workloads, as reads can be distributed across the replicas to improve performance.
-
-A third pattern is the <Highlight>**Peer-to-Peer (Leaderless) Architecture**</Highlight>, where all nodes are equal and can accept both read and write operations. Systems like Cassandra use this to provide high availability and ensure that the cluster remains operational even if half of the nodes are down.
-
-Hence, the choice of architectural pattern determines how the system balances the needs for data consistency, system availability, and overall throughput.
-
----
-
-### Q7. Describe characteristics of NOSQL database. List the different types of NoSQL data stores. Explain any two with diagram.
+ (🔴 Priority 2)
 
 NoSQL databases are characterized by their **flexible schemas**, **horizontal scalability**, and **high-performance** capabilities. They are designed to manage various data types across distributed clusters, providing a resilient foundation for Big Data applications.
 
@@ -121,19 +53,34 @@ Thus, by using different data stores, organizations can match their database tec
 
 ---
 
-### Q8. Agility is a Non-SQL business driver Justify.
+ (🟡 Priority 5)
 
-Agility is considered a primary driver for NoSQL because it enables <Highlight>**Rapid Development and Faster Deployment cycles**</Highlight>. In a traditional SQL environment, changing a data model often requires complex schema migrations and potential application downtime. NoSQL’s schema-less nature allows developers to add new fields and features instantly.
+NoSQL, which stands for <Highlight>**"Not Only SQL"**</Highlight>, is a database system designed to handle large, distributed data without a fixed schema. Unlike traditional databases, NoSQL is optimized for **horizontal scalability**, high availability, and flexible data models.
 
-Furthermore, NoSQL supports **Iterative Development**, where teams can refine their data structures based on real-world usage without being locked into a rigid initial design. This aligns perfectly with Agile and DevOps methodologies, allowing for continuous integration and delivery.
+It emerged to manage **Big Data**, which is often unstructured and generated rapidly. NoSQL stores data across commodity hardware clusters, offering a cost-effective solution for modern applications.
 
-Additionally, NoSQL systems provide **Elastic Scalability**, allowing businesses to respond quickly to changing market demands by scaling their infrastructure up or down without re-architecting the database layer.
+Thus, it complements SQL by delivering high performance for data-intensive workloads.
 
-Hence, NoSQL provides the structural and operational flexibility that modern businesses need to remain competitive in a fast-paced digital economy.
+**Business Drivers for NoSQL:**
+
+Business drivers are the operational requirements that lead organizations to adopt NoSQL. The key types include:
+
+1.  **Elastic Scalability & Cost-Effectiveness**: The ability to handle sudden traffic spikes dynamically using cheap commodity servers, reducing overall hardware costs.
+2.  **Schema Agility**: Allowing development teams to iterate faster by modifying data structures on the fly without complex migrations.
+3.  <Highlight>**High Velocity Ingestion**</Highlight>: The capability to process massive, rapid data streams in real-time. 
+    *   *Example*: A **smart city telemetry system** using Cassandra can ingest continuous data from thousands of traffic sensors instantly, a load where traditional databases would fail.
+4.  <Highlight color="blue">**Complex and Hierarchical Data Management**</Highlight>: The ability to store nested or varying records (like JSON) without rigid tables and complex joins.
+    *   *Example*: An **e-commerce platform** using MongoDB can store diverse user profiles—some with one address and others with multiple—allowing the data model to evolve easily.
+
+**Architectural Patterns of NoSQL:**
+
+One pattern is <Highlight>**Master-Slave replication**</Highlight>, where a master node handles writes and slave nodes replicate data to serve reads. This provides **read scalability** and keeps data available if a slave fails.
+
+Another is the <Highlight color="blue">**Shared-Nothing architecture**</Highlight>, where every node is independent with its own resources. Data is distributed across nodes, removing bottlenecks and enabling **linear scalability** and high fault tolerance.
 
 ---
 
-### Q9. Differentiate between master-slave versus peer-to peer architecture.
+ (🟡 Priority 6)
 
 Master-Slave and Peer-to-Peer are two different approaches to managing data in a cluster. In a <Highlight>**Master-Slave architecture**</Highlight>, there is a clear hierarchy where one node (Master) handles all writes and coordinates the updates to other nodes (Slaves). This simplifies data consistency but can create a write bottleneck at the master node.
 
@@ -150,14 +97,49 @@ Therefore, Master-Slave is often preferred for applications requiring tight cont
 
 ---
 
-### Q10. Explain shared-nothing architecture to analyse big data.
+ (🟢 Priority 8)
 
-The **Shared-Nothing architecture** is a distributed computing design where each node in a cluster is entirely self-sufficient. Every node has its own <Highlight>**local CPU, RAM, and Disk storage**</Highlight>, and nodes communicate with each other exclusively through a high-speed network. There is no contention for shared memory or disk resources.
+The first way NoSQL handles Big Data is <Highlight>**Horizontal Partitioning (Sharding)**</Highlight>, distributing data across multiple servers. This enables parallel processing and easy scaling by adding standard hardware.
 
-This architecture is ideal for analyzing Big Data because it enables **Linear Scalability**. When data volume grows, you can simply add more nodes to the cluster, and the processing power increases proportionally. It also provides **High Fault Isolation**, ensuring that the failure of one node does not impact the stability or storage of other nodes.
+The second method uses <Highlight color="blue">**Write-Optimized Storage engines**</Highlight>, batching multiple writes into a single sequential operation. This drastically improves write speeds for high-velocity data.
 
-Frameworks like Hadoop and NoSQL databases like Cassandra utilize this pattern to process petabytes of data in parallel. By moving the computation to where the data resides (locally on each node), the system avoids the network bottlenecks common in traditional centralized architectures.
+Thirdly, they use <Highlight>**Eventual Consistency models**</Highlight>, updating replicas asynchronously. This ensures high availability and fast responses, prioritizing uptime over instant synchronization.
 
-Thus, shared-nothing architecture is the foundation of modern distributed systems, providing the scale and resilience required for Big Data analytics.
+Finally, <Highlight color="blue">**Columnar Storage**</Highlight> stores data in columns rather than rows, boosting analytical query speed and providing better data compression to manage huge datasets efficiently.
+
+---
+
+### Q3. Describe characteristics of a NoSQL database.
+
+The defining characteristic of a NoSQL database is its <Highlight>**Schema-less or Flexible Data Model**</Highlight>. Unlike relational databases that require a predefined schema, NoSQL systems allow for the storage of data in various formats such as documents, key-pair values, or graphs. This flexibility supports rapid development and handles semi-structured data effectively.
+
+Another core characteristic is **Horizontal Scalability**. NoSQL databases are designed to be distributed across many nodes, allowing they to handle increased load by adding more servers rather than upgrading a single machine. This distributed nature also provides **High Availability and Fault Tolerance**, ensuring the system remains operational even if several nodes fail.
+
+Additionally, NoSQL systems often provide **Tunable Consistency**, allowing developers to choose the level of consistency required for different operations. This is often based on the **CAP Theorem**, where the system prioritizes Availability and Partition Tolerance over immediate Consistency.
+
+Thus, these characteristics make NoSQL databases highly suitable for modern, large-scale applications that require agility, resilience, and performance.
+
+---
+
+### Q5. Explain NoSQL Architectural patterns. / Q9. Explain shared-nothing architecture to analyse big data.
+
+NoSQL systems use various architectural patterns to manage data distribution across clusters to handle Big Data:
+
+1.  <Highlight>**Shared-Nothing Architecture**</Highlight>: Every node (server) in the cluster is entirely self-sufficient, having its own <Highlight>**local CPU, RAM, and Disk storage**</Highlight>. They communicate only via a high-speed network and do not share disk resources.
+    *   **Why it helps Big Data**: It allows for **Linear Scalability**—you simply add more cheap servers as data grows. Processing happens locally on each node, eliminating network bottlenecks and preventing single points of failure.
+2.  <Highlight color="blue">**Master-Slave (Primary-Replica) Replication**</Highlight>: A master node handles all writes and replicates them to multiple slave nodes. Slave nodes handle read queries. This speeds up read-heavy applications but the master can become a bottleneck.
+3.  <Highlight>**Peer-to-Peer (Leaderless) Architecture**</Highlight>: All nodes are equal and can accept both read and write operations, avoiding any single point of failure and ensuring high cluster availability (e.g., Cassandra).
+
+---
+
+### Q7. Agility is a Non-SQL business driver Justify.
+
+Agility is considered a primary driver for NoSQL because it enables <Highlight>**Rapid Development and Faster Deployment cycles**</Highlight>. In a traditional SQL environment, changing a data model often requires complex schema migrations and potential application downtime. NoSQL’s schema-less nature allows developers to add new fields and features instantly.
+
+Furthermore, NoSQL supports **Iterative Development**, where teams can refine their data structures based on real-world usage without being locked into a rigid initial design. This aligns perfectly with Agile and DevOps methodologies, allowing for continuous integration and delivery.
+
+Additionally, NoSQL systems provide **Elastic Scalability**, allowing businesses to respond quickly to changing market demands by scaling their infrastructure up or down without re-architecting the database layer.
+
+Hence, NoSQL provides the structural and operational flexibility that modern businesses need to remain competitive in a fast-paced digital economy.
 
 ---
