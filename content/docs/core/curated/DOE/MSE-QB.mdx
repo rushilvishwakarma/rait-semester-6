@@ -15,9 +15,9 @@ import { LongQuestion } from '@/components/question';
 ### 5 Marks
 </LongQuestion>
 
-A **screening design** is an efficient experimental strategy used to identify <Highlight color="green">significant factors</Highlight> from many potential variables. It tests a carefully selected subset of combinations to separate the **"vital few"** factors (which have a large impact) from the **"trivial many"** (which have little to no effect).
-
-Testing all factors (full factorial) is impractical when there are many variables, as it requires too many runs. Screening designs reduce these runs significantly. For example, screening **7 factors** takes only **8 runs** instead of the **128 runs** needed for a full 2⁷ factor experiment—saving <Highlight color="pink">94% of the effort</Highlight>.
+**Screening Design:**
+- A **screening design** is an initial test used to find the most <Highlight color="green">significant factors</Highlight> among many variables.
+- It helps separate the **"vital few"** factors (which strongly impact the result) from the **"trivial many"** variables (which have little to no real effect).
 
 <div className="flex gap-6 my-4 justify-left flex-wrap">
   <div className="flex flex-col items-center gap-2">
@@ -30,9 +30,16 @@ Testing all factors (full factorial) is impractical when there are many variable
   </div>
 </div>
 
-**Example:** In pharmaceutical manufacturing, there might be 7 variables like binder amount, mixing time, and temperature. Instead of testing all combinations, an 8-run screening design is used. If only 3 factors strongly affect tablet hardness, future optimization experiments will focus only on those 3. 
+**Why is it needed?**
+- Testing every possible combination of factors (called a full factorial test) takes far too much time and money.
+- A screening design intentionally uses a small, carefully chosen fraction of tests instead.
+- For example, if you have **7 factors**, a full test requires **128 separate runs**. A basic screening design can do it in only **8 runs**, saving <Highlight color="pink">94% of the effort</Highlight> and time while still giving reliable performance answers.
 
-This saves time and resources in the early stages of process optimization.
+**Example in Manufacturing:** 
+- In making a medicinal tablet, you might start with 7 variables to test (like oven temperature, mixing time, binder amount, and cooling speed).
+- Instead of physically paying for all 128 combinations on the machines, an 8-run screening design is performed.
+- The results will rapidly show that only 3 of those factors actually impact how hard the tablet is.
+- The company can then safely ignore the other 4 useless variables and focus future optimization experiments exclusively on those top 3 important factors.
 
 ---
 <LongQuestion>
@@ -40,9 +47,9 @@ This saves time and resources in the early stages of process optimization.
 ### 10 Marks
 </LongQuestion>
 
-**Plackett-Burman (P-B) designs** are two-level screening designs. Their key feature is that the total number of runs **N is always a multiple of 4** (like 4, 8, 12, 16). They allow studying up to **k = N - 1 factors** using exactly N experimental runs.
+**Plackett-Burman (P-B) designs** are simple two-level screening tests. The total number of runs **N is always a multiple of 4** (like 4, 8, 12, 16). They help study up to **k = N - 1 factors** using exactly N runs.
 
-P-B designs use <Highlight color="green">**orthogonal arrays**</Highlight>, meaning each factor is tested equally at high (+1) and low (-1) levels. They are **Resolution III designs**, which means main effects are studied independently. They assume interactions between factors are negligible and focus only on **main effects**.
+P-B designs use <Highlight color="green">**orthogonal arrays**</Highlight>. This means each factor is tested equally at high (+1) and low (-1) levels. They focus on finding **main effects** and assume interactions between factors are practically zero.
 
 <details>
 <summary style={{cursor:'pointer',fontWeight:500,fontSize:'0.875rem',color:'var(--color-text-secondary)',userSelect:'none',listStyle:'none',display:'flex',alignItems:'center',gap:'6px',margin:'12px 0 0'}}>
@@ -51,7 +58,7 @@ P-B designs use <Highlight color="green">**orthogonal arrays**</Highlight>, mean
 
 <div style={{marginTop:'12px'}}>
 
-> **Knowing A tells you nothing about B** — In an orthogonal array, the columns are statistically independent. The levels of factor A are completely uncorrelated with the levels of factor B across all runs, so estimating one factor's effect does not interfere with estimating another.
+> **Knowing A tells you nothing about B** — In an orthogonal array, columns are independent. When Factor A changes, Factor B stays balanced. This prevents one factor from interfering with another.
 
 <Tabs items={["L4 — 3 Factors", "L8 — 7 Factors", "L12 — 11 Factors"]}>
 
@@ -114,12 +121,12 @@ P-B designs use <Highlight color="green">**orthogonal arrays**</Highlight>, mean
 
 #### Construction of an 8-Run P-B Design
 
-It is built using the **cyclical construction** method. To draw the table quickly in an exam:
+This table is built using the **cyclic shift** method:
 
 <Callout type="info" title="The '3-1-1-2' Rule">
-- **Step 1 (Row 1):** Memorize the **3-1-1-2** pattern: **3** Highs (`+ + +`), **1** Low (`-`), **1** High (`+`), **2** Lows (`- -`). This gives `+ + + - + - -`.
-- **Step 2 (Rows 2 to 7):** Apply a cyclic shift. Take the last sign from the row above it, move it to the front, and push everything else one step to the right. (The signs shift diagonally).
-- **Step 3 (Row 8):** Fill the last row entirely with Lows (`- - - - - - -`).
+- **Step 1 (Row 1):** Use the **3-1-1-2** pattern for signs: **3** Highs (`+ + +`), **1** Low (`-`), **1** High (`+`), **2** Lows (`- -`). Result: `+ + + - + - -`.
+- **Step 2 (Rows 2 to 7):** Cycle the signs right. Bring the last sign of the top row to the front and drop the rest.
+- **Step 3 (Row 8):** Fill entirely with Lows (`- - - - - - -`).
 </Callout>
 
 #### Complete 8-Run Matrix (7 Factors: A to G)
@@ -139,9 +146,9 @@ It is built using the **cyclical construction** method. To draw the table quickl
 
 #### Example — Injection Moulding
 
-An engineer wants to screen **7 variables** (e.g., Melt Temperature, Injection Speed) affecting the accuracy of molded parts. 
+An engineer needs to screen **7 variables** (like speed and temperature). 
 
-By using this 8-run P-B design, the engineer conducts just **8 trials** in random order, logs the results, and quickly identifies which factors have the largest impact.
+Using the 8-run P-B design, they perform just **8 trials** in random order. The results clearly show which factors have the largest impact.
 
 <div className="flex gap-6 my-4 justify-left flex-wrap">
   <div className="flex flex-col items-center gap-2">
@@ -150,7 +157,7 @@ By using this 8-run P-B design, the engineer conducts just **8 trials** in rando
   </div>
 </div>
 
-This method is widely used to screen between **7 to 23 factors** efficiently when resources are limited.
+This technique is perfectly suited for quickly testing **7 to 23 factors**.
 
 ---
 <LongQuestion>
@@ -158,18 +165,17 @@ This method is widely used to screen between **7 to 23 factors** efficiently whe
 ### 5 Marks
 </LongQuestion>
 
-A <Highlight color="pink">**full factorial design**</Highlight> tests **all possible combinations** of different factor levels. If there are **k factors** tested at 2 levels each, the total runs required is **N = 2ᵏ**. 
+A <Highlight color="pink">**full factorial design**</Highlight> tests every possible outcome by combining all factor levels. If there are **k factors** tested at 2 levels each, you need **N = 2ᵏ** runs.
 
-It estimates **all main effects and interactions** cleanly, without any mixing (confounding). It is best used when there are a few factors (≤ 4) and understanding their interactions is critical. Each new factor **doubles** the needed runs.
+It correctly reveals **all main effects and interactions** without mixing them. It works best for a small number of factors (like 2 to 4).
 
-**Example:** In a **chemical reaction**, we study 2 factors:
+**Example:** 
+In a **chemical process**, we want to test 2 factors:
 - **Factor A:** Temperature (Low/High)
 - **Factor B:** Pressure (Low/High)
-- **Result:** Yield (%)
 
-This is a **2² design**, requiring **4 runs**. We test all four pairs: (Low, Low), (High, Low), (Low, High), and (High, High). 
-
-This method perfectly identifies how Temperature and Pressure interact, providing **complete knowledge** of the process compared to tweaking only one variable at a time.
+This is a **2² design**, requiring **4 runs**: (Low, Low), (High, Low), (Low, High), and (High, High). 
+This gives a perfect view of how Temperature and Pressure behave alone and together.
 
 ---
 <LongQuestion>
@@ -177,20 +183,19 @@ This method perfectly identifies how Temperature and Pressure interact, providin
 ### 5 Marks
 </LongQuestion>
 
-A **2² full factorial design** tests **2 factors** at **2 levels each**. This requires **N = 2² = 4 runs**. It helps easily estimate the main factor effects and their two-way interaction.
+A **2² full factorial design** tests **2 factors** at **2 levels**, meaning it takes **N = 2² = 4 runs**. It quickly finds the main effects and the interaction between the two factors.
 
-**Example:** Optimizing surface finish in a CNC machine.
+**Example:**
+Optimizing a machine surface finish:
 - **Factor A:** Cutting Speed (Low '-' or High '+')
 - **Factor B:** Feed Rate (Low '-' or High '+')
 - **Response:** Roughness (Ra)
 
 #### Design Matrix
 
-You can easily generate any full factorial matrix by alternating signs:
-
 <Callout type="info" title="Standard Alternating Pattern">
-- **Column A:** Alternates every 1 row (`- + - +`)
-- **Column B:** Alternates every 2 rows (`- - + +`)
+- **Column A:** Changes every 1 row (`- + - +`)
+- **Column B:** Changes every 2 rows (`- - + +`)
 </Callout>
 
 | Run | A | B | Notation | Result (Ra) |
@@ -202,13 +207,9 @@ You can easily generate any full factorial matrix by alternating signs:
 
 ![2^2 Full Factorial Design Space #invert-light](/images/docs/DOE/MSE-QB/q4_2sq_factorial.svg)
 
-#### Calculations Summary
-
-- **Effect A (Speed):** 9.75 (Largest impact)
-- **Effect B (Feed Rate):** 3.25
-- **AB Interaction:** -5.75
-
-**Meaning:** Cutting speed (A) affects roughness the most. The negative interaction (-5.75) implies that raising *both* simultaneously lowers the expected benefit. This is an <Highlight color="blue">**antagonistic interaction**</Highlight>.
+#### Summary
+- **Speed (A)** impacts roughness the most.
+- A negative interaction score means raising *both* speed and feed results in a worse benefit than expected. This is an <Highlight color="blue">**antagonistic interaction**</Highlight>.
 
 ---
 <LongQuestion>
@@ -216,25 +217,23 @@ You can easily generate any full factorial matrix by alternating signs:
 ### 5 Marks
 </LongQuestion>
 
-A **2⁴ full factorial design** uses **4 factors** at **2 levels**, needing <Highlight color="green">**16 total runs**</Highlight>. It lets you study the main effects and all possible interactions between the 4 factors completely cleanly.
+A **2⁴ full factorial design** tests **4 factors** at **2 levels**. It requires <Highlight color="green">**16 total runs**</Highlight>. It neatly uncovers every main factor and all their interactions.
 
 ![2^4 Full Factorial Design (Two Cubes) #invert-light](/images/docs/DOE/MSE-QB/q5_2_4_factorial_cube.svg)
 
-**Example:** Improving chemical yield with 4 factors:
+**Example:** Using 4 factors to boost a chemical yield:
 - **A:** Temperature
 - **B:** Pressure
 - **C:** Catalyst Amount
 - **D:** Reaction Time
 
-#### The Complete 16-Run Design Matrix
-
-To construct the matrix, simply follow the alternating pattern, doubling the group size for each new column:
+#### The Complete 16-Run Matrix
 
 <Callout type="info" title="Standard Alternating Pattern">
-- **Column A:** Alternates every **1** row (`- + - + - + ...`)
-- **Column B:** Alternates every **2** rows (`- - + + - - ...`)
-- **Column C:** Alternates every **4** rows (`- - - - + + ...`)
-- **Column D:** Alternates every **8** rows (8 `-` then 8 `+`)
+- **Column A:** Changes every **1** row (`- + - + - + ...`)
+- **Column B:** Changes every **2** rows (`- - + + - - ...`)
+- **Column C:** Changes every **4** rows (`- - - - + + ...`)
+- **Column D:** Changes every **8** rows (8 `-` then 8 `+`)
 </Callout>
 
 | Run | A | B | C | D |
@@ -258,9 +257,7 @@ To construct the matrix, simply follow the alternating pattern, doubling the gro
 
 *(The - sign is Low level, and + sign is High level)*
 
-All runs are done in a **random order**. By analyzing the results, usually only a few main factors (like A and C) and maybe one interaction (like AC) will be found to actually affect the results. This is known as the **effect sparsity principle**.
-
-For more than 4 factors, this gets too massive, so **fractional designs** are often used instead to save time.
+Only very few factors (like A and C) and their interactions will truly matter, which is called the **effect sparsity principle**. For more than 4 factors, use fractional designs to save trips.
 
 ---
 <LongQuestion>
@@ -268,7 +265,10 @@ For more than 4 factors, this gets too massive, so **fractional designs** are of
 ### 5 Marks
 </LongQuestion>
 
-<Highlight color="pink">**Confounding**</Highlight> (also called aliasing) happens when the effect of one factor is **mixed up** with another factor's effect. Because they are grouped together mathematically, you cannot tell which one actually caused the result. This is a common trade-off when doing fewer runs to save time.
+<Highlight color="pink">**Confounding**</Highlight> (also called aliasing):
+- Confounding happens when the effect of one factor is **mixed together** with the effect of another factor or interaction.
+- Because their mathematical results are combined and tied together, it becomes impossible to safely tell which factor actually caused the final measurement to change.
+- Confounding is a common trade-off. Engineers accept it intentionally when they use fractional screening designs (doing fewer test runs) to save time and money.
 
 <div className="flex gap-6 my-4 justify-left flex-wrap">
   <div className="flex flex-col items-center gap-2">
@@ -285,15 +285,17 @@ For more than 4 factors, this gets too massive, so **fractional designs** are of
   </div>
 </div>
 
-Confounding severity is defined by **Design Resolution**:
-- **Resolution III:** Main effects are mixed with 2-factor interactions.
-- **Resolution IV:** Main effects are clear, but interactions are mixed together.
-- **Resolution V:** Main effects and simple interactions are completely clear.
+**Confounding Severity (Design Resolution):**
+The level of confounding is graded by the "Resolution" of the test:
+- **Resolution III:** The worst level. Single main effects are mixed up closely with 2-factor combinations. (Use with caution).
+- **Resolution IV:** Better. Main effects are safe and clear, but 2-factor combinations are mixed up with each other.
+- **Resolution V:** Excellent. Everything (main effects and 2-factor combinations) is perfectly clear and unmixed.
 
-**Example:** In an 8-run simplified experiment, the measured effect for Factor A might actually represent:
-`Effect of A + (Interaction of B & C)`
-
-If the B & C interaction is strong, an engineer might incorrectly assume Factor A is important. Therefore, you should avoid low-resolution designs if you know strong interactions exist.
+**Real-world Example:**
+- Imagine you are running a shortened, cheap test. The visible effect you calculate for **Factor A (Temperature)** might actually mathematically represent:
+`Estimated Effect = (True Effect of Factor A) + (Interaction of Factor B & Factor C)`
+- If the true interaction between Factor B and C is very powerful, your calculation will look huge.
+- An engineer who ignores confounding might incorrectly blame Factor A for the massive result and mistakenly change the temperature in the factory, achieving absolutely nothing. This is why understanding confounding is vital before making process decisions.
 
 ---
 <LongQuestion>
@@ -301,22 +303,22 @@ If the B & C interaction is strong, an engineer might incorrectly assume Factor 
 ### 5 Marks
 </LongQuestion>
 
-**Quality characteristics** (or response variables) are the physical outputs measured to track process improvement. Choosing the correct one is a <Highlight color="green">**foundational step**</Highlight>. If you measure the wrong thing, your whole experiment is meaningless.
+**Quality characteristics** (the variables we measure) show if the process improved. Picking the correct one is a <Highlight color="green">**foundational step**</Highlight>. If you measure the wrong thing, the test is ruined.
 
-Good characteristics should follow these guidelines:
-- **Continuous over Binary:** It's better to measure exact physical values (like length) than pass/fail. Continuous data gives better insights with far fewer runs.
-- **Customer-Focused:** It must directly reflect what the end-user or customer cares about.
-- **Measurable:** You must be able to record it accurately with validated tools. Flawed tools will only record useless noise.
+Important Rules:
+- **Continuous over Binary:** It's much better to measure actual physical values (like a measurement) instead of a simple pass/fail.
+- **Customer-Focused:** Think about what the end-buyer directly cares about.
+- **Measurable:** You must use accurate, verified tools to capture real numbers.
 
-Three standard performance goals are:
+Three common performance goals:
 
 | Type | Goal | Example |
 |------|------|---------|
-| Nominal-is-Best | Hit an exact target value | Shaft diameter |
-| Smaller-is-Better | Minimize the value | Surface roughness |
+| Nominal-is-Best | Hit a precise target | Shaft diameter |
+| Smaller-is-Better | Shrink the value | Surface roughness |
 | Larger-is-Better | Maximize the value | Tensile strength |
 
-Picking the right metric ensures you are spending time answering the right question and correctly linking factor changes to desired outcomes.
+Picking the right goal saves your time and answers the right question.
 
 ---
 <LongQuestion>
@@ -324,7 +326,7 @@ Picking the right metric ensures you are spending time answering the right quest
 ### 5 Marks
 </LongQuestion>
 
-An interaction happens when a factor's effect relies entirely on the setting of another factor. There are two main types: <Highlight color="green">**synergistic**</Highlight> and <Highlight color="pink">**antagonistic**</Highlight>.
+Interactions happen when one factor changes how another factor behaves. These can be <Highlight color="green">**synergistic**</Highlight> or <Highlight color="pink">**antagonistic**</Highlight>.
 
 <div className="flex gap-6 my-4 justify-left flex-wrap">
   <div className="flex flex-col items-center gap-2">
@@ -341,12 +343,12 @@ An interaction happens when a factor's effect relies entirely on the setting of 
 
 | Feature | Synergistic (Helpful) | Antagonistic (Harmful) |
 |---------|-----------------------|------------------------|
-| **Meaning** | Combined effect is **greater** than their individual effects added up. | Combined effect is **less** than their individual effects. |
-| **Plot Lines** | Lines separate outwards; factors boost each other. | Lines cross; factors fight or cancel each other. |
-| **How to Use** | Maximize both factors for amazing results. | Find a balanced "sweet spot" to avoid drawbacks. |
-| **Example** | Heat + Good Catalyst = Huge yield spike. | Fast Speed + High Feed = Very rough, ruined surface. |
+| **Meaning** | The result is **greater** than their personal effects added up. | The result is **less** than their personal effects. |
+| **Graph Lines** | Lines flare out; factors multiply together. | Lines cross over; factors cancel each other. |
+| **How to Use** | Maximize both inputs for massive success. | Find a safe "sweet spot" to avoid fighting forces. |
+| **Example** | Heat + Good Catalyst = Enormous production. | Fast Speed + Deep Feed = Broken part finish. |
 
-**Important Rule:** In interaction graphs, <Highlight color="blue">**parallel lines mean no interaction**</Highlight>. If lines cross or aren't parallel, the factors interact, and you must analyze them as a pair rather than individually.
+**Important Rule:** On interaction graphs, <Highlight color="blue">**parallel lines mean no interaction**</Highlight>. If lines cross or angle away from each other, they interact.
 
 ---
 <LongQuestion>
@@ -354,32 +356,28 @@ An interaction happens when a factor's effect relies entirely on the setting of 
 ### 10 Marks
 </LongQuestion>
 
-#### Case: Optimizing Component Hardness in Electronics
+#### Case Study: Improving Component Hardness
 
 **Problem:**
-An electronics factory faced massive reject rates because metal parts had inconsistent **surface hardness**. Tinkering with one variable at a time (OVAT) did not solve the issue, so they initiated a structured DoE study.
+An electronics factory was throwing out too many parts because surface hardness varied badly.
 
-**Factors and Goals:**
-The team brainstormed 3 key process factors:
+**Factors:**
+The team chose to test 3 key factors at Low and High levels:
 - **A:** Power Input
 - **B:** Heating Speed 
-- **C:** Cooling Rate (Quench)
-
-The **goal (response)** was to systematically maximize Surface Hardness. They also thoroughly validated their measuring tools before starting.
+- **C:** Cooling Rate
 
 **The Experiment:**
-They ran a **2³ full design** (3 factors = 8 runs). You can easily write this 8-run matrix by doubling the alternating length for each column:
+They ran a **2³ full design** (8 runs) in random order to prevent room temperature changes from ruining the test.
 
 <Callout type="info" title="Standard Alternating Pattern">
-- **Column A:** Alternates every **1** (`- + - + - + - +`)
-- **Column B:** Alternates every **2** (`- - + + - - + +`)
-- **Column C:** Alternates every **4** (`- - - - + + + +`)
+- **Column A:** Changes every **1** (`- + - + - + - +`)
+- **Column B:** Changes every **2** (`- - + + - - + +`)
+- **Column C:** Changes every **4** (`- - - - + + + +`)
 </Callout>
 
-#### 8-Run Design Matrix (2³)
-
-| Run | A (Power) | B (Heating) | C (Cooling) | Response (Hardness) |
-|-----|-----------|-------------|-------------|---------------------|
+| Run | A (Power) | B (Heating) | C (Cooling) | Response |
+|-----|-----------|-------------|-------------|----------|
 | 1   | -         | -           | -           | y1 |
 | 2   | +         | -           | -           | y2 |
 | 3   | -         | +           | -           | y3 |
@@ -391,10 +389,8 @@ They ran a **2³ full design** (3 factors = 8 runs). You can easily write this 8
 
 *(+ = High, - = Low)*
 
-Runs were conducted in **perfectly random order** to avoid bias from worker fatigue or afternoon room temperature shifts.
-
 **Data Analysis:**
-Using statistical tools like ANOVA, they studied the results to separate true effects from random background noise.
+They studied the results mathematically using tools like ANOVA.
 
 <div className="flex gap-6 my-4 justify-left flex-wrap">
   <div className="flex flex-col items-center gap-2">
@@ -408,10 +404,9 @@ Using statistical tools like ANOVA, they studied the results to separate true ef
 </div>
 
 **Results:**
-- **Power (A)** and **Cooling Rate (C)** strongly improved hardness on their own.
-- They discovered a crucial **synergistic interaction**: combining high power with fast cooling gave unexpectedly great results.
-- **Heating Speed (B)** barely mattered, so it was ignored.
+- **Heating Speed (B)** had almost no effect on hardness.
+- **Power (A)** and **Cooling Rate (C)** strongly improved the output.
+- They found a powerful **synergistic interaction**: High Power plus Fast Cooling produced consistently awesome surface hardness.
 
 **Outcome:**
-The factory updated their final operations manual to: High Power & High Cooling. 
-This structured 8-run test successfully cut rejected parts by over 60%, avoiding weeks of blind guesswork and saving money immediately.
+The factory changed their standard rules to use High Power and Fast Cooling always. Rejects dropped by over 60%, immediately saving them thousands of dollars using just 8 easy tests.
