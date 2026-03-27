@@ -1,0 +1,13 @@
+﻿| Q1 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Explain Big Data characteristics and its types. Discuss its challenges. | 5 | CO1 | BT3 |
+| ii. | Explain Hadoop Ecosystem with core components. | 5 | CO1 | BT2 |
+| iii. | Differentiate between traditional and big data business approach. | 5 | CO1 | BT4 |
+
+---
+
+| Q2 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Explain the various stages of MapReduce with an example. | 5 | CO2 | BT4 |
+| ii. | Explain matrix-vector multiplication algorithm using MapReduce with an example. | 5 | CO2 | BT4 |
+| iii. | What are the various types of relational algebra operations? | 5 | CO2 | BT4 |

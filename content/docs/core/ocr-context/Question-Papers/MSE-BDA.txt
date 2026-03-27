@@ -1,0 +1,12 @@
+﻿| Q1 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Illustrate the flow of data through the Hadoop Ecosystem. How do the various components interact to ensure high availability and fault tolerance? | 5 | CO1 | BT5 |
+| ii. | Analyze the function of "Combiners" in MapReduce with example. | 5 | CO2 | BT4 |
+| iii. | What are the types of NoSQL business drivers? Explain any two with example. | 5 | CO3 | BT3 |
+
+---
+
+| Q2 | Solve any One | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Construct stepwise MapReduce algorithm for word count application using simple text dataset. | 10 | CO2 | BT6 |
+| ii. | Explain NoSQL database store with example. | 10 | CO3 | BT3 |

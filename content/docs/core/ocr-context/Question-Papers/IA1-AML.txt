@@ -1,0 +1,13 @@
+﻿| Q1 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Explain link functions used in Generalized Linear Models (GLMs). Give one example distribution for its associated link function. | 5 | CO1 | BT2 |
+| ii. | Describe the key idea of Multitask Learning (MTL). How does parameter sharing help models generalize better? | 5 | CO1 | BT2 |
+| iii. | A Probit model predicts grad admission with: <br/> \( \eta = -3.5 + 1.0 \cdot GPA + 0.4 \cdot TopTier \) <br/><br/> Find \( P(\text{Admit}) = \Phi(\eta) \) for: <br/> Case A: GPA = 3.0, TopTier = 0 <br/> Case B: GPA = 3.0, TopTier = 1 <br/> Case C: GPA = 4.0, TopTier = 1 | 5 | CO1 | BT3 |
+
+---
+
+| Q2 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Define the term "inference" in the context of probabilistic graphical models. List two common inference algorithms used in Bayesian Networks. | 5 | CO2 | BT2 |
+| ii. | Differentiate between Maximum Likelihood Estimation (MLE) and Bayesian Estimation for learning parameters in a directed graphical model. | 5 | CO2 | BT2 |
+| iii. | For the following system: <br/> • Weather (W) affects Road Condition (R) <br/> • Road Condition (R) affects Accident (A) <br/> • Driver Alertness (D) affects Accident (A) <br/> • Accident (A) affects Insurance Claim (C) <br/><br/> 1. Construct a Bayesian Network (DAG) <br/> 2. Write the joint probability distribution | 5 | CO2 | BT3 |

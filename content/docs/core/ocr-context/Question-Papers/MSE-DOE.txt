@@ -1,0 +1,13 @@
+﻿| Q1 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Explain importance of selecting quality characteristics for industrial experiments. | 5 | CO1 | BT2 |
+| ii. | What is screening design in DoE? Explain with suitable example. | 5 | CO3 | BT3 |
+| iii. | With suitable example, explain full factorial designs in DoE. | 5 | CO3 | BT3 |
+
+---
+
+| Q2 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Explain confounding with example. | 5 | CO1 | BT3 |
+| ii. | Differentiate between synergistic interaction and antagonistic interaction. | 5 | CO2 | BT4 |
+| iii. | With example, explain \(2^{4}\) full factorial design. | 5 | CO3 | BT3 |

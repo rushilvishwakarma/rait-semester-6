@@ -5,6 +5,7 @@ description: PYQs/Concluded Papers
 
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { FileText, Settings, Download } from 'lucide-react';
+import { QPCard } from '@/components/qp-card';
 
 ## Question Papers
 
@@ -14,42 +15,28 @@ import { FileText, Settings, Download } from 'lucide-react';
 
 <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 mt-4">
 
-<a href="https://drive.google.com/file/d/1LtYLsdvRTb6I98dp9hB1XsunnEOMdEyI/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group rounded-xl border bg-fd-card p-2 transition-all hover:shadow-md hover:bg-fd-accent no-underline">
-  <img src="https://drive.google.com/thumbnail?id=1LtYLsdvRTb6I98dp9hB1XsunnEOMdEyI&sz=w800" alt="AML IA1" className="w-full aspect-[210/297] object-cover object-top rounded-lg border !m-0 !p-0" />
-  <p className="font-semibold text-fd-foreground mt-1.5 mb-0 px-0.5 text-sm leading-tight">AML</p>
-  <p className="text-xs text-fd-muted-foreground mt-0 mb-0 px-0.5 leading-tight">Advanced Machine Learning</p>
-</a>
-
-<a href="https://drive.google.com/file/d/1qzf1HWhidsuWMwbfeNIfDtJQD_Uv7xqD/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group rounded-xl border bg-fd-card p-2 transition-all hover:shadow-md hover:bg-fd-accent no-underline">
-  <img src="https://drive.google.com/thumbnail?id=1qzf1HWhidsuWMwbfeNIfDtJQD_Uv7xqD&sz=w800" alt="DL IA1" className="w-full aspect-[210/297] object-cover object-top rounded-lg border !m-0 !p-0" />
-  <p className="font-semibold text-fd-foreground mt-1.5 mb-0 px-0.5 text-sm leading-tight">DL</p>
-  <p className="text-xs text-fd-muted-foreground mt-0 mb-0 px-0.5 leading-tight">Deep Learning</p>
-</a>
-
-<a href="https://drive.google.com/file/d/1klvX_t3plHwl7rHpSFXtznEkX1JcfvH5/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group rounded-xl border bg-fd-card p-2 transition-all hover:shadow-md hover:bg-fd-accent no-underline">
-  <img src="https://drive.google.com/thumbnail?id=1klvX_t3plHwl7rHpSFXtznEkX1JcfvH5&sz=w800" alt="BDA IA1" className="w-full aspect-[210/297] object-cover object-top rounded-lg border !m-0 !p-0" />
-  <p className="font-semibold text-fd-foreground mt-1.5 mb-0 px-0.5 text-sm leading-tight">BDA</p>
-  <p className="text-xs text-fd-muted-foreground mt-0 mb-0 px-0.5 leading-tight">Big Data Analytics</p>
-</a>
-
-<a href="https://drive.google.com/file/d/1uaBoXBQpS2VEgDhkW6v8juN-oGgKzW0k/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group rounded-xl border bg-fd-card p-2 transition-all hover:shadow-md hover:bg-fd-accent no-underline">
-  <img src="https://drive.google.com/thumbnail?id=1uaBoXBQpS2VEgDhkW6v8juN-oGgKzW0k&sz=w800" alt="NLP IA1" className="w-full aspect-[210/297] object-cover object-top rounded-lg border !m-0 !p-0" />
-  <p className="font-semibold text-fd-foreground mt-1.5 mb-0 px-0.5 text-sm leading-tight">NLP</p>
-  <p className="text-xs text-fd-muted-foreground mt-0 mb-0 px-0.5 leading-tight">Natural Language Processing</p>
-</a>
-
-<a href="https://drive.google.com/file/d/1w6j6YRo12LeER3HC2AYBCA_-gfSS3_2Y/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group rounded-xl border bg-fd-card p-2 transition-all hover:shadow-md hover:bg-fd-accent no-underline">
-  <img src="https://drive.google.com/thumbnail?id=1w6j6YRo12LeER3HC2AYBCA_-gfSS3_2Y&sz=w800" alt="DoE IA1" className="w-full aspect-[210/297] object-cover object-top rounded-lg border !m-0 !p-0" />
-  <p className="font-semibold text-fd-foreground mt-1.5 mb-0 px-0.5 text-sm leading-tight">DoE</p>
-  <p className="text-xs text-fd-muted-foreground mt-0 mb-0 px-0.5 leading-tight">Design of Experiments</p>
-</a>
+<QPCard driveId="1LtYLsdvRTb6I98dp9hB1XsunnEOMdEyI" subject="AML" subjectFull="Advanced Machine Learning" exam="IA1" contextUrl="/api/ocr/Question-Papers/IA1-AML" syllabusUrl="/api/syllabus/AML" subjectHref="/docs/core/AML" />
+<QPCard driveId="1qzf1HWhidsuWMwbfeNIfDtJQD_Uv7xqD" subject="DL" subjectFull="Deep Learning" exam="IA1" contextUrl="/api/ocr/Question-Papers/IA1-DL" syllabusUrl="/api/syllabus/DL" subjectHref="/docs/core/DL" />
+<QPCard driveId="1klvX_t3plHwl7rHpSFXtznEkX1JcfvH5" subject="BDA" subjectFull="Big Data Analytics" exam="IA1" contextUrl="/api/ocr/Question-Papers/IA1-BDA" syllabusUrl="/api/syllabus/BDA" subjectHref="/docs/core/BDA" />
+<QPCard driveId="1uaBoXBQpS2VEgDhkW6v8juN-oGgKzW0k" subject="NLP" subjectFull="Natural Language Processing" exam="IA1" contextUrl="/api/ocr/Question-Papers/IA1-NLP" syllabusUrl="/api/syllabus/NLP" subjectHref="/docs/core/NLP" />
+<QPCard driveId="1w6j6YRo12LeER3HC2AYBCA_-gfSS3_2Y" subject="DoE" subjectFull="Design of Experiments" exam="IA1" contextUrl="/api/ocr/Question-Papers/IA1-DOE" syllabusUrl="/api/syllabus/DOE" subjectHref="/docs/core/DOE" />
 
 </div>
 
 </Tab>
 
 <Tab value="MSE">
-  Papers will be updated after MSE.
+
+<div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 mt-4">
+
+<QPCard driveId="1SSafLIl7U_jqR4R7TgdiDfpFDtqdoT18" subject="AML" subjectFull="Advanced Machine Learning" exam="MSE" contextUrl="/api/ocr/Question-Papers/MSE-AML" syllabusUrl="/api/syllabus/AML" subjectHref="/docs/core/AML" />
+<QPCard driveId="1nOum_Gh4Nv3MjrTJemtX-LZNH9q-IK68" subject="DL" subjectFull="Deep Learning" exam="MSE" contextUrl="/api/ocr/Question-Papers/MSE-DL" syllabusUrl="/api/syllabus/DL" subjectHref="/docs/core/DL" />
+<QPCard driveId="1fF40pVEYG005m3xHgZQYxjWjF3-VwJoz" subject="BDA" subjectFull="Big Data Analytics" exam="MSE" contextUrl="/api/ocr/Question-Papers/MSE-BDA" syllabusUrl="/api/syllabus/BDA" subjectHref="/docs/core/BDA" />
+<QPCard driveId="1sbD37LQEAcD6YmAUN-TRdFwStoJl8YMi" subject="NLP" subjectFull="Natural Language Processing" exam="MSE" contextUrl="/api/ocr/Question-Papers/MSE-NLP" syllabusUrl="/api/syllabus/NLP" subjectHref="/docs/core/NLP" />
+<QPCard driveId="1giiaAA6C8kVKgV8bdqTslgGnHyCbyoGF" subject="DoE" subjectFull="Design of Experiments" exam="MSE" contextUrl="/api/ocr/Question-Papers/MSE-DOE" syllabusUrl="/api/syllabus/DOE" subjectHref="/docs/core/DOE" />
+
+</div>
+
 </Tab>
 
 <Tab value="IA2">
@@ -62,9 +49,10 @@ import { FileText, Settings, Download } from 'lucide-react';
 
 </Tabs>
 
-## Available Solutions
 
-<Tabs items={["IA1", "MSE", "IA2", "ESE"]}>
+## Available Verified Solutions
+
+<Tabs items={["IA1"]}>
 
 <Tab value="IA1">
 <Cards>
@@ -89,17 +77,8 @@ import { FileText, Settings, Download } from 'lucide-react';
 </Cards>
 </Tab>
 
-<Tab value="MSE">
-  Solutions will be updated after MSE.
-</Tab>
 
-<Tab value="IA2">
-  Solutions will be updated after IA2.
-</Tab>
 
-<Tab value="ESE">
-  Solutions will be updated after ESE.
-</Tab>
 
 </Tabs>
 

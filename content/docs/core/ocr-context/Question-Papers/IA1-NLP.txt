@@ -1,0 +1,13 @@
+﻿| Q1 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Define NLP. What are the different ambiguities in NLP? | 5 | CO1 | BT2 |
+| ii. | Explain N-gram language model. | 5 | CO2 | BT2 |
+| iii. | Compare inflectional morphology and derivational morphology. | 5 | CO2 | BT4 |
+
+---
+
+| Q2 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Explain the various challenges in NLP. | 5 | CO1 | BT2 |
+| ii. | Differentiate between stemming and lemmatization. | 5 | CO2 | BT4 |
+| iii. | What are Regular Expressions (RE)? Explain the meaning of the given RE: <br/> a) `[e^]` <br/> b) `[^A-Z]` | 5 | CO2 | BT3 |

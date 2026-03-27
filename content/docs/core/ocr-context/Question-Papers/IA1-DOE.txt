@@ -1,0 +1,13 @@
+﻿| Q1 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Describe potential applications of Design of Experiments in manufacturing or service process. | 5 | CO1 | BT3 |
+| ii. | Which are basic principles of Design of Experiments? Explain with examples. | 5 | CO1 | BT3 |
+| iii. | Explain in short: <br/> (i) Degree of Freedom in perspective of DoE <br/> (ii) Design Resolution | 5 | CO1 | BT2 |
+
+---
+
+| Q2 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | What is interaction between factors in DoE? Explain with example. | 5 | CO2 | BT3 |
+| ii. | Which are alternative methods for calculating the two-order interaction effect? | 5 | CO2 | BT2 |
+| iii. | What is the role of measurement system in context of industrial experiments? Explain with suitable example. | 5 | CO2 | BT3 |

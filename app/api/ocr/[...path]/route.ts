@@ -9,10 +9,10 @@ export async function GET(
   { params }: { params: Promise<{ path: string[] }> }
 ) {
   const { path: segments } = await params;
-  
+
   // Sanitize each segment to prevent directory traversal
   const sanitizedSegments = segments.map((seg) => path.basename(seg));
-  
+
   // Build path: content/docs/core/ocr-context/{Core|Labs}/{Subject}/{filename}.txt
   const filePath = path.join(
     process.cwd(),
@@ -20,7 +20,7 @@ export async function GET(
     ...sanitizedSegments.slice(0, -1),
     `${sanitizedSegments[sanitizedSegments.length - 1]}.txt`
   );
-  
+
   try {
     const content = await readFile(filePath, 'utf-8');
     return new Response(content, {

@@ -1,0 +1,13 @@
+﻿| Q1 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Calculate derivative of Unipolar Sigmoid activation and visualize both functions. | 5 | CO1 | BT4 |
+| ii. | Compare and contrast shallow neural networks learning and deep learning networks. | 5 | CO1 | BT3 |
+| iii. | Draw NN and calculate feedforward output. <br/> \( W^{(0)} = \begin{bmatrix} 1 & -1 & 1 \\ 1 & 1 & 0 \end{bmatrix},\ W^{(1)} = \begin{bmatrix} 1 & -1 & 1 \end{bmatrix} \) <br/> \( X = \begin{bmatrix} 1 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix},\ f^{(1)}(x) = \text{ReLU},\ f^{(2)}(x) = \text{Linear} \) | 5 | CO1 | BT5 |
+
+---
+
+| Q2 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Explain dropout as a regularization technique with its advantages. | 5 | CO2 | BT2 |
+| ii. | How does data augmentation compare to regularization in preventing overfitting? | 5 | CO2 | BT4 |
+| iii. | Given a linear regression model with weights \( w = [2, -3, 1] \) and regularization parameter \( \lambda = 0.5 \), calculate L1 and L2 regularization penalty. | 5 | CO2 | BT3 |

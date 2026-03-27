@@ -1,0 +1,13 @@
+﻿| Q1 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Describe the structure of a Generalized Linear Model (GLM). Explain the roles of the random component, systematic component, and link function. | 5 | CO1 | BT2 |
+| ii. | Define Directed Graphical Models (DGMs). Explain how Bayesian Networks represent joint probability distributions. | 5 | CO2 | BT2 |
+| iii. | Define a mixture model. You are given a dataset of customer purchase amounts. Some customers make small purchases, while others make large purchases. Apply the GLM framework to decide which distribution (Gaussian, Poisson, or Binomial) would be appropriate for modeling this data. Justify your choice. | 5 | CO3 | BT4 |
+
+---
+
+| Q2 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | For the given relations: <br/><br/> • Socioeconomic Status (S) affects Education Level (E) <br/> • Socioeconomic Status (S) affects Nutrition (N) <br/> • Education Level (E) affects Job Type (J) <br/> • Nutrition (N) affects Health Condition (H) <br/> • Job Type (J) affects Income (I) <br/> • Health Condition (H) affects Income (I) <br/><br/> Answer the following: <br/> 1. Draw the Directed Acyclic Graph (DAG) <br/> 2. Write the joint probability distribution <br/> 3. Write any three conditional independence relations | 5 | CO2 | BT3 |
+| ii. | Explain the concept of conditional independence in Directed Graphical Models with the help of graphical intuition. | 5 | CO2 | BT2 |
+| iii. | Describe the two main steps in parameter estimation for mixture models. Explain what makes this estimation challenging when the component labels are unknown. | 5 | CO3 | BT3 |

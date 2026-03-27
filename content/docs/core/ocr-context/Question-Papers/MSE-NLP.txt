@@ -1,0 +1,12 @@
+﻿| Q1 | Solve any Two | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Draw a generic NLP system. Explain the stages of NLP in detail. | 5 | CO1 | BT2 |
+| ii. | Explain the different types of morphology in NLP. | 5 | CO2 | BT2 |
+| iii. | What is POS tagging in NLP? List the different approaches for POS tagging. | 5 | CO3 | BT2 |
+
+---
+
+| Q2 | Solve any One | Max. Marks | CO  | BT  |
+|----|--------------|------------|-----|-----|
+| i. | Explain CFG in NLP. Develop a parse tree for the sentence "I saw a bat flying" using a top-down approach and bottom-up approach. | 10 | CO3 | BT6 |
+| ii. | Explain Porter’s Stemming algorithm in detail and apply it to the following words to obtain the stem: <br/> 1) Tapping <br/> 2) Smiling <br/> 3) Computerization | 10 | CO2 | BT3 |
