@@ -1,6 +1,7 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import Image from 'next/image';
 import { Upload } from 'lucide-react';
+import { QuestionDotLegend } from '@/components/question-dot-legend';
 
 export function baseOptions(): BaseLayoutProps {
   return {
@@ -25,6 +26,13 @@ export function baseOptions(): BaseLayoutProps {
       ),
     },
     links: [
+      {
+        type: 'icon',
+        label: 'Question Markers',
+        icon: <QuestionDotLegend />,
+        text: 'Question Markers',
+        url: '#',
+      },
       {
         type: 'icon',
         label: 'Upload Notes',

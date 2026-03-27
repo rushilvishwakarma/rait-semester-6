@@ -3,6 +3,7 @@ title: Question Bank - Internal Assessment 1
 ---
 
 import { Highlight } from '@/components/highlight';
+import { QuestionDot } from '@/components/question-dot';
 
 
 # Module 1
@@ -80,7 +81,7 @@ GLMs provide a **single framework** for modeling continuous, binary, and count d
 
 ---
 
-### Q3. What are link functions in GLMs? Why are different link functions used?
+### Q3. What are link functions in GLMs? Why are different link functions used? / Explain link functions used in Generalized Linear Models (GLMs). Give one example distribution for its associated link function. <QuestionDot color="green" text="Asked in IA1" />
 
 In a **Generalized Linear Model (GLM)**, a <Highlight color="blue">**link function**</Highlight> establishes a relationship between the **expected value of the response variable** and the **linear predictor**.
 
@@ -139,7 +140,7 @@ In practice, both give **very similar results**. Logistic regression is more pop
 
 ---
 
-### Q5. Discuss Multitask Learning (MTL). How does parameter sharing improve learning performance and generalization?
+### Q5. Discuss Multitask Learning (MTL). How does parameter sharing improve learning performance and generalization? / Describe the key idea of Multitask Learning (MTL). How does parameter sharing help models generalize better? <QuestionDot color="green" text="Asked in IA1" />
 
 **Multitask Learning (MTL)** trains multiple related tasks **together** in a single model instead of building separate models for each task.
 
@@ -167,7 +168,7 @@ MTL is more data-efficient and produces more robust models than single-task lear
 
 ---
 <LongQuestion>
-### Q6. Predict Graduate School Admission Probability Using a Probit Model
+### Q6. Predict Graduate School Admission Probability Using a Probit Model <QuestionDot color="green" text="Asked in IA1" />
 
 **Outcome variable**
 
@@ -359,7 +360,7 @@ Both models predict that the customer will **default** on the loan.
 
 # Module 2
 
-## **Q1. Define Directed Graphical Models (DGMs). Explain how Bayesian Networks represent joint probability distributions.**
+## **Q1. Define Directed Graphical Models (DGMs). Explain how Bayesian Networks represent joint probability distributions.** <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="blue" text="Asked in MSE" />
 
 <Highlight color="pink">**Directed Graphical Models (DGMs)** are probabilistic models that use a **directed graph** to show dependencies between random variables.</Highlight> Each **node** = a variable, each **arrow** = a dependency.
 
@@ -397,7 +398,7 @@ Instead of needing $2^4 - 1 = 15$ parameters for the full joint, this factorized
 ---
 
 
-## **Q2. Explain the concept of conditional independence in Directed Graphical Models with graphical intuition.**
+## **Q2. Explain the concept of conditional independence in Directed Graphical Models with graphical intuition.** <QuestionDot color="blue" text="Asked in MSE" />
 
 **Conditional independence** means two variables don't affect each other once we know a third variable. Formally, $X$ and $Y$ are conditionally independent given $Z$ if:
 $$
@@ -461,7 +462,7 @@ Observing B *opens* the path (explaining away).
 
 ---
 
-## **Q3. Describe inference in Bayesian Networks. Why is exact inference difficult in large networks?**
+## **Q3. Describe inference in Bayesian Networks. Why is exact inference difficult in large networks?** / Define the term "inference" in the context of probabilistic graphical models. List two common inference algorithms used in Bayesian Networks. <QuestionDot color="green" text="Asked in IA1" />
 
 **Inference** means computing the probability of some variables **given observed evidence**:
 $$
@@ -491,7 +492,7 @@ Inference is what makes Bayesian Networks useful — it lets us predict outcomes
 
 ---
 
-### **Q4. Explain parameter learning in Directed Graphical Models. Differentiate between MLE and Bayesian estimation.**
+### **Q4. Explain parameter learning in Directed Graphical Models. Differentiate between MLE and Bayesian estimation.** / Differentiate between Maximum Likelihood Estimation (MLE) and Bayesian Estimation for learning parameters in a directed graphical model. <QuestionDot color="green" text="Asked in IA1" />
 
 ## Parameter Learning in Directed Graphical Models (DGM)
 
@@ -598,7 +599,7 @@ Decision diagrams make it practical to work with large probabilistic models that
 
 ---
 <LongQuestion>
-## **Q6. For the given relations:**
+## **Q6. For the given relations:** <QuestionDot color="green" text="Asked in IA1" />
 
 - Weather (W) affects Road Condition (R)
 - Road Condition affects Accident (A)
@@ -643,7 +644,7 @@ $$
 
 ---
 <LongQuestion>
-## **Q7. For the given relations:**
+## **Q7. For the given relations:** <QuestionDot color="blue" text="Asked in MSE" />
 
 - Socioeconomic Status (S) affects Education Level (E)
 - Socioeconomic Status (S) affects Nutrition (N)

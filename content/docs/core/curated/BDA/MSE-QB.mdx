@@ -28,7 +28,7 @@ While ACID guarantees absolute reliability within a transaction, the CAP theorem
 
 ---
 
-### Q2. Describe characteristics of NOSQL database. List the different types of NoSQL data stores. Explain any two with diagram.
+### Q2. Describe characteristics of NOSQL database. List the different types of NoSQL data stores. Explain any two with diagram. / Explain NoSQL database store with example. <QuestionDot color="blue" text="Asked in MSE" />
 
 NoSQL databases are characterized by their **flexible schemas**, **horizontal scalability**, and **high-performance** capabilities. They are designed to manage various data types across distributed clusters, providing a resilient foundation for Big Data applications.
 
@@ -51,7 +51,7 @@ Thus, by using different data stores, organizations can match their database tec
 
 ---
 
-### Q3. What is NOSQL? What are the business drivers for NoSQL? Discuss any two architectural patterns of NoSQL. / Q2. What are the types of NOSQL business drivers explain any two with example. / What are NoSQL business drivers? Explain.
+### Q3. What is NOSQL? What are the business drivers for NoSQL? Discuss any two architectural patterns of NoSQL. / Q2. What are the types of NOSQL business drivers explain any two with example. / What are NoSQL business drivers? Explain. <QuestionDot color="blue" text="Asked in MSE" />
 
 NoSQL, which stands for <Highlight>**"Not Only SQL"**</Highlight>, is a database system designed to handle large, distributed data without a fixed schema. Unlike traditional databases, NoSQL is optimized for **horizontal scalability**, high availability, and flexible data models.
 
@@ -139,3 +139,36 @@ Furthermore, NoSQL supports **Iterative Development**, where teams can refine th
 Additionally, NoSQL systems provide **Elastic Scalability**, allowing businesses to respond quickly to changing market demands by scaling their infrastructure up or down without re-architecting the database layer.
 
 Hence, NoSQL provides the structural and operational flexibility that modern businesses need to remain competitive in a fast-paced digital economy.
+
+---
+
+## Questions not in the Question Bank but asked in MSE
+
+### Analyze the function of "Combiners" in MapReduce with example.
+
+A **Combiner** is a local reducer that runs on the Mapper node **before** the output is sent to the Reducer. It performs partial aggregation of intermediate key-value pairs to reduce the amount of data shuffled across the network.
+
+**Why use a Combiner?**
+
+- Reduces **network traffic** between Mapper and Reducer nodes.
+- Speeds up the overall MapReduce job by minimizing data transfer.
+- Acts as a **mini-reducer** at the map side.
+
+**How it works:**
+
+1. The Mapper outputs intermediate `<key, value>` pairs.
+2. The Combiner groups and partially aggregates these pairs **locally** on the same node.
+3. The reduced output is then sent to the Shuffle/Sort phase and finally to the Reducer.
+
+**Example — Word Count:**
+
+Suppose Mapper 1 processes: "Apple Apple Banana"
+
+- **Without Combiner:** Mapper sends `<Apple, 1>, <Apple, 1>, <Banana, 1>` → 3 records over the network.
+- **With Combiner:** Combiner aggregates locally → `<Apple, 2>, <Banana, 1>` → only 2 records sent.
+
+This reduces data transfer significantly in large-scale jobs.
+
+**Important Constraint:**
+
+A Combiner can only be used when the Reduce function is **commutative and associative** (e.g., sum, count, max). It cannot be used for operations like average directly because partial averages cannot be combined correctly.

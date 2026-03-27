@@ -3,9 +3,10 @@ title: Question Bank - Internal Assessment 1
 ---
 
 import { Highlight } from '@/components/highlight';
+import { QuestionDot } from '@/components/question-dot';
 import { Thermometer, CircleGauge, Snail, Timer, Trash2, RotateCw, BadgeIndianRupee, Goal, ListTodo, Brain } from 'lucide-react';
 
-### Q1. The potential applications of DoE in manufacturing processes
+### Q1. The potential applications of DoE in manufacturing processes / Describe potential applications of Design of Experiments in manufacturing or service process. <QuestionDot color="green" text="Asked in IA1" />
 
 **(5 Marks)**
 
@@ -84,7 +85,7 @@ Another important requirement is <Highlight color="pink">**statistical knowledge
 
 ---
 
-### Q3. Explain with examples basic principles of Design of Experiments
+### Q3. Explain with examples basic principles of Design of Experiments / Which are basic principles of Design of Experiments? Explain with examples. <QuestionDot color="green" text="Asked in IA1" />
 
 **(5 Marks)**
 
@@ -104,7 +105,7 @@ These principles together improve the reliability and validity of experimental r
 
 ---
 <LongQuestion>
-### Q4. Explain in short
+### Q4. Explain in short <QuestionDot color="green" text="Asked in IA1" />
 
 - (1) Degree of Freedom (DOF)
 
@@ -137,7 +138,7 @@ Design resolution shows how much overlap (confounding) exists between effects in
 
 ---
 
-### Q5. Explain the importance of selecting quality characteristics for industrial experiments
+### Q5. Explain the importance of selecting quality characteristics for industrial experiments <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="blue" text="Asked in MSE" />
 
 **(5 Marks)**
 
@@ -151,7 +152,7 @@ Thus, selecting the right quality characteristics is essential for obtaining use
 
 ---
 
-### Q6. Explain the importance of interactions of different factors in DoE
+### Q6. Explain the importance of interactions of different factors in DoE / What is interaction between factors in DoE? Explain with example. <QuestionDot color="green" text="Asked in IA1" />
 **(5 or 10 Marks)**
 
 In Design of Experiments (DoE), interaction between factors occurs when the effect of one factor on the response variable depends on the level of another factor. In many industrial processes, factors do not act independently, and therefore studying only main effects may lead to incorrect or incomplete conclusions.
@@ -167,7 +168,7 @@ Studying interactions also helps in identifying optimal factor level combination
 - **(Continue till here for 10 marks)**
 ---
 
-### Q7. Alternative method for calculating the two-factor (second-order) interaction effect
+### Q7. Alternative method for calculating the two-factor (second-order) interaction effect / Which are alternative methods for calculating the two-order interaction effect? <QuestionDot color="green" text="Asked in IA1" />
 
 **(5 Marks)**
 
@@ -179,7 +180,7 @@ This method is systematic, simple, and well suited for factorial designs, especi
 
 ---
 
-### Q8. Synergistic interaction vs Antagonistic interaction
+### Q8. Synergistic interaction vs Antagonistic interaction <QuestionDot color="blue" text="Asked in MSE" />
 
 **(10 Marks)**
 
@@ -206,3 +207,25 @@ Antagonistic interactions indicate conflict between factors and help identify co
 Understanding whether interactions are synergistic or antagonistic helps engineers select proper factor combinations, optimize processes, and avoid undesirable operating conditions. Hence, interaction analysis plays a crucial role in effective experimental design.
 
 ---
+
+## Questions not in the Question Bank but asked in IA1
+
+### What is the role of measurement system in context of industrial experiments? Explain with suitable example.
+
+The **measurement system** plays a critical role in industrial experiments because the reliability and accuracy of experimental conclusions depend entirely on the quality of the data collected. If the measurement system introduces errors, the results of the experiment will be misleading.
+
+**Key Aspects:**
+
+1. **Accuracy:** The measurement instrument must produce values close to the true value. Calibration of instruments is essential before starting any experiment.
+
+2. **Precision (Repeatability and Reproducibility):** The same measurement taken multiple times under the same conditions should give consistent results. Reproducibility ensures that different operators or instruments produce similar results.
+
+3. **Resolution:** The measuring instrument must be able to detect the smallest changes in the response variable. If the resolution is too coarse, small but significant effects of factors may go undetected.
+
+4. **Stability:** The measurement system must remain consistent over time. Drift in instrument calibration during an experiment can introduce systematic errors.
+
+**Example:**
+
+In a machining experiment to optimize surface roughness, a profilometer is used to measure the roughness value (Ra). If the profilometer has poor resolution or is not calibrated, the measured Ra values will be inaccurate. This could lead to incorrect identification of optimal cutting parameters, resulting in poor product quality in production.
+
+Therefore, conducting a **Measurement System Analysis (MSA)** before running the experiment ensures that the data collected is reliable and that the experimental conclusions are valid.

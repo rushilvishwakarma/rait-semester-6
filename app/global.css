@@ -262,3 +262,12 @@
     filter: invert(1) !important;
 }
 
+/* Always show compact question dots (not badges) inside the TOC only */
+#nd-toc .question-dot-badge {
+    display: none !important;
+}
+
+#nd-toc .question-dot-dot {
+    display: inline-block !important;
+}
+
