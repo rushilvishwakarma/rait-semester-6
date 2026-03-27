@@ -1,5 +1,5 @@
 'use client';
-import { ChevronDown, MessageCircleIcon, FileText } from 'lucide-react';
+import { ChevronDown, MessageCircleIcon, FileText, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { cva } from 'class-variance-authority';
@@ -148,9 +148,14 @@ Please fetch the question paper content from the first URL, use the syllabus URL
         />
       </a>
       <div className="flex flex-col gap-2.5 px-0.5 pt-0.5 pb-1 flex-1">
-        <a href={subjectHref} className="no-underline">
-          <p className="font-semibold text-fd-foreground mb-1 text-sm leading-tight hover:underline">{subject}</p>
-          <p className="text-xs text-fd-muted-foreground mt-0 leading-tight">{subjectFull}</p>
+        <a href={subjectHref} className="no-underline group/link block">
+          <div className="flex items-center justify-between gap-1 mb-0">
+            <p className="font-semibold text-fd-foreground text-sm leading-none !my-2 group-hover/link:underline">
+              {subject}
+            </p>
+            <ArrowRight className="size-4 shrink-0 text-fd-muted-foreground transition-transform group-hover/link:translate-x-0.5" />
+          </div>
+          <p className="text-xs text-fd-muted-foreground leading-none mt-0">{subjectFull}</p>
         </a>
         <div className="mt-auto">
           <Popover>

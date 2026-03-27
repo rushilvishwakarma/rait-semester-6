@@ -4,8 +4,8 @@ import { ImageResponse } from 'next/og';
 
 export const revalidate = false;
 
-const primaryColor = 'rgba(159,28,51,0.4)';
-const primaryTextColor = 'rgb(255,120,140)';
+const primaryColor = 'rgba(197, 29, 56, 0.75)';
+const primaryTextColor = 'rgb(255, 160, 180)';
 
 export async function GET(
   _req: Request,
