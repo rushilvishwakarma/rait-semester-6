@@ -35,7 +35,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <CuratedResourcesProvider>
           <RootProvider>
             <TooltipProvider>
-              <Banner
+{/* <Banner
                 variant="rainbow"
                 rainbowColors={[
                   '#ec8e8e6e',
@@ -45,7 +45,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 ]}
               >
                 MSE begin 23rd March 2026. <a href="/docs/core/mse-timetable" className="underline font-semibold ml-1">View Timetable</a>
-              </Banner>
+              </Banner> */}
               {children}
             </TooltipProvider>
           </RootProvider>

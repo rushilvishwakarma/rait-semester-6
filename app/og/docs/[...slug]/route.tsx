@@ -1,7 +1,6 @@
 import { getPageImage, source } from '@/lib/source';
 import { notFound } from 'next/navigation';
-import { ImageResponse } from 'next/og';
-import { generate as DefaultImage } from 'fumadocs-ui/og';
+import { generateOGImage } from 'fumadocs-ui/og/takumi';
 
 export const revalidate = false;
 
@@ -13,19 +12,13 @@ export async function GET(
   const page = source.getPage(slug.slice(0, -1));
   if (!page) notFound();
 
-  return new ImageResponse(
-    (
-      <DefaultImage
-        title={page.data.title}
-        description={page.data.description}
-        site="Semester 6"
-      />
-    ),
-    {
-      width: 1200,
-      height: 630,
-    },
-  );
+  return generateOGImage({
+    title: page.data.title,
+    description: page.data.description,
+    site: 'Semester 6',
+    primaryColor: 'rgba(159,28,51,0.4)',
+    primaryTextColor: 'rgb(255,120,140)',
+  });
 }
 
 export function generateStaticParams() {
