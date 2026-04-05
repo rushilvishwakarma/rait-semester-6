@@ -1,0 +1,146 @@
+---
+title: IA2 Topic 5 - PCY Algorithm
+---
+
+# PCY Algorithm (Park-Chen-Yu)
+
+PCY is used for frequent itemset mining.
+
+Apply PCY to the given transactions to find candidate sets.
+
+## Given
+
+1. Threshold = 3
+2. Hash function for pairs: $(i\times j)\bmod 10$
+
+Transactions (as in OCR sequence):
+
+$$
+\begin{aligned}
+T_1&=\{1,2,3\}\\
+T_2&=\{2,3,4\}\\
+T_3&=\{3,4,5\}\\
+T_4&=\{4,5,6\}\\
+T_5&=\{1,3,6\}\\
+T_6&=\{2,4,6\}\\
+T_7&=\{1,3,4\}\\
+T_8&=\{2,4,5\}\\
+T_9&=\{3,5,6\}
+\end{aligned}
+$$
+
+(Extra OCR rows $T_{10},T_{11},T_{12}$ were incomplete, so only complete rows are retained.)
+
+---
+
+## Step 1: Map single-item frequencies
+
+Item set:
+
+$$
+\{1,2,3,4,5,6\}
+$$
+
+Frequency table from notes:
+
+| Item | 1 | 2 | 3 | 4 | 5 | 6 |
+| --- | --- | --- | --- | --- | --- | --- |
+| Count | 7 | 6 | 8 | 8 | 6 | 4 |
+
+## Step 2: Reduce by threshold
+
+Keep items with count $\ge 3$:
+
+$$
+\{1,2,3,4,5,6\}
+$$
+
+## Step 3: Candidate pairs with support (OCR-preserved set)
+
+Selected pairs with support $\ge 3$:
+
+$$
+(1,3), (2,3), (2,4), (3,4), (3,5), (4,5), (4,6)
+$$
+
+## Step 4: Hash pairs into buckets
+
+$$
+\begin{aligned}
+(1,3)&\to (1\times 3)\bmod 10 = 3\\
+(2,3)&\to 6\\
+(2,4)&\to 8\\
+(3,4)&\to 2\\
+(3,5)&\to 5\\
+(4,5)&\to 0\\
+(4,6)&\to 4
+\end{aligned}
+$$
+
+## Step 5: Bucket mapping
+
+| Bucket No | Pair |
+| --- | --- |
+| 0 | (4,5) |
+| 2 | (3,4) |
+| 3 | (1,3) |
+| 4 | (4,6) |
+| 5 | (3,5) |
+| 6 | (2,3) |
+| 8 | (2,4) |
+
+## Step 6: Candidate set table (bit-vector idea)
+
+All above occupied buckets have bit value 1 in notes and satisfy threshold for candidate generation.
+
+Final candidate set retained:
+
+$$
+\{(4,5),(3,4),(1,3),(4,6),(3,5),(2,3),(2,4)\}
+$$
+
+Memory check in OCR: keep only threshold-satisfying buckets.
+
+---
+
+## OCR-Preserved Topic Lines (Close to Source)
+
+```text
+PCY Algo: used for frequent itemsets (Park Chen Yu).
+
+Threshold = 3
+Hash function = (i x j) mod 10
+
+Transactions shown in OCR include:
+T1={1,2,3}
+T2={2,3,4}
+T3={3,4,5}
+T4={4,5,6}
+T5={1,3,6}
+T6={2,4,6}
+T7={1,3,4}
+T8={2,4,5}
+T9={3,5,6}
+T10=_
+T11=1,2,4 (incomplete OCR)
+T12=2,3,5 (incomplete OCR)
+
+Map/Reduce idea used in notes:
+1) Map all elements to find frequency.
+2) Reduce to keep support >= threshold.
+3) Map candidate pairs and their frequency.
+4) Hash candidate pairs into buckets.
+5) Build bit-vector and final candidate set.
+
+Selected frequent pairs from OCR:
+(1,3), (2,3), (2,4), (3,4), (3,5), (4,5), (4,6)
+
+Bucket list (ascending):
+0:(4,5)
+2:(3,4)
+3:(1,3)
+4:(4,6)
+5:(3,5)
+6:(2,3)
+8:(2,4)
+```

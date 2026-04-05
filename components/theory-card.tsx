@@ -236,7 +236,7 @@ Please fetch the content from the URL above and help me understand and study it.
                 <GraduationCap className="size-9 text-fd-primary" />
               </div>
             </div>
-            <DialogTitle className="text-center text-xl">University Email Required</DialogTitle>
+            <DialogTitle className="text-center text-4xl md:text-5xl leading-tight">University Email Required</DialogTitle>
             <DialogDescription className="text-center text-sm mt-1 px-10 pb-3">
               On the next page, select your university email account to access this document.
             </DialogDescription>
@@ -270,7 +270,7 @@ Please fetch the content from the URL above and help me understand and study it.
                   }),
                 )}
               >
-                Open Presentation
+                Open Document
               </button>
             </div>
           </div>

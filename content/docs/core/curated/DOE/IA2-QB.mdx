@@ -1,0 +1,201 @@
+---
+title: Question Bank - Internal Assessment 2
+description: DOE IA2 solved answers (unofficial)
+---
+
+import { QuestionDot } from '@/components/question-dot';
+
+### Q1. Define Design of Experiments (DOE). Explain how statistical thinking supports better decision-making in industrial experimentation with one simple example. <QuestionDot color="orange" text="Asked in IA2" />
+
+**(5 Marks)**
+
+Design of Experiments (DOE) is a structured method to plan, run, and analyze controlled tests so we can identify how input factors affect an output response. Instead of trial-and-error, DOE studies multiple factors systematically and finds cause-effect relationships with fewer runs.
+
+Statistical thinking strengthens DOE by focusing on variation, evidence, and uncertainty. It helps separate real effects from random noise and supports decisions based on data, not assumptions.
+
+**Example:** In plastic moulding, product strength depends on temperature and pressure. DOE tests both factors together at planned levels and uses analysis to find which factor matters most and which settings maximize strength. The result is better quality with lower rework and cost.
+
+---
+
+### Q2. State and explain the basic principles of DOE (randomization, replication, blocking) using a small manufacturing or software performance example. <QuestionDot color="orange" text="Asked in IA2" />
+
+**(5 Marks)**
+
+The three core DOE principles are:
+
+1. **Randomization:** Run experiments in random order to avoid bias from time-based or hidden effects.
+2. **Replication:** Repeat runs to estimate experimental error and improve confidence in conclusions.
+3. **Blocking:** Group similar units (for example, same machine or same day) to remove known nuisance variation.
+
+**Software example:** While testing server response time, configurations are run in random order, each run is repeated three times, and tests are blocked by time window (peak vs non-peak). This gives fair, stable, and comparable results.
+
+---
+
+### Q3. What is meant by degrees of freedom in an experiment? Illustrate how degrees of freedom are calculated for a simple two-factor, two-level experiment. <QuestionDot color="orange" text="Asked in IA2" />
+
+**(5 Marks)**
+
+Degrees of freedom (DOF) are the number of independent pieces of information available to estimate effects or error.
+
+For a two-factor, two-level design:
+- Factors: A (2 levels), B (2 levels)
+- Total runs: $2 \times 2 = 4$
+- Total DOF: $N - 1 = 4 - 1 = 3$
+- DOF for A: $2 - 1 = 1$
+- DOF for B: $2 - 1 = 1$
+- DOF for interaction $AB$: $(2-1)(2-1)=1$
+
+So, $3 = 1 + 1 + 1$. With no replication, all DOF are used by main effects and interaction, leaving no pure error DOF.
+
+---
+
+### Q4. Explain the term quality characteristic in DOE. How would you select appropriate quality characteristics for an industrial or service process? Give at least two examples. <QuestionDot color="orange" text="Asked in IA2" />
+
+**(5 Marks)**
+
+A quality characteristic is the measurable response in DOE that represents process performance (for example, strength, defect rate, waiting time).
+
+Selection guidelines:
+1. **Aligned to objective:** Must reflect the problem being solved.
+2. **Measurable and repeatable:** Data should be accurate and consistent.
+3. **Sensitive to factors:** Should change when factors change.
+4. **Business relevance:** Must impact quality, cost, time, or customer satisfaction.
+
+**Examples:**
+- Manufacturing: tensile strength of a steel part.
+- Service/software: average API response time.
+
+Choosing the right quality characteristic ensures the experiment produces actionable conclusions.
+
+---
+
+### Q5. Explain geometric and non-geometric Plackett-Burman screening designs. For a case with many factors and limited runs, why is a P-B design useful? <QuestionDot color="orange" text="Asked in IA2" />
+
+**(10 Marks)**
+
+Plackett-Burman (P-B) designs are two-level screening designs used to identify important factors quickly when many factors are present.
+
+**Geometric view:** Regular $2^k$ factorial designs map to cube/hypercube geometry. A few small P-B cases may look similar, but this interpretation is limited.
+
+**Non-geometric view (practical P-B):** Most P-B designs are built from orthogonal/Hadamard-type matrices with run sizes like 8, 12, 16, 20 (multiples of 4), not necessarily powers of 2. They estimate main effects efficiently while assuming interactions are negligible during screening.
+
+Why P-B is useful with many factors and limited runs:
+1. **High efficiency:** Up to $N-1$ factors in $N$ runs.
+2. **Lower cost/time:** Major reduction in materials and machine time.
+3. **Fast prioritization:** Quickly separates critical factors from unimportant ones.
+4. **Better follow-up:** After screening, detailed optimization can focus only on significant factors.
+
+Example: 11 factors need 2048 runs in full $2^{11}$ design, but a 12-run P-B can screen them initially.
+
+---
+
+### Q6. With a neat layout table, construct a 2^3 full factorial design for three factors at two levels each and indicate how main effects can be estimated from the data. <QuestionDot color="orange" text="Asked in IA2" />
+
+**(5 Marks)**
+
+A $2^3$ full factorial design has 3 factors (A, B, C), each at 2 levels (-1, +1), so total runs = $8$.
+
+| Run | A  | B  | C  | Response |
+| --- | -- | -- | -- | -------- |
+| 1   | -1 | -1 | -1 | $Y_1$    |
+| 2   | +1 | -1 | -1 | $Y_2$    |
+| 3   | -1 | +1 | -1 | $Y_3$    |
+| 4   | +1 | +1 | -1 | $Y_4$    |
+| 5   | -1 | -1 | +1 | $Y_5$    |
+| 6   | +1 | -1 | +1 | $Y_6$    |
+| 7   | -1 | +1 | +1 | $Y_7$    |
+| 8   | +1 | +1 | +1 | $Y_8$    |
+
+Main effect of a factor = (average response at high level) - (average response at low level).
+
+$$
+\text{Effect }A = \frac{(Y_2+Y_4+Y_6+Y_8)-(Y_1+Y_3+Y_5+Y_7)}{4}
+$$
+
+Similarly, compute effects for B and C by grouping runs where each factor is at +1 and -1.
+
+---
+
+### Q7. What is a fractional factorial design? Describe the construction idea of a 2^(5-1) half-fraction design and comment on the trade-off between number of runs and information obtained. <QuestionDot color="orange" text="Asked in IA2" />
+
+**(10 Marks)**
+
+A fractional factorial design uses a selected subset of full factorial runs to reduce effort while preserving key information.
+
+For 5 factors at 2 levels:
+- Full factorial: $2^5 = 32$ runs
+- Half fraction: $2^{5-1} = 16$ runs
+
+Construction idea:
+1. Start with a $2^4$ design for factors A, B, C, D (16 runs).
+2. Define factor E using generator: $E = ABCD$.
+3. Defining relation: $I = ABCDE$.
+
+This creates aliasing (confounding), for example a main effect is aliased with a four-factor interaction.
+
+Trade-off:
+1. **Gain:** 50% fewer runs, less cost, faster experimentation.
+2. **Loss:** Some effects are confounded, so full interaction detail is not available.
+
+Hence, fractional designs are ideal for early-stage screening when resources are limited and higher-order interactions are assumed small.
+
+---
+
+### Q8. Discuss the barriers in successful application of DOE in real organizations. Include at least one statistical, one technical and one sociological barrier in your answer. <QuestionDot color="orange" text="Asked in IA2" />
+
+**(10 Marks)**
+
+DOE often fails in practice due to combined statistical, technical, and human barriers.
+
+1. **Statistical barrier:** Weak understanding of concepts like interaction, variance, and model assumptions. This can cause wrong design choice or wrong interpretation.
+2. **Technical barrier:** Limited process control, poor measurement systems, or expensive experiments. If factors cannot be set reliably, DOE conclusions become weak.
+3. **Sociological barrier:** Resistance to change, low management support, and poor cross-team communication. Teams may prefer trial-and-error over structured experiments.
+
+Additional issues include time pressure, lack of training, and poor data culture.
+
+Successful DOE needs statistical competence, technical readiness, and organizational buy-in together.
+
+---
+
+### Q9. Explain how DOE can be applied in the service industry. Briefly describe a simple case study (for example, reducing waiting time in a bank or improving response time of an online system), mentioning factors, response and expected benefits. <QuestionDot color="orange" text="Asked in IA2" />
+
+**(10 Marks)**
+
+DOE is useful in services because service outcomes also depend on controllable factors. It helps optimize operations through planned experiments instead of ad-hoc changes.
+
+**Case: Bank waiting-time reduction**
+
+- **Objective:** Reduce average customer waiting time.
+- **Factors:**
+  - Number of active counters (low/high)
+  - Staff skill mix (junior/senior)
+  - Queue system (manual/token)
+- **Response:** Average waiting time (minutes).
+
+By running a factorial experiment and analyzing effects, the bank can identify which factor settings reduce waiting most.
+
+Expected benefits:
+1. Lower waiting time and better customer satisfaction.
+2. Better staffing decisions and lower operating cost.
+3. Data-based improvements that can be replicated across branches.
+
+---
+
+### Q10. What is Six Sigma? Explain the DMAIC methodology and discuss the specific stage(s) where DOE is most useful for process improvement. <QuestionDot color="orange" text="Asked in IA2" />
+
+**(10 Marks)**
+
+Six Sigma is a data-driven quality improvement approach focused on reducing defects and process variation (target: 3.4 defects per million opportunities).
+
+DMAIC phases:
+1. **Define:** Clarify problem, scope, customer requirements.
+2. **Measure:** Collect baseline data and validate metrics.
+3. **Analyze:** Identify root causes.
+4. **Improve:** Develop and test solutions.
+5. **Control:** Sustain gains using monitoring and standards.
+
+Where DOE is most useful:
+1. **Analyze phase:** DOE quantifies which factors significantly affect the response.
+2. **Improve phase (highest use):** DOE finds optimal factor settings and validates improvement through controlled trials.
+
+So, Six Sigma gives the framework, while DOE provides the experimental engine for reliable optimization.

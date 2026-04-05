@@ -1,0 +1,249 @@
+---
+title: IA2 Topic 4 - Distance and Similarity Measures
+---
+
+# Euclidean and Manhattan Distance
+
+(Topic content kept close to provided OCR. Only irrelevant answer-book fields removed.)
+
+![Euclidean Geometry (General) #invert-light](/images/docs/BDA/IA2/topic-4/diagram-01-euclidean-general.png)
+
+$$
+AC^2 = AB^2 + BC^2
+$$
+
+$$
+AC = \sqrt{AB^2 + BC^2}
+$$
+
+$$
+AC = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}
+$$
+
+Suppose in 3D we have $(x_1,y_1,z_1)$ and $(x_2,y_2,z_2)$:
+
+$$
+AC = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}
+$$
+
+This is the $n$-dimension Euclidean-distance style formula:
+
+$$
+\sqrt{\frac{\sum_{i=1}^{n}(x_i-y_i)^2}{n}}
+$$
+
+---
+
+## Worked Example
+
+![Euclidean Worked Example #invert-light](/images/docs/BDA/IA2/topic-4/diagram-02-euclidean-worked-example.png)
+
+Using points $(1,2)$ and $(5,6)$:
+
+$$
+AC = \sqrt{(5-1)^2 + (6-2)^2} = \sqrt{4^2+4^2} = \sqrt{32}=4\sqrt{2}
+$$
+
+---
+
+## Given Data Points
+
+![Dataset Grid Points #invert-light](/images/docs/BDA/IA2/topic-4/diagram-03-dataset-grid-points.png)
+
+| Points | Attribute1 | Attribute2 |
+| --- | --- | --- |
+| X1 | 1 | 2 |
+| X2 | 3 | 5 |
+| X3 | 2 | 0 |
+| X4 | 4 | 5 |
+
+---
+
+## Manhattan Distance
+
+![Manhattan Path #invert-light](/images/docs/BDA/IA2/topic-4/diagram-04-manhattan-path.png)
+
+$$
+D_{\text{Manhattan}} = |x_2-x_1| + |y_2-y_1|
+$$
+
+For $X_1(1,2)$ to $X_2(3,5)$:
+
+$$
+|3-1|+|5-2|=2+3=5
+$$
+
+### Manhattan Distance Matrix (from the same point set)
+
+![Manhattan Distance Matrix #invert-light](/images/docs/BDA/IA2/topic-4/diagram-05-manhattan-distance-matrix.png)
+
+---
+
+## Euclidean Distance (same point set)
+
+Example:
+
+$$
+d(X_2,X_3)=\sqrt{(2-3)^2+(0-5)^2}=\sqrt{26}=5.09
+$$
+
+### Euclidean Distance Matrix
+
+![Euclidean Distance Matrix #invert-light](/images/docs/BDA/IA2/topic-4/diagram-06-euclidean-distance-matrix.png)
+
+---
+
+## Two-Point Segment View
+
+![Two Point Segment #invert-light](/images/docs/BDA/IA2/topic-4/diagram-07-two-point-segment.png)
+
+General delta-view:
+
+![Delta x and Delta y Geometry #invert-light](/images/docs/BDA/IA2/topic-4/diagram-08-delta-xy-geometry.png)
+
+---
+
+## Axis Reference
+
+![Coordinate Axes #invert-light](/images/docs/BDA/IA2/topic-4/diagram-09-coordinate-axes-reference.png)
+
+---
+
+# Cosine Similarity and Cosine Distance
+
+Used in recommendation systems.
+
+$$
+\text{Cosine Distance} = 1 - \cos(\text{sim})
+$$
+
+$$
+\cos(\text{sim}) = \cos\theta
+$$
+
+Range mentioned in notes: $-1$ to $1$.
+
+If $\theta = 45^\circ$, then $\cos 45^\circ \approx 0.707$ (high similarity).
+
+Vector-angle representation:
+
+![Cosine Vector Angle #invert-light](/images/docs/BDA/IA2/topic-4/diagram-10-cosine-vector-angle.png)
+
+Special cases noted:
+
+$$
+\cos 90^\circ = 0 \Rightarrow \text{not similar}
+$$
+
+$$
+\cos 0^\circ = 1 \Rightarrow \text{max similar}
+$$
+
+---
+
+## Movie-Genre Axis Example
+
+![Comedy vs Action Axis #invert-light](/images/docs/BDA/IA2/topic-4/diagram-11-genre-axis-example.png)
+
+As in OCR sketch:
+
+- Minions near $[0,1]$ (comedy-heavy)
+- Avengers near $[1,0]$ (action-heavy)
+
+---
+
+## Cosine Similarity Example (OCR-preserved form)
+
+Given vectors in note-like format:
+
+$$
+\cos\text{ sim} = \frac{A\cdot B}{\|A\|\|B\|}
+$$
+
+A worked line from OCR was interpreted as a final similarity near:
+
+$$
+\frac{9}{11} \approx 0.82
+$$
+
+---
+
+# Jaccard Similarity and Distance
+
+Jaccard similarity indicates closeness between two sets $A,B$.
+
+$$
+d_J(A,B)=1-J(A,B)=1-\frac{|A\cap B|}{|A\cup B|}=\frac{|A\cup B|-|A\cap B|}{|A\cup B|}
+$$
+
+Given:
+
+$$
+A=\{1,2,5,4\},\quad B=\{2,3,5,7\}
+$$
+
+Without duplicate counting:
+
+$$
+A\cap B=\{2,5\},\quad A\cup B=\{1,2,3,4,5,7\}
+$$
+
+$$
+J(A,B)=\frac{2}{6}=0.333\ldots,\quad d_J(A,B)=1-0.333\ldots=0.666\ldots
+$$
+
+(Original OCR had mixed decimal notes; the set operation above is the corrected minimal form.)
+
+---
+
+## Additional Note Fragments Preserved from OCR
+
+- Distance measure indicates degree of dissimilarity between items.
+- Mentions include Euclidean, Manhattan, Minkowski, RMS distance, and MA distance.
+- KNN-style notes include choosing $k$ and class assignment from nearest neighbors.
+
+---
+
+## OCR-Preserved Topic Lines (Close to Source)
+
+```text
+Euclidean & Manhattan distance.
+AC^2 = AB^2 + BC^2
+AC = sqrt((x2-x1)^2 + (y2-y1)^2)
+3D: sqrt((x2-x1)^2 + (y2-y1)^2 + (z2-z1)^2)
+
+Given points:
+X1(1,2), X2(3,5), X3(2,0), X4(4,5)
+
+Manhattan distance:
+|x2-x1| + |y2-y1|
+City block pattern, follows road-like movement.
+
+Euclidean sample from notes:
+x3 = sqrt((2-3)^2 + (0-5)^2) = sqrt(26) = 5.09
+
+Similarity cosine distance notes:
+1 - cos-sim = cos-distance
+cos-sim = cos(theta)
+Range -1 to 1
+cos 90 = 0 (not similar)
+cos 0 = 1 (same direction)
+
+Movie-axis sketch:
+Minions [0,1] near comedy axis
+Avenger/Action [1,0] near action axis
+
+Jaccard similarity notes:
+A = {1,2,5,4}
+B = {2,3,5,7}
+ds(A,B)=1-Js(A,B)=1-|A∩B|/|A∪B|
+
+KNN/distance snippets in OCR:
+supervised classification,
+regression,
+unsupervised clustering.
+
+Euclidean, Minkowski, Manhattan
+L2 norm, L1 norm
+Ridge, LASSO
+```

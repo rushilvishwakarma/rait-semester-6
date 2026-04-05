@@ -1,0 +1,81 @@
+---
+title: IA2 Topic 3 - Bloom Filter and Hashing
+---
+
+# Bloom Filter and Hashing (OCR Topic)
+
+Bloom Filter is a probabilistic structure used to check whether an element is possibly present or definitely not present.
+
+## Given setup in notes
+
+$$
+m=5,\quad h_1(x)=x\bmod 5,\quad h_2(x)=(2x+3)\bmod 5
+$$
+
+Bit array example shown:
+
+$$
+[1,1,0,0,1]
+$$
+
+## Insert / check snapshot from OCR
+
+| $x$ | $h_1(x)$ | $h_2(x)$ | Observation |
+| --- | --- | --- | --- |
+| 9 | 4 | 1 | positions updated |
+| 11 | 1 | 0 | positions updated |
+
+## Query example: 16
+
+$$
+h_1(16)=1,\quad h_2(16)=0
+$$
+
+Both bit positions were 1, so Bloom filter returns positive.
+
+But in note this element was actually not inserted, so this is a **false positive**.
+
+Hence statement: 16 was probably present.
+
+---
+
+## MurmurHash (OCR text corrected minimally)
+
+MurmurHash is based on multiply-and-mix style operations.
+
+Example value in notes:
+
+$$
+\text{hash}(\text{"abd"},123)=454173339
+$$
+
+## Chi-Square test (as provided)
+
+$$
+\chi^2 = \sum_{j=0}^{N-1} \frac{(O_j-E_j)^2}{E_j}
+$$
+
+## Modulo arithmetic snippets from notes
+
+$$
+\frac{10\ \text{mods}}{3} \Rightarrow 10 = 3\times 3 + 1
+$$
+
+$$
+15\ \text{mods} \Rightarrow 15 \bmod 3 = 0
+$$
+
+$$
+128 \bmod 5 = 3
+$$
+
+$$
+31345 \bmod 419 = 339
+$$
+
+(Values are preserved from OCR calculations.)
+
+## Hash Function definition (OCR normalized)
+
+A hash function is any function that maps data of arbitrary size to fixed-size values.
+The returned values are called hashes.
