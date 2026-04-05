@@ -1,249 +1,137 @@
 ---
 title: Distance and Similarity Measures
+description: IA2-ready notes on Euclidean, Manhattan, Cosine, and Jaccard measures with worked examples.
 ---
 
-# Euclidean and Manhattan Distance
+# Distance and Similarity Measures
 
-(Topic content kept close to provided OCR. Only irrelevant answer-book fields removed.)
+Distance measures quantify dissimilarity; similarity measures quantify closeness.
 
-<img src="/images/docs/BDA/IA2/topic-4/diagram-01-euclidean-general.png" alt="Euclidean Geometry (General)" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
+## 1) Euclidean Distance (L2)
 
-$$
-AC^2 = AB^2 + BC^2
-$$
+For points $(x_1,y_1)$ and $(x_2,y_2)$:
 
 $$
-AC = \sqrt{AB^2 + BC^2}
+d_E = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}
 $$
 
-$$
-AC = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}
-$$
-
-Suppose in 3D we have $(x_1,y_1,z_1)$ and $(x_2,y_2,z_2)$:
+For $n$ dimensions:
 
 $$
-AC = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}
+d_E(\mathbf{x},\mathbf{y}) = \sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}
 $$
 
-This is the $n$-dimension Euclidean-distance style formula:
+Example for points $(1,2)$ and $(5,6)$:
 
 $$
-\sqrt{\frac{\sum_{i=1}^{n}(x_i-y_i)^2}{n}}
+d_E = \sqrt{(5-1)^2 + (6-2)^2} = \sqrt{32} = 4\sqrt{2}
 $$
 
----
+## 2) Manhattan Distance (L1)
 
-## Worked Example
-
-<img src="/images/docs/BDA/IA2/topic-4/diagram-02-euclidean-worked-example.png" alt="Euclidean Worked Example" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
-
-Using points $(1,2)$ and $(5,6)$:
+For points $(x_1,y_1)$ and $(x_2,y_2)$:
 
 $$
-AC = \sqrt{(5-1)^2 + (6-2)^2} = \sqrt{4^2+4^2} = \sqrt{32}=4\sqrt{2}
+d_M = |x_2-x_1| + |y_2-y_1|
 $$
 
----
+Example from $(1,2)$ to $(3,5)$:
 
-## Given Data Points
+$$
+d_M = |3-1| + |5-2| = 2 + 3 = 5
+$$
 
-<img src="/images/docs/BDA/IA2/topic-4/diagram-03-dataset-grid-points.png" alt="Dataset Grid Points" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
+## 3) Worked Dataset
 
-| Points | Attribute1 | Attribute2 |
+| Point | Attribute 1 | Attribute 2 |
 | --- | --- | --- |
-| X1 | 1 | 2 |
-| X2 | 3 | 5 |
-| X3 | 2 | 0 |
-| X4 | 4 | 5 |
+| $X_1$ | 1 | 2 |
+| $X_2$ | 3 | 5 |
+| $X_3$ | 2 | 0 |
+| $X_4$ | 4 | 5 |
 
----
+### Manhattan Distance Matrix
 
-## Manhattan Distance
-
-<img src="/images/docs/BDA/IA2/topic-4/diagram-04-manhattan-path.png" alt="Manhattan Path" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
-
-$$
-D_{\text{Manhattan}} = |x_2-x_1| + |y_2-y_1|
-$$
-
-For $X_1(1,2)$ to $X_2(3,5)$:
-
-$$
-|3-1|+|5-2|=2+3=5
-$$
-
-### Manhattan Distance Matrix (from the same point set)
-
-<img src="/images/docs/BDA/IA2/topic-4/diagram-05-manhattan-distance-matrix.png" alt="Manhattan Distance Matrix" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
-
----
-
-## Euclidean Distance (same point set)
-
-Example:
-
-$$
-d(X_2,X_3)=\sqrt{(2-3)^2+(0-5)^2}=\sqrt{26}=5.09
-$$
+|  | $X_1$ | $X_2$ | $X_3$ | $X_4$ |
+| --- | --- | --- | --- | --- |
+| $X_1$ | 0 | 5 | 3 | 6 |
+| $X_2$ | 5 | 0 | 6 | 1 |
+| $X_3$ | 3 | 6 | 0 | 7 |
+| $X_4$ | 6 | 1 | 7 | 0 |
 
 ### Euclidean Distance Matrix
 
-<img src="/images/docs/BDA/IA2/topic-4/diagram-06-euclidean-distance-matrix.png" alt="Euclidean Distance Matrix" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
+|  | $X_1$ | $X_2$ | $X_3$ | $X_4$ |
+| --- | --- | --- | --- | --- |
+| $X_1$ | 0 | 3.61 | 2.24 | 4.24 |
+| $X_2$ | 3.61 | 0 | 5.10 | 1.00 |
+| $X_3$ | 2.24 | 5.10 | 0 | 5.39 |
+| $X_4$ | 4.24 | 1.00 | 5.39 | 0 |
 
----
+## 4) Cosine Similarity and Cosine Distance
 
-## Two-Point Segment View
-
-<img src="/images/docs/BDA/IA2/topic-4/diagram-07-two-point-segment.png" alt="Two Point Segment" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
-
-General delta-view:
-
-<img src="/images/docs/BDA/IA2/topic-4/diagram-08-delta-xy-geometry.png" alt="Delta x and Delta y Geometry" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
-
----
-
-## Axis Reference
-
-<img src="/images/docs/BDA/IA2/topic-4/diagram-09-coordinate-axes-reference.png" alt="Coordinate Axes" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
-
----
-
-# Cosine Similarity and Cosine Distance
-
-Used in recommendation systems.
+Cosine similarity compares direction, not magnitude:
 
 $$
-\text{Cosine Distance} = 1 - \cos(\text{sim})
+\cos(\theta)=\frac{\mathbf{A}\cdot\mathbf{B}}{\|\mathbf{A}\|\|\mathbf{B}\|}
 $$
 
-$$
-\cos(\text{sim}) = \cos\theta
-$$
-
-Range mentioned in notes: $-1$ to $1$.
-
-If $\theta = 45^\circ$, then $\cos 45^\circ \approx 0.707$ (high similarity).
-
-Vector-angle representation:
-
-<img src="/images/docs/BDA/IA2/topic-4/diagram-10-cosine-vector-angle.png" alt="Cosine Vector Angle" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
-
-Special cases noted:
+Cosine distance:
 
 $$
-\cos 90^\circ = 0 \Rightarrow \text{not similar}
+d_{\cos}=1-\cos(\theta)
+$$
+
+Special cases:
+
+- $\cos(0^\circ)=1$ means maximum similarity.
+- $\cos(90^\circ)=0$ means orthogonal (no directional similarity).
+
+Example with $\mathbf{A}=[1,2,0]$ and $\mathbf{B}=[2,1,1]$:
+
+$$
+\mathbf{A}\cdot\mathbf{B}=4,
+\quad \|\mathbf{A}\|=\sqrt{5},
+\quad \|\mathbf{B}\|=\sqrt{6}
 $$
 
 $$
-\cos 0^\circ = 1 \Rightarrow \text{max similar}
+\cos(\theta)=\frac{4}{\sqrt{30}}\approx 0.73,
+\quad d_{\cos}\approx 0.27
 $$
 
----
+## 5) Jaccard Similarity and Distance
 
-## Movie-Genre Axis Example
-
-<img src="/images/docs/BDA/IA2/topic-4/diagram-11-genre-axis-example.png" alt="Comedy vs Action Axis" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
-
-As in OCR sketch:
-
-- Minions near $[0,1]$ (comedy-heavy)
-- Avengers near $[1,0]$ (action-heavy)
-
----
-
-## Cosine Similarity Example (OCR-preserved form)
-
-Given vectors in note-like format:
+For sets $A$ and $B$:
 
 $$
-\cos\text{ sim} = \frac{A\cdot B}{\|A\|\|B\|}
+J(A,B)=\frac{|A\cap B|}{|A\cup B|}
 $$
 
-A worked line from OCR was interpreted as a final similarity near:
-
 $$
-\frac{9}{11} \approx 0.82
-$$
-
----
-
-# Jaccard Similarity and Distance
-
-Jaccard similarity indicates closeness between two sets $A,B$.
-
-$$
-d_J(A,B)=1-J(A,B)=1-\frac{|A\cap B|}{|A\cup B|}=\frac{|A\cup B|-|A\cap B|}{|A\cup B|}
+d_J(A,B)=1-J(A,B)
 $$
 
 Given:
 
 $$
-A=\{1,2,5,4\},\quad B=\{2,3,5,7\}
+A=\{1,2,4,5\},\quad B=\{2,3,5,7\}
 $$
-
-Without duplicate counting:
 
 $$
 A\cap B=\{2,5\},\quad A\cup B=\{1,2,3,4,5,7\}
 $$
 
 $$
-J(A,B)=\frac{2}{6}=0.333\ldots,\quad d_J(A,B)=1-0.333\ldots=0.666\ldots
+J(A,B)=\frac{2}{6}=0.333\ldots,
+\quad d_J(A,B)=0.666\ldots
 $$
 
-(Original OCR had mixed decimal notes; the set operation above is the corrected minimal form.)
+## 6) Which Measure to Use
 
----
+- Euclidean: dense numeric features where straight-line geometry is meaningful.
+- Manhattan: grid-like movement or absolute coordinate differences.
+- Cosine: text vectors and high-dimensional sparse vectors.
+- Jaccard: set or binary-presence features.
 
-## Additional Note Fragments Preserved from OCR
-
-- Distance measure indicates degree of dissimilarity between items.
-- Mentions include Euclidean, Manhattan, Minkowski, RMS distance, and MA distance.
-- KNN-style notes include choosing $k$ and class assignment from nearest neighbors.
-
----
-
-## OCR-Preserved Topic Lines (Close to Source)
-
-```text
-Euclidean & Manhattan distance.
-AC^2 = AB^2 + BC^2
-AC = sqrt((x2-x1)^2 + (y2-y1)^2)
-3D: sqrt((x2-x1)^2 + (y2-y1)^2 + (z2-z1)^2)
-
-Given points:
-X1(1,2), X2(3,5), X3(2,0), X4(4,5)
-
-Manhattan distance:
-|x2-x1| + |y2-y1|
-City block pattern, follows road-like movement.
-
-Euclidean sample from notes:
-x3 = sqrt((2-3)^2 + (0-5)^2) = sqrt(26) = 5.09
-
-Similarity cosine distance notes:
-1 - cos-sim = cos-distance
-cos-sim = cos(theta)
-Range -1 to 1
-cos 90 = 0 (not similar)
-cos 0 = 1 (same direction)
-
-Movie-axis sketch:
-Minions [0,1] near comedy axis
-Avenger/Action [1,0] near action axis
-
-Jaccard similarity notes:
-A = {1,2,5,4}
-B = {2,3,5,7}
-ds(A,B)=1-Js(A,B)=1-|A∩B|/|A∪B|
-
-KNN/distance snippets in OCR:
-supervised classification,
-regression,
-unsupervised clustering.
-
-Euclidean, Minkowski, Manhattan
-L2 norm, L1 norm
-Ridge, LASSO
-```
+These metrics are commonly used in KNN, clustering, recommendation, and retrieval.

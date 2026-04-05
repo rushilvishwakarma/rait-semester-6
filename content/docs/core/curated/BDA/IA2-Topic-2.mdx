@@ -1,138 +1,93 @@
 ---
-title: Distributed Notes, PageRank, and CPM
+title: Distributed Systems, PageRank, and CPM
+description: Clean IA2 notes covering distributed-system concepts, PageRank iterations, and community detection with clique percolation.
 ---
 
-# Distributed Systems + PageRank + Clique Percolation (OCR Topic)
+# Distributed Systems, PageRank, and Clique Percolation
 
-## Part A - Short Notes / One-liners
+## 1) Distributed Systems Quick Notes
 
-### Q5
+### Cassandra
 
-1. In Cassandra, during write operation, when hinted handoff is enabled and any replica is down, the coordinator writes to other replicas and keeps a hint locally until the down replica comes back.
-2. ELB is an important switch/service for deployment in Amazon EC2.
+- During writes, if hinted handoff is enabled and a replica is down, the coordinator writes to available replicas and stores a hint for later delivery.
+- Cassandra uses Gossip protocol to exchange node state and location information.
+- Eventual consistency means: if no new updates occur, all replicas converge and reads eventually return the same latest value.
 
-Both statements marked true in the provided notes.
+### Concurrency Terms
 
-### Q6
+- Race condition: concurrent operations interleave in a harmful way and can produce incorrect output.
+- Deadlock: processes/threads wait on each other in a cycle, so none can proceed.
 
-Cassandra uses a protocol called Gossip to discover location and state information about the other nodes participating in a Cassandra cluster.
+### ZooKeeper
 
-### Q7 - Eventual Consistency
+- ZooKeeper originated at Yahoo.
+- A watch triggers a client notification when the watched znode changes.
+- A ZooKeeper cluster is called an ensemble.
 
-If no new writes happen, all reads will eventually return the same latest value after some time.
+## 2) HBase and Kafka Essentials
 
-### Q8 - Race condition vs Deadlock
+### HBase
 
-Provided note correction:
-1. When two processes conflict and cause data corruption, it is race condition.
-2. When two processes wait for each other directly/indirectly, it is deadlock.
+- HBase is a column-family NoSQL database built on HDFS.
+- A region is a horizontal partition (chunk) of an HBase table.
+- There is one memstore per column family per region.
+- HBase cell structure: row key + column family + qualifier + timestamp + value.
+- Core components often discussed in architecture: HMaster, RegionServer, and ZooKeeper.
 
-### Q9
+### Kafka
 
-Incorrect statement in note: ZooKeeper was originally built at Google.
+- Kafka is a distributed event-streaming platform.
+- Messages are organized in topics.
+- Producer API publishes records to topics.
+- Kafka Connect moves data between Kafka and external systems.
+- Kafka Streams processes event streams in near real time.
+- Batch processing is for data-at-rest; stream processing is for data-in-motion.
 
-Correction: ZooKeeper was originally built at Yahoo.
+## 3) PageRank
 
-### Q10
-
-In ZooKeeper, when a watch is triggered, the client receives a notification packet that the znode has changed.
-
-### Q11
-
-ZooKeeper itself is intended to be replicated over a set of hosts called an ensemble.
-
-## Part B - HBase / Kafka style notes
-
-1. HBase is a column-oriented NoSQL database designed to operate on top of HDFS. (True)
-2. A small chunk of data residing on one machine and part of a table is called a Region.
-3. In HBase, number of memstores per column family: 1.
-4. HBase cell = row key + column family + column qualifier + timestamp + value.
-5. HBase architecture (as noted): master, region server, ZooKeeper.
-6. Kafka is a high-performance real-time messaging system, open-source and part of Apache. (True)
-7. Kafka maintains streams of messages in categories called Topics.
-8. Batch processing analyzes data-at-rest (stored data).
-9. Stream processing analyzes data-in-motion in real or near-real time.
-10. Both are true.
-
-### Kafka Components (OCR wording normalized minimally)
-
-- Kafka producer API publishes streams of records.
-- Kafka connect imports/exports event streams between Kafka and external systems.
-- Kafka core acts as centralized transport and storage of event streams.
-- Kafka streams is a client library to process event streams live.
-- Window parameters include window length and sliding interval.
-
----
-
-## PageRank Algorithm
+### Standard Update Rule
 
 $$
 PR_{t+1}(P_i) = \sum_{P_j \in M(P_i)} \frac{PR_t(P_j)}{C(P_j)}
 $$
 
-### Iteration table from notes
+Where $M(P_i)$ is the set of pages linking to $P_i$, and $C(P_j)$ is the out-degree of page $P_j$.
 
-| Node | J+0 | J+1 | J+2 | Rank Order |
-| --- | --- | --- | --- | --- |
-| A | $1/4$ | $1/12$ | $1.5/12$ | 1 |
-| B | $1/4$ | $2.5/12$ | $2.1/12$ | 2 |
-| C | $1/4$ | $4.5/12$ | $4.5/12$ | 4 |
-| D | $1/4$ | $4/12$ | $4/12$ | 3 |
-
-At beginning all pages are initialized equally.
-
-### Sample iteration steps (as in OCR)
-
-1. For node A, incoming page is C:
+### Damped Variant (used in practice)
 
 $$
-PR(A)=\frac{PR(C)}{3}=\frac{1/4}{3}=\frac{1}{12}
+PR(P_i) = \frac{1-d}{N} + d\sum_{P_j \in M(P_i)}\frac{PR(P_j)}{C(P_j)},\quad d\approx 0.85
 $$
 
-2. For node B, incoming pages A and C:
+### Iteration Snapshot (from class notes)
+
+| Node | Iteration 0 | Iteration 1 | Iteration 2 |
+| --- | --- | --- | --- |
+| A | $1/4$ | $1/12$ | $1.5/12$ |
+| B | $1/4$ | $2.5/12$ | $2.1/12$ |
+| C | $1/4$ | $4.5/12$ | $4.5/12$ |
+| D | $1/4$ | $4/12$ | $4/12$ |
+
+By Iteration 2, the importance order is:
 
 $$
-PR(B)=\frac{PR(A)}{2}+\frac{PR(C)}{3}
+C > D > B > A
 $$
 
-3. For node C, incoming pages A and D:
-
-$$
-PR(C)=\frac{PR(A)}{2}+\frac{PR(D)}{1}
-$$
-
-4. For node D, incoming pages C and B:
-
-$$
-PR(D)=\frac{PR(C)}{3}+\frac{PR(B)}{3}=\frac{4}{12}
-$$
-
-Sum constraint:
+Also, PageRank values are normalized:
 
 $$
 PR(A)+PR(B)+PR(C)+PR(D)=1
 $$
 
-### Second iteration snapshot
+## 4) Clique Percolation Method (CPM)
 
-$$
-\begin{aligned}
-PR(A)&=\frac{4.5/12}{3}=1.5/12\\
-PR(B)&=\frac{1/12}{2}+\frac{4.5/12}{3}\\
-PR(C)&=\frac{1/12}{2}+\frac{4/12}{1}\\
-PR(D)&=\frac{4.5/12}{3}+\frac{2.5/12}{3}=4/12
-\end{aligned}
-$$
+CPM finds overlapping communities by linking adjacent $k$-cliques.
 
-As noted: page with higher PageRank is considered more important.
+- Two $k$-cliques are adjacent if they share $k-1$ nodes.
+- A community is a connected component in the clique-adjacency graph.
 
----
-
-## Clique Percolation Method (CPM)
-
-For social graph and $k=3$ (3-clique based):
-
-Sample cliques in the notes include:
+For $k=3$, sample cliques:
 
 - $(1,2,3)$
 - $(1,2,8)$
@@ -141,76 +96,16 @@ Sample cliques in the notes include:
 - $(2,5,6)$
 - $(4,5,6)$
 
-Communities identified in notes:
+Detected communities:
 
-- $c_1=(1,2,3,8)$
-- $c_2=(2,4,5,6)$
+- $C_1=(1,2,3,8)$
+- $C_2=(2,4,5,6)$
 
-Adjacent cliques are those sharing $(k-1)$ nodes.
+### CPM Steps
 
-### CPM Algorithm (as provided)
-
-1. Input social graph $G$ and clique size $k$.
-2. Find all $k$-cliques in $G$.
-3. Build clique graph $G_C$: each node is one clique.
-4. Connect two clique nodes if they share $(k-1)$ common vertices.
-5. Find connected components in $G_C$.
-6. Each connected component represents one community.
-7. Output set of communities $C$.
-
----
-
-## OCR-Preserved Topic Lines (Close to Source)
-
-```text
-Q5. Statement 1: In Cassandra, during write operation, when hinted handoff is enabled and any replica is down, coordinator writes to available replicas and keeps hint locally till down replica comes up.
-Statement 2: EL2/ELB switch/service is important for deployment in Amazon EC2.
-Both statements marked true in notes.
-
-Q6. Cassandra uses Gossip protocol to discover location and state information of nodes in cluster.
-
-Q7. Eventual consistency: if no new writes happen, all reads return same value after a while.
-
-Q8. Notes correction:
-When two processes conflict causing data corruption -> race condition.
-When two processes wait for each other directly/indirectly -> deadlock.
-
-Q9. Incorrect statement: ZooKeeper was built at Google.
-Correction: ZooKeeper was originally built by Yahoo.
-
-Q10. In ZooKeeper, when watch is triggered, client receives packet that znode changed.
-Q11. ZooKeeper is replicated over a set of hosts called ensemble.
-
-ASS 5 snippets:
-HBase is column oriented NoSQL database on HDFS (true).
-A region is a chunk of table data on one machine.
-No. of memstore per column family = 1.
-Cell = row + column family + qualifier + value + timestamp.
-Architecture note: master, region server, ZooKeeper.
-
-Kafka snippets:
-Kafka is high performance real-time messaging, open source Apache project (true).
-Messages are stored in topics.
-Batch processing -> data at rest.
-Stream processing -> data in motion near real-time.
-
-Kafka producer API: publish streams of records.
-Kafka connect: import/export streams across systems.
-Kafka core: transport and store streams in real-time.
-Kafka streams: process event streams live.
-Window parameters: window length, sliding interval.
-
-PageRank formula used:
-PR(t+1)(Pi) = sum over Pj [ PR(t)(Pj)/C(Pj) ]
-
-Iteration table snapshot in OCR:
-A: 1/4 -> 1/12 -> 1.5/12
-B: 1/4 -> 2.5/12 -> 2.1/12
-C: 1/4 -> 4.5/12 -> 4.5/12
-D: 1/4 -> 4/12 -> 4/12
-
-CPM notes:
-3-clique based graph community discovery.
-Cliques adjacent when they share (k-1) nodes.
-Detected communities listed as c1 and c2 in notes.
-```
+1. Take graph $G$ and clique size $k$.
+2. Enumerate all $k$-cliques.
+3. Build clique graph $G_C$ where each node is one $k$-clique.
+4. Connect clique nodes sharing $k-1$ vertices.
+5. Find connected components of $G_C$.
+6. Return each component as one community.

@@ -1,81 +1,113 @@
 ---
 title: Bloom Filter and Hashing
+description: IA2 notes on Bloom filters, false positives, hash functions, and key modulo operations.
 ---
 
-# Bloom Filter and Hashing (OCR Topic)
+# Bloom Filter and Hashing
 
-Bloom Filter is a probabilistic structure used to check whether an element is possibly present or definitely not present.
+Bloom filter is a probabilistic data structure used for membership testing.
 
-## Given setup in notes
+- If the filter says "not present", the element is definitely not present.
+- If the filter says "present", the element may or may not actually be present.
+
+So Bloom filters have false positives, but no false negatives.
+
+## 1) IA2 Worked Example
+
+Given:
 
 $$
 m=5,\quad h_1(x)=x\bmod 5,\quad h_2(x)=(2x+3)\bmod 5
 $$
 
-Bit array example shown:
+Start bit array:
+
+$$
+[0,0,0,0,0]
+$$
+
+Insert $x=9$:
+
+$$
+h_1(9)=4,\quad h_2(9)=1
+$$
+
+Set positions 4 and 1 to 1:
+
+$$
+[0,1,0,0,1]
+$$
+
+Insert $x=11$:
+
+$$
+h_1(11)=1,\quad h_2(11)=0
+$$
+
+Set positions 1 and 0 to 1:
 
 $$
 [1,1,0,0,1]
 $$
 
-## Insert / check snapshot from OCR
-
-| $x$ | $h_1(x)$ | $h_2(x)$ | Observation |
-| --- | --- | --- | --- |
-| 9 | 4 | 1 | positions updated |
-| 11 | 1 | 0 | positions updated |
-
-## Query example: 16
+### Query $x=16$
 
 $$
 h_1(16)=1,\quad h_2(16)=0
 $$
 
-Both bit positions were 1, so Bloom filter returns positive.
+Both positions are 1, so Bloom filter reports "possibly present".
 
-But in note this element was actually not inserted, so this is a **false positive**.
+If 16 was never inserted, this is a false positive.
 
-Hence statement: 16 was probably present.
+## 2) False Positive Intuition
 
----
+As more elements are inserted, more bits become 1, and false-positive probability increases.
 
-## MurmurHash (OCR text corrected minimally)
-
-MurmurHash is based on multiply-and-mix style operations.
-
-Example value in notes:
+Common approximation:
 
 $$
-\text{hash}(\text{"abd"},123)=454173339
+P(\text{false positive})\approx\left(1-e^{-kn/m}\right)^k
 $$
 
-## Chi-Square test (as provided)
+Where:
+
+- $m$ = number of bits
+- $k$ = number of hash functions
+- $n$ = number of inserted elements
+
+## 3) Hashing Notes
+
+A hash function maps variable-length input to a fixed-size integer-like output (hash value).
+
+MurmurHash is a popular non-cryptographic hash function used for speed and good distribution.
+
+Example value from class notes:
 
 $$
-\chi^2 = \sum_{j=0}^{N-1} \frac{(O_j-E_j)^2}{E_j}
+hash("abd",123)=454173339
 $$
 
-## Modulo arithmetic snippets from notes
+## 4) Useful Modulo Operations
 
 $$
-\frac{10\ \text{mods}}{3} \Rightarrow 10 = 3\times 3 + 1
-$$
-
-$$
-15\ \text{mods} \Rightarrow 15 \bmod 3 = 0
+10\bmod 3=1
 $$
 
 $$
-128 \bmod 5 = 3
+15\bmod 3=0
 $$
 
 $$
-31345 \bmod 419 = 339
+128\bmod 5=3
 $$
 
-(Values are preserved from OCR calculations.)
+$$
+31345\bmod 419=339
+$$
 
-## Hash Function definition (OCR normalized)
+## 5) Quick Revision
 
-A hash function is any function that maps data of arbitrary size to fixed-size values.
-The returned values are called hashes.
+- Bloom filter answers membership queries in $O(k)$ time.
+- It is space-efficient for large set-membership problems.
+- It is widely used in databases, caching layers, and stream pipelines.
