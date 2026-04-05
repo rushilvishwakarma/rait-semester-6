@@ -9,6 +9,8 @@ Distance measures quantify dissimilarity; similarity measures quantify closeness
 
 ## 1) Euclidean Distance (L2)
 
+<img src="/images/docs/BDA/IA2/topic-4/diagram-01-euclidean-general.png" alt="Euclidean geometry overview" style={{maxWidth: '360px', margin: '0 auto', display: 'block'}} />
+
 For points $(x_1,y_1)$ and $(x_2,y_2)$:
 
 $$
@@ -23,11 +25,15 @@ $$
 
 Example for points $(1,2)$ and $(5,6)$:
 
+<img src="/images/docs/BDA/IA2/topic-4/diagram-02-euclidean-worked-example.png" alt="Euclidean worked example" style={{maxWidth: '360px', margin: '0 auto', display: 'block'}} />
+
 $$
 d_E = \sqrt{(5-1)^2 + (6-2)^2} = \sqrt{32} = 4\sqrt{2}
 $$
 
 ## 2) Manhattan Distance (L1)
+
+<img src="/images/docs/BDA/IA2/topic-4/diagram-04-manhattan-path.png" alt="Manhattan path interpretation" style={{maxWidth: '360px', margin: '0 auto', display: 'block'}} />
 
 For points $(x_1,y_1)$ and $(x_2,y_2)$:
 
@@ -43,6 +49,8 @@ $$
 
 ## 3) Worked Dataset
 
+<img src="/images/docs/BDA/IA2/topic-4/diagram-03-dataset-grid-points.png" alt="Dataset points on coordinate grid" style={{maxWidth: '360px', margin: '0 auto', display: 'block'}} />
+
 | Point | Attribute 1 | Attribute 2 |
 | --- | --- | --- |
 | $X_1$ | 1 | 2 |
@@ -51,6 +59,8 @@ $$
 | $X_4$ | 4 | 5 |
 
 ### Manhattan Distance Matrix
+
+<img src="/images/docs/BDA/IA2/topic-4/diagram-05-manhattan-distance-matrix.png" alt="Manhattan distance matrix diagram" style={{maxWidth: '420px', margin: '0 auto', display: 'block'}} />
 
 |  | $X_1$ | $X_2$ | $X_3$ | $X_4$ |
 | --- | --- | --- | --- | --- |
@@ -61,6 +71,8 @@ $$
 
 ### Euclidean Distance Matrix
 
+<img src="/images/docs/BDA/IA2/topic-4/diagram-06-euclidean-distance-matrix.png" alt="Euclidean distance matrix diagram" style={{maxWidth: '420px', margin: '0 auto', display: 'block'}} />
+
 |  | $X_1$ | $X_2$ | $X_3$ | $X_4$ |
 | --- | --- | --- | --- | --- |
 | $X_1$ | 0 | 3.61 | 2.24 | 4.24 |
@@ -68,7 +80,15 @@ $$
 | $X_3$ | 2.24 | 5.10 | 0 | 5.39 |
 | $X_4$ | 4.24 | 1.00 | 5.39 | 0 |
 
+<img src="/images/docs/BDA/IA2/topic-4/diagram-07-two-point-segment.png" alt="Two-point segment visualization" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
+
+<img src="/images/docs/BDA/IA2/topic-4/diagram-08-delta-xy-geometry.png" alt="Delta x and delta y geometry" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
+
+<img src="/images/docs/BDA/IA2/topic-4/diagram-09-coordinate-axes-reference.png" alt="Coordinate axes reference" style={{maxWidth: '320px', margin: '0 auto', display: 'block'}} />
+
 ## 4) Cosine Similarity and Cosine Distance
+
+<img src="/images/docs/BDA/IA2/topic-4/diagram-10-cosine-vector-angle.png" alt="Cosine vector angle" style={{maxWidth: '340px', margin: '0 auto', display: 'block'}} />
 
 Cosine similarity compares direction, not magnitude:
 
@@ -88,6 +108,8 @@ Special cases:
 - $\cos(90^\circ)=0$ means orthogonal (no directional similarity).
 
 Example with $\mathbf{A}=[1,2,0]$ and $\mathbf{B}=[2,1,1]$:
+
+<img src="/images/docs/BDA/IA2/topic-4/diagram-11-genre-axis-example.png" alt="Genre axis example for cosine similarity" style={{maxWidth: '340px', margin: '0 auto', display: 'block'}} />
 
 $$
 \mathbf{A}\cdot\mathbf{B}=4,
