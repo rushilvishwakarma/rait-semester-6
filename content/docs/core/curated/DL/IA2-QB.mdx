@@ -7,45 +7,78 @@ import { Highlight } from '@/components/highlight';
 import { LongQuestion } from '@/components/question';
 import { QuestionDot } from '@/components/question-dot';
 
-> All figures in this page are generated using Python (Matplotlib) and prepared for dark-mode inversion.
+> Only concept-heavy questions include diagrams. Numerical questions are solved step-by-step in text format for exam writing.
 
 # Module A - RNNs and Autoencoders
 
+> Numerical format used below (NNFS style): **Given -> Formula -> Substitution -> Final Answer**.
+
 ### Q1. An RNN has input size 15, hidden state size 30, and processes a sequence of length 20 with batch size 64. Calculate the number of multiplications in one forward pass of the entire sequence. <QuestionDot color="green" text="IA2" />
 
-For a simple RNN hidden update:
+Given:
+
+$$
+	ext{Input size}=15,\quad \text{Hidden size}=30,\quad T=20,\quad \text{Batch size}=64
+$$
+
+RNN hidden update:
 
 $$
 h_t = \tanh(x_t W_{xh} + h_{t-1}W_{hh} + b_h)
 $$
 
-Multiplications per time step:
+Step 1: Multiplications for $x_tW_{xh}$ per time step:
 
-1. Input-to-hidden: $64 \times 15 \times 30 = 28{,}800$
-2. Hidden-to-hidden: $64 \times 30 \times 30 = 57{,}600$
+$$
+64 \times 15 \times 30 = 28{,}800
+$$
 
-Total per time step:
+Step 2: Multiplications for $h_{t-1}W_{hh}$ per time step:
+
+$$
+64 \times 30 \times 30 = 57{,}600
+$$
+
+Step 3: Total multiplications per time step:
 
 $$
 28{,}800 + 57{,}600 = 86{,}400
 $$
 
-For sequence length $T=20$:
+Step 4: For sequence length $T=20$:
 
 $$
-\text{Total multiplications} = 20 \times 86{,}400 = \boxed{1{,}728{,}000}
+	ext{Total multiplications} = 20 \times 86{,}400 = \boxed{1{,}728{,}000}
 $$
 
-![RNN forward multiplication count #invert-dark](/images/docs/DL/IA2-QB/Q1_RNN_Forward_Multiplications.png)
+Final answer: One forward pass over the full sequence needs $\boxed{1{,}728{,}000}$ multiplications.
 
 ---
 
 ### Q2. A denoising autoencoder takes a noisy input. If the original input is $x=[3,5]$ and the noise added is $n=[-1,0.5]$, calculate the noisy input.
 
-Noisy input is:
+Given:
 
 $$
-\tilde{x} = x + n = [3,5] + [-1,0.5] = \boxed{[2,5.5]}
+x=[3,5],\qquad n=[-1,0.5]
+$$
+
+For denoising autoencoders, noisy input is computed as:
+
+$$
+\tilde{x} = x + n
+$$
+
+Substitute values component-wise:
+
+$$
+\tilde{x}=[3+(-1),\;5+0.5]=[2,\;5.5]
+$$
+
+Hence, noisy input is:
+
+$$
+\boxed{\tilde{x}=[2,\;5.5]}
 $$
 
 ---
@@ -60,7 +93,34 @@ W_e = \begin{bmatrix}
 $$
 calculate the encoded representation (latent vector).
 
-Treat $x$ as a row vector and compute $z=xW_e$:
+Given:
+
+$$
+x=[2,4,6],\qquad
+W_e=\begin{bmatrix}
+0.5 & 0 \\
+0 & 0.2 \\
+0 & 0
+\end{bmatrix}
+$$
+
+Formula (linear encoder):
+
+$$
+z = xW_e
+$$
+
+Substitution:
+
+$$
+[2\;4\;6]
+\begin{bmatrix}
+0.5 & 0 \\
+0 & 0.2 \\
+0 & 0
+\end{bmatrix}
+=[z_1\;z_2]
+$$
 
 $$
 z_1 = 2(0.5) + 4(0) + 6(0) = 1
@@ -69,7 +129,7 @@ $$
 z_2 = 2(0) + 4(0.2) + 6(0) = 0.8
 $$
 
-So, latent vector is:
+Final answer:
 
 $$
 z = \boxed{[1,\;0.8]}
@@ -102,7 +162,7 @@ $$
 \tilde{x}=\begin{bmatrix}1.2 \\ 1.8 \\ 3.1\end{bmatrix}
 $$
 
-Latent representation:
+Step 1: Latent representation using $h=W_e\tilde{x}$:
 
 $$
 h = W_e\tilde{x}
@@ -114,13 +174,23 @@ h = W_e\tilde{x}
 = \begin{bmatrix}1.09 \\ 1.41\end{bmatrix}
 $$
 
-So,
+Component check:
+
+$$
+h_1=0.2(1.2)+0.3(1.8)+0.1(3.1)=1.09
+$$
+
+$$
+h_2=0.1(1.2)+0.2(1.8)+0.3(3.1)=1.41
+$$
+
+Hence,
 
 $$
 \boxed{h=[1.09,\;1.41]}
 $$
 
-Reconstruction:
+Step 2: Reconstruction using $\hat{x}=W_dh$:
 
 $$
 \hat{x}=W_d h
@@ -133,35 +203,55 @@ $$
 = \begin{bmatrix}0.577 \\ 0.500 \\ 0.532\end{bmatrix}
 $$
 
+Component check:
+
+$$
+\hat{x}_1=0.4(1.09)+0.1(1.41)=0.577
+$$
+
+$$
+\hat{x}_2=0.2(1.09)+0.2(1.41)=0.500
+$$
+
+$$
+\hat{x}_3=0.1(1.09)+0.3(1.41)=0.532
+$$
+
 Hence,
 
 $$
 \boxed{\hat{x}=[0.577,\;0.500,\;0.532]}
 $$
 
-![Denoising autoencoder computation #invert-dark](/images/docs/DL/IA2-QB/Q4_Q5_Denoising_Autoencoder.png)
-
 ---
 
 ### Q6. An RNN processes sequences of length 100, with input size 50, hidden state size 128, and batch size 32. If each training step takes $0.8\text{ ms}$ per time step per batch, compute the total time for one epoch with 1,000 batches.
 
-Time per batch:
+Given:
+
+$$
+T=100,\quad \text{time per step per batch}=0.8\text{ ms},\quad \text{batches per epoch}=1000
+$$
+
+Step 1: Time for one batch:
 
 $$
 100 \times 0.8\text{ ms} = 80\text{ ms}
 $$
 
-For $1000$ batches:
+Step 2: Time for one epoch:
 
 $$
 1000 \times 80\text{ ms} = 80{,}000\text{ ms} = 80\text{ s}
 $$
 
-Final answer:
+Step 3: Convert to minutes:
 
 $$
-\boxed{80\text{ seconds} \; (\approx 1\text{ min }20\text{ s})}
+80\text{ s} = 1\text{ min }20\text{ s}
 $$
+
+Final answer: $\boxed{80\text{ s} \; (\approx 1\text{ min }20\text{ s})}$.
 
 ---
 
@@ -175,7 +265,35 @@ W_e = \begin{bmatrix}
 $$
 calculate the encoded representation (latent vector).
 
-Same as Q3:
+Given:
+
+$$
+x=[2,4,6],\qquad
+W_e=
+\begin{bmatrix}
+0.5 & 0 \\
+0 & 0.2 \\
+0 & 0
+\end{bmatrix}
+$$
+
+Using linear encoder output:
+
+$$
+z = xW_e
+$$
+
+Compute each latent component:
+
+$$
+z_1=2(0.5)+4(0)+6(0)=1
+$$
+
+$$
+z_2=2(0)+4(0.2)+6(0)=0.8
+$$
+
+Therefore,
 
 $$
 \boxed{z=[1,\;0.8]}
@@ -214,14 +332,34 @@ $$
 \Rightarrow h = \big[1w_{11}+2w_{21}+3w_{31}+4w_{41},\;1w_{12}+2w_{22}+3w_{32}+4w_{42}\big]
 $$
 
-So output shape is $1\times2$.
+So output shape is $1\times2$ and this is the exact encoder multiplication pattern asked in the question.
 
 ---
 
 ### Q9. A denoising autoencoder takes a noisy input. If $x=[3,5]$ and $n=[-1,0.5]$, calculate the noisy input.
 
+Given:
+
 $$
-\tilde{x}=x+n=[3,5]+[-1,0.5]=\boxed{[2,5.5]}
+x=[3,5],\qquad n=[-1,0.5]
+$$
+
+Use noisy-input relation:
+
+$$
+\tilde{x}=x+n
+$$
+
+Substitute values:
+
+$$
+\tilde{x}=[3+(-1),\;5+0.5]=[2,\;5.5]
+$$
+
+Final answer:
+
+$$
+\boxed{\tilde{x}=[2,\;5.5]}
 $$
 
 ---
@@ -303,8 +441,6 @@ Typical deep-learning face recognition pipeline:
 
 Models often use contrastive/triplet losses to keep same-person embeddings close and different-person embeddings far apart.
 
-![Face recognition pipeline #invert-dark](/images/docs/DL/IA2-QB/Q13_Face_Recognition_Pipeline.png)
-
 ---
 
 <LongQuestion>
@@ -316,8 +452,6 @@ Models often use contrastive/triplet losses to keep same-person embeddings close
 Example:
 
 In autonomous driving, each pixel may be labeled as road, sky, car, pedestrian, tree, etc. Unlike object detection, semantic segmentation gives a full mask, not just bounding boxes.
-
-![Semantic segmentation example #invert-dark](/images/docs/DL/IA2-QB/Q14_Semantic_Segmentation.png)
 
 ---
 
@@ -352,7 +486,7 @@ Output example: "A dog running on grass."
 | Example | "This is a cat image" | "Cat at (x,y,w,h), Ball at (x,y,w,h)" |
 | Typical Models | ResNet, EfficientNet | Faster R-CNN, YOLO, SSD |
 
-![Classification vs detection #invert-dark](/images/docs/DL/IA2-QB/Q16_Classification_vs_Detection.png)
+Exam note: Classification answers "what is present", while detection answers both "what is present" and "where it is present".
 
 ---
 
@@ -360,15 +494,31 @@ Output example: "A dog running on grass."
 
 ### Q17. A sparse autoencoder uses L1 regularization with $\lambda=0.1$. Latent representation is $h=[0.5,-0.2,0.8]$. Calculate the L1 regularization term added to loss.
 
-L1 penalty uses absolute values:
+Given:
+
+$$
+\lambda=0.1,\qquad h=[0.5,-0.2,0.8]
+$$
+
+L1 regularization term:
 
 $$
 \lambda \sum_i |h_i| = 0.1\left(|0.5| + |-0.2| + |0.8|\right)
 $$
 
+Now evaluate the magnitudes:
+
+$$
+|0.5|=0.5,\qquad |-0.2|=0.2,\qquad |0.8|=0.8
+$$
+
+So,
+
 $$
 = 0.1(0.5+0.2+0.8)=0.1(1.5)=\boxed{0.15}
 $$
+
+Final answer: L1 term added to loss is $\boxed{0.15}$.
 
 ---
 
@@ -384,6 +534,12 @@ RNN equations:
 
 $$
 h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h),\qquad y_t = W_{hy}h_t + b_y
+$$
+
+Given values:
+
+$$
+W_{hh}=0.4,\;W_{xh}=0.2,\;W_{hy}=0.6,\;b_h=0.1,\;b_y=0.2,\;h_0=0
 $$
 
 For $t=1$:
@@ -417,48 +573,81 @@ $$
 e_2 = t_2 - y_2 = 1 - 0.5292 = \boxed{0.4708}
 $$
 
-Squared-error variants:
+If squared error is asked:
 
 $$
 e_2^2 \approx 0.2217,\qquad \frac{1}{2}e_2^2 \approx 0.1108
 $$
 
-![RNN unrolling numerical #invert-dark](/images/docs/DL/IA2-QB/Q18_RNN_Unroll_Numeric.png)
+Final answer:
+
+$$
+\boxed{h_1\approx0.2913,\;h_2\approx0.5487,\;y_1\approx0.3748,\;y_2\approx0.5292,\;e_2\approx0.4708}
+$$
 
 ---
 
 ### Q19. Given $W_{hh}=0.5$, $W_{xh}=0.3$, $b_h=0.1$, $x_t=2$, and $h_{t-1}=1$, calculate current hidden state $h_t$ using tanh.
 
-$$
-h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h)
-= \tanh(0.3\cdot2 + 0.5\cdot1 + 0.1)
-$$
+Given hidden-state equation:
 
 $$
-= \tanh(1.2) \approx \boxed{0.8337}
+h_t = \tanh(z_t),\qquad
+z_t = W_{xh}x_t + W_{hh}h_{t-1} + b_h
+$$
+
+Substitute values:
+
+$$
+z_t = 0.3(2) + 0.5(1) + 0.1 = 0.6 + 0.5 + 0.1 = 1.2
+$$
+
+Apply tanh activation:
+
+$$
+h_t = \tanh(1.2) \approx \boxed{0.8337}
 $$
 
 ---
 
 ### Q20. Given input sequence $[1,2,3]$ and simple RNN weight $W_{hh}=0.2$, show first two steps of unrolling if $W_{xh}=0$, $b_h=0$, and $h_0=0$.
 
-Hidden update:
+General hidden update:
 
 $$
 h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h)
-= \tanh(0 + 0.2h_{t-1} + 0)
 $$
 
-Step 1:
+Given:
 
 $$
-h_1 = \tanh(0.2\cdot h_0) = \tanh(0)=0
+W_{xh}=0,\;W_{hh}=0.2,\;b_h=0,\;h_0=0
 $$
 
-Step 2:
+Given $W_{xh}=0$ and $b_h=0$, this simplifies to:
 
 $$
-h_2 = \tanh(0.2\cdot h_1) = \tanh(0)=0
+h_t = \tanh(0.2h_{t-1})
+$$
+
+For first time step ($x_1=1$, though it has no effect because $W_{xh}=0$):
+
+$$
+z_1 = 0.2h_0 = 0.2(0)=0
+$$
+
+$$
+h_1 = \tanh(z_1)=\tanh(0)=0
+$$
+
+For second time step ($x_2=2$, again no effect because $W_{xh}=0$):
+
+$$
+z_2 = 0.2h_1 = 0.2(0)=0
+$$
+
+$$
+h_2 = \tanh(z_2)=\tanh(0)=0
 $$
 
 Hence first two hidden states are:
