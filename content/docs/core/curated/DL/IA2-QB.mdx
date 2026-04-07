@@ -14,75 +14,77 @@ import { LongQuestion } from '@/components/question';
 
 ### Q1. An RNN has input size 15, hidden state size 30, and processes a sequence of length 20 with batch size 64. Calculate the number of multiplications in one forward pass of the entire sequence.
 
-Given:
+**Given:**
 
 $$
-	ext{Input size}=15,\quad \text{Hidden size}=30,\quad T=20,\quad \text{Batch size}=64
+\text{Input size} = 15,\quad \text{Hidden size} = 30,\quad T = 20,\quad \text{Batch size} = 64
 $$
 
-RNN hidden update:
+**Formula:**
 
 $$
-h_t = \tanh(x_t W_{xh} + h_{t-1}W_{hh} + b_h)
+\text{Multiplications per step} = \left[(I \times H + H \times H) \times B\right]
 $$
 
-Step 1: Multiplications for $x_tW_{xh}$ per time step:
+**Step 1:**
 
 $$
-64 \times 15 \times 30 = 28{,}800
+\left[x_t W_{xh} = 15 \times 30,\quad h_{t-1}W_{hh} = 30 \times 30\right]
 $$
 
-Step 2: Multiplications for $h_{t-1}W_{hh}$ per time step:
-
 $$
-64 \times 30 \times 30 = 57{,}600
+(15 \times 30) + (30 \times 30) = 450 + 900 = 1350
 $$
 
-Step 3: Total multiplications per time step:
+**Step 2:**
 
 $$
-28{,}800 + 57{,}600 = 86{,}400
+1350 \times 64 = 86{,}400
 $$
 
-Step 4: For sequence length $T=20$:
+**Step 3:**
 
 $$
-	ext{Total multiplications} = 20 \times 86{,}400 = \boxed{1{,}728{,}000}
+86{,}400 \times 20 = 1{,}728{,}000
 $$
 
-Final answer: One forward pass over the full sequence needs $\boxed{1{,}728{,}000}$ multiplications.
+**Final Answer:**
+
+$$
+\boxed{1{,}728{,}000 \text{ multiplications}}
+$$
 
 ---
 
-### Q2. A denoising autoencoder takes a noisy input. If the original input is $x=[3,5]$ and the noise added is $n=[-1,0.5]$, calculate the noisy input.
+### Q2, Q9. A denoising autoencoder takes a noisy input. If the original input is $x=[3,5]$ and the noise added is $n=[-1,0.5]$, calculate the noisy input.
 
-Given:
+**Given:**
 
 $$
-x=[3,5],\qquad n=[-1,0.5]
+x = [3,5],\quad n = [-1,0.5]
 $$
 
-For denoising autoencoders, noisy input is computed as:
+**Formula:**
 
 $$
 \tilde{x} = x + n
 $$
 
-Substitute values component-wise:
+**Calculation:**
 
 $$
-\tilde{x}=[3+(-1),\;5+0.5]=[2,\;5.5]
+\tilde{x} = [3+(-1),\;5+0.5] = [2,\;5.5]
 $$
 
-Hence, noisy input is:
+**Final Answer:**
 
 $$
-\boxed{\tilde{x}=[2,\;5.5]}
+\boxed{\tilde{x} = [2,\;5.5]}
 $$
 
 ---
 
-### Q3. Given an input vector $x=[2,4,6]$ and a linear encoder matrix
+### Q3, Q7. Given an input vector $x=[2,4,6]$ and a linear encoder matrix
 $$
 W_e = \begin{bmatrix}
 0.5 & 0 \\
@@ -254,52 +256,6 @@ Final answer: $\boxed{80\text{ s} \; (\approx 1\text{ min }20\text{ s})}$.
 
 ---
 
-### Q7. Given an input vector $x=[2,4,6]$ and encoder matrix
-$$
-W_e = \begin{bmatrix}
-0.5 & 0 \\
-0 & 0.2 \\
-0 & 0
-\end{bmatrix},
-$$
-calculate the encoded representation (latent vector).
-
-Given:
-
-$$
-x=[2,4,6],\qquad
-W_e=
-\begin{bmatrix}
-0.5 & 0 \\
-0 & 0.2 \\
-0 & 0
-\end{bmatrix}
-$$
-
-Using linear encoder output:
-
-$$
-z = xW_e
-$$
-
-Compute each latent component:
-
-$$
-z_1=2(0.5)+4(0)+6(0)=1
-$$
-
-$$
-z_2=2(0)+4(0.2)+6(0)=0.8
-$$
-
-Therefore,
-
-$$
-\boxed{z=[1,\;0.8]}
-$$
-
----
-
 ### Q8. An undercomplete autoencoder has input layer with 4 neurons and bottleneck layer with 2 neurons. If encoder weights are a $4\times2$ matrix and input is $[1,2,3,4]$, show the matrix multiplication.
 
 Let
@@ -332,34 +288,6 @@ $$
 $$
 
 So output shape is $1\times2$ and this is the exact encoder multiplication pattern asked in the question.
-
----
-
-### Q9. A denoising autoencoder takes a noisy input. If $x=[3,5]$ and $n=[-1,0.5]$, calculate the noisy input.
-
-Given:
-
-$$
-x=[3,5],\qquad n=[-1,0.5]
-$$
-
-Use noisy-input relation:
-
-$$
-\tilde{x}=x+n
-$$
-
-Substitute values:
-
-$$
-\tilde{x}=[3+(-1),\;5+0.5]=[2,\;5.5]
-$$
-
-Final answer:
-
-$$
-\boxed{\tilde{x}=[2,\;5.5]}
-$$
 
 ---
 
