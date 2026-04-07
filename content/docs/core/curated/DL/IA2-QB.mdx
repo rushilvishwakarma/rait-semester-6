@@ -446,11 +446,33 @@ Models often use contrastive/triplet losses to keep same-person embeddings close
 ### Q14. Define semantic segmentation with an example.
 </LongQuestion>
 
-<Highlight color="blue">**Semantic segmentation**</Highlight> is pixel-wise classification of an image, where every pixel is assigned a class label.
+<Highlight color="blue">**Semantic segmentation**</Highlight> is a deep-learning task in which <Highlight color="green">**every pixel of an image is assigned a semantic class**</Highlight> (for example: road, car, sky, person, tree).
 
-Example:
+In other words, the model performs <Highlight color="orange">**dense prediction**</Highlight> and produces a class map of size $H \times W$ for an input image of size $H \times W$.
 
-In autonomous driving, each pixel may be labeled as road, sky, car, pedestrian, tree, etc. Unlike object detection, semantic segmentation gives a full mask, not just bounding boxes.
+### Key Characteristics
+
+1. Pixel-level output instead of only image-level labels.
+2. Objects are identified by class, not by individual instance ID.
+3. Output is generally a segmentation mask (color-coded label map).
+4. Widely implemented using encoder-decoder networks such as FCN, U-Net, and DeepLab.
+
+### How It Works (Basic Idea)
+
+1. The encoder extracts multi-scale visual features.
+2. The decoder upsamples these features to original image resolution.
+3. A classifier predicts the class of each pixel.
+4. Final mask groups all pixels belonging to the same class.
+
+### Example
+
+In autonomous driving, a street image is segmented into classes like road, lane marking, sky, vehicle, pedestrian, and vegetation.
+
+If there are two cars, semantic segmentation marks both under the same class "car" (it does not separate them as car-1 and car-2). This helps in scene understanding for path planning and obstacle awareness.
+
+### Conclusion
+
+Semantic segmentation provides complete scene-level understanding by telling <Highlight color="green">**what is present at each pixel location**</Highlight>, which is more informative than only bounding-box based detection for many safety-critical applications.
 
 ---
 
@@ -477,15 +499,41 @@ Output example: "A dog running on grass."
 ### Q16. Differentiate between image classification and object detection.
 </LongQuestion>
 
+<Highlight color="blue">**Image classification**</Highlight> predicts the category of the entire image.
+
+<Highlight color="blue">**Object detection**</Highlight> not only predicts object categories but also gives their spatial locations in the image.
+
+### Detailed Differentiation
+
 | Basis | Image Classification | Object Detection |
 |------|----------------------|------------------|
-| Goal | Predict class label for whole image | Predict class + location of each object |
-| Output | One or more labels | Bounding boxes + labels + confidence |
-| Localization | Not provided | Provided |
-| Example | "This is a cat image" | "Cat at (x,y,w,h), Ball at (x,y,w,h)" |
-| Typical Models | ResNet, EfficientNet | Faster R-CNN, YOLO, SSD |
+| Core task | Assign class to whole image | Detect each object instance and localize it |
+| Question answered | "What is in this image?" | "What objects are present and where are they?" |
+| Output format | Class label(s) with probability | Bounding box + class label + confidence score |
+| Localization | Not required | Mandatory |
+| Annotation needed for training | Image-level labels | Box-level labels (x, y, w, h) |
+| Difficulty level | Relatively simpler | More complex (classification + localization) |
+| Typical loss | Cross-entropy | Classification loss + localization loss (for box regression) |
+| Common metrics | Accuracy, Top-1, Top-5 | mAP, IoU, Precision-Recall |
+| Compute requirement | Lower | Higher |
+| Typical models | ResNet, EfficientNet, ViT | Faster R-CNN, YOLO, SSD, DETR |
+| Typical use cases | Plant disease type, animal species, document category | Traffic monitoring, surveillance, medical lesion localization |
 
-Exam note: Classification answers "what is present", while detection answers both "what is present" and "where it is present".
+### Example (Exam-Oriented)
+
+Consider a road image containing 2 cars and 1 pedestrian.
+
+1. Image classification output: "road scene" or "contains vehicles".
+2. Object detection output:
+	- Car: $(x_1,y_1,w_1,h_1)$
+	- Car: $(x_2,y_2,w_2,h_2)$
+	- Pedestrian: $(x_3,y_3,w_3,h_3)$
+
+Thus, detection provides instance-level understanding, while classification provides only image-level understanding.
+
+### Conclusion
+
+Image classification is suitable when only category identification is needed. Object detection is preferred when both recognition and precise location are required for decision-making systems.
 
 ---
 
