@@ -1,0 +1,470 @@
+---
+title: Question Bank - Internal Assessment 2
+description: Solved numericals and theory answers for DL IA2 in exam-ready format.
+---
+
+import { Highlight } from '@/components/highlight';
+import { LongQuestion } from '@/components/question';
+import { QuestionDot } from '@/components/question-dot';
+
+> All figures in this page are generated using Python (Matplotlib) and prepared for dark-mode inversion.
+
+# Module A - RNNs and Autoencoders
+
+### Q1. An RNN has input size 15, hidden state size 30, and processes a sequence of length 20 with batch size 64. Calculate the number of multiplications in one forward pass of the entire sequence. <QuestionDot color="green" text="IA2" />
+
+For a simple RNN hidden update:
+
+$$
+h_t = \tanh(x_t W_{xh} + h_{t-1}W_{hh} + b_h)
+$$
+
+Multiplications per time step:
+
+1. Input-to-hidden: $64 \times 15 \times 30 = 28{,}800$
+2. Hidden-to-hidden: $64 \times 30 \times 30 = 57{,}600$
+
+Total per time step:
+
+$$
+28{,}800 + 57{,}600 = 86{,}400
+$$
+
+For sequence length $T=20$:
+
+$$
+\text{Total multiplications} = 20 \times 86{,}400 = \boxed{1{,}728{,}000}
+$$
+
+![RNN forward multiplication count #invert-dark](/images/docs/DL/IA2-QB/Q1_RNN_Forward_Multiplications.png)
+
+---
+
+### Q2. A denoising autoencoder takes a noisy input. If the original input is $x=[3,5]$ and the noise added is $n=[-1,0.5]$, calculate the noisy input.
+
+Noisy input is:
+
+$$
+\tilde{x} = x + n = [3,5] + [-1,0.5] = \boxed{[2,5.5]}
+$$
+
+---
+
+### Q3. Given an input vector $x=[2,4,6]$ and a linear encoder matrix
+$$
+W_e = \begin{bmatrix}
+0.5 & 0 \\
+0 & 0.2 \\
+0 & 0
+\end{bmatrix}
+$$
+calculate the encoded representation (latent vector).
+
+Treat $x$ as a row vector and compute $z=xW_e$:
+
+$$
+z_1 = 2(0.5) + 4(0) + 6(0) = 1
+$$
+$$
+z_2 = 2(0) + 4(0.2) + 6(0) = 0.8
+$$
+
+So, latent vector is:
+
+$$
+z = \boxed{[1,\;0.8]}
+$$
+
+---
+
+<LongQuestion>
+### Q4-Q5. A denoising autoencoder has input $[1,2,3]$, noisy input $[1.2,1.8,3.1]$, encoder weights
+$$
+W_e = \begin{bmatrix}
+0.2 & 0.3 & 0.1 \\
+0.1 & 0.2 & 0.3
+\end{bmatrix}
+$$
+and decoder weights
+$$
+W_d = \begin{bmatrix}
+0.4 & 0.1 \\
+0.2 & 0.2 \\
+0.1 & 0.3
+\end{bmatrix}.
+$$
+Calculate the latent representation and reconstructed output.
+</LongQuestion>
+
+Let noisy input be:
+
+$$
+\tilde{x}=\begin{bmatrix}1.2 \\ 1.8 \\ 3.1\end{bmatrix}
+$$
+
+Latent representation:
+
+$$
+h = W_e\tilde{x}
+= \begin{bmatrix}
+0.2 & 0.3 & 0.1 \\
+0.1 & 0.2 & 0.3
+\end{bmatrix}
+\begin{bmatrix}1.2 \\ 1.8 \\ 3.1\end{bmatrix}
+= \begin{bmatrix}1.09 \\ 1.41\end{bmatrix}
+$$
+
+So,
+
+$$
+\boxed{h=[1.09,\;1.41]}
+$$
+
+Reconstruction:
+
+$$
+\hat{x}=W_d h
+= \begin{bmatrix}
+0.4 & 0.1 \\
+0.2 & 0.2 \\
+0.1 & 0.3
+\end{bmatrix}
+\begin{bmatrix}1.09 \\ 1.41\end{bmatrix}
+= \begin{bmatrix}0.577 \\ 0.500 \\ 0.532\end{bmatrix}
+$$
+
+Hence,
+
+$$
+\boxed{\hat{x}=[0.577,\;0.500,\;0.532]}
+$$
+
+![Denoising autoencoder computation #invert-dark](/images/docs/DL/IA2-QB/Q4_Q5_Denoising_Autoencoder.png)
+
+---
+
+### Q6. An RNN processes sequences of length 100, with input size 50, hidden state size 128, and batch size 32. If each training step takes $0.8\text{ ms}$ per time step per batch, compute the total time for one epoch with 1,000 batches.
+
+Time per batch:
+
+$$
+100 \times 0.8\text{ ms} = 80\text{ ms}
+$$
+
+For $1000$ batches:
+
+$$
+1000 \times 80\text{ ms} = 80{,}000\text{ ms} = 80\text{ s}
+$$
+
+Final answer:
+
+$$
+\boxed{80\text{ seconds} \; (\approx 1\text{ min }20\text{ s})}
+$$
+
+---
+
+### Q7. Given an input vector $x=[2,4,6]$ and encoder matrix
+$$
+W_e = \begin{bmatrix}
+0.5 & 0 \\
+0 & 0.2 \\
+0 & 0
+\end{bmatrix},
+$$
+calculate the encoded representation (latent vector).
+
+Same as Q3:
+
+$$
+\boxed{z=[1,\;0.8]}
+$$
+
+---
+
+### Q8. An undercomplete autoencoder has input layer with 4 neurons and bottleneck layer with 2 neurons. If encoder weights are a $4\times2$ matrix and input is $[1,2,3,4]$, show the matrix multiplication.
+
+Let
+
+$$
+x = [1\;2\;3\;4], \qquad
+W_e = \begin{bmatrix}
+w_{11} & w_{12} \\
+w_{21} & w_{22} \\
+w_{31} & w_{32} \\
+w_{41} & w_{42}
+\end{bmatrix}
+$$
+
+Then latent vector is:
+
+$$
+h = xW_e
+= [1\;2\;3\;4]
+\begin{bmatrix}
+w_{11} & w_{12} \\
+w_{21} & w_{22} \\
+w_{31} & w_{32} \\
+w_{41} & w_{42}
+\end{bmatrix}
+$$
+
+$$
+\Rightarrow h = \big[1w_{11}+2w_{21}+3w_{31}+4w_{41},\;1w_{12}+2w_{22}+3w_{32}+4w_{42}\big]
+$$
+
+So output shape is $1\times2$.
+
+---
+
+### Q9. A denoising autoencoder takes a noisy input. If $x=[3,5]$ and $n=[-1,0.5]$, calculate the noisy input.
+
+$$
+\tilde{x}=x+n=[3,5]+[-1,0.5]=\boxed{[2,5.5]}
+$$
+
+---
+
+# Module B - DL Applications
+
+<LongQuestion>
+### Q10. Explain the role of deep learning in ImageNet detection and classification.
+</LongQuestion>
+
+Deep learning transformed ImageNet by learning hierarchical visual features directly from pixels.
+
+1. <Highlight color="blue">**Classification breakthrough:**</Highlight> CNNs such as AlexNet, VGG, and ResNet drastically improved Top-1 and Top-5 accuracy.
+2. <Highlight color="green">**Feature learning:**</Highlight> Early layers learn edges/textures, deeper layers learn object parts and full object semantics.
+3. <Highlight color="orange">**Transfer learning:**</Highlight> ImageNet pretraining provides strong feature extractors for medical imaging, remote sensing, and industrial vision tasks.
+4. <Highlight color="cyan">**Detection improvement:**</Highlight> Detection models (R-CNN, Faster R-CNN, YOLO, SSD) use deep backbones to localize and classify objects.
+5. <Highlight color="green">**Scale and generalization:**</Highlight> Training on millions of labeled images improves robustness to pose, illumination, and viewpoint variation.
+
+In short, ImageNet made deep CNNs the standard foundation for modern image classification and object detection.
+
+---
+
+<LongQuestion>
+### Q11. What is WaveNet? How is it used for audio generation?
+</LongQuestion>
+
+<Highlight color="blue">**WaveNet**</Highlight> is a deep generative model for raw audio waveforms developed by DeepMind.
+
+Core idea:
+
+$$
+p(x)=\prod_t p(x_t\mid x_1, x_2, \dots, x_{t-1})
+$$
+
+It generates one audio sample at a time using:
+
+1. <Highlight color="orange">**Causal convolutions**</Highlight> (no future leakage).
+2. <Highlight color="orange">**Dilated convolutions**</Highlight> (large receptive field without huge depth).
+3. <Highlight color="green">**Autoregressive sampling**</Highlight> for realistic speech/music waveform synthesis.
+
+Use cases: text-to-speech vocoders, expressive speech synthesis, and neural audio generation.
+
+![WaveNet causal dilated convolutions #invert-dark](/images/docs/DL/IA2-QB/Q11_WaveNet_Causal_Dilated.png)
+
+---
+
+<LongQuestion>
+### Q12. Describe the concept of Word2Vec in Natural Language Processing.
+</LongQuestion>
+
+<Highlight color="blue">**Word2Vec**</Highlight> learns dense vector representations (embeddings) of words such that semantically similar words lie close in vector space.
+
+Two training variants:
+
+1. <Highlight color="green">**CBOW:**</Highlight> Predict center word from context words.
+2. <Highlight color="green">**Skip-gram:**</Highlight> Predict context words from center word.
+
+Key benefits:
+
+- Captures semantic similarity (king close to queen, car close to vehicle).
+- Supports analogies (king - man + woman approx queen).
+- Provides compact features for downstream NLP tasks.
+
+![Word2Vec skip-gram concept #invert-dark](/images/docs/DL/IA2-QB/Q12_Word2Vec_SkipGram.png)
+
+---
+
+<LongQuestion>
+### Q13. How is deep learning applied in face recognition systems?
+</LongQuestion>
+
+Typical deep-learning face recognition pipeline:
+
+1. Face detection (locate face region).
+2. Face alignment (normalize pose/landmarks).
+3. Feature extraction using CNN to obtain embedding (for example 128-D).
+4. Similarity matching against stored embeddings using cosine or Euclidean distance.
+5. Decision: verification (1:1) or identification (1:N).
+
+Models often use contrastive/triplet losses to keep same-person embeddings close and different-person embeddings far apart.
+
+![Face recognition pipeline #invert-dark](/images/docs/DL/IA2-QB/Q13_Face_Recognition_Pipeline.png)
+
+---
+
+<LongQuestion>
+### Q14. Define semantic segmentation with an example.
+</LongQuestion>
+
+<Highlight color="blue">**Semantic segmentation**</Highlight> is pixel-wise classification of an image, where every pixel is assigned a class label.
+
+Example:
+
+In autonomous driving, each pixel may be labeled as road, sky, car, pedestrian, tree, etc. Unlike object detection, semantic segmentation gives a full mask, not just bounding boxes.
+
+![Semantic segmentation example #invert-dark](/images/docs/DL/IA2-QB/Q14_Semantic_Segmentation.png)
+
+---
+
+<LongQuestion>
+### Q15. What is automated image captioning? Explain its basic working.
+</LongQuestion>
+
+<Highlight color="blue">**Automated image captioning**</Highlight> generates natural-language descriptions from images.
+
+Basic working:
+
+1. <Highlight color="green">**Encoder (CNN/ViT):**</Highlight> Extract visual feature vectors.
+2. <Highlight color="green">**Decoder (LSTM/Transformer):**</Highlight> Generate words sequentially.
+3. <Highlight color="orange">**Attention mechanism:**</Highlight> Focus on relevant image regions while generating each word.
+4. Stop generation at end token.
+
+Output example: "A dog running on grass."
+
+![Image captioning pipeline #invert-dark](/images/docs/DL/IA2-QB/Q15_Image_Captioning_Pipeline.png)
+
+---
+
+<LongQuestion>
+### Q16. Differentiate between image classification and object detection.
+</LongQuestion>
+
+| Basis | Image Classification | Object Detection |
+|------|----------------------|------------------|
+| Goal | Predict class label for whole image | Predict class + location of each object |
+| Output | One or more labels | Bounding boxes + labels + confidence |
+| Localization | Not provided | Provided |
+| Example | "This is a cat image" | "Cat at (x,y,w,h), Ball at (x,y,w,h)" |
+| Typical Models | ResNet, EfficientNet | Faster R-CNN, YOLO, SSD |
+
+![Classification vs detection #invert-dark](/images/docs/DL/IA2-QB/Q16_Classification_vs_Detection.png)
+
+---
+
+# Module C - Extra Numericals
+
+### Q17. A sparse autoencoder uses L1 regularization with $\lambda=0.1$. Latent representation is $h=[0.5,-0.2,0.8]$. Calculate the L1 regularization term added to loss.
+
+L1 penalty uses absolute values:
+
+$$
+\lambda \sum_i |h_i| = 0.1\left(|0.5| + |-0.2| + |0.8|\right)
+$$
+
+$$
+= 0.1(0.5+0.2+0.8)=0.1(1.5)=\boxed{0.15}
+$$
+
+---
+
+<LongQuestion>
+### Q18. An RNN has $W_{hh}=0.4$, $W_{xh}=0.2$, $W_{hy}=0.6$, $b_h=0.1$, $b_y=0.2$, input sequence $[1,2]$, and $h_0=0$.
+
+i) Compute $h_1,h_2,y_1,y_2$ using tanh hidden activation and linear output.
+
+ii) Compute error at second time step if target output is $1$.
+</LongQuestion>
+
+RNN equations:
+
+$$
+h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h),\qquad y_t = W_{hy}h_t + b_y
+$$
+
+For $t=1$:
+
+$$
+h_1 = \tanh(0.2\cdot1 + 0.4\cdot0 + 0.1) = \tanh(0.3) \approx 0.2913
+$$
+$$
+y_1 = 0.6(0.2913) + 0.2 \approx 0.3748
+$$
+
+For $t=2$:
+
+$$
+h_2 = \tanh(0.2\cdot2 + 0.4\cdot0.2913 + 0.1)
+= \tanh(0.6165) \approx 0.5487
+$$
+$$
+y_2 = 0.6(0.5487) + 0.2 \approx 0.5292
+$$
+
+So,
+
+$$
+\boxed{h_1\approx0.2913,\;h_2\approx0.5487,\;y_1\approx0.3748,\;y_2\approx0.5292}
+$$
+
+If target at $t=2$ is $t_2=1$:
+
+$$
+e_2 = t_2 - y_2 = 1 - 0.5292 = \boxed{0.4708}
+$$
+
+Squared-error variants:
+
+$$
+e_2^2 \approx 0.2217,\qquad \frac{1}{2}e_2^2 \approx 0.1108
+$$
+
+![RNN unrolling numerical #invert-dark](/images/docs/DL/IA2-QB/Q18_RNN_Unroll_Numeric.png)
+
+---
+
+### Q19. Given $W_{hh}=0.5$, $W_{xh}=0.3$, $b_h=0.1$, $x_t=2$, and $h_{t-1}=1$, calculate current hidden state $h_t$ using tanh.
+
+$$
+h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h)
+= \tanh(0.3\cdot2 + 0.5\cdot1 + 0.1)
+$$
+
+$$
+= \tanh(1.2) \approx \boxed{0.8337}
+$$
+
+---
+
+### Q20. Given input sequence $[1,2,3]$ and simple RNN weight $W_{hh}=0.2$, show first two steps of unrolling if $W_{xh}=0$, $b_h=0$, and $h_0=0$.
+
+Hidden update:
+
+$$
+h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h)
+= \tanh(0 + 0.2h_{t-1} + 0)
+$$
+
+Step 1:
+
+$$
+h_1 = \tanh(0.2\cdot h_0) = \tanh(0)=0
+$$
+
+Step 2:
+
+$$
+h_2 = \tanh(0.2\cdot h_1) = \tanh(0)=0
+$$
+
+Hence first two hidden states are:
+
+$$
+\boxed{h_1=0,\;h_2=0}
+$$
+
+(And similarly $h_3=0$ for this setup.)
