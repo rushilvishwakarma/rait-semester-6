@@ -1,4 +1,5 @@
 import { RootProvider } from 'fumadocs-ui/provider/next';
+import { Banner } from 'fumadocs-ui/components/banner';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { CuratedResourcesProvider } from '@/components/curated-videos-client';
@@ -46,7 +47,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <CuratedResourcesProvider>
           <RootProvider>
             <TooltipProvider>
-              {/* <Banner
+              <Banner
                 variant="rainbow"
                 rainbowColors={[
                   '#ec8e8e6e',
@@ -55,8 +56,8 @@ export default function Layout({ children }: { children: ReactNode }) {
                   '#2b00147f',
                 ]}
               >
-                MSE begin 23rd March 2026. <a href="/docs/core/mse-timetable" className="underline font-semibold ml-1">View Timetable</a>
-              </Banner> */}
+                IA2 exam begin 8 April 2026. <a href="/docs/core/ia-ii-ca-iii-schedule" className="underline font-semibold ml-1">View Schedule</a>
+              </Banner>
               {children}
             </TooltipProvider>
           </RootProvider>
