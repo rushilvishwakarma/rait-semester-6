@@ -8,13 +8,14 @@
     "NLP",
     "DOE",
     "---Curriculum---",
-    "mse-timetable",
-    "ia-ii-ca-iii-schedule",
     "academic-calendars/syllabus",
     "academic-calendars/rait",
     "academic-calendars/class-timetable",
+    "academic-calendars/oral-practical-timetable",
     "academic-calendars/question-papers",
     "---Archived---",
+    "mse-timetable",
+    "ia-ii-ca-iii-schedule",
     "ia-mse-kt-retest",
     "internal-assessment-1"
   ]

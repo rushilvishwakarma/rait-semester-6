@@ -1,6 +1,7 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import Image from 'next/image';
 import { Upload } from 'lucide-react';
+import { Banner } from 'fumadocs-ui/components/banner';
 import { QuestionDotLegend } from '@/components/question-dot-legend';
 
 export function baseOptions(): BaseLayoutProps {
@@ -41,6 +42,19 @@ export function baseOptions(): BaseLayoutProps {
         url: '/upload',
       },
     ],
+    banner: (
+      <Banner
+        variant="rainbow"
+        rainbowColors={[
+          '#ec8e8e6e',
+          '#ff4f6f33',
+          '#7d112e3f',
+          '#2b00147f',
+        ]}
+      >
+        Oral & Practicals begin 13 April 2026. <a href="/docs/core/academic-calendars/oral-practical-timetable" className="underline font-semibold ml-1">View Schedule</a>
+      </Banner>
+    ),
   };
 }
 
