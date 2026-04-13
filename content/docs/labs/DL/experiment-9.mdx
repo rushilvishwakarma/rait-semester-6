@@ -3,8 +3,31 @@ title: Experiment 9
 description: Write a program for character recognition using RNN and compare results with CNN.
 ---
 
-import { Download, FileText } from 'lucide-react';
+import { Download, FileText, Play, Folder, ExternalLink } from 'lucide-react';
 import { FloatingColabButton } from '@/components/ui/floating-colab-button';
+
+## Perform
+<Cards>
+  <Card 
+    icon={<Play />}
+    title="ipynb file (Import This)" 
+    description="View Notebook in drive"
+    href="https://drive.google.com/file/d/109ezhWUcUdG5EDWkf5ELzzMeP2TwKyJL/view?usp=sharing"
+  />
+  <Card 
+    icon={<Folder />}
+    title="Exp 9 Digital Assets" 
+    description="View Folder in drive"
+    href="https://drive.google.com/drive/folders/1zmlTfyqkdbV5XcDLtg5ceNQrMRPMldqZ?usp=sharing"
+  />
+</Cards>
+
+<Callout icon={<ExternalLink />} title="YOLOv3 Model Assets">
+To perform this experiment, you will need the YOLO weight files, configuration, and class names:
+- [yolo.weights](https://pjreddie.com/media/files/yolov3.weights)
+- [yolov3.cfg](https://github.com/pjreddie/darknet/blob/master/cfg/yolov3.cfg)
+- [coco.names](https://github.com/pjreddie/darknet/blob/master/data/coco.names)
+</Callout>
 
 ## Resources
 <Cards>
