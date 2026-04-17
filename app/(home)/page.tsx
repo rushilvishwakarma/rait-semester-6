@@ -80,6 +80,12 @@ const resources = [
     icon: GraduationCap,
   },
   {
+    title: "ESE Timetable 2026",
+    description: "End Semester Exams",
+    href: "/docs/core/academic-calendars/ese-timetable",
+    icon: Calendar,
+  },
+  {
     title: "Current Semester Question Papers",
     description: "PYQs/Concluded Papers",
     href: "/docs/core/academic-calendars/question-papers",
@@ -210,6 +216,7 @@ export default function HomePage() {
                 </div>
               </Hover>
             </a>
+            {/* Temporarily using external notebook link via CourseProgressor component */}
             <Hover className="h-full">
               <CourseProgressor />
             </Hover>

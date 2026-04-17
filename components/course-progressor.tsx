@@ -218,6 +218,26 @@ export function CourseProgressor() {
         }
     };
 
+    // NOTE: Temporarily replacing the internal progressor with a Colab notebook
+    // https://colab.research.google.com/drive/1y7-TIOazKrWyK5tSof3QHAafg-2ViwL5?usp=sharing
+    return (
+        <a
+            href="https://colab.research.google.com/drive/1y7-TIOazKrWyK5tSof3QHAafg-2ViwL5?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-4 rounded-2xl bg-fd-card p-5 transition-colors text-left w-full h-full"
+        >
+            <PlayCircle className="size-6 text-fd-muted-foreground shrink-0" />
+            <div className="flex-1">
+                <p className="font-semibold text-lg">Course Progressor</p>
+                <p className="text-sm text-fd-muted-foreground">
+                    Auto-complete your entire semester&apos;s views (External Notebook)
+                </p>
+            </div>
+        </a>
+    );
+
+    /* Original Dialog-based logic below */
     return (
         <>
             <button

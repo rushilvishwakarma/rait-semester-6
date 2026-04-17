@@ -56,7 +56,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                   '#2b00147f',
                 ]}
               >
-                Oral & Practicals begin 13 April 2026. <a href="/docs/core/academic-calendars/oral-practical-timetable" className="underline font-semibold ml-1">View Schedule</a>
+                Oral & Practicals begin 13 April 2026. <a href="/docs/core/academic-calendars/oral-practical-timetable" className="underline font-semibold ml-1">View Timetable</a>
               </Banner>
               {children}
             </TooltipProvider>
