@@ -7,10 +7,32 @@ import { Highlight } from '@/components/highlight';
 import { LongQuestion } from '@/components/question';
 import { QuestionDot } from '@/components/question-dot';
 
-# End Semester Question Bank
+<div className="mb-6 rounded-xl border border-fd-border/60 bg-fd-muted/20 p-4">
+	<h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-fd-muted-foreground">References</h3>
+	<div className="space-y-3">
+		<div className="flex items-center gap-2">
+			<QuestionDot color="yellow" text="IA1-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (IA1)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="cyan" text="MSE-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (MSE)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="purple" text="IA2-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (IA2)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="pink" text="ESE-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (ESE)</span>
+		</div>
+	</div>
+</div>
+
+# Module 2
 
 <LongQuestion>
-### Q3. Distinguish between linearly separable and nonlinearly separable problems. Give examples.
+### Q3. Distinguish between linearly separable and nonlinearly separable problems. Give examples. <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
 | Property | Linearly Separable | Non-Linearly Separable |
@@ -27,7 +49,7 @@ import { QuestionDot } from '@/components/question-dot';
 ---
 
 <LongQuestion>
-### Q5. Discuss the role of L1 and L2 regularization and early stopping in controlling overfitting. <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="blue" text="Asked in MSE" />
+### Q5. Discuss the role of L1 and L2 regularization and early stopping in controlling overfitting. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="blue" text="Asked in MSE" />
 </LongQuestion>
 
 Deep learning models often suffer from <Highlight color="red">**overfitting**</Highlight> and <Highlight color="red">**slow convergence**</Highlight>. <Highlight color="blue">**Regularization techniques**</Highlight> help reduce overfitting by controlling model complexity, while <Highlight color="blue">**optimization techniques**</Highlight> help minimize the loss function efficiently during training.
@@ -107,7 +129,7 @@ Regularization techniques such as L1, L2, Early Stopping, and Dropout control ov
 ---
 
 <LongQuestion>
-### Q5. Differentiate between L1 and L2 regularization techniques.
+### Q5. Differentiate between L1 and L2 regularization techniques. <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
 Both L1 and L2 regularization add a penalty term to the loss function to prevent large weights and reduce overfitting.
@@ -166,7 +188,7 @@ $$\sum w^2 = 4 + 9 + 1 = 14 \qquad \Rightarrow \qquad \mathcal{L}_{L2} = 10 + 0.
 ---
 
 <LongQuestion>
-### Q6. Discuss different types of biases in machine learning models. / Explain bias-variance trade off. <QuestionDot color="blue" text="Asked in MSE" />
+### Q6. Discuss different types of biases in machine learning models. / Explain bias-variance trade off. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="blue" text="Asked in MSE" />
 </LongQuestion>
 
 In Machine Learning, **bias** can refer to errors arising from incorrect assumptions or flawed data collection.
@@ -198,7 +220,7 @@ $$E\left[(y - \hat{f}(x))^2\right] = \text{Bias}^2 + \text{Variance} + \sigma^2$
 ---
 
 <LongQuestion>
-### Q7. Why is regularization important in deep learning? Mention two common regularization methods.
+### Q7. Why is regularization important in deep learning? Mention two common regularization methods. <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
 <Highlight color="blue">**Regularization**</Highlight> is a set of techniques to prevent a model from <Highlight color="red">**overfitting**</Highlight> - i.e., learning the training data's noise rather than the underlying pattern.
@@ -227,7 +249,7 @@ This prevents neurons from co-adapting and forces the network to learn redundant
 ---
 
 <LongQuestion>
-### Q8. Explain the working of backpropagation in deep neural networks. Derive the weight update rule using gradient descent. / Describe Forward and Backward Propagation in ANN
+### Q8. Explain the working of backpropagation in deep neural networks. Derive the weight update rule using gradient descent. / Describe Forward and Backward Propagation in ANN <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
 Training an ANN involves two main processes: <Highlight color="blue">**Forward Propagation**</Highlight> and <Highlight color="blue">**Backward Propagation**</Highlight>.
@@ -263,7 +285,7 @@ where $\eta$ is the <Highlight color="orange">**learning rate**</Highlight>.
 ---
 
 <LongQuestion>
-### Q10. Explain the architecture diagram for CNN in detail.
+### Q10. Explain the architecture diagram for CNN in detail. <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
 A <Highlight color="blue">**Convolutional Neural Network (CNN)**</Highlight> is a specialized deep learning architecture designed for processing grid-like data such as images.
@@ -295,7 +317,7 @@ Converts raw scores to class probabilities for multi-class classification.
 ---
 
 <LongQuestion>
-### Q11. Numerical on calculating for single layer perceptron and neural network for 2-input bipolar OR / AND gate. / Train NN for 2-input bipolar OR gate using perceptron learning rule. <QuestionDot color="blue" text="Asked in MSE" />
+### Q11. Numerical on calculating for single layer perceptron and neural network for 2-input bipolar OR / AND gate. / Train NN for 2-input bipolar OR gate using perceptron learning rule. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="blue" text="Asked in MSE" />
 </LongQuestion>
 
 #### Perceptron Learning Rule
@@ -339,7 +361,7 @@ $$\text{Output} = \begin{cases} 1 & y_{in} \geq \theta \\ -1 & y_{in} < \theta \
 ---
 
 <LongQuestion>
-### Q12. Numerical on calculating for loss function and output after 1 epoch and no. of layerwise parameters. / Draw NN and calculate output after 1 epoch <QuestionDot color="blue" text="Asked in MSE" />
+### Q12. Numerical on calculating for loss function and output after 1 epoch and no. of layerwise parameters. / Draw NN and calculate output after 1 epoch <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="blue" text="Asked in MSE" />
 </LongQuestion>
 
 #### 12.1 <Highlight color="blue">**MSE Loss**</Highlight> + <Highlight color="cyan">**Backpropagation**</Highlight>
@@ -391,3 +413,231 @@ $$h'' = \frac{h'}{1-p} = \frac{[0.8, 0, 0.6, 0]}{0.5} = \boxed{[1.6,\ 0,\ 1.2,\ 
 - **Total:** $\boxed{32}$ parameters
 
 ---
+
+# Module 6
+
+<LongQuestion>
+### Q10. Explain the role of deep learning in ImageNet detection and classification. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+Deep learning transformed ImageNet by learning hierarchical visual features directly from pixels.
+
+1. <Highlight color="blue">**Classification breakthrough:**</Highlight> CNNs such as AlexNet, VGG, and ResNet drastically improved Top-1 and Top-5 accuracy.
+2. <Highlight color="green">**Feature learning:**</Highlight> Early layers learn edges/textures, deeper layers learn object parts and full object semantics.
+3. <Highlight color="orange">**Transfer learning:**</Highlight> ImageNet pretraining provides strong feature extractors for medical imaging, remote sensing, and industrial vision tasks.
+4. <Highlight color="cyan">**Detection improvement:**</Highlight> Detection models (R-CNN, Faster R-CNN, YOLO, SSD) use deep backbones to localize and classify objects.
+5. <Highlight color="green">**Scale and generalization:**</Highlight> Training on millions of labeled images improves robustness to pose, illumination, and viewpoint variation.
+
+In short, ImageNet made deep CNNs the standard foundation for modern image classification and object detection.
+
+---
+
+<LongQuestion>
+### Q11. What is WaveNet? How is it used for audio generation? <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**WaveNet**</Highlight> is a deep learning model that generates raw audio waveforms directly. It was introduced by DeepMind and is mainly used to produce natural-sounding speech.
+
+Basic working (easy explanation):
+
+1. WaveNet does not generate full audio at once. It predicts sound <Highlight color="green">**one sample at a time**</Highlight>.
+2. It uses <Highlight color="orange">**causal convolutions**</Highlight>, so the current output depends only on past samples (not future samples).
+3. It uses <Highlight color="orange">**dilated convolutions**</Highlight> to capture longer context in speech without making the network very deep.
+4. This step-by-step prediction continues until a complete waveform is formed.
+5. During training, it learns pronunciation, pitch, and rhythm patterns from real audio data.
+
+Applications:
+
+- High-quality text-to-speech (assistants, audiobooks).
+- Speech vocoders in modern TTS systems.
+- Neural music and general audio generation.
+
+In short, WaveNet is important because it produces clearer and more human-like audio than many older approaches.
+
+![WaveNet causal dilated convolutions #invert-dark](/images/docs/DL/IA2-QB/Q11_WaveNet_Causal_Dilated.png)
+
+---
+
+<LongQuestion>
+### Q12. Describe the concept of Word2Vec in Natural Language Processing. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**Word2Vec**</Highlight> is an embedding technique that maps each word to a dense, low-dimensional vector so that words used in similar contexts get nearby vectors in embedding space.
+
+Unlike one-hot vectors (mostly zeros), Word2Vec vectors are compact and semantic. This helps models understand relationships like:
+
+$$
+	ext{vec}(\text{king}) - \text{vec}(\text{man}) + \text{vec}(\text{woman}) \approx \text{vec}(\text{queen})
+$$
+
+#### Architectures
+
+1. <Highlight color="green">**CBOW (Continuous Bag of Words):**</Highlight> Uses surrounding context words to predict the center word.
+2. <Highlight color="green">**Skip-gram:**</Highlight> Uses the center word to predict surrounding context words.
+
+#### Training Objective (intuitive)
+
+- CBOW maximizes probability of the target word given context.
+- Skip-gram maximizes probability of context words given target word.
+
+In practice, efficiency is improved using techniques like:
+
+1. <Highlight color="orange">**Negative Sampling**</Highlight>
+2. <Highlight color="orange">**Hierarchical Softmax**</Highlight>
+
+#### Why It Matters in NLP
+
+Word2Vec captures semantic and syntactic similarity and is widely used in:
+
+1. Text classification and sentiment analysis
+2. Information retrieval
+3. Named entity recognition and downstream NLP pipelines
+4. As pretrained embeddings for deeper neural models
+
+![Word2Vec skip-gram concept #invert-dark](/images/docs/DL/IA2-QB/Q12_Word2Vec_SkipGram.png)
+
+---
+
+<LongQuestion>
+### Q13. How is deep learning applied in face recognition systems? <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+Deep learning-based face recognition converts a face image into a numerical identity representation called an <Highlight color="blue">**embedding**</Highlight>, then compares embeddings to recognize a person.
+
+#### Standard Pipeline
+
+1. <Highlight color="green">**Face Detection:**</Highlight> Detect face region from full image/video frame.
+2. <Highlight color="green">**Face Alignment:**</Highlight> Normalize rotation/scale using landmarks (eyes, nose, mouth).
+3. <Highlight color="green">**Feature Extraction:**</Highlight> CNN/Transformer model (for example FaceNet, ArcFace-style backbones) produces a compact embedding vector.
+4. <Highlight color="green">**Similarity Matching:**</Highlight> Compare with stored embeddings using cosine similarity or Euclidean distance.
+5. <Highlight color="green">**Decision:**</Highlight>
+   - Verification (1:1): "Is this claimed identity correct?"
+   - Identification (1:N): "Who is this person in database?"
+
+#### Training Logic
+
+Models are trained so embeddings of the same person are close and different persons are far apart using:
+
+1. <Highlight color="orange">Contrastive Loss</Highlight>
+2. <Highlight color="orange">Triplet Loss</Highlight>
+3. <Highlight color="orange">Margin-based losses (ArcFace/CosFace family)</Highlight>
+
+#### Real Applications
+
+1. Phone unlock and attendance systems
+2. Access control and surveillance analytics
+3. Photo clustering/tagging in media apps
+
+Thus, deep learning enables robust face recognition under variations in pose, lighting, and expression by learning discriminative embeddings.
+
+---
+
+<LongQuestion>
+### Q14. Define semantic segmentation with an example. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**Semantic segmentation**</Highlight> is a dense prediction task where <Highlight color="green">**every pixel in an image is classified into a semantic category**</Highlight> (road, building, person, car, sky, etc.).
+
+For an input image of size $H \times W$, the model outputs a label map (mask) of the same spatial size:
+
+$$
+f: \mathbb{R}^{H \times W \times C} \rightarrow \{1,2,\dots,K\}^{H \times W}
+$$
+
+where $K$ is the number of classes.
+
+#### Key Points
+
+1. Pixel-level understanding, not just image-level labels.
+2. Same-class objects share one class label (no instance separation).
+3. Typically built using encoder-decoder architectures (FCN, U-Net, DeepLab).
+4. Common training loss: pixel-wise cross-entropy (sometimes Dice/Focal in class-imbalance settings).
+5. Common evaluation metric: IoU/mIoU.
+
+#### Semantic vs Instance Segmentation
+
+- Semantic segmentation: both cars are labeled "car".
+- Instance segmentation: car-1 and car-2 are separated as different objects.
+
+#### Example
+
+In autonomous driving, segmentation labels each pixel as road, lane marking, vehicle, pedestrian, traffic sign, and sky. This enables detailed scene understanding for safe path planning.
+
+So, semantic segmentation tells us <Highlight color="green">**what class is present at each pixel location**</Highlight>, which is essential for robotics, medical imaging, and self-driving systems.
+
+---
+
+<LongQuestion>
+### Q15. What is automated image captioning? Explain its basic working. / What is Automated Image Captioning? Explain how Deep Learning is used in it. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**Automated image captioning**</Highlight> is the task of generating a meaningful natural-language sentence for an input image. It combines <Highlight color="green">computer vision</Highlight> and <Highlight color="green">sequence generation</Highlight>.
+
+#### How Deep Learning Is Used
+
+1. <Highlight color="orange">**Visual Encoder**</Highlight> (CNN/ViT): extracts semantic visual features such as objects, attributes, and scene context.
+2. <Highlight color="orange">**Language Decoder**</Highlight> (LSTM/GRU/Transformer): generates words one by one based on encoded image features.
+3. <Highlight color="orange">**Attention Mechanism**</Highlight>: lets the decoder focus on relevant regions while predicting each next word.
+4. <Highlight color="orange">**Sequence Modeling**</Highlight>: generation continues until an end token is produced.
+
+#### Training and Inference
+
+During training, the model learns to maximize likelihood of the reference caption token-by-token (cross-entropy objective).
+
+During inference, decoding can be done using:
+
+1. Greedy decoding
+2. Beam search (often yields better captions)
+
+#### Example and Applications
+
+Example caption: "A person riding a bike on a road."
+
+Applications include assistive technology for visually impaired users, automatic media indexing, and smart photo search systems.
+
+![Image captioning pipeline #invert-dark](/images/docs/DL/IA2-QB/Q15_Image_Captioning_Pipeline.png)
+
+---
+
+<LongQuestion>
+### Q16. Differentiate between image classification and object detection. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**Image classification**</Highlight> predicts the category of the entire image.
+
+<Highlight color="blue">**Object detection**</Highlight> not only predicts object categories but also gives their spatial locations in the image.
+
+### Detailed Differentiation
+
+| Basis | Image Classification | Object Detection |
+|------|----------------------|------------------|
+| Core task | Assign class to whole image | Detect each object instance and localize it |
+| Question answered | "What is in this image?" | "What objects are present and where are they?" |
+| Output format | Class label(s) with probability | Bounding box + class label + confidence score |
+| Localization | Not required | Mandatory |
+| Annotation needed for training | Image-level labels | Box-level labels (x, y, w, h) |
+| Difficulty level | Relatively simpler | More complex (classification + localization) |
+| Typical loss | Cross-entropy | Classification loss + localization loss (for box regression) |
+| Common metrics | Accuracy, Top-1, Top-5 | mAP, IoU, Precision-Recall |
+| Compute requirement | Lower | Higher |
+| Typical models | ResNet, EfficientNet, ViT | Faster R-CNN, YOLO, SSD, DETR |
+| Typical use cases | Plant disease type, animal species, document category | Traffic monitoring, surveillance, medical lesion localization |
+
+### Example (Exam-Oriented)
+
+Consider a road image containing 2 cars and 1 pedestrian.
+
+1. Image classification output: "road scene" or "contains vehicles".
+2. Object detection output:
+	- Car: $(x_1,y_1,w_1,h_1)$
+	- Car: $(x_2,y_2,w_2,h_2)$
+	- Pedestrian: $(x_3,y_3,w_3,h_3)$
+
+Thus, detection provides instance-level understanding, while classification provides only image-level understanding.
+
+### Conclusion
+
+Image classification is suitable when only category identification is needed. Object detection is preferred when both recognition and precise location are required for decision-making systems.
+
+---
+

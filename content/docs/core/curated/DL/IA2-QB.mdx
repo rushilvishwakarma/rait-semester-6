@@ -349,15 +349,37 @@ In short, WaveNet is important because it produces clearer and more human-like a
 ### Q12. Describe the concept of Word2Vec in Natural Language Processing.
 </LongQuestion>
 
-<Highlight color="blue">**Word2Vec**</Highlight> is a method in NLP that converts words into dense vectors, capturing their meanings and relationships. Words with similar contexts get similar vectors, enabling semantic understanding.
+<Highlight color="blue">**Word2Vec**</Highlight> is an embedding technique that maps each word to a dense, low-dimensional vector so that words used in similar contexts get nearby vectors in embedding space.
 
-Basic working:
+Unlike one-hot vectors (mostly zeros), Word2Vec vectors are compact and semantic. This helps models understand relationships like:
 
-1. Input a large text corpus.
-2. Train a shallow neural network with one hidden layer.
-3. <Highlight color="green">**CBOW:**</Highlight> Predicts a target word from surrounding words.
-4. <Highlight color="green">**Skip-gram:**</Highlight> Predicts surrounding words from a target word.
-5. After training, similar words have vectors close in space, supporting tasks such as analogy reasoning and text classification.
+$$
+	ext{vec}(\text{king}) - \text{vec}(\text{man}) + \text{vec}(\text{woman}) \approx \text{vec}(\text{queen})
+$$
+
+#### Architectures
+
+1. <Highlight color="green">**CBOW (Continuous Bag of Words):**</Highlight> Uses surrounding context words to predict the center word.
+2. <Highlight color="green">**Skip-gram:**</Highlight> Uses the center word to predict surrounding context words.
+
+#### Training Objective (intuitive)
+
+- CBOW maximizes probability of the target word given context.
+- Skip-gram maximizes probability of context words given target word.
+
+In practice, efficiency is improved using techniques like:
+
+1. <Highlight color="orange">**Negative Sampling**</Highlight>
+2. <Highlight color="orange">**Hierarchical Softmax**</Highlight>
+
+#### Why It Matters in NLP
+
+Word2Vec captures semantic and syntactic similarity and is widely used in:
+
+1. Text classification and sentiment analysis
+2. Information retrieval
+3. Named entity recognition and downstream NLP pipelines
+4. As pretrained embeddings for deeper neural models
 
 ![Word2Vec skip-gram concept #invert-dark](/images/docs/DL/IA2-QB/Q12_Word2Vec_SkipGram.png)
 
@@ -367,15 +389,33 @@ Basic working:
 ### Q13. How is deep learning applied in face recognition systems?
 </LongQuestion>
 
-Typical deep-learning face recognition pipeline:
+Deep learning-based face recognition converts a face image into a numerical identity representation called an <Highlight color="blue">**embedding**</Highlight>, then compares embeddings to recognize a person.
 
-1. Face detection (locate face region).
-2. Face alignment (normalize pose/landmarks).
-3. Feature extraction using CNN to obtain embedding (for example 128-D).
-4. Similarity matching against stored embeddings using cosine or Euclidean distance.
-5. Decision: verification (1:1) or identification (1:N).
+#### Standard Pipeline
 
-Models often use contrastive/triplet losses to keep same-person embeddings close and different-person embeddings far apart.
+1. <Highlight color="green">**Face Detection:**</Highlight> Detect face region from full image/video frame.
+2. <Highlight color="green">**Face Alignment:**</Highlight> Normalize rotation/scale using landmarks (eyes, nose, mouth).
+3. <Highlight color="green">**Feature Extraction:**</Highlight> CNN/Transformer model (for example FaceNet, ArcFace-style backbones) produces a compact embedding vector.
+4. <Highlight color="green">**Similarity Matching:**</Highlight> Compare with stored embeddings using cosine similarity or Euclidean distance.
+5. <Highlight color="green">**Decision:**</Highlight> 
+	- Verification (1:1): "Is this claimed identity correct?"
+	- Identification (1:N): "Who is this person in database?"
+
+#### Training Logic
+
+Models are trained so embeddings of the same person are close and different persons are far apart using:
+
+1. <Highlight color="orange">Contrastive Loss</Highlight>
+2. <Highlight color="orange">Triplet Loss</Highlight>
+3. <Highlight color="orange">Margin-based losses (ArcFace/CosFace family)</Highlight>
+
+#### Real Applications
+
+1. Phone unlock and attendance systems
+2. Access control and surveillance analytics
+3. Photo clustering/tagging in media apps
+
+Thus, deep learning enables robust face recognition under variations in pose, lighting, and expression by learning discriminative embeddings.
 
 ---
 
@@ -383,50 +423,64 @@ Models often use contrastive/triplet losses to keep same-person embeddings close
 ### Q14. Define semantic segmentation with an example.
 </LongQuestion>
 
-<Highlight color="blue">**Semantic segmentation**</Highlight> is a deep-learning task in which <Highlight color="green">**every pixel of an image is assigned a semantic class**</Highlight> (for example: road, car, sky, person, tree).
+<Highlight color="blue">**Semantic segmentation**</Highlight> is a dense prediction task where <Highlight color="green">**every pixel in an image is classified into a semantic category**</Highlight> (road, building, person, car, sky, etc.).
 
-In other words, the model performs <Highlight color="orange">**dense prediction**</Highlight> and produces a class map of size $H \times W$ for an input image of size $H \times W$.
+For an input image of size $H \times W$, the model outputs a label map (mask) of the same spatial size:
 
-### Key Characteristics
+$$
+f: \mathbb{R}^{H \times W \times C} \rightarrow \{1,2,\dots,K\}^{H \times W}
+$$
 
-1. Pixel-level output instead of only image-level labels.
-2. Objects are identified by class, not by individual instance ID.
-3. Output is generally a segmentation mask (color-coded label map).
-4. Widely implemented using encoder-decoder networks such as FCN, U-Net, and DeepLab.
+where $K$ is the number of classes.
 
-### How It Works (Basic Idea)
+#### Key Points
 
-1. The encoder extracts multi-scale visual features.
-2. The decoder upsamples these features to original image resolution.
-3. A classifier predicts the class of each pixel.
-4. Final mask groups all pixels belonging to the same class.
+1. Pixel-level understanding, not just image-level labels.
+2. Same-class objects share one class label (no instance separation).
+3. Typically built using encoder-decoder architectures (FCN, U-Net, DeepLab).
+4. Common training loss: pixel-wise cross-entropy (sometimes Dice/Focal in class-imbalance settings).
+5. Common evaluation metric: IoU/mIoU.
 
-### Example
+#### Semantic vs Instance Segmentation
 
-In autonomous driving, a street image is segmented into classes like road, lane marking, sky, vehicle, pedestrian, and vegetation.
+- Semantic segmentation: both cars are labeled "car".
+- Instance segmentation: car-1 and car-2 are separated as different objects.
 
-If there are two cars, semantic segmentation marks both under the same class "car" (it does not separate them as car-1 and car-2). This helps in scene understanding for path planning and obstacle awareness.
+#### Example
 
-### Conclusion
+In autonomous driving, segmentation labels each pixel as road, lane marking, vehicle, pedestrian, traffic sign, and sky. This enables detailed scene understanding for safe path planning.
 
-Semantic segmentation provides complete scene-level understanding by telling <Highlight color="green">**what is present at each pixel location**</Highlight>, which is more informative than only bounding-box based detection for many safety-critical applications.
+So, semantic segmentation tells us <Highlight color="green">**what class is present at each pixel location**</Highlight>, which is essential for robotics, medical imaging, and self-driving systems.
 
 ---
 
 <LongQuestion>
-### Q15. What is automated image captioning? Explain its basic working.
+### Q15. What is automated image captioning? Explain its basic working. / What is Automated Image Captioning? Explain how Deep Learning is used in it.
 </LongQuestion>
 
-<Highlight color="blue">**Automated image captioning**</Highlight> is generating natural-language descriptions for images using machine learning. It combines computer vision to understand image content and language modeling to produce text.
+<Highlight color="blue">**Automated image captioning**</Highlight> is the task of generating a meaningful natural-language sentence for an input image. It combines <Highlight color="green">computer vision</Highlight> and <Highlight color="green">sequence generation</Highlight>.
 
-Basic working:
+#### How Deep Learning Is Used
 
-1. The image is input to a visual encoder (usually a CNN or ViT) that extracts feature vectors representing objects, shapes, and context.
-2. These features are fed to a language decoder (often an RNN/LSTM/Transformer) that predicts a sequence of words to form a caption.
-3. <Highlight color="orange">**Attention mechanisms**</Highlight> may be used so the decoder focuses on relevant image regions while generating each word.
-4. The model stops when it outputs an end token.
+1. <Highlight color="orange">**Visual Encoder**</Highlight> (CNN/ViT): extracts semantic visual features such as objects, attributes, and scene context.
+2. <Highlight color="orange">**Language Decoder**</Highlight> (LSTM/GRU/Transformer): generates words one by one based on encoded image features.
+3. <Highlight color="orange">**Attention Mechanism**</Highlight>: lets the decoder focus on relevant regions while predicting each next word.
+4. <Highlight color="orange">**Sequence Modeling**</Highlight>: generation continues until an end token is produced.
 
-Output example: "A person riding a bike on a road."
+#### Training and Inference
+
+During training, the model learns to maximize likelihood of the reference caption token-by-token (cross-entropy objective).
+
+During inference, decoding can be done using:
+
+1. Greedy decoding
+2. Beam search (often yields better captions)
+
+#### Example and Applications
+
+Example caption: "A person riding a bike on a road."
+
+Applications include assistive technology for visually impaired users, automatic media indexing, and smart photo search systems.
 
 ![Image captioning pipeline #invert-dark](/images/docs/DL/IA2-QB/Q15_Image_Captioning_Pipeline.png)
 
