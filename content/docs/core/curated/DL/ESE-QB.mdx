@@ -32,7 +32,7 @@ import { QuestionDot } from '@/components/question-dot';
 # Module 2
 
 <LongQuestion>
-### Q3. Distinguish between linearly separable and nonlinearly separable problems. Give examples. <QuestionDot color="cyan" text="MSE-QB" />
+### Q1. Distinguish between linearly separable and nonlinearly separable problems. Give examples. <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
 | Property | Linearly Separable | Non-Linearly Separable |
@@ -49,7 +49,7 @@ import { QuestionDot } from '@/components/question-dot';
 ---
 
 <LongQuestion>
-### Q5. Discuss the role of L1 and L2 regularization and early stopping in controlling overfitting. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="blue" text="Asked in MSE" />
+### Q2. Describe regularization techniques in Deep learning (early stopping, dataset augmentation, parameter sharing, injecting noise into input, ensemble methods, dropout,) <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="blue" text="Asked in MSE" />
 </LongQuestion>
 
 Deep learning models often suffer from <Highlight color="red">**overfitting**</Highlight> and <Highlight color="red">**slow convergence**</Highlight>. <Highlight color="blue">**Regularization techniques**</Highlight> help reduce overfitting by controlling model complexity, while <Highlight color="blue">**optimization techniques**</Highlight> help minimize the loss function efficiently during training.
@@ -97,7 +97,23 @@ This prevents the model from learning noise in the training data.
 
 **Dropout:**
 
-<Highlight color="orange">**Randomly deactivates neurons**</Highlight> during training, reducing co-adaptation and improving generalization.
+<Highlight color="orange">**Randomly deactivates neurons**</Highlight> during training, reducing co-adaptation and forcing the model to learn redundant representations.
+
+**Dataset Augmentation:**
+
+Artificially increases the size and diversity of the training set by applying transformations like <Highlight color="orange">**rotation, flipping, and scaling**</Highlight>. It prevents the model from memorizing specific training samples.
+
+**Parameter Sharing:**
+
+The same set of weights is reused across different parts of a model (e.g., in <Highlight color="green">**CNN filters**</Highlight>). This significantly reduces the number of trainable parameters and controls model complexity.
+
+**Injecting Noise into Input:**
+
+Adding small random perturbations (<Highlight color="orange">**Gaussian noise**</Highlight>) to input data during training. It forces the model to learn stable patterns and improves robustness.
+
+**Ensemble Methods:**
+
+Combining predictions from <Highlight color="green">**multiple independently trained models**</Highlight> (via averaging or voting). It reduces variance as errors from individual models tend to cancel out.
 
 ---
 
@@ -124,12 +140,12 @@ An <Highlight color="green">**adaptive optimization algorithm**</Highlight> that
 
 #### Conclusion
 
-Regularization techniques such as L1, L2, Early Stopping, and Dropout control overfitting by limiting model complexity. Optimization techniques such as Gradient Descent, SGD, and Adam efficiently minimize the loss function. Together, they ensure stable and effective training of deep learning models.
+Regularization techniques such as L1, L2, Early Stopping, Dropout, Dataset Augmentation, Parameter Sharing, Noise Injection, and Ensemble Methods control overfitting by limiting model complexity and improving robustness. Optimization techniques such as Gradient Descent, SGD, and Adam efficiently minimize the loss function. Together, they ensure stable and effective training of deep learning models.
 
 ---
 
 <LongQuestion>
-### Q5. Differentiate between L1 and L2 regularization techniques. <QuestionDot color="cyan" text="MSE-QB" />
+### Q3. Differentiate between L1 and L2 regularization techniques. <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
 Both L1 and L2 regularization add a penalty term to the loss function to prevent large weights and reduce overfitting.
@@ -188,7 +204,7 @@ $$\sum w^2 = 4 + 9 + 1 = 14 \qquad \Rightarrow \qquad \mathcal{L}_{L2} = 10 + 0.
 ---
 
 <LongQuestion>
-### Q6. Discuss different types of biases in machine learning models. / Explain bias-variance trade off. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="blue" text="Asked in MSE" />
+### Q4. Discuss different types of biases in machine learning models. / Explain bias-variance trade off. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="blue" text="Asked in MSE" />
 </LongQuestion>
 
 In Machine Learning, **bias** can refer to errors arising from incorrect assumptions or flawed data collection.
@@ -220,7 +236,7 @@ $$E\left[(y - \hat{f}(x))^2\right] = \text{Bias}^2 + \text{Variance} + \sigma^2$
 ---
 
 <LongQuestion>
-### Q7. Why is regularization important in deep learning? Mention two common regularization methods. <QuestionDot color="cyan" text="MSE-QB" />
+### Q5. Describe regularization techniques in Deep learning (early stopping, dataset augmentation, parameter sharing, injecting noise into input, ensemble methods, dropout,) <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
 <Highlight color="blue">**Regularization**</Highlight> is a set of techniques to prevent a model from <Highlight color="red">**overfitting**</Highlight> - i.e., learning the training data's noise rather than the underlying pattern.
@@ -249,7 +265,7 @@ This prevents neurons from co-adapting and forces the network to learn redundant
 ---
 
 <LongQuestion>
-### Q8. Explain the working of backpropagation in deep neural networks. Derive the weight update rule using gradient descent. / Describe Forward and Backward Propagation in ANN <QuestionDot color="cyan" text="MSE-QB" />
+### Q6. Explain the working of backpropagation in deep neural networks. Derive the weight update rule using gradient descent. / Describe Forward and Backward Propagation in ANN <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
 Training an ANN involves two main processes: <Highlight color="blue">**Forward Propagation**</Highlight> and <Highlight color="blue">**Backward Propagation**</Highlight>.
@@ -284,8 +300,10 @@ where $\eta$ is the <Highlight color="orange">**learning rate**</Highlight>.
 
 ---
 
+# Module 3 — Convolutional Neural Networks
+
 <LongQuestion>
-### Q10. Explain the architecture diagram for CNN in detail. <QuestionDot color="cyan" text="MSE-QB" />
+### Q1. Explain the architecture diagram for CNN in detail. <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
 A <Highlight color="blue">**Convolutional Neural Network (CNN)**</Highlight> is a specialized deep learning architecture designed for processing grid-like data such as images.
@@ -317,7 +335,7 @@ Converts raw scores to class probabilities for multi-class classification.
 ---
 
 <LongQuestion>
-### Q11. Numerical on calculating for single layer perceptron and neural network for 2-input bipolar OR / AND gate. / Train NN for 2-input bipolar OR gate using perceptron learning rule. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="blue" text="Asked in MSE" />
+### Q2. Numerical on calculating for single layer perceptron and neural network for 2-input bipolar OR / AND gate. / Train NN for 2-input bipolar OR gate using perceptron learning rule. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="blue" text="Asked in MSE" />
 </LongQuestion>
 
 #### Perceptron Learning Rule
@@ -361,10 +379,10 @@ $$\text{Output} = \begin{cases} 1 & y_{in} \geq \theta \\ -1 & y_{in} < \theta \
 ---
 
 <LongQuestion>
-### Q12. Numerical on calculating for loss function and output after 1 epoch and no. of layerwise parameters. / Draw NN and calculate output after 1 epoch <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="blue" text="Asked in MSE" />
+### Q3. Numerical on calculating for loss function and output after 1 epoch and no. of layerwise parameters. / Draw NN and calculate output after 1 epoch <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="blue" text="Asked in MSE" />
 </LongQuestion>
 
-#### 12.1 <Highlight color="blue">**MSE Loss**</Highlight> + <Highlight color="cyan">**Backpropagation**</Highlight>
+#### 3.1 <Highlight color="blue">**MSE Loss**</Highlight> + <Highlight color="cyan">**Backpropagation**</Highlight>
 
 **Given:** $\hat{y} = 0.8,\ t = 1,\ w = 0.5,\ x = 2,\ \eta = 0.1$
 
@@ -382,7 +400,7 @@ $$w_{\text{new}} = 0.5 - 0.1 \times (-0.4) = \boxed{0.54}$$
 
 ---
 
-#### 12.2 <Highlight color="blue">**L2**</Highlight> & <Highlight color="blue">**L1 Regularization**</Highlight>
+#### 3.2 <Highlight color="blue">**L2**</Highlight> & <Highlight color="blue">**L1 Regularization**</Highlight>
 
 **Given:** Base Loss $= 5,\ W = [2, -3],\ \lambda = 0.1$
 
@@ -392,7 +410,7 @@ $$w_{\text{new}} = 0.5 - 0.1 \times (-0.4) = \boxed{0.54}$$
 
 ---
 
-#### 12.3 Dropout Regularization
+#### 3.3 Dropout Regularization
 
 **Given:** $h = [0.8,\ 0.4,\ 0.6,\ 0.2]$, dropout probability $p = 0.5$, mask $m = [1, 0, 1, 0]$
 
@@ -403,7 +421,7 @@ $$h'' = \frac{h'}{1-p} = \frac{[0.8, 0, 0.6, 0]}{0.5} = \boxed{[1.6,\ 0,\ 1.2,\ 
 
 ---
 
-#### 12.4 Layer-wise Parameters
+#### 3.4 Layer-wise Parameters
 
 **Formula:** $(n_{\text{in}} \times n_{\text{out}}) + n_{\text{out}}$ (weights + biases)
 
@@ -414,10 +432,89 @@ $$h'' = \frac{h'}{1-p} = \frac{[0.8, 0, 0.6, 0]}{0.5} = \boxed{[1.6,\ 0,\ 1.2,\ 
 
 ---
 
-# Module 6
+# Module 4 & 5 — RNNs and Autoencoders
 
 <LongQuestion>
-### Q10. Explain the role of deep learning in ImageNet detection and classification. <QuestionDot color="purple" text="IA2-QB" />
+### Q1. An RNN has input size 15, hidden state size 30, and processes a sequence of length 20 with batch size 64. Calculate the number of multiplications in one forward pass of the entire sequence. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
+</LongQuestion>
+
+**Given:**
+$$I = 15, H = 30, T = 20, B = 64$$
+
+**Formula:**
+$$\text{Multiplications per step} = \left[(I \times H + H \times H) \times B\right]$$
+
+**Calculation:**
+1. **Per step:** $(15 \times 30) + (30 \times 30) = 450 + 900 = 1350$
+2. **Per batch:** $1350 \times 64 = 86{,}400$
+3. **Full sequence:** $86{,}400 \times 20 = 1{,}728{,}000$
+
+**Final Answer:** $\boxed{1{,}728{,}000 \text{ multiplications}}$
+
+---
+
+<LongQuestion>
+### Q2. Given an input vector $x = [2,4,6]$ and a linear encoder matrix $W_e = \begin{bmatrix} 0.5 & 0 \\ 0 & 0.2 \\ 0 & 0 \end{bmatrix}$, calculate the encoded representation (latent vector). <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
+</LongQuestion>
+
+**Given:**
+$$x = [2, 4, 6], \quad W_e = \begin{bmatrix} 0.5 & 0 \\ 0 & 0.2 \\ 0 & 0 \end{bmatrix}$$
+
+**Formula:**
+$$z = x W_e$$
+
+**Calculation:**
+$$z_1 = (2 \times 0.5) + (4 \times 0) + (6 \times 0) = 1.0$$
+$$z_2 = (2 \times 0) + (4 \times 0.2) + (6 \times 0) = 0.8$$
+
+**Final Answer:** $z = \boxed{[1.0, 0.8]}$
+
+---
+
+<LongQuestion>
+### Q3. Analyze the internal structure of an RNN cell given the following configuration: input size = 10, hidden state size = 20, and output size = 20. Compute the total number of trainable parameters and identify the role of each weight and bias matrix. <QuestionDot color="purple" text="Asked in IA2" />
+</LongQuestion>
+
+**Given:**
+$$I = 10, H = 20, O = 20$$
+
+**Trainable Parameters:**
+1. **$W_{xh}$ (Input-to-Hidden):** $10 \times 20 = 200$
+2. **$W_{hh}$ (Hidden-to-Hidden):** $20 \times 20 = 400$
+3. **$b_h$ (Hidden Bias):** $20$
+4. **$W_{hy}$ (Hidden-to-Output):** $20 \times 20 = 400$
+5. **$b_y$ (Output Bias):** $20$
+
+**Total:** $200 + 400 + 20 + 400 + 20 = \boxed{1040 \text{ parameters}}$
+
+**Roles:**
+- **$W_{xh}$**: Captures features from current input.
+- **$W_{hh}$**: Captures temporal dependencies from the previous state.
+- **$b_h$**: Provides flexibility (offset) for the hidden activation.
+- **$W_{hy}$**: Maps latent representations to the output space.
+
+---
+
+<LongQuestion>
+### Q4. A denoising autoencoder takes a noisy input. If the original input is $x = [3,5]$ and noise $n = [-1, 0.5]$, calculate the noisy input. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
+</LongQuestion>
+
+**Given:**
+$$x = [3, 5], \quad n = [-1, 0.5]$$
+
+**Formula:**
+$$\tilde{x} = x + n$$
+
+**Calculation:**
+$$\tilde{x} = [3 + (-1), 5 + 0.5] = [2, 5.5]$$
+
+**Final Answer:** $\tilde{x} = \boxed{[2, 5.5]}$
+
+---
+
+# Module 6
+
+### Q1. Explain the role of deep learning in ImageNet detection and classification. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
 </LongQuestion>
 
 Deep learning transformed ImageNet by learning hierarchical visual features directly from pixels.
@@ -433,7 +530,7 @@ In short, ImageNet made deep CNNs the standard foundation for modern image class
 ---
 
 <LongQuestion>
-### Q11. What is WaveNet? How is it used for audio generation? <QuestionDot color="purple" text="IA2-QB" />
+### Q2. What is WaveNet? How is it used for audio generation? <QuestionDot color="purple" text="IA2-QB" />
 </LongQuestion>
 
 <Highlight color="blue">**WaveNet**</Highlight> is a deep learning model that generates raw audio waveforms directly. It was introduced by DeepMind and is mainly used to produce natural-sounding speech.
@@ -459,7 +556,7 @@ In short, WaveNet is important because it produces clearer and more human-like a
 ---
 
 <LongQuestion>
-### Q12. Describe the concept of Word2Vec in Natural Language Processing. <QuestionDot color="purple" text="IA2-QB" />
+### Q3. Describe the concept of Word2Vec in Natural Language Processing. <QuestionDot color="purple" text="IA2-QB" />
 </LongQuestion>
 
 <Highlight color="blue">**Word2Vec**</Highlight> is an embedding technique that maps each word to a dense, low-dimensional vector so that words used in similar contexts get nearby vectors in embedding space.
@@ -499,7 +596,7 @@ Word2Vec captures semantic and syntactic similarity and is widely used in:
 ---
 
 <LongQuestion>
-### Q13. How is deep learning applied in face recognition systems? <QuestionDot color="purple" text="IA2-QB" />
+### Q4. How is deep learning applied in face recognition systems? <QuestionDot color="purple" text="IA2-QB" />
 </LongQuestion>
 
 Deep learning-based face recognition converts a face image into a numerical identity representation called an <Highlight color="blue">**embedding**</Highlight>, then compares embeddings to recognize a person.
@@ -533,7 +630,7 @@ Thus, deep learning enables robust face recognition under variations in pose, li
 ---
 
 <LongQuestion>
-### Q14. Define semantic segmentation with an example. <QuestionDot color="purple" text="IA2-QB" />
+### Q5. Define semantic segmentation with an example. <QuestionDot color="purple" text="IA2-QB" />
 </LongQuestion>
 
 <Highlight color="blue">**Semantic segmentation**</Highlight> is a dense prediction task where <Highlight color="green">**every pixel in an image is classified into a semantic category**</Highlight> (road, building, person, car, sky, etc.).
@@ -568,7 +665,7 @@ So, semantic segmentation tells us <Highlight color="green">**what class is pres
 ---
 
 <LongQuestion>
-### Q15. What is automated image captioning? Explain its basic working. / What is Automated Image Captioning? Explain how Deep Learning is used in it. <QuestionDot color="purple" text="IA2-QB" />
+### Q6. What is automated image captioning? Explain its basic working. / What is Automated Image Captioning? Explain how Deep Learning is used in it. <QuestionDot color="purple" text="IA2-QB" />
 </LongQuestion>
 
 <Highlight color="blue">**Automated image captioning**</Highlight> is the task of generating a meaningful natural-language sentence for an input image. It combines <Highlight color="green">computer vision</Highlight> and <Highlight color="green">sequence generation</Highlight>.
@@ -599,8 +696,7 @@ Applications include assistive technology for visually impaired users, automatic
 
 ---
 
-<LongQuestion>
-### Q16. Differentiate between image classification and object detection. <QuestionDot color="purple" text="IA2-QB" />
+### Q7. Differentiate between image classification and object detection. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
 </LongQuestion>
 
 <Highlight color="blue">**Image classification**</Highlight> predicts the category of the entire image.

@@ -196,7 +196,7 @@ $$E\left[(y - \hat{f}(x))^2\right] = \text{Bias}^2 + \text{Variance} + \sigma^2$
 ---
 
 <LongQuestion>
-### Q7. Why is regularization important in deep learning? Mention two common regularization methods.
+### Q7. Describe regularization techniques in Deep learning (early stopping, dataset augmentation, parameter sharing, injecting noise into input, ensemble methods, dropout,)
 </LongQuestion>
 
 <Highlight color="blue">**Regularization**</Highlight> is a set of techniques to prevent a model from <Highlight color="red">**overfitting**</Highlight> — i.e., learning the training data's noise rather than the underlying pattern.
@@ -207,7 +207,7 @@ $$E\left[(y - \hat{f}(x))^2\right] = \text{Bias}^2 + \text{Variance} + \sigma^2$
 - Without regularization, the model generalizes poorly to new data.
 - Regularization keeps weight values controlled, forcing the model to learn simpler, more generalizable patterns.
 
-#### Two Common Methods
+#### Common Regularization Methods
 
 **1. <Highlight color="blue">L2 Regularization (Weight Decay)</Highlight>**
 
@@ -217,10 +217,27 @@ Penalizes large weights by adding the squared sum of weights to the loss. Keeps 
 
 **2. <Highlight color="blue">Dropout</Highlight>**
 
-During each training iteration, randomly sets a fraction $p$ of neuron outputs to zero:
-$$h' = h \odot m, \quad m_i \sim \text{Bernoulli}(1-p)$$
+During each training iteration, randomly sets a fraction $p$ of neuron outputs to zero. This prevents neurons from co-adapting and forces the network to learn redundant representations.
 
-This prevents neurons from co-adapting and forces the network to learn redundant representations.
+**3. <Highlight color="blue">Early Stopping</Highlight>**
+
+Training is stopped when <Highlight color="orange">**validation loss starts increasing**</Highlight> while training loss continues decreasing. This prevents the model from overfitting to the training set.
+
+**4. <Highlight color="blue">Dataset Augmentation</Highlight>**
+
+Artificially increases training set size by applying transformations like <Highlight color="orange">**rotation, flipping, and scaling**</Highlight> to existing data. It improves robustness and generalization.
+
+**5. <Highlight color="blue">Parameter Sharing</Highlight>**
+
+Reusing the same weights across different connections (e.g., in <Highlight color="green">**CNN filters**</Highlight>). It reduces model complexity by decreasing the number of unique trainable parameters.
+
+**6. <Highlight color="blue">Injecting Noise into Input</Highlight>**
+
+Adding small random perturbations (<Highlight color="orange">**Gaussian noise**</Highlight>) to input data during training, forcing the model to learn stable and robust patterns.
+
+**7. <Highlight color="blue">Ensemble Methods</Highlight>**
+
+Combining predictions from <Highlight color="green">**multiple independently trained models**</Highlight> (e.g., via averaging). It reduces variance and improves accuracy as individual errors cancel out.
 
 ---
 

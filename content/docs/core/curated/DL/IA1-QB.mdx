@@ -84,7 +84,7 @@ Thus, the goal in machine learning is to select a model complexity that provides
 <LongQuestion>
 ### Q5. Discuss the role of L1 and L2 regularization and early stopping in controlling overfitting. <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="blue" text="Asked in MSE" />
 
-### Q12. Discuss various regularization and optimization techniques used in deep learning.
+### Q12. Describe regularization techniques in Deep learning (early stopping, dataset augmentation, parameter sharing, injecting noise into input, ensemble methods, dropout,)
 </LongQuestion>
 
 Deep learning models often suffer from <Highlight color="red">**overfitting**</Highlight> and <Highlight color="red">**slow convergence**</Highlight>. <Highlight color="blue">**Regularization techniques**</Highlight> help reduce overfitting by controlling model complexity, while <Highlight color="blue">**optimization techniques**</Highlight> help minimize the loss function efficiently during training.
@@ -132,7 +132,23 @@ This prevents the model from learning noise in the training data.
 
 **Dropout:**
 
-<Highlight color="orange">**Randomly deactivates neurons**</Highlight> during training, reducing co-adaptation and improving generalization.
+<Highlight color="orange">**Randomly deactivates neurons**</Highlight> during training, reducing co-adaptation and forcing the model to learn redundant representations.
+
+**Dataset Augmentation:**
+
+Artificially increases the size and diversity of the training set by applying transformations like <Highlight color="orange">**rotation, flipping, and scaling**</Highlight>. It prevents the model from memorizing specific training samples.
+
+**Parameter Sharing:**
+
+The same set of weights is reused across different parts of a model (e.g., in <Highlight color="green">**CNN filters**</Highlight>). This significantly reduces the number of trainable parameters and controls model complexity.
+
+**Injecting Noise into Input:**
+
+Adding small random perturbations (<Highlight color="orange">**Gaussian noise**</Highlight>) to input data during training. It forces the model to learn stable patterns and improves robustness.
+
+**Ensemble Methods:**
+
+Combining predictions from <Highlight color="green">**multiple independently trained models**</Highlight> (via averaging or voting). It reduces variance as errors from individual models tend to cancel out.
 
 ---
 
@@ -159,7 +175,7 @@ An <Highlight color="green">**adaptive optimization algorithm**</Highlight> that
 
 #### Conclusion
 
-Regularization techniques such as L1, L2, Early Stopping, and Dropout control overfitting by limiting model complexity. Optimization techniques such as Gradient Descent, SGD, and Adam efficiently minimize the loss function. Together, they ensure stable and effective training of deep learning models.
+Regularization techniques such as L1, L2, Early Stopping, Dropout, Dataset Augmentation, Parameter Sharing, Noise Injection, and Ensemble Methods control overfitting by limiting model complexity and improving robustness. Optimization techniques such as Gradient Descent, SGD, and Adam efficiently minimize the loss function. Together, they ensure stable and effective training of deep learning models.
 
 ---
 
