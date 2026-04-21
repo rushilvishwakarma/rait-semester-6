@@ -5,7 +5,7 @@ function isSolvedQuestionBankPath(pathname: string) {
   return /\/docs\/core\/curated\/[^/]+\/.+QB(?:\/|$)/i.test(pathname);
 }
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
   const { supabase, response } = await updateSession(request);
