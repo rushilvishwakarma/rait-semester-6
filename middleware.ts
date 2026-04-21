@@ -34,7 +34,7 @@ export async function middleware(request: NextRequest) {
   if (!profile?.enabled_access) {
     const blockedUrl = request.nextUrl.clone();
     blockedUrl.pathname = '/selected-members-only';
-    blockedUrl.search = '';
+    blockedUrl.searchParams.set('next', `${pathname}${search}`);
     return NextResponse.redirect(blockedUrl);
   }
 

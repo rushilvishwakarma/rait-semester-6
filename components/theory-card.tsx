@@ -1,11 +1,10 @@
 'use client';
-import { FileText, ChevronDown, MessageCircleIcon, Presentation, GraduationCap, Info } from 'lucide-react';
+import { FileText, ChevronDown, MessageCircleIcon, Presentation } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { buttonVariants } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
+import { useMemo, useState, useCallback, useEffect } from 'react';
 import { cva } from 'class-variance-authority';
-import { useMemo, useState, useCallback } from 'react';
 import { rainbowButtonVariants } from './ui/rainbow-button';
 
 const optionVariants = cva(
@@ -24,42 +23,31 @@ interface TheoryCardProps {
 }
 
 export function TheoryCard({ title, description, href, contextUrl, curatedHref, showAskAi = true, presentationLabel = 'Open Presentation', curatedLabel = 'Curated Notes' }: TheoryCardProps) {
-  const [showModal, setShowModal] = useState(false);
-  const [pendingHref, setPendingHref] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
-  const handlePresentationClick = useCallback((url: string) => {
-    setPendingHref(url);
-    setShowModal(true);
+  useEffect(() => {
+    setMounted(true);
   }, []);
 
-  const handleContinue = useCallback(() => {
-    if (pendingHref) {
-      let finalHref = pendingHref;
-      try {
-        const url = new URL(pendingHref);
-        if (url.hostname.includes('drive.google.com') || url.hostname.includes('docs.google.com')) {
-          url.searchParams.set('authuser', '-1');
-          finalHref = url.toString();
-        }
-      } catch (e) {
-        // Fallback to original href if parsing fails
+  const handlePresentationClick = useCallback((url: string) => {
+    let finalHref = url;
+    try {
+      const parsed = new URL(url);
+      if (parsed.hostname.includes('drive.google.com') || parsed.hostname.includes('docs.google.com')) {
+        parsed.searchParams.set('authuser', '-1');
+        finalHref = parsed.toString();
       }
-      window.open(finalHref, '_blank', 'noopener,noreferrer');
+    } catch (e) {
+      // Fallback to original href if parsing fails
     }
-    setShowModal(false);
-    setPendingHref(null);
-  }, [pendingHref]);
-
-  const handleClose = useCallback(() => {
-    setShowModal(false);
-    setPendingHref(null);
+    window.open(finalHref, '_blank', 'noopener,noreferrer');
   }, []);
 
   const items = useMemo(() => {
     if (!contextUrl) return [];
 
     // Build the full URL for AI services to fetch
-    const fullContextUrl = typeof window !== 'undefined'
+    const fullContextUrl = mounted && typeof window !== 'undefined'
       ? new URL(contextUrl, window.location.origin).href
       : contextUrl;
 
@@ -149,7 +137,7 @@ Please fetch the content from the URL above and help me understand and study it.
         icon: <MessageCircleIcon className="size-4" />,
       },
     ];
-  }, [contextUrl]);
+  }, [contextUrl, title, description, mounted]);
 
   return (
     <>
@@ -228,54 +216,6 @@ Please fetch the content from the URL above and help me understand and study it.
         </div>
       </div>
 
-      <Dialog open={showModal} onOpenChange={(open) => { if (!open) handleClose(); }}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <div className="flex items-center justify-center mb-4">
-              <div className="rounded-full bg-fd-primary/10 p-4">
-                <GraduationCap className="size-9 text-fd-primary" />
-              </div>
-            </div>
-            <DialogTitle className="text-center text-4xl md:text-5xl leading-tight">University Email Required</DialogTitle>
-            <DialogDescription className="text-center text-sm mt-1 px-10 pb-3">
-              On the next page, select your university email account to access this document.
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="mt-4 space-y-5">
-            <div className="flex items-start gap-3 bg-fd-muted/50 rounded-xl p-4 text-sm text-fd-muted-foreground">
-              <Info className="size-4 shrink-0 mt-0.5" />
-              <p>If you see "Request Access", you selected the wrong account. Go back and switch to your university email.</p>
-            </div>
-
-            <div className="flex gap-3 w-full pt-1">
-              <button
-                type="button"
-                onClick={handleClose}
-                className={cn(
-                  buttonVariants({
-                    color: 'secondary',
-                    className: 'flex-1 cursor-pointer',
-                  }),
-                )}
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={handleContinue}
-                className={cn(
-                  buttonVariants({
-                    className: 'flex-1 cursor-pointer bg-fd-primary text-fd-primary-foreground hover:bg-fd-primary/90',
-                  }),
-                )}
-              >
-                Open Document
-              </button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
     </>
   );
 }
