@@ -344,7 +344,7 @@ export function CourseProgressor() {
                         {(status === 'processing' || status === 'fetching-docs') && selectedSemester && (
                             <div className="space-y-4 animate-in fade-in zoom-in-95">
                                 <div className="text-center space-y-1">
-                                    <h3 className="font-semibold text-lg">{selectedSemester.name}</h3>
+                                    <h3 className="font-semibold text-lg">{selectedSemester?.name}</h3>
                                     <p className="text-sm text-fd-muted-foreground">Processing subjects...</p>
                                 </div>
 
