@@ -27,7 +27,6 @@ A GLM has **three components**:
    $$
    Y \sim \text{Exponential Family}
    $$
-   It specifies the **conditional distribution** of the response given predictors. The choice depends on the nature of data (binary → Bernoulli, counts → Poisson, continuous → Gaussian).
 
 
 2. **Systematic Component**
@@ -37,7 +36,6 @@ A GLM has **three components**:
    $$
    \eta = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p = X\beta
    $$
-   Predictor variables are combined as a **weighted linear sum** through their coefficients.
 
 
 3. **Link Function**
@@ -47,7 +45,7 @@ A GLM has **three components**:
    $$
    g(\mu) = \eta
    $$
-   It **transforms** the expected value so it can be expressed as a linear function of predictors and keeps predictions within a valid range for the chosen distribution.
+   It ensures predictions stay within valid range for the chosen distribution.
 
 
    Common link functions:
@@ -120,29 +118,73 @@ Thus, link functions provide <Highlight>**flexibility**</Highlight>, ensure vali
 ### Q3. Explain Probit regression and provide a conceptual comparison with Logistic regression. / Compare Probit and Logistic regression in terms of their link functions, assumptions, and practical scenarios where one is preferred over the other. <QuestionDot color="yellow" text="IA1-QB" />
 
 
-**Probit regression** is used for binary classification (output is 0 or 1). It models the probability using the **CDF of the standard normal distribution**.
+**Probit regression** is a GLM used for binary classification. It models probability using the **standard normal CDF**:
+
 
 $$
-P(y=1|x) = \Phi(X\beta)
-$$
-where $\Phi(\cdot)$ is the standard normal CDF.
-
-It assumes a hidden <Highlight color="blue">**latent variable**</Highlight> $y^*$ that follows a normal distribution. If $y^*$ crosses a threshold, the outcome is 1:
-$$
-y = \begin{cases} 1 & \text{if } y^* > 0 \\ 0 & \text{otherwise} \end{cases}
+P(y=1 \mid x,w) = \Phi(w^T x)
 $$
 
-**Comparison with Logistic Regression:**
 
-| Feature | Probit | Logistic |
-|---|---|---|
-| **Link Function** | Inverse normal CDF ($\Phi^{-1}$) | Logit ($\log\frac{p}{1-p}$) |
-| **Probability** | $\Phi(X\beta)$ | $\frac{1}{1+e^{-X\beta}}$ |
-| **Error Distribution** | Normal | Logistic |
-| **Tails** | Lighter (approaches 0/1 faster) | Heavier |
-| **Interpretability** | Less intuitive | Coefficients = log-odds (easier) |
+where:
+$$
+\Phi(z) = \int_{-\infty}^{z} \frac{1}{\sqrt{2\pi}} e^{-t^2/2} , dt
+$$
 
-In practice, both give **very similar results**. Logistic regression is more popular because of easier interpretation, while probit is preferred in econometrics.
+
+The link function is:
+$$
+g(\mu) = \Phi^{-1}(\mu)
+$$
+
+
+---
+
+
+**Logistic regression** is also a GLM for binary classification. It models probability using the **sigmoid function**:
+
+
+$$
+P(y=1 \mid x,w) = \frac{1}{1 + e^{-w^T x}}
+$$
+
+
+The link function is:
+$$
+g(\mu) = \log\frac{\mu}{1-\mu}
+$$
+
+
+---
+
+
+### Comparison
+
+
+| Aspect        | Logistic Regression             | Probit Regression         |
+| ------------- | ------------------------------- | ------------------------- |
+| Link Function | Logit ($\log\frac{\mu}{1-\mu}$) | Probit ($\Phi^{-1}(\mu)$) |
+| Function      | Sigmoid                         | Normal CDF                |
+| Assumption    | Logistic noise                  | Gaussian (normal) noise   |
+
+
+---
+
+
+### Practical Scenarios
+
+
+* **Logistic Regression**: Used for general binary classification problems due to simplicity
+* **Probit Regression**: Used when the underlying latent variable is assumed to be normally distributed
+
+
+---
+
+
+### Conclusion
+
+
+Both give similar results. Logistic is preferred for general use, while probit is preferred when a normality assumption is appropriate.
 
 
 
