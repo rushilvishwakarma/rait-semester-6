@@ -231,51 +231,8 @@ MTL is more data-efficient and produces more robust models than single-task lear
 ---
 
 
-### Q5. 
-
-
-Both Probit and Logistic regression are **GLMs for binary classification**. They differ in their choice of link function and underlying distributional assumptions.
-
-
-**Link Functions:**
-
-
-- **Logistic Regression:** Uses the **logit** link → $g(\mu) = \log\frac{\mu}{1-\mu}$, with inverse being the sigmoid $\sigma(\eta)$.
-- **Probit Regression:** Uses the **probit** link → $g(\mu) = \Phi^{-1}(\mu)$, with inverse being the normal CDF $\Phi(\eta)$.
-
-
-| Property | Logistic | Probit |
-|---|---|---|
-| Link function | Logit | Probit ($\Phi^{-1}$) |
-| Mean function | Sigmoid $\frac{1}{1+e^{-\eta}}$ | Normal CDF $\Phi(\eta)$ |
-| Tail behavior | Heavier tails | Lighter (Gaussian) tails |
-| Latent variable noise | Logistic distribution | Gaussian distribution |
-| Coefficient interpretation | Log-odds | Standardized normal units |
-| Preferred scenario | General binary outcomes | Latent Gaussian variable assumed |
-
-
-**Key Assumptions:**
-
-
-- Both assume a **latent variable** $z^* = \mathbf{w}^T\mathbf{x} + \epsilon$ where $y = 1$ if $z^* > 0$.
-- Logistic assumes $\epsilon \sim \text{Logistic}(0,1)$; Probit assumes $\epsilon \sim \mathcal{N}(0,1)$.
-
-
-**When to Prefer Probit:**
-- When the underlying process is naturally governed by **Gaussian noise** (e.g., psychometric testing, econometrics with normal latent variable).
-- When integrating with **Bayesian models** (probit has a convenient conjugate prior — the normal).
-
-
-**When to Prefer Logistic:**
-- When **interpretability via odds ratios** is important.
-- In most general binary classification tasks — it is computationally simpler and equally accurate.
-
-
----
-
-
 <LongQuestion>
-### Q6. (Extras for Reference/Practice) A Probit model predicts grad admission with: $\eta = -3.5 + 1.0 \cdot \text{GPA} + 0.4 \cdot \text{TopTier}$. Find $P(\text{Admit}) = \Phi(\eta)$ for: Case A: GPA = 3.0, TopTier = 0; Case B: GPA = 3.0, TopTier = 1; Case C: GPA = 4.0, TopTier = 1. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" />
+### Q5. (Extras for Reference/Practice) A Probit model predicts grad admission with: $\eta = -3.5 + 1.0 \cdot \text{GPA} + 0.4 \cdot \text{TopTier}$. Find $P(\text{Admit}) = \Phi(\eta)$ for: Case A: GPA = 3.0, TopTier = 0; Case B: GPA = 3.0, TopTier = 1; Case C: GPA = 4.0, TopTier = 1. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" />
 </LongQuestion>
 
 
