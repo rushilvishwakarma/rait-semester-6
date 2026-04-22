@@ -1,0 +1,990 @@
+# Directed Graphical models
+
+- Introduction
+
+Dr. Neha Arora
+
+Advanced Machine Learning Topics Overview
+
+# Introduction
+
+# Quick Recap: Random Variables
+
+- A random variable (or stochastic variable) is a mathematical function that assigns a numerical value to each outcome of a random event, connecting real-world chance to measurable data, like getting 'Heads' (assigned 1) or 'Tails' (assigned 0) when flipping a coin. These variables are crucial in probability and statistics, categorized as discrete (countable values, e.g., 0, 1, 2 heads) or continuous (any value in a range, e.g., height, temperature)
+- Event: a subset of outcomes (e.g., "getting Head")
+- Random variable: assigns numbers to outcomes
+
+# Basic Terminologies: Quick Recap
+
+- Conditional Probability: the conditional probability of event A given event B is denoted as:
+- $P(A \mid B) = \frac{P(A \cap B)}{P(B)}$, where $P(B) &gt; 0$
+- $P(A \cap B)$ or $P(A, B)$: Probability that both A and B occur
+- $P(B)$: Probability that B occurs
+
+# Quick Recap: Chain Rule of Probability
+
+- The chain rule of probability allows us to express the joint probability of multiple events as a product of conditional probabilities.
+$$
+P(A,B) = P(A \mid B)P(B) = P(B \mid A)P(A)
+$$
+
+- Chain Rule for Three Events
+- For three events $A,B,C$:
+$$
+P(A,B,C) = P(A \mid B,C)P(B \mid C) P(C)
+$$
+- Or in any order
+$$
+P(A,B,C) = P(C \mid A,B)P(B \mid A)P(A)
+$$
+
+# Quick Recap: Chain Rule of Probability
+
+$$
+x_{1:V} = \{x_1, x_2, \dots, x_V\}
+$$
+
+$$
+p(x_{1:V}) = p(x_1, x_2, \dots, x_V)
+$$
+
+$$
+p(x_{1:V}) = p(x_1) p(x_2 \mid x_1) p(x_3 \mid x_2, x_1) p(x_4 \mid x_1, x_2, x_3) \cdots p(x_V \mid x_{1:V-1})
+$$
+
+$V$ = total number of random variables
+
+Any joint distribution can be factorized into a product of conditional distributions, using any ordering of variables.
+
+# Joint Rule of Probability
+
+- As Vgrows: Each conditional term depends on more variables
+- Example: $p(x100 \mid x1, x2, ..., x99)$
+- This becomes: Hard to estimate, Hard to store, Hard to compute
+- This motivates:
+- Conditional independence assumptions
+- Bayesian networks
+- Graphical models
+- Naïve Bayes, HMMs, etc.
+
+# Conditional Independence
+
+- Random variables X and Y are conditionally independent given $Z^{r \cdot r} \cdot X \perp Y \mid Z \iff p(X, Y \mid Z) = p(X \mid Z) p(Y \mid Z)$
+
+- Once we know $Z$:
+
+- Learning X gives no additional information about Y
+- Learning Y gives no additional information about X
+- So $Z$ "explains away" the dependence between X and Y.
+
+# How Conditional Independence Helps?
+
+- From the chain rule:
+$$
+p(x_{1:V}) = p(x_1) p(x_2|x_1) p(x_3|x_1,x_2) \cdots p(x_V|x_{1:V-1})
+$$
+
+## Problem:
+
+- Each conditional depends on many variables
+- Becomes **untraceable** as $V$ grows
+- Conditional independence assumptions reduce complexity
+
+# Markov Assumption (First Order)
+
+- The text assumes:
+$$
+x_{t+1} \perp x_{1:t-1} \mid x_t
+$$
+
+- The future is independent of the past given the present
+- This is called the first-order Markov property.
+- To predict $x_{t+1}$, we only need $x_t$
+- Earlier states $x_{1:t-1}$ provide no extra information
+
+# Using Chain Rule + Markov Assumption
+
+- Start with the chain rule:
+$$
+p(x_{1:V}) = p(x_1) p(x_2|x_1) p(x_3|x_1,x_2) \cdots p(x_V|x_{1:V-1})
+$$
+
+- Apply the Markov Assumption:
+$$
+p(x_t \mid x_{1:t-1}) = p(x_t \mid x_{t-1})
+$$
+
+- Resulting Simplified Joint Distribution
+$$
+p(x_{1:V}) = p(x_1) \prod_{t=2}^{V} p(x_t \mid x_{t-1})
+$$
+
+- This is called First Order Markov Chains.
+
+# Graphical Models
+
+- First-order Markov assumption works well for 1D sequences e.g., time series, text, speech
+- Real-world data often has complex structures:
+- 2D images
+- 3D videos
+- Biological pathways (genes, proteins)
+
+Need a more general framework to model such dependencies
+
+# Limitations of Markov Model
+
+- Markov models assume: Each variable depends only on a small local neighborhood
+- Not suitable for:
+- Spatial dependencies in images
+- Multiple interacting variables
+- Arbitrary dependency structures
+
+# Introduction and Key Ideas: Graphical Models
+
+- Graphical Models (GM) represent joint probability distributions
+- Achieved by making conditional independence (CI) assumptions
+- Provide a compact and interpretable representation
+- Nodes represent random variables
+- Edges represent direct dependencies
+- Absence of an edge implies conditional independence
+- Graph = independence structure of the probability model
+
+# Why "Graphical Models"?
+
+- Also known as Independence Diagrams
+- The term Graphical Models is widely accepted and standard
+- It Combines: Probability theory and Graph theory
+- Types of Graphical Models
+- Directed Graphical Models (This Module)
+- Bayesian Networks
+- Undirected Graphical Models
+- Markov Random Fields
+- Hybrid Models
+- Combination of directed &amp; undirected edges
+
+# Directed Graphical Models
+
+- Directed Graphical Models (DGMs), are probabilistic models used to represent the relationships and dependencies among variables in a system.
+- Explains how different models, like Naive Bayes, Markov Chains, Hidden Markov Models (HMMs) can be represented as DGMs to model conditional independence, factorization of joint distributions, and probabilistic inference.
+
+# Graphs
+
+# Graph Definition
+
+A graph $G = (V, E)$ consists of:
+
+- Nodes (or vertices) $V$: These represent random variables in a graphical model.
+- Edges $E$: These represent dependencies between variables.
+
+A graph is often represented using an adjacency matrix $G(s, t)$, where:
+
+- $G(s, t) = 1$ if there is an edge from node $s$ to node $t$.
+- $G(s, t) = 0$ if no edge exists.
+
+Types of graphs:
+
+- Directed graph: $G(s, t) \neq G(t, s)$ (edges have a direction).
+- Undirected graph: $G(s, t) = G(t, s)$ (edges have no direction).
+
+# Graph Terminology : DAG
+
+- Parent (pa(s)): For a directed graph, the parent of a node is the set of all nodes that feed into it.
+- Child (ch(s)): For a directed graph, the children of a node is the set of all nodes that feed out of it.
+- Family (fam(s)): The node and its parents, $fam(s) = \{s\} \cup pa(s)$.
+- Root: A node with no parents.
+- Leaf: A node with no children.
+- Ancestors (anc(s)): All nodes that have a directed path leading to $s$ (parents, grandparents, etc.).
+- Descendants (desc(s)): All nodes that can be reached from $s$ (children, grandchildren, etc.).
+- Cycle: A sequence of edges that forms a loop.
+- Directed Acyclic Graph (DAG): A directed graph without directed cycles.
+
+# Graph Terminology : Directed or Undirected...
+
+- Neighbors (nbr(s)): The set of nodes directly connected to $s$.
+- Degree: The number of edges connected to a node.
+- In-degree: The number of incoming edges (parents).
+- Out-degree: The number of outgoing edges (children).
+- Path or Trail: A sequence of edges that connect one node to another.
+- Subgraph: A graph formed by selecting a subset of nodes and their edges.
+
+# Directed Graphical Models (DGMs)
+
+- A Directed Graphical Model (DGM) is a graphical model whose graph is a Directed Acyclic Graph (DAG).
+- Nodes represent random variables
+- Directed edges represent conditional dependencies
+- Different Names: (Bayesian / Belief / Causal Networks)
+- DGMs are compact way to define joint probability distributions using conditional independence (CI) assumptions.
+
+# Direct Acyclic Graph
+
+![img-0.jpeg](img-0.jpeg)
+
+# Direct Cyclic Graph and Direct Acyclic Graph (DGM's)
+
+Direct Acyclic Graph
+
+![img-1.jpeg](img-1.jpeg)
+
+Direct Cyclic Graph
+
+![img-2.jpeg](img-2.jpeg)
+
+# Key Property of DAGs: Topological Ordering
+
+- What is Topological Ordering?
+- Since the graph has no cycles, nodes can be ordered so that:
+- Parents always come before children
+- This ordering is called a topological order
+- Every DAG has at least one valid ordering
+
+Direct Cyclic Graph and Direct Acyclic Graph
+
+![img-3.jpeg](img-3.jpeg)
+(a) A directed cyclic graph.
+
+![img-4.jpeg](img-4.jpeg)
+(b) A directed acyclic graph.
+
+25
+
+DY PATIL
+DY PARTHY OF THE UNIVERSITY
+RAMRAO ADIK
+INSTITUTE OF TECHNOLOGY
+NAVI MUMBAI
+
+Topological Sorting
+
+![img-5.jpeg](img-5.jpeg)
+
+This graph has many valid topological sorts, including:
+
+5, 7, 3, 11, 8, 2, 9, 10 (visual left-to-right, top-to-bottom)
+3, 5, 7, 8, 11, 2, 9, 10 (smallest-numbered available vertex first)
+3, 5, 7, 8, 11, 2, 10, 9 (lexicographic by incoming neighbors)
+5, 7, 3, 8, 11, 2, 10, 9 (fewest edges first)
+7, 5, 11, 3, 10, 8, 9, 2 (largest-numbered available vertex first)
+5, 7, 11, 2, 3, 8, 9, 10 (attompting top-to-bottom, left-to-right)
+3, 7, 8, 5, 11, 10, 2, 9 (arbitrary)
+
+#
+
+DY PATIL
+
+DISTRICT OF
+
+UNIVERSITY
+
+RAMRAO ADIK
+
+INSTITUTE OF TECHNOLOGY
+
+NAVI MUMBAI
+
+# Ordered Markov Property (Core Assumption)
+
+- Once a topological order is fixed:
+- Each node depends only on its immediate parents, not on all its predecessors
+- Mathematical Form:
+- $x_s \perp x_{pred(s)} \setminus pa(s) \mid x_{pa(s)}$
+- Meaning:
+- $x_s$ is conditionally independent of all its non-parent predecessors
+- Given its parents
+
+# Relation to Markov Chains
+
+- Markov Chain:
+- Each variable depends only on the previous variable
+- DGM:
+- Each variable depends only on its parent nodes
+
+Thus:
+
+- Ordered Markov Property = generalization of first-order Markov property from chains to DAGs
+
+# Ex: DAG Encodes the following Joint Distribution
+
+![img-6.jpeg](img-6.jpeg)
+
+For example, the DAG in Figure 10.1(a) encodes the following joint distribution:
+
+$$
+\begin{array}{l}
+p(\mathbf{x}_{1:5}) = p(x_1)p(x_2|x_1)p(x_3|x_1,x_2)p(x_4|x_1,x_2,x_3)p(x_5|x_1,x_2,x_3,x_4) \\
+= p(x_1)p(x_2|x_1)p(x_3|x_1)p(x_4|x_2,x_3)p(x_5|x_3)
+\end{array}
+$$
+
+In general, we have
+
+$$
+p(\mathbf{x}_{1:V}|G) = \prod_{t=1}^{V} p(x_t|\mathbf{x}_{\mathrm{pa}(t)})
+$$
+
+- ☐ Each node contributes one conditional probability distribution (CPD)
+- ☐ CPDs define the entire joint distribution
+- ☐ Valid only if CI assumptions encoded in DAG are correct
+
+# Parameter Reduction (Why DGMs Are Powerful)
+
+- A probabilistic model must specify a joint probability distribution
+- This distribution is defined using parameters
+- More parameters ⇒ more data, more computation, higher overfitting risk
+- DGMs dramatically reduce the number of parameters by exploiting conditional independence (CI).
+
+# Parameter Reduction (Why DGMs Are Powerful)
+
+- First Case: Without Conditional Independence (Full Joint Distribution)
+- Assume:
+- $V$ random variables
+- Each variable has $K$ possible states
+- Parameters Required:
+- Parameters = $O(K^V)$
+- Why?
+- You must specify probability for every possible combination
+- Number of combinations = $K \times K \times \cdots \times K = K^V$
+- Exponential growth → infeasible even for moderate V
+
+# Parameter Reduction (Why DGMs Are Powerful)
+
+## With Directed Graphical Model (Using DAG)
+
+- DAG encodes conditional independence:
+- Each variable depends only on its parents
+
+Not on all other variables
+
+## Joint Factorization:
+
+$$
+p(X_{1:V}) = \prod_{t=1}^{V} p\left(x_t \mid x_{pa(t)}\right)
+$$
+
+Each term is a Conditional Probability Distribution (CPD).
+
+# Parameter Reduction (Why DGMs Are Powerful)
+
+- Parameter Count in a DGM
+- Assume:
+- Each variable has at most F parents
+- Each variable has K states
+- Parameters per CPD:
+- Parent configurations = $K^F$
+- Parameters per node = $O(K^F)$
+- Total Parameters:
+- $O(VK^F)$
+
+# Parameter Reduction (Why DGMs Are Powerful) Numerical Example
+
+- Let:
+- $\Delta V = 10$ variables
+- $\Delta K = 2$ (binary) States
+- $\Delta F = 2$ parents max
+
+- Without DAG:
+- $\Delta 2^{10} = 1024$ parameters
+
+- With DAG:
+- $\Delta 10 \times 2^2 = 40$ parameters
+
+- Parameter reduction = 1024 → 40
+
+# Parameter Reduction
+
+- Without DGM: Every variable depends on everything else
+- With DGM: Each variable depends only on a few parents
+- Why Parameter Reduction Matters
+- Requires less training data
+- Faster learning and inference
+- Lower risk of overfitting
+- Makes large-scale probabilistic models feasible
+
+# Example: Graph Structure &amp;Factorization..
+
+Suppose we have three binary variables:
+
+Rain (R), Traffic (T), Late to Work (L)
+
+- Using the chain rule: $p(R, T, L) = p(R)p(T|R)p(L|R, T)$
+- If each variable has K states, the number of required parameters is $O(K^{\wedge}V)$ (exponential growth).
+- This is inefficient. To address this, we simplify the model by assuming conditional independence between variables
+
+# Example: Conditional Probability Tables (CPTs) and Factorization.
+
+In Bayesian networks, each node represents a random variable, and each directed edge represents a dependency. Instead of computing full joint distributions, we use Conditional Probability Tables (CPTs) to express dependencies in a compact form.
+
+A CPT for a variable  $X_{t}$  given its parents  $X_{pa(t)}$  is:  $p\left(x_{t} \mid x_{pa(t)}\right)$  where  $x_{pa(t)}$  are the parent variables in the graph.
+For example a binary variable  $\mathbf{T}$  (Traffic) dependent on  $\mathbf{R}$  (Rain), we can express its CP
+
+![img-7.jpeg](img-7.jpeg)
+
+Here, if it rains, the probability of heavy traffic is 0.7, while if it does not rain, the probability of traffic is only 0.2.
+The approach reduces the number of parameters compared to an explicit joint
+
+Example: Conditional Probability Tables (CPTs) and Factorization.
+
+# Bayesian Network Factorization (Conditional Independence Assumptions)
+
+Instead of assuming dependencies on all previous variables, Bayesian networks allow to specify which variables directly influence each other.
+
+For example, in a simplified medical diagnosis network, one can factorize:
+
+$p(D,S,T) = p(D)p(S|D)p(T|S)$
+
+$\triangleleft D =$ Disease
+
+$\triangleleft S =$ Symptoms
+
+$\triangleleft T =$ Test Results
+
+# Example: Graph Structure &amp;Factorization..
+
+- Factorization greatly simplifies the computation of the joint distribution because, rather than needing to consider every possible combination of the variables, we only need to consider the direct dependencies (edges in the graph).
+- Factorization of the joint distribution based on the structure of the graph reduces the number of parameters needed to model the system.
+- Without this factorization, we'd need to consider a much larger number of parameters to model the joint distribution in its entirety, making computation inefficient and complex.
+
+# Summary
+
+- Directed Graphical Models (DGMs) are useful for representing probabilistic relationships between variables, and Bayesian Networks (BNs) are a specific type of DGM.
+- The graph structure represents the dependencies between variables, and the edges indicate the direction of influence (causal or otherwise).
+- Conditional Independence (CI) is encoded in the structure of the graph, allowing for efficient factorization of the joint distribution.
+- Factorization of the Joint Distribution simplifies modeling by breaking down the complex problem into smaller, conditional components, each of which can be easier to compute and understand.
+- DGMs can model systems with multiple interacting variables in computationally efficient way.
+- The notation $X \perp Y \mid Z$ represents conditional independence in probability theory and statistics. $X \perp Y \mid Z$ means that $X$ is conditionally independent of $Y$, given $Z$.
+- This implies that once you know the value of $Z$, the knowledge about $X$ does not provide any additional information about $Y$, and vice versa.
+
+# References
+
+- Murphy, Kevin P. *Machine learning: a probabilistic perspective*. MIT press, 2012.
+- Chapter 10
+
+# Numerical
+
+1. Given three random variables $A, B, C$, with:
+$$
+P(A) = 0.5, \quad P(B|A) = 0.6, \quad P(C|A,B) = 0.2
+$$
+
+Compute the joint probability $P(A,B,C)$.
+
+2. A system follows a first-order Markov process:
+$$
+P(x_1) = 0.4, \quad P(x_2|x_1) = 0.5, \quad P(x_3|x_2) = 0.6
+$$
+
+Compute Joint Probability.
+
+|  |   |
+| --- | --- |
+
+# Directed Graphical models
+
+- Directed Graphical models : Examples
+
+Dr. Neha Arora
+
+Advanced Machine Learning Topics Overview
+
+# DGMs Example
+
+A DGM consists of nodes (random variables) and directed edges (dependencies).
+
+A directed edge from node $A$ to node $B$ means that $B$ depends on $A$ (i.e., $p(B|A)$).
+
+## Examples
+
+In this section, we show a wide variety of commonly used probabilistic models can be conveniently represented as DGMs.
+
+# Naive Bayes Model
+
+## Scenario: Diagnosing Flu
+
+- Diagnose whether a patient has the flu (Y) based on three observed symptoms:
+- Fever $(X_1)$, Cough $(X_2)$, Fatigue $(X_3)$
+- It is assumed that the symptoms only depend on the presence or absence of flu and are independent of each other given Y.
+- This results in the following DAG: $Y \to X_1, Y \to X_2, Y \to X_3$
+- Graph Representation: Y (Flu)
+
+![img-8.jpeg](img-8.jpeg)
+
+- Joint Probability Distribution Representation: $P(Y, X_1, X_2, X_3) = P(Y)P(X_1|Y)P(X_2|Y)P(X_3|Y)$
+
+- $P(Y)$ is the prior probability of having flu.
+- $P(X_1|Y), P(X_2|Y), P(X_3|Y)$ are Conditional Probability Distributions (CPDs).
+
+# Markov Property in DGMs
+
+- The Ordered Markov Property states that a node only depends on its immediate parents, not on all preceding nodes.
+- Weather Forecast Model
+- Consider a weather prediction model where tomorrow's weather $(W_t)$ depends on today's weather $(W_{t-1})$ and today's weather depends upon today's humidity $(H_{t-1})$.
+- Graph Representation:
+- $W_{t-1}$ $\longrightarrow$ $W_t$
+- $\downarrow$
+- $H_{t-1}$
+- $W_{t-1}$ (Yesterday's Weather) influences $W_t$ (Today's Weather).
+- $H_{t-1}$ (Today's Humidity) is influenced by $W_{t-1}$.
+
+Using the Markov Property, the joint probability distribution is:
+- $P(W_{t-1}, W_t, H_t) = P(W_{t-1}) P(W_t | W_{t-1}) P(H_{t-1} | W_{t-1})$
+
+This simplifies computations because we assume that: $W_t$ only depends on $W_{t-1}$ (not earlier days) &amp; $H_{t-1}$ only depends on $W_{t-1}$.
+
+# Tree-Augmented Naive Bayes (TAN) Model
+
+Tree-Augmented Naive Bayes (TAN) model improves upon Naive Bayes by allowing some dependencies among features.
+
+- Modifying Flu Diagnosis Model to include a dependency between Cough and Fever, since they are related.
+- Updated Graph:
+
+![img-9.jpeg](img-9.jpeg)
+
+- Here, Fever $(X_1)$ influences Cough $(X_2)$, meaning $P(X_2)$ depends on $X_1$ as well.
+- Updated Joint Probability: $P(Y, X_1, X_2, X_3) = P(Y)P(X_1|Y)P(X_2|Y,X_1)P(X_3|X_1)$
+
+The model captures feature dependencies, making it more expressive than Naive Bayes.
+
+# Example
+
+- Given relations:
+- Weather (W) affects Road Condition (R)
+- Road Condition affects Accident (A)
+- Driver Alertness (D) affects Accident (A)
+- Accident affects Insurance Claim (C)
+
+- Tasks:
+- Draw the DAG
+- Write the joint probability distribution
+- Identify all conditional independencies using the graph
+
+# Solution
+
+- W → R → A → C
+- ↑
+- D
+
+$$
+P(W, R, D, A, C) = P(W) P(D) P(R \mid W) P(A \mid R, D) P(C \mid A)
+$$
+
+- W ⊥ D (Unconditionally Independent)
+- W ⊥ A | R
+- R ⊥ C | A
+- R ⊥ D | A Wrong: COLLIDER EFFECT BOTH R AND D CAUSES A Hence not independent.
+
+# Example
+
+- Socioeconomic Status (S) affects Education Level (E)
+- Socioeconomic Status (S) affects Nutrition (N)
+- Education Level (E) affects Job Type (J)
+- Nutrition (N) affects Health Condition (H)
+- Job Type (J) affects Income (I)
+- Health Condition (H) affects Income (I)
+
+☐ Draw the Directed Acyclic Graph (DAG)
+☐ Write the joint probability distribution
+☐ Write any three conditional Independence Relations for DGM
+
+# Markov Chains (First and Second Order)
+
+A Markov Chain assumes that the future state depends only on the present state (first-order) or a few past states (higher-order).
+
+- First-Order Markov Chain  $p(x_{1:T}) = p(x_1)\prod_{t=2}^{T}p(x_t|x_{t-1})$
+
+Weather Prediction
+
+- States: Sunny (S), Rainy (R), Cloudy (C)
+- Transition Probabilities:  $p(S_t|S_{t-1}) = 0.7, p(R_t|S_{t-1}) = 0.2, p(C_t|S_{t-1}) = 0.1$
+- Graph:  $x1 \rightarrow x2 \rightarrow x3 \rightarrow x4$  ...
+
+This means tomorrow's weather depends only on today's.
+
+- Second-Order Markov Chain  $p(x_{1:T}) = p(x_1,x_2)\prod_{t=3}^{T}p(x_t|x_{t-1},x_{t-2})$
+- Graph  $x1 \rightarrow x2 \rightarrow x3 \rightarrow x4$  ...
+
+- In a second-order Markov model, the next state depends on the last two states.
+
+# Intuition: Hidden Markov Models
+
+- Even the second order Markov Assumption may be inadequate if there are long range correlations amongst the observations. We can't keep building even higher order models, since the number of parameters will blow up.
+- An alternative approach is to assume that there is an underlying hidden process, that can be modeled by a first-order Markov chain, but that the data is a noisy observation of
+
+![img-10.jpeg](img-10.jpeg)
+
+The result is known as a hidden Markov model or HMM.
+
+Here $zt$ is known as a hidden variable at "time" $t$, and $xt$ is the observed variable. (We put "time" in quotation marks, since these models can be applied to any kind of sequence data, such as genomics or language, where $t$ represents location rather than time.)
+
+The CPD $p(zt/zt-1)$ is the transition model, and the CPD $p(\mathbf{x}t/zt)$ is the observation model.
+
+# Hidden Markov Models (HMMs) (Detailed Discussion Module 4)
+
+A Hidden Markov Model (HMM) extends Markov models by introducing hidden variables.
+
+Speech Recognition
+
+- Hidden States $(z_t)$: Sunny / Rainy / Cloudy
+- Observed Variables $(x_t)$: Umbrella usage, humidity, temperature, wet roads
+
+Graph:
+
+- $z_1 \rightarrow z_2 \rightarrow z_3 \rightarrow z_4$
+- $x_1$
+- $x_2$
+- $x_3$
+- $x_4$
+
+Joint probability:
+
+- $p(z_{1:T}, x_{1:T}) = p(z_1)\prod_{t=2}^T p(z_t | z_{t-1})\prod_{t=1}^T p(x_t | z_t)$
+
+- This is useful for inferring the hidden state sequence given observations
+
+# Directed Gaussian Graphical Models (DGGM)
+
+# Directed Gaussian Graphical Models (DGGM)-Continuous
+
+- A Directed Gaussian Graphical Model (DGGM) is a Bayesian network or DGM where all the random variables are continuous and follow a Gaussian distribution.
+- The conditional probability distributions (CPDs) of these variables are linear Gaussian distributions, meaning that each variable is a linear function of its parents with some added Gaussian noise.
+
+# 1. Conditional Probability Distributions in a DGGM
+
+Each variable $x_{t}$ in the graph is conditionally Gaussian, meaning that given its parent variables $x_{\mathsf{pa}(t)}$, its probability density function is:
+
+$$
+p(x_{t} \mid x_{\mathsf{pa}(t)}) = \mathcal{N}\left(x_{t} \mid \mu_{t} + w_{t}^{T} x_{\mathsf{pa}(t)}, \sigma_{t}^{2}\right)
+$$
+
+- $\mu_t$ is the local mean of $x_t$,
+- $w_t$ is the vector of regression coefficients, representing the strength of the influence of parent variables on $x_t$,
+- $\sigma_t^2$ is the conditional variance.
+
+# 2. Matrix-Vector Representation of the Model
+
+For a node $x_t$ with parents $x_{pa(t)}$
+
+$$
+x_t = \mu_t + \sum_{s \in \mathbf{pa}(t)} w_{ts}(x_s - \mu_s) + \sigma_t z_t, \text{ where } z_t \sim \mathcal{N}(0,1)
+$$
+
+- This equation shows that each variable is a **weighted sum** of its parents (with their mean removed), plus some Gaussian noise.
+- $x_t$ → variable at node $t$
+- $\mu_t$ → local mean (bias term)
+- $w$ → weights from parents to node
+- $\sigma_t^2$ → conditional variance (noise)
+- Each node is a linear regression on its parents with Gaussian noise.
+
+# 2. Matrix-Vector Representation of the Model
+
+- Multiply all Gaussian CPDs together
+
+$$
+p(\mathbf{x}) = \prod_{t} p(x_t \mid x_{\mathrm{pa}(t)})
+$$
+
+- A directed Gaussian Bayes net defines a single multivariate Gaussian
+
+$$
+p(\mathbf{x}) = \mathcal{N}(\mathbf{x} \mid \boldsymbol{\mu}, \boldsymbol{\Sigma})
+$$
+
+# Matrix Vector Representation
+
+- **Global Mean Representation**: The global mean of the entire system is simply the concatenation of local means: $$\mu = (\mu_1, \mu_2, \dots, \mu_D)$$ where $D$ is the total number of variables in the system.
+
+- **Global Covariance Matrix Derivation**: Express the entire system in a matrix-vector form. Define a diagonal matrix $S$ that contains the standard deviations $\sigma_i$: $S = \mathrm{diag}(\sigma)$
+
+# Matrix-Vector Representation of the Model
+
+$$
+x_t - \mu_t = \sum_{s \in \mathbf{pa}(t)} w_{ts}(x_s - \mu_s) + \sigma_t z_t \quad , \text{where } z_t \sim \mathcal{M}(0,1)
+$$
+
+Define vectors by stacking all nodes $t = 1 \ldots D$:
+
+Variable vector
+
+$$
+\mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_D \end{bmatrix} \quad \boldsymbol{\mu} = \begin{bmatrix} \mu_1 \\ \mu_2 \\ \vdots \\ \mu_D \end{bmatrix}
+$$
+
+$$
+W_{ts} = \begin{cases} w_{ts} &amp; \text{if } s \in \mathbf{pa}(t) \\ 0 &amp; \text{otherwise} \end{cases}
+$$
+
+So:
+
+$$
+\mathbf{x} - \boldsymbol{\mu} = \begin{bmatrix} x_1 - \mu_1 \\ x_2 - \mu_2 \\ \vdots \\ x_D - \mu_D \end{bmatrix}
+$$
+
+$$
+W(\mathbf{x} - \boldsymbol{\mu}) = \begin{bmatrix} \sum_s w_{1s}(x_s - \mu_s) \\ \sum_s w_{2s}(x_s - \mu_s) \\ \vdots \\ \sum_s w_{Ds}(x_s - \mu_s) \end{bmatrix}
+$$
+
+# Matrix Representation
+
+- Noise Vector
+
+$$
+\mathbf{z} = \begin{bmatrix} z_1 \\ z_2 \\ \vdots \\ z_D \end{bmatrix}, \quad z_t \sim \mathcal{N}(0, 1)
+$$
+
+- Diagonal Standard Deviation Matrix
+
+$$
+S = \begin{bmatrix} \sigma_1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; \sigma_2 &amp; \cdots &amp; 0 \\ \vdots &amp; &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \sigma_D \end{bmatrix}
+$$
+
+$$
+S\mathbf{z} = \begin{bmatrix} \sigma_1 z_1 \\ \sigma_2 z_2 \\ \vdots \\ \sigma_D z_D \end{bmatrix}
+$$
+
+# 2. Matrix-Vector Representation of the Model...
+
+Equation in matrix form:
+
+$$
+\begin{array}{l}
+(x - \mu) = W(x - \mu) + Sz \\
+\quad \Rightarrow W \text{ is a weight matrix containing regression coefficients } w_{ts}, \\
+\quad \Rightarrow S \text{ is a diagonal matrix containing standard deviations}, \\
+\quad \Rightarrow z \text{ is a standard normal noise vector (each component follows } \mathcal{N}(0,1)\text{).}
+\end{array}
+$$
+
+Rearrange the equation to isolate $x - \mu$:
+
+Let $e$ be the vector of noise terms
+
+Let $e = Sz$
+
+$$
+Sz = (I - W)(x - \mu) \Rightarrow e = (I - W)(x - \mu) \Rightarrow (x - \mu) = (I - W)^{-1} e
+$$
+
+Let: $U = (I - W)^{-1}$
+
+Thus, we can express the deviations from the mean as: $x - \mu = Ue = USz$
+
+We know, Global covariance matrix $\Sigma$ of the joint Gaussian
+
+$x \sim \mathcal{N}(\mu, \Sigma)$
+
+# Covariance Computation
+
+- By definition $\Sigma = \operatorname{Cov}(x)$
+- Subtracting a constant doesn't change covariance: $\Sigma = \operatorname{cov}(x - \mu) =&gt; \Sigma = \operatorname{cov}(USz)$
+- For any Matrix $A$ and random vector $Z$ $\operatorname{Cov}(Az) = \operatorname{Acov}(z) A^T$
+- Applying $A = \mathrm{US} =&gt; \Sigma = \mathrm{US} \operatorname{cov}(z) (\mathrm{US})^{\mathrm{T}}$
+- As $z \sim \mathcal{N}(0,1) =&gt; \operatorname{cov}(z) = \mathrm{I}$
+- $\Rightarrow \Sigma = \mathrm{US} I(\mathrm{US})^{\mathrm{T}} \Rightarrow \mathrm{US} I(S)^T(U)^{\mathrm{T}} \Rightarrow US^2 U^T$
+- $\overline{(AB)^T = B^T A^T}$
+- For any diagonal Matrix $(S)^T = S$
+
+# 3. Covariance Matrix Computation
+
+We can derive the global covariance matrix $\Sigma$. The covariance of $x$ is:
+
+$$
+\Sigma = \operatorname{cov}(x) = \operatorname{cov}(x - \mu)
+$$
+
+Substituting $x - \mu = USz$:
+
+$$
+\Sigma = \operatorname{cov}(USz)
+$$
+
+Since $z \sim \mathcal{N}(0, I)$, the covariance of $z$ is simply the identity matrix $I$, i.e., $\operatorname{cov}(z) = I$
+
+Thus $\Sigma = US \cdot I \cdot SU^T = US^2U^T$
+
+This result shows that the covariance matrix $\Sigma$ is obtained by applying the Cholesky decomposition to the weight
+
+# Key points
+
+- Directed Gaussian Graphical Models (DGGM) are Bayesian networks where all random variables follow Gaussian distributions.
+- Each variable follows a linear Gaussian CPD, meaning it is a linear function of its parents plus some Gaussian noise.
+- The system can be expressed in a compact matrix form, where:
+- $(x - \mu) = W(x - \mu) + Sz$ relates the variables to their parents.
+- The transformation matrix $U = (I - W)^{-1}$ allows us to express the global covariance.
+- The global covariance matrix is given by:
+- $\Sigma = US^2 U^T$
+- which corresponds to the Cholesky decomposition of $\Sigma$.
+- This structured derivation makes inference and sampling from a Gaussian Bayes net computationally efficient, as the system reduces to matrix operations.
+
+# Reference
+
+- Murphy, Kevin P. *Machine learning: a probabilistic perspective*. MIT press, 2012.
+- Chapter 10
+
+# Directed Graphical models
+
+- Inference
+- Decision Diagrams
+
+Dr. Neha Arora
+
+Advanced Machine Learning Topics Overview
+
+# Inference
+
+# Decision Diagrams (DGM+DAG)
+
+- By the chain rule of probability, any joint distribution can be written $\mathcal{L}_j = \sum_{p(x_1:d) = p(x_1)p(x_2|x_1)p(x_3|x_1,x_2)\ldots p(x_d|x_{1:d-1})$
+- DAG G implies the following CI relation: $\bar{X}_j \perp X_{\text{pred}_j \setminus \pi_j} |X_{\pi_j}$
+- where $\pi_j$ are the parents of node $j$ in G and $\text{pred}_j$ are the predecessors of $j$ in any topological ordering of G. (This is an ordering of the nodes in which parents precede their children.) Note that $\pi_j \cup \text{pred}_j = \{1, \ldots, j-1\}$. $p(x_{1:d}) = p(x_1)p(x_2|x_{\pi_1})p(x_3|x_{\pi_3})\ldots p(x_d|x_{\pi_d})$
+- where each of the terms $p(x_j \mid x_{\pi_j})$ is called a conditional probability distribution (CPD).
+
+# Water Sprinkler Example
+
+- This defines a joint distribution over 4 binary variables,
+- representing whether it is cloudy or not (C),
+- whether it is raining or not (R),
+- whether the water sprinkler is on or not(S),
+- and whether the grass is wet or not (W).
+
+It is common to use the heuristic that we should add an edge from $X_{\pi j}$ to $X_j$ if $X_{\pi j}$ are all the immediate causes of $X_j$.
+
+- Since clouds cause rain, there is an arc from C to R.
+- Since we are assuming this is a light-sensitive sprinkler, there is an arc from C to S.
+- Finally, since either the sprinkler or the rain can cause the grass to be wet, there are arcs from S and R to W.
+
+# Water Sprinkler Example
+
+![img-11.jpeg](img-11.jpeg)
+Figure 5: Water sprinkler Bayes net with CPDs shown. T and F stand for true and false.
+
+# Water Sprinkler Example
+
+![img-12.jpeg](img-12.jpeg)
+
+This graph encodes various CI assumptions.
+
+- For example, the lack of arc between S and R means S ⊥ R|C, since C is a predecessor of S and R in any topological ordering.
+- Similarly, the lack of arc between C and W means W ⊥ C|S, R. Informally, this means that the clouds do not have any direct effect on the wet grass; rather, this effect is mediated via S and R.
+- These two CI assumptions allow us to represent the joint as a product of local factors, one per node:
+
+# Water Sprinkler Example
+
+$$
+\begin{array}{l}
+P(C, S, R, W) = P(C)P(S|C)P(R|S, C)P(W|S, R, C) \text{ chain rule} \\
+= P(C)P(S|C)P(R|\mathcal{S}, C)P(W|S, R, C) \text{ since } S \perp R|C \\
+= P(C)P(S|C)P(R|\mathcal{S}, C)P(W|S, R, \mathcal{C}) \text{ since } W \perp C|S, R \\
+= P(C)P(S|C)P(R|C)P(W|S, R)
+\end{array}
+$$
+
+|  C | S | R | W | Probability  |
+| --- | --- | --- | --- | --- |
+|  0 | 0 | 0 | 0 | 0.200  |
+|  0 | 0 | 0 | 1 | 0.000  |
+|  0 | 0 | 1 | 0 | 0.005  |
+|  0 | 0 | 1 | 1 | 0.045  |
+|  0 | 1 | 0 | 0 | 0.020  |
+|  0 | 1 | 0 | 1 | 0.180  |
+|  0 | 1 | 1 | 0 | 0.001  |
+|  0 | 1 | 1 | 1 | 0.050  |
+|  1 | 0 | 0 | 0 | 0.090  |
+|  1 | 0 | 0 | 1 | 0.000  |
+|  1 | 0 | 1 | 0 | 0.036  |
+|  1 | 0 | 1 | 1 | 0.324  |
+|  1 | 1 | 0 | 0 | 0.001  |
+|  1 | 1 | 0 | 1 | 0.009  |
+|  1 | 1 | 1 | 0 | 0.000  |
+|  1 | 1 | 1 | 1 | 0.040  |
+
+Table 1: Joint distribution defined by the water sprinkler model. Here 0 represents False and 1 represents True.
+
+# Inference
+
+- Graphical models provide a structured way to represent joint probability distributions over multiple variables. Inference in graphical models refers to the process of estimating unknown variables given observed ones. This is important in applications such as:
+- Hidden Markov Models (HMMs): Estimating hidden states (e.g., phonemes in speech recognition) given observations (e.g., audio signals).
+- Genetic Linkage Analysis: Estimating the likelihood of data under different hypotheses (e.g., location of disease-causing genes).
+- General Bayesian Networks: Estimating latent variables (e.g., medical diagnosis from symptoms).
+
+# Inference Problem
+
+- Consider a set of correlated random variables represented by the joint probability distribution: $p(x_{1:V}|\theta)$
+- $x_{1:V}$ are the variables in the model.
+- $\theta$ represents the parameters of the model (e.g., probabilities in a Bayesian network).
+
+- We can divide the variables into:
+- **Visible variables** $x_v$: These are observed (e.g., symptoms in medical diagnosis).
+- **Hidden variables** $x_h$: These are unobserved and need to be inferred (e.g., disease presence).
+
+# Inference Problem..
+
+- Inference involves computing the posterior probability of the hidden variables given the observed ones:
+
+$$
+p(x_h | x_v, \theta) = \frac{p(x_h, x_v | \theta)}{p(x_v | \theta)}
+$$
+
+- The numerator $p(x_h, x_v | \theta)$ is the joint probability of the hidden and visible variables.
+- The denominator $p(x_v | \theta)$ is the evidence (i.e., the probability of the observed data), which normalizes the distribution.
+
+- As wee don't directly observe $x_h$, we sum over all possible values of $x_h$:
+
+$$
+p(x_v | \theta) = \sum_{x_h'} p(x_h', x_v | \theta)
+$$
+
+- This normalization ensures that the posterior probability sums to 1.
+
+# Inference Problem.. Query vs. Nuisance Variables
+
+Sometimes, we are only interested in some of the hidden variables while others are just "nuisance" variables. In such cases, we partition the hidden variables into:
+
+- **Query variables** $x_q$: Variables whose values we want to estimate.
+- **Nuisance variables** $x_n$: Variables we are not interested in.
+
+To obtain the probability of the query variables, we marginalize out the nuisance variables:
+
+$$
+p(x_q | x_v, \theta) = \sum_{x_n} p(x_q, x_n | x_v, \theta)
+$$
+
+This reduces complexity by eliminating unnecessary variables.
+
+# Computational Complexity of Inference
+
+- **Multivariate Gaussian Case:**
+- If the variables follow a Gaussian distribution, inference can be performed efficiently in $O(V^3)$ time using linear algebra techniques like the Kalman filter or Gaussian elimination.
+
+- **Discrete Variables with $K$ Possible States:**
+- If the joint distribution is represented as a full multi-dimensional table, exact inference takes $O(K^{\vee})$ time (exponential complexity), which is infeasible for large graphs.
+- Instead, we use factorization properties of graphical models to reduce computation.
+
+- **Treewidth and Efficient Inference:**
+- If the graph is tree-like, inference can be done efficiently.
+- The treewidth $w$ of the graph determines the complexity:
+- If $w = 1$ (i.e., the graph is a tree or a simple chain), inference takes $O(VK^2)$ time.
+- If $w$ is large, inference may take exponential time.
+
+For general graphs, inference can be very expensive (exponential in the number of nodes).
+
+# Approximate Inference Methods
+
+Since exact inference can be computationally intractable, we use some common approaches
+
+- Sampling-based methods (e.g., Markov Chain Monte Carlo)
+- Variational inference
+- Loopy belief propagation
+
+# Key Points
+
+- Inference in graphical models means estimating unknown variables given observed ones.
+- The key equation is the posterior probability: $$p(x_h \mid x_v, \theta) = \frac{p(x_h, x_v \mid \theta)}{p(x_v \mid \theta)}$$
+- When there are nuisance variables, they are summed out to get the probability of the query variables.
+- Computational complexity depends on the structure of the graph:
+- Gaussian models: $O(V^3)$ time.
+- Discrete models: $O(K^V)$ time in the worst case.
+- Tree-like structures allow for efficient inference.
+- For large graphs, approximate inference methods are needed.
+
+# Reference
+
+- Murphy, Kevin P. *Machine learning: a probabilistic perspective*. MIT press, 2012.
+- Chapter 10

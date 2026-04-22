@@ -1,0 +1,1406 @@
+# Undirected Graphical Models
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Chapter 4 from
+Koller, Daphne, and Nir Friedman. *Probabilistic Graphical Models: Principles and Techniques*. Cambridge, MA: MIT Press, 2009.
+
+- Chapter 19 from
+Murphy, Kevin P. *Machine Learning: A Probabilistic Perspective*. Cambridge, MA: MIT Press, 2012.
+
+# Introduction to Undirected Models
+
+## Reason to consider Undirected graphs
+
+- Not all dependencies are naturally directional.
+- Often we wish to express symmetry or mutual compatibility between variables.
+
+## UGMs / Markov Random Fields (MRFs):
+
+- Model joint distributions over variables using an undirected graph.
+- Edges represent "peer-to-peer" relationships rather than parent-to-child causality.
+
+# Key Idea in UGMs
+
+## Graph Structure:
+- Represented as $G = (V, E)$ where nodes $V$ are random variables.
+- No Edge $\Rightarrow$ Implies a form of conditional independence.
+
+## Conditional Relationships:
+- Instead of directional influence, UGMs encode mutual compatibility between variables.
+
+# Conditional Independence in UGMs
+
+## Graph Encodes Independence:
+
+- Pairwise Markov Property:
+- Two nodes not directly connected are conditionally independent given all others.
+- Local Markov Property:
+- A node is independent of all other nodes given its neighbors.
+- Global Markov Property:
+- Two sets of nodes are independent when separated by a third set.
+
+## Importance Property:
+
+- These properties allow efficient reasoning and factorization over
+
+# Parameterization of MRFs
+
+## Joint Distribution Setup:
+
+- Expressed as: $P(X) = \frac{1}{Z} \prod_{C \in \mathcal{C}} \psi_C(X_C)$
+- $\psi_C$: Potential function over clique $C$.
+- $Z$: Partition function for normalization.
+
+## Log-Linear (Exponential Family) Form:
+
+- Alternate formulation: $P(X) = \frac{1}{Z} \exp \left( \sum_{k} \theta_{k} f_{k}(X_{C_{k}}) \right)$
+- Connects MRFs to energy-based models where: $P(X) = \frac{1}{Z} \exp(-E(X))$
+- Lower Energy $\Rightarrow$ More probable configuration.
+
+# Examples of MRFs
+
+- **Ising Model:**
+- Binary variables arranged in a grid.
+- Encourages neighboring variable agreement.
+- Used in statistical physics and image denoising.
+
+- **Potts Model:**
+- Generalization to multi-label variables.
+- Commonly applied in image segmentation for smoothing label maps.
+
+- **Gaussian MRFs (GMRFs):**
+- Models with continuous (Gaussian) variables.
+- The precision matrix encodes sparse dependency (widely used in spatial modeling).
+
+- **Conditional Random Fields (CRFs):**
+- Discriminative version that models $P(Y \mid X)$.
+- Used in structured prediction tasks (e.g., NLP, vision).
+
+# Learning in MRFs
+
+## Learning:
+- Estimate parameters $\theta$ from data.
+
+## Maximum Likelihood Learning:
+- Optimize: $\theta^{*} = \arg \max \log P(X^{(1)},\dots,X^{(N)};\theta)$
+
+## Main Challenge:
+- Computing the partition function $Z(\theta)$ is intractable in large models.
+
+## Approximate Learning Methods:
+- Pseudo-likelihood: Maximize local conditionals $P(x_{i} \mid x_{nb(i)})$.
+- Contrastive Divergence: Use short Gibbs chains for approximate gradients.
+- Score Matching: Bypasses computing $Z$ (for continuous models like GMRFs).
+
+# Conditional Random Fields (CRFs)
+
+$\equiv$ CRFs model the conditional distribution $P(Y \mid X)$ where:
+
+$\diamond X$: Observed inputs.
+$\diamond Y$: Structured output variables.
+
+$\equiv$ Log-Linear Formulation:
+
+Given by: $P(Y \mid X) = \frac{1}{Z(X)} \exp \left( \sum_{k} \theta_{k} f_{k}(Y_{C_{k}}, X) \right)$
+$\diamond$ Features depend on both $X$ and $Y$.
+
+$\equiv$ Inference in CRFs:
+
+$\diamond$ MAP Inference:
+- Algorithms such as Viterbi (for chains) or graph cuts (in vision).
+
+$\diamond$ Marginal Inference:
+- Use forward-backward (for chains) or belief propagation in trees.
+
+$\diamond$ For complex graphs (grids), approximate methods like loopy BP, mean-field, or MCMC are used.
+
+# Learning in CRFs
+
+## Parameter Estimation:
+- Maximize the conditional log-likelihood $\log P(Y \mid X)$.
+
+## Requirements:
+- Inference for marginal probabilities during gradient computation.
+- Often use gradient-based optimization with regularization (e.g., $\ell_2$) to prevent overfitting.
+
+## Application Domains:
+- NLP (POS tagging, NER)
+- Vision (semantic segmentation)
+- Bioinformatics (gene prediction)
+
+# Key Concepts
+
+## UGMs / MRFs:
+- Use undirected graphs to model symmetric relationships and conditional independence.
+- Parameterized via potential functions (often in log-linear form) with a partition function for normalization.
+
+## Learning:
+- Approximate methods are used to estimate parameters when the partition function is intractable.
+
+## CRFs:
+- Extend MRFs to supervised tasks, modeling the conditional $P(Y \mid X)$.
+
+## Real-World Applications:
+- NLP, vision, social networks, bioinformatics, and more.
+
+# Application Use Cases
+
+- NLP:
+- POS tagging, NER, parsing using linear-chain CRFs.
+- Vision:
+- Image segmentation, denoising using grid MRFs or Potts models.
+- Social Networks:
+- Link prediction using graphical structure.
+- Bioinformatics:
+- Protein folding, gene-network modeling using CRFs and GMRFs.
+
+Overview
+
+- Undirected Graphical Models (UGMs)
+- Provide a powerful, flexible framework for modeling joint distributions with symmetric relationships.
+
+- Advantages:
+- Efficient encoding of conditional independence via graph structure.
+- Connection to energy-based models for interpretation and learning.
+
+- CRFs:
+- Enable structured prediction over outputs conditioned on inputs.
+
+- This is useful for:
+- Choose the model and learning approach based on application's complexity and data characteristics.
+
+# Conditional Independence Properties of UGMs
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Chapter 4 from
+Koller, Daphne, and Nir Friedman. *Probabilistic Graphical Models: Principles and Techniques*. Cambridge, MA: MIT Press, 2009.
+
+- Chapter 19 from
+Murphy, Kevin P. *Machine Learning: A Probabilistic Perspective*. Cambridge, MA: MIT Press, 2012.
+
+# Outline
+
+- Understand how the graph structure in a UGM encodes conditional independencies between variables.
+- Explore what it means for variables to be conditionally independent in a graph.
+- Learn the three Markov properties: Pairwise, Local, and Global.
+- Understand graph separation (the UGM version of d-separation) and its relationship with conditional independence.
+
+# Conditional Independence in Probability
+
+## Definition:
+
+For random variables $X, Y$, and $Z: X \perp Y \mid Z$ if $P(X \mid Y, Z) = P(X \mid Z)$
+
+## In UGMs:
+
+- This idea is directly encoded via the absence of edges and path blockage upon conditioning.
+- Graph structure tells us which dependencies disappear when we condition on certain variables.
+
+# Graph Separation: The UGM Perspective
+
+## Key thought:
+- A set $S$ separates two other sets $A$ and $B$ if every undirected path from any node in $A$ to any node in $B$ passes through at least one node in $S$.
+
+## Implication:
+- If $S$ separates $A$ and $B$, then by the global Markov property,
+$$
+A \perp B \mid S
+$$
+
+# Three Markov Properties
+
+- They offer different "lenses" on the conditional independencies implied by a graph's structure.
+- The Three Properties:
+- Pairwise Markov Property
+- Local Markov Property
+- Global Markov Property
+- Under positivity (i.e. $P(X) &gt; 0$ for all configurations), these properties are equivalent; otherwise, they impose progressively stronger requirements.
+
+# Pairwise Markov Property
+
+- Let $G = (V, E)$ be an undirected graph. For any two nodes $i$ and $j: (i, j) \notin E \Rightarrow X_i \perp X_j \mid X_{V \setminus \{i, j\}}$
+- If two nodes are not directly connected by an edge, then they are conditionally independent given all other nodes.
+- This is the most local (and weakest) conditional independence test.
+
+# Pairwise Markov
+
+## Graph Example:
+
+- Consider a chain: $X_1 - X_2 - X_3$
+- Here, $(X_1, X_3)$ are not connected.
+- Thus, by the pairwise Markov property: $X_1 \perp X_3 \mid X_2$
+- The pairwise property only applies when conditioning on the entire set of other variables.
+
+# Local Markov Property
+
+- For a node $X_i$ with neighbors denoted by
+$$
+nb(i): X_i \perp X_{V \setminus \{i\} \cup nb(i)} \mid nb(i)
+$$
+- Once we observe its neighbors, $X_i$ is conditionally independent of all other nodes.
+- This property is central to methods like Gibbs sampling and message-passing algorithms (e.g., belief propagation).
+
+# Local Markov - Example
+
+## Example (Chain Graph):
+
+- For the chain $X_1 - X_2 - X_3$:
+- For node $X_1$:
+- Neighbors: $nb(1) = \{X_2\}$
+- Non-neighbors: $\{X_3\}$
+- Implication: $X_1 \perp X_3 \mid X_2$
+
+- "To understand $X_1$, it is enough to know $X_2$; everything else does not add extra information."
+
+# Relationship: Pairwise vs. Local
+
+## Comparison:
+
+- Pairwise Markov:
+- Checks independence between two variables given all others.
+- Local Markov:
+- Focuses on a node's immediate neighborhood.
+
+## Important Relationship:
+
+- The local Markov property implies the pairwise property, but not vice versa.
+
+## Implication Hierarchy (Under Positivity):
+
+- Global Markov ⇒ Local Markov ⇒ Pairwise Markov
+
+# Global Markov Property
+
+## Definition:
+
+- For disjoint sets $A, B$, and $S \subset V$:
+If $S$ separates $A$ and $B$ in $G$, then $A \perp B \mid S$.
+
+## Graph Separation (sep $G(A,B \mid S)$):
+
+- Every path from any node in $A$ to any node in $B$ passes through a node in $S$.
+
+## Significance:
+
+- This is the most general form and underlies the overall factorization of the distribution.
+
+# Global Markov - Example
+
+## Chain Example:
+
+Graph: $X_{1} - X_{2} - X_{3}$
+$\mathcal{A} = \{X_1\}, B = \{X_3\}$, and $S = \{X_2\}$.
+Conclusion: $X_{1} \perp X_{3} \mid X_{2}$
+
+## Tree Graph Example:
+
+Graph: $X_{1} - X_{2} - X_{3} - X_{4}$
+$\mathcal{A} = \{X_1\}, B = \{X_4\}$, and $S = \{X_2, X_3\}$.
+Conclusion: $X_{1} \perp X_{4} \mid \{X_{2}, X_{3}\}$
+
+# Relationship Between Markov Properties
+
+- Implication under Strict Positivity $(P(x) &gt; 0)$:
+- Global Markov $\Rightarrow$ Local Markov $\Rightarrow$ Pairwise Markov
+
+- Note:
+- Without positivity, a distribution might satisfy pairwise or local properties without being globally Markov.
+
+- Hammersley-Clifford Theorem:
+- If $P(X)$ is strictly positive and satisfies the global Markov property, then it factorizes over the maximal cliques of $G$.
+
+# Graph Separation as the UGM Version of d-Separation
+
+## In Bayesian Networks:
+$\diamondsuit$ d-separation is used to determine conditional independence.
+
+## In UGMs:
+$\diamondsuit$ Graph Separation:
+- A set $S$ separates $A$ and $B$ if every undirected path from a node in $A$ to one in $B$ passes through $S$.
+
+## Implication:
+$\diamondsuit$ If such separation exists, then by the global Markov property:
+$$
+A \perp B \mid S
+$$
+
+## I-Maps and D-Maps:
+$\diamondsuit$ An I-map is a graph whose separation properties reflect true conditional independencies in $P$.
+
+# Table of Markov Properties
+
+|  Property | Formal Statement | Implication  |
+| --- | --- | --- |
+|  Pairwise Markov | $(t,i)\notin E \Rightarrow X_i \perp X_i \mid X_{V \setminus \{i, i\}}$ | Independence of non-adjacent nodes given all others.  |
+|  Local Markov | $X_i \perp X_{V \setminus \{i\} \cup nb(i)} \mid nb(i)$ | Each node is independent of non-neighbors given its neighbors.  |
+|  Global Markov | $\operatorname{sep}_G(A,B \mid S) \Rightarrow A \perp B \mid S$ | Any separation in the graph implies conditional independence.  |
+
+# Points to consider from a Chain Graph
+
+## Graph: $X_1 - X_2 - X_3$
+
+### Pairwise:
+- $X_1$ and $X_3$ are not directly connected, so $X_1 \perp X_3 \mid \{X_2\}$
+### Local:
+- For $X_1$, $nb(1) = \{X_2\}$ so $X_1 \perp X_3 \mid X_2$.
+### Global:
+- $X_2$ separates $X_1$ and $X_3$ in the graph.
+
+## Small to do exercise here:
+
+- Display a simple line graph with annotations showing separation and independence relationships.
+
+# Conditional Independence quoted from books
+
+- Kevin Murphy (Ch. 19.2):
+- "If a distribution is positive and satisfies the global Markov property, then it must factorize over the maximal cliques of the graph."
+
+- Koller &amp; Friedman (Ch. 4.3):
+- "The local and pairwise Markov properties provide weaker, but useful, conditional independence criteria. However, the global Markov property is fundamental to relating graph separation to independence."
+
+# Applications of Conditional Independence in UGMs
+
+## Inference and Learning:
+- Conditional independence is fundamental for efficient inference algorithms (e.g., belief propagation, Gibbs sampling).
+
+## Structure Learning:
+- Tools like the Graphical Lasso use zeros in the precision matrix to infer independence relationships.
+
+## Connections to Other Models:
+- The factorization over cliques (and resulting Hammersley-Clifford theorem) supports the design of CRFs and deep energy models.
+
+Summary
+
+## Conditional Independence in UGMs is determined by:
+
+### Graph Separation:
+- Absence of an edge or blockage of all paths.
+
+### Markov Properties:
+- Pairwise: No direct edge implies independence given others.
+- Local: Each node is independent of non-neighbors given its neighbors.
+- Global: Full separation by a set implies conditional independence.
+
+## Theoretical Connection:
+- Under strict positivity, the global property guarantees local and pairwise properties.
+- This makes is for the justice of the joint distribution.
+
+# Summary..
+
+- UGMs encode conditional independence through the absence of edges and graph separation.
+- The three Markov properties offer a layered view of these independencies.
+- Understanding these properties is vital for both inference and learning in undirected models.
+- A well-designed UGM is one that accurately reflects the independence structure of the data, providing a bridge between graph theory and probability.
+
+# Cliques in UGMs
+
+# Understanding Cliques in UGMs
+
+## Definition:
+
+A clique in an undirected graph is a subset of nodes such that every pair of nodes in the subset is connected by an edge.
+
+## Mathematically:
+
+A set $C \subseteq V$ in graph $G = (V, E)$ is a clique if: $\forall i, j \in C, i \neq j \Rightarrow (i, j) \in E$
+
+## Key Property:
+
+Cliques represent fully connected subgraphs where all variables interact directly.
+
+# Maximal Cliques
+
+- A maximal clique is a clique that cannot be extended by including any additional node without breaking the clique property.
+- Difference from a "Maximum Clique":
+- A maximum clique is the largest clique by size in a given graph.
+- A maximal clique is simply one that cannot be extended—there can be multiple maximal cliques in a graph
+
+# Importance of Cliques in UGMs
+
+- Cliques define the scope of potential functions.
+- Maximal cliques determine factorization in MRFs.
+- Conditional independence follows clique separations.
+- Inference methods often operate over clique structures.
+- Factor graphs provide an alternative clique representation.
+
+# Cliques in Probabilistic Models
+
+## Cliques in UGMs
+
+- UGMs factorize the joint probability distribution over these cliques.
+- In Markov Random Fields (MRFs), cliques determine the scope of potential functions in the factorization.
+
+## Factorization Over Maximal Cliques:
+
+$$
+P(X_1, X_2, \dots, X_n) = \frac{1}{Z} \prod_{C \in \text{MaxCliques}} \psi_C(X_C)
+$$
+
+- This ensures that only the largest cliques contribute to the factorization, preventing redundant decomposition.
+
+# Example - Finding Cliques in a Graph
+
+## Graph Example:
+$$
+X_1 - X_2 - X_3 \ X_2 - X_4
+$$
+
+## Cliques:
+- $\{X_1, X_2\}$ (maximal)
+- $\{X_2, X_3\}$ (maximal)
+- $\{X_2, X_4\}$ (maximal)
+
+## Factorized Probability Distribution:
+$$
+P(X_1, X_2, X_3, X_4) = \frac{1}{Z} \psi_{12}(X_1, X_2) \psi_{23}(X_2, X_3) \psi_{24}(X_2, X_4)
+$$
+
+# Cliques and Conditional Independence
+
+- If two nodes are not in the same clique, they might be conditionally independent given a separating set.
+- Global Markov Property Connection:
+- Separation in the graph corresponds to factorization over cliques.
+- Example:
+- In the chain graph $X_1 - X_2 - X_3$, the clique structure implies: $X_1 \perp X_3 \mid X_2$
+- $X_1$ and $X_3$ are not in a common clique, thus their relationship is mediated by $X_2$.
+
+# Cliques in Gaussian MRFs
+
+## Connection to Precision Matrices:
+
+- In Gaussian MRFs, the inverse covariance matrix (precision matrix) encodes conditional independence relationships.
+- If $(i,j)\notin E$, then the corresponding entry in the precision matrix is zero, enforcing: $X_{i} \perp X_{j} \mid X_{V \setminus \{i,j\}}$
+
+## Graphical Lasso Algorithm:
+
+- Estimates the structure of a Gaussian MRF by learning the sparse precision matrix, identifying clique-based dependencies
+
+# Factor Graphs - An Alternative Clique Representation
+
+## Factor Graphs:
+- A bipartite graph representation that explicitly shows clique-factorization structure.
+
+## Nodes:
+- Variable Nodes: Represent random variables.
+- Factor Nodes: Represent potential functions over maximal cliques.
+
+## Example (Factor Graph for MRF):
+- Factor node $\psi_{12}$ connects $(X_1, X_2)$
+- Factor node $\psi_{23}$ connects $(X_2, X_3)$
+
+## Inference Implications:
+- Factor graphs explicitly define cliques, making belief propagation easier
+
+# Summary
+
+- UGMs encode probabilistic dependencies via cliques.
+- Factorization relies only on maximal cliques.
+- Understanding cliques helps analyze independence relationships in graphs.
+- Clique-based algorithms drive efficient inference in practical applications.
+
+# Parameterization of Markov Random Fields (MRFs)
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Chapter 4 from
+Koller, Daphne, and Nir Friedman. *Probabilistic Graphical Models: Principles and Techniques*. Cambridge, MA: MIT Press, 2009.
+
+- Chapter 19 from
+Murphy, Kevin P. *Machine Learning: A Probabilistic Perspective*. Cambridge, MA: MIT Press, 2012.
+
+# Outline
+
+- Specify the joint probability in an MRF using (Clique potentials $\psi_{C}$, Log-linear (exponential family) models, Energy functions, Gibbs distributions)
+- Convert a graph structure (cliques, edges) into a probabilistic model
+- Define and interpret potential functions
+- Represent MRFs in log-linear/exponential family form
+- Understand the role of the partition function $Z$ for normalization
+
+# Converting a Graph Structure into a Probabilistic Model
+
+Given an undirected graph $G = (V, E)$, identify the dependencies between variables.
+
+## Method:
+
+- Identify Maximal Cliques $\mathcal{C}$:
+Each maximal clique is a fully connected subset of nodes.
+
+- Define Potential Functions $\psi_C(X_C)$:
+For each clique $C$, assign a non-negative function.
+
+- Factorize the Joint Distribution:
+$$
+P(X_1, \ldots, X_n) = \frac{1}{Z} \prod_{C \in \mathcal{C}} \psi_C(X_C)
+$$
+
+- $Z$ (Partition Function):
+Normalizes the distribution by summing over all configurations.
+
+# Potential Functions $\psi_C$
+
+- A function $\psi_C: X_C \to \mathbb{R}_{\geq 0}$ defined on a clique $C$.
+- High Value ($\psi_C(x_C) \gg 0$): The configuration $x_C$ is very compatible (preferred).
+- Low Value ($\psi_C(x_C) \approx 0$): The configuration is unlikely.
+- Potentials are not probabilities (they need not sum to one) but serve as "compatibility scores" or "soft constraints."
+
+# Potential Functions in Action
+
+## Binary Example:
+
+Let $X_1, X_2 \in \{0,1\}$ with $\psi_{12}(x_1,x_2) = \begin{cases} 3, &amp; \text{if } x_1 = x_2 \\ 1, &amp; \text{if } x_1 \neq x_2 \end{cases}$
+
+## Joint Probability:
+
+$\Rightarrow P(x_1,x_2) = \frac{1}{Z}\psi_{12}(x_1,x_2)$ where $Z = 3 + 1 + 1 + 3 = 8$.
+
+$\Rightarrow$ Outcome: $P(0,0) = P(1,1) = \frac{3}{8}, P(0,1) = P(1,0) = \frac{1}{8}$.
+
+# Log-Linear / Exponential Family Representation
+
+## Objective:
+
+- To create a parameterized, differentiable model that is learnable via gradient-based methods.
+
+## Log-Linear Formulation:
+
+$$
+P(X) = \frac{1}{Z} \exp\left(\sum_{k} \theta_{k} f_{k}(X_{C_{k}})\right)
+$$
+
+- $f_{k}(X_{C_{k}})$: Feature function defined on clique $C_k$ (can be an indicator or real-valued function).
+- $\theta_{k}$: Corresponding weight/parameter for that feature.
+
+## Connection to Potentials:
+
+$$
+\psi_{C}(X_{C}) = \exp\left(\sum_{k: C_{k} = C} \theta_{k} f_{k}(X_{C})\right)
+$$
+
+- The joint distribution becomes:
+
+$$
+P(X) = \frac{1}{Z} \prod_{C \in \overline{C}} \psi_{C}(X_{C})
+$$
+
+# Log-Linear Form Benefits
+
+- **Learnability:**
+Compatible with gradient-based optimization.
+
+- **Interpretability:**
+Each parameter $\theta_k$ shows how strongly a feature influences the probability.
+
+- **Modularity:**
+Multiple feature functions can be combined easily.
+
+- **Connections:**
+Establishes the link to Conditional Random Fields (CRFs) and forms the basis of modern energy-based models.
+
+# Energy-Based Representation of MRFs
+
+## Energy Function Approach:
+
+- Write the potential function in terms of energy: $$\psi_C(X_C) = \exp(-E_C(X_C))$$
+- Overall Energy: $$E(X) = -\sum_k \theta_k f_k(X_{C_k})$$
+
+## Gibbs Distribution: $P(X) = \frac{1}{Z} \exp(-E(X))$
+
+- Lower energy configurations have higher probability (akin to physical systems in thermodynamics).
+
+# Gibbs Distributions &amp; the Hammersley-Clifford
+
+## Gibbs Distribution:
+
+- A probability distribution of the form: $P(X) = \frac{1}{Z} \exp\left(-\sum_{C \in \mathcal{C}} E_C(X_C)\right)$
+
+## Hammersley-Clifford Theorem:
+
+- States that if a probability distribution $P(X)$ is positive and obeys the global Markov property w.r.t. graph $G$, then it can be factorized as a Gibbs distribution over the maximal cliques of $G$.
+
+# Role of the Partition Function Z
+
+- Definition:
+$$
+\Delta Z = \sum_{X} \prod_{C \in \mathcal{C}} \psi_{C}(X_{C}) = \sum_{X} \exp\left(\sum_{k} \theta_{k} f_{k}(X_{C_{k}})\right)
+$$
+
+- Normalizes the joint distribution so that $P(X)$ sums to 1 over all possible configurations.
+
+- $Z$ requires summing over an exponential number of configurations (e.g., $d^n$ assignments for $n$ variables, each taking $d$ values).
+
+- Computing $Z$ is critical for exact likelihood estimation, gradient computations, and parameter learning.
+
+- Leads to the use of approximation methods (Monte Carlo, Gibbs sampling, variational inference, contrastive divergence).
+
+# Log-Linear MRF Model
+
+Complete Model Expression: $P(X) = \frac{1}{Z} \exp\left(\sum_{k} \theta_{k} f_{k}(X_{C_{k}})\right)$
+
+Energy Form:
+- Define the energy function as: $E(X) = -\sum_{k} \theta_{k} f_{k}(X_{C_{k}})$
+- Then: $P(X) = \frac{1}{Z} \exp(-E(X))$
+
+Key Components:
+- Feature Functions $f_{k}$: Capture patterns or interactions within cliques.
+- Parameters $\theta_{k}$: Weights controlling the influence of factors.
+
+# Binary Pairwise MRF with Log-Linear Potentials
+
+- Let $X_i, X_j \in \{0,1\}$, and define the feature function:
+$$
+f_{ij}(X_i, X_j) = I[X_i = X_j]
+$$
+
+- Potential Function: $\psi_{ij}(X_i, X_j) = \exp(\theta_{ij} \cdot I[X_i = X_j])$
+
+- Interpretation:
+- If $\theta_{ij} &gt; 0$, the model prefers $X_i$ and $X_j$ to be the same (encourages agreement).
+- The overall joint probability will then favor configurations where variables agree according to the specified cliques.
+
+# Advantages of the Log-Linear Form
+
+- **Interpretability:**
+Each parameter $\theta_k$ influences the likelihood in a clear, additive manner in the log domain.
+
+- **Modularity:**
+Feature functions can be designed and combined flexibly.
+
+- **Optimization:**
+The log-linear form is convex under a fixed structure and lends itself to gradient-based methods.
+
+- **Connection to Other Models:**
+Forms the basis for CRFs, Boltzmann machines, and other energy-based models in deep learning.
+
+# Parameterization of MRFs (Summarizing)
+
+|  Component | Description  |
+| --- | --- |
+|  Clique Potentials ψC | Non-negative functions over cliques that encode compatibility (not normalized probabilities).  |
+|  Log-Linear Form | $P(X) = \frac{1}{Z} \exp(\sum_{k} \theta_{k} f_{k}(X_{C_{k}}))$; parameterizes MRFs via features and weights.  |
+|  Energy Function $E(X)$ | $E(X) = -\sum_{k} \theta_{k} f_{k}(X_{C_{k}})$; lower energy implies higher probability.  |
+|  Partition Function Z | $Z = \sum_{X} \exp(\sum_{k} \theta_{k} f_{k}(X_{C_{k}}))$; normalizes the distribution, but is computationally challenging.  |
+|  Gibbs Distribution | The formulation $P(X) = \frac{1}{Z} \exp(-E(X))$ which is equivalent to the MRF formulation under positivity.  |
+
+# Approximation Methods for Z
+
+## Why is Z Difficult?
+
+- Involves summing over an exponential number of configurations.
+- E.g., For $n$ binary variables, there are $2^n$ configurations.
+
+## Approximation Methods:
+
+- Monte Carlo Methods: Estimate expectations using random samples.
+- Gibbs Sampling: Use local conditionals to sample from $P(X)$.
+- Variational Inference (Mean Field): Approximate $P(X)$ by a simpler factorized distribution.
+
+# Highlights
+
+## Parameterization Flow:
+
+- Graph Structure:
+- → Identify maximal cliques.
+- Potential Functions $\psi_C$:
+- → Define local compatibility scores.
+- Log-Linear Representation:
+- → Represent potentials as $\exp(\sum_k \theta_k f_k)$.
+- Energy-Based Models:
+- → Understand via $E(X) = -\sum_k \theta_k f_k$.
+- Normalization via $Z$:
+- → Ensures $P(X)$ is a valid probability distribution.
+
+## Theoretical Connection:
+
+- Hammersley-Clifford Theorem guarantees that if $P(X)$ is positive and satisfies the global Markov property, it factorizes over the cliques as described (Go to Slide 12)
+
+# Highlights..
+
+- Parameterize MRFs by mapping graph structure to a product of clique potentials.
+- The log-linear/exponential family formulation makes models learnable and interpretable.
+- Energy-based representations provide intuitive and computationally useful interpretations.
+- This parameterization is foundational in Conditional Random Fields, Boltzmann machines, and deep energy-based models.
+
+# Examples of MRFs (Markov Random Fields)
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Chapter 4 from
+Koller, Daphne, and Nir Friedman. *Probabilistic Graphical Models: Principles and Techniques*. Cambridge, MA: MIT Press, 2009.
+
+- Chapter 19 from
+Murphy, Kevin P. *Machine Learning: A Probabilistic Perspective*. Cambridge, MA: MIT Press, 2012.
+
+# Outline
+
+- Common MRF Examples
+- Ising Model
+- Potts Model
+- Image Denoising MRF
+- Gaussian MRF (GMRF)
+- Conditional Random Fields (CRFs)
+- How potentials, energy functions, and graph structures are used in practice.
+- Applications across vision, language, biology, and physics
+
+# Ising Model Details
+
+## Applications:
+- Ferromagnetism in physics.
+- Binary image denoising: In images, noisy pixels are corrected to align with neighboring pixel values.
+- Graphical model inference via MAP estimation or Gibbs sampling.
+
+## Summary Table (Ising Model Features):
+- Variables: $X_i \in \{-1, +1\}$
+- Graph Type: Undirected grid; pairwise neighbors
+- Energy Function: $E(x) = -\sum_{(i,j)} \theta_{ij} x_i x_j - \sum_i \theta_i x_i$
+- Goal: Find low-energy configurations (smooth and consistent)
+- Probability Model: $P(x) \propto \exp(-E(x))$
+
+# Ising Model - A Binary Pairwise MRF
+
+## Variables:
+- $X_i \in \{-1, +1\}$ (interpreted as "spin up/down" or "black/white pixel")
+
+## Graph Structure:
+- Arranged into an undirected grid (e.g., a 2D image) where each variable is connected to its nearest neighbors.
+
+## Applications:
+- Statistical physics (modeling ferromagnetism)
+- Binary image denoising
+
+# Ising Model - Energy Function and Interpretation
+
+## Energy Function:
+$$
+E(x) = -\sum_{(i,j) \in E} \theta_{ij} x_i x_j - \sum_i \theta_i x_i
+$$
+
+### Interaction Term:
+$$
+-\sum_{(i,j)} \theta_{ij} x_i x_j
+$$
+
+- If $\theta_{ij} &gt; 0$, then when $x_i = x_j$ (i.e. both +1 or both -1), $x_i x_j = +1 \rightarrow$ Low energy.
+- Mismatches yield higher energy.
+
+### Bias Term:
+$$
+-\sum_i \theta_i x_i
+$$
+
+- $\theta_i &gt; 0$ favors $x_i = +1$; $\theta_i &lt; 0$ favors $x_i = -1$.
+
+## From Energy to Probability:
+$$
+P(x) = \frac{1}{Z} \exp(-E(x)) \text{ where } Z = \sum_x \exp(-E(x)) \text{ is the partition function.}
+$$
+
+## Interpretation:
+The model favors configurations where neighboring spins align (smoothness) and bias terms are respected.
+
+# Potts Model - Multiclass Generalization
+
+## Motivation:
+- The Ising model only works for binary variables.
+- Many applications (e.g., image segmentation) require multi-label assignments.
+
+## Variables:
+- $X_i \in \{1,2,\dots,K\}$
+
+## Graph Structure:
+- Typically a 2D grid or planar graph with pairwise interactions.
+
+# Potts Model - Multiclass Generalization..
+
+Energy Function: $E(x) = \sum_{(i,j) \in E} \theta_{ij} I[x_i \neq x_j]$
+
+$\Rightarrow I[\cdot]$: Indicator function (1 if labels differ, 0 otherwise)
+
+## Interpretation:
+
+$\Rightarrow$ Penalizes neighboring variables having different labels, ensuring smooth regions.
+
+## Use Case:
+
+$\Rightarrow$ Image segmentation and scene labeling.
+
+# Ising vs. Potts Models
+
+## Ising Model:
+
+- Variable Domain: Binary $\{-1, +1\}$
+- Interaction: $-\theta_{ij}x_i x_j$
+- Encourages: Neighboring values align.
+
+## Potts Model:
+
+- Variable Domain: Multiclass $\{1,2,...,K\}$
+- Interaction: $\theta_{ij} I[x_i \ne x_j]$
+- Encourages: Neighbors to have the same label.
+
+## Advantage in using Potts
+
+- Generalizes the smoothness prior to multiclass settings for applications like image segmentation.
+
+# Image Denoising MRF
+
+## The idea:
+$\Rightarrow$ Recover the true image $X = \{X_i\}$ from its noisy observation $O = \{O_i\}$.
+
+## Variables:
+$\Rightarrow$ Hidden Variables $X_i$: Clean labels (binary or multiclass).
+$\Rightarrow$ Observed Variables $O_i$: Noisy pixel values.
+
+## Graph Structure:
+$\Rightarrow$ Hidden labels $X$ form a grid-structured MRF.
+
+$\Rightarrow$ The observations $O_i$ are conditionally independent
+
+# Image Denoising MRF - Energy Function &amp; Inference
+
+- **Energy Function**: $E(x) = \sum_{(i,j)} \theta_s I[x_i \neq x_j] + \sum_i \theta_d I[x_i \neq o_i]$
+- Smoothness Term ($\theta_s$): Enforces similar labels among neighboring pixels.
+- Data Fidelity Term ($\theta_d$): Penalizes differences between the cleaned label $x_i$ and the observed $o_i$.
+
+- **Probability Model**: $P(X \mid O) = \frac{1}{Z} \exp(-E(x))$
+
+- **MAP Estimation**: $x^* = \arg \min_{x} E(x)$
+
+- **Inference Methods**:
+- Graph cuts, loopy belief propagation, iterated conditional modes (ICM), simulated annealing.
+
+- **Applications**:
+- Useful in computer vision for removing noise while preserving true
+
+# Gaussian MRFs (GMRFs)
+
+## Variables:
+$$
+\vartheta X = (X_1, \dots, X_n) \in \mathbb{R}^n \text{ (continuous variables)}
+$$
+
+## Distribution Form:
+$$
+P(X) \propto \exp\left(-\frac{1}{2} X^T \Lambda X + \eta^T X\right)
+$$
+
+- $\vartheta \Lambda$: Precision matrix (i.e., the inverse covariance matrix)
+- $\vartheta \eta$: Optional linear term
+
+## Graph Structure:
+The precision matrix $\Lambda$ encodes conditional independencies: $\Lambda_{ij} \neq 0$ implies an edge between $i$ and $j$; if zero, then $X_i$ and $X_j$ are conditionally independent.
+
+## Applications:
+- Spatial statistics, sensor networks, and structure learning (Graphical Lasso).
+
+11
+
+# Gaussian MRFs - Energy and Interpretation
+
+## Energy Function in GMRFs:
+The quadratic form: $E(x) = \frac{1}{2} x^T \Lambda x - \eta^T x$
+
+## Conditional Independence:
+$\Lambda_{ij} = 0$ implies $X_i \perp X_j \mid X_{\setminus \{i,j\}}$
+
+## Inference and Optimization:
+Inference involves solving the linear system: $\Lambda x = \eta$.
+
+## Properties:
+- Efficient inference via Cholesky decomposition.
+- The sparsity of $\Lambda$ directly relates to the underlying graph structure.
+
+# Conditional Random Fields (CRFs)
+
+## CRFs Overview:
+- Model the conditional distribution $P(Y \mid X)$, focusing on structured output prediction.
+
+## Structure:
+- The label variables $Y$ form an undirected graph (like an MRF) but conditioned on the observed input $X$.
+
+## Mathematical Formulation:
+$$
+P(Y \mid X) = \frac{1}{Z(X)} \exp\left(\sum_{k} \theta_{k} f_{k}(Y_{C_{k}}, X)\right)
+$$
+
+- $f_k$: Feature functions based on both label and observation.
+- $Z(X)$: Input-dependent partition function.
+
+## Applications:
+- NLP (e.g., POS tagging, NER), computer vision (segmentation, object detection).
+
+# MRF Examples
+
+| Model | Variable Type | Key Feature/Interaction | Application Domain |
+| --- | --- | --- | --- |
+| Ising Model | Binary ({-1, +1}) | Pairwise interactions with energy: E(x) = -∑(i,j) θijxi xj - ∑i θi xi | Statistical physics; binary image denoising |
+| Potts Model | Multiclass ({1, ..., K}) | Penalizes label mismatches: E(x) = ∑(i,j) θijI[xi ≠ xj] | Image segmentation; document layout |
+| Denoising MRF | Binary/Multiclass | Combines smoothness and data consistency: E(x) = ∑(i,j) θsI[xi ≠ xj] + ∑i θdI[xi ≠ oi] | Restoring noisy images; spatial classification |
+| Gaussian MRF | Continuous (Rn) | Sparse precision matrix Λ; quadratic energy form E(x) | Spatial statistics; sensor networks; Graphical Lasso |
+| CRFs | Structured labels (discrete) | Conditional log-linear model: P(Y | X) = 1/Z(X) exp(∑k θk f_k(YC_k, X)) | NLP, computer vision (structured prediction) |
+
+# Key Highlights
+
+## MRFs Theory and Applications:
+- Concrete models (Ising, Potts, GMRFs, CRFs) translate abstract graph concepts into useful tools.
+
+## Key Concepts Energy Functions:
+Determine the "cost" or "compatibility" of configurations.
+
+## Gibbs Distributions:
+Translate energy minimization to probability.
+
+## Graph Structure:
+Encodes conditional independencies that shape the factorization.
+
+# Learning in Markov Random Fields (MRFs)
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Chapter 4 from
+Koller, Daphne, and Nir Friedman. *Probabilistic Graphical Models: Principles and Techniques*. Cambridge, MA: MIT Press, 2009.
+
+- Chapter 19 from
+Murphy, Kevin P. *Machine Learning: A Probabilistic Perspective*. Cambridge, MA: MIT Press, 2012.
+
+# Learning in MRFs
+
+- Given a dataset $D = \{x^{(1)}, \dots, x^{(M)}\}$
+- Model: $P(x; \theta) = \frac{1}{Z(\theta)} \exp \left( \sum_{k} \theta_{k} f_{k}(x_{C_{k}}) \right)$
+- Task: Learn the parameters $\theta$ that best fit the data (typically by maximizing the likelihood).
+
+# Maximum Likelihood Estimation (MLE) for MRFs
+
+## Log-Likelihood Definition:
+
+$\mathcal{L}(\theta) = \sum_{m=1}^{M} \log P(x^{(m)}; \theta)$ can be written as:
+
+$$
+\mathcal{L}(\theta) = \sum_{m=1}^{M} \sum_{k} \theta_{k} f_{k}(x_{C_{k}}^{(m)}) - \log Z(\theta)
+$$
+
+## Interpretation:
+
+- First term: Empirical counts $\sum_{m} f_{k}(x_{C_{k}}^{(m)})$
+- Second term: $M \log Z(\theta)$
+- The goal is to match empirical feature counts with model expectations.
+
+# Gradient of the Log-Likelihood
+
+## Gradient Expression:
+
+$$
+\frac {\partial \ell (\theta)}{\partial \theta_ {k}} = \sum_ {m = 1} ^ {M} f _ {k} (x _ {C _ {k}} ^ {(m)}) - M \cdot E _ {P (x; \theta)} [ f _ {k} (x _ {C _ {k}}) ]
+$$
+
+## Important point:
+
+- The gradient is the difference between the empirical expectation and the model expectation of the feature function.
+
+# Challenge of the Partition Function
+
+$$
+Z(\theta)
+$$
+
+Partition Function Definition: $Z(\theta) = \sum_{x \in \mathcal{X}} \exp \left( \sum_{j} \theta_j f_j(x) \right)$
+
+Why $Z(\theta)$ Is Difficult:
+
+- The sum is over all possible configurations of $x$.
+- For $n$ variables (each with $d$ values), $|\mathcal{X}| = d^n$.
+- Even small models (e.g., $d = 2, n = 30$) yield $2^{30} \approx 10^9$ configurations.
+- Example: For a binary MRF with 100 variables, $2^{100}$ configurations—completely infeasible to sum exactly.
+
+**Implication:**
+
+- Both the log-likelihood and its gradient depend on $Z(\theta)$ and its derivatives, making exact MLE intractable.
+
+# Consequences of the Intractable $Z(\theta)$
+
+## Model Expectation Term:
+
+$$
+E_{P(x;\theta)}[f_k(x_{C_k})] = \sum_x f_k(x) \cdot \frac{1}{Z(\theta)} \exp\left(\sum_j \theta_j f_j(x)\right)
+$$
+
+## Consequences:
+
+- Exact computation of $\log Z(\theta)$ and its gradient is computationally expensive.
+- This bottleneck affects both the objective and the gradient during MLE.
+
+# Approximate Learning Methods for MRFs
+
+- Due to $Z(\theta)$'s intractability, we use approximations:
+- Pseudo-likelihood
+- Contrastive Divergence (CD)
+- Score Matching (for continuous models)
+
+- References:
+- Kevin Murphy (Ch. 19.6)
+- Koller &amp; Friedman (Ch. 4.7)
+
+# Pseudo-Likelihood Estimation
+
+## Idea:
+
+- Replace the full joint likelihood with the product of local conditionals:
+$$
+PL(x; \theta) = \prod_{i=1}^{n} P(x_i \mid x_{nb(i)}; \theta)
+$$
+
+## Log Pseudo-Likelihood:
+
+$$
+\log PL(x; \theta) = \sum_{i=1}^{n} \log P(x_i \mid x_{nb(i)}; \theta)
+$$
+
+## Local Conditional:
+
+$$
+P\left(x_i \mid x_{nb(i)}; \theta\right) = \frac{1}{Z_i(x_{nb(i)})} \exp\left(\sum_{k: C_k \ni i} \theta_k f_k(x_{C_k})\right)
+$$
+
+## Advantages:
+
+- Tractable: Only involves the local neighborhood.
+- Scalable and often convex.
+
+## Limitations:
+
+- Lacks global normalization.
+- May yield suboptimal gradients for structured inference.
+- Can produce poor marginal estimates.
+
+# Contrastive Divergence (CD)
+
+The idea here is to :
+- Approximate the intractable model expectation in the gradient.
+
+MLE Gradient Recall: $\frac{\partial \log P(x)}{\partial \theta_k} = f_k(x) - E_{P(x'; \theta)}[f_k(x')]$
+
+CD Approximation:
+- Start with a data sample $x^{(0)} = x$.
+- Run a few steps (e.g., 1-5) of Gibbs sampling to obtain $x^{(n)}$.
+- Approximate gradient: $\frac{\partial \log P(x)}{\partial \theta_k} \approx f_k(x^{(0)}) - f_k(x^{(n)})$
+
+Advantages:
+- Simple and computationally cheap.
+
+Limitations:
+- Provides a biased gradient (especially for short sampling chains).
+
+# Score Matching (for Continuous MRFs)
+
+## Applicability:
+- Designed for continuous MRFs, such as Gaussian MRFs.
+
+## The main point is:
+- Match the score function (gradient of log-probability) rather than the likelihood itself.
+
+## Objective (per Hyvärinen, 2005):
+$$
+J(\theta) = \frac{1}{2} \mathbb{E}_x \| V_x \log P(x; \theta) \|^2 + \mathbb{E}_x \left[ V_x^2 \log P(x; \theta) \right]
+$$
+
+## Advantages:
+- Does not require computing $Z(\theta)$.
+- For models like GMRFs, the objective can even be solved in closed form.
+
+## Limitations:
+- Applicable only to continuous distributions.
+- Not suited for discrete MRFs.
+
+# Regularization in MRF Learning
+
+## Why Regularize?
+
+- The log-likelihood is: $\ell(\theta) = \sum_{m} \sum_{k} \theta_{k} f_{k}\left(x_{C_{k}}^{(m)}\right) - M \log Z(\theta)$
+- In high-dimensional settings or with limited/noisy data, overfitting occurs.
+
+## Regularized Objective: $\ell_{\mathrm{reg}}(\theta) = \ell(\theta) - \lambda \| \theta \|_p$
+
+- $\lambda$ is the regularization strength.
+- $\| \theta \|_p$ is the regularization norm.
+
+## Types of Regularization:
+
+- L2 Regularization (Ridge): $\| \theta \|_2^2 = \sum_k \theta_k^2$
+- L1 Regularization (Lasso): $\| \theta \|_1 = \sum_k |\theta_k|$
+- Promotes sparsity in parameters, beneficial for structure learning.
+
+## Example - Graphical Lasso for GMRFs:
+
+$$
+\hat{\Lambda} = \arg \max_{\Lambda &gt; 0} \left( \log \det \Lambda - \operatorname{tr}(S \Lambda) - \lambda \| \Lambda \|_1 \right)
+$$
+
+Where $S$ is the sample covariance matrix.
+
+# Regularization in MRF Learning..
+
+## Regularization Terms:
+- L2 penalty: Smooths parameters.
+- L1 penalty: Induces sparsity; useful for structural discovery.
+
+## Benefits:
+- Prevents overfitting.
+- In structure learning (e.g., Graphical Lasso), zeros in parameters imply missing edges (conditional independence).
+
+# Learning in MRFs
+
+|  Approach | Description | Pros | Cons  |
+| --- | --- | --- | --- |
+|  MLE | Maximize full log-likelihood; involves log Z(θ) | Statistically consistent | Computationally intractable due to Z  |
+|  Pseudo-Likelihood | Maximize product of local conditionals | Tractable, scalable | Only approximate; loses global info  |
+|  Contrastive Divergence | Use short Gibbs chains to approximate model expectation | Simple and computationally cheap | Biased gradient estimates  |
+|  Score Matching | Match score function Vxlog P(x;θ) | No need for Z(θ); closed-form for many models | Limited to continuous variables  |
+
+# Summary
+
+## Learning in MRFs is Challenging Because:
+- The need to compute the partition function $Z(\theta)$ makes exact likelihood and gradient computations intractable.
+
+## Approximate Learning Techniques:
+- Pseudo-likelihood, Contrastive Divergence, and Score Matching provide practical alternatives.
+
+## Regularization:
+- Essential for controlling model complexity and discovering structure.
+
+## Key Insight from the Books:
+- Murphy and Koller &amp; Friedman stress that learning in MRFs is essentially matching empirical feature counts with model expectations, a process complicated by the exponential sum over configurations.
+
+# Summary..
+
+|  Concept | Explanation  |
+| --- | --- |
+|  MLE Log-Likelihood | $$ \mathcal{L}(\theta) = \sum_{m} \sum_{k} \theta_{k} f_{k}(x_{C_{k}}^{(m)}) - M \log Z(\theta) $$  |
+|  Gradient | Difference between empirical and model feature expectations.  |
+|  Partition Function | $$ Z(\theta) = \sum_{x} \exp(\sum_{j} \theta_{j} f_{j}(x)) $$; intractable for large models.  |
+|  Approximate Methods | Pseudo-likelihood (local conditionals), Contrastive Divergence (short sampling), Score Matching (for continuous models).  |
+|  Regularization | Adds penalty (L1 or L2) to control overfitting and aid structure discovery.  |
+
+# Conditional Random Fields (CRFs)
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Chapter 4 from
+Koller, Daphne, and Nir Friedman. *Probabilistic Graphical Models: Principles and Techniques*. Cambridge, MA: MIT Press, 2009.
+
+- Chapter 19 from
+Murphy, Kevin P. *Machine Learning: A Probabilistic Perspective*. Cambridge, MA: MIT Press, 2012.
+
+# Outline
+
+- Modeling: Structure, potentials, and the conditional formulation.
+- Inference: How to compute marginals and MAP estimates.
+- Learning: Parameter estimation and approximate methods.
+- Applications: NLP, vision, bioinformatics.
+
+# Modeling Conditional Random Field (CRF)
+
+A Conditional Random Field (CRF) is an undirected probabilistic graphical model that models the conditional probability of a set of output variables $Y = \{Y_{1},\dots,Y_{n}\}$ given an input $X$.
+
+- The graph structure defines dependencies among the output variables.
+- Every potential in the model is conditioned on the observed input $X$.
+- A CRF is essentially an MRF on $Y$ where all potentials depend on $X$.
+
+# Definition of a CRF
+
+## Graphical Definition (Lafferty et al., 2001):
+
+Let $G = (V, E)$ be an undirected graph where:
+
+- $V$: output variables $Y = \{Y_1, \dots, Y_n\}$
+- $E$: edges representing conditional dependencies among the $Y$'s.
+
+The conditional distribution is defined as:
+
+$$
+P (Y | X) = \frac {1}{Z (X)} \exp \left(\sum_ {C \in \mathcal {C}} \psi_ {C} \left(Y _ {C}, X\right)\right)
+$$
+
+- $\psi_C(Y_C, X)$ is a non-negative potential function on clique $C$, conditioned on $X$.
+- $Z(X) = \sum_{Y} \exp \left( \sum_{C \in \mathcal{C}} \psi_C(Y_C, X) \right)$ is the input-dependent partition
+
+Lafferty J., McCallum, A., &amp; Pereira, F. (2001). Conditional random fields: Probabilistic models for segmenting and labeling sequence data. In *Proceedings of the 18th International Conference on Machine Learning* (pp. 282-289). Morgan Kaufmann.
+
+# Log-Linear Form of CRFs
+
+## Expressing Potentials in Log-Linear Form:
+
+Typically, potentials are written as: $\psi_C(Y_C,X) = \sum_k \theta_k f_k(Y_C,X)$
+
+Thus, the CRF becomes: $P(Y \mid X) = \frac{1}{Z(X)} \exp \left( \sum_{k} \theta_{k} f_{k}(Y_{C_{k}}, X) \right)$
+
+- $f_{k}(Y_{C_{k}}, X)$: feature functions defined over cliques $C_{k}$ and input $X$.
+- $\theta_{k} \in \mathbb{R}$: learned weights.
+
+# Important aspects of CRFs
+
+- **Undirected Structure:**
+The graph over $Y$ encodes mutual dependencies among labels.
+
+- **Conditioning on $X$:**
+Input $X$ influences all potentials, without needing to model $P(X)$.
+
+- **Exponential Family:**
+Log-linear potentials make CRFs learnable with convex objectives.
+
+- **Comparison with Other Models:**
+- HMM: Models $P(Y, X)$ with directed, chain structure.
+- MRF: Models $P(Y, X)$ but with joint representation.
+- Logistic Regression: Models $P(Y \mid X)$ for independent outputs.
+
+CRF Modeling
+
+## Notation:
+
+- $Y_C$: the subset of output variables in clique $C$.
+- In a graph, if the output variables are arranged as:
+$$
+Y_1 - Y_2 - Y_3,
+$$
+then maximal cliques are $C_1 = \{Y_1, Y_2\}$ and $C_2 = \{Y_2, Y_3\}$.
+
+## Log-Linear Expression: $P(Y \mid X) = \frac{1}{Z(X)} \exp \left( \sum_{k} \theta_k f_k(Y_{C_k}, X) \right)$
+
+- CRFs extend MRFs by conditioning every potential on the input $X$, allowing rich, overlapping features in prediction.
+
+# CRF Structures - Linear-Chain
+
+## Linear-Chain CRFs:
+
+- Useful when outputs $Y_1, \ldots, Y_T$ form a sequence (e.g., words in a sentence).
+- Graph Structure: $Y_1 - Y_2 - \cdots - Y_T$ (chain structured).
+- Model Formulation: $P(Y|X) = \frac{1}{Z(X)} \exp \left( \sum_{t=1}^{T} \sum_{k} \theta_k f_k(Y_{t-1}, Y_t, X, t) \right)$
+
+Here, features $f_k$ can depend on $Y_{t-1}, Y_t$, and input $X$.
+
+# CRF Structures - Grid CRFs
+
+## Grid CRFs:
+
+- Use when the outputs form a 2D grid, such as pixels in an image.
+- Graph Structure:
+Nodes arranged in a grid (e.g., a 3×3 layout) with edges linking adjacent nodes.
+
+## Model Formulation:
+
+$$
+P(Y \mid X) = \frac{1}{Z(X)} \exp \left( \sum_{(i,j)} \psi_u(Y_{ij}, X_{ij}) + \sum_{(i,j), (i', j') \in E} \psi_p(Y_{ij}, Y_{i'j'}, X) \right)
+$$
+
+- Unary Potential $\psi_u$: Likelihood of a label based on local features.
+- Pairwise Potential $\psi_p$: Encourages consistency among neighboring labels.
+
+Exact inference is intractable. Approximate methods (graph cuts, LBP, mean-field) are used.
+
+# Inference in CRFs
+
+## Inference Tasks:
+
+### MAP Inference:
+Find the most likely label assignment: $Y^{*} = \arg \max_{Y} P(Y \mid X)$
+Equivalent to minimizing the energy:
+$$
+Y^{*} = \arg \min_{Y} E(Y, X) \text{ where } E(Y, X) = -\sum_{k} \theta_{k} f_{k}(Y_{C_{k}}, X)
+$$
+
+### Marginal Inference:
+Compute marginals $P(Y_{i} \mid X)$ or pairwise marginals $P(Y_{i}, Y_{j} \mid X)$.
+
+## Methods for Inference:
+
+- For linear-chain CRFs: Forward-backward (for marginals) and Viterbi (for MAP).
+- For general graphs: Approximate methods (loopy BP, mean-field, MCMC, graph cuts for MAP).
+
+# Learning in CRFs
+
+## Learning Task:
+
+Given training data $D = \{(X^{(m)},Y^{(m)})\}$, maximize the conditional log-likelihood: $\ell(\theta) = \sum_{m=1}^{M} \log P(Y^{(m)} \mid X^{(m)}; \theta)$
+
+Which can be expressed as:
+
+$$
+\ell(\theta) = \sum_{m=1}^{M} \left( \sum_{k} \theta_{k} f_{k}(Y_{C_{k}}^{(m)}, X^{(m)}) - \log Z(X^{(m)}) \right)
+$$
+
+## Gradient of Log-Likelihood:
+
+$$
+\frac{\partial \ell(\theta)}{\partial \theta_{k}} = \sum_{m=1}^{M} f_{k}(Y^{(m)}, X^{(m)}) - \sum_{m=1}^{M} E_{P(Y \mid X^{(m)}; \theta)} [f_{k}(Y, X^{(m)})]
+$$
+
+## Regularization:
+
+Often, an L2 or L1 penalty is added: $\ell_{reg}(\theta) = \ell(\theta) - \lambda \|\theta\|_p$
+
+Helps prevent overfitting and can induce sparsity (structure learning).
+
+# Advantages of CRFs
+
+## CRFs
+
+- Model directly the conditional distribution $P(Y \mid X)$ without modeling $P(X)$.
+- Allow rich, overlapping, and arbitrary features of the input $X$. Flexibility of features, powerful inference (exact for chains), and effective learning frameworks.
+- Circumvent label bias issues present in HMMs.
+- Enable efficient inference in structured prediction tasks (exact in chains, approximate in more complex graphs).
+- Structured output modeling with discriminative training.
+- CRFs are widely used in real-world applications across NLP, vision, and bioinformatics, making them invaluable for structured prediction tasks.
+
+## Comparison:
+
+- HMMs: Generative, chain-structured, limited features.
+- MRFs: Joint modeling, but require modeling $P(X,Y)$.
+- Logistic Regression: Single-node, unstructured.
+- CRFs: Discriminative, structured, and flexible
+
+# Applications of CRFs
+
+- Natural Language Processing (NLP):
+- POS tagging, NER, chunking, sequence labeling.
+- Computer Vision:
+- Image segmentation, object detection, denoising.
+- Bioinformatics:
+- Gene prediction, protein secondary structure prediction.
+- Others:
+- Robotics (activity recognition), social networks, etc.
+
+# Key Points of CRFs
+
+|  Aspect | CRF  |
+| --- | --- |
+|  Model Type | Discriminative undirected graphical model for $P(Y \mid X)$  |
+|  Graph Structure | Undirected graph over output variables $Y$; potentials conditioned on $X$  |
+|  Representation | Log-linear model: $P(Y \mid X) = \frac{1}{Z(X)} \exp(\sum_{k} \theta_{k} f_{k}(Y_{C_{k}}, X))$  |
+|  Inference | MAP via Viterbi/graph cuts; Marginals via forward-backward for chains or approximate methods (LBP, MF) for loopy graphs  |
+|  Learning | Maximize conditional log-likelihood with regularization; requires computing feature expectations  |
+|  Advantages | Rich feature integration; avoids modeling $P(X)$; addresses label bias issues  |
+|  Applications | Sequence labeling (NLP), image segmentation (vision), and various structured prediction tasks  |

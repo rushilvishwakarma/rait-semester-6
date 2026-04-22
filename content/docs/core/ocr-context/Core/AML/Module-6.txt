@@ -1,0 +1,928 @@
+# Monte Carlo Inference -Overview
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Selected Topics from
+- Privault, Nicolas. *Understanding Markov Chains: Examples and Applications*. 2nd ed. Springer, 2018..
+- Chapter 23 from
+- Murphy, Kevin P. *Machine Learning: A Probabilistic Perspective*. Cambridge, MA: MIT Press, 2012.
+
+# Overview
+
+- Introduction
+- Sampling from Standard Distributions
+- Rejection Sampling
+- Importance Sampling
+- Markov Chain Monte Carlo (MCMC)
+
+# Introduction
+
+## The Challenge:
+- Many ML problems require computing expectations, marginals, or normalization constants, which involve intractable integrals—especially in high-dimensional spaces.
+
+## Monte Carlo to the Rescue:
+- Estimate quantities via random sampling rather than analytical integration.
+- Basic Idea: $E_p[f(x)] \approx \frac{1}{N} \sum_{i=1}^{N} f(x^{(i)}), x^{(i)} \sim p(x)$
+
+## Advantages:
+- Works in high dimensions
+- Simple and flexible
+
+# Sampling from Standard Distributions
+
+- Standard Distributions and Their Sampling Methods:
+- Uniform:
+- Use standard random number generators.
+- Gaussian:
+- Use the Box-Muller transform or standard library functions.
+- Exponential:
+- Invert the cumulative distribution function (CDF).
+- Categorical:
+- Use cumulative sums and uniform draws.
+- These methods serve as building blocks for more advanced sampling techniques (e.g., rejection or importance sampling).
+
+# Rejection Sampling
+
+- Sample from a difficult target distribution $p(x)$ using an easier proposal distribution $q(x)$ satisfying: $p(x) \leq M q(x) \forall x$
+- **Algorithm:**
+- Draw $x \sim q(x)$.
+- Accept $x$ with probability $\frac{p(x)}{M q(x)}$; otherwise, reject $x$ and try again.
+- **Properties:**
+- Produces i.i.d. samples from $p(x)$.
+- **Drawback:**
+- Inefficient in high dimensions (high rejection rates)
+
+# Importance Sampling
+
+Instead of drawing samples directly from $p(x)$, sample from an easier proposal $q(x)$ and reweight the samples.
+
+## Weighted Estimation:
+
+- Draw samples $x^{(i)} \sim q(x)$.
+- Compute importance weights: $w(x) = \frac{p(x)}{q(x)}$
+- Estimate expectation: $E_{p}[f(x)] \approx \frac{\sum_{i=1}^{N} w(x^{(i)}) f(x^{(i)})}{\sum_{i=1}^{N} w(x^{(i)})}$
+
+## Advantages:
+
+- Useful when $p(x)$ is known up to a constant.
+
+## Disadvantage
+
+- High variance if $q(x)$ poorly matches $p(x)$.
+
+# Rejection vs. Importance Sampling
+
+|  Feature | Rejection Sampling | Importance Sampling  |
+| --- | --- | --- |
+|  Output | True samples from $p(x)$ | Weighted samples for expectation estimation  |
+|  Efficiency | High rejection rate | Efficiency depends on matching $q(x)$ with $p(x)$  |
+|  Best Used When | $q(x)$ tightly envelopes $p(x)$ | You want to reuse samples for expectation estimation  |
+
+# Introduction to Markov Chain Monte Carlo(MCMC)
+
+When direct sampling from $p(x)$ is infeasible and a suitable proposal $q(x)$ is hard to find.
+
+## MCMC Concept:
+
+- Generate a sequence $x^{(1)} \to x^{(2)} \to \dots \to x^{(T)}$ using a Markov chain, whose stationary distribution is $p(x)$.
+- **Estimation** $E_{p}[f(x)] \approx \frac{1}{T} \sum_{t=1}^{T} f(x^{(t)})$, once the chain has reached stationarity.
+- **Conditions for MCMC to Work**
+- **Ergodicity**: The chain can reach any state eventually.
+- **Stationarity**: $p(x)$ is the stable, long-term distribution.
+- **Detailed Balance**: Ensures that the chain converges to $p(x)$.
+
+# MCMC Algorithms (1) - Metropolis-Hastings
+
+## Metropolis-Hastings (MH):
+
+- Given the current state $x$, propose a new state $x' \sim q(x' \mid x)$.
+- Accept $x'$ with probability: $\alpha = \min \left(1, \frac{p(x') \cdot q(x \mid x')}{p(x) \cdot q(x' \mid x)}\right)$.
+- If accepted, set the next state to $x'$; otherwise, keep $x$.
+
+## To Note:
+
+- Works for arbitrary distributions $p(x)$ (even unnormalized).
+- Tuning the proposal $q(\cdot \mid x)$ is crucial for good performance.
+
+# MCMC Algorithms (2) - Gibbs Sampling
+
+## Gibbs Sampling:
+- A special case of MH.
+- **Procedure:**
+- Update one variable at a time by sampling from the conditional distribution: $x_{i}^{(t + 1)} \sim p(x_{i} \mid x_{-i}^{(t)})$, where $x_{-i}$ denotes all variables except $x_{i}$.
+
+## Advantages:
+- Always accepts the proposal.
+- Works well when conditional distributions are easy to sample.
+
+## Applications:
+- Topic models (LDA), Bayesian networks, and graphical models.
+
+# MCMC in Bayesian Inference
+
+## Uses:
+
+- **Posterior Estimation:**
+Estimate $p(\theta \mid D)$ via samples drawn from MCMC.
+
+- **Predictive Distribution:**
+Compute $p(y^{*} \mid x^{*}, D)$ using the generated samples.
+
+- **Uncertainty Quantification:**
+Estimate variances and credible intervals.
+
+- **Model Comparison:**
+Approximate marginal likelihoods $p(D)$.
+
+# In Summary
+
+## Monte Carlo Methods Overview:
+
+- Rejection Sampling: Accept-reject samples using an envelope $q(x)$.
+- Importance Sampling: Use weighted samples from $q(x)$ to estimate expectations.
+- MCMC Methods: Generate a Markov chain to approximate $p(x)$ when direct sampling is unavailable.
+
+## MCMC Algorithms:
+
+- Metropolis-Hastings and Gibbs Sampling.
+
+## Overall Benefits:
+
+- Allow intractable integrals to be approximated by sampling.
+- Enable Bayesian inference even in high-dimensional spaces.
+
+# Monte Carlo Inference -Introduction
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Selected Topics (Concepts on Random Sampling and Approximation) from
+- Privault, Nicolas. *Understanding Markov Chains: Examples and Applications*. 2nd ed. Springer, 2018.
+- Chapter 23 from
+- Murphy, Kevin P. *Machine Learning: A Probabilistic Perspective*. Cambridge, MA: MIT Press, 2012.
+
+# Overview
+
+## Objective of Monte Carlo Methods:
+- Approximate expectations, marginals, integrals, and probabilities.
+- Solve inference problems where exact computation (integrals/sums) is intractable.
+
+## In Machine Learning:
+- Replace difficult sums/integrals over high-dimensional probability distributions with averages over samples.
+
+# Monte Carlo Methods
+
+## Why Use Monte Carlo?
+
+- Estimate quantities of the form: $E_{p}[f(x)] = \int f(x)p(x)dx$
+- Such integrals are often:
+- Analytically intractable.
+- Numerically expensive in high dimensions.
+
+## Monte Carlo Key Idea:
+
+- Draw $N$ i.i.d. samples $x^{(1)}, \ldots, x^{(N)} \sim p(x)$ and use their average as an estimator.
+
+# Issue and solution
+
+A) This we need to solve:  $E_{p}[f(x)] = \int f(x)p(x)dx$
+
+The issue of this is:
+
+- Intractable analytical solution.
+- High-dimensional numerical integration is often infeasible.
+
+B) Monte Carlo Estimator:  $\hat{\mu}_N = \frac{1}{N}\sum_{i=1}^N f(x^{(i)})$  where each  $x^{(i)} \sim p(x)$ .
+
+$\Leftrightarrow$ Possible solution here:
+
+- This estimator replaces the difficult integral with an average over samples.
+
+C) Unbiased Estimator:  $E[\hat{\mu}_N] = E_p[f(x)]$
+
+$\Leftrightarrow$ Interpretation:
+
+# Using Monte Carlo
+
+## Problems:
+- $p(x)$ might be known only up to a constant (e.g., an unnormalized posterior).
+- The dimensionality of $x$ is very high.
+
+## Monte Carlo is Beneficial when:
+- Sampling from $p(x)$ is easy (or approximately possible).
+- Approximate answers with confidence bounds are acceptable.
+
+# Properties
+
+## Law of Large Numbers (LLN)
+
+- LLN Statement:
+- As $N \to \infty, \hat{\mu}_N \longrightarrow E_p[f(x)]$ (almost surely)
+- Implication:
+- The Monte Carlo estimator converges to the true expectation with enough samples.
+
+## Central Limit Theorem (CLT)
+
+- CLT Statement:
+- As $N$ increases, $\sqrt{N}(\hat{\mu}_N - \mu) \xrightarrow{d} N(0, \sigma^2)$
+- Here, $\mu = E_p[f(x)]$ and $\sigma^2 = \mathrm{Var}_p[f(x)]$.
+- Consequences:
+- The error of the estimator is roughly normally distributed.
+- Allows us to construct confidence intervals: $\hat{\mu}_N \pm z_{\alpha/2} \cdot \hat{\sigma}_N$
+
+## Variance of the Estimator
+
+- Variance Formula: $\mathrm{Var}[\hat{\mu}_N] = \frac{\sigma^2}{N}$
+- Implication:
+- More samples $\Rightarrow$ lower variance in the estimator.
+
+# Example (from Privault check Slide 2)
+
+## Setup:
+$\diamondsuit$ Let $X \sim$ Exponential(1), and consider estimating $E[X^2]$.
+
+## Monte Carlo Estimation:
+$\hat{\mu}_N = \frac{1}{N}\sum_{i=1}^{N}\left(X^{(i)}\right)^2$ with $X^{(i)} \sim$ Exponential(1)
+
+## Generalization:
+$\diamondsuit$ This approach can be extended to Markov chains, where samples might not be i.i.d.—a topic addressed in MCMC.
+
+# Trade-Offs of Monte Carlo Methods
+
+## Advantages:
+
+- **Simple:**
+Easy to implement; no need for derivative computations.
+
+- **Flexible:**
+Can be applied whenever sampling is available.
+
+## Disadvantages:
+
+- **Slow Convergence:**
+Convergence is $O(1/\sqrt{N})$, which may be slower compared to numerical integration in lower dimensions.
+
+- **Randomized:**
+Each run may yield slightly different results.
+
+# Variants of Monte Carlo Methods
+
+- **Inverse CDF Sampling:**
+For exact sampling from simple distributions.
+
+- **Rejection Sampling:**
+Use a proposal distribution and accept/reject samples.
+
+- **Importance Sampling:**
+Reweight samples from a different distribution.
+
+- **Markov Chain Monte Carlo (MCMC):**
+Use Markov chains (e.g., Gibbs, Metropolis-Hastings) to sample when direct sampling is difficult.
+
+# Summary Points
+
+## Key Concepts:
+
+- Expectation: $E_{p}[f(x)] = \int f(x)p(x)dx$
+- MC Estimator: $\hat{\mu}_{N} = \frac{1}{N}\sum_{i=1}^{N}f(x^{(i)})$
+- Unbiasedness: $E[\hat{\mu}_N] = E_p[f(x)]$
+- Convergence Rate: $O(1 / \sqrt{N})$ (by CLT)
+
+## Monte Carlo Inference Enables:
+
+- Approximation of integrals and expectations in high-dimensional spaces,
+- Estimation of marginals, normalization constants, and probabilities when analytical integration fails.
+- To approximate complex integrals and work with high-dimensional probability distributions.
+
+# Monte Carlo Inference
+- Sampling from Standard Distributions
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Selected Topics (Concepts on Random Sampling and Approximation) from
+- Privault, Nicolas. *Understanding Markov Chains: Examples and Applications*. 2nd ed. Springer, 2018.
+- Chapter 23 from
+- Murphy, Kevin P. *Machine Learning: A Probabilistic Perspective*. Cambridge, MA: MIT Press, 2012.
+
+# Outline
+
+## Objective:
+- Monte Carlo methods rely on drawing random samples from probability distributions.
+
+## Purpose:
+- Understand advanced techniques (e.g., rejection sampling or MCMC),
+- Understand how to sample from standard (known) distributions.
+
+# Important points
+
+- Monte Carlo methods approximate $E_p[f(x)]$ using sample averages.
+- $\hat{\mu}_N = \frac{1}{N}\sum_{i=1}^{N}f(x^{(i)})$ is unbiased and converges with rate $O(1/\sqrt{N})$.
+- Standard sampling methods (Inverse Transform, Box-Muller, etc.) are building blocks that enable advanced Monte Carlo techniques.
+
+# Monte Carlo Sampling
+
+- Why Use Sampling?
+Replace difficult integrals (e.g., expectations, marginals) over high-dimensional spaces with averages over random samples.
+
+- Equation:
+$$\vartheta E_{p}[f(x)] = \int f(x)p(x) \, dx$$
+approximated by:
+$$\hat{\mu}_{N} = \frac{1}{N}\sum_{i=1}^{N} f(x^{(i)}), \quad x^{(i)} \sim p(x)$$
+
+- This works even in high dimensions; simple and flexible.
+
+# Inverse Transform Sampling
+
+- If a random variable $X$ has CDF $F(x)$ and if $U \sim \mathrm{Uniform}(0,1)$, then: $X = F^{-1}(U) \sim F$
+- This method provides an exact sample from the distribution.
+- Example: Let $X \sim \mathrm{Exponential}(\lambda)$. Its CDF is: $F(x) = 1 - e^{-\lambda x}$
+- Sampling Steps:
+- Draw $U \sim \mathrm{Uniform}(0,1)$.
+- Set $U = F(x) = 1 - e^{-\lambda x}$ and solve to obtain: $X = -\frac{1}{\lambda} \log (1 - U)$
+- Since $1 - U \sim \mathrm{Uniform}(0,1)$, we often write: $X = -\frac{1}{\lambda} \log (U)$
+- Result: $X$ is an exact sample from an Exponential distribution with rate $\lambda$.
+
+# Inverse Transform Sampling...
+
+## Advantages:
+- Simple to implement.
+- Works for any distribution with a known, invertible CDF.
+
+## Limitations:
+- Many distributions (e.g., Gaussian) do not have closed-form inverse CDFs.
+
+# Sampling from the Gaussian (Normal) Distribution
+
+- Challenge: The standard normal distribution $N(0,1)$ does not have a closed-form inverse CDF.
+- Solution: Use specialized methods that transform uniform random numbers into normal samples.
+
+$\diamond$ Box-Muller Transform (Kevin Murphy, Sec. 23.2.1)
+- Generate two independent samples $U_{1}, U_{2} \sim \text{Uniform}(0,1)$.
+- Compute: $Z_{1} = \sqrt{-2\log U_{1}} \cdot \cos(2\pi U_{2})Z_{2} = \sqrt{-2\log U_{1}} \cdot \sin(2\pi U_{2})$
+- Then $Z_{1}, Z_{2} \sim N(0,1)$ are i.i.d.
+- Features: Uses trigonometric functions and logarithms to generate normal samples.
+
+# Sampling from Other Standard Distributions
+
+- Bernoulli(p):
+- Sample $U \sim \text{Uniform}(0,1)$.
+- Output: 1 if $U &lt; p$; otherwise 0.
+
+- Uniform(a, b):
+- Sample $U \sim \text{Uniform}(0,1)$ and compute: $X = a + (b - a) \cdot U$
+
+- Binomial(n, p):
+- Sum $n$ i.i.d. Bernoulli(p) samples.
+
+- Poisson(λ):
+- Use Knuth's algorithm or the inverse CDF method.
+
+- Gamma(α, β):
+- Apply the Marsaglia-Tsang method.
+
+- Programming libraries (e.g., NumPy, SciPy, PyTorch) have these sampling methods implemented.
+
+# Privault - Estimating an Expectation (Slide 2)
+
+## Example:
+- Let $X \sim \mathrm{Uniform}(0,1)$.
+- The true expectation: $E[X^2] = \frac{1}{3}$.
+
+## Monte Carlo Estimation:
+$$
+\hat{\mu}_N = \frac{1}{N} \sum_{i=1}^{N} U_i^2, \quad U_i \sim \mathrm{Uniform}(0,1)
+$$
+This illustrates convergence due to the Law of Large Numbers.
+
+# Properties and Trade-Offs
+
+## Properties of Monte Carlo Estimators
+
+- Law of Large Numbers (LLN):
+- $\hat{\mu}_N \to E_p[f(x)]$ almost surely as $N \to \infty$.
+- Central Limit Theorem (CLT):
+- $\sqrt{N} (\hat{\mu}_N - \mu)$ converges in distribution to $N(0, \sigma^2)$.
+- Variance:
+- $\operatorname{Var}(\hat{\mu}_N) = \sigma^2 / N$ which decreases as more samples are drawn.
+
+## Trade-Offs and Considerations
+
+- Advantages of MC Sampling:
+- Simple: No derivatives or complicated integration needed.
+- Flexible: Works for any distribution where sampling is possible.
+- Disadvantages:
+- Slow convergence rate ($O(1 / \sqrt{N})$).
+- Randomized estimates may vary from run to run.
+
+# Variants of Monte Carlo Sampling
+
+- **Inverse CDF Sampling**: For distributions with a closed-form inverse.
+- **Rejection Sampling**: Uses proposal distributions and accept/reject criteria.
+- **Importance Sampling**: Samples from a different distribution and reweights.
+- **MCMC Techniques**: Such as Gibbs Sampling and Metropolis-Hastings.
+
+# Monte Carlo Inference
+- Rejection Sampling
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Selected Topics (Understanding Markov Chains (related notes)) from
+- Privault, Nicolas. *Understanding Markov Chains: Examples and Applications*. 2nd ed. Springer, 2018.
+- Chapter 23 from
+- Murphy, Kevin P. *Machine Learning: A Probabilistic Perspective*. Cambridge, MA: MIT Press, 2012.
+
+# Outline
+
+- To sample from a target distribution $p(x)$ when direct sampling is impractical (e.g., because $p(x)$ is unnormalized or lacks a closed-form inverse CDF).
+
+# What is Rejection Sampling
+
+- Rejection sampling is a fundamental Monte Carlo method used to generate samples from a complex probability distribution $p(x)$ when direct sampling is impractical.
+- It works by drawing proposals from an easier-to-sample distribution $q(x)$ and accepting or rejecting them based on a criterion that ensures the final samples follow $p(x)$.
+- The method requires an envelope condition, ensuring that $p(x)$ does not exceed a scaled version of $q(x)$, controlled by a constant $M$. While simple and unbiased, rejection sampling can become inefficient in high dimensions if the acceptance rate is too low
+
+# Rejection Sampling...
+
+- Target Density: $p(x)$ — may be unnormalized.
+- Proposal Distribution: $q(x)$ — from which we can sample easily.
+- Scaling Constant: $M &gt; 0$, such that for all $x: p(x) \leq M q(x)$
+- This condition is expressed as: $q(x)$ dominates $p(x)$ if $p(x) \leq M q(x)$.
+- Algorithm
+
+- Repeat:
+- Sample $x \sim q(x)$.
+- Sample $u \sim \text{Uniform}(0,1)$.
+- Accept $x$ if: $u \leq \frac{p(x)}{M q(x)}$ Otherwise, reject $x$ and try again.
+- Output: Accepted $x$ values follow the target distribution $p(x)$ (or its normalized version).
+
+# Rejection Sampling - Geometric Intuition
+
+- Think of each sample as a 2D point $(x,u)$ drawn under the curve of $M q(x)$.
+- Only accept the point if it lies below the curve $p(x)$:
+- If $u \cdot M q(x) \leq p(x)$: Accept $x$.
+- Otherwise: Reject.
+- This method (often called the "envelope method") samples uniformly under the envelope $M q(x)$ and retains only the samples that fall under $p(x)$.
+
+# Key Property - Acceptance Probability
+
+## Derivation:
+
+- You accept $x$ if $u \leq \frac{p(x)}{Mq(x)}$.
+- Overall acceptance probability: $P(\text{accept}) = \frac{1}{M} \int p(x) \, dx = \frac{Z_p}{M}$
+- Case 1 - Normalized Target:
+- If $p(x)$ is a PDF ($Z_p = 1$), then $P(\text{accept}) \approx \frac{1}{M}$.
+- $\Rightarrow$ Rejection rate is $1 - \frac{1}{M}$.
+- Case 2 - Unnormalized Target:
+- Even if $p(x)$ is unnormalized, as long as $\tilde{p}(x)$ and $M$ are known (or bounded), rejection sampling still yields samples from the normalized target.
+
+# Efficiency and Design Considerations
+
+## Efficiency Factors:
+
+- **Tightness of $M$:**
+A smaller $M$ (closer to the maximum of $\frac{p(x)}{q(x)}$) improves acceptance.
+
+- **Proposal Matching:**
+$q(x)$ should closely match $\frac{p(x)}{Z}$ in shape, especially in the tails.
+
+## Observation:
+
+- If $q(x)$ is very different from $p(x)$, the rejection rate will be high, making the method inefficient—especially in high-dimensional settings.
+
+# Example from Murphy's book (Slide 2)
+
+## Example :
+
+- Target: $p(x) = \exp\left(-\frac{x^2}{2}\right)$ (an unnormalized Gaussian).
+- Proposal: $q(x) = \text{Uniform}(-10, 10)$ with $q(x) = \frac{1}{20}$.
+
+## Determine $M$:
+
+- Compute the ratio: $\frac{p(x)}{q(x)} = 20 \exp\left(-\frac{x^2}{2}\right)$
+- The maximum occurs at $x = 0$, so $M = 20$.
+
+## Acceptance Rate:
+
+- $P(\text{accept}) = \frac{Z_p}{M}$.
+(If normalized, approximately $\frac{1}{2}$ or 5% acceptance.)
+
+# Example from Privault's book (Slide 2)
+
+## Example Setup:
+- Target: $p(x) \propto \exp(-x^2)$ (a sharper Gaussian).
+- Proposal: $q(x)$ is an Exponential distribution.
+
+## Important Point:
+- Because the exponential distribution has asymmetric and heavier tails, matching the tails becomes crucial; if $q(x)$ decays slower than $p(x)$, many proposals in the negative region (or non-matching region) will be rejected.
+- Tail matching between $p(x)$ and $q(x)$ is essential for efficiency.
+
+# Key Properties - Efficiency and Design
+
+## Efficiency Factors Recap:
+- Acceptance Probability is $\frac{Z_p}{M}$.
+- Best when $q(x)$ closely resembles $p(x)/Z$ and $M$ is tight.
+
+## Practical Tips:
+- When designing a rejection sampler, choose $q(x)$ based on the shape of $p(x)$.
+- In high dimensions, rejection sampling becomes less practical due to an exponentially growing rejection rate.
+- Consider alternative sampling methods (like MCMC) if the efficiency is too low.
+
+# Rejection Sampling- Key points
+
+|  Element | Description  |
+| --- | --- |
+|  Target Distribution | $p(x)$ (can be unnormalized)  |
+|  Proposal Distribution | $q(x)$, an easy-to-sample distribution  |
+|  Scaling Constant $M$ | Chosen such that $p(x) \leq M$ $q(x)$ for all $x$; the tighter $M$ is, the better  |
+|  Acceptance Rule | Accept $x$ if $u \leq \frac{p(x)}{M q(x)}$ with $u \sim \text{Uniform}(0,1)$  |
+|  Acceptance Rate | $P(\text{accept}) = \frac{Z_p}{M}$, for normalized $p(x)$, approximately $1/M$  |
+|  Output | Accepted $x$ values follow the target distribution (after normalization)  |
+
+# Rejection Sampling - Summary
+
+## Design Considerations:
+
+- Match $q(x)$ to $p(x)$:
+Better tail matching minimizes rejections.
+
+- Keep $M$ Tight:
+A smaller constant improves the acceptance rate.
+
+## When to Use:
+
+- Use rejection sampling in low-dimensional problems or when you can design a very close proposal.
+
+## When to Avoid:
+
+- In high-dimensional settings or when $p(x)$ is multimodal/complex, consider other Monte Carlo methods (e.g., MCMC).
+
+# Monte Carlo Inference
+- Importance Sampling
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Selected Topics from
+- Privault, Nicolas. *Understanding Markov Chains: Examples and Applications*. 2nd ed. Springer, 2018.
+- Chapter 23 (In specific 23.4) from
+- Murphy, Kevin P. *Machine Learning: A Probabilistic Perspective*. Cambridge, MA: MIT Press, 2012.
+
+# Importance Sampling
+
+- Suppose we wish to compute: $\mu = E_p[f(x)] = \int f(x) p(x) \, dx$
+- Challenges:
+- We cannot sample from $p(x)$ directly.
+- We can evaluate $p(x)$ only up to a constant.
+- We can sample from an alternative distribution $q(x)$ (the proposal).
+- Use importance weights to shift the expectation: $\mu = E_q \left[ f(x) \frac{p(x)}{q(x)} \right]$
+
+# Importance Sampling Estimator
+
+- Estimator Form: $\hat{\mu}_{IS} = \frac{1}{N}\sum_{i=1}^{N} f(x^{(i)})\ w(x^{(i)}), x^{(i)} \sim q(x)$
+- Importance Weight: $w(x) = \frac{p(x)}{q(x)}$
+- By drawing samples from $q(x)$ and adjusting each with weight $w(x)$, we approximate the expectation under $p(x)$.
+
+# Handling Unnormalized Targets
+
+- When the Target is Unnormalized:
+Let $\tilde{p}(x) = Z \cdot p(x)$.
+- Modified Estimator: $\hat{\mu}_{IS} = \frac{\sum_{i=1}^{N} f(x^{(i)}) \tilde{w}(x^{(i)})}{\sum_{i=1}^{N} \tilde{w}(x^{(i)})}$, with $\tilde{w}(x) = \frac{\tilde{p}(x)}{q(x)}$
+- Provides an unbiased estimate of the normalized expectation even when only an unnormalized target is available
+
+# Example
+
+- Given:
+- Target: $p(x) = N(0,1)$ (standard normal)
+- Proposal: $q(x) = N(0,4)$ (a wider Gaussian)
+
+- Goal:
+- Estimate $\mu = E_p[x^2]$ (true value of 1 for $N(0,1)$).
+
+- Procedure:
+- Sample $x^{(i)} \sim q(x)$.
+- Compute weights: $w(x^{(i)}) = \frac{p(x^{(i)})}{q(x^{(i)})}$
+- Estimate: $\hat{\mu}_{IS} = \frac{\sum_{i=1}^{N} (x^{(i)})^2 w(x^{(i)})}{\sum_{i=1}^{N} w(x^{(i)})}$
+
+- This estimator approximates the true expectation $E_p[x^2]$
+
+# Properties of the Importance Sampling Estimator
+
+Unbiasedness: $E_q[\hat{\mu}_{IS}] = E_p[f(x)]$
+
+Variance: $\operatorname{Var}[\hat{\mu}_{IS}] \propto E_q \left[ \left( \frac{p(x)}{q(x)} \right)^2 f(x)^2 \right]$
+
+- Heavy tails or sharp modes in $p(x)$ can produce very high variance.
+- A poor match between $q(x)$ and $p(x)$ leads to unstable, spiky weights.
+
+# Choosing the Proposal Distribution $q(x)$
+
+- **Proposal:**
+Choose $q(x)$ such that: $q(x) \approx p(x)$ (everywhere that $f(x)$ $p(x)$ is large)
+
+- **Case for Minimal Variance:**
+If $q(x)\alpha|f(x)|p(x)$, the variance of the estimator is minimized.
+
+- **Practical Guidelines:**
+- The proposal must cover the support of $p(x)$.
+- Monitor the effective sample size (ESS): $N_{\text{eff}} = \frac{\left(\sum_{i=1}^{N} w_i\right)^2}{\sum_{i=1}^{N} w_i^2}$
+- If $N_{\text{eff}} \ll N$, then the estimate is likely to be high variance.
+
+# Reweighting and Variance Considerations
+
+- Reweighting Works by shifting the integral from $p(x)$ to $q(x)$ by adjusting each sample's contribution using $w(x)$.
+- Variance Issues:
+- If the ratio $p(x)/q(x)$ is large or spiky (especially in the tails), variance can be high.
+- Ensure that $q(x)$ does not assign zero probability in regions where $p(x)$ is positive.
+
+# Rejection vs. Importance Sampling
+
+|  Aspect | Rejection Sampling | Importance Sampling  |
+| --- | --- | --- |
+|  Objective | Directly sample from $p(x)$ via accept/reject. | Estimate $E_p[f(x)]$ using weighted samples from $q(x)$.  |
+|  Output | i.i.d. samples from $p(x)$. | Weighted samples approximating $p(x)$ expectations.  |
+|  Requirement on $p(x)$ | Does not require $p(x)$ to be normalized. | Works even when $p(x)$ is known up to a constant.  |
+|  Acceptance/Reweighting | Accept if $u \leq \frac{p(x)}{Mq(x)}$. | Weight sample with $w(x) = \frac{p(x)}{q(x)}$.  |
+|  Proposal Constraints | Requires an envelope: $p(x) \leq Mq(x)$ for a known constant $M$. | Requires $q(x)$ to have similar support & shape as $p(x)$.  |
+
+# Few key highlights of Importance Sampling
+
+- Target Distribution: $p(x)$ (possibly unnormalized).
+- Proposal Distribution: $q(x)$ (easy to sample from).
+- Importance Weight: $w(x) = \frac{p(x)}{q(x)}$
+- Estimator: $\hat{\mu}_{IS} = \frac{\sum_{i=1}^{N} f(x^{(i)}) w(x^{(i)})}{\sum_{i=1}^{N} w(x^{(i)})}$
+- Importance Sampling issues:
+- Unbiased (for normalized $p(x)$).
+- Variance depends on how well $q(x)$ resembles $p(x)$.
+- Effective sample size should be monitored to assess reliability
+
+# Monte Carlo Inference
+- Markov Chain Monte Carlo (MCMC)
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Sources to read from
+
+- Selected Topics (Relevant Markov chain concepts) from Privault, Nicolas. Understanding Markov Chains: Examples and Applications. 2nd ed. Springer, 2018.
+- Chapter 23 (In specific 23.5) from Murphy, Kevin P. Machine Learning: A Probabilistic Perspective. Cambridge, MA: MIT Press, 2012.
+
+# Markov Chain Monte Carlo (MCMC)
+
+- Problem Statement:
+In many problems, we cannot sample directly from a complex target distribution $p(x)$ (or $\pi(x)$), due to high dimensionality or because $p(x)$ is unnormalized.
+
+- MCMC Solution:
+Construct a Markov chain whose stationary distribution is the target $\pi(x)$ so that, as $t \to \infty$,
+
+$$
+\lim_{t \to \infty} P(x^{(t)} \in A) = \int_{A} \pi(x) \, dx.
+$$
+
+- Objective:
+Approximate expectations
+
+$$
+E_{\pi}[f(x)] = \int f(x) \, \pi(x) \, dx,
+$$
+
+# MCMC Framework ..
+
+- **Key Idea:**
+Build a chain:
+$$
+x^{(1)} \rightarrow x^{(2)} \rightarrow x^{(3)} \rightarrow \dots,
+$$
+where the chain's stationary distribution is $\pi(x)$.
+
+- **Task:**
+Estimate expectations by taking time averages:
+$$
+\hat{\mu}_N = \frac{1}{N} \sum_{t=1}^{N} f(x^{(t)}) \text{ approximates } E_{\pi}[f(x)].
+$$
+
+# MCMC Framework : Steps
+
+## Step 1 - Define the Target Distribution
+
+- **Target Definition:**
+Write the target (possibly unnormalized) density as:
+$$
+\pi(x) = \frac{\tilde{p}(x)}{Z}, \text{ with } Z = \int \tilde{p}(x) \, dx.
+$$
+
+- **Important Note:**
+MCMC does not require the normalization constant $Z$ since only the relative values of $\tilde{p}(x)$ matter.
+
+- **Requirement:**
+We need to be able to evaluate $\tilde{p}(x)$ pointwise (up to a constant).
+
+# MCMC Framework : Steps..
+
+## Step 2 - Constructing the Markov Chain
+
+- **Transition Kernel**  $T(x' \mid x)$:
+Specifies the probability of moving from state $x$ to state $x'$:
+
+- $T(x' \mid x) = P(x_{t+1} = x' \mid x_t = x)$.
+
+- **Essential Properties of $T$:**
+- **Positivity:** $T(x' \mid x) &gt; 0$ for all $x, x'$ in the space.
+- **Ergodicity:** Ensures the chain can reach any state, eventually converging to $\pi(x)$.
+
+# MCMC Framework : Steps..
+
+## Step 3 - Ensuring Ergodicity
+
+### Ergodicity Conditions:
+
+- Irreducibility: Every state is eventually reachable from any other state.
+- Aperiodicity: The chain does not get trapped in cycles (no fixed period in returns).
+- Positive Recurrent: The expected return time to a state is finite.
+
+### Guarantee:
+
+These conditions ensure the existence and uniqueness of the stationary distribution $\pi(x)$
+
+# MCMC Framework : Steps..
+
+## Step 3 - Ensuring Ergodicity
+
+### Ergodicity Conditions:
+
+- Irreducibility: Every state is eventually reachable from any other state.
+- Aperiodicity: The chain does not get trapped in cycles (no fixed period in returns).
+- Positive Recurrent: The expected return time to a state is finite.
+
+These conditions ensure the existence and uniqueness of the stationary distribution $\pi(x)$.
+
+### Step 4 - Stationarity and Convergence
+
+#### Stationarity Equation:
+
+The chain is stationary if: $\pi(x') = \int \pi(x) T(x' \mid x) \, dx$.
+
+Once equilibrium is reached, the distribution of $x^{(t)}$ remains unchanged,
+
+# MCMC Framework : Steps..
+
+## Step 5 - Discarding Burn-In
+
+### Burn-In Period:
+- Early samples $x^{(1)}, x^{(2)}, \ldots, x^{(B)}$ are influenced by the initial state.
+- **Action**: Discard the first $B$ samples to allow the chain to converge.
+
+- Ensures that subsequent samples better represent the target distribution $\pi(x)$.
+
+## Step 6 - Compute Empirical Expectations
+
+- **Empirical Estimator**: $\hat{\mu}_N = \frac{1}{N} \sum_{t=B+1}^{B+N} f(x^{(t)})$.
+
+- **Convergence**: By the Ergodic Theorem: $\lim_{N\to \infty}\hat{\mu}_N = E_\pi [f(x)]$ (with probability 1).
+
+- Although these samples are dependent, the estimator converges under the
+
+# What Makes MCMC Work?
+
+## Principles Ensuring MCMC Convergence:
+
+### Ergodicity:
+- The chain can reach every state eventually.
+
+### Stationarity:
+- $\pi(x)$ satisfies: $\pi(x') = \int T(x' \mid x) \pi(x) \, dx$.
+
+### Detailed Balance (Reversibility):
+- For all $x, x' : \pi(x)T(x' \mid x) = \pi(x')T(x \mid x')$.
+- This condition is sufficient for $\pi(x)$ to be the stationary distribution.
+
+## Ergodic Theorem:
+For an ergodic Markov chain with stationary distribution $\pi(x)$ and any integrable function $f$, $\lim_{N \to \infty} \frac{1}{N} \sum_{t=1}^{N} f(x^{(t)}) = E_{\pi}[f(x)]$ almost surely. Time averages over the Markov chain approximate expectations under $\pi(x)$.
+
+# MCMC vs. Other Sampling Methods
+
+|  Property | Importance/Rejection Sampling | MCMC  |
+| --- | --- | --- |
+|  Sample Independence | i.i.d. samples | Dependent (from a Markov chain)  |
+|  Proposal Requirements | Requires perfect matching of proposal | Only requires that every state is reachable  |
+|  Normalization | Often relies on normalized $p(x)$ | Does not require normalization of $p(x)$  |
+|  High-Dimensional Usability | Can fail | Generally works well  |
+
+# MCMC Algorithms
+
+- Metropolis-Hastings (MH):
+Uses a proposal distribution and an accept-reject step.
+
+- Gibbs Sampling:
+Special case where each variable is updated from its conditional distribution.
+
+- Hamiltonian Monte Carlo (HMC):
+Utilizes gradient information
+
+# Metropolis-Hastings Algorithm
+
+**Goal:**
+Generate samples $x^{(1)}, x^{(2)}, \dots \sim \pi(x)$ via a Markov chain.
+
+**Algorithm Steps:**
+- **Propose a Move:**
+Sample $x' \sim q(x' \mid x^{(t)})$.
+- **Compute Acceptance Probability:** $\alpha(x^{(t)}, x') = \min\left(1, \frac{\pi(x') q(x^{(t)} \mid x')}{\pi(x^{(t)}) q(x' \mid x^{(t)})}\right)$
+- **Accept or Reject:**
+Draw $u \sim \text{Uniform}(0, 1)$.
+If $u \leq \alpha(x^{(t)}, x')$, set $x^{(t+1)} = x'$; else, $x^{(t+1)} = x^{(t)}$.
+
+- Proposals that increase $\pi(x)$ are accepted with high probability, but sometimes "worse" moves are accepted to avoid local optima.
+
+**Detailed Balance Condition:** Ensures: $\pi(x)T(x' \mid x) = \pi(x')T(x \mid x')$, where: $T(x' \mid x) = q(x' \mid x) \cdot \alpha(x, x')$. Guarantees that $\pi(x)$ is the stationary distribution of the chain.
+
+# Gibbs Sampling
+
+- **Goal**: Sample from a joint distribution $\pi(x_1, x_2, \ldots, x_d)$ by updating one variable at a time.
+
+- **Algorithm Steps**:
+- For each variable $i = 1, \ldots, d$:
+$$
+x_i^{(t+1)} \sim p(x_i \mid x_1^{(t+1)}, \ldots, x_{i-1}^{(t+1)}, x_{i+1}^{(t)}, \ldots, x_d^{(t)}).
+$$
+- Cycle through variables repeatedly.
+
+- The conditional distributions $p(x_i \mid x_{-i})$ are often easier to sample from.
+
+- Every proposed update is accepted (acceptance probability = 1).
+
+# Hamiltonian Monte Carlo (HMC)
+
+- **Hamiltonian Monte Carlo (HMC):**
+- Uses gradient information of $\log \pi(x)$ to propose moves.
+- Particularly efficient for continuous, high-dimensional spaces.
+- HMC is popular in Bayesian deep learning (e.g., implementations in Stan).
+
+# Burn-In and Mixing &amp; Effective Sample Size
+
+## Burn-In:
+- Discard the first $B$ samples to allow the chain to converge to its stationary distribution.
+
+## Mixing:
+- Refers to how quickly the chain "forgets" its initial state.
+- Poorly mixing chains produce highly correlated samples.
+
+## Thinning:
+- Optionally, use only every $k$th sample to reduce autocorrelation.
+
+## Effective Sample Size
+- The effective number of independent samples is approximated by: $N_{\text{eff}} = \frac{N}{1 + 2\sum_{k=1}^{\infty}\rho_k}$, where $\rho_k$ is the autocorrelation at lag $k$. Even if we collect $N$ samples, high autocorrelation means $N_{\text{eff}} \ll N$.
+
+# MCMC Components
+
+|  Concept | Key Details  |
+| --- | --- |
+|  Target Distribution $\pi(x)$ | Unnormalized density $\tilde{p}(x)$; normalization constant $Z$ not needed in MCMC.  |
+|  Transition Kernel $T(x' \mid x)$ | Must be positive, ergodic; ensures convergence and stationarity via detailed balance.  |
+|  Burn-In and Mixing | Discard initial $B$ samples; ensure chain "forgets" its starting point; thin if necessary.  |
+|  Gibbs Sampling | Sequentially sample coordinates $x_i \sim p(x_i \mid x_{-i})$; always accepted; efficient if conditionals are known.  |
+|  Effective Sample Size: | $N_{\text{eff}} = \frac{N}{1 + 2 \sum_{k=1}^{\infty} \rho_k}$; indicates reduced independence.  |
+|  Applications: | Posterior sampling, uncertainty quantification, predictive inference, model comparison in Bayesian analysis.  |
+|  Ergodicity | Guarantees convergence to $\pi(x)$  |
+|  Estimator | $\hat{\mu}_N = \frac{1}{N} \sum_{t=1}^{N} f(x^{(t)})$  |
+
+# MCMC in Bayesian Inference
+
+- Sampling from Posterior:
+Draw samples $\theta^{(1)},\theta^{(2)},\dots \sim p(\theta \mid D)$ without computing $Z$.
+
+- Estimating Expectations: $E_{p(\theta |D)}[f(\theta)] \approx \frac{1}{N}\sum_{i = 1}^{N}f(\theta^{(i)})$
+
+- Uncertainty Quantification:
+Compute variance, credible intervals, etc.
+
+- Posterior Predictive Inference: $p(y^{*}\mid x^{*},D)\approx \frac{1}{N}\sum_{i = 1}^{N}p(y^{*}\mid x^{*},\theta^{(i)})$
+
+- Model Comparison:
+Use methods like Chib's estimator, Bridge sampling, or the harmonic mean estimator.
+
+# Summary Points on MCMC
+
+- It allows sampling from complex, high-dimensional distributions.
+- Despite generating dependent samples, under ergodicity, time averages converge to desired expectations.
+- Choice of transition kernel and burn-in/thinning strategies are crucial.
+- Methods like Metropolis-Hastings, Gibbs Sampling, and HMC extend MCMC to various settings.
+- MCMC is central to Bayesian inference, enabling estimation, prediction, and uncertainty quantification in models that can't have analytical solution.

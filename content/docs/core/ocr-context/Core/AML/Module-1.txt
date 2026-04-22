@@ -1,0 +1,735 @@
+# ADVANCED MACHINE LEARNING
+
+Dr. Neha Arora
+
+# Examinations and Prerequisites
+
+|  DY PATIL
+UNIVERSITY
+RAMRAO ADIK
+INSTITUTE OF TECHNOLOGY
+NAST MEMBAJ |   | B.TECH IN
+COMPUTER SCIENCE & ENGINEERING
+(ARTIFICIAL INTELLIGENCE &
+MACHINE LEARNING) |   |   |   |   |   | THIRD YEAR
+SEM- VI  |   |   |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  Course Code | Course Name | Teaching Scheme
+(Contact Hours 45) |   |   |   | Credits Assigned  |   |   |   |   |
+|   |   |  Lecture | Practical | Tutorial | Lecture | Tutorial | Prac/Oral |   | Total  |   |
+|  231CAUCC61 | Advanced Machine Learning | 03 | -- | -- | 03 | -- | -- |   | 03  |   |
+|   |   |  Evaluation Scheme  |   |   |   |   |   |   |   |   |
+|   |   |  Theory |   |   |   |   | Term work | Prac./ Oral | Total  |   |
+|   |   |  Internal Assessment |   |   | Mid Sem. Exam | End Sem. Exam  |   |   |   |   |
+|   |   |  Test 1 | Test 2 | Avg.  |   |   |   |   |   |   |
+|   |   |  20 | 20 | 20 | 60 | 2 | -- | -- | 100  |   |
+
+- Prerequisite:
+231CAUCC52 Machine Learning
+231CAUCC53 Neural Networks &amp; Fuzzy Systems
+
+# Syllabus
+
+|  Sr. No. | Module | Detailed Content | Hours | CO Mapping  |
+| --- | --- | --- | --- | --- |
+|  1 | Generalized Linear Models and Exponential Family | Introduction, Exponential family, generalized Linear model, Probit regression, Multitask learning, generalized linear mixed models | 6 | CO1  |
+|  2 | Directed Graphical models | Introduction, examples, inference, learning, conditional independence properties of DGM, decision diagrams | 6 | CO2  |
+|  3 | Mixture Models and EM algorithm | Latent variable models, Mixture models, Goals, parameter estimation of mixture models, EM algorithm, model selection for latent variable models, fitting models with missing data | 8 | CO3  |
+|  4 | Markov and Hidden Markov Models | Introduction, Markov models, Hidden Markov Models, Inference in HMM, learning for HMMs, generalizations of HMMs | 7 | CO4  |
+|  5 | Undirected Graphical Models | Introduction, Conditional independence properties of UGMs, parameterization of MRFs, examples of MRFs, learning, Conditional random fields | 6 | CO5  |
+|  6 | Monte carlo Inference | Introduction, sampling from standard distributions, rejection sampling, importance sampling, Markov chain Monte carlo inference introduction | 6 | CO6  |
+
+# Text and Reference Books
+
+## Text Books:
+1. Kevin Murphy, "Machine Learning - a Probabilistic Perspective", MIT Press, 2012.
+
+## Reference Books:
+1. Tom Mitchell, "Machine Learning", McGraw Hill, 1997.
+2. Bishop, "Pattern Recognition and Machine Learning", Springer, 2006.
+3. Ethem Alpaydin, "Introduction to Machine Learning", MIT Press, 2004.
+4. Devroye, Gyoerfi, Lugosi, "A Probabilistic Theory of Pattern Recognition", Springer, 1997.
+
+# Course Objectives, Outcomes and Prerequisites
+
+## Course Objectives:
+1. To conceptualize the Linear model.
+2. To understand graphical directed and undirected models.
+3. To understand Mixture models and EM algorithm.
+4. To become familiar with Markov Chain and HMM with inference model.
+
+## Course Outcomes: At the end of the course learner will able to
+1. Identify the generalized linear model and exponential family.
+2. Choose an appropriate graphical model for a problem.
+3. Identify Mixture model and understand EM algorithm.
+4. Apply Markov and Hidden Markov Model in real world problem solution.
+5. Analyze and apply the undirected graphical model.
+6. Understand and apply Monte Carlo Inference system.
+
+## Prerequisites: Foundation of Machine Learning, Probability and Statistics, Linear Algebra
+
+# Generalized Linear Models and Exponential Family
+
+- Exponential Families
+- Log Partition Function
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Quick Recap: Random Variables
+
+- A random variable is a function that assigns a numerical value to each possible outcome of a random experiment.
+- Instead of working with outcomes like heads/tails or rain/no rain, a random variable converts these outcomes into numbers, making them easier to analyze mathematically.
+- Example
+- $\triangle$ Outcome: Head → X=1
+- $\triangle$ Outcome: Tail → X=0
+
+# Types of Random Variables
+
+- Discrete Random Variable
+- Takes countable values
+- Example: Number of students present in a class
+- Continuous Random Variable
+- Takes any value in a range
+- Example: Height, weight, time
+- A random variable maps outcomes of randomness to numbers so we can apply probability and statistical analysis.
+
+# Quick Recap: Probability Density Function (PDF)
+
+- A Probability Density Function (PDF) describes how probability is distributed over the values of a continuous random variable.
+- It does not give probability directly at a point.
+- Probability is obtained by integration over an interval.
+- For a continuous random variable $X$, a function $f(x)$ is a PDF if:
+- Non-negativity
+- $f(x) \geq 0 \ \forall x$
+- Total probability is 1
+- $\int_{-\infty}^{\infty} f(x) \, dx = 1$
+- Probability over an interval
+- $P(a \leq X \leq b) = \int_{a}^{b} f(x) \, dx$
+
+# Key Properties of PDF
+
+- $P(X=x)=0$ for continuous variables
+- Probability is always found over ranges
+- Area under the curve = probability
+- PDF values may be greater than 1, but total area must be 1.
+
+- Normal (Gaussian) Distribution
+- $f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp \left(-\frac{\left(x - \mu\right)^2}{2\sigma^2}\right)$
+- Bell-shaped curve
+- Mean = Median = Mode = $\mu$
+- Used widely in statistics and ML
+- standard deviation ($\sigma$), width
+- $\sigma^2$ is Variance
+
+# Other PDFs
+
+- Uniform Distribution
+- Exponential Distribution
+- Gamma Distribution
+- Beta Distribution
+
+# Probability Mass Functions (PMF)
+
+- A Probability Mass Function (PMF) describes the probability distribution of a discrete random variable.
+- It assigns a probability to each possible value of the random variable.
+- For a discrete random variable $X$, the PMF is defined as:
+- $p(x) = P(X = x)$
+- A function $p(x)$ is a valid PMF if:
+- Non-negativity: $p(x) \geq 0 \forall x$
+- Total probability equals $1 \sum_{x} p(x) = 1$
+- Probability at a point is meaningful
+- $P(X = x) = p(x)$
+
+# Probability Mass Functions (PMF)
+
+- Probability Using PMF
+- $P(a \leq X \leq b) = \sum_{x=a}^{b} p(x)$
+- Examples
+- Bernoulli Distribution
+- $p(x) = \begin{cases} p, &amp; x = 1 \\ 1-p, &amp; x = 0 \end{cases}$
+- Models success/failure
+- Mean = $p$
+- Variance = $p(1-p)$
+- $P(X=x) = p^x(1-p)^{1-x}, x \in \{0,1\}$
+
+# Other Examples
+
+- Binomial Distribution
+- Geometric Distribution
+- Discrete Uniform Distribution
+
+# Exponential Families
+
+- Idea: If $P$ has some special Form =&gt; Some of the inference come for free.
+- Exponential families are a class of distributions whose probability density function (PDF) can be molded into the following $P(y; \eta) = b(y) \exp(\eta^T * T(y) - a(\eta))$
+
+- $\eta$ – Natural parameter (can be a scalar or a vector quantity)
+- $y$ – Label for data
+- $T(y)$ – Sufficient statistic (Here, it will be equal to $y$)
+- $a(\eta)$ – Log-partition function (It should be purely a function of eta)
+- $b(y)$ – It should be purely a function of $y$
+
+# Examples of Exponential Family: Bernoulli Distribution
+
+$$
+\begin{array}{l}
+P(y; \phi) = \phi^{y} * (1 - \phi)^{(1 - y)} \\
+= \exp\left(\log\left(\phi^{y} * (1 - \phi)^{(1 - y)}\right)\right) \\
+= \exp\left(y * \log(\phi) + (1 - y) * \log(1 - \phi)\right) \\
+= \exp\left(y * \log(\phi / 1 - \phi)\right) + \log(1 - \phi) - Eq2
+\end{array}
+$$
+
+By Comparing Eq2 with the following Equation
+
+$$
+P(y; \eta) = b(y) \exp(\eta^{T} * T(y) - a(\eta))
+$$
+
+$$
+\eta = \log(\Phi / 1 - \Phi) =&gt; \Phi = 1 / (1 + e^{(- \eta)}) \quad , \quad T(y) = y, \quad \text{and} \quad a(\eta) = -\log(1 - \Phi)
+$$
+
+Note: As mentioned above the value of phi (which is the same as the activation or sigmoid function for Logistic regression) is not a coincidence. And it will be proved later in the article how Logistic regression model can be derived from the Bernoulli distribution.
+
+# Examples of Exponential Family: Bernoulli Distribution
+
+$$
+\Phi = \frac {1}{1 + e ^ {- \eta}}
+$$
+
+$$
+\begin{array}{l} 1 - \Phi = 1 - \frac {1}{1 + e ^ {- \eta}} \\ = \frac {1 + e ^ {- \eta} - 1}{1 + e ^ {- \eta}} \\ = \frac {e ^ {- \eta}}{1 + e ^ {- \eta}} \\ \end{array}
+$$
+
+$$
+\log (1 - \Phi) = - \log (1 + e ^ {\eta})
+$$
+
+# Example 2: Gaussian Distribution as Exponential Family
+
+For a univariate Gaussian random variable $y$ with mean $\mu$ and variance $\sigma^2$:
+
+$$
+p(y \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(y - \mu)^2}{2\sigma^2}\right) \quad \text{Assume variance} = 1 \text{ for simplification}
+$$
+
+Expand the exponent Terms
+
+$$
+-\frac{(y - \mu)^2}{2} = -\frac{y^2}{2} + \mu y - \frac{\mu^2}{2}
+$$
+
+$$
+p(y) = \frac{1}{\sqrt{2\pi}} \exp\left(\mu y - \frac{y^2}{2} - \frac{\mu^2}{2}\right)
+$$
+
+Compare with following Equation
+
+$$
+P(y; \eta) = b(y) \exp(\eta^T * T(y) - a(\eta))
+$$
+
+# Example 2: Gaussian Distribution as Exponential Family
+
+$$
+p(y) = \underbrace{\frac{1}{\sqrt{2\pi}} \exp\left(-\frac{y^2}{2}\right)}_{b(y)} \exp\left(\underbrace{\mu_y y}_{T(y)} - \underbrace{\frac{\mu^2}{2}}_{a(\eta)}\right)
+$$
+
+$$
+P(y; \eta) = b(y) \exp(\eta^T * T(y) - a(\eta))
+$$
+
+|  $b(y)$ | $\frac{1}{\sqrt{2\pi}} \exp\left(-\frac{y^2}{2}\right)$  |
+| --- | --- |
+|  $T(y)$ | $y$  |
+|  $\eta$ | $\mu$  |
+|  $a(\eta)$ | $\frac{\mu^2}{2}$  |
+
+# Why do we care about this form?
+
+- Inference is easy
+- Expectation E[y;η] = ∂a(η) / ∂η
+- Variance Var[y;η] = ∂2a(η) / ∂2η
+- Learning is well defined for the form.
+- Maximum Likelihood Estimation (MLE) w.r.t. η is concave and provide global minimum.
+
+# Exponential Families
+
+The exponential family of distributions forms a broad and essential class of probability distributions widely used in statistical modeling and machine learning. These distributions share a canonical form, simplifying inference, parameter estimation, and theoretical analysis. Key benefits include:
+
+- Unified Framework: Many common distributions like Gaussian, Bernoulli, and Multinomial can be expressed in this form.
+- Efficient Estimation: Maximum likelihood estimation (MLE) and Bayesian inference are straightforward for this family.
+- Sufficient Statistics: They encapsulate all necessary information about the data in compact forms (e.g., mean, variance).
+
+Applications: Regression, and Learning algorithms.
+
+# Generalization in GLMs
+
+"Generalization" in Generalized Linear Models (GLMs) refers to the extension of simple linear models to handle a broader range of data characteristics
+
+Generalization of Response Variable Distribution:
+
+- Linear models assume the response variable $y$ follows a normal distribution.
+- GLMs generalize this by allowing the response variable to belong to the exponential family of distributions, which includes:
+- Normal distribution for continuous data.
+- Binomial distribution for binary outcomes.
+- Poisson distribution for counting data.
+
+# Generalized Linear Models
+
+- Generalized Linear Models (GLMs) are a class of regression models that can be used to model a wide range of relationships between a response variable and one or more predictor variables. Unlike traditional linear regression models, which assume a linear relationship between the response and predictor variables, GLMs allow for more flexible, non-linear relationships by using a different underlying statistical distribution.
+
+# Generalization in GLMs...
+
+- Generalization of the Relationship Between Predictors and Response:
+- In linear models, the mean response $\mu$ is modeled directly as a linear function of predictors ($\mu = w^T x$).
+- GLMs introduce a link function $g(\mu)$ to connect the predictors $w^T x$ to the mean of the response: $g(\mu) = w^T x$.
+- This allows for nonlinear relationships between predictors and the response.
+
+# Generalization in GLMs...
+
+- Flexible extension of linear regression models, designed to handle a variety of response distributions and nonlinear relationships. They consist of three key components:
+- Random Component: Specifies the distribution of the response variable $y$, which belongs to the exponential family (e.g., normal, binomial, Poisson).
+- Systematic Component: A linear predictor $\eta = w^T x$, where $w$ is the weight vector and $x$ is the input vector.
+- Link Function: Relates the mean of the response variable $\mu$ to the linear predictor via an invertible function $g: \mu = g^{-1}(\eta)$
+
+# Features of GLMs
+
+- **Flexibility**: GLMs can model a wide range of relationships between the response and predictor variables, including linear, logistic, Poisson, and exponential relationships.
+- **Model interpretability**: GLMs provide a clear interpretation of the relationship between the response and predictor variables, as well as the effect of each predictor on the response.
+- **Robustness**: GLMs can be robust to outliers and other anomalies in the data, as they allow for non-normal distributions of the response variable.
+- **Scalability**: GLMs can be used for large datasets and complex models, as they have efficient algorithms for model fitting and prediction.
+- **Ease of use**: GLMs are relatively easy to understand and use, especially compared to more complex models such as neural networks or decision trees.
+- **Hypothesis testing**: GLMs allow for hypothesis testing and statistical inference, which can be useful in many applications where it's important to understand the significance of relationships between variables.
+- **Regularization**: GLMs can be regularized to reduce overfitting and improve model performance, using techniques such as Lasso, Ridge, or Elastic Net regression.
+
+![img-0.jpeg](img-0.jpeg)
+Linear Regression Model
+The general linear model
+Generalized Linear Model
+Categorical Outcome
+Count Data
+Logistic Regression
+Only two possible values
+multinomial logistic regression
+more than two level categories
+Ordinal Logistic Regression
+More than two level but ordered
+Poisson Regression
+Negative Binomial
+Other Models Exponential Gamma Regression Beta Regression?
+
+# Constructing GLMs
+
+- To construct GLMs for a particular type of data or more generally for linear or logistic classification problems the following three assumptions or design choices are to be considered:
+- $y \mid x; \theta \sim \text{exponential family}(\eta)$ Given $x$ our goal is to predict $T(y)$ which is equal to $y$ in our case or $h(x) = E[y \mid x] = \mu$
+- $\eta = \theta^T * x$
+
+![img-1.jpeg](img-1.jpeg)
+
+# Terminology
+
+![img-2.jpeg](img-2.jpeg)
+
+# Generalized Linear Models
+
+Generalized Linear Models (GLMs) are a flexible extension of ordinary linear regression, unifying models like linear, logistic, and Poisson regression by allowing the response variable to follow different distributions (not just normal) and using a link function to connect the linear predictor to the mean response.
+
+They work for various data types (binary, counts, continuous) by specifying the distribution (Binomial, Poisson, Gamma, etc.) and the link function (logit, log, identity) that transforms the linear part to the expected outcome.
+
+# Why Use GLMs?
+
+☐ Flexibility: Handles non-normal data, such as yes/no answers (logistic) or event counts (Poisson).
+☐ Unified Framework: Unifies different regression types under one structure, simplifying modeling.
+☐ Interpretability: Maintains clear interpretation of predictor effects via the link function.
+
+# Linear Models Vs Generalized Linear Models
+
+## Linear Model: Guass 1809
+
+- $y_i$'s are independent.
+- $y$ follows normal distribution.
+- $\mu_i = x_i^T \beta = x_0 \beta_0 + x_1 \beta_1 + \ldots$
+- Least square or maximum likelihood estimation is used for optimization. (Both methods give us same result.)
+
+## Generalized Linear Model: Nelder and Wedderburn in 1972
+
+- $y_i$'s are independent.
+- $y$ follows exponential family distribution.
+- $g(\mu_i) = x_i^T \beta$: Any function may be logit or inverse or any other form.
+- Only Maximum Likely Hood Estimation (MLE) is used.
+
+# Least Square Vs Maximum Likely Hood Estimation
+
+## Least Square
+
+![img-3.jpeg](img-3.jpeg)
+
+$$
+\hat{y}_i = \theta_0 + \theta_1 x_i
+$$
+
+$$
+\underset{\theta_0, \theta_1}{\operatorname{argmin}} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2
+$$
+
+## Maximum Likely Hood Estimation
+
+![img-4.jpeg](img-4.jpeg)
+
+$$
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}
+$$
+
+$$
+\hat{\theta} = \underset{\theta_0, \theta_1}{\operatorname{argmax}} \prod_{i=1}^{N} \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(y_i - y_i)^2}{2\sigma^2}}
+$$
+
+# Link Function in GLM()
+
+|  Distrib. | Link g(μ) | θ = ψ(μ) | μ = ψ-1(θ) = E[y]  |
+| --- | --- | --- | --- |
+|  N(μ,σ2) | identity | θ = μ | μ = θ  |
+|  Bin(N,μ) | logit | θ = log(μ/1-μ) | μ = sigm(θ)  |
+|  Poi(μ) | log | θ = log(μ) | μ = eθ  |
+
+Table 9.1 Canonical link functions  $\psi$  and their inverses for some common GLMs.
+
+Reference :
+
+https://en.wikipedia.org/wiki/Generalized_linear_model
+
+# General Form of the Exponential Family
+
+Rewriting $p(x)$ in a canonical form:
+
+- $p(x) = h(x)\exp\left(\eta^T T(x) - A(\eta)\right)$
+- $h(x)$: base measure,
+- $\eta$: natural parameter (possibly a vector),
+- $T(x)$: sufficient statistics,
+- $A(\eta)$: log-partition function, $A(\eta) = \log Z(\eta)$.
+
+- The term **log-partition function**, denoted $A(\eta)$ in the general exponential family formulation, derives its name because it is the logarithm of the **partition function** $Z(\eta)$, which normalizes the probability distribution.
+
+# Reference
+
+- Murphy, Kevin P. *Machine learning: a probabilistic perspective*. MIT press, 2012.
+- Chapter 9
+
+# Generalized Linear Models and Exponential Family
+
+- Probit Regression
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Probit Regression
+
+# Generalized Linear Models for Binary Classification
+
+In binary classification, we aim to model the probability of an outcome $y \in \{0,1\}$ given an input feature vector $x_i$. A common approach is to use generalized linear models (GLMs), which assume that the probability function can be written as:
+
+$p(y = 1 \mid x_i, w) = g^{-1}(w^T x_i)$
+
+$\triangle g^{-1}(\cdot)$ is a function that maps real numbers $[-\infty, \infty]$ to a probability range $[0, 1]$.
+
+$\triangle w^T x_i$ represents a linear combination of the input features.
+
+The function $g^{-1}(\cdot)$ is often referred to as the mean function or link function.
+
+# Probit Regression vs. Logistic Regression
+
+- In logistic regression, we use the sigmoid function (logistic function):
+- $p(y = 1 \mid x_i, w) = \sigma(w^T x_i) = \frac{1}{1 + e^{-w^T x_i}}$
+- The sigmoid function ensures the probability is always between 0 and 1.
+
+- In probit regression, we replace the sigmoid function with the cumulative distribution function (CDF) of the standard normal distribution $\Phi(\eta)$:
+- $p(y = 1 \mid x_i, w) = \Phi(w^T x_i)$
+- where $\Phi(\eta)$ is defined as:
+- $\Phi(\eta) = \int_{-\infty}^{\eta} \frac{1}{\sqrt{2\pi}} e^{-t^2 / 2} dt$
+
+- This function represents the probability that a standard normal variable is less than $\eta$.
+- Instead of using the logistic function, we model the probability using the normal distribution's cumulative probability.
+- If $w^T x_i$ is very large, $\Phi(w^T x_i) \approx 1$: if $w^T x_i$ is very small, $\Phi(w^T x_i) \approx 0$.
+
+# Probit Regression
+
+$\diamond$ Probit regression is a statistical model used for binary classification. Unlike logistic regression, which assumes a logistic (sigmoid) function, probit regression models the probability of an event occurring using the cumulative distribution function (CDF) of the standard normal distribution:
+
+- $p(y = 1 | x_i, w) = \Phi(w^T x_i)$
+- $\Phi(\eta)$ is the standard normal CDF, mapping the real line $[-\infty, \infty]$ to the probability range $[0, 1]$.
+- Why Probit Instead of Logistic Regression?
+- Both models are used for binary classification.
+- Logistic regression assumes logistic (sigmoid) transformation, while probit regression assumes a normal cumulative distribution function (CDF).
+- If the latent variable follows a normal distribution, probit regression is preferred.
+
+# Probit Regression..
+
+Probit regression, $\Phi(\mu_i)$ is used to model the probability of the outcome
+
+- $\phi(\mu_i)$ - Standard Normal PDF (Probability Density Function):
+- Defined as: $\phi(\mu_i) = \frac{1}{\sqrt{2\pi}} e^{-\frac{\mu_i^2}{2}}$
+- $\Phi(\mu_i)$ - Standard Normal CDF (Cumulative Distribution Function):
+- Represents the probability that a standard normal variable is less than or equal to $\mu_i$.
+- Defined as the integral of the PDF: $\Phi(\mu_i) = \int_{-\infty}^{\mu_i} \phi(t) dt$
+
+|  Property | Logistic Function $\sigma(\eta)$ | Probit Function $\Phi(\eta)$  |
+| --- | --- | --- |
+|  Definition | $\sum_{-\infty}^{\infty} \phi(t) dt$ | $\int_{-\infty}^{\infty} \phi(t) dt$  |
+|  Derivative (Slope) | $\sigma(\eta)(1 - \sigma(\eta))$ | $\phi(\eta)$  |
+|  Range | (0,1) | (0,1)  |
+|  Interpretation | Based on odds and logit transform | Based on normal probability  |
+|  Extreme Cases | $\sigma(\eta) \approx 0$ for $\eta \to -\infty$, $\sigma(\eta) \approx 1$ for $\eta \to \infty$ | $\Phi(\eta) \approx 0$ for $\eta \to -\infty$, $\Phi(\eta) \approx 1$ for $\eta \to \infty$  |
+
+# Probit Vs Logistic Regression
+
+![img-5.jpeg](img-5.jpeg)
+
+# Numerical
+
+Predicting Graduate School Admission probability (Y=1 for admitted, Y=0 for rejected). We will use two predictors:
+
+- X1: GPA (Grade Point Average, 0.0 to 4.0).
+- X2: Top-Tier School (A "dummy" variable where 1 = attended a top undergraduate school, 0 = did not).
+
+$$
+\frac{\beta \text{Logit}}{= 1.6 \times \beta \text{probit}}
+$$
+
+Suppose our statistical analysis gives us these estimated coefficients for Probit Model:
+
+- Intercept ($\beta_0$): -3.5
+- GPA ($\beta_1$): 1.0
+- Top-Tier School ($\beta_2$): 0.4
+
+# Numerical Continued
+
+- Case1: Stats: GPA = 3.0, Not from a Top-Tier School (X2 = 0)
+- Case2: Stats: GPA = 3.0, From a Top-Tier School (X2 = 1)
+- Case3: Stats: GPA = 4.0, From a Top-Tier School (X2 = 1)
+
+# Important Points
+
+- Probit regression is a generalized linear model (GLM) for binary classification.
+- Instead of the logistic sigmoid function, it uses the CDF of the standard normal distribution $\Phi(\eta)$ as the mean function.
+- It is useful when a normality assumption holds for the latent variable.
+- It is similar to logistic regression, but has theoretical advantages in cases involving Gaussian noise
+
+# Reference
+
+- Murphy, Kevin P. *Machine learning: a probabilistic perspective*. MIT press, 2012.
+- Chapter 9
+
+# Generalized Linear Models and Exponential Family
+
+- Multi-Task Learning (MTL)
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Multi-Task Learning (MTL)
+
+# Introduction
+
+- In many real-world scenarios, we need to train multiple related models simultaneously.
+- Instead of training separate models for each task, Multi-Task Learning (MTL) leverages shared information among tasks to improve overall performance.
+- This approach assumes that different tasks share some common structure in their input-output relationships.
+- By jointly learning the tasks, the model generalizes better, especially when some tasks have limited training data.
+
+# Examples of Multi-Task Learning
+
+- Speech Recognition: Learning phoneme recognition across multiple languages.¹
+- Medical Diagnosis: Predicting multiple related diseases based on patient history.²
+- Computer Vision: Object detection and segmentation trained together.³
+- Natural Language Processing (NLP): Sentiment analysis and emotion detection trained together.⁴
+
+1. Pironkov, Gueorgui, Stephane Dupont, and Thierry Dutoit. "Multi-task learning for speech recognition: an overview." In *ESANN*. 2016.
+2. Bi, J., Xiong, T., Yu, S., Dundar, M., &amp; Rao, R. B. An improved multi-task learning approach with applications in medical diagnosis. In Machine Learning and Knowledge Discovery in Databases: European Conference, ECML PKDD 2008
+
+# Multi Task Learning
+
+![img-6.jpeg](img-6.jpeg)
+
+# When Multi Task Learning Makes Sense
+
+- Training on a set of tasks that could benefit from having shared lower-level features.
+- Usually: Amount of data you have for each task is quite similar.
+- Can train a big enough neural network to do well on all the tasks.
+
+# Multitask Vs Multilabel Learning
+
+![img-7.jpeg](img-7.jpeg)
+MULTILABEL LEARNING
+
+- Shared Components
+- Task-Specific Components
+- Input/Output Data
+
+Data: Single Input -&gt; Multiple Labels for one task
+
+![img-8.jpeg](img-8.jpeg)
+MULTITASK LEARNING
+
+- Shared Components
+- Task-Specific Components
+- Input/Output Data
+
+Data: Multiple tasks -&gt; Shared features, separate outputs
+
+# Multitask Vs Multilabel Learning
+
+![img-9.jpeg](img-9.jpeg)
+MULTILABEL LEARNING
+(e.g., Image Tagging)
+One image input, multiple labels apply.
+
+![img-10.jpeg](img-10.jpeg)
+MULTITASK LEARNING
+(e.g., Autonomous Driving)
+One input stream, multiple distinct tasks performed.
+
+![img-11.jpeg](img-11.jpeg)
+
+|  Aspect | Multi-Task | Multi-Label  |
+| --- | --- | --- |
+|  Number of tasks | Multiple | One  |
+|  Loss functions | Multiple | One  |
+|  Output types | Can differ | Same  |
+|  Sharing | Across tasks | Across labels  |
+
+# Multi-Task Learning
+
+- Instead of training separate models for each task, MTL learns a shared representation across all tasks.
+- Given $T$ related tasks, where each task $t$ has:
+- Dataset: $D_t = \{(x_i, y_i)\}_{i=1}^{N_t}$
+- Model: $f_t(x)$
+- Loss Function: $L_t(f_t(x), y)$
+- MTL minimizes a combined objective $L = \sum_{t=1}^{T} L_t(f_t(x), y)$
+- $L_t$ is the loss for task $t$.
+- The key assumption is that some model parameters are shared across tasks to improve generalization
+- Caruana, Rich. "Multitask learning." *Machine learning* 28 (1997): 41-75.
+
+# Approaches to Multi-Task Learning
+
+## Parameter Sharing
+
+- Each task has its own model, but regularization forces the models to remain similar.
+- Example: Using $\ell_2$ regularization to encourage parameters to be close
+
+$$
+L = \sum_{t=1}^{T} L_t(f_t(x), y) + \lambda \sum_{t \ne t'} \|W_t - W_{t'}\|^2
+$$
+
+|  $W_t$ = parameter vector for task $t$  |
+| --- |
+|  $W_{t'}$ = parameter vector for task $t'$  |
+|  $\|\cdot\|^2$ = squared $t_s$ (Euclidean) norm  |
+|  $\lambda$ = regularization strength  |
+
+- Sun, Shiliang, Honglei Shi, and Yuanbin Wu. "A survey of multi-source domain adaptation." *Information Fusion* 24 (2015): 84-92.
+- Zhang, Y. and Yang, Q., 2021. A survey on multi-task learning. *IEEE transactions on knowledge and data engineering*, 34(12), pp.5586-5609.
+
+# Approaches to Multi-Task Learning...
+
+- Bayesian Multi-Task Learning (Hierarchical Models): Statistical Model
+- Assumption: Task-specific models are drawn from a shared prior.
+- Use Bayesian techniques to estimate a shared prior distribution over task parameters.
+- Example: $W_t \sim \mathcal{N}(W_{\text{shared}}, \Sigma)$
+- $W_{\text{shared}}$ is the mean of all tasks.
+- $\Sigma$ models task variability.
+- Example Suppose:
+- Task A has 1,000 samples
+- Task B has 20 samples
+- Without penalty:
+- Task B overfits
+- With similarity penalty:
+- Task B's parameters move closer to Task A's
+- Task B learns a more stable model
+
+# Use of Hierarchical Bayesian Models
+
+- Some groups (or tasks) may have a lot of data, allowing us to estimate parameters reliably.
+- Other groups may have very little data, making parameter estimation difficult.
+- A hierarchical Bayesian approach shares information across groups, so groups with less data can "borrow strength" from groups with more data.
+
+# Example Formulation: Hierarchical Bayesian Models
+
+Given a dataset where:
+- $y_{ij}$ is the response (output) for the $i$-th item in group $j$.
+- $x_{ij}$ is the feature vector associated with $y_{ij}$.
+- $j$ represents different groups (tasks) for example different schools and i might index students within school.
+
+Our goal is to estimate the probability distribution $p(y_{j}|x_{j})$ for all $j$.
+
+# Example Formulation: Hierarchical Bayesian Models..
+
+$\Leftrightarrow$  Generalized Linear Model (GLM): The expected value of  $y_{ij}$  is given by  $E[y_{ij}|x_{ij}] = g(x_{ij}^T\beta_j)$  where  $g(\cdot)$  is a link function (e.g., logistic function for classification or identity function for regression).
+
+$\Leftrightarrow$  Group-Specific Parameters: Each group  $j$  has a separate parameter  $\beta_{j}$ , but they are not completely independent.
+
+Hierarchical Prior on Parameters:  $\beta_{j} \sim N(\beta_{*}, \sigma_{j}^{2}I)$  where  $\beta_{*}$  is a global mean parameter shared across groups.
+
+Global Prior:  $\beta_{*} \sim N(\mu, \sigma_{*}^{2}I)$
+
+$\sigma_{j}^{2}$  controls how much group  $j$  depends on the common mean  $\beta_{*}$ .
+$\sigma_{*}^{2}$  controls the overall variability in the population.
+
+# Example Formulation: Hierarchical Bayesian Models..
+
+$\Leftrightarrow$  Generalized Linear Model (GLM): The expected value of  $y_{ij}$  is given by  $E[y_{ij}|x_{ij}] = g(x_{ij}^T\beta_j)$  where  $g(\cdot)$  is a link function (e.g., logistic function for classification or identity function for regression).
+
+$\Leftrightarrow$  Group-Specific Parameters: Each group  $j$  has a separate parameter  $\beta_{j}$ , but they are not completely independent.
+
+Hierarchical Prior on Parameters:  $\beta_{j} \sim N(\beta_{*}, \sigma_{j}^{2}I)$  where  $\beta_{*}$  is a global mean parameter shared across groups.
+
+Global Prior:  $\beta_{*} \sim N(\mu, \sigma_{*}^{2}I)$
+
+$\sigma_{j}^{2}$  controls how much group  $j$  depends on the common mean  $\beta_{*}$ .
+$\sigma_{*}^{2}$  controls the overall variability in the population.
+
+# Example Formulation: Hierarchical Bayesian Models..
+
+- If we have a lot of data for group $j$, $\beta_j$ is learned mostly from that data.
+- If we have little data for group $j$, $\beta_j$ is pulled toward $\beta_*$, which is estimated using all groups.
+- This approach **adapts** to the amount of data available in each group, ensuring **better generalization** than separate models.
+
+# Applications
+
+- **Education Modeling:**
+- Groups: Schools
+- Features: Student demographics, teacher quality, etc.
+- Output: Average test scores per school
+- Advantage: Small schools benefit from data from larger schools.
+
+- **Customer Purchase Prediction (Discrete Choice Modeling):**
+- Groups: Individuals
+- Features: Browsing history, age, location, etc.
+- Output: Purchased product category
+- Advantage: New customers benefit from similar existing customers.
+
+- **Healthcare Prediction:**
+- Groups: Hospitals
+- Features: Patient demographics, symptoms, etc.
+- Output: Disease diagnosis probability
+- Advantage: Small hospitals leverage data from larger hospitals.
+
+- Zhang, Y. and Yang, Q., 2021. A survey on multi-task learning. IEEE transactions on knowledge and data engineering, 34(12), pp.5586-5609.
+- Bi, Jinbo, Tao Xiong, Shipeng Yu, Murat Dundar, and R. Bharat Rao. "An improved multi-task learning approach with applications in medical diagnosis." In Machine Learning and Knowledge Discovery in Databases: European Conference, ECML PKDD 2008, Antwerp, Belgium, September 15-19, 2008, Proceedings, Part I 19, pp. 117-132. Springer Berlin Heidelberg, 2008.
+
+# Other Examples
+
+- Input Data: Patient medical records
+- Tasks:
+- Predict disease risk
+- Predict hospital stay duration
+- Predict readmission probability
+
+# Reference
+
+- Murphy, Kevin P. *Machine learning: a probabilistic perspective*. MIT press, 2012.
+- Chapter 9

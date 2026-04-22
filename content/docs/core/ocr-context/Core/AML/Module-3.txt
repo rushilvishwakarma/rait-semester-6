@@ -1,0 +1,1949 @@
+# Mixture Models and EM algorithm
+
+- Latent variable models
+- Mixture models
+- Parameter Estimation
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Latent variable models
+
+# Intuition
+
+- In graphical models (Module 2):
+- If two observed variables are correlated → add an edge
+- High-dimensional data → many edges → many parameters
+- Correlation is modeled **explicitly** between observed variables.
+- Latent variable approach (hidden common cause)
+- Observed variables are correlated **by cause**
+- This hidden cause is the latent variable
+
+![img-0.jpeg](img-0.jpeg)
+
+# Example of Latent Variable Model
+
+- X1 : Body temperature (°C)
+- X2 : White blood cell (WBC) count
+- X3 : C-reactive protein (CRP) level
+- Y: Doctor's diagnosis score (0-100)
+- L: Disease severity (latent)
+- Case 1:
+- $Y = 10X_1 + 0.3X_2 + 5X_3 - 300$
+
+# Example Continued
+
+- Case 2: Latent variable model (with hidden variable)
+- $\diamond$ Latent severity generates symptoms
+$$
+\begin{array}{l}
+X_1 = 36 + 0.6L + \epsilon_1 \\
+X_2 = 5 + 2L + \epsilon_2 \\
+X_3 = 1 + 1.5L + \epsilon_3 \\
+\end{array}
+$$
+
+- Latent severity generates diagnosis
+- $\diamond Y = 12L + \epsilon_y$
+- Final Intuition: Observed data = f(Latent variables) + $\epsilon$
+
+# Another Example:
+
+- Suppose we want to check a Restaurant for food, checked for some reviews
+- Reviews are mainly based on
+- Waiting Time
+- Cleanliness
+- Staff Behaviour
+- Taste of Food
+- Food Freshness
+- Food Temperature
+
+# Latent Variable Models
+
+- Latent Variables are variables that are not directly observed but are inferred from other variables.
+- Mathematical Models that can Explain observed variables in terms of Latent Variables are called Latent Variable Models.
+
+![img-1.jpeg](img-1.jpeg)
+
+# Understanding Latent Variables
+
+- A latent variable is a variable that is not directly observed but is inferred from other observed variables. In LVMs, we assume that the observed variables are related due to some underlying hidden causes.
+
+- For example:
+- In medical diagnosis, symptoms (observed variables) may be correlated due to an underlying disease (latent variable).
+- In natural language processing, topics (latent variables) influence word distributions in documents.
+
+- LVMs are particularly useful because:
+- Dimensionality Reduction: They reduce the number of parameters needed to model relationships.
+- Feature Learning: The latent variables can serve as a compressed representation of data.
+
+# Understanding Latent Variables..
+
+- A Latent Variable: z ~ p(z)
+- Observed data conditioned on that latent variable: $x \sim p(x \mid z)$
+
+- Given observed data $x$ and latent variables $z$, the joint probability distribution is defined as:
+- $x$ represents observed variables,
+- $z$ represents latent variables,
+
+- This gives the joint distribution:
+$$
+p(x, z) = p(x|z)p(z)
+$$
+Since the latent variable $z$ is not observed, we compute the marginal distribution over $x$:
+$$
+p(x) = \sum_{z} p(x|z)p(z)
+$$
+for continuous latent variables:
+$$
+p(x) = \int p(x|z)p(z)dz
+$$
+This marginalization often makes direct computation difficult, and so Expectation-Maximization (EM) or variational inference is used
+
+# Latent Variable Models vs. Directly Correlated Models
+
+Instead of modeling dependencies between observed variables directly, LVMs introduce latent variables that serve as common hidden causes. This often results in more compact models with fewer parameters.
+
+## Example of Parameter Reduction
+
+- Directly correlated model: Suppose we model relationships among 5 observed variables directly using a Bayesian Network (without latent variables). The number of parameters grows quickly.
+- LVM Approach: Introducing a single latent variable reduces the number of parameters, making the model more efficient.
+
+A latent variable acts as a mediator between symptoms and
+
+# Variables (Visible and Latent)
+
+P(si/H) and
+P(H|C1,C2,C3)
+
+6+8+OVERHEAD=17
+
+![img-2.jpeg](img-2.jpeg)
+17 parameters
+
+![img-3.jpeg](img-3.jpeg)
+59 parameters
+
+P(Si/C1, C2, C3)
+
+24+Features(Due to interrelation of symptoms)
+
+Figure II.1 A DGM with and without hidden variables. The leaves represent medical symptoms. The roots represent primary causes, such as smoking, diet and exercise. The hidden variable can represent mediating factors, such as heart disease, which might not be directly visible.
+
+# Types of Latent Variable Models
+
+LVMs can have different structures based on how latent variables interact with observed data. Figure 11.2 illustrates common structures:
+
+(a) Many-to-Many Mapping
+
+- Multiple latent variables influence multiple observed variables.
+- Example: Restaurant Example
+
+(b) One-to-Many Mapping
+
+- A single latent variable influences multiple observed variables.
+- Example: Latent variable: Intelligence (IQ)
+
+- Observed variables:
+- Math score
+- Verbal score
+- Logical reasoning score
+
+# Different Types of Latent Variables
+
+## (c) Many-to-One Mapping
+
+- Multiple latent variables contribute to a single observed variable.
+- Example: Observed: Blood pressure
+- Latent factors: Stress, Sleep quality, Diet
+
+## (d) One-to-One Mapping
+
+- Each observed variable has a corresponding latent variable.
+- Example: Latent: weather state (sunny/rainy)
+- Observed umbrella usage
+
+# Variables (Visible and Latent)..
+
+![img-4.jpeg](img-4.jpeg)
+(a)
+
+![img-5.jpeg](img-5.jpeg)
+(b)
+
+![img-6.jpeg](img-6.jpeg)
+(c)
+
+![img-7.jpeg](img-7.jpeg)
+(d)
+Figure II.2 A latent variable model represented as a DGM. (a) Many-to-many. (b) One-to-many. (c) Many-to-one. (d) One-to-one.
+
+# Latent Variable Models
+
+- Latent Variable Models (LVMs) introduce hidden (or latent) variables to explain dependencies between observed variables. These models assume that the observed variables are correlated because they arise from an unobserved common cause. Mathematically, LVMs define a joint distribution over both observed and hidden variables:
+
+- LVMs are useful because:
+
+- They reduce the number of parameters: Instead of directly modeling dependencies among observed variables, they model dependencies through latent variables.
+
+- They serve as a bottleneck: The hidden variables compress information, which is beneficial for unsupervised learning and
+
+# Mixture Models
+
+# Mixture Models
+
+The simplest form of an LVM is a mixture model, where the latent variable $z_{i}$ is discrete and represents different categories (or clusters) from which the data is generated. A general mixture model is given by:
+
+$$
+p(x_i|\theta) = \sum_{k=1}^{K} \pi_k p_k(x_i|\theta)
+$$
+
+- $K$ is the number of mixture components,
+- $\pi_k$ is the mixing weight (prior probability of component $k$),
+- $p_k(x_i|\theta)$ is the component-specific probability density function (PDF),
+- $\sum_{k=1}^{K} \pi_k = 1$ ensures valid probabilities.
+
+# Mixture Models..
+
+In a mixture model, the probability distribution is represented as a convex combination of component distributions.
+
+$$
+p(x) = \sum_{k=1}^{K} \pi_k p_k(x)
+$$
+
+- $p_k(x)$ are the component distributions (e.g., Gaussian distributions in a Gaussian Mixture Model).
+- $\pi_k$ are the mixing weights, which determine the proportion of each component in the mixture.
+
+The weights satisfy convex combination properties:
+
+- $0 \leq \pi_k \leq 1$ (weights are non-negative).
+- $\sum_{k=1}^{K} \pi_k = 1$ (weights sum to 1).
+
+This ensures that the resulting distribution is a valid probability distribution.
+
+# Example
+
+- Imagine a class with two types of students:
+- Group 1: Hard-working
+- Group 2: Casual
+- We see their marks.
+We don't know which student belongs to which group.
+- Now suppose:
+- 60% students are hard-working
+- 40% are casual
+- Each group has its own mark distribution.
+
+# Example
+
+- Now you see a student scored 75.
+- What is the probability of seeing score 75?
+- It depends on:
+- $\diamond$ Probability it came from Group 1
+- $\diamond$ Probability it came from Group 2
+- Since you don't know the group, you combine both possibilities.
+
+$$
+p(x_i|\theta) = \sum_{k=1}^{K} \pi_k p_k(x_i|\theta_k)
+$$
+
+- From this formula
+
+# Example
+
+- Assume there are K groups
+- $\Delta K = \text{number of hidden clusters.}$
+- Each group has a weight $\pi_k$
+- Example:
+- $\Delta \pi_1 = 0.6$
+- $\Delta \pi_2 = 0.4$
+- This means:
+- 60% data from group 1
+- 40% data from group 2
+
+# Example
+
+- For example:
+- Group 1 → Normal(80, 5)
+- Group 2 → Normal(60, 8)
+
+- Probability of score 75:
+$$
+= 0.6 \times p_1(75) + 0.4 \times p_2(75)
+$$
+
+- So we multiply:
+- Weight of group
+- Probability from that group
+- Then add all groups.
+
+# How it is related to LVM?
+
+- A Latent Variable Model (LVM) is:
+- A model that includes hidden (unobserved) variables that influence observed data.
+- What is hidden here in previous example?
+
+$$
+p(x_i) = \sum_{k=1}^{K} \pi_k p_k(x_i)
+$$
+
+- This summation come from introducing hidden variable
+- First choose a hidden component $z_i \sim \text{Categorical}(\pi_1, \dots, \pi_K)$
+
+Then generate data:
+
+$$
+\vartheta x _ {i} \sim p \left(x _ {i} \mid z _ {i}\right)
+$$
+
+So the real generative process is:
+
+$$
+\vartheta z _ {i} \rightarrow x _ {i}
+$$
+
+That hidden variable  $z_{i}$  is the latent variable.
+
+# Another Example
+
+- Height of a person
+- But you don't know: Whether the person is male or female?
+- Gender is hidden (latent variable).
+- Height distribution = mixture of:
+- Male height distribution
+- Female height distribution
+- Since gender is hidden → mixture model → latent variable model.
+
+# 1. Mixtures of Gaussians (Gaussian Mixture Models, GMMs)
+
+A common mixture model is the Gaussian Mixture Model (GMM), where each component is a Gaussian distribution
+
+$$
+\begin{array}{l}
+\Leftrightarrow p(x_i|\theta) = \sum_{k=1}^{K} \pi_k \mathcal{M}(x_i | \mu_k, \Sigma_k) \\
+\Rightarrow \mathcal{M}(x | \mu_k, \Sigma_k) \text{ is the Gaussian PDF} \\
+\Rightarrow \mu_k \text{ is the mean of cluster } k, \\
+\Rightarrow \Sigma_k \text{ is the covariance matrix of cluster } k, \\
+\Rightarrow \pi_k \text{ are the mixing weights.}
+\end{array}
+$$
+
+GMMs are widely used for clustering because they can model complex distributions using a combination of Gaussian components.
+
+**Gaussian Mixture Models (GMMs)** are widely used for density estimation.
+
+# 1. Mixtures of Gaussians (Gaussian Mixture Models GMMs)..
+
+Gaussian Mixture Model (GMM), where each mixture component is a Gaussian distribution.
+
+$$
+p(x_i|\theta) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)
+$$
+
+Each data point is generated by a Gaussian component, but we don't know which one.
+
+The latent variable $z_i$ indicates which Gaussian generated the data.
+
+The Expectation-Maximization (EM) algorithm is commonly used for training GMMs.
+
+Figure 11.3 shows an example of a mixture of 3 Gaussians in 2D, with different components contributing to the overall
+
+# 1. Mixtures of Gaussians (Gaussian Mixture Models GMMs)..
+
+![img-8.jpeg](img-8.jpeg)
+(a)
+
+![img-9.jpeg](img-9.jpeg)
+(b)
+Figure 11.3 A mixture of 3 Gaussians in 2d. (a) We show the contours of constant probability for each component in the mixture. (b) A surface plot of the overall density. Based on Figure 2.23 of (Bishop 2006a). Figure generated by mixGaussPlotDemo.
+
+# 2. Mixture of Multinomials (Bernoulli Mixture Model)
+
+For a dataset of binary vectors (e.g., words in a document, pixels in an image), each data point $x_i$ follows a Bernoulli distribution under a specific component:
+
+- $p(x_i | z_i = k, \theta) = \prod_{j=1}^{D} \operatorname{Ber}(x_{ij} | \mu_{jk})$
+- $D =$ Data is D dimension bit vector.
+- $x_{ij} \in \{0,1\}$ is the value of feature $j$ in sample $i$.
+- $\mu_{jk} =$ probability of bit $j$ being active (1) in cluster $k$.
+
+- $\operatorname{Ber}(x_{ij} | \mu_{jk})$ follows a Bernoulli distribution:
+- $\operatorname{Ber}(x_{ij} | \mu_{jk}) = \mu_{jk}^{x_{ij}} (1 - \mu_{jk})^{1 - x_{ij}}$
+
+- The overall mixture model is:
+- $p(x_i | \theta) = \sum_{k=1}^{K} \pi_k \prod_{j=1}^{D} \mu_{jk}^{x_{ij}} (1 - \mu_{jk})^{1 - x_{ij}}$
+- $\pi_k$ are the mixing weights.
+
+# Mixture of Multinomials (Bernoulli Mixture Model)
+
+- Data consist of D-dimensional bit vectors
+- Each data point $i: x_i = (x_{i1}, x_{i2}, \dots, x_{iD})$
+- Where each $x_{ij} \in \{0,1\}$
+- Example:
+- Spam detection (word present = 1, absent = 0)
+- Image pixels (black/white)
+- Yes/No survey responses
+
+# What is D in mixture of Bernoulli's Mixture Model?
+
+In mixture of Bernoulli's:
+
+$$
+p(x_i | z = k) = \prod_{j=1}^{D} \mathrm{Ber}(x_{ij} | \mu_{jk})
+$$
+
+Each $x_{ij}$ is a separate Bernoulli variable.
+There are D different features (Not D repeated trials)
+But D different random variables
+You have D different questions.
+
+Example:
+
+Survey:
+
+- Q1: Do you like coffee?
+- Q2: Do you exercise?
+- Q3: Do you eat spicy food?
+
+These are different Bernoulli variables, not repeated trials.
+
+So: $D =$ number of features
+
+# Using Mixture Models for Clustering
+
+## Two Main Uses of Mixture Models
+
+- Density estimation Model overall data distribution $p(x)$
+- Clustering (most common use): Known as Soft Clustering
+- We first compute probability that represents posterior probability that point $i$ belong to $p(z_i = k | \mathbf{x}_i, \theta)$
+- Use posterior probability: (Bayes Formula)
+
+$$
+r_{ik} \triangleq p(z_i = k | \mathbf{x}_i, \theta) = \frac{p(z_i = k | \theta) p(\mathbf{x}_i | z_i = k, \theta)}{\sum_{k'=1}^{K} p(z_i = k' | \theta) p(\mathbf{x}_i | z_i = k', \theta)}
+$$
+
+# Explanation
+
+- Probability that data point $x_{i}$ belongs to cluster $k$: posterior probability (or responsibility)
+- Here
+$$
+A = z_{i} = k
+$$
+$$
+B = x_{i}
+$$
+$$
+p(A \mid B) = \frac{p(B \mid A)p(A)}{p(B)}
+$$
+$$
+p(z_{i} = k \mid x_{i}) = \frac{p(x_{i} \mid z_{i} = k)p(z_{i} = k)}{p(x_{i})}
+$$
+
+- P(xᵢ): Since cluster is unknown, we marginalize over all clusters:
+$$
+p(x_{i}) = \sum_{k' = 1}^{K} p(x_{i}, z_{i} = k')
+$$
+$$
+p(x_{i}, z_{i} = k') = p(x_{i} \mid z_{i} = k')p(z_{i} = k')
+$$
+$$
+p(x_{i}) = \sum_{k' = 1}^{K} p(x_{i} \mid z_{i} = k')p(z_{i} = k')
+$$
+
+# Explanations
+
+## Substitution
+
+$$
+p(z_i = k \mid x_i) = \frac{p(x_i \mid z_i = k)p(z_i = k)}{\sum_{k'=1}^{K} p(x_i \mid z_i = k')p(z_i = k'}
+$$
+
+## Here $p(z_i = k) = \pi_k$
+
+$$
+r_{ik} = \frac{\pi_k p(x_i \mid z_i = k)}{\sum_{k'=1}^{K} \pi_{k'} p(x_i \mid z_i = k'}
+$$
+
+# 3. Mixture of Experts (MoE) Model
+
+A Mixture of Experts (MoE) model is an extension of mixture models where different "experts" (functions) are specialized in handling different parts of the data. Instead of assuming that each mixture component is a simple probability distribution (e.g., Gaussian), in MoE:
+
+- Each component is a predictive model (e.g., regression or classification).
+- A gating function decides which expert is responsible for which data point.
+
+Mathematical Definition: The probability of output $y$ given in put $x$ is:
+
+- $p(y|x,\theta) = \sum_{k=1}^{K} \pi_k(x)p_k(y|x,\theta_k)$
+- $\pi_k(x) = \text{gating function}$, which determines the probability of choosing expert $k$ for input $x$.
+- $p_k(y|x,\theta_k) = \text{expert function}$ (e.g., linear regression, neural network).
+- $K = \text{number of experts}$.
+
+Each expert specializes in a region of the input space.
+
+Examples
+
+- Handwriting recognition: Different experts can specialize in recognizing different letters or writing styles.
+
+# Mixture of Experts: Intuition
+
+- A Mixture of Experts (MoE) is:
+- A model where multiple sub-models ("experts") make predictions, and a gating network decides which expert to trust for each input.
+
+- It is mainly used for:
+- Regression
+- Classification
+
+- Unlike standard mixture models, here the mixing weights depend on the input $x$.
+
+# Mixture of Experts
+
+- Instead of using a single model
+- We use multiple smaller models (experts)
+- A gating network decides which expert to trust for each input.
+- For small $x \to$ Use Linear Model with positive slope
+- For medium $x \to$ Use Linear Model with negative slope
+- For large $x \to$ relationship is flat
+
+Gating network looks at $x$, It outputs probabilities for each expert
+
+Each expert makes a prediction
+Final prediction = weighted combination of expert predictions
+
+# Mixture of Experts Vs Gaussian Mixture Models
+
+- In Gaussian Mixture Models:
+- Mixing weights are fixed numbers ($\pi_k$)
+- They do not depend on input
+
+- In Mixture of Experts:
+- Mixing weights depend on input $x$
+- The model dynamically decides which expert to use
+
+# Properties Mixture of Experts
+
+- Handles nonlinearity
+- Divides complex problem into simpler subproblems
+- Smooth transition between regions
+- Each expert can be simple (e.g., linear model)
+
+# Equations for Mixture of Experts
+
+- Expert Model (Regression Case)
+
+$$
+p(y_i | x_i, z_i = k, \theta) = \mathcal{N}(y_i | w_k^T x_i, \sigma_k^2)
+$$
+
+- Each expert is a linear regression model
+- So: Expert k predicts $w_k^T x_i$
+- Gating function:
+$$
+p(\text{zi} | x, \theta) = \operatorname{Cat}(z_i | S(V^T x_i))
+$$
+- Where:
+- $S(\cdot)$ = Softmax function
+- Output = probability over experts
+- The mixing weights depend on input $x_i$.
+
+![img-10.jpeg](img-10.jpeg)
+(a)
+
+![img-11.jpeg](img-11.jpeg)
+(b)
+
+![img-12.jpeg](img-12.jpeg)
+(c)
+Figure II.6 (a) Some data fit with three separate regression lines. (b) Gating functions for three different "experts". (c) The conditionally weighted average of the three expert predictions. Figure generated by mixexpDemo.
+
+# Overall Prediction Model
+
+Overall Prediction Model
+
+$$
+p(y_i | x_i) = \sum p(z_i = k | x_i) p(y_i | x_i, z_i = k)
+$$
+
+- $z_i$: This is the hidden variable that tells, which expert is responsible for input $x_i$.
+- $p(zi = k \mid xi)$: This is the gating function.
+- It tells: How much expert $k$ should be trusted for this input.
+- These values:
+- Depend on $x_i$
+- Sum to 1
+- Are usually computed using softmax
+- $p(yi | xi, z_i = k)$: This is the prediction $\text{pr}(yi | x_i, z_i = k) = p(yi | x_i, z_i = k) \quad \text{at} \ k$.
+- For example: If expert is linear regression:
+- Summation is done because: So marginalized output: $p(yi | x) = \sum_{k} p(z = k | x) p(yi | x, z = k)$
+
+# Numerical Example
+
+- Gating outputs:
+- $\vartheta p(z = 1 \mid x) = 0.7$
+- $\vartheta p(z = 2 \mid x) = 0.3$
+- Expert predictions:
+- $\vartheta y_1 = 10$
+- $\vartheta y_2 = 20$
+- Then final prediction:
+- $\vartheta 0.7(10) + 0.3(20) = 7 + 6 = 13$
+- So output is a weighted average.
+
+# Gaussian Mixture Model
+
+$$
+f_0(x) = N(x; 2, 2) \quad f_1(x) = N(x; 10, .5)
+$$
+
+$$
+\pi = \left[ .5 \quad .5 \right]^T
+$$
+
+![img-13.jpeg](img-13.jpeg)
+
+# Gaussian Mixture Models
+
+## General Mixture Model
+
+$$
+p(x) = \pi_1 f_1(x) + \pi_2 f_2(x) + \cdots + \pi_K f_K(x)
+$$
+
+where
+
+$$
+\sum_{k=1}^{K} \pi_k = 1
+$$
+
+$$
+\text{Compact Form} \quad p(x) = \sum_{k=1}^{K} \pi_k f_k(x)
+$$
+
+Condition
+
+$$
+\sum_{k=1}^{K} \pi_k = 1
+$$
+
+# Gaussian Mixture Model (Replacing $f_{k}(x)$ with Gaussian)
+
+$$
+p(x) = \pi_1 \mathcal{N}(x \mid \mu_1, \Sigma_1) + \pi_2 \mathcal{N}(x \mid \mu_2, \Sigma_2) + \cdots + \pi_K \mathcal{N}(x \mid \mu_K, \Sigma_K)
+$$
+
+where
+
+$$
+\sum_{k=1}^{K} \pi_k = 1
+$$
+
+## Final Compact Form
+
+$$
+p(x) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k)
+$$
+
+- $\kappa$ = number of Gaussians
+- $\pi_k$ = mixing coefficients (weights)
+- $\mu_k$ = mean of $k^{th}$ Gaussian
+- $\Sigma_k$ = covariance matrix of $k^{th}$ Gaussian
+
+# Likelihood of Dataset
+
+Given dataset:
+
+$$
+X = \{x _ {1}, x _ {2}, \dots , x _ {N} \}
+$$
+
+Likelihood:
+
+$$
+P (X \mid \mu , \Sigma , \pi) = \prod_ {m = 1} ^ {N} p (x _ {m}) = \prod_ {m = 1} ^ {N} \sum_ {k = 1} ^ {K} \pi_ {k} \mathcal {N} (x _ {m} \mid \mu_ {k}, \Sigma_ {k})
+$$
+
+We assume data points are independent.
+
+So:
+
+$$
+P (X) = P (x 1, x 2, \dots , x N)
+$$
+
+Because of independence:
+
+$$
+P (X) = \prod_ {m = 1} ^ {N} P (x _ {m})
+$$
+
+# Log Likelihood
+
+$$
+\ln P (X \mid \mu , \Sigma , \pi) = \sum_ {m = 1} ^ {N} \ln p (x _ {m})
+$$
+
+Substituting mixture model:
+
+$$
+\ln P (X \mid \mu , \Sigma , \pi) = \sum_ {m = 1} ^ {N} \ln \left(\sum_ {k = 1} ^ {K} \pi_ {k} \mathcal {N} (x _ {m} \mid \mu_ {k}, \Sigma_ {k})\right)
+$$
+
+# Parameter Estimation for Mixture Models
+
+# Parameter Estimation for Mixture Models
+
+In mixture models, we have observed data points $X = \{x_{1}, x_{2}, \ldots, x_{N}\}$ and hidden variables $Z = \{z_{1}, z_{2}, \ldots, z_{N}\}$, which indicate which mixture component generated each data point. The parameters $\theta$ of the model include:
+
+- Mixing coefficients $\pi_{k}$ (probability of selecting a component $k$)
+- Component means $\mu_{k}$
+- Covariances $\Sigma_{k}$ (for Gaussian mixture models)
+
+The goal of parameter estimation is to compute the posterior $p(\theta | D)$, where $D$ represents the observed data.
+
+In fully observed models (where $Z$ is known), parameter estimation is straightforward using Maximum Likelihood Estimation (MLE) estimation.
+
+However, when $Z$ is hidden, we must marginalize over all possible assignments of $Z$, making computation difficult.
+
+# Unidentifiability
+
+Unidentifiability occurs when multiple sets of parameters produce the same likelihood, leading to a multimodal posterior distribution for $\theta$. This happens because:
+
+- Different ways of assigning clusters to data points can lead to identical likelihoods.
+- There are multiple equivalent labeling of clusters.
+
+For example, in a 2-component Gaussian Mixture Model (GMM) with means $\mu_1 = -10$ and $\mu_2 = 10$, the likelihood remains unchanged if we swap the labels: $\mu_1 = 10$, $\mu_2 = -10$. Figure 11.10(b) illustrates this issue, showing two peaks in the likelihood surface corresponding to these two labeling.
+
+Since there are $K!$ possible labelings of $K$ clusters, the number of modes in the posterior can grow exponentially, making it NP-hard to find the global MLE (Abiso et al., 2009; Duippos et al., 2004).
+
+# Unidentifiability..
+
+![img-14.jpeg](img-14.jpeg)
+(a)
+
+![img-15.jpeg](img-15.jpeg)
+(b)
+Figure 11.10 Left:  $N = 200$  data points sampled from a mixture of 2 Gaussians in 1d, with  $\pi_k = 0.5$ ,  $\sigma_k = 5$ ,  $\mu_1 = -10$  and  $\mu_2 = 10$ . Right: Likelihood surface  $p(\mathcal{D}|\mu_1,\mu_2)$ , with all other parameters set to their true values. We see the two symmetric modes, reflecting the unidentifiability of the parameters. Figure generated by mixGaussLikSurfaceDemo.
+
+# Consequences of Unidentifiability (Figure 11.2)
+
+## (a) Histogram of Sampled Data (Left Plot)
+
+This shows a dataset of 200 data points sampled from a mixture of two Gaussians in one dimension.
+
+The mixture model has:
+
+- Equal mixing weights ($\pi_k = 0.5$), meaning both Gaussians contribute equally.
+- Standard deviation $\sigma_k = 5$, which controls the spread.
+
+Means:
+
+- $\mu_1 = -10$ (first Gaussian is centered at -10)
+- $\mu_2 = 10$ (second Gaussian is centered at 10)
+
+The histogram shows two peaks, corresponding to the two Gaussian components. This is characteristic of a Gaussian Mixture Model (GMM).
+
+## (b) Likelihood Surface of the Mixture Model (Right Plot)
+
+This is a contour plot of the likelihood function $p(\mathcal{D}|\mu_1,\mu_2)$, which represents how likely the observed data $\mathcal{D}$ is given different values of $\mu_1$ and $\mu_2$.
+
+The plot has two symmetric peaks, indicating unidentifiability in parameter estimation.
+
+# Consequences of Unidentifiability (Figure 11.2).
+
+- The histogram shows that data is generated from a mixture of two Gaussian distributions.
+- The contour plot represents the likelihood function $p(\mathcal{D}|\mu_1,\mu_2)$.
+- The two red circles (peaks) show two maxima in the likelihood function.
+- The two modes (peaks) reflect parameter unidentifiability:
+- The mixture model cannot distinguish between $(\mu_1 = -10, \mu_2 = 10)$ and $(\mu_1 = 10, \mu_2 = -10)$.
+- Swapping the labels of the two Gaussians does not change the likelihood, since both settings generate the same probability distribution.
+- In a mixture model, the likelihood function is symmetric in its parameters.
+- If we swap $\mu_1$ and $\mu_2$, the probability distribution remains the same.
+- This symmetry causes multiple optimal solutions, making it harder for optimization algorithms to converge to a unique answer.
+
+# Consequences of Unidentifiability (Figure 11.2).
+
+- The histogram shows that data is generated from a mixture of two Gaussian distributions.
+- The contour plot represents the likelihood function $p(\mathcal{D}|\mu_1,\mu_2)$.
+- The two red circles (peaks) show two maxima in the likelihood function.
+- The two modes (peaks) reflect parameter unidentifiability:
+- The mixture model cannot distinguish between $(\mu_1 = -10, \mu_2 = 10)$ and $(\mu_1 = 10, \mu_2 = -10)$.
+- Swapping the labels of the two Gaussians does not change the likelihood, since both settings generate the same probability distribution.
+- In a mixture model, the likelihood function is symmetric in its parameters.
+- If we swap $\mu_1$ and $\mu_2$, the probability distribution remains the same.
+- This symmetry causes multiple optimal solutions, making it harder for optimization algorithms to converge to a unique answer.
+
+# Challenge of Computing MAP Estimates in Mixture Models
+
+## Non-Convexity of the Likelihood Function
+
+The likelihood function for a mixture model is:
+
+$$
+p(D|\theta) = \prod_{i=1}^{N} \sum_{z_i} p(x_i, z_i|\theta)
+$$
+
+Taking the log-likelihood,
+
+$$
+\log p(D|\theta) = \sum_{i=1}^{N} \log \sum_{z_i} p(x_i, z_i|\theta)
+$$
+
+This function is non-convex
+
+- The logarithm cannot be pushed inside the summation, preventing algebraic simplifications.
+- The log-sum-exp function is convex, and its difference with another convex function is not necessarily convex.
+
+As a result, the likelihood surface has multiple local optima:
+
+- Gradient-based optimization methods (e.g., gradient descent) may converge to different solutions based on initialization.
+
+# References
+
+- Murphy, Kevin P. *Machine learning: a probabilistic perspective*. MIT press, 2012.
+- Chapter 11
+
+# Mixture Models and EM algorithm
+
+- EM Algorithm
+
+Dr. Neha Arora
+CSE, RAIT
+
+Advanced Machine Learning
+
+# EM Algorithm
+
+# EM Algorithm
+
+- EM is used when:
+- Your data comes from multiple distributions
+- But you don't know which data point came from which distribution
+- This is exactly the case in a
+- Gaussian Mixture Model (GMM) In a GMM, data is generated from multiple normal distributions, but the labels are hidden.
+
+# Intuition
+
+- Scenario 1
+- [1, 2, X] are draws from N(1,1)
+- What is the best Guess for x?
+- X=1, Maximum Likelihood Estimation
+
+- Scenario 2
+- [0,1,2] are draws from N(μ,1)
+- What is the best guess for μ?
+- μ=1 as the average of 0,1,2 is 1.
+
+# Intuition Continued
+
+- Scenario 3
+- [1, 2, X] are draws from N(μ,1)
+- What is the best Guess for x and μ?
+- Difficult?
+
+# Solution
+
+- Method Assume X, Calculate $\mu$.
+- Do the iterations until it converges
+
+# EM Algorithm: Coin Toss Example
+
+The Expectation-Maximization (EM) algorithm is used to estimate the individual biases of two coins when it is unknown which coin was used for each series of tosses. This is a classic example of using EM to find maximum likelihood estimates in the presence of hidden or latent variables (in this case, the identity of the coin used for each experiment).
+
+# EM Algorithm Coin Toss Example
+
+- Suppose we want to learn about the probability of Two Coins A and Coin B.
+- Let $\theta_{\mathrm{A}}$ is the probability of heads from flip of coin A.
+- Let $\theta_{\mathrm{B}}$ is the probability of heads from flip of coin B.
+- We observe Four Sequences from Coin A and Coin B.
+- Two from Both.
+
+![img-16.jpeg](img-16.jpeg)
+
+# EM Algorithm Example (Maximum Likelihood Estimate)
+
+|  Coin A | Coin B  |
+| --- | --- |
+|  $$\text{Θ}_A = 0.7$$ | $$\text{Θ}_B = 0.2$$  |
+|  HHTHH | HTTHT  |
+|  HTHTH | TTTTT  |
+
+# Case 2:
+
+- We don't know which sequence from which Coin
+- It is difficult to find out $\theta_{\mathrm{B}}, \theta_{\mathrm{A}}$
+
+- In these scenario we will use EM algorithm.
+- Two Steps- (General Idea)
+- Guess which sequence is from which coin
+- Estimate the $\theta_{\mathrm{B}}, \theta_{\mathrm{A}}$
+
+HHTHH
+HTTHT
+HTHTH
+TTTTT
+
+# EM Algorithm
+
+- E-Step (Expectation Step)
+- Compute the expected value of the latent variables using current parameter estimates.
+
+- M-Step (Maximization Step)
+- Update parameters to maximize the expected likelihood:
+
+# EM Algorithm
+
+- Initialize parameters $\theta^{(0)}$
+- E-step → compute responsibilities
+- M-step → update parameters
+- Repeat until convergence
+
+# Example
+
+We'll use 4 sequences of 10 coin flips.
+
+1. HTTHTTTTTT → 3 heads
+2. THTTTTTTHH → 4 heads
+3. HHTHTHTHTH → 7 heads
+4. HHHTHHHHH → 9 heads
+
+|  Heads | Tails  |
+| --- | --- |
+|  H | T  |
+|  3 | 7  |
+|  4 | 6  |
+|  7 | 3  |
+|  9 | 1  |
+
+# Step 1
+
+$\diamond$ Step 1: Random Guess  $\hat{\theta}_{A}^{(1)} = 0.7$ $\hat{\theta}_{B}^{(1)} = 0.2$
+
+|  Heads | Tails | Likelihood with coin A | Likelihood with coin B  |
+| --- | --- | --- | --- |
+|  H | T | $$(\hat{\theta}_A)^H \times (1 - \hat{\theta}_A)^T$$ | $$(\hat{\theta}_B)^H \times (1 - \hat{\theta}_B)^T$$  |
+|  3 | 7 | 0.000075 | 0.001678  |
+|  4 | 6 | 0.000175 | 0.000419  |
+|  7 | 3 | 0.002224 | 0.0000066  |
+|  9 | 1 | 0.012106 | 0.0000004  |
+
+Binomial Formula
+$$0.7^3 \times 0.3^7 = 0.000075$$
+$$0.2^3 \times 0.8^7 = 0.001678$$
+
+# EM Algorithm
+
+For any event  $A \cdot P(A \mid X_i) = \frac{P(X_i \mid A)P(A)}{P(X_i)}$
+
+$X_{i} =$  observed data point
+
+$A =$  component A
+
+$P(A \mid X_i) =$  posterior probability (responsibility in EM)
+
+$P(X_{i}\mid A) =$  likelihood
+
+$P(A) =$  prior
+
+Important: This term:  $P(A \mid X_i)$  is called the responsibility in EM.
+
+Since there are only two components (A and B):
+
+$$
+P \left(X _ {i}\right) = P \left(X _ {i} \mid A\right) P (A) + P \left(X _ {i} \mid B\right) P (B)
+$$
+
+This comes from the Law of Total Probability.
+
+So,
+
+$$
+P (A \mid X _ {i}) = \frac {P (X _ {i} \mid A) P (A)}{P (X _ {i} \mid A) P (A) + P (X _ {i} \mid B) P (B)}
+$$
+
+# EM Algorithm: Calculating Responsibility Assuming Prior Prob  $P(A) = P(B)$
+
+We can convert the likelihoods into probabilities with Bayes' rule
+
+$$
+\begin{array}{l} P (A \mid X _ {i}, \hat {\theta} ^ {(t)}) \\ = \frac {P \left(X _ {i} \mid \hat {\theta} _ {A} ^ {(t)}\right) \times P (A)}{P \left(X _ {i} \mid \hat {\theta} ^ {(t)}\right) \times P (A) + P \left(X _ {i} \mid \hat {\theta} _ {B} ^ {(t)}\right) \times P (B)} \\ = \frac {P (X _ {i} | \hat {\theta} _ {A} ^ {(t)}) \times \frac {1}{2}}{P (X _ {i} | \hat {\theta} ^ {(t)}) \times \frac {1}{2} + P (X _ {i} | \hat {\theta} _ {B} ^ {(t)}) \times \frac {1}{2}} \\ \end{array}
+$$
+
+We can use Bayes' theorem, with an equal prior probability, to compute the probability
+
+# EM Algorithm: Assuming $P(A) = P(B)$
+
+We can convert the likelihoods into probabilities with Bayes' rule
+
+$$
+\begin{array}{l}
+P(A \mid X_i, \hat{\theta}^{(t)}) \\
+= \frac{P(X_i \mid \hat{\theta}_A^{(t)}) \times P(A)}{P(X_i \mid \hat{\theta}^{(t)}) \times P(A) + P(X_i \mid \hat{\theta}_B^{(t)}) \times P(B)} \\
+= \frac{P(X_i \mid \hat{\theta}_A^{(t)}) \times \frac{1}{2}}{P(X_i \mid \hat{\theta}^{(t)}) \times \frac{1}{2} + P(X_i \mid \hat{\theta}_B^{(t)}) \times \frac{1}{2}} \\
+= \frac{L(A)}{L(A) + L(B)}
+\end{array}
+$$
+
+We can compute these numbers exactly:
+
+$$
+\frac{0.000075}{0.000075 + 0.001678} = 0.0428
+$$
+
+$$
+\frac{0.001678}{0.000075 + 0.001678} = 0.9572
+$$
+
+# EM Algorithm
+
+|  Heads | Tails | Likelihood with coin A | Likelihood with coin B | Prob(Coin A) | Prob(Coin B)  |
+| --- | --- | --- | --- | --- | --- |
+|  H | T | $$(\hat{\theta}_A')^H \times (1 - \hat{\theta}_A')^T$$ | $$(\hat{\theta}_B')^H \times (1 - \hat{\theta}_B')^T$$ | $$\frac{L(A)}{L(A) + L(B)}$$ | $$\frac{L(B)}{L(A) + L(B)}$$  |
+|  3 | 7 | 0.000075 | 0.001678 | 0.0428 | 0.9572  |
+|  4 | 6 | 0.000175 | 0.000419 | 0.2944 | 0.7056  |
+|  7 | 3 | 0.002224 | 0.0000066 | 0.997 | 0.003  |
+|  9 | 1 | 0.012106 | 0.0000004 | 0.99997 | 0.00003  |
+
+# EM Algorithm
+
+|  Heads | Tails | Likelihood with coin A | Likelihood with coin B | Prob(Coin A) | Prob(Coin B) | Heads/Tails Attributed to Coin A | Heads /Tails Attributed to Coin B  |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+|  H | T | $$(\hat{\theta}_A)^H \times (1 - \hat{\theta}_A)^T$$ | $$(\hat{\theta}_B)^H \times (1 - \hat{\theta}_B)^T$$ | $$\frac{L(A)}{L(A) + L(B)}$$ | $$\frac{L(B)}{L(A) + L(B)}$$ | $$H \times P(A)$$
+$$T \times P(A)$$ | $$H \times P(B)$$
+$$T \times P(B)$$  |
+|  3 | 7 | 0.000075 | 0.001678 | 0.0428 | 0.9572 | 0.128H
+0.3T | 2.87H
+6.7T  |
+|  4 | 6 | 0.000175 | 0.000419 | 0.2944 | 0.7056 | 1.178H
+1.767T | 2.822H
+4.233T  |
+|  7 | 3 | 0.002224 | 0.0000066 | 0.997 | 0.003 | 6.979H
+2.99T | 0.02H
+0.0088T  |
+|  9 | 1 | 0.012106 | 0.0000004 | 0.99997 | 0.00003 | 8.9997H
+0.99996T | 0.0003H
+0.0003T  |
+
+# Total Number of Heads/Tails Attributed to Coin A and Coin B
+
+|  Heads | Tails | Likelihood with coin A | Likelihood with coin B | Prob(Coin A) | Prob(Coin B) | Heads/Tails Attributed to Coin A | Heads /Tails Attributed to Coin B  |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+|  H | T | $$(\hat{\theta}_A')^H \times (1 - \hat{\theta}_A')^T$$ | $$(\hat{\theta}_B)^H \times (1 - \hat{\theta}_B)^T$$ | $$\frac{L(A)}{L(A) + L(B)}$$ | $$\frac{L(B)}{L(A) + L(B)}$$ | $$H \times P(A)$$
+$$T \times P(A)$$ | $$H \times P(B)$$
+$$T \times P(B)$$  |
+|  3 | 7 | 0.000075 | 0.001678 | 0.0428 | 0.9572 | 0.128H
+0.3T | 2.87H
+6.7T  |
+|  4 | 6 | 0.000175 | 0.000419 | 0.2944 | 0.7056 | 1.178H
+1.767T | 2.822H
+4.233T  |
+|  7 | 3 | 0.002224 | 0.0000066 | 0.997 | 0.003 | 6.979H
+2.99T | 0.02H
+0.0088T  |
+|  9 | 1 | 0.012106 | 0.0000004 | 0.99997 | 0.00003 | 8.9997H
+0.99996T | 0.0003H
+0.0003T  |
+|  $$\hat{\theta}_A^{(1)} = 0.7 \quad \hat{\theta}_B^{(1)} = 0.2$$ | $$\hat{\theta}_A^{(2)} = \frac{17.285}{17.285 + 6.057} = 0.74$$  |
+| --- | --- |
+|   |  $$\hat{\theta}_B^{(2)} = \frac{5.715}{5.715 + 10.943} = 0.343$$  |
+
+# Second Iteration
+
+|  Heads | Tails | Likelihood with coin A | Likelihood with coin B | Prob(Coin A) | Prob(Coin B) | Heads/Tails Attributed to Coin A | Heads /Tails Attributed to Coin B  |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+|  H | T | $$(\hat{\theta}_A')^H \times (1 - \hat{\theta}_A')^T$$ | $$(\hat{\theta}_B')^H \times (1 - \hat{\theta}_B')^T$$ | $$\frac{L(A)}{L(A) + L(B)}$$ | $$\frac{L(B)}{L(A) + L(B)}$$ | $$H \times P(A)$$
+$$T \times P(A)$$ | $$H \times P(B)$$
+$$T \times P(B)$$  |
+|  3 | 7 | 0.000032 | 0.00213 | 0.015 | 0.985 | 0.044H
+0.1T | 2.96H
+6.9T  |
+|  4 | 6 | 0.00009 | 0.0011 | 0.076 | 0.924 | 0.3H
+0.46T | 3.7H
+5.54T  |
+|  7 | 3 | 0.002 | 0.000159 | 0.931 | 0.069 | 6.52H
+2.79T | 0.484H
+0.208T  |
+|  9 | 1 | 0.0174 | 0.00004 | 0.9975 | 0.0025 | 8.978H
+0.998T | 0.022H
+0.024T  |
+|   |  |  |  |  |  | 15.84H
+4.35T | 7.157H
+12.649T  |
+
+$$
+\hat{\theta}_A^{(2)} = 0.74 \quad \hat{\theta}_B^{(2)} = 0.343
+$$
+
+Portion out the heads and tails between the coins.
+
+Third Iteration
+
+$$
+\hat{\theta}_A^{(3)} = \frac{15.84}{15.84 + 4.35} = 0.785
+$$
+
+$$
+\hat{\theta}_B^{(3)} = \frac{7.157}{7.157 + 12.649} = 0.361
+$$
+
+# Repeat
+
+- Repeat this process over and over again until $\theta_{A}, \theta_{B}$ stops changing
+- Or the Output converges.
+- Eventually outputs stop changing and Output converges.
+- We will reach a local optimum in 10 iterations
+
+$$
+\hat{\theta}_{A}^{(10)} = 0.801 \quad \hat{\theta}_{B}^{(10)} = 0.3715
+$$
+
+# EM Algorithm in Machine Learning
+
+- The Expectation-Maximization (EM) algorithm is a powerful iterative optimization technique used to estimate unknown parameters in probabilistic models, particularly when the data is incomplete, noisy or contains hidden (latent) variables. It works in two steps:
+- **E-step (Expectation Step)**: Using the current parameter estimates, the algorithm calculates the expected values of the missing or hidden variables. Essentially, it assigns probabilities or "responsibilities" to different hidden outcomes given the observed data.
+- **M-step (Maximization Step)**: With these updated expectations from the E-step, the algorithm then re-estimates the model parameters by maximizing the expected log-likelihood. This improves how well the model explains the observed data.
+- These two steps are repeated until convergence, which typically means that:
+- The parameter values stop changing significantly, or
+- The log-likelihood improves only by a negligible amount.
+
+# EM Algorithm Step-by-Step
+
+Suppose you have 5 height measurements from a mixed population (say, males and females), and you want to identify the two clusters (males and females) and estimate their mean height and variance using the EM Algorithm.
+
+- The height data (in cm):
+- $x = \{158,170,165,180,175\}$
+
+Assume:
+
+- There are 2 clusters (K=2) → Cluster 1 (Females) and Cluster 2 (Males)
+- We do not know which height belongs to which cluster.
+- The data is drawn from two Gaussian Distributions with unknown mean $\mu$ and variance $\sigma^2$.
+
+# EM Algorithm Step-by-Step
+
+## Step 1: Initialize the Parameters (Random Guess)
+
+- Since we have no prior knowledge about the clusters, we start with random initial estimates:
+
+|  Parameter | Cluster 1 (Female) | Cluster 2 (Male)  |
+| --- | --- | --- |
+|  Mean (μ) | 160 cm | 1/5 cm  |
+|  Variance (σ²) | 25 | 25  |
+|  Mixing Coefficient (π) | 0.5 | 0.5  |
+
+# EM Algorithm Step-by-Step : Expectation Step (E-Step)
+
+In this step, we calculate the responsibilities, i.e., the probability that each height belongs to Cluster 1 (Female) or Cluster 2 (Male).
+
+The formula for the Gaussian distribution is:  $p(x|\mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}$
+
+For the first height:  $x_{1} = 158$
+
+- For Cluster 1 (Female):  $p(158|\mu_1 = 160, \sigma_1^2 = 25) = \frac{1}{\sqrt{2\pi \times 25}} e^{-\frac{(158 - 160)^2}{2 \times 25}}$
+- Calculating it:  $p(158|Female) = \frac{1}{\sqrt{157.08}} e^{-\frac{4}{50}} = 0.0798$
+- For Cluster 2 (Male):
+- $p\left(158 \mid \mu_2 = 175, \sigma_2^2 = 25\right) = \frac{1}{\sqrt{157.08}} e^{-\frac{289}{50}} = 0.00006$
+
+# EM Algorithm Step-by-Step : Expectation Step (E-Step)
+
+## Step 2.1: Calculate the Gaussian Probability for Each Point
+
+In this step, we calculate the responsibilities, i.e., the probability that each height belongs to Cluster 1 (Female) or Cluster 2 (Male).
+
+The formula for the Gaussian distribution is: $p(x|\mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}$
+
+For the first height: $x_1 = 158$
+
+- For Cluster 1 (Female): $p(158|\mu_1 = 160, \sigma_1^2 = 25) = \frac{1}{\sqrt{2\pi \times 25}} e^{-\frac{(158 - 160)^2}{2 \times 25}}$
+- Calculating it: $p(158|Female) = \frac{1}{\sqrt{157.08}} e^{-\frac{4}{50}} = 0.0798$
+- For Cluster 2 (Male):
+- $p\left(158 \mid \mu_2 = 175, \sigma_2^2 = 25\right) = \frac{1}{\sqrt{157.08}} e^{-\frac{289}{50}} = 0.00006$
+
+# EM Algorithm Step-by-Step : Expectation Step (E-Step)
+
+## Step 2.2: Calculate the Posterior Probability (Responsibilities)
+
+- The formula for the **responsibility** is given by Bayes' Theorem:
+$$
+r_{i1} = \frac{\pi_1 p(x_i | \mu_1, \sigma_1^2)}{\pi_1 p(x_i | \mu_1, \sigma_1^2) + \pi_2 p(x_i | \mu_2, \sigma_2^2)}
+$$
+- For $x_1 = 158$: $r_{1,1} = \frac{0.5 \times 0.0798}{0.5 \times 0.0798 + 0.5 \times 0.00006} \approx 0.9992$
+- This means **point 158 cm** is **99.92%** likely to belong to Cluster 1 (Female).
+- Similarly, compute the **responsibility** for all 5 points.
+
+|  Height (cm) | (p(x/Female)) | (p(x / Male)) | Responsibility (r_{i1})  |
+| --- | --- | --- | --- |
+|  158 | 0.0798 | 0.00006 | 0.9992  |
+|  170 | 0.0594 | 0.0439 | 0.575  |
+|  165 | 0.0716 | 0.0207 | 0.775  |
+|  180 | 0.0146 | 0.0549 | 0.208  |
+|  175 | 0.0266 | 0.0484 | 0.355  |
+
+# EM Algorithm Step-by-Step : Expectation Step (E-Step)
+
+## Step 3 : Compute the Expected Log-Likelihood (Optional)
+
+- The expected log-likelihood is computed as:
+$$
+Q(\theta, \theta^{(t-1)}) = \sum_{i=1}^{N} \sum_{k=1}^{K} r_{ik} \left[ \log(\pi_k) + \log(p(x_i | \mu_k, \sigma_k^2)) \right]
+$$
+- It's essentially maximizing the probability based on the calculated responsibilities.
+
+# EM Algorithm Step-by-Step : Expectation Step (E-Step)
+
+## Step 4: Maximization Step (M-Step)
+
+- In this step, we update the parameters $(\mu, \sigma^2, \pi)$ using the responsibilities
+- Step 4.1: Update Mixing Coefficient $(\pi_k)$
+- The new mixing coefficient (prior) is:
+$$
+\pi_k = \frac{\sum_{i=1}^{N} r_{ik}}{N}
+$$
+- For Cluster 1:
+$$
+\pi_1 = \frac{0.9992 + 0.575 + 0.775 + 0.208 + 0.355}{5}
+$$
+$$
+\pi_1 = \frac{2.9122}{5}
+$$
+$$
+\pi_1 = 0.582
+$$
+- So the new prior probability for Cluster 1 is $58.2\%$.
+
+# EM Algorithm Step-by-Step : Expectation Step (E-Step)
+
+Step 4: Maximization Step (M-Step)
+
+Step 4.2: Update the Mean $(\mu_k)$
+
+- The new mean is calculated as a weighted average:
+$$
+\mu_k = \frac{\sum_{i=1}^{N} r_{ik} x_i}{\sum_{i=1}^{N} r_{ik}}
+$$
+
+- For Cluster 1 (Female):
+$$
+\mu_1 = \frac{(0.9992 \times 158) + (0.575 \times 170) + (0.775 \times 165) + \dots}{2.9122}
+$$
+$$
+\mu_1 \approx 163.4
+$$
+
+- For Cluster 2 (Male):
+$$
+\mu_2 = \frac{(0.0008 \times 158) + (0.425 \times 170) + \dots}{2.0878}
+$$
+$$
+\mu_2 \approx 177.6
+$$
+
+# EM Algorithm Step-by-Step : Expectation Step (E-Step)
+
+Step 4: Maximization Step (M-Step)
+
+- Step 4.3: Update the Variance $(\sigma_k^2)$
+- The new variance is:
+$$
+\sigma_k^2 = \frac{\sum_{i=1}^{N} r_{ik} (x_i - \mu_k)^2}{\sum_{i=1}^{N} r_{ik}}
+$$
+
+- For Cluster 1:
+$$
+\sigma_1^2 = \frac{(0.9992 \times (158 - 163.4)^2) + \dots}{2.9122}
+$$
+$$
+\sigma_1^2 \approx 18.6
+$$
+
+- For Cluster 2:
+$$
+\sigma_2^2 \approx 20.4
+$$
+
+# EM Algorithm Step-by-Step : Expectation Step (E-Step)
+
+- Step 5: Repeat E-Step and M-Step
+- Use the new means, variances, and priors to recalculate responsibilities (E-step).
+- Again maximize the log-likelihood (M-step).
+- Repeat until convergence.
+
+Result: after 3 Transitions
+
+|  Cluster | Mean (μ) | Variance (σ²) | Mixing Coefficient (π)  |
+| --- | --- | --- | --- |
+|  Cluster 1 (Female) | 162.5 cm | 19.4 | 0.56  |
+|  Cluster 2 (Male) | 177.2 cm | 22.1 | 0.44  |
+
+# EM Algorithm Step-by-Step : Expectation Step (E-Step)
+
+- Step 5: Repeat E-Step and M-Step
+- Use the new means, variances, and priors to recalculate responsibilities (E-step).
+- Again maximize the log-likelihood (M-step).
+- Repeat until convergence.
+
+Result: after 3 Transitions
+
+|  Cluster | Mean (μ) | Variance (σ²) | Mixing Coefficient (π)  |
+| --- | --- | --- | --- |
+|  Cluster 1 (Female) | 162.5 cm | 19.4 | 0.56  |
+|  Cluster 2 (Male) | 177.2 cm | 22.1 | 0.44  |
+
+The EM Algorithm automatically separated the data into two clusters based on height without any labels.
+
+# References
+
+- Murphy, Kevin P. *Machine learning: a probabilistic perspective*. MIT press, 2012.
+- Chapter 11
+
+# EM Algorithm
+
+## Mixing Coefficients as Prior Probabilities
+
+We can interpret mixing coefficients as prior probabilities of components:
+
+$$
+P(k) = \pi_k
+$$
+
+## Responsibilities (Posterior Probabilities)
+
+The responsibility of component $k$ for data point $x$ is:
+
+$$
+\gamma_k(x) = P(k \mid x)
+$$
+
+## Using Bayes' theorem:
+
+$$
+P(k \mid x) = \frac{P(k) P(x \mid k)}{P(x)}
+$$
+
+# EM Algorithm
+
+- Substituting GMM terms:
+$$
+\gamma_k(x) = \frac{\pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k)}{\sum_{j=1}^{K} \pi_j \mathcal{N}(x \mid \mu_j, \Sigma_j)}
+$$
+
+- Mixture Density (Denominator)
+- $P(x) = \sum_{j=1}^{K} \pi_j \mathcal{N}(x \mid \mu_j, \Sigma_j)$
+
+- Mixing Coefficients (Empirical Form)
+- $\pi_k = \frac{N_k}{N}$
+- where:
+- $N_k$ = number of points assigned to cluster $k$
+- $N$ = total number of data points
+
+# EM Algorithm
+
+- In EM, $N_k$ becomes soft count:
+- $N_k = \sum_{n=1}^{N} \gamma_k(x_n)$
+
+- EM: Iterative Optimization Techn
+- $\diamond$ Estimation Step:
+- $\diamond$ Maximization Step
+
+![img-17.jpeg](img-17.jpeg)
+
+# EM Algorithm
+
+## Estimation Step (E-Step)
+- For given parameter values, we compute the expected values of the latent variable.
+- Responsibilities
+
+## Maximization Step (M-Step)
+- Update the parameters of the model based on the latent variables calculated using the Maximum Likelihood (ML) method.
+
+## Parameters Updated
+- $\mu, \Sigma, \pi$ Where:
+- $\mu$ = Mean vectors
+- $\Sigma$ = Covariance matrices
+- $\pi$ = Mixing coefficients
+
+# EM Algorithm for GMM
+
+## Initialization (Random Values)
+
+- Initialize the means $\mu_j$, covariance matrices $\Sigma_j$, and mixing coefficients $\pi_j$.
+- Evaluate the initial likelihood values.
+
+## E-Step (Expectation Step)
+
+- Evaluate the responsibilities using the current parameter values.
+
+$$
+\gamma_j(x) = \frac{\pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k)}{\sum_{j=1}^{K} \pi_j \mathcal{N}(x \mid \mu_j, \Sigma_j)}
+$$
+
+where:
+
+- $\gamma_j(x)$ = responsibility of component $j$ for data point $x$
+- $\pi_j$ = mixing coefficient
+- $\mathcal{N}(x \mid \mu_j, \Sigma_j)$ = Gaussian density
+- $K$ = number of mixture components
+
+# Maximization Step
+
+- Update Mean
+$$
+\mu_j = \frac{\sum_{n=1}^{N} \gamma_j(x_n) x_n}{\sum_{n=1}^{N} \gamma_j(x_n)}
+$$
+
+- Update Covariance
+$$
+\Sigma_j = \frac{\sum_{n=1}^{N} \gamma_j(x_n) (x_n - \mu_j)(x_n - \mu_j)^T}{\sum_{n=1}^{N} \gamma_j(x_n)}
+$$
+
+- Update Mixing Coefficients
+$$
+\pi_j = \frac{1}{N} \sum_{n=1}^{N} \gamma_j(x_n)
+$$
+
+# Convergence: Evaluate log likelihood (Optional)
+
+$$
+\ln p (X \mid \mu , \Sigma , \pi) = \sum_ {n = 1} ^ {N} \ln \left\{\sum_ {k = 1} ^ {K} \pi_ {k} \mathcal {N} (x _ {n} \mid \mu_ {k}, \Sigma_ {k}) \right\}
+$$
+
+If there is no convergence
+
+→ return to Step 2,
+
+If there is not much change in parameters, in successive iterations, it is assumed to be converged
+
+# EM Algorithm: Example
+
+![img-18.jpeg](img-18.jpeg)
+EM Algorithm : Example
+
+![img-19.jpeg](img-19.jpeg)
+
+![img-20.jpeg](img-20.jpeg)
+(a)
+
+![img-21.jpeg](img-21.jpeg)
+(b)
+
+![img-22.jpeg](img-22.jpeg)
+(c)
+
+![img-23.jpeg](img-23.jpeg)
+(d)
+
+![img-24.jpeg](img-24.jpeg)
+(e)
+
+![img-25.jpeg](img-25.jpeg)
+(f)
+Figure 11.11 Illustration of the EM for a GMM applied to the Old Faithful data. (a) Initial (random) values of the parameters. (b) Posterior responsibility of each point computed in the first E step. The degree of redness indicates the degree to which the point belongs to the red cluster, and similarly for blue; this purple points have a roughly uniform posterior over clusters. (c) We show the updated parameters after the first M step. (d) After 3 iterations. (e) After 5 iterations. (f) After 16 iterations. Based on (Bishop 2006a) Figure 9.8. Figure generated by mixGaussDemoFaithful.
+
+# Mixture Models and EM algorithm
+
+- EM for Mixture of Experts (MOEs)
+
+Dr. Neha Arora
+
+Advanced Machine Learning
+
+# Expectation-Maximization (EM) for Gaussian Mixture Models (GMMs)
+
+# EM for GMMs
+
+- Expectation-Maximization (EM) algorithm is used to fit Gaussian Mixture Models (GMMs) when the data has multiple clusters but the cluster labels are hidden (latent variables).
+- It iteratively estimates the most likely cluster assignments and updates the Gaussian parameters.
+- EM is guaranteed to increase the likelihood at each iteration.
+- It finds a local maximum, so initialization matters.
+- The process generalizes to higher dimensions and different mixture models.
+
+# Mixture of Gaussians (MoG)
+
+When assumed the data follows a mixture of $K$ Gaussians:
+
+$$
+p(x) = \sum_{k=1}^{K} \pi_k \mathcal{M}(x \mid \mu_k, \Sigma_k)
+$$
+
+$\pi_k$ is the mixing coefficient (probability of cluster $k$, summing to 1),
+
+$\mathcal{M}(x \mid \mu_k, \Sigma_k)$ is the Gaussian probability density function with mean $\mu_k$ and covariance $\Sigma_k$.
+
+The goal is to estimate $\pi_k, \mu_k,$ and $\Sigma_k$ given only the observed data $x_1, x_2, \ldots, x_N$
+
+# EM Algorithm (MoG)
+
+EM is an iterative algorithm that alternates between:
+
+- **E-step (Expectation)**: Estimate the probability (responsibility) that each data point belongs to each cluster.
+- **M-step (Maximization)**: Update the parameters $\pi_k, \mu_k, \Sigma_k$ using these probabilities.
+
+To derive the EM updates, define the **expected complete log-likelihood function** as
+
+$$
+Q(\theta, \theta^{(t-1)}) = \sum_{i=1}^{N} \mathbb{E}_{z \mid x, \theta^{(t-1)}}[\log p(x_i, z_i \mid \theta)]
+$$
+
+$$
+Q(\theta, \theta^{(t-1)}) = \sum_{i=1}^{N} \sum_{k=1}^{K} p\left(z_i = k \mid x_i, \theta^{(t-1)}\right) \log\left[\pi_k p(x_i \mid \theta_k)\right]
+$$
+
+$\Delta p(z_i = k \mid x_i, \theta^{(t-1)})$ is the probability that point $x_i$ belongs to cluster $k$, known as **responsibility** $r_{ik}$.
+
+# EM Algorithm for GMM (MoG)
+
+## E-Step (Expectation Step)
+
+Compute the responsibility $r_{ik}$, which is the probability that point $x_i$ belongs to cluster $k$, using Bayes' Theorem:
+
+$$
+\pi_{ik} = p(z_i = k \mid x_i, \theta^{(t-1)}) = \frac{\pi_k^{(t-1)} p(x_i \mid \mu_k^{(t-1)}, \Sigma_k^{(t-1)})}{\sum_{j=1}^{K} \pi_j^{(t-1)} p(x_i \mid \mu_j^{(t-1)}, \Sigma_j^{(t-1)})}
+$$
+
+$\vartheta p(x_i \mid \mu_k, \Sigma_k)$ is the Gaussian density function.
+
+# EM Algorithm for GMM.. (MoG)
+
+## M-Step (Maximization Step)
+
+Update the parameters $\pi_k, \mu_k, \Sigma_k$ to maximize the expected log-likelihood.
+
+- Update Mixing Coefficient $(\pi_k)$ : $\pi_k = \frac{1}{N} \sum_{i=1}^{N} r_{ik}$
+- This ensures the mixing coefficients sum to 1.
+
+- Update Mean $(\mu_k)$ : $\mu_k = \frac{\sum_{i=1}^{N} r_{ik} x_i}{\sum_{i=1}^{N} r_{ik}}$
+- This is the weighted mean of points assigned to cluster $k$.
+
+- Update Covariance $(\Sigma_k)$ : $\Sigma_k = \frac{\sum_{i=1}^{N} r_{ik} (x_i - \mu_k)(x_i - \mu_k)^T}{\sum_{i=1}^{N} r_{ik}}$
+- This is the weighted scatter matrix.
+
+After updating parameters, iterate again by computing new responsibilities in the E-step.
+
+# Applying EM to a 1D GMM
+
+Assume six data points: $X = [1.2,1.8,2.5,5.0,5.5,6.1]$
+
+Assume a two-component GMM ($K = 2$) with initial values:
+
+- $\pi_1 = 0.5, \mu_1 = 2, \Sigma_1 = 1$
+- $\pi_2 = 0.5, \mu_2 = 5, \Sigma_2 = 1$
+
+## Iteration 1:
+
+### E-Step: Compute Responsibilities
+
+Using the Gaussian PDF, compute $p(x_i|\mu_k,\Sigma_k)$ for each data point and cluster.
+
+$$
+r_{ik} = \frac{\pi_k p(x_i|\mu_k,\Sigma_k)}{\sum_{j=1}^{K} \pi_j p(x_i|\mu_j,\Sigma_j)}
+$$
+
+For example, for $x = 1.2$:
+
+- $p(1.2|\mu_1 = 2, \Sigma_1 = 1) = 0.29, p(1.2|\mu_2 = 5, \Sigma_2 = 1) = 0.01$
+- $r_{11} = \frac{0.5 \times 0.29}{(0.5 \times 0.29) + (0.5 \times 0.01)} = 0.97, r_{12} = 1 - 0.97 = 0.03$
+
+Repeating this for all $x_i$, we obtain all responsibilities.
+
+# Applying EM to a 1D GMM..
+
+## M-Step: Update Parameters
+
+- Using the updated responsibilities:
+- $\pi_k = \frac{1}{N} \sum_{i=1}^{N} r_{ik}$
+- $\mu_k = \frac{\sum_{i=1}^{N} r_{ik} x_i}{\sum_{i=1}^{N} r_{ik}}$
+- $\sum_k = \frac{\sum_{i=1}^{N} r_{ik} (x_i - \mu_k)^2}{\sum_{i=1}^{N} r_{ik}}$
+
+After updating $\pi_k, \mu_k, \sum_k$, repeat the E-step and M-step until convergence
+
+# Applying EM to a 1D GMM..
+
+## Summary (Very Important)
+
+### Point 1
+
+- E-Step: Compute responsibilities $r_{ik}$ using the current parameters.
+- M-Step: Compute new parameters $(\pi_k, \mu_k, \Sigma_k)$ using these responsibilities.
+- Repeat until convergence.
+
+### Point 2
+
+- The weights $\pi_k$ affect the area under each Gaussian curve in the plot, not the height.
+- The means $\mu_k$ determine where each Gaussian is centered.
+
+# Expectation-Maximization (EM) for Mixture of Experts (MoEs)
+
+# Mixture of Experts (MoEs)
+
+- Mixture of Experts (MoE) model is a type of mixture model where each component is a different expert (typically a regression model), and a gating function determines the probability of selecting each expert.
+- The EM algorithm is used to optimize this model, similar to Gaussian Mixture Models (GMMs), but with some key differences.
+
+# EM for MoE
+
+- EM in a Mixture of Experts model is to find the best parameters for both the experts (regression models) and the gating function that determines which expert is responsible for which data point.
+- Expected Complete Data Log-Likelihood (Q-function)
+- E-step: Computing Responsibilities
+- M-step: Updating Parameters
+
+# Expected Complete Data Log-Likelihood (Q-function)
+
+The expected complete data log-likelihood is given by:
+
+$$
+\Leftrightarrow Q\left(\theta, \theta^{\text{old}}\right) = \sum_{i=1}^{N} \sum_{k=1}^{K} r_{ik} \log\left[\pi_{ik} N(y_i | w_k^T x_i, \sigma_k^2)\right]
+$$
+
+- $r_{ik}$ is the responsibility of expert $k$ for data point $i$.
+- $\pi_{ik}$ is the mixing probability (gating function output) for expert $k$.
+- $N(y_i | w_k^T x_i, \sigma_k^2)$ is the Gaussian likelihood for expert $k$.
+- $w_k$ are the parameters (weights) for the expert $k$, and $\sigma_k^2$ is its variance.
+
+# E-step: Computing Responsibilities
+
+In the E-step, compute the probability that each data point $x_i$ belongs to expert $k$.
+
+The formula is: $r_{ik} = \frac{\pi_{ik} N(y_i | w_k^T x_i, \sigma_k^2)}{\sum_{j=1}^{K} \pi_{ij} N(y_i | w_j^T x_i, \sigma_j^2)}$
+
+This is similar to the responsibility computation in GMMs, but:
+
+- $\pi_{ik}$ is not constant across all data points (unlike GMMs where mixing proportions $\pi_k$ are fixed). Instead, it depends on the gating function: $\pi_{i,k} = S(V^T x_i)_k$
+- $S(\cdot)$ is the softmax function, and $V$ represents the parameters of the gating function.
+
+The numerator represents the likelihood that expert $k$ generated $y_i$.
+
+# M-step: Updating Parameters (1)
+
+In the M-step, optimize the parameters for:
+
+- The expert models (regression parameters $w_k$, variance $\sigma_k^2$).
+- The gating function parameters $V$.
+
+Updating Regression Parameters $w_k$
+
+To update $w_k$, maximize the expected log-likelihood for the regression experts:
+
+$$
+Q(\theta_k, \theta^{\mathrm{old}}) = \sum_{i=1}^{N} r_{ik} \left(- \frac{1}{2 \sigma_k^2} (y_i - w_k^T x_i)^2\right)
+$$
+
+This is a weighted least squares problem, where data points are weighted by $r_{ik}$. The solution is:
+
+- $w_k = (X^T R_k X)^{-1} X^T R_k y$
+- $R_k = \mathrm{diag}(r_{:k})$ is a diagonal matrix of responsibilities for expert $k$.
+- $X$ is the matrix of input features.
+- $y$ is the vector of target values.
+
+This means that expert $k$ is trained using the weighted sum of the data points assigned to it.
+
+# M-step: Updating Parameters (2)
+
+## Updating Variance $\sigma_k^2$
+
+- The variance of expert $k$ is updated as: $\sigma_k^2 = \frac{\sum_{i=1}^{N} r_{ik} (y_i - w_k^T x_i)^2}{\sum_{i=1}^{N} r_{ik}}$
+- This is a weighted version of the standard variance formula, where data points with low responsibility contribute less.
+
+## Updating Gating Function Parameters $V$
+
+- Instead of updating mixing coefficients $\pi_k$ directly (as in GMMs), update the gating function parameters $V$, which control the probabilities $\pi_{ik}$.
+- The objective function for $V$ is: $Q(V) = \sum_{i} \sum_{k} r_{ik} \log \pi_{ik}$
+
+This is equivalent to training a multinomial logistic regression model, where:
+
+- $r_{ik}$ acts as the soft labels instead of hard class labels.
+- The model learns the gating probabilities using logistic regression
+
+# Summary: EM for MoE (1)
+
+- E-step: Assign responsibilities to each expert based on how well it explains the data.
+- M-step:
+- Update regression models using weighted least squares.
+- Update variances using weighted residual errors.
+- Update gating function using logistic regression.
+- This process iterates until convergence, refining the experts and the gating function to best fit the data.
+
+# Summary: EM for MoE (2)
+
+- The EM algorithm for the Mixture of Experts (MoE) model extends the traditional GMM framework by introducing:
+- Expert models (regressors) instead of simple Gaussian distributions.
+- A gating function (softmax) that dynamically assigns mixing probabilities.
+- This allows MoE to be a framework for adaptive regression models, where different subsets of the data can be modeled by different experts, and a gating network determines which expert to use based on the input features.
+
+(This is a very important point)
+
+# Differences Between EM for GMMs and MoE
+
+|  Feature | EM for Gaussian Mixture Models (GMMs) | EM for Mixture of Experts (MoE)  |
+| --- | --- | --- |
+|  Model type | Unsupervised clustering | Supervised regression  |
+|  Component type | Gaussian distributions | Regression models  |
+|  Responsibilities $r_{ik}$ | Based on Gaussian densities | Based on both regression likelihood and gating function  |
+|  Mixing probabilities $\pi_k$ | Fixed across all data points | Varies for each data point (dependent on $x_i$)  |
+|  M-step updates | Compute new means and covariances for clusters | Compute new regression parameters and train logistic regression for gating function  |
+
+# References
+
+- Murphy, Kevin P. *Machine learning: a probabilistic perspective*. MIT press, 2012.
+- Chapter 11
+
+# Mixture Models and EM algorithm
+
+- Fitting Models with Missing Data
+- Model Selection for Latent Variable Models
+
+Dr Neha Arora
+
+Advanced Machine Learning
+
+# Fitting Models with Missing Data
+
+# Missing Data
+
+- In many real-world scenarios, datasets are incomplete due to missing values.
+- Missing data can occur due to various reasons, such as sensor failures, survey non-responses, or errors in data collection.
+- Handling missing data is crucial because standard machine learning and statistical methods assume complete data.
+- The Expectation-Maximization (EM) algorithm provides an efficient way to estimate parameters in models when data is missing.
+
+# Issues with Missing Data
+
+Assume that we have a dataset $\mathbf{X}$ with missing values, where each data point $x_{i}$ can be partially observed.
+
+- Define a binary observation indicator matrix $O$, where: $O_{ij} = 1$ if feature $j$ of data point $i$ is observed, $O_{ij} = 0$ if feature $j$ of data point $i$ is missing.
+- The observed (visible) part of the dataset is denoted as $X_{v}$, and the missing (hidden) part as $X_{h}$.
+- Our goal is to find the maximum likelihood estimate (MLE) of the model parameters $\theta$ using the observed data:
+$$
+\hat{\theta} = \arg \max_{\theta} p(X_{v}|\theta, O)
+$$
+$\theta$
+
+Since the likelihood function involves missing data, it is difficult to optimize directly. We use Expectation-Maximization (EM) to
+
+# Expectation-Maximization (EM) Algorithm for Missing Data
+
+The EM algorithm is an iterative method for maximum likelihood estimation in the presence of hidden (missing) data. It consists of two steps:
+
+## Step 1: Expectation Step (E-Step)
+
+- Compute the expected value of the complete-data log-likelihood, given the observed data and the current parameter estimate $\theta^{(t - 1)}$. This involves computing the expected values of missing variables using their posterior distributions.
+- The expected log-likelihood is: $Q(\theta, \theta^{(t - 1)}) = E_{X_h|X_v, \theta^{(t - 1)}}[\log p(X_v, X_h|\theta)]$
+- Since direct maximization of the likelihood is difficult due to missing data, we estimate the missing values using their expected values.
+
+## Maximization Step (M-Step)
+
+- Maximize the expected log-likelihood function $Q(\theta, \theta^{(t - 1)})$ to find updated parameters $\theta^{(t)}$. This step is similar to performing MLE, but instead of the raw data, we use the expected values of missing data computed in the E-step.
+
+The EM algorithm alternates between the E-step and M-step until convergence
+
+# Example: Fitting a Multivariate Normal (MVN) Distribution with Missing Data
+
+Suppose we have a dataset where each data point follows a multivariate normal (Gaussian) distribution:
+
+$$
+\begin{array}{l}
+\pm x_{i} \sim \mathcal{N}(\mu, \Sigma) \\
+\quad \neg \mu \text{ is the mean vector.} \\
+\quad \neg \Sigma \text{ is the covariance matrix.}
+\end{array}
+$$
+
+However, some entries in our dataset are missing. We want to estimate $\mu$ and $\Sigma$ using EM.
+
+## Step 1: Initial Estimation (Starting EM)
+
+Initialize $\mu$ and $\Sigma$ using the fully observed rows of data. If no rows are fully observed, we use an imputation method like mean substitution to get initial estimates.
+
+# Example: Fitting a Multivariate Normal (MVN) Distribution with Missing Data
+
+## Step 2: E-Step (Expectation Computation)
+
+- For each incomplete data point $x_i$, we compute the expected value of the missing components given the observed components.
+- From multivariate Gaussian properties, split the observed and missing parts as: $\begin{bmatrix} x_v \\ x_h \end{bmatrix} \sim \mathcal{N}\left(\begin{bmatrix} \mu_v \\ \mu_h \end{bmatrix}, \begin{bmatrix} \Sigma_{vv} &amp; \Sigma_{vh} \\ \Sigma_{hv} &amp; \Sigma_{hh} \end{bmatrix}\right)$
+- Then the conditional distribution of $x_h$ given $x_v$ is: $x_h|x_v, \theta \sim \mathcal{N}(m_i, V_i)$
+- $m_i = \mu_h + \Sigma_{hv}\Sigma_{vv}^{-1}(x_v - \mu_v)$
+- $V_i = \Sigma_{hh} - \Sigma_{hv}\Sigma_{vv}^{-1}\Sigma_{vh}$
+- Thus, the missing values are estimated as their conditional mean $m_i$. Compute the expected sufficient statistics:
+- $E[x_i] = (m_i, x_v)$
+- $E[x_i x_i^T] = \begin{bmatrix} E[x_h x_h^T] &amp; E[x_h] x_v^T \\ x_v E[x_h]^T &amp; x_v x_v^T \end{bmatrix}$
+- where: $E[x_h x_h^T] = m_i m_i^T + V_i$
+
+# Example: Fitting a Multivariate Normal (MVN) Distribution with Missing Data
+
+## Step 3: M-Step (Updating Parameters)
+
+- Using the expected sufficient statistics, update $\mu$ and $\Sigma$:
+- $\mu^{(t)} = \frac{1}{N}\sum_{i=1}^{N} E[x_i]$
+- $\Sigma^{(t)} = \frac{1}{N}\sum_{i=1}^{N} \left(E[x_i x_i^T] - \mu^{(t)}(\mu^{(t)})^T\right)$
+- Repeat the E-step and M-step until convergence.
+
+# Example: Fitting a Multivariate Normal (MVN) Distribution with Missing Data
+
+- Consider the following dataset where some values are missing:
+- Step 1: Initialize Parameters. Estimate $\mu$ and $\Sigma$ using fully observed data:
+- $\mu^{(0)} = [4.0,7.0,7.5]$
+- $\Sigma^{(0)} = \text{computed from available values}$
+- Step 2: E-Step (Estimate Missing Values). Using the conditional mean formulas, estimate missing values:
+- $x_{2}^{(2)} = E[x_{2}|x_{1} = 4,x_{3} = 6] = 5.5$
+- $x_{3}^{(3)} = E[x_{3}|x_{1} = 7,x_{2} = 8] = 9.0$
+- $x_{1}^{(4)} = E[x_{1}|x_{2} = 11,x_{3} = 12] = 6.5$
+- Step 3: M-Step (Update Parameters)
+- Update $\mu$ and $\Sigma$ using new estimates.
+- Repeat until convergence
+
+# Summary
+
+- The EM algorithm provides an iterative way to estimate missing data and learn model parameters.
+- E-Step: Compute expected values of missing data using conditional distributions.
+- M-Step: Update parameters using expected sufficient statistics.
+- EM guarantees that the likelihood increases at each iteration, leading to a local maximum.
+- EM is widely used in Gaussian Mixture Models (GMMs), Hidden Markov Models (HMMs), and Bayesian Networks.
+
+# Model Selection for Latent Variable Models
+
+# Latent Variable Models
+
+- When using Latent Variable Models (LVMs), a crucial decision is selecting the appropriate number of latent variables, which directly controls the complexity of the model. A key example is in mixture models, where we must specify $K$, the number of clusters.
+- This process of determining the optimal model complexity is known as **model selection**.
+- Different approaches are used depending on whether the model is **probabilistic** (e.g., Gaussian Mixture Models) or **non-probabilistic** (e.g., K-means).
+
+# Model Selection for Probabilistic Models
+
+- Probabilistic models are based on likelihood functions and Bayesian principles. The key goal is to maximize the marginal likelihood:
+
+$$
+K^* = \arg \max_{K} p(D|K)
+$$
+
+- $p(D|K)$ is the probability of the observed data given a particular model with $K$ components.
+
+- Challenges with Marginal Likelihood Computation
+- Difficult Computation: Evaluating the marginal likelihood in LVMs is computationally expensive and often infeasible.
+- Model Search Complexity: Searching for the best $K$ requires evaluating multiple models, which can be time-consuming.
+
+- Since directly computing the marginal likelihood is difficult, approximate methods are used
+
+# Alternative Approaches for Model Selection in Probabilistic Models
+
+## (1) Bayesian Information Criterion (BIC)
+
+- BIC is an approximation of the marginal likelihood and penalizes model complexity.
+- $BIC = -2\log p(D|\theta) + K\log N$
+- $\Delta p(D|\theta)$ is the likelihood of the data given parameters $\theta$,
+- $\Delta K$ is the number of free parameters in the model,
+- $\Delta N$ is the number of data points.
+- A lower BIC value indicates a better model.
+
+# Comparison
+
+|  Model | Likelihood | Parameters | BIC  |
+| --- | --- | --- | --- |
+|  Model 1 | Good | 2 | 120  |
+|  Model 2 | Better | 5 | 118- Best Model  |
+|  Model 3 | Best | 20- Complexity very High | 140  |
+|  Clusters | BIC  |
+| --- | --- |
+|  1 | 520  |
+|  2 | 430  |
+|  3 | 410- Best Model  |
+|  4 | 415  |
+
+→ For GMM
+
+# Alternative Approaches for Model Selection in Probabilistic Models
+
+## (2) Cross-Validated Likelihood
+
+- Uses **cross-validation (CV)** to estimate the likelihood of the model on unseen data.
+- Computationally expensive as the model must be fit multiple times for different folds of the data.
+- Typically used when BIC is unreliable.
+
+## (3) Bayesian Occam's Razor
+
+- The idea that simpler models should be preferred unless more complexity is justified.
+- A model is initialized with a large number of components, but Bayesian inference automatically removes unnecessary components.
+
+# Alternative Approaches for Model Selection in Probabilistic Models
+
+## (4) Stochastic Model Selection
+
+- Instead of exhaustively searching for $K$, we use sampling-based methods:
+
+### (a) Reversible Jump MCMC (RJ-MCMC)
+
+- A type of Markov Chain Monte Carlo (MCMC) that allows changing the number of parameters during sampling.
+
+- Uses birth and death moves:
+- Birth move: Introduces a new cluster/component.
+- Death move: Removes an unnecessary cluster/component.
+
+- Advantages: Avoids evaluating all possible $K$ values explicitly. Can be more efficient than exhaustive search.
+
+- Disadvantages: Can be slow and hard to implement.
+
+### (b) Dirichlet Process Mixture Models (DPMM)
+
+- Uses a Dirichlet Process as a prior, allowing an unbounded number of clusters.
+
+- Fitting is done via Gibbs sampling.
+
+- Advantage: Automatically finds the appropriate number of clusters without needing explicit model selection.
+
+# Model Selection for Non-Probabilistic Methods
+
+If the model is not probabilistic, we cannot use likelihood-based approaches. Instead, we focus on reconstruction error.
+
+## Reconstruction Error in K-Means
+
+- For K-means, reconstruction error measures how well the data points are represented by their assigned cluster centers:
+- $E(D,K) = \frac{1}{|D|}\sum_{i\in D}||x_i - \hat{x}_i||^2$
+- $x_i$ is a data point,
+- $\hat{x}_i$ is its corresponding cluster center.
+
+## Observations from Reconstruction Error
+
+- Error always decreases as $K$ increases:
+- More clusters mean each point is closer to its assigned centroid.
+- Example: Figure 11.21(b) shows how centroids tile the space as $K$ increases.
+- No natural stopping criterion:
+- Unlike probabilistic models, where likelihood follows a U-shaped curve, reconstruction error decreases monotonically.
+
+# Choosing $K$ for K-Means
+
+## Choosing $K$ for K-Means
+
+- Since reconstruction error does not provide a clear stopping rule, alternative methods are used.
+
+### (1) Elbow Method
+
+- Plot reconstruction error vs. $K$ and look for a "knee" (elbow) point.
+- The elbow point is where the rate of decrease slows down.
+- Example: Figure 11.20(a) shows an elbow at $K = 3$, which aligns with the true number of clusters.
+
+### (2) Gap Statistic (Tibshirani et al., 2001)
+
+- Compares reconstruction error to that expected under a null reference distribution.
+- Key thought: If increasing $K$ does not improve clustering much compared to random data, we stop increasing $K$.
+- Steps:
+- Compute the reconstruction error $E(D,K)$.
+- Generate random reference data (e.g., uniform distribution).
+- Compute the expected error $E^{*}(D,K)$ under randomness.
+- Compute the gap:
+- Gap$(K) = E^{*}(D,K) - E(D,K)$
+- Choose $K$ where the gap starts decreasing.
+
+Choosing
+K
+for K-Means
+
+## (3) Silhouette Score
+
+- Measures how well points fit in their assigned cluster.
+- Defined as:  $s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}$
+- $\Delta a(i)$ = average distance of $i$ to points in its cluster.
+- $\Delta b(i)$ = average distance of $i$ to points in the nearest other cluster.
+- Higher silhouette score means better clustering.
+
+# Summary
+
+- Probabilistic models allow for likelihood-based selection, but require approximations like BIC or Bayesian sampling methods.
+- Non-probabilistic models rely on heuristics like the elbow method or the gap statistic.
+- In unsupervised learning, choosing $K$ is harder than in supervised learning because cross-validation is not directly applicable.
+- Using the right model selection technique ensures that the chosen model balances complexity and generalization, avoiding both underfitting and overfitting.
+
+# References
+
+- Murphy, Kevin P. *Machine learning: a probabilistic perspective*. MIT press, 2012.
+- Chapter 11
