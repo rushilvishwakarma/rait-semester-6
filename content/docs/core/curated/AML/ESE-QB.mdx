@@ -195,51 +195,31 @@ Both give similar results. Logistic is preferred for general use, while probit i
 ### Q4. What is multitask learning? How does parameter sharing across related tasks enhance generalization, particularly when certain tasks have scarce training data? <QuestionDot color="green" text="Asked in IA1" />
 
 
-**Multi-Task Learning (MTL)** is a machine learning approach where **multiple related tasks are learned simultaneously**, instead of training separate models for each task.
+**Multitask Learning (MTL)** trains multiple related tasks **together** in a single model instead of building separate models for each task.
 
+The core idea is <Highlight>**parameter sharing**</Highlight>, which has two types:
 
-**Core Idea:**
+1. **Hard Sharing**: Tasks share the same hidden layers, only output layers are separate. Most common and reduces overfitting.
+2. **Soft Sharing**: Each task has its own model, but parameters are pushed to stay similar.
 
+**How Parameter Sharing Helps:**
 
-$$
-\mathcal{L} = \sum_{t=1}^{T} \mathcal{L}_t(f_t(x), y)
-$$
+1. **Knowledge Transfer**: Tasks with less data learn from tasks with more data
+2. **Regularization**: Shared parameters reduce overfitting, especially for low-data tasks
+3. **Better Features**: Model learns general patterns useful across all tasks
+4. **Handles Scarce Data**: Low-data tasks borrow strength from high-data tasks via shared prior
+5. **Better Generalization**: Leads to more stable estimates and improved performance across tasks
 
+**Examples:**
 
-- $T$ = number of tasks
-- $\mathcal{L}_t$ = loss for task $t$
-- The key assumption: some model parameters are **shared across tasks**.
+- **NLP**: One model doing NER + POS tagging + sentiment analysis together.
+- **Vision**: One model doing object detection + segmentation + depth estimation.
+- **Healthcare**: Predicting readmission, mortality, and stay length from the same patient data.
 
+**Significance:**
 
-**How Parameter Sharing Works:**
+MTL is more data-efficient and produces more robust models than single-task learning, especially when individual tasks have limited labeled data.
 
-
-MTL assumes tasks share common structure. There are two main approaches:
-
-
-1. **Hard Parameter Sharing** — Shared lower layers, task-specific output layers. Regularizes via shared representation.
-
-
-2. **Soft Parameter Sharing (Regularization-based)** — Each task has its own parameters $W_t$, but a penalty forces them to be similar:
-
-
-$$
-\mathcal{L} = \sum_{t=1}^{T} \mathcal{L}_t(f_t(x), y) + \lambda \sum_{t} \|W_t - \bar{W}\|^2
-$$
-
-
-**How It Helps with Scarce Data:**
-
-
-Using **Bayesian Hierarchical Models**:
-$$
-W_t \sim \mathcal{N}(W_{\text{shared}}, \sigma^2)
-$$
-
-
-- Tasks with **lots of data** (e.g., Task A with 1,000 samples) → reliable parameter estimates.
-- Tasks with **scarce data** (e.g., Task B with 20 samples) → **borrows strength** from Task A via the shared prior.
-- Without sharing: Task B overfits. With sharing: Task B parameters move closer to Task A's → more stable, better generalization.
 
 
 **Real-World Examples:**
