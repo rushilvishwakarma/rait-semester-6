@@ -597,38 +597,52 @@ A latent variable (z) indicates which component generates the data point.
 ---
 
 
-### Q3. Outline the two principal steps of the EM algorithm. Why are these steps crucial for parameter estimation with latent variables? / Describe the two main steps in parameter estimation for mixture models. Explain what makes this estimation challenging when the component labels are unknown. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" />
+### Q3. Outline the two principal steps of the EM algorithm. Why are these steps crucial for parameter estimation with latent variables? / Describe the two main steps in parameter estimation for mixture models. Explain what makes this estimation challenging when the component labels are unknown. / Q5. Explain the E-step and M-step of the EM algorithm in detail. Why is the algorithm guaranteed to converge to a local optimum? <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" />
 
 The **Expectation-Maximization (EM) Algorithm** is an iterative method for maximum likelihood estimation when data has **latent (hidden) variables**.
 
-**E-Step (Expectation):**
+---
 
-Compute the **responsibility** $\gamma_{nk}$ — the probability that data point $x_n$ belongs to component $k$:
+### E-step (Expectation)
 
 $$
-\gamma_{nk} = \frac{\pi_k \, \mathcal{N}(x_n \mid \mu_k, \Sigma_k)}{\sum_{j=1}^{K} \pi_j \, \mathcal{N}(x_n \mid \mu_j, \Sigma_j)}
+\gamma_{nk} = \frac{\pi_k \mathcal{N}(x_n|\mu_k,\Sigma_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(x_n|\mu_j,\Sigma_j)}
 $$
 
-This assigns **soft (fractional) membership** to each data point instead of hard labels.
+---
 
-**M-Step (Maximization):**
+### M-step (Maximization)
 
-Using the responsibilities, update all three parameters:
-- $N_k = \sum_n \gamma_{nk}$ (effective count for cluster $k$)
-- $\hat{\mu}_k = \frac{1}{N_k}\sum_n \gamma_{nk} x_n$ (weighted mean)
-- $\hat{\Sigma}_k = \frac{1}{N_k}\sum_n \gamma_{nk}(x_n - \hat{\mu}_k)(x_n - \hat{\mu}_k)^T$ (weighted covariance)
-- $\hat{\pi}_k = \frac{N_k}{N}$ (updated mixing weight)
+$$
+N_k = \sum_n \gamma_{nk}
+$$
 
-**Why These Steps Are Crucial:**
+$$
+\mu_k = \frac{1}{N_k}\sum_n \gamma_{nk} x_n
+$$
 
-* With known labels → MLE is easy
-* With hidden labels → optimization is hard
-* EM solves this by:
+$$
+\Sigma_k = \frac{1}{N_k}\sum_n \gamma_{nk}(x_n - \mu_k)(x_n - \mu_k)^T
+$$
 
-  * **E-step:** estimate cluster probabilities
-  * **M-step:** update parameters
-* Likelihood increases each step → converges to a local optimum
+$$
+\pi_k = \frac{N_k}{N}
+$$
 
+---
+
+### Why EM is needed
+
+* Known labels → MLE is easy
+* Hidden labels → optimization is difficult
+* EM alternates between E-step and M-step
+
+---
+
+### Convergence
+
+* Likelihood increases every iteration
+* Converges to a local optimum
 
 ---
 
@@ -676,28 +690,6 @@ $$
 
 
 **Binomial distribution** is **not suitable** because it models **yes/no or success/failure** type data (like whether a customer bought or not), not purchase amounts.
-
-
----
-
-
-### Q5. Explain the E-step and M-step of the EM algorithm in detail. Why is the algorithm guaranteed to converge to a local optimum? <QuestionDot color="cyan" text="MSE-QB" />
-
-*(See Q3 above for the core E-step and M-step formulas.)*
-
-**E-Step:** Compute responsibility $\gamma_{nk}$ = probability that $x_n$ belongs to component $k$, using current parameters. This gives a **soft assignment** for each data point.
-
-**M-Step:** Update parameters using the responsibilities as weights:
-- $\hat{\mu}_k$ = responsibility-weighted mean
-- $\hat{\pi}_k = N_k / N$ = updated mixing proportion
-
-**Why EM Converges to a Local Optimum:**
-
-1. **Monotonic increase:** Every iteration increases (or keeps equal) the log-likelihood — it never decreases.
-2. **Bounded above:** Log-likelihood is bounded (probabilities $\le 1$), so it must converge.
-3. **Jensen's Inequality:** The E-step builds a lower bound on the log-likelihood; the M-step maximizes that bound.
-
-EM finds a **local optimum** (not necessarily global) because the likelihood surface is non-convex. Starting from different initial parameters may give different results.
 
 
 ---
@@ -831,38 +823,33 @@ $$
 ### Q3. List and briefly describe the three fundamental problems that HMMs address, along with the standard algorithms used to solve each.
 
 
-When given only an observed sequence $O = O_1, O_2, \dots, O_T$, HMMs address three fundamental problems:
+### Q3. Three Fundamental Problems in HMM
+
+**1. Evaluation (Likelihood)**
+
+* **Description:** Compute the probability that the model generates the observation sequence
+  $$
+  P(O|\lambda)
+  $$
+* **Algorithm:** Forward Algorithm
 
 
-**A. Evaluation (Likelihood)**
+**2. Decoding (Most Likely State Sequence)**
+
+* **Description:** Find the most likely hidden state sequence for the observations
+  $$
+  \arg\max_Q P(Q|O,\lambda)
+  $$
+* **Algorithm:** Viterbi Algorithm
 
 
-- **Problem:** What is the probability $P(O \mid \lambda)$ that the observed sequence was generated by the model?
-- **Challenge:** Summing over all $N^T$ possible hidden state sequences is computationally infeasible.
-- **Algorithm:** **Forward Algorithm** — uses dynamic programming to efficiently compute $P(O \mid \lambda)$ in $O(N^2 T)$ time.
+**3. Learning (Parameter Estimation)**
 
-
-**B. Decoding (Most Likely Hidden Sequence)**
-
-
-- **Problem:** What is the most likely hidden state sequence $Q^* = \arg\max_Q P(Q \mid O, \lambda)$ that explains the observed data?
-- **Algorithm:** **Viterbi Algorithm** — uses dynamic programming with maximization instead of summation; finds the optimal path in $O(N^2 T)$ time.
-
-
-**C. Learning (Parameter Estimation)**
-
-
-- **Problem:** How do we estimate model parameters $\lambda = (A, B, \pi)$ from observed data alone?
-- **Challenge:** Hidden state sequences are unobserved; direct counting is impossible.
-- **Algorithm:** **Baum-Welch Algorithm** (a form of EM) — E-step computes expected counts via Forward-Backward; M-step re-estimates parameters. Iterates until convergence.
-
-
-| Problem | Question | Algorithm |
-|---|---|---|
-| Evaluation | $P(O \mid \lambda) = ?$ | Forward Algorithm |
-| Decoding | $\arg\max_Q P(Q \mid O, \lambda) = ?$ | Viterbi Algorithm |
-| Learning | $\arg\max_\lambda P(O \mid \lambda) = ?$ | Baum-Welch (EM) |
-
+* **Description:** Estimate model parameters from observed data
+  $$
+  \lambda = (A, B, \pi)
+  $$
+* **Algorithm:** Baum-Welch Algorithm (EM)
 
 ---
 
@@ -890,6 +877,12 @@ $$
 P(O \mid \lambda) = \sum_{i=1}^{N} \alpha_T(i)
 $$
 - Sum forward probabilities at the final time step over all states.
+
+**Trick to remember (Forward Algorithm):**
+
+* **Start:** initial × emission
+* **Loop:** sum(previous × transition) × emission
+* **End:** sum all
 
 
 ---
