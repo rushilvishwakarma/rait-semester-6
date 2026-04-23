@@ -934,15 +934,11 @@ This is the **global Markov property**: once B is observed, A and C become indep
 ---
 
 
-### Q2. Draw a simple CRF diagram for sequence labeling and explain the purpose of node factors and edge factors.
+### Q2. Explain Conditional Random Fields (CRFs), draw a sequence labeling diagram, and explain node/edge factors. Why are they used in sequence modeling?
 
+A **Conditional Random Field (CRF)** is an undirected probabilistic graphical model that directly models $P(Y \mid X)$ — the conditional distribution of output labels $Y$ given observed input $X$.
 
-A **Conditional Random Field (CRF)** is an undirected probabilistic graphical model that models $P(Y \mid X)$ — the conditional distribution of output labels $Y$ given observed input $X$.
-
-
-**Linear-Chain CRF for Sequence Labeling:**
-
-
+**Linear-Chain CRF Diagram:**
 <Mermaid chart={`graph TD
   X1 --- Y1
   X2 --- Y2
@@ -953,34 +949,28 @@ A **Conditional Random Field (CRF)** is an undirected probabilistic graphical mo
   Y3 --- Y4
 `} />
 
-
-The conditional distribution is:
-
-
+**Formula:**
 $$
 P(Y \mid X) = \frac{1}{Z(X)} \prod_{t=1}^{T} \phi_{\text{node}}(Y_t, X, t) \cdot \prod_{t=1}^{T-1} \phi_{\text{edge}}(Y_t, Y_{t+1}, X, t)
 $$
+*(where $Z(X)$ is the normalization constant)*
 
+**1. Node Factors (Unary Potentials) $\phi_{\text{node}}$:**
+- Capture compatibility of **label $Y_t$ with input $X$ at position $t$**.
+- Example: In NER, scores if "New" is likely a B-LOC given surrounding words.
 
-**Node Factors $\phi_{\text{node}}(Y_t, X, t)$:**
-
-
-- Also called **unary potentials**.
-- Capture the compatibility of **label $Y_t$ with the input $X$ at position $t$**.
-- Example: In NER, the node factor scores how likely "New" is a B-LOC tag given surrounding words.
-- Encode local, position-specific evidence.
-
-
-**Edge Factors $\phi_{\text{edge}}(Y_t, Y_{t+1}, X, t)$:**
-
-
-- Also called **pairwise potentials**.
+**2. Edge Factors (Pairwise Potentials) $\phi_{\text{edge}}$:**
 - Capture **label-to-label transitions** between adjacent positions, conditioned on $X$.
-- Example: Penalize unlikely transitions like I-ORG following B-PER.
-- Encode **sequential consistency** of label assignments.
+- Example: Penalize unlikely transitions (e.g., I-ORG after B-PER).
 
+**Key advantage:** Both factors depend on the **entire input sequence $X$** (rich, overlapping features), unlike HMMs which use only local context.
 
-**Key advantage:** Both factors can depend on the **entire input sequence $X$**, unlike HMMs where only local context is used. This allows rich, overlapping features.
+**Why CRFs Are Used in Sequence Modeling:**
+1. **Discriminative:** Models $P(Y \mid X)$ directly without needing to model $P(X)$.
+2. **Rich features:** Uses arbitrary, overlapping properties of the full input.
+3. **No label bias:** Circumvents the label bias problem seen in HMMs.
+4. **Efficient inference:** Viterbi (MAP) and Forward-Backward in $O(N^2 T)$.
+5. **Applications:** POS tagging, Named Entity Recognition (NER), chunking, etc.
 
 
 ---
@@ -1052,29 +1042,6 @@ where $\psi_C(X_C) \ge 0$ = **potential function** (compatibility score over cli
 | **Pairwise** | If no edge between $i$ and $j$, then $X_i \perp X_j$ given all others |
 | **Local** | A node is independent of all non-neighbors given its neighbors |
 | **Global** | If $S$ separates $A$ from $B$ in the graph, then $A \perp B \mid S$ |
-
-
----
-
-
-### Q5. Explain Conditional Random Fields (CRFs). Why are they used in sequence modeling?
-
-A **Conditional Random Field (CRF)** is an undirected probabilistic graphical model that directly models $P(Y \mid X)$ — the conditional distribution of output labels $Y$ given observed inputs $X$.
-
-**Formula:**
-$$
-P(Y \mid X) = \frac{1}{Z(X)} \prod_{C \in \mathcal{C}} \psi_C(Y_C, X)
-$$
-
-where $\psi_C$ are potential functions depending on labels and the entire input $X$, and $Z(X)$ is the normalization constant.
-
-**Why CRFs Are Used in Sequence Modeling:**
-
-1. **Discriminative:** Models $P(Y \mid X)$ directly — no need to model $P(X)$.
-2. **Rich features:** Can use arbitrary, overlapping properties of the full input sequence (word shape, context, prefix, etc.) — more expressive than HMMs.
-3. **No label bias:** CRFs avoid the label bias problem that affects HMMs.
-4. **Efficient inference:** Viterbi (MAP) and Forward-Backward (marginals) work in $O(N^2 T)$.
-5. **Applications:** POS tagging, Named Entity Recognition (NER), chunking, image segmentation.
 
 
 ---
@@ -1169,33 +1136,57 @@ The **Metropolis-Hastings (MH) Algorithm** builds a Markov chain whose stationar
 
 ### Q4. How do Importance Sampling and Rejection Sampling differ conceptually? Explain with suitable examples.
 
+
 Both use a proposal $q(x)$ when direct sampling from $p(x)$ is impractical — but their **goals differ**.
 
-**Rejection Sampling:**
-- **Goal:** Produce actual i.i.d. samples from $p(x)$.
-- **Mechanism:** Accept/reject proposals based on $\frac{p(x^*)}{M \cdot q(x^*)}$.
-- **Output:** True samples from $p(x)$ — usable for any downstream purpose.
-- **Requires:** Envelope $p(x) \le M \cdot q(x)$ for all $x$.
-- **Example:** Sampling from a Gaussian $p(x) \propto e^{-x^2/2}$ using a Uniform$(-10, 10)$ proposal.
+## **Rejection Sampling**
 
-**Importance Sampling:**
-- **Goal:** Estimate **expectations** $\mathbb{E}_p[f(x)]$ without generating true samples from $p(x)$.
-- **Mechanism:** Draw samples from $q(x)$ and weight them: $w(x) = \frac{p(x)}{q(x)}$:
-$$
-\hat{\mu}_{\text{IS}} = \frac{\sum_{i} f(x_i) w(x_i)}{\sum_{i} w(x_i)}, \quad x_i \sim q(x)
-$$
-- **Output:** Weighted estimate — not true samples, but sufficient for expectations.
-- **Requires:** $q(x) > 0$ wherever $p(x) > 0$; no envelope constant needed.
-- **Example:** Estimating $\mathbb{E}_p[x^2]$ with $p = \mathcal{N}(0,1)$ using a wider $q = \mathcal{N}(0,4)$.
+Rejection Sampling is a method used to generate **independent samples from a target distribution $p(x)$** using a simpler proposal distribution $q(x)$.
 
-**Comparison:**
+A sample $x^* \sim q(x)$ is **accepted with probability**:
+$\frac{p(x^*)}{M q(x^*)}$
 
-| Aspect | Rejection Sampling | Importance Sampling |
-|--------|--------------------|---------------------|
-| Goal | Generate samples from $p(x)$ | Estimate $\mathbb{E}_p[f(x)]$ |
-| Output | i.i.d. samples | Weighted samples |
-| Requirement on $q$ | Envelope: $p(x) \le M \cdot q(x)$ | Coverage: $q(x) > 0$ where $p(x) > 0$ |
-| High-dim behavior | Exponentially poor | Can fail with spiky weights |
-| When to use | Low-dim, close proposal | Expectation estimation, reusing samples |
+where $M$ is a constant such that:
+$p(x) \le M q(x), \ \forall x$
 
+**Algorithm:**
 
+1. Sample $x^* \sim q(x)$
+2. Sample $u \sim U(0,1)$
+3. Accept $x^*$ if
+   $u \le \frac{p(x^*)}{M q(x^*)}$
+
+**Output:**
+Produces **true i.i.d. samples from $p(x)$**.
+
+---
+
+## **Importance Sampling**
+
+Importance Sampling is used to **estimate expectations** of the form:
+$E_p[f(x)]$
+
+when sampling directly from $p(x)$ is difficult.
+
+Samples are drawn from $q(x)$ and assigned weights:
+$w(x) = \frac{p(x)}{q(x)}$
+
+The estimate is:
+$\hat{\mu}*{IS} = \frac{\sum*{i} f(x_i), w(x_i)}{\sum_{i} w(x_i)}, \quad x_i \sim q(x)$
+
+**Condition:**
+$q(x) > 0$ wherever $p(x) > 0$
+
+**Output:**
+Gives a **weighted estimate**, not actual samples.
+
+---
+
+## **Comparison**
+
+* Rejection Sampling → generates **actual samples from $p(x)$**
+* Importance Sampling → computes **expected values using weights**
+* Rejection needs constant $M$, Importance does not
+* Rejection may reject samples (inefficient), Importance uses all samples
+
+---
