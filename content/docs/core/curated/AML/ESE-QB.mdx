@@ -542,96 +542,57 @@ $$
 
 ### Q1. Derive the Maximum Likelihood Estimates for the mean $\mu$ and variance $\sigma^2$ of a univariate Gaussian distribution given i.i.d. samples.
 
-Got it — here it is fully in **KaTeX `$$` format** and still minimal:
-
----
-
-### Q1. Derive the Maximum Likelihood Estimates for the mean $\mu$ and variance $\sigma^2$
-
 Given $y_1, \dots, y_N \sim \mathcal{N}(\mu, \sigma^2)$.
 
-**Log-Likelihood:**
+**Log-likelihood:**
 $$
-\ell(\mu, \sigma^2) = -\frac{N}{2}\log(2\pi) - \frac{N}{2}\log(\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^{N}(y_i - \mu)^2
-$$
-
----
-
-### MLE for $\mu$
-
-$$
-\frac{\partial \ell}{\partial \mu}
-= \frac{1}{\sigma^2}\sum_{i=1}^{N}(y_i - \mu)
-$$
-
-$$
-\sum_{i=1}^{N}(y_i - \mu) = 0
-;\Rightarrow;
-\mu = \frac{1}{N}\sum_{i=1}^{N} y_i
-$$
-
-$$
-\boxed{\hat{\mu}*{\text{MLE}} = \frac{1}{N}\sum*{i=1}^{N} y_i}
+\ell = -\frac{N}{2}\log(\sigma^2) - \frac{1}{2\sigma^2}\sum (y_i - \mu)^2
 $$
 
 ---
 
-### MLE for $\sigma^2$
+### For $\mu$
 
 $$
-\frac{\partial \ell}{\partial \sigma^2}
-= -\frac{N}{2\sigma^2} + \frac{1}{2\sigma^4}\sum_{i=1}^{N}(y_i - \mu)^2
+\frac{\partial \ell}{\partial \mu} = \frac{1}{\sigma^2}\sum (y_i - \mu) = 0
+$$
+$$
+\Rightarrow \hat{\mu} = \frac{1}{N}\sum y_i
 $$
 
-$$
--\frac{N}{2\sigma^2} + \frac{1}{2\sigma^4}\sum (y_i - \mu)^2 = 0
-$$
+---
+
+### For $\sigma^2$
 
 $$
-\sum (y_i - \mu)^2 = N\sigma^2
-;\Rightarrow;
-\sigma^2 = \frac{1}{N}\sum (y_i - \mu)^2
+\frac{\partial \ell}{\partial \sigma^2} = 0
 $$
-
 $$
-\boxed{\hat{\sigma}^2_{\text{MLE}} = \frac{1}{N}\sum_{i=1}^{N}(y_i - \hat{\mu})^2}
+\Rightarrow \hat{\sigma}^2 = \frac{1}{N}\sum (y_i - \mu)^2
 $$
-
 
 ---
 
 
 ### Q2. What is a Gaussian Mixture Model (GMM)? Write the probability density function for a GMM with K components. <QuestionDot color="cyan" text="MSE-QB" />
 
+A **Gaussian Mixture Model (GMM)** is a probabilistic model that represents data as a **weighted sum of multiple Gaussian distributions**. It is used for **soft clustering**, where each data point belongs to clusters with certain probabilities.
 
-A **Gaussian Mixture Model (GMM)** is a probabilistic model that represents data as a **combination of multiple Gaussian distributions**. It performs **soft clustering** — each data point has a probability of belonging to each cluster rather than a hard assignment.
-
-
-The overall probability density function for a GMM with $K$ components is:
-
+The probability density function (PDF) of a GMM with (K) components is:
 
 $$
-p(\mathbf{x}) = \sum_{k=1}^{K} \pi_k \, \mathcal{N}(\mathbf{x} \mid \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)
+p(x) = \sum_{k=1}^{K} \pi_k , \mathcal{N}(x \mid \mu_k, \Sigma_k)
 $$
-
 
 Where:
-- $K$ = number of Gaussian components
-- $\pi_k$ = **mixing coefficient** (weight of component $k$), with $\sum_{k=1}^{K} \pi_k = 1$ and $0 \le \pi_k \le 1$
-- $\boldsymbol{\mu}_k$ = mean of the $k$-th Gaussian
-- $\boldsymbol{\Sigma}_k$ = covariance matrix of the $k$-th Gaussian
-- $\mathcal{N}(\mathbf{x} \mid \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$ = Gaussian PDF for component $k$
 
+* (K) = number of components
+* (\pi_k) = mixing coefficient, such that (\sum_{k=1}^{K} \pi_k = 1) and (0 \le \pi_k \le 1)
+* (\mu_k) = mean of the (k)-th Gaussian
+* (\Sigma_k) = covariance of the (k)-th Gaussian
+* (\mathcal{N}(x \mid \mu_k, \Sigma_k)) = Gaussian distribution
 
-**Generative Process:**
-
-
-1. Choose a hidden component $z_i \sim \text{Categorical}(\pi_1, \dots, \pi_K)$
-2. Generate data $x_i \sim p(x_i \mid z_i = k) = \mathcal{N}(\mathbf{x} \mid \boldsymbol{\mu}_k, \boldsymbol{\Sigma}_k)$
-
-
-The latent variable $z_i$ indicates which Gaussian generated data point $x_i$. Since $z_i$ is **hidden**, direct MLE is intractable — the EM algorithm is used for parameter estimation.
-
+A latent variable (z) indicates which component generates the data point.
 
 ---
 
@@ -660,10 +621,13 @@ Using the responsibilities, update all three parameters:
 
 **Why These Steps Are Crucial:**
 
-- With **known** cluster labels, MLE is easy (just compute sample statistics per cluster).
-- With **hidden** labels, the log-likelihood is **non-convex** — direct optimization fails.
-- EM alternates between estimating the missing information (E) and maximizing with it (M).
-- EM guarantees the **likelihood never decreases** at each iteration, converging to a local optimum.
+* With known labels → MLE is easy
+* With hidden labels → optimization is hard
+* EM solves this by:
+
+  * **E-step:** estimate cluster probabilities
+  * **M-step:** update parameters
+* Likelihood increases each step → converges to a local optimum
 
 
 ---
