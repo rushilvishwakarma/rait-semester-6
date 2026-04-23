@@ -260,7 +260,14 @@ $$
 
 
 - Flu (Y) causes Fever ($X_1$), Cough ($X_2$), Fatigue ($X_3$)
-- DAG: $Y \to X_1$, $Y \to X_2$, $Y \to X_3$
+
+**DAG:**
+
+<Mermaid chart={`graph TD
+  Y[Flu] --> X1[Fever]
+  Y --> X2[Cough]
+  Y --> X3[Fatigue]
+`} />
 
 
 $$
@@ -271,7 +278,7 @@ $$
 **How It Facilitates Inference:**
 
 
-- If a patient has Fever and Cough, we can compute $P(Y=1 \mid X_1=1, X_2=1)$ using Bayes' theorem.
+- If a patient has Fever and Cough, we can compute $P(Y=1 \mid X_1=1, X_2=1)$ using Bayes' theorem. [You are trying to estimate the probability that they have flu.]
 - The graph structure tells us **which variables are relevant** — reducing computation.
 - Instead of $2^4 - 1 = 15$ parameters for the full joint, this needs only **7** parameters.
 
@@ -535,21 +542,59 @@ $$
 
 ### Q1. Derive the Maximum Likelihood Estimates for the mean $\mu$ and variance $\sigma^2$ of a univariate Gaussian distribution given i.i.d. samples.
 
-Given $N$ i.i.d. samples from $\mathcal{N}(\mu, \sigma^2)$, we maximize the log-likelihood.
+Got it — here it is fully in **KaTeX `$$` format** and still minimal:
+
+---
+
+### Q1. Derive the Maximum Likelihood Estimates for the mean $\mu$ and variance $\sigma^2$
+
+Given $y_1, \dots, y_N \sim \mathcal{N}(\mu, \sigma^2)$.
 
 **Log-Likelihood:**
 $$
 \ell(\mu, \sigma^2) = -\frac{N}{2}\log(2\pi) - \frac{N}{2}\log(\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^{N}(y_i - \mu)^2
 $$
 
-**MLE for $\mu$** — set $\frac{\partial \ell}{\partial \mu} = 0$:
+---
+
+### MLE for $\mu$
+
 $$
-\boxed{\hat{\mu}_{\text{MLE}} = \frac{1}{N}\sum_{i=1}^{N} y_i} \quad \text{(sample mean)}
+\frac{\partial \ell}{\partial \mu}
+= \frac{1}{\sigma^2}\sum_{i=1}^{N}(y_i - \mu)
 $$
 
-**MLE for $\sigma^2$** — set $\frac{\partial \ell}{\partial \sigma^2} = 0$:
 $$
-\boxed{\hat{\sigma}^2_{\text{MLE}} = \frac{1}{N}\sum_{i=1}^{N}(y_i - \hat{\mu})^2} \quad \text{(biased sample variance — uses } N \text{, not } N-1)
+\sum_{i=1}^{N}(y_i - \mu) = 0
+;\Rightarrow;
+\mu = \frac{1}{N}\sum_{i=1}^{N} y_i
+$$
+
+$$
+\boxed{\hat{\mu}*{\text{MLE}} = \frac{1}{N}\sum*{i=1}^{N} y_i}
+$$
+
+---
+
+### MLE for $\sigma^2$
+
+$$
+\frac{\partial \ell}{\partial \sigma^2}
+= -\frac{N}{2\sigma^2} + \frac{1}{2\sigma^4}\sum_{i=1}^{N}(y_i - \mu)^2
+$$
+
+$$
+-\frac{N}{2\sigma^2} + \frac{1}{2\sigma^4}\sum (y_i - \mu)^2 = 0
+$$
+
+$$
+\sum (y_i - \mu)^2 = N\sigma^2
+;\Rightarrow;
+\sigma^2 = \frac{1}{N}\sum (y_i - \mu)^2
+$$
+
+$$
+\boxed{\hat{\sigma}^2_{\text{MLE}} = \frac{1}{N}\sum_{i=1}^{N}(y_i - \hat{\mu})^2}
 $$
 
 
