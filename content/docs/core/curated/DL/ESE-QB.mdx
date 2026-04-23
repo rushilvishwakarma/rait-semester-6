@@ -438,18 +438,16 @@ $$h'' = \frac{h'}{1-p} = \frac{[0.8, 0, 0.6, 0]}{0.5} = \boxed{[1.6,\ 0,\ 1.2,\ 
 ### Q1. An RNN has input size 15, hidden state size 30, and processes a sequence of length 20 with batch size 64. Calculate the number of multiplications in one forward pass of the entire sequence. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
 </LongQuestion>
 
-**Given:**
-$$I = 15, H = 30, T = 20, B = 64$$
+**Given:** Input = 15, Hidden = 30, Sequence length = 20, Batch = 64
 
-**Formula:**
-$$\text{Multiplications per step} = \left[(I \times H + H \times H) \times B\right]$$
+**Step 1 — Multiplications per time step (one sample):**
+- Input × Hidden: $15 \times 30 = 450$
+- Hidden × Hidden: $30 \times 30 = 900$
+- Total per step: $450 + 900 = 1350$
 
-**Calculation:**
-1. **Per step:** $(15 \times 30) + (30 \times 30) = 450 + 900 = 1350$
-2. **Per batch:** $1350 \times 64 = 86{,}400$
-3. **Full sequence:** $86{,}400 \times 20 = 1{,}728{,}000$
+**Step 2 — Multiply by batch size:** $1350 \times 64 = 86{,}400$
 
-**Final Answer:** $\boxed{1{,}728{,}000 \text{ multiplications}}$
+**Step 3 — Multiply by sequence length:** $86{,}400 \times 20 = \boxed{1{,}728{,}000}$
 
 ---
 
@@ -457,17 +455,13 @@ $$\text{Multiplications per step} = \left[(I \times H + H \times H) \times B\rig
 ### Q2. Given an input vector $x = [2,4,6]$ and a linear encoder matrix $W_e = \begin{bmatrix} 0.5 & 0 \\ 0 & 0.2 \\ 0 & 0 \end{bmatrix}$, calculate the encoded representation (latent vector). <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
 </LongQuestion>
 
-**Given:**
-$$x = [2, 4, 6], \quad W_e = \begin{bmatrix} 0.5 & 0 \\ 0 & 0.2 \\ 0 & 0 \end{bmatrix}$$
+**Given:** $x = [2, 4, 6]$, encoder matrix $W_e$ as above.
 
-**Formula:**
-$$z = x W_e$$
+Multiply $x$ with each column of $W_e$:
+- $z_1 = (2 \times 0.5) + (4 \times 0) + (6 \times 0) = 1.0$
+- $z_2 = (2 \times 0) + (4 \times 0.2) + (6 \times 0) = 0.8$
 
-**Calculation:**
-$$z_1 = (2 \times 0.5) + (4 \times 0) + (6 \times 0) = 1.0$$
-$$z_2 = (2 \times 0) + (4 \times 0.2) + (6 \times 0) = 0.8$$
-
-**Final Answer:** $z = \boxed{[1.0, 0.8]}$
+**Final Answer:** $z = \boxed{[1.0,\ 0.8]}$
 
 ---
 
@@ -475,23 +469,25 @@ $$z_2 = (2 \times 0) + (4 \times 0.2) + (6 \times 0) = 0.8$$
 ### Q3. Analyze the internal structure of an RNN cell given the following configuration: input size = 10, hidden state size = 20, and output size = 20. Compute the total number of trainable parameters and identify the role of each weight and bias matrix. <QuestionDot color="purple" text="Asked in IA2" />
 </LongQuestion>
 
-**Given:**
-$$I = 10, H = 20, O = 20$$
+**Given:** Input = 10, Hidden = 20, Output = 20
 
-**Trainable Parameters:**
-1. **$W_{xh}$ (Input-to-Hidden):** $10 \times 20 = 200$
-2. **$W_{hh}$ (Hidden-to-Hidden):** $20 \times 20 = 400$
-3. **$b_h$ (Hidden Bias):** $20$
-4. **$W_{hy}$ (Hidden-to-Output):** $20 \times 20 = 400$
-5. **$b_y$ (Output Bias):** $20$
+**Parameters** (formula: rows × cols, plus bias):
 
-**Total:** $200 + 400 + 20 + 400 + 20 = \boxed{1040 \text{ parameters}}$
+| Matrix | Size | Count |
+|--------|------|-------|
+| $W_{xh}$ — Input → Hidden | $10 \times 20$ | 200 |
+| $W_{hh}$ — Hidden → Hidden | $20 \times 20$ | 400 |
+| $b_h$ — Hidden Bias | $20$ | 20 |
+| $W_{hy}$ — Hidden → Output | $20 \times 20$ | 400 |
+| $b_y$ — Output Bias | $20$ | 20 |
 
-**Roles:**
-- **$W_{xh}$**: Captures features from current input.
-- **$W_{hh}$**: Captures temporal dependencies from the previous state.
-- **$b_h$**: Provides flexibility (offset) for the hidden activation.
-- **$W_{hy}$**: Maps latent representations to the output space.
+**Total:** $200 + 400 + 20 + 400 + 20 = \boxed{1040}$ parameters
+
+**Roles (one line each):**
+- **$W_{xh}$**: Processes the current input at each time step.
+- **$W_{hh}$**: Carries memory from the previous time step.
+- **$b_h$**: Adds a fixed offset to the hidden activation.
+- **$W_{hy}$**: Converts the hidden state into an output.
 
 ---
 
@@ -499,16 +495,13 @@ $$I = 10, H = 20, O = 20$$
 ### Q4. A denoising autoencoder takes a noisy input. If the original input is $x = [3,5]$ and noise $n = [-1, 0.5]$, calculate the noisy input. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
 </LongQuestion>
 
-**Given:**
-$$x = [3, 5], \quad n = [-1, 0.5]$$
+**Given:** $x = [3, 5]$, noise $n = [-1, 0.5]$
 
-**Formula:**
-$$\tilde{x} = x + n$$
+Noisy input = original + noise, element by element:
+- $3 + (-1) = 2$
+- $5 + 0.5 = 5.5$
 
-**Calculation:**
-$$\tilde{x} = [3 + (-1), 5 + 0.5] = [2, 5.5]$$
-
-**Final Answer:** $\tilde{x} = \boxed{[2, 5.5]}$
+**Final Answer:** $\tilde{x} = \boxed{[2,\ 5.5]}$
 
 ---
 
@@ -518,15 +511,13 @@ $$\tilde{x} = [3 + (-1), 5 + 0.5] = [2, 5.5]$$
 ### Q1. Explain the role of deep learning in ImageNet detection and classification. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
 </LongQuestion>
 
-Deep learning transformed ImageNet by learning hierarchical visual features directly from pixels.
+ImageNet is a large dataset of millions of labeled images. Deep learning models trained on it achieve very high accuracy in both classification and detection.
 
-1. <Highlight color="blue">**Classification breakthrough:**</Highlight> CNNs such as AlexNet, VGG, and ResNet drastically improved Top-1 and Top-5 accuracy.
-2. <Highlight color="green">**Feature learning:**</Highlight> Early layers learn edges/textures, deeper layers learn object parts and full object semantics.
-3. <Highlight color="orange">**Transfer learning:**</Highlight> ImageNet pretraining provides strong feature extractors for medical imaging, remote sensing, and industrial vision tasks.
-4. <Highlight color="cyan">**Detection improvement:**</Highlight> Detection models (R-CNN, Faster R-CNN, YOLO, SSD) use deep backbones to localize and classify objects.
-5. <Highlight color="green">**Scale and generalization:**</Highlight> Training on millions of labeled images improves robustness to pose, illumination, and viewpoint variation.
-
-In short, ImageNet made deep CNNs the standard foundation for modern image classification and object detection.
+1. <Highlight color="blue">**Classification:**</Highlight> CNNs like AlexNet, VGG, and ResNet achieved breakthrough accuracy on ImageNet's 1000-class challenge.
+2. <Highlight color="green">**Feature learning:**</Highlight> CNNs automatically learn useful features — early layers detect edges, deeper layers detect objects and scenes.
+3. <Highlight color="orange">**Transfer learning:**</Highlight> Models pretrained on ImageNet are reused for other tasks (medical imaging, remote sensing) with minimal retraining.
+4. <Highlight color="cyan">**Object detection:**</Highlight> Models like R-CNN, YOLO, and SSD use ImageNet-pretrained backbones to detect and locate objects in images.
+5. <Highlight color="green">**Robustness:**</Highlight> Training on millions of diverse images makes models handle variations in lighting, angle, and pose.
 
 ---
 
@@ -560,37 +551,25 @@ In short, WaveNet is important because it produces clearer and more human-like a
 ### Q3. Describe the concept of Word2Vec in Natural Language Processing. <QuestionDot color="purple" text="IA2-QB" />
 </LongQuestion>
 
-<Highlight color="blue">**Word2Vec**</Highlight> is an embedding technique that maps each word to a dense, low-dimensional vector so that words used in similar contexts get nearby vectors in embedding space.
+<Highlight color="blue">**Word2Vec**</Highlight> converts words into numeric vectors so that words with similar meanings end up close to each other in vector space.
 
-Unlike one-hot vectors (mostly zeros), Word2Vec vectors are compact and semantic. This helps models understand relationships like:
+For example: king − man + woman ≈ queen. This shows the model understands word relationships without being explicitly taught.
 
-$$
-	ext{vec}(\text{king}) - \text{vec}(\text{man}) + \text{vec}(\text{woman}) \approx \text{vec}(\text{queen})
-$$
+#### Two Architectures
 
-#### Architectures
+1. <Highlight color="green">**CBOW (Continuous Bag of Words):**</Highlight> Predicts a center word from its surrounding words.
+2. <Highlight color="green">**Skip-gram:**</Highlight> Predicts surrounding words given a center word. Works better for rare words.
 
-1. <Highlight color="green">**CBOW (Continuous Bag of Words):**</Highlight> Uses surrounding context words to predict the center word.
-2. <Highlight color="green">**Skip-gram:**</Highlight> Uses the center word to predict surrounding context words.
+#### Efficiency Tricks
 
-#### Training Objective (intuitive)
+- <Highlight color="orange">**Negative Sampling:**</Highlight> Instead of updating all words, only update a small random set of incorrect words per step.
+- <Highlight color="orange">**Hierarchical Softmax:**</Highlight> Uses a tree structure to speed up probability calculation.
 
-- CBOW maximizes probability of the target word given context.
-- Skip-gram maximizes probability of context words given target word.
+#### Applications
 
-In practice, efficiency is improved using techniques like:
-
-1. <Highlight color="orange">**Negative Sampling**</Highlight>
-2. <Highlight color="orange">**Hierarchical Softmax**</Highlight>
-
-#### Why It Matters in NLP
-
-Word2Vec captures semantic and syntactic similarity and is widely used in:
-
-1. Text classification and sentiment analysis
-2. Information retrieval
-3. Named entity recognition and downstream NLP pipelines
-4. As pretrained embeddings for deeper neural models
+- Text classification and sentiment analysis
+- Named entity recognition
+- Pretrained embeddings for NLP models
 
 ![Word2Vec skip-gram concept #invert-dark](/images/docs/DL/IA2-QB/Q12_Word2Vec_SkipGram.png)
 
@@ -634,34 +613,25 @@ Thus, deep learning enables robust face recognition under variations in pose, li
 ### Q5. Define semantic segmentation with an example. <QuestionDot color="purple" text="IA2-QB" />
 </LongQuestion>
 
-<Highlight color="blue">**Semantic segmentation**</Highlight> is a dense prediction task where <Highlight color="green">**every pixel in an image is classified into a semantic category**</Highlight> (road, building, person, car, sky, etc.).
+<Highlight color="blue">**Semantic segmentation**</Highlight> means <Highlight color="green">**classifying every single pixel in an image into a category**</Highlight> (e.g. road, car, person, sky).
 
-For an input image of size $H \times W$, the model outputs a label map (mask) of the same spatial size:
-
-$$
-f: \mathbb{R}^{H \times W \times C} \rightarrow \{1,2,\dots,K\}^{H \times W}
-$$
-
-where $K$ is the number of classes.
+The output is a colored mask the same size as the input image, where each pixel is colored based on its class.
 
 #### Key Points
 
-1. Pixel-level understanding, not just image-level labels.
-2. Same-class objects share one class label (no instance separation).
-3. Typically built using encoder-decoder architectures (FCN, U-Net, DeepLab).
-4. Common training loss: pixel-wise cross-entropy (sometimes Dice/Focal in class-imbalance settings).
-5. Common evaluation metric: IoU/mIoU.
+1. Works at pixel level — much more detailed than classification.
+2. All objects of the same class get the same label (no distinction between individuals).
+3. Uses encoder-decoder networks like FCN, U-Net, and DeepLab.
+4. Measured using IoU / mIoU metrics.
 
 #### Semantic vs Instance Segmentation
 
-- Semantic segmentation: both cars are labeled "car".
-- Instance segmentation: car-1 and car-2 are separated as different objects.
+- **Semantic:** Two cars → both labeled "car" (same color).
+- **Instance:** Two cars → labeled "car-1" and "car-2" separately.
 
 #### Example
 
-In autonomous driving, segmentation labels each pixel as road, lane marking, vehicle, pedestrian, traffic sign, and sky. This enables detailed scene understanding for safe path planning.
-
-So, semantic segmentation tells us <Highlight color="green">**what class is present at each pixel location**</Highlight>, which is essential for robotics, medical imaging, and self-driving systems.
+In a self-driving car, semantic segmentation labels every pixel as road, pedestrian, vehicle, or sky. This helps the car understand its surroundings and plan a safe path.
 
 ---
 
@@ -701,41 +671,26 @@ Applications include assistive technology for visually impaired users, automatic
 ### Q7. Differentiate between image classification and object detection. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
 </LongQuestion>
 
-<Highlight color="blue">**Image classification**</Highlight> predicts the category of the entire image.
-
-<Highlight color="blue">**Object detection**</Highlight> not only predicts object categories but also gives their spatial locations in the image.
-
-### Detailed Differentiation
+- <Highlight color="blue">**Image classification:**</Highlight> Tells *what* is in the image (one label for the whole image).
+- <Highlight color="blue">**Object detection:**</Highlight> Tells *what* objects are in the image *and where* each one is (bounding box + label).
 
 | Basis | Image Classification | Object Detection |
 |------|----------------------|------------------|
-| Core task | Assign class to whole image | Detect each object instance and localize it |
-| Question answered | "What is in this image?" | "What objects are present and where are they?" |
-| Output format | Class label(s) with probability | Bounding box + class label + confidence score |
-| Localization | Not required | Mandatory |
-| Annotation needed for training | Image-level labels | Box-level labels (x, y, w, h) |
-| Difficulty level | Relatively simpler | More complex (classification + localization) |
-| Typical loss | Cross-entropy | Classification loss + localization loss (for box regression) |
-| Common metrics | Accuracy, Top-1, Top-5 | mAP, IoU, Precision-Recall |
-| Compute requirement | Lower | Higher |
-| Typical models | ResNet, EfficientNet, ViT | Faster R-CNN, YOLO, SSD, DETR |
-| Typical use cases | Plant disease type, animal species, document category | Traffic monitoring, surveillance, medical lesion localization |
+| Task | Label the whole image | Label + locate each object |
+| Output | Class label + probability | Bounding box + label + confidence |
+| Localization | Not needed | Required |
+| Training labels | Image-level | Box-level (x, y, width, height) |
+| Metrics | Accuracy, Top-1/5 | mAP, IoU |
+| Models | ResNet, VGG, ViT | YOLO, Faster R-CNN, SSD |
+| Complexity | Simpler | More complex |
 
-### Example (Exam-Oriented)
+#### Example
 
-Consider a road image containing 2 cars and 1 pedestrian.
+For a road image with 2 cars and 1 pedestrian:
+- **Classification output:** "Road scene with vehicles"
+- **Detection output:** Draws a box around each car and the pedestrian with labels and confidence scores.
 
-1. Image classification output: "road scene" or "contains vehicles".
-2. Object detection output:
-	- Car: $(x_1,y_1,w_1,h_1)$
-	- Car: $(x_2,y_2,w_2,h_2)$
-	- Pedestrian: $(x_3,y_3,w_3,h_3)$
-
-Thus, detection provides instance-level understanding, while classification provides only image-level understanding.
-
-### Conclusion
-
-Image classification is suitable when only category identification is needed. Object detection is preferred when both recognition and precise location are required for decision-making systems.
+**Conclusion:** Use classification when you only need to know what's in the image. Use detection when you need to know where each object is.
 
 ---
 
