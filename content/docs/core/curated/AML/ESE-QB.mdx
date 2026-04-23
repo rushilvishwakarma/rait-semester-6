@@ -13,22 +13,62 @@ import { LongQuestion } from '@/components/question';
 
 ### Q1. Explain the three core components of a GLM—random component, systematic component, and link function—and describe how they interact. / Describe the structure of a Generalized Linear Model (GLM). Explain the roles of the random component, systematic component, and link function. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" />
 
+
 A **Generalized Linear Model (GLM)** extends linear regression so that the response variable can follow distributions **other than Normal** (e.g., binary, count data).
+
 
 A GLM has **three components**:
 
-1. **Random Component** — The distribution of the response variable $Y$, which must belong to the **exponential family** (e.g., Normal, Bernoulli, Poisson).
 
-2. **Systematic Component** — A linear combination of input variables called the **linear predictor**: $\eta = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$
+1. **Random Component**
 
-3. **Link Function** — Connects the mean $\mu = E(Y)$ to the linear predictor via $g(\mu) = \eta$. It keeps predictions within a valid range.
+   
+   The probability distribution of the response variable $Y$, which must belong to the **exponential family** (e.g., Normal, Bernoulli, Poisson).
+   $$
+   Y \sim \text{Exponential Family}
+   $$
 
-Common link functions:
-- **Identity** ($g(\mu) = \mu$) → Linear regression
-- **Logit** ($g(\mu) = \log\frac{\mu}{1-\mu}$) → Logistic regression
-- **Log** ($g(\mu) = \log(\mu)$) → Poisson regression
 
-**How They Interact:** The systematic component builds $\eta$ from the predictors. The link function maps $\eta$ to the mean $\mu$. The random component links $\mu$ to the observed $Y$. This lets one framework handle continuous, binary, and count data.
+2. **Systematic Component**
+
+   
+   A linear combination of input variables (the linear predictor):
+   $$
+   \eta = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p = X\beta
+   $$
+
+
+3. **Link Function**
+
+   
+   Connects the mean $\mu = E(Y)$ to the linear predictor:
+   $$
+   g(\mu) = \eta
+   $$
+   It ensures predictions stay within valid range for the chosen distribution.
+
+
+   Common link functions:
+   - **Identity** ($g(\mu) = \mu$) → Linear regression
+   - **Logit** ($g(\mu) = \log\frac{\mu}{1-\mu}$) → Logistic regression
+   - **Log** ($g(\mu) = \log(\mu)$) → Poisson regression
+
+
+**Significance:**
+
+
+GLMs provide a **single framework** for modeling continuous, binary, and count data while keeping the simplicity of linear models. They are widely used in statistics, ML, and economics.
+
+
+**How They Interact:**
+
+
+The random component defines the distribution of $Y$ and its mean $\mu$. The link function bridges $\mu$ to the linear predictor $\eta$. The systematic component builds $\eta$ from the predictors. Together:
+
+
+$$
+\mathbf{X}\boldsymbol{\beta} \overset{\text{Systematic}}{\longrightarrow} \eta \overset{g^{-1}}{\longrightarrow} \mu \overset{\text{Random}}{\longrightarrow} Y
+$$
 
 
 ---
@@ -77,9 +117,46 @@ Thus, link functions provide <Highlight>**flexibility**</Highlight>, ensure vali
 
 ### Q3. Explain Probit regression and provide a conceptual comparison with Logistic regression. / Compare Probit and Logistic regression in terms of their link functions, assumptions, and practical scenarios where one is preferred over the other. <QuestionDot color="yellow" text="IA1-QB" />
 
-**Probit regression** is a GLM for binary classification. It models probability using the **standard normal CDF (bell curve area)**. The link function is the inverse CDF: $g(\mu) = \Phi^{-1}(\mu)$.
 
-**Logistic regression** also handles binary classification but uses the **sigmoid function** and the logit link: $g(\mu) = \log\frac{\mu}{1-\mu}$.
+**Probit regression** is a GLM used for binary classification. It models probability using the **standard normal CDF**:
+
+
+$$
+P(y=1 \mid x,w) = \Phi(w^T x)
+$$
+
+
+where:
+$$
+\Phi(z) = \int_{-\infty}^{z} \frac{1}{\sqrt{2\pi}} e^{-t^2/2} \, dt
+$$
+
+
+The link function is:
+$$
+g(\mu) = \Phi^{-1}(\mu)
+$$
+
+
+---
+
+
+**Logistic regression** is also a GLM for binary classification. It models probability using the **sigmoid function**:
+
+
+$$
+P(y=1 \mid x,w) = \frac{1}{1 + e^{-w^T x}}
+$$
+
+
+The link function is:
+$$
+g(\mu) = \log\frac{\mu}{1-\mu}
+$$
+
+
+---
+
 
 ### Comparison
 
