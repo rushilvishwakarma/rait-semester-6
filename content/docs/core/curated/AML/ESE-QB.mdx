@@ -578,7 +578,7 @@ $$
 
 A **Gaussian Mixture Model (GMM)** is a probabilistic model that represents data as a **weighted sum of multiple Gaussian distributions**. It is used for **soft clustering**, where each data point belongs to clusters with certain probabilities.
 
-The probability density function (PDF) of a GMM with (K) components is:
+The probability density function (PDF) of a GMM with $K$ components is:
 
 $$
 p(x) = \sum_{k=1}^{K} \pi_k , \mathcal{N}(x \mid \mu_k, \Sigma_k)
@@ -586,13 +586,13 @@ $$
 
 Where:
 
-* (K) = number of components
-* (\pi_k) = mixing coefficient, such that (\sum_{k=1}^{K} \pi_k = 1) and (0 \le \pi_k \le 1)
-* (\mu_k) = mean of the (k)-th Gaussian
-* (\Sigma_k) = covariance of the (k)-th Gaussian
-* (\mathcal{N}(x \mid \mu_k, \Sigma_k)) = Gaussian distribution
+* $K$ = number of components
+* $\pi_k$ = mixing coefficient, such that $\sum_{k=1}^{K} \pi_k = 1$ and $0 \le \pi_k \le 1$
+* $\mu_k$ = mean of the $k$-th Gaussian
+* $\Sigma_k$ = covariance of the $k$-th Gaussian
+* $\mathcal{N}(x \mid \mu_k, \Sigma_k)$ = Gaussian distribution
 
-A latent variable (z) indicates which component generates the data point.
+A latent variable $z$ indicates which component generates the data point.
 
 ---
 
