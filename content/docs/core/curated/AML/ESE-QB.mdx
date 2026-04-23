@@ -11,7 +11,7 @@ import { LongQuestion } from '@/components/question';
 # Module 1 — Generalized Linear Models & Exponential Family
 
 
-### Q1. Explain the three core components of a GLM—random component, systematic component, and link function—and describe how they interact. / Describe the structure of a Generalized Linear Model (GLM). Explain the roles of the random component, systematic component, and link function. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" />
+### Q1. Explain the three core components of a GLM—random component, systematic component, and link function—and describe how they interact. / Describe the structure of a Generalized Linear Model (GLM). Explain the roles of the random component, systematic component, and link function. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
 
 
 A **Generalized Linear Model (GLM)** extends linear regression so that the response variable can follow distributions **other than Normal** (e.g., binary, count data).
@@ -74,7 +74,7 @@ $$
 ---
 
 
-### Q2. What is the role of the canonical link function in GLMs? Explain with an example. / What are link functions in GLMs? Why are different link functions used? / Explain link functions used in Generalized Linear Models (GLMs). Give one example distribution for its associated link function. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" />
+### Q2. What is the role of the canonical link function in GLMs? Explain with an example. / What are link functions in GLMs? Why are different link functions used? / Explain link functions used in Generalized Linear Models (GLMs). Give one example distribution for its associated link function. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="red" text="Important" />
 
 
 In a **Generalized Linear Model (GLM)**, a <Highlight color="blue">**link function**</Highlight> establishes a relationship between the **expected value of the response variable** and the **linear predictor**.
@@ -115,7 +115,7 @@ Thus, link functions provide <Highlight>**flexibility**</Highlight>, ensure vali
 ---
 
 
-### Q3. Explain Probit regression and provide a conceptual comparison with Logistic regression. / Compare Probit and Logistic regression in terms of their link functions, assumptions, and practical scenarios where one is preferred over the other. <QuestionDot color="yellow" text="IA1-QB" />
+### Q3. Explain Probit regression and provide a conceptual comparison with Logistic regression. / Compare Probit and Logistic regression in terms of their link functions, assumptions, and practical scenarios where one is preferred over the other. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="red" text="Important" />
 
 
 **Probit regression** is a GLM used for binary classification. It models probability using the **standard normal CDF**:
@@ -192,7 +192,7 @@ Both give similar results. Logistic is preferred for general use, while probit i
 ---
 
 
-### Q4. What is multitask learning? How does parameter sharing across related tasks enhance generalization, particularly when certain tasks have scarce training data? <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" />
+### Q4. What is multitask learning? How does parameter sharing across related tasks enhance generalization, particularly when certain tasks have scarce training data? <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="red" text="Important" />
 
 
 **Multitask Learning (MTL)** trains multiple related tasks **together** in a single model instead of building separate models for each task.
@@ -233,7 +233,7 @@ MTL is more data-efficient and produces more robust models than single-task lear
 # Module 2 — Directed Graphical Models
 
 
-### Q1. What are Directed Graphical Models (Bayesian Networks)? Using a suitable real-world example, explain how they represent causal relationships and facilitate probabilistic inference. / Define Directed Graphical Models (DGMs). Explain how Bayesian Networks represent joint probability distributions. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" />
+### Q1. What are Directed Graphical Models (Bayesian Networks)? Using a suitable real-world example, explain how they represent causal relationships and facilitate probabilistic inference. / Define Directed Graphical Models (DGMs). Explain how Bayesian Networks represent joint probability distributions. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
 
 
 **Directed Graphical Models (DGMs)** are probabilistic models that use a **directed graph** to show dependencies between random variables. Each **node** = a variable, each **arrow** = a dependency.
@@ -292,7 +292,7 @@ A node is **conditionally independent of all non-descendants given its parents**
 ---
 
 
-### Q2. How do Bayesian Networks use conditional independence properties? Explain two such properties with examples. / Explain the concept of conditional independence in Directed Graphical Models with the help of graphical intuition. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" />
+### Q2. How do Bayesian Networks use conditional independence properties? Explain two such properties with examples. / Explain the concept of conditional independence in Directed Graphical Models with the help of graphical intuition. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
 
 
 **Conditional independence** means two variables don't affect each other once we know a third variable:
@@ -462,81 +462,6 @@ When all CPDs are Gaussian, their product gives a **single joint multivariate Ga
 ---
 
 
-<LongQuestion>
-### Q6. (Extras for Reference/Practice) For the following system: Weather (W) affects Road Condition (R), Road Condition (R) affects Accident (A), Driver Alertness (D) affects Accident (A), Accident (A) affects Insurance Claim (C). Construct a Bayesian Network (DAG) and write the joint probability distribution. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" />
-</LongQuestion>
-
-
-**1. Directed Acyclic Graph (DAG)**
-
-
-<Mermaid chart={`graph LR
-  W[Weather] --> R[Road Condition]
-  R --> A[Accident]
-  D[Driver Alertness] --> A
-  A --> C[Insurance Claim]
-`} />
-
-
-Nodes: $W, R, D, A, C$  
-Edges: $W \to R$, $R \to A$, $D \to A$, $A \to C$
-
-
-**2. Joint Probability Distribution**
-
-
-Using the chain rule for Bayesian Networks (each node depends only on its direct parents):
-
-
-$$
-P(W, R, D, A, C) = P(W) \cdot P(D) \cdot P(R \mid W) \cdot P(A \mid R, D) \cdot P(C \mid A)
-$$
-
-
----
-
-
-<LongQuestion>
-### Q7. (Extras for Reference/Practice) For the given relations: Socioeconomic Status (S) affects Education Level (E) and Nutrition (N); Education Level (E) affects Job Type (J); Nutrition (N) affects Health Condition (H); Job Type (J) and Health Condition (H) affect Income (I). Draw the DAG, write the joint probability, and write three conditional independence relations. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" />
-</LongQuestion>
-
-
-**1. Directed Acyclic Graph (DAG)**
-
-
-<Mermaid chart={`graph LR
-  S[Socioeconomic Status] --> E[Education Level]
-  S --> N[Nutrition]
-  E --> J[Job Type]
-  N --> H[Health Condition]
-  J --> I[Income]
-  H --> I
-`} />
-
-
-Nodes: $S, E, N, J, H, I$  
-Edges: $S \to E$, $S \to N$, $E \to J$, $N \to H$, $J \to I$, $H \to I$
-
-
-**2. Joint Probability Distribution**
-
-
-$$
-P(S, E, N, J, H, I) = P(S) \cdot P(E \mid S) \cdot P(N \mid S) \cdot P(J \mid E) \cdot P(H \mid N) \cdot P(I \mid J, H)
-$$
-
-
-**3. Three Conditional Independence Relations**
-
-
-1. **$E \perp N \mid S$**: Education and Nutrition are conditionally independent given Socioeconomic Status (Fork structure at $S$).
-2. **$J \perp H \mid \{E, N\}$**: Job Type and Health Condition are conditionally independent given Education and Nutrition (Chain structures from $E$ and $N$).
-3. **$J \perp S \mid E$**: Job Type is conditionally independent of Socioeconomic Status given Education Level (Chain structure $S \to E \to J$).
-
-
----
-
-
 # Module 3 — Mixture Models & EM Algorithm
 
 
@@ -574,7 +499,7 @@ $$
 ---
 
 
-### Q2. What is a Gaussian Mixture Model (GMM)? Write the probability density function for a GMM with K components. <QuestionDot color="cyan" text="MSE-QB" />
+### Q2. What is a Gaussian Mixture Model (GMM)? Write the probability density function for a GMM with K components. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="red" text="Important" />
 
 A **Gaussian Mixture Model (GMM)** is a probabilistic model that represents data as a **weighted sum of multiple Gaussian distributions**. It is used for **soft clustering**, where each data point belongs to clusters with certain probabilities.
 
@@ -597,7 +522,7 @@ A latent variable $z$ indicates which component generates the data point.
 ---
 
 
-### Q3. Outline the two principal steps of the EM algorithm. Why are these steps crucial for parameter estimation with latent variables? / Describe the two main steps in parameter estimation for mixture models. Explain what makes this estimation challenging when the component labels are unknown. / Q5. Explain the E-step and M-step of the EM algorithm in detail. Why is the algorithm guaranteed to converge to a local optimum? <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" />
+### Q3. Outline the two principal steps of the EM algorithm. Why are these steps crucial for parameter estimation with latent variables? / Describe the two main steps in parameter estimation for mixture models. Explain what makes this estimation challenging when the component labels are unknown. / Q5. Explain the E-step and M-step of the EM algorithm in detail. Why is the algorithm guaranteed to converge to a local optimum? <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
 
 The **Expectation-Maximization (EM) Algorithm** is an iterative method for maximum likelihood estimation when data has **latent (hidden) variables**.
 
@@ -647,7 +572,7 @@ $$
 ---
 
 
-### Q4. Write the mathematical expression for a mixture model with K components. For customer purchase amounts showing two distinct patterns (small vs large), analyze the suitability of Gaussian, Poisson, and Binomial distributions. Justify your choice. / Define a mixture model. You are given a dataset of customer purchase amounts. Some customers make small purchases, while others make large purchases. Apply the GLM framework to decide which distribution (Gaussian, Poisson, or Binomial) would be appropriate for modeling this data. Justify your choice. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" />
+### Q4. Write the mathematical expression for a mixture model with K components. For customer purchase amounts showing two distinct patterns (small vs large), analyze the suitability of Gaussian, Poisson, and Binomial distributions. Justify your choice. / Define a mixture model. You are given a dataset of customer purchase amounts. Some customers make small purchases, while others make large purchases. Apply the GLM framework to decide which distribution (Gaussian, Poisson, or Binomial) would be appropriate for modeling this data. Justify your choice. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
 
 
 **Mixture Model with K Components:**
