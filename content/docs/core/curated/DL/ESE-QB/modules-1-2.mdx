@@ -1,4 +1,4 @@
-﻿---
+---
 title: Module 1 & Module 2
 description: Introduction to Deep Learning, Neurons, Activation Functions, Backpropagation, Regularization & Optimization.
 ---
@@ -37,13 +37,13 @@ import { QuestionDot } from '@/components/question-dot';
 
 A single neuron is the basic processing unit of a neural network. Its operation has three steps:
 
-**Step 1 â€” Weighted Sum:**
+**Step 1 — Weighted Sum:**
 
 Each input $x_i$ is multiplied by a corresponding weight $w_i$, and a bias $b$ is added:
 
 $$z = \sum_{i=1}^{n} w_i x_i + b = w_1x_1 + w_2x_2 + \dots + w_nx_n + b$$
 
-**Step 2 â€” Activation Function:**
+**Step 2 — Activation Function:**
 
 The weighted sum $z$ is passed through an activation function $f(z)$ to produce the output $y$:
 
@@ -75,8 +75,8 @@ where $\alpha$ is the learning rate, $t$ is the target output, and $y$ is the ac
 
 **Goal:** Find a set of weights such that the perceptron correctly classifies all linearly separable training samples. The rule guarantees convergence in finite steps for linearly separable problems *(Perceptron Convergence Theorem)*.
 
-- If $y = t$ â†’ no update (prediction is correct).
-- If $y \neq t$ â†’ weights are adjusted in the direction that reduces error.
+- If $y = t$ → no update (prediction is correct).
+- If $y \neq t$ → weights are adjusted in the direction that reduces error.
 
 ---
 
@@ -86,8 +86,8 @@ where $\alpha$ is the learning rate, $t$ is the target output, and $y$ is the ac
 
 | Architecture | Description | Use Case |
 |---|---|---|
-| <Highlight color="green">**Feedforward NN (FNN)**</Highlight> | Data flows in one direction only: input â†’ hidden â†’ output. No loops or cycles. | Classification, regression |
-| <Highlight color="orange">**Recurrent NN (RNN)**</Highlight> | Contains loops â€” the output of a layer is fed back as input. Maintains a hidden state (memory). | Time series, NLP, speech |
+| <Highlight color="green">**Feedforward NN (FNN)**</Highlight> | Data flows in one direction only: input → hidden → output. No loops or cycles. | Classification, regression |
+| <Highlight color="orange">**Recurrent NN (RNN)**</Highlight> | Contains loops — the output of a layer is fed back as input. Maintains a hidden state (memory). | Time series, NLP, speech |
 | <Highlight color="blue">**Convolutional NN (CNN)**</Highlight> | Uses convolutional filters to scan local regions of input. Employs parameter sharing and pooling. | Image recognition, object detection |
 
 ---
@@ -100,11 +100,11 @@ A feedforward neural network with one hidden layer has three layers:
 
 ```
 Input Layer     Hidden Layer     Output Layer
-  (x1)  â”€â”€â”
-           â”œâ”€â”€â†’  (h1)  â”€â”€â”
-  (x2)  â”€â”€â”¤              â”œâ”€â”€â†’  (y)
-           â”œâ”€â”€â†’  (h2)  â”€â”€â”˜
-  (x3)  â”€â”€â”˜
+  (x1)  ──┐
+           ├──→  (h1)  ──┐
+  (x2)  ──┤              ├──→  (y)
+           ├──→  (h2)  ──┘
+  (x3)  ──┘
 ```
 
 - **Input layer:** receives raw features.
@@ -128,7 +128,7 @@ $$\Delta w_i = \alpha\,(t - \hat{y})\,f'(z)\,x_i$$
 
 where:
 - $\alpha$ = learning rate
-- $t - \hat{y}$ = error (target âˆ’ predicted)
+- $t - \hat{y}$ = error (target − predicted)
 - $f'(z)$ = derivative of the activation function
 - $x_i$ = input value
 
@@ -145,16 +145,16 @@ where:
 ---
 
 <LongQuestion>
-### Q6. Numerical: Given a perceptron with weights $w=[0.7,âˆ’0.4]$, bias $b=0.1$, and input $x=[2,1]$, calculate the output using a step activation function.
+### Q6. Numerical: Given a perceptron with weights $w=[0.7,−0.4]$, bias $b=0.1$, and input $x=[2,1]$, calculate the output using a step activation function.
 </LongQuestion>
 
-**Step 1 â€” Compute weighted sum:**
+**Step 1 — Compute weighted sum:**
 
 $$z = w_1 x_1 + w_2 x_2 + b = (0.7)(2) + (-0.4)(1) + 0.1$$
 
 $$z = 1.4 - 0.4 + 0.1 = \mathbf{1.1}$$
 
-**Step 2 â€” Apply step activation function:**
+**Step 2 — Apply step activation function:**
 
 $$\text{Output} = \begin{cases} 1 & \text{if } z > 0 \\ 0 & \text{if } z \leq 0 \end{cases}$$
 
@@ -184,9 +184,9 @@ $$f(x) = \max(0,\, x)$$
 - Output range: $[0, \infty)$
 - Most widely used in hidden layers.
 - Computationally efficient and avoids vanishing gradients (for positive inputs).
-- Drawback: <Highlight color="red">**dying ReLU**</Highlight> problem â€” neurons can get stuck at zero.
+- Drawback: <Highlight color="red">**dying ReLU**</Highlight> problem — neurons can get stuck at zero.
 
-**Bonus â€” Tanh:**
+**Bonus — Tanh:**
 
 $$f(x) = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$$
 
@@ -200,7 +200,7 @@ Output range: $(-1, 1)$. Used in hidden layers of RNNs.
 
 <Highlight color="blue">**Deep Learning**</Highlight> is a subset of machine learning that uses <Highlight color="green">**multi-layered neural networks**</Highlight> (deep neural networks) to automatically learn hierarchical feature representations from raw data.
 
-**Key characteristic:** Each layer learns progressively more abstract features (edges â†’ shapes â†’ objects in images).
+**Key characteristic:** Each layer learns progressively more abstract features (edges → shapes → objects in images).
 
 **Importance in Modern AI:**
 
@@ -258,16 +258,16 @@ $$W^{[l]} \leftarrow W^{[l]} - \eta\,\frac{\partial \mathcal{L}}{\partial W^{[l]
 
 | Era | Development |
 |-----|-------------|
-| **1943** | <Highlight color="orange">**McCulloch-Pitts neuron**</Highlight> â€” first mathematical model of a neuron |
-| **1958** | <Highlight color="orange">**Perceptron (Rosenblatt)**</Highlight> â€” single-layer trainable network |
-| **1969** | Minsky & Papert showed perceptrons can't solve XOR â†’ <Highlight color="red">**AI Winter**</Highlight> |
-| **1986** | <Highlight color="green">**Backpropagation (Rumelhart et al.)**</Highlight> â€” enabled multi-layer training |
-| **1998** | <Highlight color="green">**LeNet (LeCun)**</Highlight> â€” first successful CNN for digit recognition |
-| **2006** | Hinton's <Highlight color="green">**Deep Belief Networks**</Highlight> â€” revival of deep learning |
+| **1943** | <Highlight color="orange">**McCulloch-Pitts neuron**</Highlight> — first mathematical model of a neuron |
+| **1958** | <Highlight color="orange">**Perceptron (Rosenblatt)**</Highlight> — single-layer trainable network |
+| **1969** | Minsky & Papert showed perceptrons can't solve XOR → <Highlight color="red">**AI Winter**</Highlight> |
+| **1986** | <Highlight color="green">**Backpropagation (Rumelhart et al.)**</Highlight> — enabled multi-layer training |
+| **1998** | <Highlight color="green">**LeNet (LeCun)**</Highlight> — first successful CNN for digit recognition |
+| **2006** | Hinton's <Highlight color="green">**Deep Belief Networks**</Highlight> — revival of deep learning |
 | **2012** | <Highlight color="blue">**AlexNet**</Highlight> wins ImageNet with GPU-accelerated deep CNN |
-| **2014â€“17** | VGG, GoogLeNet, ResNet â€” very deep architectures with skip connections |
+| **2014–17** | VGG, GoogLeNet, ResNet — very deep architectures with skip connections |
 | **2017** | <Highlight color="blue">**Transformers (Attention is All You Need)**</Highlight> |
-| **2020s** | GPT, BERT, DALL-E, diffusion models â€” modern generative AI |
+| **2020s** | GPT, BERT, DALL-E, diffusion models — modern generative AI |
 
 **Key enabling factors:** Big data, GPU compute, improved activation functions (ReLU), better initialization, and regularization (dropout).
 
@@ -296,13 +296,13 @@ $$W \leftarrow W - \eta\,\frac{\partial \mathcal{L}}{\partial W}$$
 6. **Repeat** for many epochs until the loss converges.
 
 ```
-Input â†’ [Layer 1: Edges] â†’ [Layer 2: Shapes] â†’ [Layer 3: Objects] â†’ Output
+Input → [Layer 1: Edges] → [Layer 2: Shapes] → [Layer 3: Objects] → Output
 ```
 
 ---
 
 <LongQuestion>
-### Q14. Numerical: Calculate the output of the given neural network (Sigmoid, 2â†’2â†’1 architecture).
+### Q14. Numerical: Calculate the output of the given neural network (Sigmoid, 2→2→1 architecture).
 </LongQuestion>
 
 **Given:**
@@ -310,22 +310,22 @@ Input â†’ [Layer 1: Edges] â†’ [Layer 2: Shapes] â†’ [Layer 3: Ob
 - $W_1 = \begin{bmatrix}0.9 & 0.6 \\ -0.4 & 0.1\end{bmatrix}$, $b_1 = [0.3,\,-0.1]$
 - $W_2 = [0.6,\,-0.5]$, $b_2 = 0.5$
 
-**Step 1 â€” Hidden layer pre-activation:**
+**Step 1 — Hidden layer pre-activation:**
 
 $$z_1^{[1]} = 0.9(1) + (-0.4)(0) + 0.3 = 1.2$$
 $$z_2^{[1]} = 0.6(1) + 0.1(0) + (-0.1) = 0.5$$
 
-**Step 2 â€” Hidden layer activation (Sigmoid):**
+**Step 2 — Hidden layer activation (Sigmoid):**
 
 $$a_1^{[1]} = \sigma(1.2) = \frac{1}{1+e^{-1.2}} \approx \mathbf{0.7685}$$
 $$a_2^{[1]} = \sigma(0.5) = \frac{1}{1+e^{-0.5}} \approx \mathbf{0.6225}$$
 
-**Step 3 â€” Output layer pre-activation:**
+**Step 3 — Output layer pre-activation:**
 
 $$z^{[2]} = 0.6(0.7685) + (-0.5)(0.6225) + 0.5$$
 $$= 0.4611 - 0.3113 + 0.5 = 0.6498$$
 
-**Step 4 â€” Output activation (Sigmoid):**
+**Step 4 — Output activation (Sigmoid):**
 
 $$\hat{y} = \sigma(0.6498) = \frac{1}{1+e^{-0.6498}} \approx \boxed{0.6570}$$
 
@@ -358,9 +358,9 @@ $$E_{\text{total}} = \text{Bias}^2 + \text{Variance} + \text{Irreducible Noise}$
 
 #### Advantages
 
-- <Highlight color="green">**Automatic Feature Extraction:**</Highlight> Unlike traditional ML, DNNs do not require manual feature engineering â€” they learn features directly from raw data.
+- <Highlight color="green">**Automatic Feature Extraction:**</Highlight> Unlike traditional ML, DNNs do not require manual feature engineering — they learn features directly from raw data.
 - <Highlight color="green">**Scalability:**</Highlight> Performance improves significantly with more data and compute (Big Data compatibility).
-- <Highlight color="green">**Versatility:**</Highlight> Applicable across diverse domains â€” computer vision, NLP, speech recognition, and more.
+- <Highlight color="green">**Versatility:**</Highlight> Applicable across diverse domains — computer vision, NLP, speech recognition, and more.
 - <Highlight color="green">**Handles Non-linearity:**</Highlight> Excellent at modeling complex, non-linear relationships through stacked layers and activation functions.
 
 #### Disadvantages

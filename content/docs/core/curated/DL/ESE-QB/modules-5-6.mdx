@@ -1,4 +1,4 @@
-﻿---
+---
 title: Module 5 & Module 6
 description: Autoencoders (Sparse, Denoising, Contractive), DL Applications (ImageNet, WaveNet, Word2Vec, Face Recognition).
 ---
@@ -29,7 +29,7 @@ import { QuestionDot } from '@/components/question-dot';
 	</div>
 </div>
 
-# Module 5 â€” Autoencoders
+# Module 5 — Autoencoders
 
 ---
 
@@ -42,20 +42,20 @@ An <Highlight color="blue">**Autoencoder**</Highlight> is an unsupervised neural
 **Key components:**
 
 ```
-Input x â†’ [Encoder] â†’ Latent z â†’ [Decoder] â†’ Reconstruction xÌ‚
+Input x → [Encoder] → Latent z → [Decoder] → Reconstruction x̂
 ```
 
 **1. <Highlight color="green">Encoder</Highlight>:** Maps high-dimensional input $x$ to a low-dimensional latent space $z$:
 
 $$z = f_\theta(x) = \sigma(W_e x + b_e)$$
 
-**2. <Highlight color="orange">Latent Space (Bottleneck)</Highlight>:** Compressed representation $z$ â€” forces the network to learn the most important features.
+**2. <Highlight color="orange">Latent Space (Bottleneck)</Highlight>:** Compressed representation $z$ — forces the network to learn the most important features.
 
 **3. <Highlight color="blue">Decoder</Highlight>:** Reconstructs the input from the latent representation:
 
 $$\hat{x} = g_\phi(z) = \sigma(W_d z + b_d)$$
 
-**Training objective** â€” minimize reconstruction loss:
+**Training objective** — minimize reconstruction loss:
 
 $$\mathcal{L} = \|x - \hat{x}\|^2 \quad \text{(MSE)}$$
 
@@ -73,15 +73,15 @@ A <Highlight color="blue">**linear autoencoder**</Highlight> uses only linear ac
 
 $$z = W_e x, \qquad \hat{x} = W_d z = W_d W_e x$$
 
-The overall mapping is: $\hat{x} = (W_d W_e)\,x$ â€” a **linear transformation** of $x$.
+The overall mapping is: $\hat{x} = (W_d W_e)\,x$ — a **linear transformation** of $x$.
 
 **Characteristics:**
 - Encoder and decoder are purely linear layers.
 - The bottleneck performs dimensionality reduction via a linear projection.
-- It is mathematically equivalent to **PCA (Principal Component Analysis)** â€” the subspace spanned by the encoder weights converges to the principal components.
+- It is mathematically equivalent to **PCA (Principal Component Analysis)** — the subspace spanned by the encoder weights converges to the principal components.
 
 **Limitations:**
-- <Highlight color="red">**Cannot capture non-linear structure**</Highlight> in data â€” fails on manifolds and complex distributions.
+- <Highlight color="red">**Cannot capture non-linear structure**</Highlight> in data — fails on manifolds and complex distributions.
 - <Highlight color="red">**Limited representational power:**</Highlight> Composed linear layers are still just a single linear map.
 - <Highlight color="red">**Sensitive to outliers:**</Highlight> MSE loss amplifies large deviations.
 - For non-linear data, non-linear autoencoders (with ReLU/tanh) are required.
@@ -101,7 +101,7 @@ The overall mapping is: $\hat{x} = (W_d W_e)\,x$ â€” a **linear transformat
 | **Regularization needed** | Not necessary | Required (L1 sparsity, denoising, dropout) |
 | **Use case** | Dimensionality reduction, compression | Sparse coding, feature learning, denoising |
 
-**Undercomplete autoencoder:** The hidden layer is smaller than the input â€” compression forces the encoder to capture only the most salient features.
+**Undercomplete autoencoder:** The hidden layer is smaller than the input — compression forces the encoder to capture only the most salient features.
 
 $$\dim(z) < \dim(x) \Rightarrow \text{bottleneck constraint}$$
 
@@ -129,7 +129,7 @@ A <Highlight color="blue">**sparse autoencoder**</Highlight> adds a sparsity pen
 
 $$\mathcal{L}_{sparse} = \|x - \hat{x}\|^2 + \lambda \|z\|_1$$
 
-**Benefit of sparsity:** Only a small number of hidden units activate per input â†’ learns **disentangled, interpretable features** (similar to how the brain encodes information).
+**Benefit of sparsity:** Only a small number of hidden units activate per input → learns **disentangled, interpretable features** (similar to how the brain encodes information).
 
 **Comparison:**
 
@@ -148,13 +148,13 @@ $$\mathcal{L}_{sparse} = \|x - \hat{x}\|^2 + \lambda \|z\|_1$$
 
 **Why regularization is required:**
 
-Without regularization (especially in overcomplete autoencoders), the network learns the **identity function** â€” simply copying input to output without learning any meaningful representation. Regularization prevents this by constraining the latent space.
+Without regularization (especially in overcomplete autoencoders), the network learns the **identity function** — simply copying input to output without learning any meaningful representation. Regularization prevents this by constraining the latent space.
 
 **1. <Highlight color="green">L1 Regularization (Sparse Autoencoder)</Highlight>**
 
 $$\mathcal{L} = \|x - \hat{x}\|^2 + \lambda \sum_j |z_j|$$
 
-- Encourages most latent units to be zero â†’ **sparse** representations.
+- Encourages most latent units to be zero → **sparse** representations.
 - Promotes feature selection: only important features activate.
 - Useful for learning parts-based or disentangled representations.
 
@@ -184,7 +184,7 @@ $$z' = z \odot m, \quad m_i \sim \text{Bernoulli}(1-p)$$
 
 **Training Process:**
 
-1. **Forward pass:** Input $x$ is passed through encoder â†’ latent $z$ â†’ decoder â†’ reconstruction $\hat{x}$.
+1. **Forward pass:** Input $x$ is passed through encoder → latent $z$ → decoder → reconstruction $\hat{x}$.
 
 2. **Loss computation (MSE):**
 
@@ -198,7 +198,7 @@ $$W \leftarrow W - \eta\,\frac{\partial \mathcal{L}}{\partial W}$$
 
 5. **Repeat** for multiple epochs until reconstruction loss converges.
 
-**Note:** No labels are required â€” autoencoders are **self-supervised** (the target is the input itself).
+**Note:** No labels are required — autoencoders are **self-supervised** (the target is the input itself).
 
 **Dimensionality Reduction:**
 
@@ -238,7 +238,7 @@ $$z_2 = 2(0) + 4(0.2) + 6(0) = 0.8$$
 
 $$\boxed{z = [1.0,\; 0.8]}$$
 
-The input is compressed from 3 dimensions to 2 â€” performing linear dimensionality reduction.
+The input is compressed from 3 dimensions to 2 — performing linear dimensionality reduction.
 
 ---
 
@@ -251,7 +251,7 @@ The input is compressed from 3 dimensions to 2 â€” performing linear dimens
 ImageNet is a large dataset of millions of labeled images. Deep learning models trained on it achieve very high accuracy in both classification and detection.
 
 1. <Highlight color="blue">**Classification:**</Highlight> CNNs like AlexNet, VGG, and ResNet achieved breakthrough accuracy on ImageNet's 1000-class challenge.
-2. <Highlight color="green">**Feature learning:**</Highlight> CNNs automatically learn useful features â€” early layers detect edges, deeper layers detect objects and scenes.
+2. <Highlight color="green">**Feature learning:**</Highlight> CNNs automatically learn useful features — early layers detect edges, deeper layers detect objects and scenes.
 3. <Highlight color="orange">**Transfer learning:**</Highlight> Models pretrained on ImageNet are reused for other tasks (medical imaging, remote sensing) with minimal retraining.
 4. <Highlight color="cyan">**Object detection:**</Highlight> Models like R-CNN, YOLO, and SSD use ImageNet-pretrained backbones to detect and locate objects in images.
 5. <Highlight color="green">**Robustness:**</Highlight> Training on millions of diverse images makes models handle variations in lighting, angle, and pose.
@@ -290,7 +290,7 @@ In short, WaveNet is important because it produces clearer and more human-like a
 
 <Highlight color="blue">**Word2Vec**</Highlight> converts words into numeric vectors so that words with similar meanings end up close to each other in vector space.
 
-For example: king âˆ’ man + woman â‰ˆ queen. This shows the model understands word relationships without being explicitly taught.
+For example: king − man + woman ≈ queen. This shows the model understands word relationships without being explicitly taught.
 
 #### Two Architectures
 
@@ -356,15 +356,15 @@ The output is a colored mask the same size as the input image, where each pixel 
 
 #### Key Points
 
-1. Works at pixel level â€” much more detailed than classification.
+1. Works at pixel level — much more detailed than classification.
 2. All objects of the same class get the same label (no distinction between individuals).
 3. Uses encoder-decoder networks like FCN, U-Net, and DeepLab.
 4. Measured using IoU / mIoU metrics.
 
 #### Semantic vs Instance Segmentation
 
-- **Semantic:** Two cars â†’ both labeled "car" (same color).
-- **Instance:** Two cars â†’ labeled "car-1" and "car-2" separately.
+- **Semantic:** Two cars → both labeled "car" (same color).
+- **Instance:** Two cars → labeled "car-1" and "car-2" separately.
 
 #### Example
 
@@ -430,4 +430,5 @@ For a road image with 2 cars and 1 pedestrian:
 **Conclusion:** Use classification when you only need to know what's in the image. Use detection when you need to know where each object is.
 
 ---
+
 

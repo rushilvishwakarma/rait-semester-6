@@ -1,4 +1,4 @@
-﻿---
+---
 title: Module 3 & Module 4
 description: CNNs, Convolution, Pooling, Feature Extraction, RNNs, BPTT, Vanishing & Exploding Gradients.
 ---
@@ -47,12 +47,12 @@ The result is a **feature map** (activation map) that highlights where a specifi
 
 **Role in feature extraction:**
 
-- <Highlight color="green">**Early layers:**</Highlight> Detect low-level features â€” edges, corners, gradients.
-- <Highlight color="orange">**Middle layers:**</Highlight> Detect mid-level features â€” textures, shapes, curves.
-- <Highlight color="blue">**Deep layers:**</Highlight> Detect high-level, semantic features â€” eyes, wheels, faces.
+- <Highlight color="green">**Early layers:**</Highlight> Detect low-level features — edges, corners, gradients.
+- <Highlight color="orange">**Middle layers:**</Highlight> Detect mid-level features — textures, shapes, curves.
+- <Highlight color="blue">**Deep layers:**</Highlight> Detect high-level, semantic features — eyes, wheels, faces.
 
 **Key advantages:**
-- <Highlight color="green">**Parameter sharing:**</Highlight> Same filter weights applied everywhere â†’ fewer parameters.
+- <Highlight color="green">**Parameter sharing:**</Highlight> Same filter weights applied everywhere → fewer parameters.
 - <Highlight color="green">**Local connectivity:**</Highlight> Each neuron connects to a small local region, capturing spatial structure.
 - <Highlight color="green">**Translation invariance:**</Highlight> Features detected regardless of position in image.
 
@@ -87,7 +87,7 @@ $$\frac{\partial \mathcal{L}}{\partial W^{[l]}} = \frac{\partial \mathcal{L}}{\p
 
 $$W^{[l]} \leftarrow W^{[l]} - \eta\,\frac{\partial \mathcal{L}}{\partial W^{[l]}}$$
 
-**Role in CNN:** Backprop adjusts filter weights (kernels), FC layer weights, and biases â€” training the CNN to detect increasingly useful features.
+**Role in CNN:** Backprop adjusts filter weights (kernels), FC layer weights, and biases — training the CNN to detect increasingly useful features.
 
 ---
 
@@ -97,13 +97,13 @@ $$W^{[l]} \leftarrow W^{[l]} - \eta\,\frac{\partial \mathcal{L}}{\partial W^{[l]
 
 **Given:** Weights $w = [0.5,\; -0.3]$, bias $b = 0.1$, input $x = [1,\; 2]$, step activation.
 
-**Step 1 â€” Weighted sum:**
+**Step 1 — Weighted sum:**
 
 $$z = w_1 x_1 + w_2 x_2 + b = (0.5)(1) + (-0.3)(2) + 0.1$$
 
 $$z = 0.5 - 0.6 + 0.1 = 0.0$$
 
-**Step 2 â€” Step activation:**
+**Step 2 — Step activation:**
 
 $$\hat{y} = \begin{cases} 1 & z > 0 \\ 0 & z \leq 0 \end{cases}$$
 
@@ -121,8 +121,8 @@ $$\boxed{\hat{y} = 0 \quad \text{(Class 0)}}$$
 
 | Property | Feedforward NN (FNN) | Recurrent NN (RNN) |
 |----------|---------------------|--------------------|
-| **Data flow** | One direction: input â†’ output | Loops: output fed back as input |
-| **Memory** | <Highlight color="red">**None**</Highlight> â€” no state retained | <Highlight color="green">**Hidden state**</Highlight> $h_t$ carries past info |
+| **Data flow** | One direction: input → output | Loops: output fed back as input |
+| **Memory** | <Highlight color="red">**None**</Highlight> — no state retained | <Highlight color="green">**Hidden state**</Highlight> $h_t$ carries past info |
 | **Input type** | Fixed-size vector | Sequential / time-series data |
 | **Architecture** | Acyclic graph | Cyclic connections |
 | **Best for** | Image classification, regression | NLP, speech, time-series |
@@ -137,7 +137,7 @@ $$\boxed{\hat{y} = 0 \quad \text{(Class 0)}}$$
 ### Q5. What is overfitting, and how can it be avoided?
 </LongQuestion>
 
-<Highlight color="red">**Overfitting**</Highlight> occurs when a model learns the training data too well â€” including noise and random fluctuations â€” and fails to generalize to new/unseen data.
+<Highlight color="red">**Overfitting**</Highlight> occurs when a model learns the training data too well — including noise and random fluctuations — and fails to generalize to new/unseen data.
 
 **Symptoms:**
 - Low training error, high validation/test error.
@@ -180,7 +180,7 @@ Followed by an activation function (typically ReLU): $a = \max(0, z)$
 
 Reduces spatial dimensions (downsampling) while retaining dominant features.
 
-- **Max Pooling:** Takes the maximum value in each window â†’ preserves strongest activations.
+- **Max Pooling:** Takes the maximum value in each window → preserves strongest activations.
 - **Average Pooling:** Takes the mean of each window.
 
 $$\text{Max Pool}_{2\times2}:\quad \begin{bmatrix}1&3\\2&4\end{bmatrix} \rightarrow 4$$
@@ -200,13 +200,13 @@ $$\hat{y} = \text{softmax}(W \cdot \text{flatten}(A) + b)$$
 
 ```
 Input Image
-  â†’ [Conv + ReLU] Ã— n   (feature extraction)
-  â†’ [Pooling]            (downsampling)
-  â†’ [Conv + ReLU] Ã— n
-  â†’ [Pooling]
-  â†’ Flatten
-  â†’ [FC Layer + ReLU]
-  â†’ [FC + Softmax]       (output probabilities)
+  → [Conv + ReLU] × n   (feature extraction)
+  → [Pooling]            (downsampling)
+  → [Conv + ReLU] × n
+  → [Pooling]
+  → Flatten
+  → [FC Layer + ReLU]
+  → [FC + Softmax]       (output probabilities)
 ```
 
 ---
@@ -215,7 +215,7 @@ Input Image
 ### Q10. List two common applications of Convolutional Neural Networks (CNNs).
 </LongQuestion>
 
-1. <Highlight color="green">**Image Classification:**</Highlight> Assigning a class label to an input image (e.g., AlexNet/ResNet on ImageNet â€” classifying dogs, cats, vehicles across 1000 categories).
+1. <Highlight color="green">**Image Classification:**</Highlight> Assigning a class label to an input image (e.g., AlexNet/ResNet on ImageNet — classifying dogs, cats, vehicles across 1000 categories).
 
 2. <Highlight color="orange">**Object Detection:**</Highlight> Locating and classifying multiple objects within an image using bounding boxes (e.g., YOLO, Faster R-CNN for pedestrian detection in autonomous driving).
 
@@ -223,7 +223,7 @@ Other notable applications: Medical image analysis (tumor detection), facial rec
 
 ---
 
-# Module 4 â€” Recurrent Neural Networks
+# Module 4 — Recurrent Neural Networks
 
 ---
 
@@ -255,8 +255,8 @@ A <Highlight color="blue">**Recurrent Neural Network (RNN)**</Highlight> is a ne
 #### Architecture
 
 An RNN at each time step $t$ takes:
-- $x_t$ â€” current input
-- $h_{t-1}$ â€” previous hidden state
+- $x_t$ — current input
+- $h_{t-1}$ — previous hidden state
 
 And computes:
 
@@ -265,22 +265,22 @@ $$h_t = \tanh(W_{xh}\,x_t + W_{hh}\,h_{t-1} + b_h)$$
 $$y_t = W_{hy}\,h_t + b_y$$
 
 where:
-- $W_{xh}$ â€” input-to-hidden weight matrix
-- $W_{hh}$ â€” hidden-to-hidden (recurrent) weight matrix
-- $W_{hy}$ â€” hidden-to-output weight matrix
+- $W_{xh}$ — input-to-hidden weight matrix
+- $W_{hh}$ — hidden-to-hidden (recurrent) weight matrix
+- $W_{hy}$ — hidden-to-output weight matrix
 
 #### Role of Recurrent Connections
 
-The recurrent connection via $W_{hh}$ feeds the previous hidden state back into the current computation â€” this is what gives the RNN its **memory**. The same $W_{hh}$, $W_{xh}$, $W_{hy}$ are **shared across all time steps** (parameter sharing).
+The recurrent connection via $W_{hh}$ feeds the previous hidden state back into the current computation — this is what gives the RNN its **memory**. The same $W_{hh}$, $W_{xh}$, $W_{hy}$ are **shared across all time steps** (parameter sharing).
 
 #### Sequential Processing
 
 ```
-xâ‚ â†’ [RNN cell] â†’ hâ‚ â†’ yâ‚
-              â†“
-xâ‚‚ â†’ [RNN cell] â†’ hâ‚‚ â†’ yâ‚‚
-              â†“
-xâ‚ƒ â†’ [RNN cell] â†’ hâ‚ƒ â†’ yâ‚ƒ
+x₁ → [RNN cell] → h₁ → y₁
+              ↓
+x₂ → [RNN cell] → h₂ → y₂
+              ↓
+x₃ → [RNN cell] → h₃ → y₃
 ```
 
 At each step, the hidden state $h_t$ summarizes all past information $x_1, x_2, \ldots, x_t$.
@@ -303,14 +303,14 @@ If $\|W_{hh}\| < 1$ or $|f'| \ll 1$ (e.g., saturated sigmoid/tanh), the product 
 
 $$\left\|\prod_{t=1}^{T} \frac{\partial h_t}{\partial h_{t-1}}\right\| \rightarrow 0 \quad \text{as } T \rightarrow \infty$$
 
-- <Highlight color="red">**Effect:**</Highlight> Early time steps receive near-zero gradients â†’ network cannot learn long-range dependencies.
+- <Highlight color="red">**Effect:**</Highlight> Early time steps receive near-zero gradients → network cannot learn long-range dependencies.
 
 **Exploding Gradient:**
 
 If $\|W_{hh}\| > 1$, the product grows exponentially.
 
-- <Highlight color="red">**Effect:**</Highlight> Gradients become very large â†’ unstable training, NaN weights.
-- <Highlight color="green">**Fix:**</Highlight> **Gradient clipping** â€” cap gradients if their norm exceeds a threshold.
+- <Highlight color="red">**Effect:**</Highlight> Gradients become very large → unstable training, NaN weights.
+- <Highlight color="green">**Fix:**</Highlight> **Gradient clipping** — cap gradients if their norm exceeds a threshold.
 
 | Problem | Cause | Effect | Fix |
 |---------|-------|--------|-----|
@@ -325,10 +325,10 @@ If $\|W_{hh}\| > 1$, the product grows exponentially.
 
 **Unrolling:**
 
-<Highlight color="blue">**Unrolling**</Highlight> (or unfolding) means expanding the RNN across time steps to visualize it as a deep feedforward network â€” one copy of the RNN cell per time step. This allows standard backpropagation to be applied (BPTT).
+<Highlight color="blue">**Unrolling**</Highlight> (or unfolding) means expanding the RNN across time steps to visualize it as a deep feedforward network — one copy of the RNN cell per time step. This allows standard backpropagation to be applied (BPTT).
 
 ```
-hâ‚€ â†’ [Cell, xâ‚] â†’ hâ‚ â†’ [Cell, xâ‚‚] â†’ hâ‚‚ â†’ [Cell, xâ‚ƒ] â†’ hâ‚ƒ
+h₀ → [Cell, x₁] → h₁ → [Cell, x₂] → h₂ → [Cell, x₃] → h₃
 ```
 
 Each cell shares the same weights $W_{xh}$, $W_{hh}$, $b_h$.
@@ -347,7 +347,7 @@ $$h_1 = \tanh(0 \cdot 1 + 0.2 \cdot 0 + 0) = \tanh(0) = \boxed{0}$$
 
 $$h_2 = \tanh(0 \cdot 1 + 0.2 \cdot 0 + 0) = \tanh(0) = \boxed{0}$$
 
-Since $W_{xh} = 0$ and $h_0 = 0$, the hidden state remains zero â€” illustrating that input weights must be non-zero for the network to respond to inputs.
+Since $W_{xh} = 0$ and $h_0 = 0$, the hidden state remains zero — illustrating that input weights must be non-zero for the network to respond to inputs.
 
 ---
 
@@ -424,3 +424,4 @@ $$h_t = \tanh(0.3 \times 2 + 0.5 \times 1 + 0.1) = \tanh(0.6 + 0.5 + 0.1) = \tan
 $$h_t = \frac{e^{1.2} - e^{-1.2}}{e^{1.2} + e^{-1.2}} \approx \boxed{0.8337}$$
 
 ---
+
