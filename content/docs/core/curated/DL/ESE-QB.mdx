@@ -568,7 +568,7 @@ $$\sum w^2 = 4 + 9 + 1 = 14 \qquad \Rightarrow \qquad \mathcal{L}_{L2} = 10 + 0.
 
 | Property | L1 Regularization | L2 Regularization |
 |----------|------------------|------------------|
-| **Penalty term** | $\lambda\sum\|w\|$ | $\lambda\sum w^2$ |
+| **Penalty term** | $\lambda\sum\Vert w\Vert$ | $\lambda\sum w^2$ |
 | **Also known as** | Lasso | Ridge / Weight Decay |
 | **Solution type** | <Highlight color="green">**Sparse**</Highlight> (weights -> 0) | Non-sparse (weights shrink) |
 | **Feature selection** | Yes (implicit) | No |
@@ -1009,8 +1009,8 @@ If $|W_{hh}| > 1$: repeated multiplication → gradient → ∞.
 
 | Problem | Cause | Effect | Fix |
 |---|---|---|---|
-| Vanishing | $|W_{hh}|<1$, saturated activations | Forgets long-term context | LSTM, GRU, ReLU |
-| Exploding | $|W_{hh}|>1$ | Unstable training | Gradient clipping |
+| Vanishing | $\vert W_{hh} \vert < 1$, saturated activations | Forgets long-term context | LSTM, GRU, ReLU |
+| Exploding | $\vert W_{hh} \vert > 1$ | Unstable training | Gradient clipping |
 
 ---
 
@@ -1173,7 +1173,7 @@ An <Highlight color="blue">**overcomplete autoencoder**</Highlight> has a <Highl
 
 | | Undercomplete | Overcomplete |
 |---|---|---|
-| **Latent size** | < Input size | > Input size |
+| **Latent size** | &lt; Input size | &gt; Input size |
 | **Key constraint** | Bottleneck itself | Regularization required |
 | **Use** | Dimensionality reduction | Sparse features, denoising |
 
