@@ -336,7 +336,7 @@ In Bayesian Networks, the graph structure directly encodes conditional independe
 ---
 
 
-### Q3. Environmental Impact Study DAG
+### Q3. Environmental Impact Study DAG <QuestionDot color="red" text="Important" />
 
 
 **Given:**
@@ -388,7 +388,7 @@ $$
 ---
 
 
-### Q4. Medical Diagnosis DAG
+### Q4. Medical Diagnosis DAG <QuestionDot color="red" text="Important" />
 
 
 **Given:**
@@ -438,7 +438,7 @@ $$
 ---
 
 
-### Q5. What is a Directed Gaussian Graphical Model (DGGM)? Explain the assumption of Gaussian distribution in DGGM.
+### Q5. What is a Directed Gaussian Graphical Model (DGGM)? Explain the assumption of Gaussian distribution in DGGM. <QuestionDot color="red" text="Important" />
 
 
 A **Directed Gaussian Graphical Model (DGGM)** is a Bayesian Network (DGM) where **all random variables are continuous and follow a Gaussian distribution**. The conditional probability distributions (CPDs) are **linear Gaussian**, meaning each variable is a linear function of its parents plus Gaussian noise.
@@ -465,7 +465,7 @@ When all CPDs are Gaussian, their product gives a **single joint multivariate Ga
 # Module 3 — Mixture Models & EM Algorithm
 
 
-### Q1. Derive the Maximum Likelihood Estimates for the mean $\mu$ and variance $\sigma^2$ of a univariate Gaussian distribution given i.i.d. samples.
+### Q1. Derive the Maximum Likelihood Estimates for the mean $\mu$ and variance $\sigma^2$ of a univariate Gaussian distribution given i.i.d. samples. <QuestionDot color="red" text="Important" />
 
 Given $y_1, \dots, y_N \sim \mathcal{N}(\mu, \sigma^2)$.
 
@@ -620,7 +620,7 @@ $$
 ---
 
 
-### Q6. Compare GLMs with Generalized Linear Mixed Models (GLMMs). Highlight key differences in model structure, handling of random effects, and appropriate application scenarios.
+### Q6. Compare GLMs with Generalized Linear Mixed Models (GLMMs). Highlight key differences in model structure, handling of random effects, and appropriate application scenarios. <QuestionDot color="red" text="Important" />
 
 **Generalized Linear Models (GLMs)** model the expected value of $Y$ using only fixed predictors: $g(E[Y|X]) = X\beta$.
 
@@ -646,7 +646,7 @@ $$
 # Module 4 — Markov Chains & Hidden Markov Models
 
 
-### Q1. State the Markov property for a first-order Markov chain. For a second-order Markov chain, write the expression for computing the probability of a sequence and draw a diagram illustrating the dependencies.
+### Q1. State the Markov property for a first-order Markov chain. For a second-order Markov chain, write the expression for computing the probability of a sequence and draw a diagram illustrating the dependencies. <QuestionDot color="red" text="Important" />
 
 **First-Order Markov Property:**
 
@@ -694,7 +694,7 @@ Each node $x_t$ has **two parents**: $x_{t-1}$ and $x_{t-2}$.
 ---
 
 
-### Q2. Define transition probabilities and emission probabilities in HMMs. Explain their significance.
+### Q2. Define transition probabilities and emission probabilities in HMMs. Explain their significance. <QuestionDot color="red" text="Important" />
 
 
 An **HMM** is defined by parameters $\lambda = (A, B, \pi)$ governing a two-layer model: a hidden Markov chain and observable emissions.
@@ -745,7 +745,7 @@ $$
 ---
 
 
-### Q3. List and briefly describe the three fundamental problems that HMMs address, along with the standard algorithms used to solve each.
+### Q3. List and briefly describe the three fundamental problems that HMMs address, along with the standard algorithms used to solve each. <QuestionDot color="red" text="Important" />
 
 
 ### Q3. Three Fundamental Problems in HMM
@@ -779,7 +779,7 @@ $$
 ---
 
 
-### Q4. Define the forward variable $\alpha_t(i)$ for an HMM. Provide the initialization, recursion, and termination steps of the Forward Algorithm with mathematical expressions.
+### Q4. Define the forward variable $\alpha_t(i)$ for an HMM. Provide the initialization, recursion, and termination steps of the Forward Algorithm with mathematical expressions. <QuestionDot color="red" text="Important" />
 
 **Forward Variable:** $\alpha_t(i)$ = probability of observing the first $t$ symbols AND being in state $S_i$ at time $t$.
 
@@ -816,7 +816,7 @@ $$
 # Module 5 — Undirected Graphical Models
 
 
-### Q1. Apply conditional independence to an undirected graphical model (Markov Random Field). Using a simple chain structure A-B-C, write the factorization of the joint probability distribution and explain the conditional independence property that holds.
+### Q1. Apply conditional independence to an undirected graphical model (Markov Random Field). Using a simple chain structure A-B-C, write the factorization of the joint probability distribution and explain the conditional independence property that holds. <QuestionDot color="red" text="Important" />
 
 
 **Markov Random Fields (MRFs)** encode conditional independence through **graph separation**: two variables are conditionally independent if removing a set of observed nodes disconnects their paths.
@@ -861,7 +861,7 @@ This is the **global Markov property**: once B is observed, A and C become indep
 ---
 
 
-### Q2. Explain Conditional Random Fields (CRFs), draw a sequence labeling diagram, and explain node/edge factors. Why are they used in sequence modeling?
+### Q2. Explain Conditional Random Fields (CRFs), draw a sequence labeling diagram, and explain node/edge factors. Why are they used in sequence modeling? <QuestionDot color="red" text="Important" />
 
 A **Conditional Random Field (CRF)** is an undirected probabilistic graphical model that directly models $P(Y \mid X)$ — the conditional distribution of output labels $Y$ given observed input $X$.
 
@@ -903,7 +903,7 @@ $$
 ---
 
 
-### Q3. Compare CRFs and HMMs for sequence labeling. Explain their key training and inference differences with examples.
+### Q3. Compare CRFs and HMMs for sequence labeling. Explain their key training and inference differences with examples. <QuestionDot color="red" text="Important" />
 
 
 Both HMMs and CRFs are used for sequence labeling (e.g., POS tagging, Named Entity Recognition), but they differ fundamentally in their modeling philosophy.
@@ -945,7 +945,7 @@ Both HMMs and CRFs are used for sequence labeling (e.g., POS tagging, Named Enti
 ---
 
 
-### Q4. Define Markov Random Fields. Write the mathematical formula for Markov Random Fields.
+### Q4. Define Markov Random Fields. Write the mathematical formula for Markov Random Fields. <QuestionDot color="red" text="Important" />
 
 A **Markov Random Field (MRF)**, also called an **Undirected Graphical Model (UGM)**, represents the joint distribution of random variables using an **undirected graph** $G = (V, E)$.
 
@@ -977,7 +977,7 @@ where $\psi_C(X_C) \ge 0$ = **potential function** (compatibility score over cli
 # Module 6 — Monte Carlo Inference
 
 
-### Q1. What is Monte Carlo Inference? Why are Monte Carlo methods used in probabilistic models?
+### Q1. What is Monte Carlo Inference? Why are Monte Carlo methods used in probabilistic models? <QuestionDot color="red" text="Important" />
 
 **Monte Carlo Inference** uses **random sampling** to approximate answers to probability questions that are too hard to solve analytically (e.g., computing expectations or marginals over complex distributions).
 
@@ -1003,7 +1003,7 @@ As $N$ grows, this converges to the true answer (Law of Large Numbers).
 ---
 
 
-### Q2. Explain the Rejection Sampling method for generating samples from complex distributions. What are the key requirements for the proposal distribution and envelope function?
+### Q2. Explain the Rejection Sampling method for generating samples from complex distributions. What are the key requirements for the proposal distribution and envelope function? <QuestionDot color="red" text="Important" />
 
 **Rejection Sampling** generates i.i.d. samples from a target distribution $p(x)$ when direct sampling is impractical.
 
@@ -1033,7 +1033,7 @@ As $N$ grows, this converges to the true answer (Law of Large Numbers).
 ---
 
 
-### Q3. What practical challenges are encountered when applying the Metropolis-Hastings algorithm to real-world problems?
+### Q3. What practical challenges are encountered when applying the Metropolis-Hastings algorithm to real-world problems? <QuestionDot color="red" text="Important" />
 
 The **Metropolis-Hastings (MH) Algorithm** builds a Markov chain whose stationary distribution is the target $\pi(x)$:
 
@@ -1061,7 +1061,7 @@ The **Metropolis-Hastings (MH) Algorithm** builds a Markov chain whose stationar
 ---
 
 
-### Q4. How do Importance Sampling and Rejection Sampling differ conceptually? Explain with suitable examples.
+### Q4. How do Importance Sampling and Rejection Sampling differ conceptually? Explain with suitable examples. <QuestionDot color="red" text="Important" />
 
 
 Both use a proposal $q(x)$ when direct sampling from $p(x)$ is impractical — but their **goals differ**.
