@@ -690,49 +690,61 @@ Each node $x_t$ has **two parents**: $x_{t-1}$ and $x_{t-2}$.
 ### Q2. Define transition probabilities and emission probabilities in HMMs. Explain their significance.
 
 
-An **HMM** is defined by parameters $\lambda = (A, B, \pi)$ governing a two-layer model: a hidden Markov chain and observable emissions.
+### **Transition and Emission Probabilities in HMM**
 
+An HMM is defined by parameters $(A, B, \pi)$, where **transition** and **emission** probabilities are the key components.
 
-**Transition Probabilities ($A$):**
+---
 
+### **1. Transition Probabilities (A)**
 
 $$
 a_{ij} = P(q_{t+1} = S_j \mid q_t = S_i)
 $$
 
+* Probability of moving from **state $S_i$** to **state $S_j$**
+* Captures how the system **evolves over time**
 
-- $a_{ij}$ is the probability of transitioning from hidden state $S_i$ to $S_j$.
-- **Properties:** $a_{ij} \ge 0$ and $\sum_{j=1}^{N} a_{ij} = 1$ for each state $S_i$.
-- Organized as an $N \times N$ **transition matrix** $A$.
+**Significance:**
 
+* Shows how hidden states **change over time**
+* Helps predict the **next state**
 
-**Significance:** Captures the **temporal dynamics** of the hidden process — how the system evolves over time.
+---
 
-
-**Emission Probabilities ($B$):**
-
+### **2. Emission Probabilities (B)**
 
 $$
-b_{jm} = P(O_t = v_m \mid q_t = S_j)
+b_j(k) = P(O_t = v_k \mid q_t = S_j)
 $$
 
+**Explanation:**
 
-- $b_{jm}$ is the probability of observing symbol $v_m$ when in hidden state $S_j$.
-- **Properties:** $b_{jm} \ge 0$ and $\sum_{m=1}^{M} b_{jm} = 1$ for each state $S_j$.
-- Organized as an $N \times M$ **emission matrix** $B$.
+* $q_t = S_j$: hidden state at time $t$
+* $O_t = v_k$: observed output at time $t$
+* $b_j(k)$: probability of seeing $v_k$ **given the system is in state $S_j$**
+* Connects **hidden states to observed data**
 
+**Significance:**
 
-**Significance:** Links the **hidden states to observable outputs** — allows inference of hidden causes from observed data.
+* Shows how states **produce observations**
+* Helps find **hidden states from data**
 
+---
 
-**Together** $(A, B, \pi)$:
+### **Key Idea**
 
+* **Transition** → state to state
+* **Emission** → state to observation
 
-| Parameter | Meaning |
-|---|---|
-| $\pi_i$ | Initial state probability $P(q_1 = S_i)$ |
-| $A$ | How hidden states evolve over time |
-| $B$ | What observations each hidden state generates |
+---
+
+### **Example (intuition)**
+
+* Hidden state = Weather (Rainy/Sunny)
+* Observation = Activity (Walk, Shop)
+* Transition → Rainy → Sunny
+* Emission → Rainy → more likely “Shop”
 
 
 ---
@@ -873,21 +885,20 @@ $$
 *(where $Z(X)$ is the normalization constant)*
 
 **1. Node Factors (Unary Potentials) $\phi_{\text{node}}$:**
-- Capture compatibility of **label $Y_t$ with input $X$ at position $t$**.
-- Example: In NER, scores if "New" is likely a B-LOC given surrounding words.
+* Tells how well one label fits one input word.
+* Example: In NER, they help decide if "New" is a location label.
 
 **2. Edge Factors (Pairwise Potentials) $\phi_{\text{edge}}$:**
-- Capture **label-to-label transitions** between adjacent positions, conditioned on $X$.
-- Example: Penalize unlikely transitions (e.g., I-ORG after B-PER).
+* Tells how likely two neighboring labels are to go together.
+* Example: They can stop invalid tag pairs like I-ORG after B-PER.
 
-**Key advantage:** Both factors depend on the **entire input sequence $X$** (rich, overlapping features), unlike HMMs which use only local context.
+**Key advantage:** CRFs can use the whole sentence, not just nearby words.
 
 **Why CRFs Are Used in Sequence Modeling:**
-1. **Discriminative:** Models $P(Y \mid X)$ directly without needing to model $P(X)$.
-2. **Rich features:** Uses arbitrary, overlapping properties of the full input.
-3. **No label bias:** Circumvents the label bias problem seen in HMMs.
-4. **Efficient inference:** Viterbi (MAP) and Forward-Backward in $O(N^2 T)$.
-5. **Applications:** POS tagging, Named Entity Recognition (NER), chunking, etc.
+* They model $P(Y \mid X)$ directly.
+* They can use many input features at once.
+* They avoid the label bias problem.
+* They work well for sequence tasks like POS tagging, NER, and chunking.
 
 
 ---
@@ -1096,14 +1107,5 @@ $q(x) > 0$ wherever $p(x) > 0$
 
 **Output:**
 Gives a **weighted estimate**, not actual samples.
-
----
-
-## **Comparison**
-
-* Rejection Sampling → generates **actual samples from $p(x)$**
-* Importance Sampling → computes **expected values using weights**
-* Rejection needs constant $M$, Importance does not
-* Rejection may reject samples (inefficient), Importance uses all samples
 
 ---
