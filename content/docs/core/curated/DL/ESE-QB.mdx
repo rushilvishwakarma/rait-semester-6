@@ -806,6 +806,160 @@ $$h'' = \frac{h'}{1-p} = \frac{[0.8, 0, 0.6, 0]}{0.5} = \boxed{[1.6,\ 0,\ 1.2,\ 
 
 ---
 
+<LongQuestion>
+### Q4. Briefly explain what a CNN is and why it's particularly effective for image processing. <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+A <Highlight color="blue">**Convolutional Neural Network (CNN)**</Highlight> is a type of deep neural network specifically designed to process grid-structured data such as images. Unlike fully connected networks, CNNs use convolutional filters that slide across the input to detect local patterns.
+
+**Why CNNs are effective for image processing:**
+
+1. <Highlight color="green">**Local Connectivity:**</Highlight> Each neuron connects only to a small local region (receptive field), capturing local features like edges and textures efficiently.
+2. <Highlight color="green">**Parameter Sharing:**</Highlight> The same filter weights are reused across all spatial locations, drastically reducing the number of parameters compared to a fully connected network.
+3. <Highlight color="orange">**Translation Invariance:**</Highlight> Through pooling, CNNs can detect features regardless of their exact location in the image.
+4. <Highlight color="green">**Hierarchical Feature Learning:**</Highlight> Early layers learn simple features (edges, corners), and deeper layers learn complex features (shapes, objects).
+5. <Highlight color="orange">**Efficient on images:**</Highlight> A 224×224 image with a fully connected layer would need millions of parameters; a CNN with filters needs far fewer, preventing overfitting.
+
+---
+
+<LongQuestion>
+### Q5. What is the primary purpose of a convolutional layer in a CNN? Explain its role in feature extraction. <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+The **primary purpose** of a convolutional layer is to <Highlight color="green">**automatically extract local spatial features**</Highlight> from the input by applying learnable filters.
+
+**How it works:**
+
+A filter (kernel) of size $K \times K$ slides across the input image with a given stride and computes dot products at each position:
+
+$$Z[i,j] = \sum_{m=0}^{K-1} \sum_{n=0}^{K-1} X[i+m,\; j+n] \cdot W[m,n] + b$$
+
+Each filter detects a specific pattern (edge, gradient direction, texture). The result is called a **feature map**.
+
+**Role in feature extraction:**
+
+| Layer Depth | Features Learned |
+|-------------|-----------------|
+| Layer 1 | Edges, gradients |
+| Layer 2 | Corners, curves |
+| Layer 3+ | Object parts, complex shapes |
+
+Using multiple filters at each layer, CNNs build a rich hierarchy of features from raw pixels, eliminating the need for manual feature engineering.
+
+---
+
+<LongQuestion>
+### Q6. Explain the purpose of pooling layers in CNNs.
+</LongQuestion>
+
+<Highlight color="blue">**Pooling layers**</Highlight> perform **spatial downsampling** of feature maps, reducing their size while retaining the most important information.
+
+**Purpose (5 key points):**
+
+1. <Highlight color="green">**Reduces spatial dimensions:**</Highlight> Decreases width and height of feature maps, reducing computation in subsequent layers.
+2. <Highlight color="green">**Controls overfitting:**</Highlight> Fewer parameters → lower risk of overfitting.
+3. <Highlight color="orange">**Translation invariance:**</Highlight> Small shifts in input don't drastically change the pooled output.
+4. <Highlight color="green">**Retains dominant features:**</Highlight> Max pooling keeps the strongest activation in each region.
+5. <Highlight color="orange">**Reduces memory:**</Highlight> Smaller feature maps need less memory storage.
+
+**Max Pooling (most common):**
+
+With a $2 \times 2$ pool and stride 2:
+
+$$\text{Output size} = \frac{W - P}{S} + 1 = \frac{32 - 2}{2} + 1 = 16$$
+
+Example: A $4 \times 4$ feature map becomes $2 \times 2$ after $2 \times 2$ max pooling.
+
+---
+
+<LongQuestion>
+### Q7. What is the role of backpropagation in CNN training?
+</LongQuestion>
+
+<Highlight color="blue">**Backpropagation in CNNs**</Highlight> works the same as in standard neural networks — it computes gradients of the loss with respect to all learnable parameters (filter weights, biases) using the chain rule, and updates them via gradient descent.
+
+**CNN-specific steps during backpropagation:**
+
+1. <Highlight color="orange">**Compute loss:**</Highlight> After forward pass, compute loss (e.g., cross-entropy).
+2. <Highlight color="orange">**Backprop through FC layers:**</Highlight> Standard dense layer gradient computation.
+3. <Highlight color="orange">**Backprop through pooling:**</Highlight> For max pooling, gradient flows only to the position that had the max value (others get 0).
+4. <Highlight color="orange">**Backprop through conv layers:**</Highlight> Gradient w.r.t. filter weights:
+$$\frac{\partial \mathcal{L}}{\partial W} = \sum_{i,j} \frac{\partial \mathcal{L}}{\partial Z[i,j]} \cdot X[i,j]$$
+5. <Highlight color="green">**Update filters:**</Highlight> $W \leftarrow W - \eta \frac{\partial \mathcal{L}}{\partial W}$
+
+This allows the CNN to learn the optimal filter values for feature detection from data.
+
+---
+
+<LongQuestion>
+### Q8. Define the terms "loss function" and "backpropagation" in the context of deep learning. Also list two common applications of CNNs.
+</LongQuestion>
+
+**Loss Function:**
+
+A <Highlight color="blue">**loss function**</Highlight> (also called cost function) measures the difference between the predicted output $\hat{y}$ and the true label $y$. It gives a single scalar value that the network tries to minimize during training.
+
+Common examples:
+- **Mean Squared Error (MSE):** $\mathcal{L} = \frac{1}{n}\sum(y - \hat{y})^2$ — used for regression
+- **Binary Cross-Entropy:** $\mathcal{L} = -[y\log\hat{y} + (1-y)\log(1-\hat{y})]$ — binary classification
+- **Categorical Cross-Entropy:** $\mathcal{L} = -\sum y_k \log \hat{y}_k$ — multi-class classification
+
+**Backpropagation:**
+
+<Highlight color="blue">**Backpropagation**</Highlight> is the algorithm that efficiently computes the gradient of the loss function with respect to each weight in the network by applying the **chain rule** of calculus in a backward pass from output to input. These gradients are then used to update weights via gradient descent.
+
+**Two Common CNN Applications:**
+
+1. <Highlight color="green">**Image Classification:**</Highlight> Identifying the category of an image (e.g., cat vs dog, disease detection from X-rays).
+2. <Highlight color="green">**Object Detection:**</Highlight> Locating and classifying multiple objects within an image (e.g., YOLO for self-driving cars, surveillance).
+
+---
+
+<LongQuestion>
+### Q9. Compare and contrast feedforward neural networks and recurrent neural networks (RNNs). <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+| Property | Feedforward NN (FFNN) | Recurrent NN (RNN) |
+|----------|----------------------|-------------------|
+| **Data flow** | One direction: input → output | Loops back — output feeds into next step |
+| **Memory** | <Highlight color="red">**No memory**</Highlight> — each input processed independently | <Highlight color="green">**Has memory**</Highlight> — hidden state carries information across time steps |
+| **Suitable for** | Fixed-size, independent inputs (images, tabular data) | Sequential/temporal data (text, speech, time series) |
+| **Hidden state** | Not maintained | $h_t = f(W_{xh}x_t + W_{hh}h_{t-1} + b_h)$ |
+| **Parameters** | Fixed per layer | Shared across all time steps |
+| **Training** | Standard backpropagation | Backpropagation Through Time (BPTT) |
+| **Problem with depth** | Vanishing gradient (with depth) | Vanishing gradient (with sequence length) |
+| **Examples** | CNN, MLP | LSTM, GRU, Vanilla RNN |
+
+**Key insight:** An FFNN looks at one input at a time with no context; an RNN maintains a running summary (hidden state) of everything it has seen so far in the sequence.
+
+---
+
+<LongQuestion>
+### Q10. Provide a numerical example of how a perceptron can perform binary classification. <QuestionDot color="yellow" text="IA1-QB" />
+</LongQuestion>
+
+**Problem:** Classify input $x = [1, 2]$ using a perceptron with weights $w = [0.5, -0.3]$ and bias $b = 0.1$.
+
+**Step 1 — Compute weighted sum:**
+
+$$z = w_1 x_1 + w_2 x_2 + b = 0.5(1) + (-0.3)(2) + 0.1 = 0.5 - 0.6 + 0.1 = 0.0$$
+
+**Step 2 — Apply step activation (threshold $\theta = 0$):**
+
+$$y = \begin{cases} 1 & z \geq 0 \\ 0 & z < 0 \end{cases}$$
+
+Since $z = 0.0 \geq 0$, output $\hat{y} = \mathbf{1}$ → **Class 1**.
+
+**Weight update if prediction is wrong** (e.g., true label = 0):
+
+$$w_i^{\text{new}} = w_i + \alpha(t - \hat{y})x_i = w_i + 1(0 - 1)x_i$$
+
+$$w_1 = 0.5 + (-1)(1) = -0.5, \quad w_2 = -0.3 + (-1)(2) = -2.3, \quad b = 0.1 + (-1)(1) = -0.9$$
+
+This process repeats until the perceptron correctly classifies all training examples (guaranteed for linearly separable data).
+
+---
+
 # Module 4 & 5 — RNNs and Autoencoders
 
 <LongQuestion>
