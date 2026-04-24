@@ -807,199 +807,289 @@ $$h'' = \frac{h'}{1-p} = \frac{[0.8, 0, 0.6, 0]}{0.5} = \boxed{[1.6,\ 0,\ 1.2,\ 
 ---
 
 <LongQuestion>
-### Q4. Briefly explain what a CNN is and why it's particularly effective for image processing. <QuestionDot color="cyan" text="MSE-QB" />
+### Q4. Briefly explain what a CNN is and why it's effective for image processing. Also list two common applications. <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
-A <Highlight color="blue">**Convolutional Neural Network (CNN)**</Highlight> is a type of deep neural network specifically designed to process grid-structured data such as images. Unlike fully connected networks, CNNs use convolutional filters that slide across the input to detect local patterns.
+A <Highlight color="blue">**Convolutional Neural Network (CNN)**</Highlight> is a deep learning architecture that uses <Highlight color="green">**learnable filters (kernels)**</Highlight> to scan across an image and automatically extract spatial features like edges, textures, and shapes.
 
-**Why CNNs are effective for image processing:**
+**Why it's effective for images:**
 
-1. <Highlight color="green">**Local Connectivity:**</Highlight> Each neuron connects only to a small local region (receptive field), capturing local features like edges and textures efficiently.
-2. <Highlight color="green">**Parameter Sharing:**</Highlight> The same filter weights are reused across all spatial locations, drastically reducing the number of parameters compared to a fully connected network.
-3. <Highlight color="orange">**Translation Invariance:**</Highlight> Through pooling, CNNs can detect features regardless of their exact location in the image.
-4. <Highlight color="green">**Hierarchical Feature Learning:**</Highlight> Early layers learn simple features (edges, corners), and deeper layers learn complex features (shapes, objects).
-5. <Highlight color="orange">**Efficient on images:**</Highlight> A 224×224 image with a fully connected layer would need millions of parameters; a CNN with filters needs far fewer, preventing overfitting.
+1. <Highlight color="green">**Local connectivity:**</Highlight> Filters only look at small local regions, capturing spatial patterns efficiently.
+2. <Highlight color="green">**Parameter sharing:**</Highlight> The same filter is applied across all positions, drastically reducing the number of parameters.
+3. <Highlight color="orange">**Hierarchical feature learning:**</Highlight> Early layers detect simple features (edges), deep layers detect complex patterns (objects, faces).
+4. <Highlight color="orange">**Translation invariance:**</Highlight> Pooling layers make the model robust to small shifts in object position.
+
+**Two Common Applications:**
+1. Image classification (e.g., identifying cats vs. dogs)
+2. Object detection (e.g., YOLO for detecting cars in traffic)
 
 ---
 
 <LongQuestion>
-### Q5. What is the primary purpose of a convolutional layer in a CNN? Explain its role in feature extraction. <QuestionDot color="cyan" text="MSE-QB" />
+### Q5. Explain the role of the convolutional layer in feature extraction. / What is the primary purpose of a convolutional layer in a CNN? <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
-The **primary purpose** of a convolutional layer is to <Highlight color="green">**automatically extract local spatial features**</Highlight> from the input by applying learnable filters.
+The <Highlight color="blue">**convolutional layer**</Highlight> is the core building block of a CNN. Its primary purpose is <Highlight color="green">**automatic feature extraction**</Highlight> from the input.
 
 **How it works:**
 
-A filter (kernel) of size $K \times K$ slides across the input image with a given stride and computes dot products at each position:
+A learnable filter (kernel) of size $K \times K$ slides across the input with stride $S$:
 
-$$Z[i,j] = \sum_{m=0}^{K-1} \sum_{n=0}^{K-1} X[i+m,\; j+n] \cdot W[m,n] + b$$
+$$Z_{i,j} = \sum_{m=0}^{K-1}\sum_{n=0}^{K-1} X_{i+m,\,j+n} \cdot W_{m,n} + b$$
 
-Each filter detects a specific pattern (edge, gradient direction, texture). The result is called a **feature map**.
+Each filter produces one **feature map** that highlights the presence of a specific pattern (e.g., horizontal edge, curve).
 
-**Role in feature extraction:**
+**Key roles:**
+- **Early layers:** detect low-level features — edges, corners, color gradients.
+- **Middle layers:** detect mid-level patterns — shapes, textures.
+- **Deep layers:** detect high-level features — faces, objects, scenes.
 
-| Layer Depth | Features Learned |
-|-------------|-----------------|
-| Layer 1 | Edges, gradients |
-| Layer 2 | Corners, curves |
-| Layer 3+ | Object parts, complex shapes |
-
-Using multiple filters at each layer, CNNs build a rich hierarchy of features from raw pixels, eliminating the need for manual feature engineering.
+Output size formula:
+$$\text{Output} = \frac{W - K + 2P}{S} + 1$$
 
 ---
 
 <LongQuestion>
-### Q6. Explain the purpose of pooling layers in CNNs.
+### Q6. Explain the purpose of pooling layers. <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
-<Highlight color="blue">**Pooling layers**</Highlight> perform **spatial downsampling** of feature maps, reducing their size while retaining the most important information.
+A <Highlight color="blue">**pooling layer**</Highlight> reduces the spatial dimensions (height × width) of feature maps after convolution.
 
-**Purpose (5 key points):**
+**Primary purposes:**
 
-1. <Highlight color="green">**Reduces spatial dimensions:**</Highlight> Decreases width and height of feature maps, reducing computation in subsequent layers.
-2. <Highlight color="green">**Controls overfitting:**</Highlight> Fewer parameters → lower risk of overfitting.
-3. <Highlight color="orange">**Translation invariance:**</Highlight> Small shifts in input don't drastically change the pooled output.
-4. <Highlight color="green">**Retains dominant features:**</Highlight> Max pooling keeps the strongest activation in each region.
-5. <Highlight color="orange">**Reduces memory:**</Highlight> Smaller feature maps need less memory storage.
+1. <Highlight color="green">**Dimensionality reduction:**</Highlight> Reduces the number of parameters and computation in subsequent layers.
+2. <Highlight color="green">**Translation invariance:**</Highlight> Small shifts in the object position don't change the output significantly.
+3. <Highlight color="orange">**Overfitting control:**</Highlight> Fewer parameters mean less chance of memorizing training data.
 
-**Max Pooling (most common):**
+**Types of Pooling:**
 
-With a $2 \times 2$ pool and stride 2:
+| Type | Operation | Example |
+|------|-----------|---------|
+| <Highlight color="blue">**Max Pooling**</Highlight> | Takes the maximum value in each window | $\begin{bmatrix}1&3\\2&4\end{bmatrix} \rightarrow 4$ |
+| **Average Pooling** | Takes the average of values in each window | $\begin{bmatrix}1&3\\2&4\end{bmatrix} \rightarrow 2.5$ |
 
-$$\text{Output size} = \frac{W - P}{S} + 1 = \frac{32 - 2}{2} + 1 = 16$$
-
-Example: A $4 \times 4$ feature map becomes $2 \times 2$ after $2 \times 2$ max pooling.
+**Max Pooling is most common** because it retains the most dominant features.
 
 ---
 
 <LongQuestion>
-### Q7. What is the role of backpropagation in CNN training?
+### Q7. What is the role of backpropagation in CNN training? <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
-<Highlight color="blue">**Backpropagation in CNNs**</Highlight> works the same as in standard neural networks — it computes gradients of the loss with respect to all learnable parameters (filter weights, biases) using the chain rule, and updates them via gradient descent.
+Backpropagation in CNNs works the same as in standard ANNs but gradients must also flow through **convolution** and **pooling** operations.
 
-**CNN-specific steps during backpropagation:**
+**Role:**
 
-1. <Highlight color="orange">**Compute loss:**</Highlight> After forward pass, compute loss (e.g., cross-entropy).
-2. <Highlight color="orange">**Backprop through FC layers:**</Highlight> Standard dense layer gradient computation.
-3. <Highlight color="orange">**Backprop through pooling:**</Highlight> For max pooling, gradient flows only to the position that had the max value (others get 0).
-4. <Highlight color="orange">**Backprop through conv layers:**</Highlight> Gradient w.r.t. filter weights:
-$$\frac{\partial \mathcal{L}}{\partial W} = \sum_{i,j} \frac{\partial \mathcal{L}}{\partial Z[i,j]} \cdot X[i,j]$$
-5. <Highlight color="green">**Update filters:**</Highlight> $W \leftarrow W - \eta \frac{\partial \mathcal{L}}{\partial W}$
+1. After forward pass, compute loss: $\mathcal{L} = \text{CrossEntropy}(y, \hat{y})$
+2. Compute gradient at output layer.
+3. Propagate error backward through:
+   - **FC layers:** standard backprop via chain rule.
+   - **Convolutional layers:** gradient w.r.t. filter weights is computed as a correlation between input and error signal.
+   - **Pooling layers (Max Pool):** gradient flows only through the position of the maximum value (all others receive zero gradient).
+4. Update filter weights and FC weights via gradient descent:
 
-This allows the CNN to learn the optimal filter values for feature detection from data.
+$$W_{\text{filter}} \leftarrow W_{\text{filter}} - \eta\,\frac{\partial \mathcal{L}}{\partial W_{\text{filter}}}$$
+
+This allows CNNs to learn **which patterns to look for** entirely from labeled data.
 
 ---
 
 <LongQuestion>
-### Q8. Define the terms "loss function" and "backpropagation" in the context of deep learning. Also list two common applications of CNNs.
+### Q8. Compare and contrast feedforward neural networks and recurrent neural networks (RNNs). <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
-**Loss Function:**
-
-A <Highlight color="blue">**loss function**</Highlight> (also called cost function) measures the difference between the predicted output $\hat{y}$ and the true label $y$. It gives a single scalar value that the network tries to minimize during training.
-
-Common examples:
-- **Mean Squared Error (MSE):** $\mathcal{L} = \frac{1}{n}\sum(y - \hat{y})^2$ — used for regression
-- **Binary Cross-Entropy:** $\mathcal{L} = -[y\log\hat{y} + (1-y)\log(1-\hat{y})]$ — binary classification
-- **Categorical Cross-Entropy:** $\mathcal{L} = -\sum y_k \log \hat{y}_k$ — multi-class classification
-
-**Backpropagation:**
-
-<Highlight color="blue">**Backpropagation**</Highlight> is the algorithm that efficiently computes the gradient of the loss function with respect to each weight in the network by applying the **chain rule** of calculus in a backward pass from output to input. These gradients are then used to update weights via gradient descent.
-
-**Two Common CNN Applications:**
-
-1. <Highlight color="green">**Image Classification:**</Highlight> Identifying the category of an image (e.g., cat vs dog, disease detection from X-rays).
-2. <Highlight color="green">**Object Detection:**</Highlight> Locating and classifying multiple objects within an image (e.g., YOLO for self-driving cars, surveillance).
+| Property | Feedforward NN (FNN) | Recurrent NN (RNN) |
+|---|---|---|
+| **Data flow** | One direction: input → output | Loops — output fed back as next input |
+| **Memory** | <Highlight color="red">**No memory**</Highlight> between inputs | <Highlight color="green">**Has hidden state**</Highlight> (memory of past) |
+| **Input type** | Fixed-size vectors | <Highlight color="green">**Sequential / variable-length**</Highlight> data |
+| **Use case** | Classification, regression | Time series, NLP, speech recognition |
+| **Training** | Standard backpropagation | <Highlight color="orange">**Backpropagation Through Time (BPTT)**</Highlight> |
+| **Vanishing gradient** | Less common | Common in long sequences |
+| **Examples** | MLP, CNN | LSTM, GRU, vanilla RNN |
 
 ---
 
+# Module 4 — Recurrent Neural Networks
+
 <LongQuestion>
-### Q9. Compare and contrast feedforward neural networks and recurrent neural networks (RNNs). <QuestionDot color="cyan" text="MSE-QB" />
+### Q1. Briefly explain what an RNN is and why it's suitable for sequential data. <QuestionDot color="purple" text="IA2-QB" />
 </LongQuestion>
 
-| Property | Feedforward NN (FFNN) | Recurrent NN (RNN) |
-|----------|----------------------|-------------------|
-| **Data flow** | One direction: input → output | Loops back — output feeds into next step |
-| **Memory** | <Highlight color="red">**No memory**</Highlight> — each input processed independently | <Highlight color="green">**Has memory**</Highlight> — hidden state carries information across time steps |
-| **Suitable for** | Fixed-size, independent inputs (images, tabular data) | Sequential/temporal data (text, speech, time series) |
-| **Hidden state** | Not maintained | $h_t = f(W_{xh}x_t + W_{hh}h_{t-1} + b_h)$ |
-| **Parameters** | Fixed per layer | Shared across all time steps |
-| **Training** | Standard backpropagation | Backpropagation Through Time (BPTT) |
-| **Problem with depth** | Vanishing gradient (with depth) | Vanishing gradient (with sequence length) |
-| **Examples** | CNN, MLP | LSTM, GRU, Vanilla RNN |
+A <Highlight color="blue">**Recurrent Neural Network (RNN)**</Highlight> is a type of neural network designed for <Highlight color="green">**sequential and time-series data**</Highlight>. Unlike feedforward networks, RNNs have <Highlight color="orange">**recurrent connections**</Highlight> that allow information to persist across time steps.
 
-**Key insight:** An FFNN looks at one input at a time with no context; an RNN maintains a running summary (hidden state) of everything it has seen so far in the sequence.
+**Why suitable for sequential data:**
+
+- At each time step $t$, the RNN takes the current input $x_t$ **and** the previous hidden state $h_{t-1}$ to produce a new hidden state:
+
+$$h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h)$$
+
+- This hidden state acts as a <Highlight color="green">**memory**</Highlight> that carries information from earlier time steps.
+- This makes RNNs naturally suited for tasks where order matters: text, speech, stock prices, sensor data.
 
 ---
 
 <LongQuestion>
-### Q10. Provide a numerical example of how a perceptron can perform binary classification. <QuestionDot color="yellow" text="IA1-QB" />
+### Q2. Describe the basic architecture of a simple RNN, including the concept of hidden states. / Explain how RNNs process sequential data through recurrent connections.
 </LongQuestion>
 
-**Problem:** Classify input $x = [1, 2]$ using a perceptron with weights $w = [0.5, -0.3]$ and bias $b = 0.1$.
+A simple RNN has three sets of weights:
 
-**Step 1 — Compute weighted sum:**
+| Weight | Role |
+|--------|------|
+| $W_{xh}$ | Input → Hidden (processes current input) |
+| $W_{hh}$ | Hidden → Hidden (carries memory from previous step) |
+| $W_{hy}$ | Hidden → Output (produces output at each step) |
 
-$$z = w_1 x_1 + w_2 x_2 + b = 0.5(1) + (-0.3)(2) + 0.1 = 0.5 - 0.6 + 0.1 = 0.0$$
+**Equations at each time step:**
 
-**Step 2 — Apply step activation (threshold $\theta = 0$):**
+$$h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h) \quad \text{(hidden state)}$$
 
-$$y = \begin{cases} 1 & z \geq 0 \\ 0 & z < 0 \end{cases}$$
+$$y_t = W_{hy}h_t + b_y \quad \text{(output)}$$
 
-Since $z = 0.0 \geq 0$, output $\hat{y} = \mathbf{1}$ → **Class 1**.
+**Processing sequential data:**
 
-**Weight update if prediction is wrong** (e.g., true label = 0):
+For input sequence $[x_1, x_2, \dots, x_T]$:
+- Start with $h_0 = \mathbf{0}$
+- At each step $t$: combine $x_t$ and $h_{t-1}$ → compute $h_t$ → compute $y_t$
+- $h_t$ carries forward the context of all previous inputs
 
-$$w_i^{\text{new}} = w_i + \alpha(t - \hat{y})x_i = w_i + 1(0 - 1)x_i$$
-
-$$w_1 = 0.5 + (-1)(1) = -0.5, \quad w_2 = -0.3 + (-1)(2) = -2.3, \quad b = 0.1 + (-1)(1) = -0.9$$
-
-This process repeats until the perceptron correctly classifies all training examples (guaranteed for linearly separable data).
+The hidden state is the <Highlight color="green">**memory**</Highlight> of the network — it summarizes everything seen so far in the sequence.
 
 ---
 
-# Module 4 & 5 — RNNs and Autoencoders
-
 <LongQuestion>
-### Q1. An RNN has input size 15, hidden state size 30, and processes a sequence of length 20 with batch size 64. Calculate the number of multiplications in one forward pass of the entire sequence. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
+### Q3. Explain the concept of "unrolling" an RNN in time.
 </LongQuestion>
 
-**Given:** Input = 15, Hidden = 30, Sequence length = 20, Batch = 64
+<Highlight color="blue">**Unrolling**</Highlight> (or unfolding) means expanding the RNN's recurrent loop into a sequence of individual feedforward-like steps, one per time step.
 
-**Step 1 — Multiplications per time step (one sample):**
-- Input × Hidden: $15 \times 30 = 450$
-- Hidden × Hidden: $30 \times 30 = 900$
-- Total per step: $450 + 900 = 1350$
+**Before unrolling** (compact notation): The same RNN cell is reused at every time step with shared weights.
 
-**Step 2 — Multiply by batch size:** $1350 \times 64 = 86{,}400$
+**After unrolling** (for sequence length $T = 3$):
 
-**Step 3 — Multiply by sequence length:** $86{,}400 \times 20 = \boxed{1{,}728{,}000}$
+```
+x1 → [RNN cell] → h1 → y1
+           ↓
+x2 → [RNN cell] → h2 → y2
+           ↓
+x3 → [RNN cell] → h3 → y3
+```
+
+**Why it matters:**
+- Unrolling makes it clear how gradients must flow **backwards through time** (BPTT).
+- The same weights $W_{xh}$, $W_{hh}$, $W_{hy}$ are shared across all unrolled steps.
+- Unrolling over long sequences causes gradients to be multiplied many times → leads to the <Highlight color="red">**vanishing/exploding gradient problem**</Highlight>.
 
 ---
 
 <LongQuestion>
-### Q2. Given an input vector $x = [2,4,6]$ and a linear encoder matrix $W_e = \begin{bmatrix} 0.5 & 0 \\ 0 & 0.2 \\ 0 & 0 \end{bmatrix}$, calculate the encoded representation (latent vector). <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
+### Q4. Explain in detail the vanishing and exploding gradient problems in RNN training. <QuestionDot color="purple" text="IA2-QB" />
 </LongQuestion>
 
-**Given:** $x = [2, 4, 6]$, encoder matrix $W_e$ as above.
+During **Backpropagation Through Time (BPTT)**, gradients are computed backwards across all $T$ time steps by repeatedly multiplying the recurrent weight matrix $W_{hh}$.
 
-Multiply $x$ with each column of $W_e$:
-- $z_1 = (2 \times 0.5) + (4 \times 0) + (6 \times 0) = 1.0$
-- $z_2 = (2 \times 0) + (4 \times 0.2) + (6 \times 0) = 0.8$
+**Gradient at step $t$ involves:**
 
-**Final Answer:** $z = \boxed{[1.0,\ 0.8]}$
+$$\frac{\partial \mathcal{L}}{\partial h_1} = \frac{\partial \mathcal{L}}{\partial h_T} \cdot \prod_{t=2}^{T} W_{hh}^T \cdot \text{diag}(f'(z_t))$$
+
+#### Vanishing Gradient
+
+If $|W_{hh}| < 1$ (or $f'(z_t)$ is small, e.g., saturated sigmoid): repeated multiplication → gradient → 0.
+
+- **Effect:** <Highlight color="red">**Early time steps receive near-zero gradients**</Highlight>; the network forgets long-range dependencies.
+- **Solution:** Use <Highlight color="green">**LSTM**</Highlight> or <Highlight color="green">**GRU**</Highlight> (gating mechanisms maintain gradient flow).
+
+#### Exploding Gradient
+
+If $|W_{hh}| > 1$: repeated multiplication → gradient → ∞.
+
+- **Effect:** <Highlight color="red">**Weights update by huge amounts**</Highlight>; training becomes unstable (NaN loss).
+- **Solution:** <Highlight color="green">**Gradient clipping**</Highlight> — if $\|\nabla\| > \text{threshold}$, scale it down.
+
+| Problem | Cause | Effect | Fix |
+|---|---|---|---|
+| Vanishing | $|W_{hh}|<1$, saturated activations | Forgets long-term context | LSTM, GRU, ReLU |
+| Exploding | $|W_{hh}|>1$ | Unstable training | Gradient clipping |
 
 ---
 
 <LongQuestion>
-### Q3. Analyze the internal structure of an RNN cell given the following configuration: input size = 10, hidden state size = 20, and output size = 20. Compute the total number of trainable parameters and identify the role of each weight and bias matrix. <QuestionDot color="purple" text="Asked in IA2" />
+### Q5. Numerical: A sparse autoencoder uses L1 regularization with $\lambda=0.1$. Latent representation $h=[0.5,-0.2,0.8]$. Calculate the L1 regularization term. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+**Given:** $\lambda = 0.1$, $h = [0.5,\,-0.2,\,0.8]$
+
+**Formula:**
+$$L1 = \lambda \sum_i |h_i|$$
+
+**Substitution:**
+$$= 0.1 \times (|0.5| + |-0.2| + |0.8|) = 0.1 \times (0.5 + 0.2 + 0.8) = 0.1 \times 1.5$$
+
+$$\boxed{L1 \text{ term} = 0.15}$$
+
+---
+
+<LongQuestion>
+### Q6. Numerical: RNN with $W_{hh}=0.4$, $W_{xh}=0.2$, $W_{hy}=0.6$, $b_h=0.1$, $b_y=0.2$, input $[1,2]$, $h_0=0$. Calculate $h_1, h_2, y_1, y_2$ and error at $t=2$ if target $= 1$. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+**RNN equations:**
+$$h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h), \qquad y_t = W_{hy}h_t + b_y$$
+
+**At $t=1$, $x_1=1$, $h_0=0$:**
+
+$$h_1 = \tanh(0.2\times1 + 0.4\times0 + 0.1) = \tanh(0.3) \approx \mathbf{0.2913}$$
+$$y_1 = 0.6(0.2913) + 0.2 \approx \mathbf{0.3748}$$
+
+**At $t=2$, $x_2=2$, $h_1=0.2913$:**
+
+$$h_2 = \tanh(0.2\times2 + 0.4\times0.2913 + 0.1) = \tanh(0.4 + 0.1165 + 0.1) = \tanh(0.6165) \approx \mathbf{0.5487}$$
+$$y_2 = 0.6(0.5487) + 0.2 \approx \mathbf{0.5292}$$
+
+**Error at $t=2$** (target $= 1$):
+$$e_2 = t_2 - y_2 = 1 - 0.5292 = \boxed{0.4708}$$
+
+$$\boxed{h_1 \approx 0.2913,\; h_2 \approx 0.5487,\; y_1 \approx 0.3748,\; y_2 \approx 0.5292,\; e_2 \approx 0.4708}$$
+
+---
+
+<LongQuestion>
+### Q7. Numerical: $W_{hh}=0.5$, $W_{xh}=0.3$, $b_h=0.1$, $x_t=2$, $h_{t-1}=1$. Calculate $h_t$ using tanh. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+**Formula:**
+$$h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1} + b_h)$$
+
+**Substitution:**
+$$z_t = 0.3(2) + 0.5(1) + 0.1 = 0.6 + 0.5 + 0.1 = 1.2$$
+
+$$h_t = \tanh(1.2) \approx \boxed{0.8337}$$
+
+---
+
+<LongQuestion>
+### Q8. Numerical: Input sequence $[1,2,3]$, $W_{hh}=0.2$, $W_{xh}=0$, $b_h=0$, $h_0=0$. Show first two steps of unrolling. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+**Simplified equation** (since $W_{xh}=0$, $b_h=0$):
+$$h_t = \tanh(W_{xh}x_t + W_{hh}h_{t-1}) = \tanh(0.2\,h_{t-1})$$
+
+**Step 1** ($x_1=1$, $h_0=0$):
+$$z_1 = 0.2(0) = 0 \quad\Rightarrow\quad h_1 = \tanh(0) = \boxed{0}$$
+
+**Step 2** ($x_2=2$, $h_1=0$):
+$$z_2 = 0.2(0) = 0 \quad\Rightarrow\quad h_2 = \tanh(0) = \boxed{0}$$
+
+**Observation:** Since $W_{xh}=0$, the input has no effect. The hidden state remains 0 throughout because it was initialized to 0 and only depends on the previous hidden state.
+
+---
+
+<LongQuestion>
+### Q9. Analyze the internal structure of an RNN cell: input size = 10, hidden = 20, output = 20. Compute total trainable parameters. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
 </LongQuestion>
 
 **Given:** Input = 10, Hidden = 20, Output = 20
-
-**Parameters** (formula: rows × cols, plus bias):
 
 | Matrix | Size | Count |
 |--------|------|-------|
@@ -1011,25 +1101,184 @@ Multiply $x$ with each column of $W_e$:
 
 **Total:** $200 + 400 + 20 + 400 + 20 = \boxed{1040}$ parameters
 
-**Roles (one line each):**
+**Roles:**
 - **$W_{xh}$**: Processes the current input at each time step.
-- **$W_{hh}$**: Carries memory from the previous time step.
-- **$b_h$**: Adds a fixed offset to the hidden activation.
-- **$W_{hy}$**: Converts the hidden state into an output.
+- **$W_{hh}$**: Carries memory from the previous time step (recurrence).
+- **$W_{hy}$**: Converts the hidden state into an output at each step.
+
+---
+
+# Module 5 — Autoencoders
+
+<LongQuestion>
+### Q1. What is an Autoencoder? Explain using encoder and decoder. <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+An <Highlight color="blue">**Autoencoder**</Highlight> is an unsupervised neural network that learns to <Highlight color="green">**compress**</Highlight> (encode) input data and then <Highlight color="green">**reconstruct**</Highlight> (decode) it. It is trained to minimize the reconstruction error.
+
+**Architecture:**
+
+$$\text{Input } X \;\xrightarrow{\text{Encoder}}\; \text{Latent } z \;\xrightarrow{\text{Decoder}}\; \text{Reconstructed } \hat{X}$$
+
+- <Highlight color="green">**Encoder:**</Highlight> Compresses the input into a smaller latent representation $z = f(W_e X + b_e)$. It learns which features are most important.
+- **Latent Space (Bottleneck):** The compressed representation. It forces the network to learn only the essential structure.
+- <Highlight color="green">**Decoder:**</Highlight> Reconstructs the original input from $z$: $\hat{X} = g(W_d z + b_d)$.
+
+**Training Objective:**
+$$\min \;\|\, X - \hat{X}\,\|^2 \quad \text{(minimize reconstruction error)}$$
+
+**Applications:** Dimensionality reduction, anomaly detection, denoising, generative models.
 
 ---
 
 <LongQuestion>
-### Q4. A denoising autoencoder takes a noisy input. If the original input is $x = [3,5]$ and noise $n = [-1, 0.5]$, calculate the noisy input. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
+### Q2. Describe the characteristics and limitations of linear autoencoders. What type of transformation does a linear autoencoder perform?
 </LongQuestion>
 
-**Given:** $x = [3, 5]$, noise $n = [-1, 0.5]$
+A <Highlight color="blue">**linear autoencoder**</Highlight> uses only linear activation functions (i.e., $f(x) = x$) in both encoder and decoder.
 
-Noisy input = original + noise, element by element:
-- $3 + (-1) = 2$
-- $5 + 0.5 = 5.5$
+**Transformation:** It performs a **linear projection** — essentially the same as <Highlight color="green">**PCA (Principal Component Analysis)**</Highlight>. The latent space spans the same subspace as the top principal components of the data.
 
-**Final Answer:** $\tilde{x} = \boxed{[2,\ 5.5]}$
+**Characteristics:**
+- Encoder: $z = W_e X$ (linear map to lower dimension)
+- Decoder: $\hat{X} = W_d z$ (linear map back to original dimension)
+- The combined operation is: $\hat{X} = W_d W_e X$ — a single linear transformation
+
+**Limitations:**
+1. <Highlight color="red">**Cannot capture non-linear patterns**</Highlight> — fails for complex data (images, audio).
+2. <Highlight color="red">**Equivalent to PCA**</Highlight> — no advantage over classical techniques.
+3. <Highlight color="red">**Limited representational power**</Highlight> — cannot model manifolds or clusters in data.
+
+Non-linear autoencoders (using ReLU, Sigmoid) are far more powerful for real-world data.
+
+---
+
+<LongQuestion>
+### Q3. What is an undercomplete autoencoder and why is it used? Compare with overcomplete autoencoders.
+</LongQuestion>
+
+#### Undercomplete Autoencoder
+
+An <Highlight color="blue">**undercomplete autoencoder**</Highlight> has a <Highlight color="green">**latent space smaller than the input**</Highlight> (bottleneck < input dimensions).
+
+- **Why used:** Forces the network to learn the most important features and discard noise. This is a form of <Highlight color="orange">**dimensionality reduction**</Highlight>.
+- **Example:** Input = 784 neurons (28×28 image) → Bottleneck = 32 neurons.
+
+#### Overcomplete Autoencoder
+
+An <Highlight color="blue">**overcomplete autoencoder**</Highlight> has a <Highlight color="red">**latent space larger than the input**</Highlight>.
+
+- **Risk:** Without regularization, the model can simply copy the input (identity mapping), learning nothing useful.
+- **Solution:** Add regularization (L1 sparsity, dropout) to force meaningful learning.
+
+| | Undercomplete | Overcomplete |
+|---|---|---|
+| **Latent size** | < Input size | > Input size |
+| **Key constraint** | Bottleneck itself | Regularization required |
+| **Use** | Dimensionality reduction | Sparse features, denoising |
+
+---
+
+<LongQuestion>
+### Q4. Describe the concept of a denoising autoencoder. Compare with sparse autoencoders.
+</LongQuestion>
+
+#### Denoising Autoencoder
+
+A <Highlight color="blue">**denoising autoencoder**</Highlight> is trained to reconstruct a <Highlight color="green">**clean input from a corrupted (noisy) version**</Highlight>.
+
+- **Training:** Noise $\epsilon$ is added to input: $\tilde{x} = x + \epsilon$
+- **Goal:** Learn $\hat{x} = \text{Decoder}(\text{Encoder}(\tilde{x}))$ such that $\hat{x} \approx x$ (original clean input)
+- **Effect:** Forces the model to learn <Highlight color="green">**robust, noise-invariant features**</Highlight>.
+
+#### Sparse Autoencoder
+
+A <Highlight color="blue">**sparse autoencoder**</Highlight> adds an <Highlight color="orange">**L1 penalty on the latent activations**</Highlight> to encourage most units to be inactive (zero) at any given time.
+
+$$\mathcal{L} = \|x - \hat{x}\|^2 + \lambda \sum_i |h_i|$$
+
+- **Effect:** Learns <Highlight color="green">**sparse, disentangled features**</Highlight> — each feature is meaningful and selective.
+
+| | Denoising AE | Sparse AE |
+|---|---|---|
+| **Regularization** | Corruption of input | L1 penalty on latent |
+| **Goal** | Robust to noise | Sparse representations |
+| **Key benefit** | Denoising, feature robustness | Feature disentanglement |
+
+---
+
+<LongQuestion>
+### Q5. Why is regularization required in autoencoders? Explain any two regularized autoencoders. <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+**Why regularization is needed:**
+
+Without regularization, an overcomplete autoencoder can learn an <Highlight color="red">**identity mapping**</Highlight> — simply copying the input to output — which learns nothing useful. Regularization forces the model to learn meaningful compressed representations.
+
+#### 1. Sparse Autoencoder (L1 Regularization)
+
+Adds L1 penalty to the latent representation:
+
+$$\mathcal{L} = \|x - \hat{x}\|^2 + \lambda \sum_i |h_i|$$
+
+Forces most hidden units to be inactive (zero), creating <Highlight color="green">**sparse, selective features**</Highlight>. Each latent unit responds to a specific input pattern.
+
+#### 2. Denoising Autoencoder (Input Corruption)
+
+Corrupts the input before encoding: $\tilde{x} = x + \epsilon$, then trains to reconstruct the original $x$.
+
+Prevents the trivial identity solution and forces the encoder to learn <Highlight color="green">**robust, stable features**</Highlight> that are invariant to noise.
+
+---
+
+<LongQuestion>
+### Q6. Explain the training process of an autoencoder, including the loss function. / How do autoencoders perform dimensionality reduction? <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+#### Training Process
+
+1. **Forward Pass:** Input $x$ → Encoder → latent $z$ → Decoder → reconstruction $\hat{x}$
+2. **Loss Computation** (Reconstruction Error):
+$$\mathcal{L} = \|x - \hat{x}\|^2 = \sum_i (x_i - \hat{x}_i)^2$$
+For binary inputs, Binary Cross-Entropy is used instead.
+3. **Backward Pass:** Gradients of $\mathcal{L}$ w.r.t. all weights computed via backpropagation.
+4. **Weight Update:** $W \leftarrow W - \eta\,\nabla_W \mathcal{L}$
+5. **Repeat** for many epochs until loss converges.
+
+#### Dimensionality Reduction
+
+The <Highlight color="green">**bottleneck (latent layer)**</Highlight> has fewer neurons than the input, forcing the network to retain only the most essential features:
+
+- Input: $x \in \mathbb{R}^n$ (high-dimensional)
+- Latent: $z \in \mathbb{R}^k$, where $k \ll n$ (low-dimensional)
+- The encoder effectively learns a **non-linear projection** from $n$-D to $k$-D space.
+
+This is more powerful than PCA because it captures non-linear structure.
+
+---
+
+<LongQuestion>
+### Q7. Numerical: Input $x=[2,4,6]$, encoder matrix $W_e = \begin{bmatrix}0.5&0\\0&0.2\\0&0\end{bmatrix}$. Calculate the latent vector. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
+</LongQuestion>
+
+**Formula:** $z = x W_e$
+
+$$[2\;4\;6]\begin{bmatrix}0.5&0\\0&0.2\\0&0\end{bmatrix} = [z_1\;z_2]$$
+
+$$z_1 = 2(0.5) + 4(0) + 6(0) = 1.0$$
+$$z_2 = 2(0) + 4(0.2) + 6(0) = 0.8$$
+
+$$\boxed{z = [1.0,\;0.8]}$$
+
+---
+
+<LongQuestion>
+### Q8. Numerical: Denoising autoencoder — original input $x=[3,5]$, noise $n=[-1,0.5]$. Calculate noisy input. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
+</LongQuestion>
+
+**Formula:** $\tilde{x} = x + n$
+
+$$\tilde{x} = [3+(-1),\;5+0.5] = \boxed{[2,\;5.5]}$$
 
 ---
 
