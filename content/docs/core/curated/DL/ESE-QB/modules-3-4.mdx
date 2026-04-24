@@ -1,0 +1,426 @@
+﻿---
+title: Module 3 & Module 4
+description: CNNs, Convolution, Pooling, Feature Extraction, RNNs, BPTT, Vanishing & Exploding Gradients.
+---
+
+import { Highlight } from '@/components/highlight';
+import { LongQuestion } from '@/components/question';
+import { QuestionDot } from '@/components/question-dot';
+
+<div className="mb-6 rounded-xl border border-fd-border/60 bg-fd-muted/20 p-4">
+	<h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-fd-muted-foreground">References</h3>
+	<div className="space-y-3">
+		<div className="flex items-center gap-2">
+			<QuestionDot color="yellow" text="IA1-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (IA1)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="cyan" text="MSE-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (MSE)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="purple" text="IA2-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (IA2)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="pink" text="ESE-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (ESE)</span>
+		</div>
+	</div>
+</div>
+
+# Module 3
+
+<LongQuestion>
+### Q1 / Q7. What is the primary purpose of a convolutional layer in a CNN? / Explain the role of the convolutional layer in feature extraction.
+</LongQuestion>
+
+The **convolutional layer** is the core building block of a CNN. Its primary purpose is **automatic feature extraction** from input data.
+
+**How it works:**
+
+A learnable filter (kernel) of size $F \times F$ slides across the input with a given stride, computing a dot product at each position:
+
+$$z_{i,j} = \sum_{m=0}^{F-1}\sum_{n=0}^{F-1} x_{i+m,\, j+n} \cdot w_{m,n} + b$$
+
+The result is a **feature map** (activation map) that highlights where a specific pattern is present.
+
+**Role in feature extraction:**
+
+- <Highlight color="green">**Early layers:**</Highlight> Detect low-level features â€” edges, corners, gradients.
+- <Highlight color="orange">**Middle layers:**</Highlight> Detect mid-level features â€” textures, shapes, curves.
+- <Highlight color="blue">**Deep layers:**</Highlight> Detect high-level, semantic features â€” eyes, wheels, faces.
+
+**Key advantages:**
+- <Highlight color="green">**Parameter sharing:**</Highlight> Same filter weights applied everywhere â†’ fewer parameters.
+- <Highlight color="green">**Local connectivity:**</Highlight> Each neuron connects to a small local region, capturing spatial structure.
+- <Highlight color="green">**Translation invariance:**</Highlight> Features detected regardless of position in image.
+
+---
+
+<LongQuestion>
+### Q2 / Q9. Define "loss function" and "backpropagation" in the context of deep learning. / What is the role of backpropagation in CNN training?
+</LongQuestion>
+
+**Loss Function:**
+
+A <Highlight color="blue">**loss function**</Highlight> $\mathcal{L}$ measures the error between the network's predicted output $\hat{y}$ and the true label $y$.
+
+| Task | Loss Function | Formula |
+|------|--------------|---------|
+| Regression | Mean Squared Error (MSE) | $\mathcal{L} = \frac{1}{n}\sum(y_i - \hat{y}_i)^2$ |
+| Binary Classification | Binary Cross-Entropy | $\mathcal{L} = -[y\log\hat{y} + (1-y)\log(1-\hat{y})]$ |
+| Multi-class | Categorical Cross-Entropy | $\mathcal{L} = -\sum_c y_c \log\hat{y}_c$ |
+
+**Backpropagation:**
+
+<Highlight color="blue">**Backpropagation**</Highlight> is the algorithm that computes gradients of the loss w.r.t. every weight in the network using the **chain rule**, so weights can be updated via gradient descent.
+
+**Steps:**
+
+1. **Forward pass:** Compute $\hat{y}$ and $\mathcal{L}$.
+2. **Backward pass:** Propagate error from output to input layer using:
+
+$$\frac{\partial \mathcal{L}}{\partial W^{[l]}} = \frac{\partial \mathcal{L}}{\partial A^{[l]}} \cdot \frac{\partial A^{[l]}}{\partial Z^{[l]}} \cdot \frac{\partial Z^{[l]}}{\partial W^{[l]}}$$
+
+3. **Weight update (Gradient Descent):**
+
+$$W^{[l]} \leftarrow W^{[l]} - \eta\,\frac{\partial \mathcal{L}}{\partial W^{[l]}}$$
+
+**Role in CNN:** Backprop adjusts filter weights (kernels), FC layer weights, and biases â€” training the CNN to detect increasingly useful features.
+
+---
+
+<LongQuestion>
+### Q3. Provide a numerical example of how a perceptron can perform binary classification.
+</LongQuestion>
+
+**Given:** Weights $w = [0.5,\; -0.3]$, bias $b = 0.1$, input $x = [1,\; 2]$, step activation.
+
+**Step 1 â€” Weighted sum:**
+
+$$z = w_1 x_1 + w_2 x_2 + b = (0.5)(1) + (-0.3)(2) + 0.1$$
+
+$$z = 0.5 - 0.6 + 0.1 = 0.0$$
+
+**Step 2 â€” Step activation:**
+
+$$\hat{y} = \begin{cases} 1 & z > 0 \\ 0 & z \leq 0 \end{cases}$$
+
+Since $z = 0 \leq 0$:
+
+$$\boxed{\hat{y} = 0 \quad \text{(Class 0)}}$$
+
+**Interpretation:** The perceptron separates two classes using the hyperplane $w^T x + b = 0$. Points on one side are Class 1, the other side Class 0.
+
+---
+
+<LongQuestion>
+### Q4. Compare and contrast feedforward neural networks and recurrent neural networks (RNNs).
+</LongQuestion>
+
+| Property | Feedforward NN (FNN) | Recurrent NN (RNN) |
+|----------|---------------------|--------------------|
+| **Data flow** | One direction: input â†’ output | Loops: output fed back as input |
+| **Memory** | <Highlight color="red">**None**</Highlight> â€” no state retained | <Highlight color="green">**Hidden state**</Highlight> $h_t$ carries past info |
+| **Input type** | Fixed-size vector | Sequential / time-series data |
+| **Architecture** | Acyclic graph | Cyclic connections |
+| **Best for** | Image classification, regression | NLP, speech, time-series |
+| **Training** | Standard backpropagation | Backpropagation Through Time (BPTT) |
+| **Parameters** | Different weights per layer | Shared weights across time steps |
+
+**Summary:** FNNs map fixed inputs to outputs independently; RNNs process sequences by maintaining a hidden state that carries context across time steps.
+
+---
+
+<LongQuestion>
+### Q5. What is overfitting, and how can it be avoided?
+</LongQuestion>
+
+<Highlight color="red">**Overfitting**</Highlight> occurs when a model learns the training data too well â€” including noise and random fluctuations â€” and fails to generalize to new/unseen data.
+
+**Symptoms:**
+- Low training error, high validation/test error.
+- Large gap between training and validation accuracy.
+
+**How to avoid it:**
+
+| Technique | How it helps |
+|-----------|-------------|
+| <Highlight color="green">**Dropout**</Highlight> | Randomly deactivates neurons during training; prevents co-adaptation |
+| <Highlight color="green">**L1 / L2 Regularization**</Highlight> | Penalizes large weights; forces simpler models |
+| <Highlight color="green">**Early Stopping**</Highlight> | Halts training when validation loss starts rising |
+| <Highlight color="green">**Data Augmentation**</Highlight> | Artificially expands training data (flips, rotations) |
+| <Highlight color="green">**More Training Data**</Highlight> | Directly reduces overfitting by exposing more variation |
+| <Highlight color="green">**Reduce Model Complexity**</Highlight> | Fewer layers/neurons lowers capacity to memorize |
+
+$$\underbrace{E_{\text{total}}}_{\text{Error}} = \underbrace{\text{Bias}^2}_{\text{Underfitting}} + \underbrace{\text{Variance}}_{\text{Overfitting}} + \sigma^2$$
+
+---
+
+<LongQuestion>
+### Q6 / Q8 / Q11 / Q12. Describe the basic layers of a CNN. / What is a CNN and why is it effective for image processing? / Explain the detailed structure of a CNN. / Explain the purpose of pooling layers.
+</LongQuestion>
+
+A <Highlight color="blue">**Convolutional Neural Network (CNN)**</Highlight> is a deep learning architecture specifically designed for processing grid-structured data (images, video). It is effective for images because it exploits **local spatial structure**, **parameter sharing**, and **hierarchical feature learning**.
+
+#### Layers of a CNN
+
+**1. <Highlight color="green">Convolutional Layer</Highlight>**
+
+Applies $K$ learnable filters of size $F \times F$ to extract feature maps.
+
+$$z = \text{input} * \text{filter} + b$$
+
+Output size: $\left\lfloor\frac{N - F + 2P}{S}\right\rfloor + 1$ where $N$ = input size, $P$ = padding, $S$ = stride.
+
+Followed by an activation function (typically ReLU): $a = \max(0, z)$
+
+**2. <Highlight color="orange">Pooling Layer</Highlight>**
+
+Reduces spatial dimensions (downsampling) while retaining dominant features.
+
+- **Max Pooling:** Takes the maximum value in each window â†’ preserves strongest activations.
+- **Average Pooling:** Takes the mean of each window.
+
+$$\text{Max Pool}_{2\times2}:\quad \begin{bmatrix}1&3\\2&4\end{bmatrix} \rightarrow 4$$
+
+**Purpose of pooling:**
+- Reduces computation and memory usage.
+- Provides local translation invariance.
+- Prevents overfitting by reducing the number of parameters.
+
+**3. <Highlight color="blue">Fully Connected (FC) Layer</Highlight>**
+
+Flattens the feature maps into a 1D vector and performs classification using standard weighted connections.
+
+$$\hat{y} = \text{softmax}(W \cdot \text{flatten}(A) + b)$$
+
+#### Typical CNN Pipeline
+
+```
+Input Image
+  â†’ [Conv + ReLU] Ã— n   (feature extraction)
+  â†’ [Pooling]            (downsampling)
+  â†’ [Conv + ReLU] Ã— n
+  â†’ [Pooling]
+  â†’ Flatten
+  â†’ [FC Layer + ReLU]
+  â†’ [FC + Softmax]       (output probabilities)
+```
+
+---
+
+<LongQuestion>
+### Q10. List two common applications of Convolutional Neural Networks (CNNs).
+</LongQuestion>
+
+1. <Highlight color="green">**Image Classification:**</Highlight> Assigning a class label to an input image (e.g., AlexNet/ResNet on ImageNet â€” classifying dogs, cats, vehicles across 1000 categories).
+
+2. <Highlight color="orange">**Object Detection:**</Highlight> Locating and classifying multiple objects within an image using bounding boxes (e.g., YOLO, Faster R-CNN for pedestrian detection in autonomous driving).
+
+Other notable applications: Medical image analysis (tumor detection), facial recognition, and video activity recognition.
+
+---
+
+# Module 4 â€” Recurrent Neural Networks
+
+---
+
+<LongQuestion>
+### Q1 / Q2. What is an RNN and why is it suitable for sequential data? / What is the main difference between an RNN and a feedforward network?
+</LongQuestion>
+
+A <Highlight color="blue">**Recurrent Neural Network (RNN)**</Highlight> is a neural network with **cyclic connections** that allow information to persist across time steps, making it suitable for sequential data.
+
+**Why suitable for sequential data:**
+- Maintains a <Highlight color="green">**hidden state**</Highlight> $h_t$ that acts as memory, capturing context from all previous inputs.
+- Processes inputs one step at a time while updating its state: output at step $t$ depends on both current input $x_t$ and past hidden state $h_{t-1}$.
+
+**Key difference from FNN:**
+
+| Property | Feedforward NN | RNN |
+|----------|---------------|-----|
+| **Connections** | Acyclic (no loops) | Cyclic (recurrent loops) |
+| **Memory** | None | Hidden state $h_t$ |
+| **Input** | Fixed-size | Variable-length sequences |
+| **Weight sharing** | Different per layer | Shared across all time steps |
+
+---
+
+<LongQuestion>
+### Q3 / Q4 / Q7 / Q8. Describe the architecture of a simple RNN, including hidden states, recurrent connections, and how it processes sequential data.
+</LongQuestion>
+
+#### Architecture
+
+An RNN at each time step $t$ takes:
+- $x_t$ â€” current input
+- $h_{t-1}$ â€” previous hidden state
+
+And computes:
+
+$$h_t = \tanh(W_{xh}\,x_t + W_{hh}\,h_{t-1} + b_h)$$
+
+$$y_t = W_{hy}\,h_t + b_y$$
+
+where:
+- $W_{xh}$ â€” input-to-hidden weight matrix
+- $W_{hh}$ â€” hidden-to-hidden (recurrent) weight matrix
+- $W_{hy}$ â€” hidden-to-output weight matrix
+
+#### Role of Recurrent Connections
+
+The recurrent connection via $W_{hh}$ feeds the previous hidden state back into the current computation â€” this is what gives the RNN its **memory**. The same $W_{hh}$, $W_{xh}$, $W_{hy}$ are **shared across all time steps** (parameter sharing).
+
+#### Sequential Processing
+
+```
+xâ‚ â†’ [RNN cell] â†’ hâ‚ â†’ yâ‚
+              â†“
+xâ‚‚ â†’ [RNN cell] â†’ hâ‚‚ â†’ yâ‚‚
+              â†“
+xâ‚ƒ â†’ [RNN cell] â†’ hâ‚ƒ â†’ yâ‚ƒ
+```
+
+At each step, the hidden state $h_t$ summarizes all past information $x_1, x_2, \ldots, x_t$.
+
+**Initial condition:** $h_0 = \mathbf{0}$ (zero vector).
+
+---
+
+<LongQuestion>
+### Q5 / Q9. Briefly explain the vanishing gradient problem. / Explain in detail the vanishing and exploding gradient problems in RNN training.
+</LongQuestion>
+
+RNNs are trained using **Backpropagation Through Time (BPTT)**, which unrolls the network across $T$ time steps. The gradient of the loss w.r.t. early weights involves repeated multiplication:
+
+$$\frac{\partial \mathcal{L}}{\partial W} \propto \prod_{t=1}^{T} \frac{\partial h_t}{\partial h_{t-1}} = \prod_{t=1}^{T} W_{hh}^\top \cdot \text{diag}(f'(h_t))$$
+
+**Vanishing Gradient:**
+
+If $\|W_{hh}\| < 1$ or $|f'| \ll 1$ (e.g., saturated sigmoid/tanh), the product of gradients shrinks exponentially:
+
+$$\left\|\prod_{t=1}^{T} \frac{\partial h_t}{\partial h_{t-1}}\right\| \rightarrow 0 \quad \text{as } T \rightarrow \infty$$
+
+- <Highlight color="red">**Effect:**</Highlight> Early time steps receive near-zero gradients â†’ network cannot learn long-range dependencies.
+
+**Exploding Gradient:**
+
+If $\|W_{hh}\| > 1$, the product grows exponentially.
+
+- <Highlight color="red">**Effect:**</Highlight> Gradients become very large â†’ unstable training, NaN weights.
+- <Highlight color="green">**Fix:**</Highlight> **Gradient clipping** â€” cap gradients if their norm exceeds a threshold.
+
+| Problem | Cause | Effect | Fix |
+|---------|-------|--------|-----|
+| Vanishing | $\|W_{hh}\| < 1$ or saturated activation | Cannot learn long-term dependencies | LSTM, GRU, ReLU activation |
+| Exploding | $\|W_{hh}\| > 1$ | Unstable training, NaN | Gradient clipping |
+
+---
+
+<LongQuestion>
+### Q6 / Q13. Explain the concept of "unrolling" an RNN in time. / Numerical: Given $W_{hh}=0.2$, $W_{xh}=0$, $b_h=0$, $h_0=0$, show the first two steps of unrolling and calculate hidden states.
+</LongQuestion>
+
+**Unrolling:**
+
+<Highlight color="blue">**Unrolling**</Highlight> (or unfolding) means expanding the RNN across time steps to visualize it as a deep feedforward network â€” one copy of the RNN cell per time step. This allows standard backpropagation to be applied (BPTT).
+
+```
+hâ‚€ â†’ [Cell, xâ‚] â†’ hâ‚ â†’ [Cell, xâ‚‚] â†’ hâ‚‚ â†’ [Cell, xâ‚ƒ] â†’ hâ‚ƒ
+```
+
+Each cell shares the same weights $W_{xh}$, $W_{hh}$, $b_h$.
+
+**Numerical (assume input sequence $x = [1, 1, 1, \ldots]$):**
+
+**Given:** $W_{hh} = 0.2$, $W_{xh} = 0$, $b_h = 0$, $h_0 = 0$
+
+$$h_t = \tanh(W_{xh}\,x_t + W_{hh}\,h_{t-1} + b_h)$$
+
+**Step 1** ($t=1$, $x_1 = 1$):
+
+$$h_1 = \tanh(0 \cdot 1 + 0.2 \cdot 0 + 0) = \tanh(0) = \boxed{0}$$
+
+**Step 2** ($t=2$, $x_2 = 1$):
+
+$$h_2 = \tanh(0 \cdot 1 + 0.2 \cdot 0 + 0) = \tanh(0) = \boxed{0}$$
+
+Since $W_{xh} = 0$ and $h_0 = 0$, the hidden state remains zero â€” illustrating that input weights must be non-zero for the network to respond to inputs.
+
+---
+
+<LongQuestion>
+### Q10. A sparse autoencoder uses L1 regularization with $\lambda = 0.1$. The latent representation is $h = [0.5,\,-0.2,\,0.8]$. Calculate the L1 regularization term.
+</LongQuestion>
+
+**Given:**
+
+$$\lambda = 0.1, \quad h = [0.5,\; -0.2,\; 0.8]$$
+
+**Formula (L1 regularization term):**
+
+$$\mathcal{R}_{L1} = \lambda \sum_i |h_i|$$
+
+**Calculation:**
+
+$$\sum_i |h_i| = |0.5| + |-0.2| + |0.8| = 0.5 + 0.2 + 0.8 = 1.5$$
+
+$$\mathcal{R}_{L1} = 0.1 \times 1.5 = \boxed{0.15}$$
+
+This term is added to the reconstruction loss to encourage sparsity in the latent representation.
+
+---
+
+<LongQuestion>
+### Q11. RNN forward pass numerical: $W_{hh}=0.4$, $W_{xh}=0.2$, $W_{hy}=0.6$, $b_h=0.1$, $b_y=0.2$, input $x=[1, 2]$, $h_0=0$. (a) Calculate $h_1, h_2, y_1, y_2$. (b) Error at $t=2$ if target $y_2^* = 1$.
+</LongQuestion>
+
+**Given:**
+
+$$W_{hh}=0.4,\; W_{xh}=0.2,\; W_{hy}=0.6,\; b_h=0.1,\; b_y=0.2,\; h_0=0$$
+
+$$\text{Input: } x_1=1,\; x_2=2$$
+
+**Formula:**
+
+$$h_t = \tanh(W_{xh}\,x_t + W_{hh}\,h_{t-1} + b_h), \qquad y_t = W_{hy}\,h_t + b_y$$
+
+**(a) Step 1** ($t=1$):
+
+$$h_1 = \tanh(0.2 \times 1 + 0.4 \times 0 + 0.1) = \tanh(0.3) \approx \mathbf{0.2913}$$
+
+$$y_1 = 0.6 \times 0.2913 + 0.2 = 0.1748 + 0.2 = \boxed{0.3748}$$
+
+**Step 2** ($t=2$):
+
+$$h_2 = \tanh(0.2 \times 2 + 0.4 \times 0.2913 + 0.1) = \tanh(0.4 + 0.1165 + 0.1) = \tanh(0.6165) \approx \mathbf{0.5490}$$
+
+$$y_2 = 0.6 \times 0.5490 + 0.2 = 0.3294 + 0.2 = \boxed{0.5294}$$
+
+**(b) Error at $t=2$:**
+
+$$e_2 = y_2^* - y_2 = 1 - 0.5294 = \boxed{0.4706}$$
+
+---
+
+<LongQuestion>
+### Q12. Given $W_{hh}=0.5$, $W_{xh}=0.3$, $b_h=0.1$, $x_t=2$, $h_{t-1}=1$. Calculate $h_t$ using tanh.
+</LongQuestion>
+
+**Given:**
+
+$$W_{hh}=0.5,\quad W_{xh}=0.3,\quad b_h=0.1,\quad x_t=2,\quad h_{t-1}=1$$
+
+**Formula:**
+
+$$h_t = \tanh(W_{xh}\,x_t + W_{hh}\,h_{t-1} + b_h)$$
+
+**Substitution:**
+
+$$h_t = \tanh(0.3 \times 2 + 0.5 \times 1 + 0.1) = \tanh(0.6 + 0.5 + 0.1) = \tanh(1.2)$$
+
+$$h_t = \frac{e^{1.2} - e^{-1.2}}{e^{1.2} + e^{-1.2}} \approx \boxed{0.8337}$$
+
+---

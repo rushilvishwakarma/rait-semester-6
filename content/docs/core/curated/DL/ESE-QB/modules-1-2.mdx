@@ -1,0 +1,675 @@
+﻿---
+title: Module 1 & Module 2
+description: Introduction to Deep Learning, Neurons, Activation Functions, Backpropagation, Regularization & Optimization.
+---
+
+import { Highlight } from '@/components/highlight';
+import { LongQuestion } from '@/components/question';
+import { QuestionDot } from '@/components/question-dot';
+
+<div className="mb-6 rounded-xl border border-fd-border/60 bg-fd-muted/20 p-4">
+	<h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-fd-muted-foreground">References</h3>
+	<div className="space-y-3">
+		<div className="flex items-center gap-2">
+			<QuestionDot color="yellow" text="IA1-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (IA1)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="cyan" text="MSE-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (MSE)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="purple" text="IA2-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (IA2)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="pink" text="ESE-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (ESE)</span>
+		</div>
+	</div>
+</div>
+
+# Module 1
+
+<LongQuestion>
+### Q1. Explain the basic operation of a single neuron, including the role of weights, bias, and activation functions. <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+A single neuron is the basic processing unit of a neural network. Its operation has three steps:
+
+**Step 1 â€” Weighted Sum:**
+
+Each input $x_i$ is multiplied by a corresponding weight $w_i$, and a bias $b$ is added:
+
+$$z = \sum_{i=1}^{n} w_i x_i + b = w_1x_1 + w_2x_2 + \dots + w_nx_n + b$$
+
+**Step 2 â€” Activation Function:**
+
+The weighted sum $z$ is passed through an activation function $f(z)$ to produce the output $y$:
+
+$$y = f(z)$$
+
+**Roles of each component:**
+
+| Component | Role |
+|-----------|------|
+| <Highlight color="green">**Weights ($w_i$)**</Highlight> | Control the importance/strength of each input. Learned during training. |
+| <Highlight color="orange">**Bias ($b$)**</Highlight> | Shifts the activation threshold, allowing the neuron to fire even when all inputs are zero. |
+| <Highlight color="blue">**Activation Function**</Highlight> | Introduces non-linearity so the network can learn complex patterns. Without it, the network reduces to a linear model. |
+
+Common activation functions: Sigmoid, Tanh, ReLU.
+
+---
+
+<LongQuestion>
+### Q2. Briefly describe the perceptron learning rule and its goal. <QuestionDot color="yellow" text="IA1-QB" />
+</LongQuestion>
+
+The <Highlight color="blue">**Perceptron Learning Rule**</Highlight> is a supervised learning algorithm that adjusts weights based on prediction error.
+
+**Weight Update Formula:**
+
+$$w_i^{(\text{new})} = w_i^{(\text{old})} + \alpha\,(t - y)\,x_i$$
+
+where $\alpha$ is the learning rate, $t$ is the target output, and $y$ is the actual output.
+
+**Goal:** Find a set of weights such that the perceptron correctly classifies all linearly separable training samples. The rule guarantees convergence in finite steps for linearly separable problems *(Perceptron Convergence Theorem)*.
+
+- If $y = t$ â†’ no update (prediction is correct).
+- If $y \neq t$ â†’ weights are adjusted in the direction that reduces error.
+
+---
+
+<LongQuestion>
+### Q3. List and briefly describe three basic architectures of neural networks. <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+| Architecture | Description | Use Case |
+|---|---|---|
+| <Highlight color="green">**Feedforward NN (FNN)**</Highlight> | Data flows in one direction only: input â†’ hidden â†’ output. No loops or cycles. | Classification, regression |
+| <Highlight color="orange">**Recurrent NN (RNN)**</Highlight> | Contains loops â€” the output of a layer is fed back as input. Maintains a hidden state (memory). | Time series, NLP, speech |
+| <Highlight color="blue">**Convolutional NN (CNN)**</Highlight> | Uses convolutional filters to scan local regions of input. Employs parameter sharing and pooling. | Image recognition, object detection |
+
+---
+
+<LongQuestion>
+### Q4. Provide a simple diagram of a feedforward neural network with one hidden layer.
+</LongQuestion>
+
+A feedforward neural network with one hidden layer has three layers:
+
+```
+Input Layer     Hidden Layer     Output Layer
+  (x1)  â”€â”€â”
+           â”œâ”€â”€â†’  (h1)  â”€â”€â”
+  (x2)  â”€â”€â”¤              â”œâ”€â”€â†’  (y)
+           â”œâ”€â”€â†’  (h2)  â”€â”€â”˜
+  (x3)  â”€â”€â”˜
+```
+
+- **Input layer:** receives raw features.
+- **Hidden layer:** applies weighted sums + activation function (e.g., ReLU or Sigmoid).
+- **Output layer:** produces final prediction (Sigmoid for binary, Softmax for multi-class).
+
+$$z^{[1]} = W^{[1]}X + b^{[1]}, \quad a^{[1]} = f(z^{[1]})$$
+$$z^{[2]} = W^{[2]}a^{[1]} + b^{[2]}, \quad \hat{y} = f(z^{[2]})$$
+
+---
+
+<LongQuestion>
+### Q5. Explain the delta learning rule and its application in training neural networks.
+</LongQuestion>
+
+The <Highlight color="blue">**Delta Rule**</Highlight> (Widrow-Hoff rule) is a gradient descent-based learning rule for single-layer networks with continuous activation functions.
+
+**Update Rule:**
+
+$$\Delta w_i = \alpha\,(t - \hat{y})\,f'(z)\,x_i$$
+
+where:
+- $\alpha$ = learning rate
+- $t - \hat{y}$ = error (target âˆ’ predicted)
+- $f'(z)$ = derivative of the activation function
+- $x_i$ = input value
+
+**Key differences from Perceptron Rule:**
+
+| Perceptron Rule | Delta Rule |
+|---|---|
+| Binary outputs only | Works with continuous outputs |
+| No derivative of activation | Uses $f'(z)$ (gradient-based) |
+| Converges for linearly separable only | Foundation of backpropagation |
+
+**Application:** The Delta Rule is the basis of backpropagation. It is applied layer by layer (via chain rule) to update all weights in multi-layer networks.
+
+---
+
+<LongQuestion>
+### Q6. Numerical: Given a perceptron with weights $w=[0.7,âˆ’0.4]$, bias $b=0.1$, and input $x=[2,1]$, calculate the output using a step activation function.
+</LongQuestion>
+
+**Step 1 â€” Compute weighted sum:**
+
+$$z = w_1 x_1 + w_2 x_2 + b = (0.7)(2) + (-0.4)(1) + 0.1$$
+
+$$z = 1.4 - 0.4 + 0.1 = \mathbf{1.1}$$
+
+**Step 2 â€” Apply step activation function:**
+
+$$\text{Output} = \begin{cases} 1 & \text{if } z > 0 \\ 0 & \text{if } z \leq 0 \end{cases}$$
+
+Since $z = 1.1 > 0$:
+
+$$\boxed{y = 1}$$
+
+---
+
+<LongQuestion>
+### Q7 & Q8. List and explain two common activation functions and provide their mathematical formula. <QuestionDot color="yellow" text="IA1-QB" />
+</LongQuestion>
+
+**1. <Highlight color="blue">Sigmoid Function</Highlight>**
+
+$$f(x) = \frac{1}{1 + e^{-x}}$$
+
+- Output range: $(0, 1)$
+- Converts any value to a probability.
+- Used in binary classification output layers.
+- Drawback: suffers from <Highlight color="red">**vanishing gradients**</Highlight> for very large or very small inputs.
+
+**2. <Highlight color="blue">ReLU (Rectified Linear Unit)</Highlight>**
+
+$$f(x) = \max(0,\, x)$$
+
+- Output range: $[0, \infty)$
+- Most widely used in hidden layers.
+- Computationally efficient and avoids vanishing gradients (for positive inputs).
+- Drawback: <Highlight color="red">**dying ReLU**</Highlight> problem â€” neurons can get stuck at zero.
+
+**Bonus â€” Tanh:**
+
+$$f(x) = \tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$$
+
+Output range: $(-1, 1)$. Used in hidden layers of RNNs.
+
+---
+
+<LongQuestion>
+### Q9. Define deep learning and explain its importance in modern AI applications. <QuestionDot color="yellow" text="IA1-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**Deep Learning**</Highlight> is a subset of machine learning that uses <Highlight color="green">**multi-layered neural networks**</Highlight> (deep neural networks) to automatically learn hierarchical feature representations from raw data.
+
+**Key characteristic:** Each layer learns progressively more abstract features (edges â†’ shapes â†’ objects in images).
+
+**Importance in Modern AI:**
+
+1. <Highlight color="green">**Automatic feature extraction:**</Highlight> Eliminates the need for manual feature engineering.
+2. <Highlight color="green">**State-of-the-art performance:**</Highlight> Surpasses traditional ML in image recognition, speech, NLP.
+3. <Highlight color="green">**Scalability:**</Highlight> Performance improves with more data and computational power (GPUs/TPUs).
+4. <Highlight color="orange">**Powers real-world applications:**</Highlight> Self-driving cars, ChatGPT, medical diagnosis (cancer detection), recommendation systems.
+5. <Highlight color="orange">**Transfer learning:**</Highlight> Pretrained deep models can be fine-tuned for new tasks with minimal data.
+
+---
+
+<LongQuestion>
+### Q10. What are the key differences between traditional machine learning and deep learning? <QuestionDot color="yellow" text="IA1-QB" />
+</LongQuestion>
+
+| Property | Traditional Machine Learning | Deep Learning |
+|---|---|---|
+| **Feature Engineering** | Manual (human-designed features) | <Highlight color="green">**Automatic**</Highlight> (learned from raw data) |
+| **Data requirement** | Works with small/medium datasets | Requires <Highlight color="red">**large datasets**</Highlight> |
+| **Model complexity** | Simpler models (SVM, Decision Tree) | Complex multi-layer neural networks |
+| **Interpretability** | More interpretable | <Highlight color="red">**Black-box**</Highlight> |
+| **Hardware** | Runs on standard CPUs | Needs <Highlight color="orange">**GPUs/TPUs**</Highlight> |
+| **Performance on unstructured data** | Limited | <Highlight color="green">**Excellent**</Highlight> (images, audio, text) |
+| **Examples** | Logistic Regression, Random Forest | CNNs, RNNs, Transformers |
+
+**In short:** Traditional ML relies on feature engineering by experts; deep learning automates this process using layered representations, at the cost of needing more data and compute.
+
+---
+
+<LongQuestion>
+### Q11. Explain the role of backpropagation in deep neural networks. <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**Backpropagation**</Highlight> is the algorithm used to compute gradients of the loss function with respect to each weight in the network, enabling weight updates via gradient descent.
+
+**Role (step by step):**
+
+1. **Forward pass:** Compute predictions $\hat{y}$ and calculate the loss $\mathcal{L}$.
+2. **Compute output gradient:** $\frac{\partial \mathcal{L}}{\partial \hat{y}}$
+3. **Propagate backward using chain rule:** For each layer $l$:
+
+$$\frac{\partial \mathcal{L}}{\partial W^{[l]}} = \frac{\partial \mathcal{L}}{\partial A^{[l]}} \cdot \frac{\partial A^{[l]}}{\partial Z^{[l]}} \cdot \frac{\partial Z^{[l]}}{\partial W^{[l]}}$$
+
+4. **Update weights:**
+
+$$W^{[l]} \leftarrow W^{[l]} - \eta\,\frac{\partial \mathcal{L}}{\partial W^{[l]}}$$
+
+**Key importance:** Without backpropagation, it would be computationally impossible to train deep networks with millions of parameters efficiently. It makes learning feasible by computing all gradients in a single backward pass.
+
+---
+
+<LongQuestion>
+### Q12. Explain the evolution of deep learning from perceptrons to modern neural networks.
+</LongQuestion>
+
+| Era | Development |
+|-----|-------------|
+| **1943** | <Highlight color="orange">**McCulloch-Pitts neuron**</Highlight> â€” first mathematical model of a neuron |
+| **1958** | <Highlight color="orange">**Perceptron (Rosenblatt)**</Highlight> â€” single-layer trainable network |
+| **1969** | Minsky & Papert showed perceptrons can't solve XOR â†’ <Highlight color="red">**AI Winter**</Highlight> |
+| **1986** | <Highlight color="green">**Backpropagation (Rumelhart et al.)**</Highlight> â€” enabled multi-layer training |
+| **1998** | <Highlight color="green">**LeNet (LeCun)**</Highlight> â€” first successful CNN for digit recognition |
+| **2006** | Hinton's <Highlight color="green">**Deep Belief Networks**</Highlight> â€” revival of deep learning |
+| **2012** | <Highlight color="blue">**AlexNet**</Highlight> wins ImageNet with GPU-accelerated deep CNN |
+| **2014â€“17** | VGG, GoogLeNet, ResNet â€” very deep architectures with skip connections |
+| **2017** | <Highlight color="blue">**Transformers (Attention is All You Need)**</Highlight> |
+| **2020s** | GPT, BERT, DALL-E, diffusion models â€” modern generative AI |
+
+**Key enabling factors:** Big data, GPU compute, improved activation functions (ReLU), better initialization, and regularization (dropout).
+
+---
+
+<LongQuestion>
+### Q13. Discuss the fundamental working principles of deep neural networks.
+</LongQuestion>
+
+A <Highlight color="blue">**Deep Neural Network (DNN)**</Highlight> works by learning a hierarchy of representations through multiple stacked layers.
+
+**Working Principle:**
+
+1. <Highlight color="green">**Layered Representation:**</Highlight> Each layer transforms the input into a more abstract representation. Early layers detect low-level features (edges), deeper layers detect high-level features (objects).
+
+2. <Highlight color="green">**Forward Propagation:**</Highlight> Input is passed layer-by-layer:
+$$Z^{[l]} = W^{[l]} A^{[l-1]} + b^{[l]}, \quad A^{[l]} = f(Z^{[l]})$$
+
+3. <Highlight color="orange">**Loss Computation:**</Highlight> The output is compared to the target using a loss function (e.g., MSE, cross-entropy).
+
+4. <Highlight color="orange">**Backpropagation:**</Highlight> Gradients of the loss are computed backwards using the chain rule.
+
+5. <Highlight color="blue">**Weight Update (Gradient Descent):**</Highlight>
+$$W \leftarrow W - \eta\,\frac{\partial \mathcal{L}}{\partial W}$$
+
+6. **Repeat** for many epochs until the loss converges.
+
+```
+Input â†’ [Layer 1: Edges] â†’ [Layer 2: Shapes] â†’ [Layer 3: Objects] â†’ Output
+```
+
+---
+
+<LongQuestion>
+### Q14. Numerical: Calculate the output of the given neural network (Sigmoid, 2â†’2â†’1 architecture).
+</LongQuestion>
+
+**Given:**
+- Input: $x = [1, 0]$
+- $W_1 = \begin{bmatrix}0.9 & 0.6 \\ -0.4 & 0.1\end{bmatrix}$, $b_1 = [0.3,\,-0.1]$
+- $W_2 = [0.6,\,-0.5]$, $b_2 = 0.5$
+
+**Step 1 â€” Hidden layer pre-activation:**
+
+$$z_1^{[1]} = 0.9(1) + (-0.4)(0) + 0.3 = 1.2$$
+$$z_2^{[1]} = 0.6(1) + 0.1(0) + (-0.1) = 0.5$$
+
+**Step 2 â€” Hidden layer activation (Sigmoid):**
+
+$$a_1^{[1]} = \sigma(1.2) = \frac{1}{1+e^{-1.2}} \approx \mathbf{0.7685}$$
+$$a_2^{[1]} = \sigma(0.5) = \frac{1}{1+e^{-0.5}} \approx \mathbf{0.6225}$$
+
+**Step 3 â€” Output layer pre-activation:**
+
+$$z^{[2]} = 0.6(0.7685) + (-0.5)(0.6225) + 0.5$$
+$$= 0.4611 - 0.3113 + 0.5 = 0.6498$$
+
+**Step 4 â€” Output activation (Sigmoid):**
+
+$$\hat{y} = \sigma(0.6498) = \frac{1}{1+e^{-0.6498}} \approx \boxed{0.6570}$$
+
+---
+
+<LongQuestion>
+### Q15. Explain the concepts of overfitting and underfitting in relation to neural network training. <QuestionDot color="yellow" text="IA1-QB" />
+</LongQuestion>
+
+| | Underfitting | Overfitting |
+|---|---|---|
+| **Definition** | Model is too simple to learn the training data | Model memorizes training data including noise |
+| **Training Error** | <Highlight color="red">**High**</Highlight> | <Highlight color="green">**Low**</Highlight> |
+| **Validation Error** | <Highlight color="red">**High**</Highlight> | <Highlight color="red">**High**</Highlight> |
+| **Also called** | High Bias | High Variance |
+| **Cause** | Too few layers/neurons, insufficient training | Too many parameters, too many epochs |
+| **Fix** | Increase model complexity, train longer | Dropout, L1/L2 regularization, early stopping, more data |
+
+**Ideal model:** Low training error AND low validation error (good generalization).
+
+$$E_{\text{total}} = \text{Bias}^2 + \text{Variance} + \text{Irreducible Noise}$$
+
+---
+
+<LongQuestion>
+### Q16. Describe the advantages and disadvantages of Deep Neural Networks. <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+**Deep Neural Networks (DNNs)** are multi-layered artificial neural networks capable of learning complex representations of data.
+
+#### Advantages
+
+- <Highlight color="green">**Automatic Feature Extraction:**</Highlight> Unlike traditional ML, DNNs do not require manual feature engineering â€” they learn features directly from raw data.
+- <Highlight color="green">**Scalability:**</Highlight> Performance improves significantly with more data and compute (Big Data compatibility).
+- <Highlight color="green">**Versatility:**</Highlight> Applicable across diverse domains â€” computer vision, NLP, speech recognition, and more.
+- <Highlight color="green">**Handles Non-linearity:**</Highlight> Excellent at modeling complex, non-linear relationships through stacked layers and activation functions.
+
+#### Disadvantages
+
+- <Highlight color="red">**Data Hungry:**</Highlight> Require massive amounts of labeled data for high accuracy.
+- <Highlight color="red">**High Compute Cost:**</Highlight> Need specialized hardware (GPUs/TPUs) and significant energy.
+- <Highlight color="red">**Black-Box:**</Highlight> Difficult to interpret how specific decisions are made (lack of transparency / explainability).
+- <Highlight color="red">**Hyperparameter Sensitivity:**</Highlight> Hard to tune (learning rate, number of layers, neurons, etc.).
+- <Highlight color="red">**Overfitting Risk:**</Highlight> With limited data, DNNs can easily memorize training examples instead of generalizing.
+
+---
+
+<LongQuestion>
+### Q17. How does a shallow Neural Network perform binary classification? <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+A <Highlight color="blue">**shallow neural network**</Highlight> (one hidden layer + one output layer) performs <Highlight color="green">**binary classification**</Highlight> by transforming input features into a probability value using <Highlight color="cyan">**weighted layers**</Highlight> and <Highlight color="cyan">**activation functions**</Highlight>.
+
+#### Forward Propagation
+
+$$A^{[0]} = X$$
+
+$$Z^{[1]} = W^{[1]} A^{[0]} + b^{[1]}, \qquad A^{[1]} = f^{[1]}(Z^{[1]}) \quad \text{(ReLU / tanh)}$$
+
+$$Z^{[2]} = W^{[2]} A^{[1]} + b^{[2]}, \qquad A^{[2]} = \sigma(Z^{[2]}) \quad \text{(Sigmoid)}$$
+
+#### Decision Rule
+
+$$\hat{y} = \begin{cases} 1 & A^{[2]} \geq 0.5 \\ 0 & A^{[2]} < 0.5 \end{cases}$$
+
+#### Training
+
+**Loss (Binary Cross-Entropy):**
+$$\mathcal{L} = -\left[t \log A^{[2]} + (1-t)\log(1 - A^{[2]})\right]$$
+
+**Weight Update:**
+$$W^{[l]} \leftarrow W^{[l]} - \alpha \frac{\partial \mathcal{L}}{\partial W^{[l]}}, \qquad b^{[l]} \leftarrow b^{[l]} - \alpha \frac{\partial \mathcal{L}}{\partial b^{[l]}}$$
+
+Repeat for multiple epochs until convergence.
+
+---
+
+# Module 2
+
+<LongQuestion>
+### Q1. Distinguish between linearly separable and nonlinearly separable problems. Give examples. <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+| Property | Linearly Separable | Non-Linearly Separable |
+|----------|--------------------|------------------------|
+| **Definition** | A <Highlight color="green">**single hyperplane**</Highlight> correctly partitions all classes | No single hyperplane achieves correct classification |
+| **Decision boundary** | Straight line (2D) / plane (nD) | Curved, piecewise, or non-convex boundary |
+| **Single-layer perceptron** | Converges in finite epochs *(Perceptron Convergence Theorem)* | <Highlight color="red">**Never converges**</Highlight> - oscillates indefinitely |
+| **Examples** | AND, OR, NOT, NAND, NOR | XOR, XNOR, concentric circles |
+| **Network required** | Single-layer perceptron | <Highlight color="blue">**Multi-layer perceptron (MLP)**</Highlight> |
+| **Feature space** | Classes lie on opposite sides of a hyperplane | Classes are interspersed / interleaved |
+
+![Linearly vs Nonlinearly Separable #invert-dark](/images/docs/DL/MSE-QB/Q5_Separable.png)
+
+---
+
+<LongQuestion>
+### Q2. Describe regularization techniques in Deep learning (early stopping, dataset augmentation, parameter sharing, injecting noise into input, ensemble methods, dropout,) <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="blue" text="Asked in MSE" />
+</LongQuestion>
+
+Deep learning models often suffer from <Highlight color="red">**overfitting**</Highlight> and <Highlight color="red">**slow convergence**</Highlight>. <Highlight color="blue">**Regularization techniques**</Highlight> help reduce overfitting by controlling model complexity, while <Highlight color="blue">**optimization techniques**</Highlight> help minimize the loss function efficiently during training.
+
+Let the prediction of a model be:
+
+$$
+\hat{y} = w_1 x_1 + w_2 x_2 + \dots + w_m x_m + b
+$$
+
+where $w_j$ are weights and $b$ is bias.
+
+Let the original loss function (Mean Squared Error) be:
+
+$$
+L = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+$$
+
+---
+
+#### Regularization Techniques
+
+**L1 Regularization (Lasso):**
+
+$$
+L_{total} = L + \lambda \sum_{j=1}^{m} |w_j|
+$$
+
+It adds a penalty equal to the absolute values of weights.
+It <Highlight color="green">**forces some weights to become zero**</Highlight>, performs feature selection, and reduces overfitting.
+
+**L2 Regularization (Ridge):**
+
+$$
+L_{total} = L + \lambda \sum_{j=1}^{m} w_j^2
+$$
+
+It adds a penalty equal to squared weights.
+It <Highlight color="green">**reduces large weight values**</Highlight> and prevents the model from becoming too sensitive to training data.
+
+**Early Stopping:**
+
+Training is stopped when <Highlight color="orange">**validation loss starts increasing**</Highlight> while training loss continues decreasing.
+This prevents the model from learning noise in the training data.
+
+**Dropout:**
+
+<Highlight color="orange">**Randomly deactivates neurons**</Highlight> during training, reducing co-adaptation and forcing the model to learn redundant representations.
+
+**Dataset Augmentation:**
+
+Artificially increases the size and diversity of the training set by applying transformations like <Highlight color="orange">**rotation, flipping, and scaling**</Highlight>. It prevents the model from memorizing specific training samples.
+
+**Parameter Sharing:**
+
+The same set of weights is reused across different parts of a model (e.g., in <Highlight color="green">**CNN filters**</Highlight>). This significantly reduces the number of trainable parameters and controls model complexity.
+
+**Injecting Noise into Input:**
+
+Adding small random perturbations (<Highlight color="orange">**Gaussian noise**</Highlight>) to input data during training. It forces the model to learn stable patterns and improves robustness.
+
+**Ensemble Methods:**
+
+Combining predictions from <Highlight color="green">**multiple independently trained models**</Highlight> (via averaging or voting). It reduces variance as errors from individual models tend to cancel out.
+
+---
+
+#### Optimization Techniques
+
+**Gradient Descent:**
+
+$$
+w = w - \eta \frac{\partial L}{\partial w}
+$$
+
+where $\eta$ is the <Highlight color="orange">**learning rate**</Highlight>.
+It updates weights in the direction of minimum loss.
+
+**Stochastic Gradient Descent (SGD):**
+
+Updates weights using <Highlight color="green">**one training sample at a time**</Highlight> for faster convergence.
+
+**Adam Optimizer:**
+
+An <Highlight color="green">**adaptive optimization algorithm**</Highlight> that adjusts learning rates for each parameter and improves convergence speed.
+
+---
+
+#### Conclusion
+
+Regularization techniques such as L1, L2, Early Stopping, Dropout, Dataset Augmentation, Parameter Sharing, Noise Injection, and Ensemble Methods control overfitting by limiting model complexity and improving robustness. Optimization techniques such as Gradient Descent, SGD, and Adam efficiently minimize the loss function. Together, they ensure stable and effective training of deep learning models.
+
+---
+
+<LongQuestion>
+### Q3. Differentiate between L1 and L2 regularization techniques. <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+Both L1 and L2 regularization add a penalty term to the loss function to prevent large weights and reduce overfitting.
+
+#### <Highlight color="blue">**L1 Regularization (Lasso)**</Highlight>
+
+$$\mathcal{L}_{L1} = L(w) + \frac{\lambda}{2m} \sum \|w\|$$
+
+- Adds the **absolute value** of weights to the loss function.
+- Produces <Highlight color="green">**sparse solutions**</Highlight> (weights -> 0); performs <Highlight color="green">**implicit feature selection**</Highlight>.
+- Robust to outliers.
+- Useful when many features are irrelevant (high-dimensional data).
+
+#### <Highlight color="blue">**L2 Regularization (Ridge / Weight Decay)**</Highlight>
+
+$$\mathcal{L}_{L2} = L(w) + \lambda \sum w^2$$
+
+Also written as:
+
+$$\widetilde{\mathcal{L}}(w) = \mathcal{L}(w) + \frac{\alpha}{2}\|w\|^2$$
+
+- Adds the **squared value** of weights; shrinks all weights but **never to exactly zero**.
+- Generally preferred in deep learning as **weight decay**.
+- Not robust to outliers due to the squared term.
+
+#### Updated Gradient (L2)
+
+$$\nabla\widetilde{\mathcal{L}}(w) = \nabla\mathcal{L}(w) + \alpha w \qquad \Rightarrow \qquad w_{t+1} = w_t - \eta\,\nabla\mathcal{L}(w_t) - \eta\alpha\, w_t$$
+
+#### Geometric Interpretation
+
+- **L2** constraint region: circle ($w_1^2 + w_2^2 \leq C$) - weights are small but non-zero.
+- **L1** constraint region: diamond ($|w_1| + |w_2| \leq C$) - optimal solution hits a corner, driving some weights to exactly zero.
+
+#### Numerical Example
+
+**Given:** Original Loss $= 10$, $W = [2,\ -3,\ 1]$, $\lambda = 0.1$
+
+**L1:**
+
+$$\sum|w| = 2 + 3 + 1 = 6 \qquad \Rightarrow \qquad \mathcal{L}_{L1} = 10 + 0.1 \times 6 = \boxed{10.6}$$
+
+**L2:**
+
+$$\sum w^2 = 4 + 9 + 1 = 14 \qquad \Rightarrow \qquad \mathcal{L}_{L2} = 10 + 0.1 \times 14 = \boxed{11.4}$$
+
+| Property | L1 Regularization | L2 Regularization |
+|----------|------------------|------------------|
+| **Penalty term** | $\lambda\sum\Vert w\Vert$ | $\lambda\sum w^2$ |
+| **Also known as** | Lasso | Ridge / Weight Decay |
+| **Solution type** | <Highlight color="green">**Sparse**</Highlight> (weights -> 0) | Non-sparse (weights shrink) |
+| **Feature selection** | Yes (implicit) | No |
+| **Robustness** | Robust to outliers | Not robust |
+| **Constraint region** | Diamond-shaped | Circular |
+
+---
+
+<LongQuestion>
+### Q4. Discuss different types of biases in machine learning models. / Explain bias-variance trade off. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="blue" text="Asked in MSE" />
+</LongQuestion>
+
+In Machine Learning, **bias** can refer to errors arising from incorrect assumptions or flawed data collection.
+
+#### Types of Biases (Mnemonic: **SCEMA**)
+
+1. <Highlight color="orange">**S - Selection Bias:**</Highlight> Training data is not representative of the real population (e.g., training only on urban images for a global model).
+2. <Highlight color="orange">**C - Confirmation Bias:**</Highlight> Interpreting results to confirm pre-existing assumptions while ignoring contradictory evidence.
+3. <Highlight color="orange">**E - Exclusion Bias:**</Highlight> Certain groups or data points are unintentionally excluded from the dataset.
+4. <Highlight color="orange">**M - Measurement Bias:**</Highlight> Systematic errors in how data was recorded, labeled, or classified.
+5. <Highlight color="orange">**A - Algorithm Bias:**</Highlight> The model's inductive assumptions (e.g., linearity) cause systematic errors regardless of data size.
+
+#### Impact on Learning (Mnemonic: **PUSS**)
+
+- <Highlight color="red">**P - Poor Generalization:**</Highlight> Model performs well on training data but fails on real-world, diverse inputs.
+- <Highlight color="red">**U - Unfairness:**</Highlight> Discriminatory outcomes for underrepresented groups.
+- <Highlight color="red">**S - Skewed Accuracy:**</Highlight> High training accuracy but total failure in production.
+- <Highlight color="red">**S - Systematic Error:**</Highlight> Unlike variance, bias errors are consistent and not reducible by more training data alone.
+
+The <Highlight color="blue">**Bias-Variance Tradeoff**</Highlight> formalizes this:
+
+$$E\left[(y - \hat{f}(x))^2\right] = \text{Bias}^2 + \text{Variance} + \sigma^2$$
+
+- **High Bias:** Overly simple model -> <Highlight color="red">**Underfitting**</Highlight>.
+- **High Variance:** Overly complex model -> <Highlight color="red">**Overfitting**</Highlight>.
+
+![Bias-Variance Tradeoff #invert-dark](/images/docs/DL/MSE-QB/Q9_BiasVariance.png)
+
+---
+
+<LongQuestion>
+### Q5. Describe regularization techniques in Deep learning (early stopping, dataset augmentation, parameter sharing, injecting noise into input, ensemble methods, dropout,) <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**Regularization**</Highlight> is a set of techniques to prevent a model from <Highlight color="red">**overfitting**</Highlight> - i.e., learning the training data's noise rather than the underlying pattern.
+
+#### Why It's Important
+
+- Deep networks have millions of parameters and can perfectly fit training data, including noise.
+- Without regularization, the model generalizes poorly to new data.
+- Regularization keeps weight values controlled, forcing the model to learn simpler, more generalizable patterns.
+
+#### Two Common Methods
+
+**1. <Highlight color="blue">L2 Regularization (Weight Decay)</Highlight>**
+
+$$\widetilde{\mathcal{L}} = \mathcal{L}(w) + \frac{\lambda}{2}\|w\|^2$$
+
+Penalizes large weights by adding the squared sum of weights to the loss. Keeps all features but shrinks their influence.
+
+**2. <Highlight color="blue">Dropout</Highlight>**
+
+During each training iteration, randomly sets a fraction $p$ of neuron outputs to zero:
+$$h' = h \odot m, \quad m_i \sim \text{Bernoulli}(1-p)$$
+
+This prevents neurons from co-adapting and forces the network to learn redundant representations.
+
+---
+
+<LongQuestion>
+### Q6. Explain the working of backpropagation in deep neural networks. Derive the weight update rule using gradient descent. / Describe Forward and Backward Propagation in ANN <QuestionDot color="cyan" text="MSE-QB" />
+</LongQuestion>
+
+Training an ANN involves two main processes: <Highlight color="blue">**Forward Propagation**</Highlight> and <Highlight color="blue">**Backward Propagation**</Highlight>.
+
+#### Forward Propagation
+
+Input $A^{[0]} = X$ is passed through the network layer by layer:
+
+$$Z^{[l]} = W^{[l]} A^{[l-1]} + b^{[l]}, \qquad A^{[l]} = f\!\left(Z^{[l]}\right)$$
+
+Final layer produces prediction $\hat{y} = A^{[L]}$, and loss is computed:
+
+$$\mathcal{L} = \frac{1}{2}(y - \hat{y})^2$$
+
+#### Backward Propagation
+
+Error is propagated backward using the <Highlight color="orange">**chain rule**</Highlight>:
+
+$$\frac{\partial \mathcal{L}}{\partial W} = \frac{\partial \mathcal{L}}{\partial A} \cdot \frac{\partial A}{\partial Z} \cdot \frac{\partial Z}{\partial W}$$
+
+#### Derivation of Weight Update Rule (Gradient Descent)
+
+The goal is to move weights in the direction that **minimizes** the loss:
+
+$$\Delta W = -\alpha \frac{\partial \mathcal{L}}{\partial W}$$
+
+$$W^{[l]} \leftarrow W^{[l]} - \eta \,\frac{\partial \mathcal{L}}{\partial W^{[l]}}, \qquad b^{[l]} \leftarrow b^{[l]} - \eta \,\frac{\partial \mathcal{L}}{\partial b^{[l]}}$$
+
+where $\eta$ is the <Highlight color="orange">**learning rate**</Highlight>.
+
+![Forward and Backward Propagation #invert-dark](/images/docs/DL/MSE-QB/Q6_ForwardBackward.png)
+
+---

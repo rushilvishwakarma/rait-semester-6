@@ -1,0 +1,433 @@
+﻿---
+title: Module 5 & Module 6
+description: Autoencoders (Sparse, Denoising, Contractive), DL Applications (ImageNet, WaveNet, Word2Vec, Face Recognition).
+---
+
+import { Highlight } from '@/components/highlight';
+import { LongQuestion } from '@/components/question';
+import { QuestionDot } from '@/components/question-dot';
+
+<div className="mb-6 rounded-xl border border-fd-border/60 bg-fd-muted/20 p-4">
+	<h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-fd-muted-foreground">References</h3>
+	<div className="space-y-3">
+		<div className="flex items-center gap-2">
+			<QuestionDot color="yellow" text="IA1-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (IA1)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="cyan" text="MSE-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (MSE)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="purple" text="IA2-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (IA2)</span>
+		</div>
+		<div className="flex items-center gap-2">
+			<QuestionDot color="pink" text="ESE-QB" />
+			<span className="text-sm font-medium text-fd-muted-foreground">Original Question Bank (ESE)</span>
+		</div>
+	</div>
+</div>
+
+# Module 5 â€” Autoencoders
+
+---
+
+<LongQuestion>
+### Q1 / Q6. What is the purpose of an Autoencoder? What are its key components? / Explain the function of autoencoder using encoder and decoder.
+</LongQuestion>
+
+An <Highlight color="blue">**Autoencoder**</Highlight> is an unsupervised neural network trained to **reconstruct its input** at the output layer. Its purpose is to learn a compact, efficient internal representation (encoding) of the data.
+
+**Key components:**
+
+```
+Input x â†’ [Encoder] â†’ Latent z â†’ [Decoder] â†’ Reconstruction xÌ‚
+```
+
+**1. <Highlight color="green">Encoder</Highlight>:** Maps high-dimensional input $x$ to a low-dimensional latent space $z$:
+
+$$z = f_\theta(x) = \sigma(W_e x + b_e)$$
+
+**2. <Highlight color="orange">Latent Space (Bottleneck)</Highlight>:** Compressed representation $z$ â€” forces the network to learn the most important features.
+
+**3. <Highlight color="blue">Decoder</Highlight>:** Reconstructs the input from the latent representation:
+
+$$\hat{x} = g_\phi(z) = \sigma(W_d z + b_d)$$
+
+**Training objective** â€” minimize reconstruction loss:
+
+$$\mathcal{L} = \|x - \hat{x}\|^2 \quad \text{(MSE)}$$
+
+**Applications:** Dimensionality reduction, denoising, anomaly detection, generative modeling.
+
+---
+
+<LongQuestion>
+### Q2 / Q3. Describe the characteristics and limitations of linear autoencoders. / What transformation does a linear autoencoder perform?
+</LongQuestion>
+
+A <Highlight color="blue">**linear autoencoder**</Highlight> uses only linear activation functions (no non-linearity) throughout.
+
+**Transformation performed:**
+
+$$z = W_e x, \qquad \hat{x} = W_d z = W_d W_e x$$
+
+The overall mapping is: $\hat{x} = (W_d W_e)\,x$ â€” a **linear transformation** of $x$.
+
+**Characteristics:**
+- Encoder and decoder are purely linear layers.
+- The bottleneck performs dimensionality reduction via a linear projection.
+- It is mathematically equivalent to **PCA (Principal Component Analysis)** â€” the subspace spanned by the encoder weights converges to the principal components.
+
+**Limitations:**
+- <Highlight color="red">**Cannot capture non-linear structure**</Highlight> in data â€” fails on manifolds and complex distributions.
+- <Highlight color="red">**Limited representational power:**</Highlight> Composed linear layers are still just a single linear map.
+- <Highlight color="red">**Sensitive to outliers:**</Highlight> MSE loss amplifies large deviations.
+- For non-linear data, non-linear autoencoders (with ReLU/tanh) are required.
+
+---
+
+<LongQuestion>
+### Q4 / Q12. What is an undercomplete autoencoder and why is it used? / Compare undercomplete and overcomplete autoencoders.
+</LongQuestion>
+
+| Property | Undercomplete | Overcomplete |
+|----------|--------------|--------------|
+| **Latent dimension** | $\dim(z) < \dim(x)$ | $\dim(z) \geq \dim(x)$ |
+| **Constraint** | Bottleneck forces compression | No compression; needs regularization |
+| **Goal** | Learn the most important features | Learn a richer, over-parameterized representation |
+| **Risk** | Loses fine-grained information | Can learn identity mapping (trivial solution) |
+| **Regularization needed** | Not necessary | Required (L1 sparsity, denoising, dropout) |
+| **Use case** | Dimensionality reduction, compression | Sparse coding, feature learning, denoising |
+
+**Undercomplete autoencoder:** The hidden layer is smaller than the input â€” compression forces the encoder to capture only the most salient features.
+
+$$\dim(z) < \dim(x) \Rightarrow \text{bottleneck constraint}$$
+
+Without regularization, an overcomplete autoencoder can copy the input directly to the output, learning nothing useful.
+
+---
+
+<LongQuestion>
+### Q5 / Q15 / Q7. Describe the denoising autoencoder. / Compare denoising and sparse autoencoders. / What is the benefit of using sparse autoencoders?
+</LongQuestion>
+
+**Denoising Autoencoder:**
+
+A <Highlight color="blue">**denoising autoencoder (DAE)**</Highlight> is trained to reconstruct the **clean input** $x$ from a **corrupted version** $\tilde{x}$:
+
+$$\tilde{x} = x + \epsilon, \quad \epsilon \sim \mathcal{N}(0, \sigma^2)$$
+
+$$\mathcal{L}_{DAE} = \|x - \hat{x}\|^2 \quad \text{where } \hat{x} = g_\phi(f_\theta(\tilde{x}))$$
+
+The model learns robust features that are invariant to noise.
+
+**Sparse Autoencoder:**
+
+A <Highlight color="blue">**sparse autoencoder**</Highlight> adds a sparsity penalty on the latent representation $z$ so that only a few neurons are active at once:
+
+$$\mathcal{L}_{sparse} = \|x - \hat{x}\|^2 + \lambda \|z\|_1$$
+
+**Benefit of sparsity:** Only a small number of hidden units activate per input â†’ learns **disentangled, interpretable features** (similar to how the brain encodes information).
+
+**Comparison:**
+
+| Property | Denoising AE | Sparse AE |
+|----------|-------------|-----------|
+| **Goal** | Robustness to corruption | Sparse, interpretable features |
+| **How regularized** | Corrupted input during training | L1 penalty on latent $z$ |
+| **Overcomplete?** | Can be | Usually overcomplete |
+| **Key benefit** | Learns stable features | Feature selection, interpretability |
+
+---
+
+<LongQuestion>
+### Q8 / Q9 / Q13 / Q14. Why is regularization in autoencoders required? Explain two common regularization techniques (L1, L2, Dropout).
+</LongQuestion>
+
+**Why regularization is required:**
+
+Without regularization (especially in overcomplete autoencoders), the network learns the **identity function** â€” simply copying input to output without learning any meaningful representation. Regularization prevents this by constraining the latent space.
+
+**1. <Highlight color="green">L1 Regularization (Sparse Autoencoder)</Highlight>**
+
+$$\mathcal{L} = \|x - \hat{x}\|^2 + \lambda \sum_j |z_j|$$
+
+- Encourages most latent units to be zero â†’ **sparse** representations.
+- Promotes feature selection: only important features activate.
+- Useful for learning parts-based or disentangled representations.
+
+**2. <Highlight color="orange">L2 Regularization</Highlight>**
+
+$$\mathcal{L} = \|x - \hat{x}\|^2 + \lambda \sum_j z_j^2$$
+
+- Penalizes large activations in the latent space.
+- Spreads information across all latent units rather than concentrating it.
+- Prevents any single latent dimension from dominating.
+
+**3. <Highlight color="blue">Dropout</Highlight>**
+
+Randomly zeros out a fraction $p$ of latent units during training:
+
+$$z' = z \odot m, \quad m_i \sim \text{Bernoulli}(1-p)$$
+
+- Forces the decoder to reconstruct from incomplete representations.
+- Improves robustness and generalization.
+- Acts similarly to denoising in the latent space.
+
+---
+
+<LongQuestion>
+### Q10 / Q11. Explain the training process of an autoencoder, including the loss function. / How do autoencoders perform dimensionality reduction?
+</LongQuestion>
+
+**Training Process:**
+
+1. **Forward pass:** Input $x$ is passed through encoder â†’ latent $z$ â†’ decoder â†’ reconstruction $\hat{x}$.
+
+2. **Loss computation (MSE):**
+
+$$\mathcal{L} = \frac{1}{n}\sum_{i=1}^{n}\|x^{(i)} - \hat{x}^{(i)}\|^2$$
+
+3. **Backpropagation:** Gradients of $\mathcal{L}$ w.r.t. all weights ($W_e, W_d, b_e, b_d$) are computed.
+
+4. **Weight update:**
+
+$$W \leftarrow W - \eta\,\frac{\partial \mathcal{L}}{\partial W}$$
+
+5. **Repeat** for multiple epochs until reconstruction loss converges.
+
+**Note:** No labels are required â€” autoencoders are **self-supervised** (the target is the input itself).
+
+**Dimensionality Reduction:**
+
+The encoder maps $x \in \mathbb{R}^d$ to $z \in \mathbb{R}^k$ where $k \ll d$ (undercomplete):
+
+$$z = f_\theta(x): \mathbb{R}^d \rightarrow \mathbb{R}^k$$
+
+- The bottleneck forces the network to retain only the **most informative features**.
+- $z$ can be used as a low-dimensional feature vector (similar to PCA but non-linear).
+- The decoder verifies that $z$ captures enough information by reconstructing $x$.
+
+**Advantage over PCA:** Autoencoders can learn **non-linear** dimensionality reductions, capturing complex manifold structures that PCA misses.
+
+---
+
+<LongQuestion>
+### Q16. Given input $x = [2, 4, 6]$ and encoder matrix $W_e = \begin{bmatrix}0.5 & 0 \\ 0 & 0.2 \\ 0 & 0\end{bmatrix}$, calculate the latent vector.
+</LongQuestion>
+
+**Given:**
+
+$$x = [2,\; 4,\; 6], \qquad W_e = \begin{bmatrix}0.5 & 0 \\ 0 & 0.2 \\ 0 & 0\end{bmatrix}$$
+
+**Formula (linear encoder):**
+
+$$z = x\, W_e$$
+
+**Substitution:**
+
+$$[2\;\; 4\;\; 6]\begin{bmatrix}0.5 & 0 \\ 0 & 0.2 \\ 0 & 0\end{bmatrix} = [z_1,\; z_2]$$
+
+$$z_1 = 2(0.5) + 4(0) + 6(0) = 1.0$$
+
+$$z_2 = 2(0) + 4(0.2) + 6(0) = 0.8$$
+
+**Final Answer:**
+
+$$\boxed{z = [1.0,\; 0.8]}$$
+
+The input is compressed from 3 dimensions to 2 â€” performing linear dimensionality reduction.
+
+---
+
+# Module 6
+
+<LongQuestion>
+### Q1. Explain the role of deep learning in ImageNet detection and classification. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
+</LongQuestion>
+
+ImageNet is a large dataset of millions of labeled images. Deep learning models trained on it achieve very high accuracy in both classification and detection.
+
+1. <Highlight color="blue">**Classification:**</Highlight> CNNs like AlexNet, VGG, and ResNet achieved breakthrough accuracy on ImageNet's 1000-class challenge.
+2. <Highlight color="green">**Feature learning:**</Highlight> CNNs automatically learn useful features â€” early layers detect edges, deeper layers detect objects and scenes.
+3. <Highlight color="orange">**Transfer learning:**</Highlight> Models pretrained on ImageNet are reused for other tasks (medical imaging, remote sensing) with minimal retraining.
+4. <Highlight color="cyan">**Object detection:**</Highlight> Models like R-CNN, YOLO, and SSD use ImageNet-pretrained backbones to detect and locate objects in images.
+5. <Highlight color="green">**Robustness:**</Highlight> Training on millions of diverse images makes models handle variations in lighting, angle, and pose.
+
+---
+
+<LongQuestion>
+### Q2. What is WaveNet? How is it used for audio generation? <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**WaveNet**</Highlight> is a deep learning model that generates raw audio waveforms directly. It was introduced by DeepMind and is mainly used to produce natural-sounding speech.
+
+Basic working (easy explanation):
+
+1. WaveNet does not generate full audio at once. It predicts sound <Highlight color="green">**one sample at a time**</Highlight>.
+2. It uses <Highlight color="orange">**causal convolutions**</Highlight>, so the current output depends only on past samples (not future samples).
+3. It uses <Highlight color="orange">**dilated convolutions**</Highlight> to capture longer context in speech without making the network very deep.
+4. This step-by-step prediction continues until a complete waveform is formed.
+5. During training, it learns pronunciation, pitch, and rhythm patterns from real audio data.
+
+Applications:
+
+- High-quality text-to-speech (assistants, audiobooks).
+- Speech vocoders in modern TTS systems.
+- Neural music and general audio generation.
+
+In short, WaveNet is important because it produces clearer and more human-like audio than many older approaches.
+
+![WaveNet causal dilated convolutions #invert-dark](/images/docs/DL/IA2-QB/Q11_WaveNet_Causal_Dilated.png)
+
+---
+
+<LongQuestion>
+### Q3. Describe the concept of Word2Vec in Natural Language Processing. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**Word2Vec**</Highlight> converts words into numeric vectors so that words with similar meanings end up close to each other in vector space.
+
+For example: king âˆ’ man + woman â‰ˆ queen. This shows the model understands word relationships without being explicitly taught.
+
+#### Two Architectures
+
+1. <Highlight color="green">**CBOW (Continuous Bag of Words):**</Highlight> Predicts a center word from its surrounding words.
+2. <Highlight color="green">**Skip-gram:**</Highlight> Predicts surrounding words given a center word. Works better for rare words.
+
+#### Efficiency Tricks
+
+- <Highlight color="orange">**Negative Sampling:**</Highlight> Instead of updating all words, only update a small random set of incorrect words per step.
+- <Highlight color="orange">**Hierarchical Softmax:**</Highlight> Uses a tree structure to speed up probability calculation.
+
+#### Applications
+
+- Text classification and sentiment analysis
+- Named entity recognition
+- Pretrained embeddings for NLP models
+
+![Word2Vec skip-gram concept #invert-dark](/images/docs/DL/IA2-QB/Q12_Word2Vec_SkipGram.png)
+
+---
+
+<LongQuestion>
+### Q4. How is deep learning applied in face recognition systems? <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+Deep learning-based face recognition converts a face image into a numerical identity representation called an <Highlight color="blue">**embedding**</Highlight>, then compares embeddings to recognize a person.
+
+#### Standard Pipeline
+
+1. <Highlight color="green">**Face Detection:**</Highlight> Detect face region from full image/video frame.
+2. <Highlight color="green">**Face Alignment:**</Highlight> Normalize rotation/scale using landmarks (eyes, nose, mouth).
+3. <Highlight color="green">**Feature Extraction:**</Highlight> CNN/Transformer model (for example FaceNet, ArcFace-style backbones) produces a compact embedding vector.
+4. <Highlight color="green">**Similarity Matching:**</Highlight> Compare with stored embeddings using cosine similarity or Euclidean distance.
+5. <Highlight color="green">**Decision:**</Highlight>
+   - Verification (1:1): "Is this claimed identity correct?"
+   - Identification (1:N): "Who is this person in database?"
+
+#### Training Logic
+
+Models are trained so embeddings of the same person are close and different persons are far apart using:
+
+1. <Highlight color="orange">Contrastive Loss</Highlight>
+2. <Highlight color="orange">Triplet Loss</Highlight>
+3. <Highlight color="orange">Margin-based losses (ArcFace/CosFace family)</Highlight>
+
+#### Real Applications
+
+1. Phone unlock and attendance systems
+2. Access control and surveillance analytics
+3. Photo clustering/tagging in media apps
+
+Thus, deep learning enables robust face recognition under variations in pose, lighting, and expression by learning discriminative embeddings.
+
+---
+
+<LongQuestion>
+### Q5. Define semantic segmentation with an example. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**Semantic segmentation**</Highlight> means <Highlight color="green">**classifying every single pixel in an image into a category**</Highlight> (e.g. road, car, person, sky).
+
+The output is a colored mask the same size as the input image, where each pixel is colored based on its class.
+
+#### Key Points
+
+1. Works at pixel level â€” much more detailed than classification.
+2. All objects of the same class get the same label (no distinction between individuals).
+3. Uses encoder-decoder networks like FCN, U-Net, and DeepLab.
+4. Measured using IoU / mIoU metrics.
+
+#### Semantic vs Instance Segmentation
+
+- **Semantic:** Two cars â†’ both labeled "car" (same color).
+- **Instance:** Two cars â†’ labeled "car-1" and "car-2" separately.
+
+#### Example
+
+In a self-driving car, semantic segmentation labels every pixel as road, pedestrian, vehicle, or sky. This helps the car understand its surroundings and plan a safe path.
+
+---
+
+<LongQuestion>
+### Q6. What is automated image captioning? Explain its basic working. / What is Automated Image Captioning? Explain how Deep Learning is used in it. <QuestionDot color="purple" text="IA2-QB" />
+</LongQuestion>
+
+<Highlight color="blue">**Automated image captioning**</Highlight> is the task of generating a meaningful natural-language sentence for an input image. It combines <Highlight color="green">computer vision</Highlight> and <Highlight color="green">sequence generation</Highlight>.
+
+#### How Deep Learning Is Used
+
+1. <Highlight color="orange">**Visual Encoder**</Highlight> (CNN/ViT): extracts semantic visual features such as objects, attributes, and scene context.
+2. <Highlight color="orange">**Language Decoder**</Highlight> (LSTM/GRU/Transformer): generates words one by one based on encoded image features.
+3. <Highlight color="orange">**Attention Mechanism**</Highlight>: lets the decoder focus on relevant regions while predicting each next word.
+4. <Highlight color="orange">**Sequence Modeling**</Highlight>: generation continues until an end token is produced.
+
+#### Training and Inference
+
+During training, the model learns to maximize likelihood of the reference caption token-by-token (cross-entropy objective).
+
+During inference, decoding can be done using:
+
+1. Greedy decoding
+2. Beam search (often yields better captions)
+
+#### Example and Applications
+
+Example caption: "A person riding a bike on a road."
+
+Applications include assistive technology for visually impaired users, automatic media indexing, and smart photo search systems.
+
+![Image captioning pipeline #invert-dark](/images/docs/DL/IA2-QB/Q15_Image_Captioning_Pipeline.png)
+
+---
+
+<LongQuestion>
+### Q7. Differentiate between image classification and object detection. <QuestionDot color="purple" text="IA2-QB" /> <QuestionDot color="purple" text="Asked in IA2" />
+</LongQuestion>
+
+- <Highlight color="blue">**Image classification:**</Highlight> Tells *what* is in the image (one label for the whole image).
+- <Highlight color="blue">**Object detection:**</Highlight> Tells *what* objects are in the image *and where* each one is (bounding box + label).
+
+| Basis | Image Classification | Object Detection |
+|------|----------------------|------------------|
+| Task | Label the whole image | Label + locate each object |
+| Output | Class label + probability | Bounding box + label + confidence |
+| Localization | Not needed | Required |
+| Training labels | Image-level | Box-level (x, y, width, height) |
+| Metrics | Accuracy, Top-1/5 | mAP, IoU |
+| Models | ResNet, VGG, ViT | YOLO, Faster R-CNN, SSD |
+| Complexity | Simpler | More complex |
+
+#### Example
+
+For a road image with 2 cars and 1 pedestrian:
+- **Classification output:** "Road scene with vehicles"
+- **Detection output:** Draws a box around each car and the pedestrian with labels and confidence scores.
+
+**Conclusion:** Use classification when you only need to know what's in the image. Use detection when you need to know where each object is.
+
+---
+
