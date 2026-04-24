@@ -155,20 +155,14 @@ g(\mu) = \log\frac{\mu}{1-\mu}
 $$
 
 
----
-
 
 ### Comparison
 
-
-| Aspect        | Logistic Regression             | Probit Regression         |
-| ------------- | ------------------------------- | ------------------------- |
-| Link Function | Logit ($\log\frac{\mu}{1-\mu}$) | Probit ($\Phi^{-1}(\mu)$) |
-| Function      | Sigmoid                         | Normal CDF                |
-| Assumption    | Logistic noise                  | Gaussian (normal) noise   |
-
-
----
+| Aspect        | Probit Regression         | Logistic Regression             |
+| ------------- | ------------------------- | ------------------------------- |
+| Link Function | Probit ($\Phi^{-1}(\mu)$) | Logit ($\log\frac{\mu}{1-\mu}$) |
+| Function      | Normal CDF                | Sigmoid                         |
+| Assumption    | Gaussian (normal) noise   | Logistic noise                  |
 
 
 ### Practical Scenarios
@@ -176,17 +170,6 @@ $$
 
 * **Logistic Regression**: Used for general binary classification problems due to simplicity
 * **Probit Regression**: Used when the underlying latent variable is assumed to be normally distributed
-
-
----
-
-
-### Conclusion
-
-
-Both give similar results. Logistic is preferred for general use, while probit is preferred when a normality assumption is appropriate.
-
-
 
 
 ---
@@ -278,15 +261,23 @@ $$
 **How It Facilitates Inference:**
 
 
-- If a patient has Fever and Cough, we can compute $P(Y=1 \mid X_1=1, X_2=1)$ using Bayes' theorem. [You are trying to estimate the probability that they have flu.]
+- If a patient has Fever and Cough, we can compute $P(Y=1 \mid X_1=1, X_2=1)$ using Bayes' theorem.
 - The graph structure tells us **which variables are relevant** — reducing computation.
-- Instead of $2^4 - 1 = 15$ parameters for the full joint, this needs only **7** parameters.
+
+$$
+\text{Full Joint: } 2^4 - 1 = 15 \text{ parameters}
+$$
+
+$$
+\text{DAG (Bayesian Network) Factorization: } 7 \text{ parameters}
+$$
+
 
 
 **Markov Property:**
 
 
-A node is **conditionally independent of all non-descendants given its parents**. This enables the compact factorization above.
+A node is **conditionally independent of all non-descendants given its parents**.
 
 
 ---
@@ -501,7 +492,9 @@ $$
 
 ### Q2. What is a Gaussian Mixture Model (GMM)? Write the probability density function for a GMM with K components. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="red" text="Important" />
 
-A **Gaussian Mixture Model (GMM)** is a probabilistic model that represents data as a **weighted sum of multiple Gaussian distributions**. It is used for **soft clustering**, where each data point belongs to clusters with certain probabilities.
+A **Gaussian Mixture Model (GMM)** represents data as a **combination of multiple Gaussian (normal) distributions**.
+It is used for **soft clustering**, where each data point **belongs to different clusters with certain probabilities** (not just one cluster).
+
 
 The probability density function (PDF) of a GMM with $K$ components is:
 
@@ -746,9 +739,6 @@ $$
 
 
 ### Q3. List and briefly describe the three fundamental problems that HMMs address, along with the standard algorithms used to solve each. <QuestionDot color="red" text="Important" />
-
-
-### Q3. Three Fundamental Problems in HMM
 
 **1. Evaluation (Likelihood)**
 
