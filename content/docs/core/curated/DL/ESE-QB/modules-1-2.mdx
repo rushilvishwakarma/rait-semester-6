@@ -209,8 +209,7 @@ Output range: $(-1, 1)$. Used in hidden layers of RNNs.
 ### Q11. Explain the role of backpropagation in deep neural networks. <QuestionDot color="cyan" text="MSE-QB" />
 </LongQuestion>
 
-<Highlight color="blue">**Backpropagation**</Highlight> is the algorithm used to compute gradients of the loss function with respect to each weight in the network, enabling weight updates via gradient descent.
-
+<Highlight color="blue">**Backpropagation**</Highlight> is the algorithm used to compute gradients of the loss function for each weight, which is then used to update the weights and reduce the error.
 **Role (step by step):**
 
 1. **Forward pass:** Compute predictions $\hat{y}$ and calculate the loss $\mathcal{L}$.
@@ -482,10 +481,6 @@ $$\mathcal{L}_{L1} = L(w) + \frac{\lambda}{2m} \sum \|w\|$$
 
 $$\mathcal{L}_{L2} = L(w) + \lambda \sum w^2$$
 
-Also written as:
-
-$$\widetilde{\mathcal{L}}(w) = \mathcal{L}(w) + \frac{\alpha}{2}\|w\|^2$$
-
 - Adds the **squared value** of weights; shrinks all weights but **never to exactly zero**.
 - Generally preferred in deep learning as **weight decay**.
 - Not robust to outliers due to the squared term.
@@ -496,8 +491,8 @@ $$\nabla\widetilde{\mathcal{L}}(w) = \nabla\mathcal{L}(w) + \alpha w \qquad \Rig
 
 #### Geometric Interpretation
 
-- **L2** constraint region: circle ($w_1^2 + w_2^2 \leq C$) - weights are small but non-zero.
-- **L1** constraint region: diamond ($|w_1| + |w_2| \leq C$) - optimal solution hits a corner, driving some weights to exactly zero.
+- L2 constraint region: weights are small but non-zero to avoid overfitting.
+- L1 constraint region: optimal solution occurs at a corner, so some weights become exactly zero.
 
 | Property | L1 Regularization | L2 Regularization |
 |----------|------------------|------------------|
