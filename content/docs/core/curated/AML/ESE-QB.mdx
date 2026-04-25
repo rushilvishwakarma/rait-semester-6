@@ -11,7 +11,7 @@ import { LongQuestion } from '@/components/question';
 # Module 1 — Generalized Linear Models & Exponential Family
 
 
-### Q1. <Highlight color="yellow">Explain</Highlight> the <Highlight color="yellow">three core components</Highlight> of a <Highlight color="yellow">GLM</Highlight>—<Highlight color="yellow">random component</Highlight>, <Highlight color="yellow">systematic component</Highlight>, and <Highlight color="yellow">link function</Highlight>—and <Highlight color="yellow">describe how they interact</Highlight>. / <Highlight color="yellow">Describe</Highlight> the structure of a <Highlight color="yellow">Generalized Linear Model (GLM)</Highlight>. <Highlight color="yellow">Explain</Highlight> the roles of the <Highlight color="yellow">random component</Highlight>, <Highlight color="yellow">systematic component</Highlight>, and <Highlight color="yellow">link function</Highlight>. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
+### Q1. Explain the <Highlight color="yellow">three GLM components</Highlight> (random, systematic, link) and <Highlight color="yellow">how they interact</Highlight>. / Describe the <Highlight color="yellow">GLM structure</Highlight> and its component roles. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
 
 
 A **Generalized Linear Model (GLM)** extends linear regression so that the response variable can follow distributions **other than Normal** (e.g., binary, count data).
@@ -74,7 +74,7 @@ $$
 ---
 
 
-### Q2. <Highlight color="yellow">What is the role of the canonical link function</Highlight> in <Highlight color="yellow">GLMs</Highlight>? <Highlight color="yellow">Explain with an example</Highlight>. / What are <Highlight color="yellow">link functions</Highlight> in <Highlight color="yellow">GLMs</Highlight>? <Highlight color="yellow">Why are different link functions used</Highlight>? / <Highlight color="yellow">Explain link functions</Highlight> used in <Highlight color="yellow">Generalized Linear Models (GLMs)</Highlight>. <Highlight color="yellow">Give one example distribution</Highlight> for its associated link function. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="red" text="Important" />
+### Q2. Role of the <Highlight color="yellow">canonical link function</Highlight> in <Highlight color="yellow">GLMs</Highlight>? / What are <Highlight color="yellow">link functions</Highlight> and <Highlight color="yellow">why</Highlight> are they used? / Explain link functions in GLMs with an <Highlight color="yellow">example distribution</Highlight>. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="red" text="Important" />
 
 
 In a **Generalized Linear Model (GLM)**, a <Highlight color="blue">**link function**</Highlight> establishes a relationship between the **expected value of the response variable** and the **linear predictor**.
@@ -115,7 +115,7 @@ Thus, link functions provide <Highlight>**flexibility**</Highlight>, ensure vali
 ---
 
 
-### Q3. <Highlight color="yellow">Explain Probit regression</Highlight> and <Highlight color="yellow">provide a conceptual comparison</Highlight> with <Highlight color="yellow">Logistic regression</Highlight>. / <Highlight color="yellow">Compare Probit and Logistic regression</Highlight> in terms of their <Highlight color="yellow">link functions</Highlight>, <Highlight color="yellow">assumptions</Highlight>, and <Highlight color="yellow">practical scenarios</Highlight> where one is preferred over the other. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="red" text="Important" />
+### Q3. <Highlight color="yellow">Explain Probit regression</Highlight> and <Highlight color="yellow">compare with Logistic regression</Highlight>. / Compare Probit and Logistic regression: link functions, assumptions, and scenarios. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="red" text="Important" />
 
 
 **Probit regression** is a GLM used for binary classification. It models probability using the **standard normal CDF**:
@@ -175,7 +175,7 @@ $$
 ---
 
 
-### Q4. <Highlight color="yellow">What is multitask learning</Highlight>? <Highlight color="yellow">How does parameter sharing</Highlight> across related tasks <Highlight color="yellow">enhance generalization</Highlight>, particularly when certain tasks have <Highlight color="yellow">scarce training data</Highlight>? <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" />
+### Q4. What is <Highlight color="yellow">multitask learning</Highlight>? How does <Highlight color="yellow">parameter sharing</Highlight> enhance generalization with <Highlight color="yellow">scarce data</Highlight>? <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" />
 
 
 **Multitask Learning (MTL)** trains multiple related tasks **together** in a single model instead of building separate models for each task.
@@ -216,7 +216,7 @@ MTL is more data-efficient and produces more robust models than single-task lear
 # Module 2 — Directed Graphical Models
 
 
-### Q1. <Highlight color="yellow">What are Directed Graphical Models (Bayesian Networks)</Highlight>? Using a suitable real-world example, <Highlight color="yellow">explain how they represent causal relationships</Highlight> and <Highlight color="yellow">facilitate probabilistic inference</Highlight>. / <Highlight color="yellow">Define Directed Graphical Models (DGMs)</Highlight>. <Highlight color="yellow">Explain how Bayesian Networks represent joint probability distributions</Highlight>. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
+### Q1. What are <Highlight color="yellow">Directed Graphical Models (Bayesian Networks)</Highlight>? Explain <Highlight color="yellow">causal relationships</Highlight> and <Highlight color="yellow">probabilistic inference</Highlight>. / Define DGMs and how they represent joint probability. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
 
 
 **Directed Graphical Models (DGMs)** are probabilistic models that use a **directed graph** to show dependencies between random variables. Each **node** = a variable, each **arrow** = a dependency.
@@ -283,7 +283,7 @@ A node is **conditionally independent of all non-descendants given its parents**
 ---
 
 
-### Q2. <Highlight color="yellow">How do Bayesian Networks use conditional independence properties</Highlight>? <Highlight color="yellow">Explain two such properties</Highlight> with examples. / <Highlight color="yellow">Explain the concept of conditional independence</Highlight> in <Highlight color="yellow">Directed Graphical Models</Highlight> with the help of graphical intuition. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
+### Q2. How do Bayesian Networks use <Highlight color="yellow">conditional independence</Highlight>? Explain <Highlight color="yellow">two properties</Highlight> with examples. / Explain conditional independence in DGMs with <Highlight color="yellow">graphical intuition</Highlight>. <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
 
 
 **Conditional independence** means two variables don't affect each other once we know a third variable:
@@ -429,7 +429,7 @@ $$
 ---
 
 
-### Q5. <Highlight color="yellow">What is a Directed Gaussian Graphical Model (DGGM)</Highlight>? <Highlight color="yellow">Explain the assumption of Gaussian distribution</Highlight> in DGGM.
+### Q5. What is a <Highlight color="yellow">Directed Gaussian Graphical Model (DGGM)</Highlight>? Explain the <Highlight color="yellow">Gaussian distribution assumption</Highlight>.
 
 
 A **Directed Gaussian Graphical Model (DGGM)** is a Bayesian Network (DGM) where **all random variables are continuous and follow a Gaussian distribution**. The conditional probability distributions (CPDs) are **linear Gaussian**, meaning each variable is a linear function of its parents plus Gaussian noise.
@@ -456,7 +456,7 @@ When all CPDs are Gaussian, their product gives a **single joint multivariate Ga
 # Module 3 — Mixture Models & EM Algorithm
 
 
-### Q1. <Highlight color="yellow">Derive the Maximum Likelihood Estimates</Highlight> for the <Highlight color="yellow">mean $\mu$</Highlight> and <Highlight color="yellow">variance $\sigma^2$</Highlight> of a <Highlight color="yellow">univariate Gaussian distribution</Highlight> given i.i.d. samples. <QuestionDot color="red" text="Important" />
+### Q1. <Highlight color="yellow">Derive MLE</Highlight> for <Highlight color="yellow">mean and variance</Highlight> of a univariate <Highlight color="yellow">Gaussian distribution</Highlight>. <QuestionDot color="red" text="Important" />
 
 Given $y_1, \dots, y_N \sim \mathcal{N}(\mu, \sigma^2)$.
 
@@ -490,7 +490,7 @@ $$
 ---
 
 
-### Q2. <Highlight color="yellow">What is a Gaussian Mixture Model (GMM)</Highlight>? <Highlight color="yellow">Write the probability density function</Highlight> for a GMM with <Highlight color="yellow">K components</Highlight>. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="red" text="Important" />
+### Q2. What is a <Highlight color="yellow">Gaussian Mixture Model (GMM)</Highlight>? Write its <Highlight color="yellow">PDF with K components</Highlight>. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="red" text="Important" />
 
 A **Gaussian Mixture Model (GMM)** represents data as a **combination of multiple Gaussian (normal) distributions**.
 It is used for **soft clustering**, where each data point **belongs to different clusters with certain probabilities** (not just one cluster).
@@ -515,7 +515,7 @@ A latent variable $z$ indicates which component generates the data point.
 ---
 
 
-### Q3. <Highlight color="yellow">Outline the two principal steps</Highlight> of the <Highlight color="yellow">EM algorithm</Highlight>. <Highlight color="yellow">Why are these steps crucial</Highlight> for <Highlight color="yellow">parameter estimation</Highlight> with latent variables? / <Highlight color="yellow">Describe the two main steps</Highlight> in parameter estimation for <Highlight color="yellow">mixture models</Highlight>. <Highlight color="yellow">Explain what makes this estimation challenging</Highlight> when the component labels are unknown. / Q5. <Highlight color="yellow">Explain the E-step and M-step</Highlight> of the <Highlight color="yellow">EM algorithm</Highlight> in detail. <Highlight color="yellow">Why is the algorithm guaranteed to converge</Highlight> to a local optimum? <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
+### Q3. Steps of the <Highlight color="yellow">EM algorithm</Highlight> and why they are crucial for <Highlight color="yellow">parameter estimation</Highlight>. / Explain <Highlight color="yellow">E-step and M-step</Highlight> and why it <Highlight color="yellow">guarantees convergence</Highlight>. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" /> <QuestionDot color="red" text="Important" />
 
 The **Expectation-Maximization (EM) Algorithm** is an iterative method for maximum likelihood estimation when data has **latent (hidden) variables**.
 
@@ -565,7 +565,7 @@ $$
 ---
 
 
-### Q4. <Highlight color="yellow">Write the mathematical expression</Highlight> for a <Highlight color="yellow">mixture model with K components</Highlight>. For customer purchase amounts showing two distinct patterns (<Highlight color="yellow">small vs large</Highlight>), <Highlight color="yellow">analyze the suitability</Highlight> of <Highlight color="yellow">Gaussian, Poisson, and Binomial distributions</Highlight>. <Highlight color="yellow">Justify your choice</Highlight>. / <Highlight color="yellow">Define a mixture model</Highlight>. You are given a dataset of <Highlight color="yellow">customer purchase amounts</Highlight>. Some customers make small purchases, while others make large purchases. <Highlight color="yellow">Apply the GLM framework</Highlight> to decide which distribution (<Highlight color="yellow">Gaussian, Poisson, or Binomial</Highlight>) would be appropriate for modeling this data. <Highlight color="yellow">Justify your choice</Highlight>. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" />
+### Q4. Mathematical expression for <Highlight color="yellow">mixture model</Highlight> (K components). For <Highlight color="yellow">customer purchase amounts</Highlight>, analyze suitability of <Highlight color="yellow">Gaussian, Poisson, or Binomial</Highlight>. <QuestionDot color="cyan" text="MSE-QB" /> <QuestionDot color="purple" text="Asked in MSE" />
 
 
 **Mixture Model with K Components:**
@@ -613,7 +613,7 @@ $$
 ---
 
 
-### Q6. <Highlight color="yellow">Compare GLMs with Generalized Linear Mixed Models (GLMMs)</Highlight>. <Highlight color="yellow">Highlight key differences</Highlight> in <Highlight color="yellow">model structure</Highlight>, <Highlight color="yellow">handling of random effects</Highlight>, and <Highlight color="yellow">appropriate application scenarios</Highlight>. <QuestionDot color="red" text="Important" />
+### Q6. <Highlight color="yellow">Compare GLMs and GLMMs</Highlight>: model structure, <Highlight color="yellow">random effects</Highlight>, and application scenarios. <QuestionDot color="red" text="Important" />
 
 **Generalized Linear Models (GLMs)** model the expected value of $Y$ using only fixed predictors: $g(E[Y|X]) = X\beta$.
 
@@ -639,7 +639,7 @@ $$
 # Module 4 — Markov Chains & Hidden Markov Models
 
 
-### Q1. <Highlight color="yellow">State the Markov property</Highlight> for a <Highlight color="yellow">first-order Markov chain</Highlight>. For a <Highlight color="yellow">second-order Markov chain</Highlight>, <Highlight color="yellow">write the expression for computing the probability of a sequence</Highlight> and <Highlight color="yellow">draw a diagram illustrating the dependencies</Highlight>. <QuestionDot color="red" text="Important" />
+### Q1. <Highlight color="yellow">Markov property</Highlight> (1st order). For <Highlight color="yellow">2nd order</Highlight>, write probability expression and draw dependency <Highlight color="yellow">diagram</Highlight>. <QuestionDot color="red" text="Important" />
 
 **First-Order Markov Property:**
 
@@ -687,7 +687,7 @@ Each node $x_t$ has **two parents**: $x_{t-1}$ and $x_{t-2}$.
 ---
 
 
-### Q2. <Highlight color="yellow">Define transition probabilities and emission probabilities</Highlight> in <Highlight color="yellow">HMMs</Highlight>. <Highlight color="yellow">Explain their significance</Highlight>.
+### Q2. Define <Highlight color="yellow">transition and emission probabilities</Highlight> in <Highlight color="yellow">HMMs</Highlight> and their significance.
 
 
 ### **Transition and Emission Probabilities in HMM**
@@ -750,7 +750,7 @@ $$
 ---
 
 
-### Q3. <Highlight color="yellow">List and briefly describe the three fundamental problems that HMMs address</Highlight>, along with the <Highlight color="yellow">standard algorithms</Highlight> used to solve each. <QuestionDot color="red" text="Important" />
+### Q3. Three <Highlight color="yellow">fundamental problems of HMMs</Highlight> and their <Highlight color="yellow">algorithms</Highlight>. <QuestionDot color="red" text="Important" />
 
 **1. Evaluation (Likelihood)**
 
@@ -781,7 +781,7 @@ $$
 ---
 
 
-### Q4. <Highlight color="yellow">Define the forward variable $\alpha_t(i)$</Highlight> for an <Highlight color="yellow">HMM</Highlight>. <Highlight color="yellow">Provide the initialization, recursion, and termination steps</Highlight> of the <Highlight color="yellow">Forward Algorithm</Highlight> with mathematical expressions. <QuestionDot color="red" text="Important" />
+### Q4. <Highlight color="yellow">Forward variable</Highlight> $\alpha_t(i)$ for HMM. Provide <Highlight color="yellow">steps of Forward Algorithm</Highlight> with math expressions. <QuestionDot color="red" text="Important" />
 
 **Forward Variable:** $\alpha_t(i)$ = probability of observing the first $t$ symbols AND being in state $S_i$ at time $t$.
 
@@ -818,7 +818,7 @@ $$
 # Module 5 — Undirected Graphical Models
 
 
-### Q1. <Highlight color="yellow">Apply conditional independence</Highlight> to an <Highlight color="yellow">undirected graphical model (Markov Random Field)</Highlight>. Using a simple chain structure <Highlight color="yellow">A-B-C</Highlight>, <Highlight color="yellow">write the factorization</Highlight> of the joint probability distribution and <Highlight color="yellow">explain the conditional independence property</Highlight> that holds. <QuestionDot color="red" text="Important" />
+### Q1. Apply <Highlight color="yellow">conditional independence</Highlight> to <Highlight color="yellow">undirected graphical models</Highlight> (MRF) using chain A-B-C. <QuestionDot color="red" text="Important" />
 
 
 **Markov Random Fields (MRFs)** encode conditional independence through **graph separation**: two variables are conditionally independent if removing a set of observed nodes disconnects their paths.
@@ -863,7 +863,7 @@ This is the **global Markov property**: once B is observed, A and C become indep
 ---
 
 
-### Q2. <Highlight color="yellow">Explain Conditional Random Fields (CRFs)</Highlight>, <Highlight color="yellow">draw a sequence labeling diagram</Highlight>, and <Highlight color="yellow">explain node/edge factors</Highlight>. <Highlight color="yellow">Why are they used in sequence modeling</Highlight>? <QuestionDot color="red" text="Important" />
+### Q2. Explain <Highlight color="yellow">Conditional Random Fields (CRFs)</Highlight>, draw diagram, and explain <Highlight color="yellow">node/edge factors</Highlight>. <QuestionDot color="red" text="Important" />
 
 A **Conditional Random Field (CRF)** is an undirected probabilistic graphical model that directly models $P(Y \mid X)$ — the conditional distribution of output labels $Y$ given observed input $X$.
 
@@ -904,7 +904,7 @@ $$
 ---
 
 
-### Q3. <Highlight color="yellow">Compare CRFs and HMMs</Highlight> for <Highlight color="yellow">sequence labeling</Highlight>. <Highlight color="yellow">Explain their key training and inference differences</Highlight> with examples. <QuestionDot color="red" text="Important" />
+### Q3. <Highlight color="yellow">Compare CRFs and HMMs</Highlight> for sequence labeling: training and inference differences. <QuestionDot color="red" text="Important" />
 
 
 Both HMMs and CRFs are used for sequence labeling (e.g., POS tagging, Named Entity Recognition), but they differ fundamentally in their modeling philosophy.
@@ -946,7 +946,7 @@ Both HMMs and CRFs are used for sequence labeling (e.g., POS tagging, Named Enti
 ---
 
 
-### Q4. <Highlight color="yellow">Define Markov Random Fields</Highlight>. <Highlight color="yellow">Write the mathematical formula</Highlight> for <Highlight color="yellow">Markov Random Fields</Highlight>. <QuestionDot color="red" text="Important" />
+### Q4. <Highlight color="yellow">Define and write formula</Highlight> for <Highlight color="yellow">Markov Random Fields</Highlight>. <QuestionDot color="red" text="Important" />
 
 A **Markov Random Field (MRF)**, also called an **Undirected Graphical Model (UGM)**, represents the joint distribution of random variables using an **undirected graph** $G = (V, E)$.
 
@@ -978,7 +978,7 @@ where $\psi_C(X_C) \ge 0$ = **potential function** (compatibility score over cli
 # Module 6 — Monte Carlo Inference
 
 
-### Q1. <Highlight color="yellow">What is Monte Carlo Inference</Highlight>? <Highlight color="yellow">Why are Monte Carlo methods used</Highlight> in probabilistic models? <QuestionDot color="red" text="Important" />
+### Q1. What is <Highlight color="yellow">Monte Carlo Inference</Highlight> and <Highlight color="yellow">why</Highlight> is it used? <QuestionDot color="red" text="Important" />
 
 **Monte Carlo Inference** uses **random sampling** to approximate answers to probability questions that are too hard to solve analytically (e.g., computing expectations or marginals over complex distributions).
 
@@ -1004,7 +1004,7 @@ As $N$ grows, this converges to the true answer (Law of Large Numbers).
 ---
 
 
-### Q2. <Highlight color="yellow">Explain the Rejection Sampling method</Highlight> for generating samples from <Highlight color="yellow">complex distributions</Highlight>. <Highlight color="yellow">What are the key requirements</Highlight> for the <Highlight color="yellow">proposal distribution</Highlight> and <Highlight color="yellow">envelope function</Highlight>? <QuestionDot color="red" text="Important" />
+### Q2. <Highlight color="yellow">Rejection Sampling</Highlight> for complex distributions: requirements for <Highlight color="yellow">proposal and envelope</Highlight>. <QuestionDot color="red" text="Important" />
 
 **Rejection Sampling** generates i.i.d. samples from a target distribution $p(x)$ when direct sampling is impractical.
 
@@ -1034,7 +1034,7 @@ As $N$ grows, this converges to the true answer (Law of Large Numbers).
 ---
 
 
-### Q3. <Highlight color="yellow">What practical challenges</Highlight> are encountered when applying the <Highlight color="yellow">Metropolis-Hastings algorithm</Highlight> to real-world problems?
+### Q3. Practical <Highlight color="yellow">challenges</Highlight> of <Highlight color="yellow">Metropolis-Hastings algorithm</Highlight>.
 
 The **Metropolis-Hastings (MH) Algorithm** builds a Markov chain whose stationary distribution is the target $\pi(x)$:
 
@@ -1062,7 +1062,7 @@ The **Metropolis-Hastings (MH) Algorithm** builds a Markov chain whose stationar
 ---
 
 
-### Q4. <Highlight color="yellow">How do Importance Sampling and Rejection Sampling differ conceptually</Highlight>? <Highlight color="yellow">Explain with suitable examples</Highlight>. <QuestionDot color="red" text="Important" />
+### Q4. <Highlight color="yellow">Compare Importance and Rejection Sampling</Highlight> with examples. <QuestionDot color="red" text="Important" />
 
 
 Both use a proposal $q(x)$ when direct sampling from $p(x)$ is impractical — but their **goals differ**.
