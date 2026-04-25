@@ -1,0 +1,309 @@
+---
+title: AML Numericals Only
+description: Module-wise numericals and calculation-based problems for Advanced Machine Learning.
+---
+
+import { Highlight } from '@/components/highlight';
+import { QuestionDot } from '@/components/question-dot';
+import { LongQuestion } from '@/components/question';
+
+
+# Module 1 - Generalized Linear Models
+
+
+<LongQuestion>
+### Q1. Predict Graduate School Admission Probability Using a Probit Model <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" />
+
+**Outcome variable**
+* $Y = 1$: Admitted
+* $Y = 0$: Rejected
+
+**Predictors**
+* $X_1$: GPA (0.0-4.0)
+* $X_2$: Top-Tier School (1 = Yes, 0 = No)
+
+**Estimated Probit Coefficients**
+* Intercept: $\beta_0 = -3.5$
+* GPA: $\beta_1 = 1.0$
+* Top-Tier School: $\beta_2 = 0.4$
+</LongQuestion>
+
+<Callout type="info">
+- Solution requires values from Given Z-Table.
+- Or use **CASIO fx-991ES PLUS (2nd Edition)**: `MODE` -> `STAT` (3) -> `1: 1-VAR` -> `AC` -> `SHIFT` + `1` -> `5: Distr` -> `1:P(`
+</Callout>
+
+#### Model:
+$$
+P(Y=1 \mid X) = \Phi(Z) \quad \text{where} \quad Z = -3.5 + 1.0X_1 + 0.4X_2
+$$
+
+---
+
+#### Case 1: GPA = 3.0, Not Top-Tier ($X_2 = 0$)
+$$
+Z = -3.5 + 1.0(3.0) + 0.4(0) = -0.5
+$$
+<Highlight color="green">**Probability = 0.31**</Highlight> $\rightarrow$ **Rejected**
+
+---
+
+#### Case 2: GPA = 3.0, Top-Tier ($X_2 = 1$)
+$$
+Z = -3.5 + 1.0(3.0) + 0.4(1) = -0.1
+$$
+<Highlight color="green">**Probability = 0.46**</Highlight> $\rightarrow$ **Rejected (borderline)**
+
+---
+
+#### Case 3: GPA = 4.0, Top-Tier ($X_2 = 1$)
+$$
+Z = -3.5 + 1.0(4.0) + 0.4(1) = 0.9
+$$
+<Highlight color="green">**Probability = 0.82**</Highlight> $\rightarrow$ **Admitted**
+
+---
+
+
+<LongQuestion>
+### Q2. Predict Loan Default Probability Using Logistic and Probit Models <QuestionDot color="yellow" text="IA1-QB" />
+
+**Standardized income score** $x = 1$
+
+**Given coefficients:**
+- **Logistic:** $\beta_0 = -0.5$, $\beta_1 = 1.2$
+- **Probit:** $\beta_0 = -0.3$, $\beta_1 = 0.7$
+</LongQuestion>
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+### Logistic Regression
+$$
+Z = -0.5 + 1.2(1) = 0.7
+$$
+$$
+P(Y=1) = \frac{1}{1 + e^{-0.7}} \approx \frac{1}{1 + 0.496} \approx 0.668
+$$
+<Highlight color="green">**Probability $\approx$ 0.67**</Highlight> $\rightarrow$ **Defaults**
+</div>
+
+<div>
+### Probit Regression
+$$
+Z = -0.3 + 0.7(1) = 0.4
+$$
+$$
+P(Y=1) = \Phi(0.4) \approx 0.655
+$$
+<Highlight color="green">**Probability $\approx$ 0.66**</Highlight> $\rightarrow$ **Defaults**
+</div>
+</div>
+
+---
+
+
+<LongQuestion>
+### Q3. COVID-19 Public Health Interpretation <QuestionDot color="cyan" text="MSE-QB" />
+
+A researcher models daily COVID-19 cases using a Poisson GLM with a **log link**.
+Predictors: Temperature, Vaccination Rate, Public Holiday.
+
+**Task:** If the coefficient for **vaccination rate** is estimated as **−0.05**, interpret this value.
+</LongQuestion>
+
+#### Interpretation:
+Since the link is **log**, coefficients are multiplicative on the rate $\lambda$:
+$$
+e^{-0.05} \approx 0.951
+$$
+<Highlight color="green">**Result:** Each 1% increase in vaccination rate is associated with a **4.9% decrease** in expected daily cases, holding other factors constant.</Highlight>
+
+---
+
+
+# Module 2 - Directed Graphical Models
+
+
+<LongQuestion>
+### Q4. Environmental Impact Study DAG <QuestionDot color="red" text="Important" />
+
+**Scenario:**
+- Industrial Activity (I) affects Air (A) and Water (W).
+- Air affects Respiratory Health (R).
+- Water affects Diseases (D).
+- R and D affect Healthcare Demand (H).
+- H affects Gov Expenditure (G).
+
+**Task:** Draw DAG, write joint distribution, and identify 2 conditional independencies.
+</LongQuestion>
+
+#### (i) DAG Structure:
+<Mermaid chart={`graph LR
+  I[Industrial Activity] --> A[Air Quality]
+  I --> W[Water Quality]
+  A --> R[Respiratory Health]
+  W --> D[Waterborne Diseases]
+  R --> H[Healthcare Demand]
+  D --> H
+  H --> G[Government Expenditure]
+`} />
+
+#### (ii) Joint Probability Factorization:
+$$
+P(I, A, W, R, D, H, G) = P(I) P(A \mid I) P(W \mid I) P(R \mid A) P(D \mid W) P(H \mid R, D) P(G \mid H)
+$$
+
+#### (iii) Two Conditional Independence Relations:
+1. **$R \perp D \mid I$** - Respiratory Health and Waterborne Diseases are independent given Industrial Activity.
+2. **$A \perp W \mid I$** - Air Quality and Water Quality are independent given Industrial Activity.
+
+---
+
+<LongQuestion>
+### Q5. Medical Diagnosis DAG
+
+**Scenario:**
+- Smoking (S) and Genetics (G) cause Lung Disease (L) and Heart Disease (H).
+- L causes Cough (C).
+- H causes Chest Pain (P).
+- C and P cause Hospital Visit (V).
+
+**Task:** Draw DAG, write joint distribution, and identify 2 conditional independencies.
+</LongQuestion>
+
+#### (i) DAG Structure:
+<Mermaid chart={`graph LR
+  S[Smoking] --> L[Lung Disease]
+  G[Genetics] --> L
+  S --> H[Heart Disease]
+  G --> H
+  L --> C[Cough]
+  H --> P[Chest Pain]
+  C --> V[Hospital Visit]
+  P --> V
+`} />
+
+#### (ii) Joint Probability Factorization:
+$$
+P(S, G, L, H, C, P, V) = P(S) P(G) P(L \mid S, G) P(H \mid S, G) P(C \mid L) P(P \mid H) P(V \mid C, P)
+$$
+
+#### (iii) Two Conditional Independence Relations:
+1. **$C \perp P \mid L, H$** - Cough and Chest Pain are independent given their causes (L and H).
+2. **$S \perp G$** - Smoking and Genetics are marginally independent.
+
+---
+
+<LongQuestion>
+### Q6. Road Condition and Accident DAG <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" />
+
+**Scenario:**
+- Weather (W) affects Road Condition (R)
+- Road Condition affects Accident (A)
+- Driver Alertness (D) affects Accident (A)
+- Accident affects Insurance Claim (C)
+
+**Task:** Draw DAG, write joint distribution, and identify 2 conditional independencies.
+</LongQuestion>
+
+#### (i) DAG Structure:
+<Mermaid chart={`graph LR
+  W[Weather] --> R[Road Condition]
+  R --> A[Accident]
+  D[Driver Alertness] --> A
+  A --> C[Insurance Claim]
+`} />
+
+#### (ii) Joint Probability Factorization:
+$$
+P(W, R, D, A, C) = P(W) \cdot P(D) \cdot P(R \mid W) \cdot P(A \mid R, D) \cdot P(C \mid A)
+$$
+
+#### (iii) Two Conditional Independence Relations:
+1. **$W \perp A \mid R$** - Weather is independent of Accident given Road Condition.
+2. **$D \perp W$** - Driver Alertness is independent of Weather.
+
+---
+
+<LongQuestion>
+### Q7. Socioeconomic Status and Health DAG <QuestionDot color="blue" text="Asked in MSE" />
+
+**Scenario:**
+- Socioeconomic Status (S) affects Education (E) and Nutrition (N)
+- E affects Job Type (J)
+- N affects Health (H)
+- J and H affect Income (I)
+
+**Task:** Draw DAG, write joint distribution, and identify 3 conditional independencies.
+</LongQuestion>
+
+#### (i) DAG Structure:
+<Mermaid chart={`graph LR
+  S[Socioeconomic Status] --> E[Education Level]
+  S --> N[Nutrition]
+  E --> J[Job Type]
+  N --> H[Health Condition]
+  J --> I[Income]
+  H --> I
+`} />
+
+#### (ii) Joint Probability Factorization:
+$$
+P(S, E, N, J, H, I) = P(S) \cdot P(E \mid S) \cdot P(N \mid S) \cdot P(J \mid E) \cdot P(H \mid N) \cdot P(I \mid J, H)
+$$
+
+#### (iii) Three Conditional Independence Relations:
+1. **$E \perp N \mid S$**
+2. **$J \perp N \mid E$**
+3. **$I \perp S \mid J, H$**
+
+---
+
+<LongQuestion>
+### Q8. Parameter Count in Markov Chains and DGMs <QuestionDot color="yellow" text="IA1-QB" /> <QuestionDot color="green" text="Asked in IA1" />
+
+**Scenario:** A sequence consists of **5 binary variables**.
+- (a) Parameters for a **first-order Markov chain**.
+- (b) Parameters for a **DGM where each node has two parents**.
+</LongQuestion>
+
+#### (a) First-Order Markov Chain
+Structure: $X_1 \to X_2 \to X_3 \to X_4 \to X_5$
+1. **Initial $P(X_1)$:** $2^0 \times (2-1) = 1$ parameter.
+2. **Transitions ($X_2 \dots X_5$):** 4 transitions, each with 1 parent.
+   - Per transition: $2^1 \times (2-1) = 2$ parameters.
+   - Total transitions: $4 \times 2 = 8$ parameters.
+
+**Total:** $1 + 8 = 9$ parameters.
+
+---
+
+#### (b) DGM with 2 Parents per Node
+For 5 nodes, each having 2 parents:
+1. Per node configurations: $2^2 = 4$.
+2. Independent parameters per configuration: $2 - 1 = 1$.
+3. Total per node: $4 \times 1 = 4$ parameters.
+
+**Total for 5 nodes:** $5 \times 4 = 20$ parameters.
+
+---
+
+
+# Module 3 - Mixture Models & EM Algorithm
+
+
+<LongQuestion>
+### Q9. Responsibility Calculation in GMM <QuestionDot color="cyan" text="MSE-QB" />
+
+For a two-component GMM:
+$$
+P(x) = \pi_1 \mathcal{N}(x \mid \mu_1, \sigma_1^2) + \pi_2 \mathcal{N}(x \mid \mu_2, \sigma_2^2)
+$$
+Define and write the formula for **responsibility** $\gamma_{ik}$.
+</LongQuestion>
+
+#### Formula:
+$$
+\gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i \mid \mu_k, \sigma_k^2)}{\pi_1 \mathcal{N}(x_i \mid \mu_1, \sigma_1^2) + \pi_2 \mathcal{N}(x_i \mid \mu_2, \sigma_2^2)}
+$$
+<Highlight color="green">**Meaning:** The probability that data point $x_i$ was generated by component $k$.</Highlight>
