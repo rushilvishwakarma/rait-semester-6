@@ -212,35 +212,7 @@ $$z = f_\theta(x): \mathbb{R}^d \rightarrow \mathbb{R}^k$$
 
 **Advantage over PCA:** Autoencoders can learn **non-linear** dimensionality reductions, capturing complex manifold structures that PCA misses.
 
----
 
-<LongQuestion>
-### Q16. Given input $x = [2, 4, 6]$ and encoder matrix $W_e = \begin{bmatrix}0.5 & 0 \\ 0 & 0.2 \\ 0 & 0\end{bmatrix}$, calculate the latent vector.
-</LongQuestion>
-
-**Given:**
-
-$$x = [2,\; 4,\; 6], \qquad W_e = \begin{bmatrix}0.5 & 0 \\ 0 & 0.2 \\ 0 & 0\end{bmatrix}$$
-
-**Formula (linear encoder):**
-
-$$z = x\, W_e$$
-
-**Substitution:**
-
-$$[2\;\; 4\;\; 6]\begin{bmatrix}0.5 & 0 \\ 0 & 0.2 \\ 0 & 0\end{bmatrix} = [z_1,\; z_2]$$
-
-$$z_1 = 2(0.5) + 4(0) + 6(0) = 1.0$$
-
-$$z_2 = 2(0) + 4(0.2) + 6(0) = 0.8$$
-
-**Final Answer:**
-
-$$\boxed{z = [1.0,\; 0.8]}$$
-
-The input is compressed from 3 dimensions to 2 — performing linear dimensionality reduction.
-
----
 
 # Module 6
 

@@ -98,14 +98,7 @@ where $\alpha$ is the learning rate, $t$ is the target output, and $y$ is the ac
 
 A feedforward neural network with one hidden layer has three layers:
 
-```
-Input Layer     Hidden Layer     Output Layer
-  (x1)  ──┐
-           ├──→  (h1)  ──┐
-  (x2)  ──┤              ├──→  (y)
-           ├──→  (h2)  ──┘
-  (x3)  ──┘
-```
+![Feedforward Neural Network Diagram #invert-dark](/images/docs/DL/ESE-QB/M1-Q4-nn_diagram.png)
 
 - **Input layer:** receives raw features.
 - **Hidden layer:** applies weighted sums + activation function (e.g., ReLU or Sigmoid).
@@ -142,25 +135,7 @@ where:
 
 **Application:** The Delta Rule is the basis of backpropagation. It is applied layer by layer (via chain rule) to update all weights in multi-layer networks.
 
----
 
-<LongQuestion>
-### Q6. Numerical: Given a perceptron with weights $w=[0.7,−0.4]$, bias $b=0.1$, and input $x=[2,1]$, calculate the output using a step activation function.
-</LongQuestion>
-
-**Step 1 — Compute weighted sum:**
-
-$$z = w_1 x_1 + w_2 x_2 + b = (0.7)(2) + (-0.4)(1) + 0.1$$
-
-$$z = 1.4 - 0.4 + 0.1 = \mathbf{1.1}$$
-
-**Step 2 — Apply step activation function:**
-
-$$\text{Output} = \begin{cases} 1 & \text{if } z > 0 \\ 0 & \text{if } z \leq 0 \end{cases}$$
-
-Since $z = 1.1 > 0$:
-
-$$\boxed{y = 1}$$
 
 ---
 
@@ -299,37 +274,7 @@ $$W \leftarrow W - \eta\,\frac{\partial \mathcal{L}}{\partial W}$$
 Input → [Layer 1: Edges] → [Layer 2: Shapes] → [Layer 3: Objects] → Output
 ```
 
----
 
-<LongQuestion>
-### Q14. Numerical: Calculate the output of the given neural network (Sigmoid, 2→2→1 architecture).
-</LongQuestion>
-
-**Given:**
-- Input: $x = [1, 0]$
-- $W_1 = \begin{bmatrix}0.9 & 0.6 \\ -0.4 & 0.1\end{bmatrix}$, $b_1 = [0.3,\,-0.1]$
-- $W_2 = [0.6,\,-0.5]$, $b_2 = 0.5$
-
-**Step 1 — Hidden layer pre-activation:**
-
-$$z_1^{[1]} = 0.9(1) + (-0.4)(0) + 0.3 = 1.2$$
-$$z_2^{[1]} = 0.6(1) + 0.1(0) + (-0.1) = 0.5$$
-
-**Step 2 — Hidden layer activation (Sigmoid):**
-
-$$a_1^{[1]} = \sigma(1.2) = \frac{1}{1+e^{-1.2}} \approx \mathbf{0.7685}$$
-$$a_2^{[1]} = \sigma(0.5) = \frac{1}{1+e^{-0.5}} \approx \mathbf{0.6225}$$
-
-**Step 3 — Output layer pre-activation:**
-
-$$z^{[2]} = 0.6(0.7685) + (-0.5)(0.6225) + 0.5$$
-$$= 0.4611 - 0.3113 + 0.5 = 0.6498$$
-
-**Step 4 — Output activation (Sigmoid):**
-
-$$\hat{y} = \sigma(0.6498) = \frac{1}{1+e^{-0.6498}} \approx \boxed{0.6570}$$
-
----
 
 <LongQuestion>
 ### Q15. Explain the concepts of overfitting and underfitting in relation to neural network training. <QuestionDot color="yellow" text="IA1-QB" />
@@ -553,18 +498,6 @@ $$\nabla\widetilde{\mathcal{L}}(w) = \nabla\mathcal{L}(w) + \alpha w \qquad \Rig
 
 - **L2** constraint region: circle ($w_1^2 + w_2^2 \leq C$) - weights are small but non-zero.
 - **L1** constraint region: diamond ($|w_1| + |w_2| \leq C$) - optimal solution hits a corner, driving some weights to exactly zero.
-
-#### Numerical Example
-
-**Given:** Original Loss $= 10$, $W = [2,\ -3,\ 1]$, $\lambda = 0.1$
-
-**L1:**
-
-$$\sum|w| = 2 + 3 + 1 = 6 \qquad \Rightarrow \qquad \mathcal{L}_{L1} = 10 + 0.1 \times 6 = \boxed{10.6}$$
-
-**L2:**
-
-$$\sum w^2 = 4 + 9 + 1 = 14 \qquad \Rightarrow \qquad \mathcal{L}_{L2} = 10 + 0.1 \times 14 = \boxed{11.4}$$
 
 | Property | L1 Regularization | L2 Regularization |
 |----------|------------------|------------------|
