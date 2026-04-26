@@ -437,7 +437,7 @@ Given $y_1, \dots, y_N \sim \mathcal{N}(\mu, \sigma^2)$.
 
 **Log-likelihood:**
 $$
-\ell = -\frac{N}{2}\log(\sigma^2) - \frac{1}{2\sigma^2}\sum (y_i - \mu)^2
+\ell = -\frac{N}{2}\log(\sigma^2) - \frac{1}{2} \cdot \frac{1}{\sigma^2}\sum (y_i - \mu)^2
 $$
 
 ---
@@ -445,7 +445,7 @@ $$
 ### For $\mu$
 
 $$
-\frac{\partial \ell}{\partial \mu} = \frac{1}{\sigma^2}\sum (y_i - \mu) = 0
+\frac{\partial \ell}{\partial \mu} = \frac{1}{\sigma^2} \cdot \sum (y_i - \mu) = 0
 $$
 $$
 \Rightarrow \hat{\mu} = \frac{1}{N}\sum y_i
@@ -456,10 +456,11 @@ $$
 ### For $\sigma^2$
 
 $$
-\frac{\partial \ell}{\partial \sigma^2} = 0
+\frac{\partial \ell}{\partial \sigma^2} = -\frac{N}{2} \cdot \frac{1}{\sigma^2} + \frac{1}{2} \cdot \frac{1}{\sigma^4} \sum (y_i - \mu)^2 = 0
 $$
+
 $$
-\Rightarrow \hat{\sigma}^2 = \frac{1}{N}\sum (y_i - \mu)^2
+\Rightarrow \hat{\sigma}^2 = \frac{1}{N}\sum (y_i - \hat{\mu})^2
 $$
 
 ---
