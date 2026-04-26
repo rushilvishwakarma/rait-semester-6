@@ -616,12 +616,12 @@ An HMM is defined by three parameters $(A, B, \pi)$, which act as the "rules" of
 
 ### **1. Transition Probabilities (A)**
 The chance of moving from one **hidden state** to another.
-*   **Formula**: $a_{ij} = P(\text{state}_j \text{ at } t+1 \mid \text{state}_i \text{ at } t)$
+*   **Formula**: $a_{ij} = P(q_{t+1} = S_j \mid q_t = S_i)$
 *   **Example**: If you are **Healthy** today, what is the chance you will be **Sick** tomorrow?
 
 ### **2. Emission Probabilities (B)**
 The chance of seeing a specific **observation** given a hidden state.
-*   **Formula**: $b_j(k) = P(\text{obs}_k \mid \text{state}_j)$
+*   **Formula**: $b_j(k) = P(O_t = v_k \mid q_t = S_j)$
 *   **Example**: If you are **Sick** (hidden), what is the chance you will have a **Fever** (observation)?
 
 ### **3. Initial Probabilities ($\pi$)**
