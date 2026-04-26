@@ -570,12 +570,13 @@ $$
 
 **Generalized Linear Mixed Models (GLMMs)** extend GLMs by adding **random effects** $b$ to account for group-level variation: $g(E[Y|X,b]) = X\beta + Zb$, where $b \sim \mathcal{N}(0, \Psi)$.
 
-### Comparison
-- **Effects**: **GLMs** use Fixed effects only, while **GLMMs** use both **Fixed and Random effects**.
-- **Data Assumption**: **GLMs** assume independent observations; **GLMMs** handle grouped, clustered, or repeated data.
-- **Estimation**: **GLMs** use MLE (analytical); **GLMMs** require numerical methods like MLE or REML.
-- **Inference**: **GLMs** provide population-level results; **GLMMs** provide subject-level inference.
-- **Use Case**: Use **GLMs** for independent samples and **GLMMs** for hierarchical or longitudinal data.
+| Generalized Linear Model (GLM) | Generalized Linear Mixed Model (GLMM) |
+|-------------------------------|-----------------------------------------|
+| Models expected value using only **Fixed Predictors**. | Models expected value using both **Fixed and Random effects**. |
+| Assumes **Independent Observations**. | Handles **Grouped, Clustered, or Repeated** data. |
+| Estimation is done via **MLE** (analytical). | Estimation is done via **MLE or REML** (numerical). |
+| Focuses on **Population-level** inference. | Allows for **Subject-level** inference. |
+| Best for **Independent samples**. | Best for **Hierarchical or Longitudinal** data. |
 
 **When to Use GLMMs:**
 - Students nested in schools (schools are random effects)
@@ -883,13 +884,14 @@ $$
 Both HMMs and CRFs are used for sequence labeling (e.g., POS tagging, Named Entity Recognition), but they differ fundamentally in their modeling philosophy.
 
 
-### Comparison
-- **Model Type**: **HMMs** are Generative (model $P(X,Y)$); **CRFs** are Discriminative (model $P(Y|X)$).
-- **Independence**: **HMMs** assume observations are independent given the state; **CRFs** have no such strong assumptions.
-- **Features**: **HMMs** are limited to local emission features; **CRFs** allow rich, overlapping, and arbitrary features.
-- **Label Bias**: **HMMs** are susceptible to label bias; **CRFs** naturally avoid it.
-- **Training**: **HMMs** maximize the joint likelihood (Baum-Welch); **CRFs** maximize the conditional likelihood.
-- **Parameters**: **HMMs** use Transition ($A$) and Emission ($B$) matrices; **CRFs** use feature weights ($\lambda_k$).
+| Hidden Markov Model (HMM) | Conditional Random Field (CRF) |
+|---------------------------|--------------------------------|
+| **Generative** model (models $P(X, Y)$). | **Discriminative** model (models $P(Y \mid X)$). |
+| Models **Joint Distribution**. | Models **Conditional Distribution**. |
+| Assumes observations are **Independent** given state. | No strong independence assumptions (**Global Normalization**). |
+| Limited to **local emission features** only. | Allows **rich, overlapping, and arbitrary features**. |
+| Susceptible to **Label Bias**. | Circumvents **Label Bias**. |
+| Parameters are **Transition ($A$) and Emission ($B$)**. | Parameters are **Feature Weights ($\lambda_k$)**. |
 
 
 **Training Differences:**
