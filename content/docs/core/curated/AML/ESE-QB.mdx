@@ -499,6 +499,18 @@ For modeling purchase amounts (continuous data), we analyze:
 
 The **Expectation-Maximization (EM) Algorithm** is an iterative method for maximum likelihood estimation when data has **latent (hidden) variables**.
 
+* Used in **GMM clustering, missing data, HMMs**
+
+---
+
+### **Steps of EM Algorithm**
+
+1. Initialize parameters ( $\mu_k, \Sigma_k, \pi_k$ )
+2. Repeat until convergence:
+
+   * **E-step**: Computes **soft assignments (responsibilities)** and estimates hidden variables ($z_n$).
+   * **M-step**: Updates parameters using weighted data to maximize expected log-likelihood.
+
 ---
 
 ### E-step (Expectation)
@@ -530,12 +542,24 @@ $$
 ---
 
 ### **Why EM is Needed:**
-*   **Hidden Labels**: While MLE is easy if labels are known, optimization becomes difficult when labels are **latent (missing)**.
-*   **Iterative Process**: EM solves this by alternating between estimating labels (**E-step**) and optimizing parameters (**M-step**).
+
+* **Hidden Labels**: MLE is difficult when labels are **missing**
+* **EM Idea**: Alternates between estimating labels and optimizing parameters
+
+---
+
+### **Why steps are crucial**
+
+* **E-step** → handles **hidden data**
+* **M-step** → updates parameters
+* **Together** → make problem **solvable iteratively**
+
+---
 
 ### **Convergence:**
-*   **Guaranteed Increase**: The log-likelihood is mathematically designed to **increase** at every iteration.
-*   **Local Optimum**: Since the likelihood is bounded, the algorithm always converges to a **local optimum**.
+
+* **Guaranteed Increase**: Log-likelihood **increases every iteration**
+* **Local Optimum**: Converges to a **local maximum**
 
 ---
 
