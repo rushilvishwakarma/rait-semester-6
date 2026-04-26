@@ -695,6 +695,13 @@ The chance of being in a specific state at the very **start** (time $t=1$).
 **Purpose:**
 The Viterbi algorithm is used for **Decoding** — finding the single **most likely sequence of hidden states** that produced the observed data.
 
+**To use Viterbi, you need:**
+- **States**: Hidden conditions (e.g., weather: Sunny, Rainy)
+- **Observations**: Visible outputs (e.g., umbrella seen)
+- **Transition probabilities**: $P(s_t \mid s_{t-1})$
+- **Emission probabilities**: $P(o_t \mid s_t)$
+- **Initial probabilities**: $P(s_0)$
+
 **Main Steps:**
 1.  **Initialization**: Start at the first time step ($t=1$) using initial probabilities and emission scores.
 2.  **Recursion**: For each subsequent time step, calculate the maximum probability of reaching each state and store a "back-pointer" to the best previous state.
@@ -1023,7 +1030,7 @@ Gives a **weighted estimate**, not actual samples.
 
 ---
 
-# Unanswered PYQs
+# Extra PYQs
 
 1. **Define the exponential family of distributions**. Give an example with its canonical form. / **Define the exponential family of distributions** with an example. **[5 Marks]** <QuestionDot color="pink" text="ESE PYQ 5 marks" />
 2. What is the **Evidence Lower Bound (ELBO)** in Variational Inference? Why is it important? **[5 Marks]** <QuestionDot color="pink" text="ESE PYQ 5 marks" />
