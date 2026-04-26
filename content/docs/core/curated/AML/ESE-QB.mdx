@@ -570,13 +570,12 @@ $$
 
 **Generalized Linear Mixed Models (GLMMs)** extend GLMs by adding **random effects** $b$ to account for group-level variation: $g(E[Y|X,b]) = X\beta + Zb$, where $b \sim \mathcal{N}(0, \Psi)$.
 
-| Aspect | GLM | GLMM |
-|--------|-----|------|
-| Effects | Fixed only | Fixed + Random |
-| Data assumption | Independent observations | Grouped / clustered / repeated |
-| Estimation | MLE (analytical) | MLE/REML (numerical) |
-| Inference level | Population-level | Subject-level |
-| Use case | Independent samples | Hierarchical, longitudinal data |
+### Comparison
+- **Effects**: **GLMs** use Fixed effects only, while **GLMMs** use both **Fixed and Random effects**.
+- **Data Assumption**: **GLMs** assume independent observations; **GLMMs** handle grouped, clustered, or repeated data.
+- **Estimation**: **GLMs** use MLE (analytical); **GLMMs** require numerical methods like MLE or REML.
+- **Inference**: **GLMs** provide population-level results; **GLMMs** provide subject-level inference.
+- **Use Case**: Use **GLMs** for independent samples and **GLMMs** for hierarchical or longitudinal data.
 
 **When to Use GLMMs:**
 - Students nested in schools (schools are random effects)
@@ -884,16 +883,13 @@ $$
 Both HMMs and CRFs are used for sequence labeling (e.g., POS tagging, Named Entity Recognition), but they differ fundamentally in their modeling philosophy.
 
 
-| Aspect | HMM | CRF |
-|---|---|---|
-| Model Type | Generative: models $P(X, Y)$ | Discriminative: models $P(Y \mid X)$ |
-| Joint/Conditional | Joint distribution | Conditional distribution |
-| Independence Assumption | Observations independent given state | No strong independence assumptions |
-| Feature Flexibility | Limited: local emission features only | Rich, overlapping, arbitrary features of $X$ |
-| Label Bias | Susceptible to label bias | Circumvents label bias |
-| Training | MLE on joint $P(X, Y)$ via Baum-Welch | Maximize conditional log-likelihood |
-| Inference | Forward/Viterbi algorithms | Forward-backward / Viterbi (chains) |
-| Parameters | Transition $A$, Emission $B$, Initial $\pi$ | Feature weights $\lambda_k$ |
+### Comparison
+- **Model Type**: **HMMs** are Generative (model $P(X,Y)$); **CRFs** are Discriminative (model $P(Y|X)$).
+- **Independence**: **HMMs** assume observations are independent given the state; **CRFs** have no such strong assumptions.
+- **Features**: **HMMs** are limited to local emission features; **CRFs** allow rich, overlapping, and arbitrary features.
+- **Label Bias**: **HMMs** are susceptible to label bias; **CRFs** naturally avoid it.
+- **Training**: **HMMs** maximize the joint likelihood (Baum-Welch); **CRFs** maximize the conditional likelihood.
+- **Parameters**: **HMMs** use Transition ($A$) and Emission ($B$) matrices; **CRFs** use feature weights ($\lambda_k$).
 
 
 **Training Differences:**
