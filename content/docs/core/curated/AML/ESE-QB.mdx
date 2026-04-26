@@ -859,20 +859,22 @@ $$
 *(where $Z(X)$ is the normalization constant)*
 
 **1. Node Factors (Unary Potentials) $\phi_{\text{node}}$:**
-* Tells how well one label fits one input word.
-* Example: In NER, they help decide if "New" is a location label.
+*   **Tells how well one label fits one input word.**
+*   Example: In NER, they help decide if "New" is a location label.
 
 **2. Edge Factors (Pairwise Potentials) $\phi_{\text{edge}}$:**
-* Tells how likely two neighboring labels are to go together.
-* Example: They can stop invalid tag pairs like I-ORG after B-PER.
+*   **Tells how likely two neighboring labels are to go together.**
+*   Example: They can stop invalid tag pairs like I-ORG after B-PER.
 
-**Key advantage:** CRFs can use the whole sentence, not just nearby words.
+**Key advantage:** CRFs can use the **whole sentence (global context)**, not just nearby words.
 
-**Why CRFs Are Used in Sequence Modeling:**
-* They model $P(Y \mid X)$ directly.
-* They can use many input features at once.
-* They avoid the label bias problem.
-* They work well for sequence tasks like POS tagging, NER, and chunking.
+---
+
+### **Why CRFs Are Used in Sequence Modeling:**
+*   **Discriminative**: They model $P(Y \mid X)$ directly.
+*   **Flexible**: They can use many input features at once.
+*   **Robust**: They avoid the **label bias problem**.
+*   **Versatile**: Work well for tasks like **POS tagging, NER, and chunking**.
 
 
 ---
@@ -933,14 +935,14 @@ $$
 P(X_1, \dots, X_n) = \frac{1}{Z} \prod_{C \in \mathcal{C}} \psi_C(X_C)
 $$
 
-where $\psi_C(X_C) \ge 0$ = **potential function** (compatibility score over clique $C$) and $Z$ = normalization constant.
+where $\psi_C(X_C) \ge 0$ = **potential function**.
 
 **Three Markov Properties:**
 
 | Property | Meaning |
 |----------|---------|
 | **Pairwise** | If no edge between $i$ and $j$, then $X_i \perp X_j$ given all others |
-| **Local** | A node is independent of all non-neighbors given its neighbors |
+| **Local** | A node only depends on its neighbors. Once you know the neighbors, all other nodes don’t matter for that node. |
 | **Global** | If $S$ separates $A$ from $B$ in the graph, then $A \perp B \mid S$ |
 
 
@@ -962,15 +964,17 @@ $$
 $$
 As $N$ grows, this converges to the true answer (Law of Large Numbers).
 
-**Why Monte Carlo Methods Are Used:**
+### **Why Monte Carlo Methods are Used:**
+*   **Intractable Integrals**: When posterior distributions have no closed-form (simple formula).
+*   **Complex Distributions**: When normalizing constants (partition functions) are too hard to compute.
+*   **Latent Variables**: When summing over all hidden configurations is exponentially expensive.
 
-1. **Intractable integrals:** Posterior distributions involve normalization constants that have no closed form.
-2. **Complex distributions:** Mixture models and MRFs have intractable partition functions.
-3. **Latent variables:** Summing over all hidden variable configurations is exponentially expensive.
+**Key Advantages**:
+*   Works well in **High Dimensions**.
+*   Provides estimates for **Expectations, Marginals, and Intervals**.
+*   **Simple & Flexible**: Can be applied to almost any complex probabilistic model.
 
-**Advantages:** Works in high dimensions; simple and flexible; provides estimates for expectations, marginals, and credible intervals.
-
-**Common Methods:** Rejection Sampling, Importance Sampling, MCMC (Metropolis-Hastings, Gibbs Sampling).
+**Common Methods**: Rejection Sampling, Importance Sampling, MCMC (Metropolis-Hastings, Gibbs Sampling).
 
 
 ---
@@ -991,14 +995,11 @@ As $N$ grows, this converges to the true answer (Law of Large Numbers).
 
 **Geometric Intuition:** Think of drawing points under the envelope $M \cdot q(x)$. Accept only those that fall under $p(x)$.
 
-**Key Requirements:**
-
-| Requirement | Description |
-|-------------|-------------|
-| Proposal $q(x)$ | Easy to sample from |
-| Coverage | $q(x) > 0$ wherever $p(x) > 0$ |
-| Envelope | $M \cdot q(x) \ge p(x)$ for all $x$ |
-| Tightness | $M$ should be as small as possible (higher acceptance rate) |
+### **Key Requirements:**
+*   **Proposal $q(x)$**: Distribution must be easy to sample from.
+*   **Coverage**: $q(x) > 0$ wherever target $p(x) > 0$ (must cover the whole support).
+*   **Envelope**: There must be a constant $M$ such that $M \cdot q(x) \ge p(x)$ for all $x$.
+*   **Tightness**: $M$ should be as small as possible to maximize the **acceptance rate**.
 
 **Practical Limitation:** In high dimensions, acceptance rate drops exponentially. MCMC methods are preferred instead.
 
@@ -1013,22 +1014,12 @@ The **Metropolis-Hastings (MH) Algorithm** builds a Markov chain whose stationar
 1. Propose: $x^* \sim q(x^* \mid x_t)$
 2. Accept with probability: $\alpha = \min\left(1, \frac{\pi(x^*) q(x_t \mid x^*)}{\pi(x_t) q(x^* \mid x_t)}\right)$; else keep $x_t$.
 
-**Practical Challenges:**
-
-1. **Proposal Tuning:** Choosing the right proposal $q$ is critical.
-   - Too narrow → slow exploration, many correlated samples.
-   - Too wide → most proposals rejected (very low acceptance rate).
-   - Optimal acceptance rate ≈ 23–44%.
-
-2. **Burn-In Period:** Early samples are influenced by the starting point and must be discarded. Determining how long to burn in is non-trivial.
-
-3. **Slow Mixing:** The chain may get stuck in one region of a multimodal distribution for many steps, leading to poor coverage.
-
-4. **High Autocorrelation:** Consecutive samples are correlated, so the effective number of independent samples is much less than the total drawn.
-
-5. **High Dimensionality:** In high dimensions, it becomes very hard to propose good moves. Gradient-based methods (HMC) are preferred.
-
-6. **Convergence Diagnosis:** No definitive test confirms convergence. Diagnostics like trace plots and Gelman-Rubin $\hat{R}$ are heuristics, not guarantees.
+### **Practical Challenges:**
+*   **Burn-In Period**: Early samples are biased by the starting point and must be discarded (non-trivial to decide how many).
+*   **Slow Mixing**: The chain may get "stuck" in one region (especially in multimodal distributions), leading to poor coverage.
+*   **High Autocorrelation**: Consecutive samples are highly correlated; the number of truly independent samples is much lower than the total drawn.
+*   **High Dimensionality**: Proposing "good" moves is extremely difficult in high dimensions.
+*   **Convergence Diagnosis**: No definitive test exists; we rely on heuristics like **Trace Plots** and **Gelman-Rubin ($\hat{R}$)**.
 
 
 ---
