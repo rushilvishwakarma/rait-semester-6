@@ -763,6 +763,29 @@ $$
 * **End:** sum all
 
 
+### Q5. A person's health condition has two hidden states: <Highlight color="yellow">Healthy (H) and Sick (S)</Highlight>. Initial probabilities: $\Pi=[0.6, 0.4]$. Transition matrix $A=[[0.7,0.3],[0.4,0.6]]$. Observations: <Highlight color="yellow">Normal (N), Fever (F)</Highlight>. Emission matrix $B=[[0.8,0.2],[0.3,0.7]]$. Find the probability of observation sequence <Highlight color="yellow">$O=(\text{Normal, Fever})$</Highlight>. <QuestionDot color="red" text="ESE PYQ 10 marks" />
+
+The probability of the observation sequence $O = (\text{Normal, Fever})$ is found using the **Forward Algorithm**:
+$$ \alpha_t(j) = \left[ \sum_i \alpha_{t-1}(i) \cdot a_{ij} \right] \cdot b_j(o_t) $$
+
+**Calculation:**
+
+**1. For the first observation: Normal (N)**
+- $\alpha_1(H) = \pi_H \cdot b_H(N) = 0.6 \times 0.8 = \mathbf{0.48}$
+- $\alpha_1(S) = \pi_S \cdot b_S(N) = 0.4 \times 0.3 = \mathbf{0.12}$
+
+**2. For the second observation: Fever (F)**
+- $\alpha_2(H) = [\alpha_1(H) a_{HH} + \alpha_1(S) a_{SH}] \cdot b_H(F)$
+  $$ = [(0.48)(0.7) + (0.12)(0.4)] \times (0.2) = 0.384 \times 0.2 = \mathbf{0.0768} $$
+- $\alpha_2(S) = [\alpha_1(H) a_{HS} + \alpha_1(S) a_{SS}] \cdot b_S(F)$
+  $$ = [(0.48)(0.3) + (0.12)(0.6)] \times (0.7) = 0.216 \times (0.7) = \mathbf{0.1512} $$
+
+**3. Final Probability:**
+Add the final forward probabilities:
+$$ P(O = (N, F)) = \alpha_2(H) + \alpha_2(S) = 0.0768 + 0.1512 = \mathbf{0.228} $$
+
+**Answer:** The probability of the observation sequence is **0.228**.
+
 ---
 
 
