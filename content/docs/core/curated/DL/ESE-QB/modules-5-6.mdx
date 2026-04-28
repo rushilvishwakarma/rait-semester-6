@@ -92,20 +92,30 @@ The overall mapping is: $\hat{x} = (W_d W_e)\,x$ — a **linear transformation**
 ### Q4 / Q12. What is an undercomplete autoencoder and why is it used? / Compare undercomplete and overcomplete autoencoders.
 </LongQuestion>
 
-| Property | Undercomplete | Overcomplete |
-|----------|--------------|--------------|
-| **Latent dimension** | $\dim(z) < \dim(x)$ | $\dim(z) \geq \dim(x)$ |
-| **Constraint** | Bottleneck forces compression | No compression; needs regularization |
-| **Goal** | Learn the most important features | Learn a richer, over-parameterized representation |
-| **Risk** | Loses fine-grained information | Can learn identity mapping (trivial solution) |
-| **Regularization needed** | Not necessary | Required (L1 sparsity, denoising, dropout) |
-| **Use case** | Dimensionality reduction, compression | Sparse coding, feature learning, denoising |
+### Undercomplete vs Overcomplete Autoencoder
 
-**Undercomplete autoencoder:** The hidden layer is smaller than the input — compression forces the encoder to capture only the most salient features.
+| **Undercomplete Autoencoder** | **Overcomplete Autoencoder** |
+| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| The latent dimension is smaller than the input dimension ($\text{dim}(z) < \text{dim}(x)$). | The latent dimension is equal to or greater than the input dimension ($\text{dim}(z) \ge \text{dim}(x)$). |
+| It has a bottleneck that forces the model to compress the input data. | It does not have a bottleneck and does not enforce compression. |
+| It learns only the most important and relevant features of the data. | It can learn a richer but possibly redundant representation of the data. |
+| It may lose some fine-grained details due to compression. | It may learn identity mapping and simply copy input to output. |
+| Regularization is generally not required. | Regularization is required to prevent trivial solutions. |
+| It is mainly used for dimensionality reduction and data compression. | It is used for feature learning, sparse coding, and denoising tasks. |
 
-$$\dim(z) < \dim(x) \Rightarrow \text{bottleneck constraint}$$
 
-Without regularization, an overcomplete autoencoder can copy the input directly to the output, learning nothing useful.
+**Undercomplete autoencoder:** The hidden layer is smaller than the input — compression forces the encoder to capture only the most important features.
+
+$$
+\text{dim}(z) < \text{dim}(x) \implies \text{bottleneck constraint (forces compression)}
+$$
+
+**Overcomplete autoencoder:** The hidden layer is **equal to or larger than the input** — it does not force compression, so without regularization it may just learn to copy the input instead of meaningful features.
+
+$$
+\text{dim}(z) \ge \text{dim}(x) \implies \text{no bottleneck (may learn identity mapping, needs regularization)}
+$$
+
 
 ---
 
