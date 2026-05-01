@@ -1,8 +1,246 @@
 ---
 title: Module 5
-description: Handling Larger Datasets.
+description: Handling Larger Datasets - PCY, SON, CURE, and Recommendation Systems.
 ---
+
+import { Highlight } from '@/components/highlight';
+import { QuestionDot } from '@/components/question-dot';
+import { DatabaseBadge } from '@/components/database-badge';
+import { Mermaid } from '@/components/mermaid';
 
 ## Module 5: Handling Larger Datasets
 
-*Sample text. You can add your content here.*
+### Q1. Explain clearly with diagram how the PCY algorithm helps to perform frequent itemset mining for large datasets.
+
+The <Highlight color="yellow">**PCY (Park-Chen-Yu) algorithm**</Highlight> is a smarter version of Apriori. It helps find <Highlight color="blue">frequent itemsets</Highlight> (items often bought together) without using too much memory.
+
+**The Problem:** Normal Apriori creates millions of "candidate pairs," which <Highlight color="red">crashes the computer's memory</Highlight>.
+**The Solution:** PCY uses <Highlight color="green">**hashing**</Highlight> to "guess" which pairs are likely to be frequent and throws away the rest early.
+
+**How it works:**
+1. <Highlight color="yellow">**Pass 1**</Highlight>: Count individual items AND <Highlight color="blue">hash pairs into buckets</Highlight>.
+2. <Highlight color="yellow">**Bitmap Creation**</Highlight>: If a bucket has very few items, we know <Highlight color="red">none of the pairs in it are frequent</Highlight>. We mark it as 0 in a bitmap.
+3. <Highlight color="yellow">**Pass 2**</Highlight>: We only count a pair if:
+   - Both items in the pair are frequent.
+   - The pair hashes into a bucket marked as <Highlight color="green">1 (Frequent)</Highlight> in the bitmap.
+
+**Working Diagram:**
+
+<Mermaid chart={`
+graph TD
+    A[Transaction Baskets] --> B[Pass 1: Count Items + Hash Pairs]
+    B --> C[Find Frequent Items + Create Bitmap]
+    C --> D[Pass 2: Generate Reduced Candidates]
+    D --> E[Count & Output Frequent Pairs]
+`} />
+
+**Conclusion**
+
+Hence, PCY makes mining <Highlight color="green">**faster and memory-efficient**</Highlight> by using hash buckets to prune useless candidate pairs.
+
+---
+
+### Q2. Explain how SON Algorithm handles large-scale frequent itemset mining.
+
+The <Highlight color="yellow">**SON Algorithm**</Highlight> is designed for datasets that are <Highlight color="red">too big for one computer</Highlight>. It works by <Highlight color="blue">breaking the data into chunks</Highlight> and processing them separately.
+
+**The Main Idea:** If an itemset is truly frequent in the whole dataset, it <Highlight color="green">must be frequent in at least one small chunk</Highlight>.
+
+**Steps in SON:**
+1. <Highlight color="yellow">**Phase 1 (Local Mining)**</Highlight>: 
+   - Split data into chunks.
+   - Find frequent items in each chunk <Highlight color="blue">locally</Highlight>.
+   - Combine all these local winners into a list of <Highlight color="green">"Candidates."</Highlight>
+2. <Highlight color="yellow">**Phase 2 (Global Counting)**</Highlight>: 
+   - Look at the whole dataset one more time.
+   - Count the support for <Highlight color="red">only</Highlight> the candidates from Phase 1.
+   - Keep the ones that pass the threshold.
+
+**Working Diagram:**
+
+<Mermaid chart={`
+graph TD
+    A[Large Dataset] --> B[Divide into Chunks]
+    B --> C[Find Local Frequent Itemsets]
+    C --> D[Union of Local Sets = Candidates]
+    D --> E[Second Pass on Full Dataset]
+    E --> F[Find Globally Frequent Itemsets]
+`} />
+
+**Conclusion**
+
+Thus, SON handles massive data by <Highlight color="blue">**splitting the work**</Highlight> and then verifying the results globally.
+
+---
+
+### Q3. Justify the use of CURE algorithm in clustering over other traditional clustering algorithms in the context of large-scale data.
+
+<Highlight color="yellow">**CURE (Clustering Using Representatives)**</Highlight> is better than traditional algorithms like <Highlight color="blue">K-Means</Highlight> for Big Data for several reasons.
+
+**Why Traditional Algorithms Fail:**
+- <Highlight color="red">Sensitive to Outliers</Highlight>: One bad data point can ruin the whole cluster.
+- <Highlight color="red">Spherical Shapes Only</Highlight>: They can't find clusters that look like "S" shapes or long lines.
+
+**Why CURE is Better:**
+1. <Highlight color="green">**Multiple Representatives**</Highlight>: Instead of one center point (centroid), CURE picks <Highlight color="blue">several points</Highlight> to represent a cluster. This helps it understand <Highlight color="green">weird shapes</Highlight>.
+2. <Highlight color="green">**Shrinking**</Highlight>: It moves these representative points toward the center, which <Highlight color="blue">ignores outliers</Highlight> that are far away.
+3. <Highlight color="green">**Scalable**</Highlight>: It uses random sampling to work with <Highlight color="blue">massive datasets</Highlight> quickly.
+
+**Conclusion**
+
+Hence, CURE is the preferred choice for Big Data because it <Highlight color="green">**handles outliers and complex shapes**</Highlight> much better than K-Means.
+
+---
+
+### Q4. Explain the concept of decision trees as a classification algorithm in Big Data analytics. Provide a small example scenario.
+
+A <Highlight color="yellow">**Decision Tree**</Highlight> is like a flowchart that helps classify data. It is one of the most popular tools in Big Data because it is <Highlight color="green">easy to read and very fast</Highlight>.
+
+**How it works:**
+- It asks a series of "Yes/No" questions about the data.
+- Each branch is an <Highlight color="blue">outcome</Highlight>.
+- Each leaf (end) is a <Highlight color="green">Class Label</Highlight>.
+
+**Example Scenario (Loan Approval):**
+A bank wants to know if they should give a loan to a customer.
+1. **Root Node**: Is Income $> 50,000$? (Yes/No)
+2. **Next Step**: Is Credit Score $> 700$? (Yes/No)
+3. **Leaf Node**: <Highlight color="green">Approve</Highlight> or <Highlight color="red">Reject</Highlight>.
+
+**Simple Diagram:**
+
+```text
+            Income > 50k?
+           /            \
+        Yes              No
+       /                  \
+   Credit > 700?        Reject
+    /        \
+Approve     Review
+```
+
+**Conclusion**
+
+Thus, a Decision Tree is a <Highlight color="blue">**simple yet powerful**</Highlight> way to categorize Big Data based on logical rules.
+
+---
+
+### Q5. Explain different Similarity Measures used in Big Data Analytics.
+
+In Big Data, we often need to find how <Highlight color="blue">"similar"</Highlight> two items are (e.g., two users, two products, or two documents).
+
+1. <Highlight color="yellow">**Jaccard Similarity**</Highlight>: Measures similarity between sets.
+   - Formula: $\frac{\text{Intersection}}{\text{Union}}$
+   - Useful for: <Highlight color="blue">Comparing sets of words in documents</Highlight>.
+2. <Highlight color="yellow">**Cosine Distance**</Highlight>: Measures the <Highlight color="green">angle</Highlight> between two vectors.
+   - If the angle is small, the items are very similar.
+   - Useful for: <Highlight color="blue">Text mining and Recommendation systems</Highlight>.
+3. <Highlight color="yellow">**Edit Distance**</Highlight>: Measures how many <Highlight color="blue">changes</Highlight> (add, delete, swap) are needed to turn one string into another.
+   - Useful for: <Highlight color="blue">Spell checkers and DNA sequence matching</Highlight>.
+4. <Highlight color="yellow">**Hamming Distance**</Highlight>: Counts the number of positions where characters are <Highlight color="red">different</Highlight>.
+   - Useful for: <Highlight color="blue">Error detection in data transmission</Highlight>.
+5. <Highlight color="yellow">**Euclidean Distance**</Highlight>: The "straight line" distance between two points in a graph.
+   - Useful for: <Highlight color="blue">Standard clustering algorithms</Highlight>.
+
+**Conclusion**
+
+Choosing the right similarity measure depends on whether you are comparing <Highlight color="blue">**sets, text, or coordinates**</Highlight>.
+
+---
+
+### Q6. Differentiate between exact and approximate methods for counting distinct elements in a data stream.
+
+When counting unique items (like unique visitors to a site), we have two choices:
+
+| Feature | Exact Methods | Approximate Methods |
+| :--- | :--- | :--- |
+| <Highlight color="blue">**Accuracy**</Highlight> | 100% Correct | 95-99% Correct (Estimate) |
+| <Highlight color="red">**Memory**</Highlight> | <Highlight color="red">High</Highlight> (Needs to save everything) | <Highlight color="green">Very Low</Highlight> (Uses summaries) |
+| <Highlight color="green">**Speed**</Highlight> | Slow for massive data | <Highlight color="green">Super Fast</Highlight> |
+| **Scalability** | Not good for Big Data | **Perfect for Big Data** |
+
+**Conclusion**
+
+Hence, while exact methods are perfect, <Highlight color="green">**approximate methods**</Highlight> are preferred for Big Data because they save <Highlight color="blue">massive amounts of memory</Highlight>.
+
+---
+
+### Q7. What is the count-distinct problem in data stream processing?
+
+The <Highlight color="yellow">**count-distinct problem**</Highlight> is the challenge of counting how many <Highlight color="blue">unique/different items</Highlight> are in a non-stop stream of data.
+
+**Why is it a "Problem"?**
+- In a stream, data is <Highlight color="red">infinite</Highlight>.
+- If you try to remember every unique user ID exactly, you will <Highlight color="red">run out of RAM (memory)</Highlight> very quickly.
+- You need a way to count them without "saving" them.
+
+**Solutions:**
+Systems use algorithms like <Highlight color="blue">Flajolet-Martin</Highlight> to <Highlight color="green">estimate</Highlight> the count using tiny memory.
+
+**Conclusion**
+
+Thus, the count-distinct problem is about <Highlight color="blue">**finding unique counts**</Highlight> under the pressure of <Highlight color="red">limited memory</Highlight>.
+
+---
+
+### Q8. Explain Page Rank algorithm with a suitable example.
+
+<Highlight color="yellow">**PageRank**</Highlight> is the algorithm Google used to rank websites. It treats the internet as a giant <Highlight color="blue">Social Network</Highlight> of pages.
+
+**The Rule:** A page is important if <Highlight color="green">important pages link to it</Highlight>. It's like a "popularity contest."
+
+**How it works:**
+- Every link is like a <Highlight color="blue">"Vote."</Highlight>
+- If a page has many "Votes" (links) from other popular pages, its rank goes up.
+- A link from a <Highlight color="green">high-rank page</Highlight> is worth more than a link from a low-rank page.
+
+**Example:**
+Imagine Page A, Page B, and Page C.
+- Page A is a very popular news site.
+- Page A links to Page B.
+- Even if Page B has only <Highlight color="red">one link</Highlight>, it becomes important because that link came from the "famous" Page A.
+
+**Conclusion**
+
+Hence, PageRank measures the <Highlight color="green">**authority and importance**</Highlight> of nodes in a network based on links.
+
+---
+
+### Q9. Explain social network graph clustering with example.
+
+Social network clustering is the process of finding <Highlight color="green">"groups" or "communities"</Highlight> in a web of users.
+
+**The Concept:** People in a cluster are <Highlight color="blue">tightly connected</Highlight> to each other, but <Highlight color="red">loosely connected</Highlight> to people outside.
+
+**Example:**
+Think of your college's social graph:
+- **Cluster 1**: Computer Science students (everyone knows each other).
+- **Cluster 2**: Mechanical Engineering students.
+- **Edges**: A few students who have friends in both departments.
+
+Clustering algorithms (like <Highlight color="blue">Girvan-Newman</Highlight>) find these departments by <Highlight color="red">cutting the weak links</Highlight> between groups.
+
+**Conclusion**
+
+Thus, clustering helps social media apps <Highlight color="green">**identify user tribes**</Highlight> for better recommendations and ads.
+
+---
+
+### Q10. Explain collaborative-based recommendation in detail.
+
+<Highlight color="yellow">**Collaborative Filtering**</Highlight> is a recommendation method that suggests items based on <Highlight color="blue">"People like you also liked..."</Highlight>
+
+**Types:**
+
+1. <Highlight color="yellow">**User-Based**</Highlight>: Finds users who have similar tastes to you.
+   - *Example*: You and your friend both liked *Inception* and *Interstellar*. Your friend watches *Tenet* and likes it. The system <Highlight color="green">recommends *Tenet* to you</Highlight>.
+2. <Highlight color="yellow">**Item-Based**</Highlight>: Finds items that are frequently bought together by everyone.
+   - *Example*: Many people who buy a <DatabaseBadge type="rdbms" text="laptop" /> also buy a mouse. When you add a laptop to your cart, it <Highlight color="green">suggests the mouse</Highlight>.
+
+**Why it's popular:**
+- It doesn't need to know <Highlight color="blue">what</Highlight> the movie is about.
+- It only needs to know <Highlight color="blue">who</Highlight> liked it.
+
+**Conclusion**
+
+Hence, collaborative filtering creates <Highlight color="green">**personalized experiences**</Highlight> by learning from the <Highlight color="blue">wisdom of the crowd</Highlight>.
