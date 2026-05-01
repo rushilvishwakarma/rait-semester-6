@@ -10,223 +10,241 @@ import { Mermaid } from '@/components/mermaid';
 
 ## Module 4: Mining Data Streams
 
-In simple terms, the <Highlight color="yellow">**stream data model**</Highlight> is used for data that <Highlight color="blue">never stops arriving</Highlight>. Unlike a normal database where you save data first and then search it, in a stream, you process the data <Highlight color="blue">**as it flows in**</Highlight>.
+### Q1. Discuss the Stream Data Model in the context of Big Data analytics, focusing on DSMS and their significance.
 
-Think of it like a <Highlight color="green">live video stream</Highlight> vs a downloaded movie. You have to watch (process) the live stream right now because it's happening in real-time.
+**Answer:**  
+In Big Data analytics, the <Highlight color="yellow">**stream data model**</Highlight> is used for data that <Highlight color="blue">arrives continuously, rapidly, and in sequence over time</Highlight>. Unlike traditional databases where data is stored first and queried later, stream processing systems handle data <Highlight color="blue">**as it arrives**</Highlight>.
 
 **Examples of Stream Data:**
-- <Highlight color="blue">Sensor data</Highlight> from a smart city.
-- <Highlight color="blue">Stock market prices</Highlight> changing every millisecond.
-- <Highlight color="blue">Live social media feeds</Highlight> (like Twitter/X).
-- <Highlight color="blue">GPS signals</Highlight> from moving cars.
+- <Highlight color="blue">Sensor readings</Highlight> from smart devices.
+- <Highlight color="blue">Stock market prices</Highlight> changing rapidly.
+- <Highlight color="blue">Social media feeds</Highlight> and clickstreams.
+- <Highlight color="blue">Network traffic</Highlight> and GPS signals.
 
-A <Highlight color="yellow">**Data Stream Management System (DSMS)**</Highlight> is the tool that handles this. It doesn't store all the data because the data is <Highlight color="red">unbounded (never-ending)</Highlight> and <Highlight color="red">too big to save</Highlight>.
+A <Highlight color="yellow">**Data Stream Management System (DSMS)**</Highlight> is a software system designed to process and analyze these continuous data streams. It is significant because it allows <Highlight color="green">real-time analysis</Highlight> without needing to store the entire dataset, which is often impossible due to its size.
 
-**Why is DSMS important?**
-- It runs <Highlight color="green">**continuous queries**</Highlight>. You tell the system once what to look for, and it keeps giving you updates automatically.
-- This is different from a traditional <DatabaseBadge type="rdbms" text="DBMS" />, where you have to ask for data manually every time.
-- It is perfect for systems that need <Highlight color="green">immediate action</Highlight>, like detecting credit card fraud or monitoring a patient's heartbeat.
+**Significance of DSMS:**
+- **Continuous Queries**: Unlike a traditional <DatabaseBadge type="rdbms" text="DBMS" />, which runs a query once, a DSMS runs <Highlight color="green">**continuous queries**</Highlight> that provide updated results as new data arrives.
+- **Immediate Response**: Essential for applications like <Highlight color="blue">fraud detection</Highlight> or <Highlight color="blue">system monitoring</Highlight> where immediate action is required.
+- **Handles Unbounded Data**: Designed to work with data that is <Highlight color="red">potentially infinite</Highlight>.
 
-**Conclusion**
-
-Thus, the stream data model and DSMS allow us to <Highlight color="green">**analyze high-speed data instantly**</Highlight> without needing to store everything first.
+**Conclusion**  
+Thus, the stream data model and DSMS are critical for Big Data applications that require <Highlight color="green">**immediate insights from high-speed, continuous data**</Highlight>.
 
 ---
 
 ### Q2. Explain with block diagram the architecture of a Data Stream Management System. (10 marks)
 
-A <Highlight color="yellow">**DSMS**</Highlight> is built to handle data that <Highlight color="blue">moves very fast</Highlight>. It works differently from a normal <DatabaseBadge type="rdbms" text="DBMS" /> because it doesn't wait for data to be "saved" in a table.
+**Answer:**  
+A <Highlight color="yellow">**DSMS architecture**</Highlight> is designed to process high-speed, continuous data streams efficiently. It focuses on <Highlight color="blue">query execution, memory management, and approximate summaries</Highlight> rather than permanent storage.
 
-**Block diagram of DSMS**
+### Block Diagram of DSMS
 
 <Mermaid chart={`
 graph TD
     A[Stream Sources] --> B[Input Adapter]
     B --> C[Query Processor]
     C --> D[Memory Manager]
-    D --> E[Real-time Output]
+    D --> E[Output / Alerts]
 `} />
 
 **Core Components:**
 
-1. <Highlight color="yellow">**Stream Sources**</Highlight>: These are the origins of data, like <Highlight color="blue">sensors, website logs, or stock exchanges</Highlight>.
-2. <Highlight color="yellow">**Input Adapter**</Highlight>: This "catches" the data and <Highlight color="blue">prepares it</Highlight> for the system to understand.
-3. <Highlight color="yellow">**Query Processor**</Highlight>: The <Highlight color="green">brain of the system</Highlight>. it runs your questions (queries) on the live data as it flies past.
-4. <Highlight color="yellow">**Memory Manager**</Highlight>: Since the stream is <Highlight color="red">infinite</Highlight>, we can't save it all. This manager uses <Highlight color="blue">Windows</Highlight> (only looking at the last 5 minutes of data) or <Highlight color="blue">Summaries</Highlight> to save space.
-5. <Highlight color="yellow">**Output Module**</Highlight>: Sends out the results to <Highlight color="green">dashboards or triggers alerts</Highlight> (like a "Price Drop" notification).
+1. <Highlight color="yellow">**Stream Sources**</Highlight>: Producers that <Highlight color="blue">continuously generate data</Highlight>, such as sensors, stock exchanges, or network logs.
+2. <Highlight color="yellow">**Input Adapter**</Highlight>: Captures the incoming data and <Highlight color="blue">converts it</Highlight> into a format suitable for the system.
+3. <Highlight color="yellow">**Query Processor**</Highlight>: The <Highlight color="green">core engine</Highlight> that executes continuous queries on the flowing data.
+4. <Highlight color="yellow">**Memory Manager**</Highlight>: Since data is infinite, it uses <Highlight color="blue">Windows</Highlight> (temporary storage of recent data) and <Highlight color="blue">Synopses</Highlight> (compact summaries) to manage limited RAM.
+5. <Highlight color="yellow">**Output Module**</Highlight>: Produces the final results, sends <Highlight color="green">alerts</Highlight>, or updates real-time dashboards.
 
-**How it works (In short):**
-Data comes from <Highlight color="blue">sources</Highlight> $\rightarrow$ <Highlight color="blue">Input Adapter</Highlight> cleans it $\rightarrow$ <Highlight color="blue">Query Processor</Highlight> analyzes it $\rightarrow$ <Highlight color="blue">Memory Manager</Highlight> keeps only what's needed $\rightarrow$ <Highlight color="green">Output</Highlight> shows the result.
-
-**Conclusion**
-
-Hence, DSMS architecture is focused on <Highlight color="blue">**speed and smart memory usage**</Highlight> to process non-stop data.
+**Conclusion**  
+Hence, DSMS architecture is specialized for <Highlight color="blue">**real-time processing**</Highlight> by prioritizing stream flow and efficient memory usage over traditional disk storage.
 
 ---
 
-Processing data streams is hard because the data is <Highlight color="red">fast, non-stop, and huge</Highlight>. Here are the main issues:
+### Q3. Discuss the key issues involved in stream processing.
 
-1. <Highlight color="yellow">**Unbounded Data**</Highlight>: The data is <Highlight color="red">potentially infinite</Highlight>. You can't just click "Save All" because your hard drive will eventually fill up.
-2. <Highlight color="yellow">**Limited Memory**</Highlight>: Since we can't save everything, we can only keep <Highlight color="red">small snippets</Highlight> or summaries in memory at any given time.
-3. <Highlight color="yellow">**Real-Time Speed**</Highlight>: If you're detecting a <Highlight color="blue">bank robbery or a stock market crash</Highlight>, you need the answer <Highlight color="green">NOW</Highlight>, not in 10 minutes.
-4. <Highlight color="yellow">**Single-Pass Processing**</Highlight>: You only get <Highlight color="red">one chance</Highlight> to look at the data. Once it flows past, it's gone unless you saved a summary of it.
-5. <Highlight color="yellow">**Out-of-Order Data**</Highlight>: Sometimes data packets arrive <Highlight color="red">late or in the wrong order</Highlight> due to network issues, which makes analysis tricky.
+**Answer:**  
+Stream processing introduces several challenges because the data <Highlight color="red">arrives continuously, rapidly, and in massive volumes</Highlight>.
 
-**Conclusion**
+**Key Issues:**
+1. <Highlight color="yellow">**Unbounded Data**</Highlight>: The data stream is <Highlight color="red">potentially infinite</Highlight>. It is impossible to store the entire stream permanently in a traditional <DatabaseBadge type="rdbms" text="database" />.
+2. <Highlight color="yellow">**Limited Memory**</Highlight>: Since the input is huge, only a <Highlight color="red">small portion</Highlight> can be stored in RAM at any time. Algorithms must be extremely memory-efficient.
+3. <Highlight color="yellow">**Real-Time Requirements**</Highlight>: Applications like <Highlight color="blue">stock trading</Highlight> or <Highlight color="blue">intrusion detection</Highlight> need <Highlight color="green">immediate response</Highlight>.
+4. <Highlight color="yellow">**Single-Pass Processing**</Highlight>: Data usually passes through the system only once. If it isn't processed immediately, it is lost unless a summary is saved.
+5. <Highlight color="yellow">**Arrival Rate**</Highlight>: Data may arrive <Highlight color="red">faster than it can be processed</Highlight>, requiring highly scalable and efficient systems.
+6. <Highlight color="yellow">**Out-of-Order Data**</Highlight>: Network delays can cause data packets to arrive <Highlight color="red">late or in the wrong sequence</Highlight>.
 
-Thus, stream processing systems must be <Highlight color="green">**extremely fast and smart**</Highlight> about what they choose to remember and what they throw away.
-
----
-
-Since stream data <Highlight color="red">never stops</Highlight>, if we try to save every bit of it, we would need <Highlight color="red">infinite memory</Highlight>. This is called the <Highlight color="yellow">**unbounded memory requirement**</Highlight>.
-
-Because no computer has infinite memory, we have to use <Highlight color="blue">approximate query answering</Highlight>. This means instead of giving a 100% exact answer (which is too slow and memory-heavy), we give an answer that is <Highlight color="green">"close enough"</Highlight> to the truth.
-
-**Why use Approximation?**
-- <Highlight color="green">Saves Memory</Highlight>: We only store small summaries instead of the whole stream.
-- <Highlight color="green">Saves Time</Highlight>: We get results instantly.
-- <Highlight color="blue">Scalable</Highlight>: It works even when data volume is massive.
-
-**Example:**
-Instead of remembering every single person who visits a website (which takes a lot of space), we use a mathematical trick (like <Highlight color="blue">Flajolet-Martin</Highlight>) to <Highlight color="green">estimate</Highlight> the number of unique visitors using almost zero memory.
-
-**Conclusion**
-
-Hence, approximate query answering is the only <Highlight color="blue">**practical way**</Highlight> to handle data streams because it solves the problem of <Highlight color="red">unlimited data growth</Highlight>.
+**Conclusion**  
+Thus, stream processing must balance <Highlight color="red">**memory limits, high speed, and accuracy**</Highlight> to provide reliable real-time analytics.
 
 ---
 
-These two describe data in different ways:
+### Q4. Explain the concept of unbounded memory requirement and approximate query answering in data stream processing.
 
-1. <Highlight color="yellow">**Streaming Data Patterns**</Highlight>: Focuses on <Highlight color="blue">**How data arrives**</Highlight>.
-   - Is it constant? Is it in bursts? Is it fast?
-   - Examples: <Highlight color="blue">Live stock prices, sensor logs, social media feeds</Highlight>.
-2. <Highlight color="yellow">**Structural Data Patterns**</Highlight>: Focuses on <Highlight color="green">**How data is organized**</Highlight>.
-   - Is it a table? A document? A graph?
-   - Examples: <Highlight color="green">SQL tables, JSON documents, Key-value pairs</Highlight>.
+**Answer:**  
+In stream processing, the <Highlight color="yellow">**unbounded memory requirement**</Highlight> refers to the fact that if a system tries to store every element of an infinite stream, it will eventually <Highlight color="red">run out of memory</Highlight>.
 
-**In short:**
-- <Highlight color="blue">Streaming</Highlight> = **Time & Speed** (When does it arrive?)
-- <Highlight color="green">Structural</Highlight> = **Format & Schema** (What does it look like?)
+Since no system has infinite RAM, we cannot save the complete stream. Instead, we use <Highlight color="yellow">**approximate query answering**</Highlight>. This means the system provides a result that is <Highlight color="green">close to the exact answer</Highlight> but uses much less time and memory.
 
-**Conclusion**
+**Key Aspects:**
+- **Compact Summaries**: Using <Highlight color="blue">sketches, samples, and Bloom filters</Highlight> to represent the data.
+- **Trade-off**: We accept a <Highlight color="red">small error</Highlight> in exchange for <Highlight color="green">high speed and low memory usage</Highlight>.
+- **Scalability**: Approximate methods allow the system to handle <Highlight color="blue">massive data volumes</Highlight> that would crash an exact counting system.
 
-Thus, streaming patterns help us manage <Highlight color="blue">**data flow**</Highlight>, while structural patterns help us manage <Highlight color="green">**data storage**</Highlight>.
+**Example:**  
+Instead of storing every unique user ID to count website visitors, the <Highlight color="blue">Flajolet-Martin algorithm</Highlight> can <Highlight color="green">estimate the count</Highlight> using very little memory.
 
----
-
-A <Highlight color="yellow">**Bloom Filter**</Highlight> is a very clever way to <Highlight color="blue">check if something is in a set</Highlight> without actually storing the data itself. It's like a tiny checklist that uses <Highlight color="green">almost no memory</Highlight>.
-
-It gives two types of answers:
-1. <Highlight color="green">"Definitely NO"</Highlight>: The item is 100% not there.
-2. <Highlight color="blue">"Maybe YES"</Highlight>: The item might be there (it's not 100% sure).
-
-**Why it's cool:** It <Highlight color="green">never tells a lie</Highlight> if the answer is "No". But it might sometimes say "Yes" by mistake (this is called a <Highlight color="red">false positive</Highlight>).
-
-**How it works:**
-- You have a row of boxes (a <Highlight color="blue">bit array</Highlight>) filled with 0s.
-- You have several <Highlight color="blue">hash functions</Highlight> (mathematical mixers).
-- **To add an item**: Mix it with the hash functions to get some positions in the row. Change those boxes from <Highlight color="green">0 to 1</Highlight>.
-- **To check an item**: Mix it again. If <Highlight color="red">any</Highlight> of those boxes are still 0, the item is definitely not there. If all are 1, it <Highlight color="blue">might</Highlight> be there.
-
-**Conclusion**
-
-Hence, a Bloom Filter is a <Highlight color="green">**super-fast filter**</Highlight> that saves massive amounts of memory by allowing a tiny bit of error.
+**Conclusion**  
+Hence, approximate query answering is a <Highlight color="blue">**practical necessity**</Highlight> in stream processing to avoid the limitations of unbounded memory.
 
 ---
 
-In Big Data, searching through a <DatabaseBadge type="rdbms" text="huge database" /> takes <Highlight color="red">too much time</Highlight>. A Bloom Filter acts as a <Highlight color="green">fast front-gate</Highlight> to block unnecessary searches.
+### Q5. Differentiate between streaming data patterns and structural data patterns.
 
-**Real-world Example (URL Checking):**
-Imagine Google wants to check if a website URL is <Highlight color="red">spam</Highlight>. Storing billions of spam URLs takes <Highlight color="red">huge space</Highlight>.
-- Instead, they put them in a <Highlight color="yellow">**Bloom Filter**</Highlight>.
-- When you click a link, the filter checks the URL.
-- If it says <Highlight color="green">**"Not in the spam list"**</Highlight>, you can go there instantly.
-- If it says <Highlight color="blue">**"Might be spam"**</Highlight>, only then does Google go and check the actual slow database.
+**Answer:**  
+These patterns describe different characteristics of Big Data—one focusing on <Highlight color="blue">timing</Highlight> and the other on <Highlight color="green">organization</Highlight>.
 
-**Main Benefits:**
-- <Highlight color="green">Saves Disk Space</Highlight>: Uses very little memory.
-- <Highlight color="green">Increases Speed</Highlight>: No need to check the slow database every time.
-- <Highlight color="blue">Handles Massive Data</Highlight>: Perfect for systems with trillions of records.
+| Feature | Streaming Data Patterns | Structural Data Patterns |
+| :--- | :--- | :--- |
+| **Focus** | <Highlight color="blue">Behavior over time</Highlight> (How it arrives) | <Highlight color="green">Organization/Schema</Highlight> (How it is stored) |
+| **Examples** | <Highlight color="blue">Continuous, Bursty, Periodic, High-speed</Highlight> | <Highlight color="green">Key-Value, Document, Graph, Tabular</Highlight> |
+| **Nature** | <Highlight color="blue">Dynamic and active</Highlight> | <Highlight color="green">Static and passive</Highlight> |
+| **Key Concern** | <Highlight color="blue">Flow rate and order</Highlight> | <Highlight color="green">Data relationships and format</Highlight> |
 
-**Conclusion**
-
-Thus, Bloom Filters make Big Data systems <Highlight color="green">**faster and cheaper**</Highlight> to run by filtering out unnecessary work.
+**Conclusion**  
+In short, streaming patterns deal with the <Highlight color="blue">**flow of data**</Highlight>, while structural patterns deal with the <Highlight color="green">**format of data**</Highlight>.
 
 ---
 
-This algorithm is used to answer one simple question: <Highlight color="blue">**"How many unique items are in this stream?"**</Highlight> (e.g., how many unique people visited my site today?)
+### Q6. Explain the Bloom Filter in detail.
 
-Normally, to count unique items, you have to save all of them, which <Highlight color="red">wastes memory</Highlight>. The Flajolet-Martin algorithm uses <Highlight color="green">almost no memory</Highlight> to give you an estimate.
+**Answer:**  
+A <Highlight color="yellow">**Bloom Filter**</Highlight> is a space-efficient <Highlight color="green">probabilistic data structure</Highlight> used to test whether an element belongs to a set. It provides a very fast way to check membership using minimal memory.
 
-**How it works (The Simple Idea):**
-- It hashes every item into a binary number (like `01101000`).
-- It looks at the <Highlight color="blue">trailing zeros</Highlight> (how many zeros are at the end).
-- **Rule**: If you see a lot of zeros at the end (like `...0000`), it means you have probably seen <Highlight color="green">a lot of distinct items</Highlight>.
-- The algorithm uses this probability to <Highlight color="green">guess</Highlight> the total count of unique items.
+**Possible Answers:**
+1. <Highlight color="green">**Definitely Not Present**</Highlight>: The element is 100% not in the set.
+2. <Highlight color="blue">**Possibly Present**</Highlight>: The element might be in the set (includes a chance of <Highlight color="red">false positives</Highlight>).
 
-**Why use it?**
-- <Highlight color="green">One Pass</Highlight>: You only look at the data once.
-- <Highlight color="green">Tiny Memory</Highlight>: You only remember the "longest string of zeros" you've seen, not the items themselves.
-- <Highlight color="blue">Real-Time</Highlight>: Perfect for counting hashtags on Twitter or unique IPs on a server.
+**How it Works:**
+- **Bit Array**: A row of $m$ bits, initially all <Highlight color="green">0</Highlight>.
+- **Hash Functions**: $k$ independent hash functions.
+- **Insertion**: To add an item, apply the $k$ hash functions to it and set the resulting bit positions to <Highlight color="blue">1</Highlight>.
+- **Query**: To check an item, apply the same hash functions. If <Highlight color="red">any</Highlight> of the bits are 0, it is **definitely not** there. If all are 1, it is **possibly** there.
 
-**Conclusion**
+**Properties:**
+- <Highlight color="green">No False Negatives</Highlight>: If it says "No", it is always correct.
+- <Highlight color="red">False Positives</Highlight>: It might occasionally say "Yes" for an item that wasn't added.
 
-Hence, Flajolet-Martin is a <Highlight color="green">**space-saving hero**</Highlight> for real-time systems that need to count unique things at massive scale.
-
----
-
-MapReduce is like a <Highlight color="blue">team of workers</Highlight> cleaning a giant stadium. Instead of one person doing everything, the work is split up.
-
-1. <Highlight color="yellow">**Map Phase (The Splitter)**</Highlight>:
-   - Each worker takes a small pile of trash (data) and labels it.
-   - **Example**: If we're counting fruit in a box `[Apple, Banana, Apple]`, the Map phase says: `Apple: 1`, `Banana: 1`, `Apple: 1`.
-2. <Highlight color="yellow">**Shuffling (The Organizer)**</Highlight>:
-   - All the same items are <Highlight color="blue">put into the same group</Highlight>.
-   - Now we have one group for `Apples` and one for `Bananas`.
-3. <Highlight color="yellow">**Reduce Phase (The Counter)**</Highlight>:
-   - Each group is counted to get a final total.
-   - Result: `Apple: 2`, `Banana: 1`.
-
-**Key Point:** This happens on <Highlight color="green">many computers at once</Highlight>, which is why it's so fast for Big Data.
-
-**Conclusion**
-
-Thus, MapReduce handles Big Data by <Highlight color="blue">**Mapping**</Highlight> (splitting/labeling), <Highlight color="blue">**Shuffling**</Highlight> (grouping), and <Highlight color="blue">**Reducing**</Highlight> (summarizing).
+**Conclusion**  
+Hence, the Bloom Filter is a <Highlight color="green">**high-speed filter**</Highlight> that saves massive memory by allowing a small, controlled margin of error.
 
 ---
 
-Multiplying two giant matrices normally takes <Highlight color="red">forever</Highlight>. MapReduce makes it fast by <Highlight color="green">breaking the matrix into tiny pieces</Highlight>.
+### Q7. How is Bloom Filter useful for Big Data Analytics? Explain with one example.
 
-**The Logic:**
-To get one cell in the result matrix, you multiply a **row** from Matrix A with a **column** from Matrix B.
+**Answer:**  
+In Big Data, checking membership in a <DatabaseBadge type="rdbms" text="massive database" /> is slow and expensive. A **Bloom Filter** acts as a <Highlight color="green">fast front-end filter</Highlight> to avoid unnecessary lookups.
+
+**Example: Spam URL Detection**  
+Suppose a browser wants to check if a URL is in a list of millions of malicious websites.
+- Instead of searching a huge database for every click, the browser uses a <Highlight color="yellow">**Bloom Filter**</Highlight>.
+- If the filter says <Highlight color="green">**"Not in the list"**</Highlight>, the user can visit the site immediately (Fast).
+- If it says <Highlight color="blue">**"Possibly Malicious"**</Highlight>, only then does the system perform a slow check against the actual database.
+
+**Benefits:**
+- <Highlight color="green">Reduces Disk I/O</Highlight>: Avoids slow database hits.
+- <Highlight color="green">Saves Memory</Highlight>: Can represent billions of items in just a few megabytes.
+- <Highlight color="blue">Scalable</Highlight>: Works perfectly for massive real-time datasets.
+
+**Conclusion**  
+Thus, Bloom Filters make Big Data systems <Highlight color="green">**significantly faster and more cost-effective**</Highlight> by acting as an efficient "gatekeeper."
+
+---
+
+### Q8. Evaluate the use of the Flajolet-Martin algorithm in real-time big data systems.
+
+**Answer:**  
+The <Highlight color="yellow">**Flajolet-Martin (FM) algorithm**</Highlight> is a probabilistic method used to estimate the number of <Highlight color="blue">**distinct elements**</Highlight> in a stream (the "Count-Distinct" problem).
+
+**Working Principle:**
+- Each element is <Highlight color="blue">hashed</Highlight> into a binary string.
+- The algorithm tracks the maximum number of <Highlight color="blue">trailing zeros</Highlight> (zeros at the end of the hash value) seen across all items.
+- If we see a hash with $R$ trailing zeros, we can estimate that there are approximately $2^R$ distinct items.
+
+**Advantages:**
+- <Highlight color="green">Minimal Memory</Highlight>: Only needs to store the maximum $R$ value, not the items themselves.
+- <Highlight color="green">One-Pass</Highlight>: Processes the stream in a single pass, ideal for <Highlight color="blue">real-time analytics</Highlight>.
+- <Highlight color="blue">Scalable</Highlight>: Can count unique users among billions of visits with very little overhead.
+
+**Limitations:**
+- <Highlight color="red">Approximate Result</Highlight>: It gives an estimate, not an exact count.
+- <Highlight color="red">Variance</Highlight>: A single "lucky" hash can throw off the estimate (often solved by using multiple hash functions and averaging).
+
+**Conclusion**  
+Hence, the FM algorithm is a <Highlight color="green">**powerful tool for real-time systems**</Highlight> like social media or network monitoring where counting unique items must be done at scale.
+
+---
+
+### Q9. What is MapReduce? Explain how Map and Reduce work. What is Shuffling in MapReduce? (10 marks)
+
+**Answer:**  
+<Highlight color="yellow">**MapReduce**</Highlight> is a distributed programming model for processing large-scale data in parallel across a cluster of computers. It consists of three main phases:
+
+**1. Map Phase:**  
+The input data is split into small chunks and sent to <Highlight color="blue">Mappers</Highlight>. Each Mapper processes its chunk and outputs **intermediate key-value pairs**.
+- *Example*: In word count, the mapper takes "Apple Banana Apple" and outputs `(Apple, 1), (Banana, 1), (Apple, 1)`.
+
+**2. Shuffling and Sorting:**  
+This is the intermediate step where the system <Highlight color="blue">groups all values belonging to the same key</Highlight> together and sorts them. This ensures that a single Reducer receives all data for a specific key.
+
+**3. Reduce Phase:**  
+The <Highlight color="blue">Reducers</Highlight> take the grouped key-value pairs and perform an <Highlight color="green">aggregation or summary</Highlight> task.
+- *Example*: The Reducer for "Apple" receives `(Apple, [1, 1])` and outputs `(Apple, 2)`.
+
+**Conclusion**  
+Thus, MapReduce allows Big Data to be processed by <Highlight color="blue">**Mapping**</Highlight> (splitting/labelling), <Highlight color="blue">**Shuffling**</Highlight> (organizing), and <Highlight color="blue">**Reducing**</Highlight> (aggregating) across many machines.
+
+---
+
+### Q10. Write the steps for matrix multiplication using MapReduce.
+
+**Answer:**  
+Matrix multiplication ($C = A \times B$) can be parallelized using MapReduce by <Highlight color="blue">calculating partial products</Highlight> in the Map phase and <Highlight color="green">summing them</Highlight> in the Reduce phase.
 
 **Steps:**
-1. **Map Phase**: The system identifies which row and column elements are needed for each final cell and <Highlight color="blue">tags them</Highlight> with the cell's position (like `(Row 1, Col 1)`).
-2. **Shuffle**: All elements needed for cell `(1,1)` are <Highlight color="blue">sent to the same worker</Highlight>.
-3. **Reduce Phase**: The worker <Highlight color="green">multiplies the matching pairs and adds them up</Highlight> to get the final value for that cell.
+1. <Highlight color="yellow">**Map Phase**</Highlight>: 
+   - For every element $A[i, k]$, the mapper emits keys for all result cells $(i, j)$ it contributes to.
+   - For every element $B[k, j]$, the mapper emits keys for all result cells $(i, j)$ it contributes to.
+2. <Highlight color="yellow">**Shuffle**</Highlight>: 
+   - All elements with the same intermediate key $(i, j)$—meaning they belong to the same result cell—are <Highlight color="blue">grouped together</Highlight>.
+3. <Highlight color="yellow">**Reduce Phase**</Highlight>: 
+   - The reducer receives all elements $A[i, k]$ and $B[k, j]$ for a specific cell $(i, j)$.
+   - It <Highlight color="green">multiplies matching pairs</Highlight> (where $k$ is the same) and adds them up to get the final value for $C[i, j]$.
 
-**Conclusion**
-
-Hence, MapReduce solves matrix multiplication by <Highlight color="blue">**calculating all result cells at the same time**</Highlight> across many computers.
+**Conclusion**  
+Hence, MapReduce performs matrix multiplication by <Highlight color="blue">**distributing the multiplication and addition tasks**</Highlight> across multiple nodes, making it efficient for massive matrices.
 
 ---
 
-A social network is a giant web of <Highlight color="blue">Nodes</Highlight> (People) and <Highlight color="blue">Edges</Highlight> (Friendships/Follows). Mining this graph means looking for <Highlight color="green">hidden groups or important people</Highlight>.
+### Q11. Explain methods for mining social network graphs, focusing on community detection algorithms and their role in social media analytics.
 
-**What is Community Detection?**
-It's finding a <Highlight color="green">"click" or a "group"</Highlight> where everyone is tightly connected to each other but not so much to people outside the group (like a group of college friends vs the rest of the world).
+**Answer:**  
+Mining social network graphs involves analyzing <Highlight color="blue">nodes (users)</Highlight> and <Highlight color="blue">edges (relationships)</Highlight> to find patterns. A key task is **Community Detection**, which identifies groups of users who are more tightly connected to each other than to the rest of the network.
 
-**Key Mining Methods:**
-- <Highlight color="yellow">**Degree Analysis**</Highlight>: Finding the <Highlight color="blue">"Influencers"</Highlight> who have the most followers.
-- <Highlight color="yellow">**Centrality**</Highlight>: Finding people who are <Highlight color="green">at the center</Highlight> of the network and connect different groups.
-- <Highlight color="yellow">**Community Detection**</Highlight>: Finding <Highlight color="green">tribes or groups</Highlight> with the same interests.
+**Mining Methods:**
+- <Highlight color="yellow">**Degree Analysis**</Highlight>: Identifying influential "hubs" (users with many connections).
+- <Highlight color="yellow">**Centrality Measures**</Highlight>: Finding nodes that act as "bridges" between different parts of the network.
+- <Highlight color="yellow">**Link Analysis**</Highlight>: Predicting future connections or finding the "shortest path" for information spread.
 
-**Why is this useful for Social Media?**
-- <Highlight color="green">Ad Targeting</Highlight>: Showing sports ads to a "Sports Fans" community.
-- <Highlight color="green">Recommendations</Highlight>: Suggesting you follow someone your "community" already follows.
-- <Highlight color="blue">Trend Analysis</Highlight>: Seeing how a viral video spreads from one group to another.
+**Community Detection Algorithms:**
+- **Modularity-based**: Groups nodes to <Highlight color="green">maximize internal connections</Highlight>.
+- **Hierarchical Clustering**: Groups nodes step-by-step based on similarity.
+- **Girvan-Newman**: Detects communities by <Highlight color="red">removing "weak" edges</Highlight> that have high betweenness (bridge edges).
 
-**Conclusion**
+**Role in Social Media Analytics:**
+- <Highlight color="green">Targeted Advertising</Highlight>: Showing ads to specific interest-based communities.
+- <Highlight color="green">Recommendation Systems</Highlight>: Suggesting friends or content popular within your community.
+- <Highlight color="blue">Influencer Discovery</Highlight>: Finding key users within a sub-group to lead marketing campaigns.
 
-Thus, graph mining and community detection help apps understand <Highlight color="blue">**who is important**</Highlight> and <Highlight color="green">**how people group together**</Highlight> in the digital world.
+**Conclusion**  
+Thus, community detection is a <Highlight color="blue">**fundamental tool**</Highlight> for understanding the social structure and interaction patterns in massive digital networks.

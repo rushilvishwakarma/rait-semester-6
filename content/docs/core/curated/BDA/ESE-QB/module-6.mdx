@@ -1,8 +1,132 @@
 ---
 title: Module 6
-description: Big Data Models to Social Networking.
+description: Big Data Models to Social Networking - Recommendation Systems, PageRank, and Jaccard Similarity.
 ---
+
+import { Highlight } from '@/components/highlight';
+import { QuestionDot } from '@/components/question-dot';
+import { DatabaseBadge } from '@/components/database-badge';
+import { Mermaid } from '@/components/mermaid';
 
 ## Module 6: Big Data Models to Social Networking
 
-*Sample text. You can add your content here.*
+### 1. Recommendation Systems: Types, Collaborative Filtering, Content-Based Filtering, and Applications
+
+**Answer:**  
+A <Highlight color="yellow">**recommendation system**</Highlight> is a tool that suggests relevant items to users based on their preferences or behavior. It is used in platforms like <Highlight color="blue">Amazon, Netflix, YouTube, and Spotify</Highlight> to help users discover content.
+
+The two main types are **Collaborative Filtering** and **Content-Based Filtering**.
+
+1. <Highlight color="yellow">**Collaborative Filtering**</Highlight>: Recommends items based on the behavior of <Highlight color="blue">other similar users</Highlight>.
+   - *Logic*: If User A and User B liked the same 3 movies, and User B likes a 4th movie, it is recommended to User A.
+2. <Highlight color="yellow">**Content-Based Filtering**</Highlight>: Recommends items based on the <Highlight color="green">features of items</Highlight> the user already liked.
+   - *Logic*: If you watch sci-fi movies, the system recommends other movies with the same <Highlight color="blue">genre, actors, or theme</Highlight>.
+
+### Comparison
+
+| Feature | Collaborative Filtering | Content-Based Filtering |
+| :--- | :--- | :--- |
+| **Focus** | <Highlight color="blue">Similar Users</Highlight> | <Highlight color="green">Similar Items</Highlight> |
+| **Data used** | User interactions (Likes, Ratings) | Item descriptions (Tags, Genre) |
+| **Advantage** | Can recommend <Highlight color="green">new/unexpected</Highlight> items | Doesn't need other users' data |
+| **Requirement** | Needs <Highlight color="red">many users</Highlight> to start | Needs detailed item attributes |
+
+**Conclusion**  
+Thus, recommendation systems help users find useful items quickly by analyzing either <Highlight color="blue">**user similarity**</Highlight> or <Highlight color="green">**item similarity**</Highlight>.
+
+---
+
+### 2. Collaborative Filtering with Similarity
+
+**Answer:**  
+<Highlight color="yellow">**Collaborative filtering**</Highlight> works on the principle that <Highlight color="green">users with similar interests in the past will likely have similar interests in the future</Highlight>.
+
+**Steps in Collaborative Filtering:**
+1. **Data Collection**: Collect user behavior (likes, clicks, ratings).
+2. **User-Item Matrix**: Create a matrix where rows are users and columns are items.
+3. **Similarity Calculation**: Use mathematical measures to find similar users or items.
+
+**Common Similarity Measures:**
+- <Highlight color="blue">**Cosine Similarity**</Highlight>: Measures the angle between two user/item vectors.
+- <Highlight color="blue">**Pearson Correlation**</Highlight>: Measures how much two variables change together.
+- <Highlight color="blue">**Jaccard Similarity**</Highlight>: Measures the overlap between sets of items.
+
+**Two Main Forms:**
+- <Highlight color="yellow">**User-based**</Highlight>: Finds users similar to you and suggests what they liked.
+- <Highlight color="yellow">**Item-based**</Highlight>: Finds items similar to what you liked based on everyone's behavior.
+
+**Conclusion**  
+Hence, collaborative filtering uses <Highlight color="blue">**similarity scores**</Highlight> to generate highly personalized recommendations.
+
+---
+
+### 3. PageRank Algorithm with Example and Importance
+
+**Answer:**  
+The <Highlight color="yellow">**PageRank algorithm**</Highlight> measures the importance of pages in a graph (like the Web). It was originally developed by Google.
+
+**Core Idea:** A page is important if <Highlight color="green">many important pages link to it</Highlight>. It treats each link as a <Highlight color="blue">"Vote."</Highlight>
+
+### Example Scenario
+
+<Mermaid chart={`
+graph LR
+    A((Page A)) --> B((Page B))
+    B --> C((Page C))
+    C --> A
+    C --> B
+`} />
+
+In this example, **Page B** might receive a higher rank because it has incoming links from both Page A and Page C.
+
+**Factors that Increase Rank:**
+- <Highlight color="green">**More Backlinks**</Highlight>: More pages linking to your site.
+- <Highlight color="green">**High-Quality Links**</Highlight>: A link from a popular site like Wikipedia is worth more than a link from a new blog.
+- <Highlight color="blue">**Better Link Structure**</Highlight>: Improving the hierarchy of incoming links.
+
+**Conclusion**  
+Thus, PageRank is a fundamental algorithm for ranking nodes based on the <Highlight color="green">**strength and quantity of incoming connections**</Highlight>.
+
+---
+
+### 4. Jaccard Distance and Similarity in Datasets
+
+**Answer:**  
+<Highlight color="yellow">**Jaccard Similarity**</Highlight> measures how much two sets overlap. <Highlight color="yellow">**Jaccard Distance**</Highlight> measures how different they are.
+
+- **Similarity = 1**: The sets are identical.
+- **Similarity = 0**: The sets have nothing in common.
+
+### Formula
+- <Highlight color="blue">**Jaccard Similarity**</Highlight> $= \frac{|A \cap B|}{|A \cup B|}$ (Intersection over Union)
+- <Highlight color="blue">**Jaccard Distance**</Highlight> $= 1 - \text{Jaccard Similarity}$
+
+### Example
+Let $A = \{1, 2, 3, 4\}$ and $B = \{3, 4, 5, 6\}$.
+- **Intersection** ($A \cap B$) $= \{3, 4\}$ (Size = 2)
+- **Union** ($A \cup B$) $= \{1, 2, 3, 4, 5, 6\}$ (Size = 6)
+- **Similarity** $= \frac{2}{6} = 0.33$
+- **Distance** $= 1 - 0.33 = 0.67$
+
+**Uses:**
+- Comparing text documents.
+- Finding similar users in recommendation systems.
+- <Highlight color="blue">Duplicate detection</Highlight> in massive datasets.
+
+**Conclusion**  
+Hence, Jaccard Distance is a simple and effective way to find <Highlight color="red">**dissimilarity**</Highlight> between two datasets.
+
+---
+
+## 🎯 Best Strategy for Study
+
+If you want **minimum questions with maximum coverage**, study these 4 answers. They cover:
+- Recommendation systems (Collaborative vs Content-based)
+- Similarity concepts (Cosine, Jaccard, etc.)
+- Applications of Big Data in Social Media
+- PageRank and Graph Mining
+
+### If you want just 3 questions only:
+1. **Recommendation Systems**: Collaborative vs Content-Based.
+2. **Collaborative Filtering**: The concept of Similarity.
+3. **PageRank + Jaccard Distance**: How graph ranking and set similarity work.
