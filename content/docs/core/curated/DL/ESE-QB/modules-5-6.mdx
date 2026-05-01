@@ -96,12 +96,12 @@ The overall mapping is: $\hat{x} = (W_d W_e)\,x$ — a **linear transformation**
 
 | **Undercomplete Autoencoder** | **Overcomplete Autoencoder** |
 | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| The latent dimension is smaller than the input dimension ($\text{dim}(z) < \text{dim}(x)$). | The latent dimension is equal to or greater than the input dimension ($\text{dim}(z) \ge \text{dim}(x)$). |
-| It has a bottleneck that forces the model to compress the input data. | It does not have a bottleneck and does not enforce compression. |
-| It learns only the most important and relevant features of the data. | It can learn a richer but possibly redundant representation of the data. |
-| It may lose some fine-grained details due to compression. | It may learn identity mapping and simply copy input to output. |
-| Regularization is generally not required. | Regularization is required to prevent trivial solutions. |
-| It is mainly used for dimensionality reduction and data compression. | It is used for feature learning, sparse coding, and denoising tasks. |
+| **Smaller latent space** ($\text{dim}(z) < \text{dim}(x)$). | **Larger latent space** ($\text{dim}(z) \ge \text{dim}(x)$). |
+| **Forces compression** through a physical bottleneck. | **No bottleneck**; no natural compression occurs. |
+| Captures only the **most important features**. | Learns a **richer, more detailed** representation. |
+| Risk of losing fine-grained details. | Risk of **identity mapping** (simply copying input). |
+| Regularization is generally not required. | **Regularization is mandatory** to prevent trivial solutions. |
+| Mainly used for **dimensionality reduction**. | Used for **feature learning and denoising**. |
 
 
 **Undercomplete autoencoder:** The hidden layer is smaller than the input — compression forces the encoder to capture only the most important features.

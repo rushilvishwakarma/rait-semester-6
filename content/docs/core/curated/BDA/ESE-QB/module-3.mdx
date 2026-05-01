@@ -1,0 +1,317 @@
+---
+title: Module 3
+description: NoSQL Databases - Patterns, Consistency, and Case Studies (Cassandra, MongoDB, HBase).
+---
+
+import { Highlight } from '@/components/highlight';
+import { QuestionDot } from '@/components/question-dot';
+import { DatabaseBadge } from '@/components/database-badge';
+
+## Module 3: NoSQL Databases
+
+### Q1. What are the different data architecture patterns in NoSQL? Explain Key-Value store and Document store with examples.
+
+<Highlight color="yellow">**<DatabaseBadge type="nosql" text="NoSQL databases" />**</Highlight> use different <Highlight color="blue">**data architecture patterns**</Highlight> to store and manage large, distributed, and flexible data. These patterns are chosen depending on the type of data, the way it is accessed, and the performance required. The main NoSQL patterns are <Highlight color="blue">Key-Value stores, Document stores, Column-family stores, and Graph stores</Highlight>.
+
+A <Highlight color="yellow">**Key-Value store**</Highlight> is the <Highlight color="green">simplest NoSQL pattern</Highlight>. Data is stored as a pair of a <Highlight color="blue">unique key and its corresponding value</Highlight>. The key is used to directly fetch the value, so access is <Highlight color="green">very fast</Highlight>. This model is suitable when retrieval is mainly based on <Highlight color="blue">one unique identifier</Highlight>.
+
+A <Highlight color="yellow">**Document store**</Highlight> stores data in the form of <Highlight color="blue">documents, usually in JSON, BSON, or XML format</Highlight>. Each document contains fields and values, and different documents can have different structures. This makes document stores <Highlight color="green">more flexible than <DatabaseBadge type="rdbms" text="relational tables" /></Highlight>, especially when the data is semi-structured or keeps changing.
+
+A <Highlight color="yellow">**Column-family store**</Highlight> organizes data into <Highlight color="blue">rows and column families</Highlight> instead of fixed tables. It is designed to <Highlight color="green">handle very large amounts of distributed data</Highlight> and allows related columns to be stored together for efficient access. Examples: <Highlight color="blue">HBase</Highlight> and <Highlight color="blue">Cassandra</Highlight>.
+
+A <Highlight color="yellow">**Graph store**</Highlight> represents data using <Highlight color="blue">**nodes, edges, and relationships**</Highlight>. It is mainly used when the <Highlight color="green">connection between data items is more important than the data itself</Highlight>. This model is suitable for <Highlight color="blue">social networks, recommendation systems, and fraud detection</Highlight>. Examples: <Highlight color="blue">Neo4j</Highlight> and <Highlight color="blue">Amazon Neptune</Highlight>.
+
+**Examples**
+
+- **Key-Value stores:** Redis, Amazon DynamoDB
+- **Document stores:** MongoDB, CouchDB
+- **Column-family stores:** HBase, Cassandra
+- **Graph stores:** Neo4j, Amazon Neptune
+
+**Example Format**
+
+- **Key-Value format**: `101 -> "Rushil"`
+- **Document format**:
+```json
+{
+  "id": 101,
+  "name": "Rushil",
+  "city": "Mumbai",
+  "skills": ["React", "NodeJS"]
+}
+```
+
+**Conclusion**
+
+Thus, NoSQL supports multiple data architecture patterns, where <Highlight color="green">**Key-Value stores**</Highlight> are best for simple fast retrieval, <Highlight color="green">**Document stores**</Highlight> are suitable for flexible semi-structured data, <Highlight color="green">**Column-family stores**</Highlight> are useful for large distributed datasets, and <Highlight color="green">**Graph stores**</Highlight> are ideal for highly connected data.
+
+---
+
+### Q2. Explain in detail key-value store NoSQL architectural pattern. Identify two applications that can use this pattern.
+
+A <Highlight color="yellow">**Key-Value store**</Highlight> is a <DatabaseBadge type="nosql" text="NoSQL database" /> model in which data is stored as a pair of <Highlight color="blue">key</Highlight> and <Highlight color="blue">value</Highlight>. The key acts as a <Highlight color="green">unique identifier</Highlight>, while the value contains the actual data. This is one of the <Highlight color="green">simplest and fastest</Highlight> data models used in NoSQL systems.
+
+In a key-value database, every item is accessed directly through its key. Because of this <Highlight color="green">direct lookup mechanism</Highlight>, read and write operations are <Highlight color="green">very fast</Highlight>. The database <Highlight color="red">does not need complex joins or table relationships</Highlight> like a <DatabaseBadge type="rdbms" text="relational database" />. The value can be of any type such as <Highlight color="blue">string, number, JSON object, image, or binary data</Highlight>.
+
+Key-value stores are <Highlight color="green">highly suitable for distributed systems</Highlight> because they are easy to <Highlight color="green">scale horizontally</Highlight> by adding more machines. They are especially useful when the application mainly performs <Highlight color="blue">insert, update, and retrieve operations using a unique key</Highlight>.
+
+**Characteristics of key-value stores**
+
+- <Highlight color="green">Simple data model</Highlight>
+- <Highlight color="green">Fast lookup using key</Highlight>
+- <Highlight color="green">High scalability</Highlight>
+- <Highlight color="blue">Good performance for large volumes of data</Highlight>
+- <Highlight color="blue">Best for lookup-based applications</Highlight>
+
+**Applications using key-value stores**
+
+1. <Highlight color="yellow">**Shopping cart system**</Highlight>: Customer ID can be the key and cart details can be the value.
+2. <Highlight color="yellow">**Session management**</Highlight>: Session ID can be the key and user session information can be the value.
+
+Other applications include <Highlight color="blue">caching systems, game leaderboards, and user preference storage</Highlight>.
+
+**Example**
+
+`User123 -> {theme:"dark", language:"en"}`
+
+**Conclusion**
+
+Hence, key-value stores are ideal for applications that require <Highlight color="green">**simple, fast, and scalable data retrieval using a unique key**</Highlight>.
+
+---
+
+### Q3. Compare and contrast BASE and ACID properties.
+
+<Highlight color="yellow">**ACID**</Highlight> and <Highlight color="yellow">**BASE**</Highlight> are two different models used in database systems to manage data consistency, availability, and reliability. ACID is mainly associated with <Highlight color="blue">traditional <DatabaseBadge type="rdbms" text="relational databases" /></Highlight>, while BASE is commonly associated with <Highlight color="blue">distributed <DatabaseBadge type="nosql" text="NoSQL systems" /></Highlight>.
+
+**ACID** stands for <Highlight color="yellow">**Atomicity, Consistency, Isolation, and Durability**</Highlight>.
+- <Highlight color="green">**Atomicity**</Highlight>: A transaction is completed fully or <Highlight color="red">not at all</Highlight>.
+- <Highlight color="green">**Consistency**</Highlight>: The database remains valid before and after the transaction.
+- <Highlight color="green">**Isolation**</Highlight>: Transactions <Highlight color="blue">do not interfere with each other</Highlight>.
+- <Highlight color="green">**Durability**</Highlight>: Once committed, the data <Highlight color="green">remains permanently saved</Highlight>.
+
+**BASE** stands for <Highlight color="yellow">**Basically Available, Soft State, and Eventually Consistent**</Highlight>.
+- <Highlight color="blue">**Basically Available**</Highlight>: The system <Highlight color="green">remains available even during failures</Highlight>.
+- <Highlight color="blue">**Soft State**</Highlight>: The system state <Highlight color="red">may change over time</Highlight> because updates may not be immediate.
+- <Highlight color="blue">**Eventually Consistent**</Highlight>: All replicas will become consistent <Highlight color="green">after some time</Highlight>.
+
+ACID focuses on <Highlight color="green">**strong consistency and transaction correctness**</Highlight>, while BASE focuses on <Highlight color="green">**availability, flexibility, and scalability**</Highlight>. ACID is suitable for <Highlight color="blue">banking and transaction systems</Highlight>, whereas BASE is suitable for <Highlight color="blue">large distributed systems like social media platforms</Highlight>.
+
+**Main differences**
+
+- ACID gives <Highlight color="green">immediate consistency</Highlight>.
+- BASE allows <Highlight color="red">temporary inconsistency</Highlight>.
+- ACID is <Highlight color="blue">strict and transaction-focused</Highlight>.
+- BASE is <Highlight color="green">flexible and availability-focused</Highlight>.
+
+**Conclusion**
+
+Thus, ACID ensures <Highlight color="green">strict and reliable transactions</Highlight>, while BASE provides <Highlight color="green">better scalability and availability</Highlight> in distributed environments.
+
+---
+
+### Q4. What is eventual consistency in NoSQL databases?
+
+<Highlight color="yellow">**Eventual consistency**</Highlight> is a <Highlight color="blue">consistency model</Highlight> used in many <DatabaseBadge type="nosql" text="NoSQL databases" />. It means that when data is updated, the updated value <Highlight color="red">may not appear immediately on all nodes</Highlight>, but after some time all copies of the data will become the same.
+
+In distributed databases, data is often <Highlight color="blue">replicated across multiple servers</Highlight>. When an update is made on one server, other servers may still temporarily hold the old value. Once the <Highlight color="blue">replication process is completed</Highlight>, all servers reflect the updated value. This is called <Highlight color="yellow">**eventual consistency**</Highlight>.
+
+This model is used because it <Highlight color="green">improves system availability and performance</Highlight>. Instead of forcing all nodes to update immediately, the system <Highlight color="blue">allows temporary differences and synchronizes later</Highlight>. This is acceptable in applications where <Highlight color="green">a small delay in consistency is not a serious problem</Highlight>.
+
+**Example**
+
+Suppose a user changes a password or profile picture. One server may show the <Highlight color="green">updated value immediately</Highlight>, while another server may show the <Highlight color="red">old value for a short time</Highlight>. After synchronization, <Highlight color="green">both servers show the same updated value</Highlight>.
+
+**Conclusion**
+
+Hence, eventual consistency means the system <Highlight color="red">may be temporarily inconsistent</Highlight>, but all replicas will <Highlight color="green">converge to the same value after some time</Highlight>.
+
+---
+
+### Q5. How does a key-value database differ from a document database?
+
+Key-value databases and document databases are both NoSQL models, but they differ in the way data is stored, understood, and queried.
+
+In a <Highlight color="yellow">**key-value database**</Highlight>, data is stored as a <Highlight color="green">simple pair of key and value</Highlight>. The database mainly uses the key to retrieve the value and <Highlight color="red">usually does not understand the internal structure of the value</Highlight>. Because of this, key-value databases are <Highlight color="green">very fast and simple</Highlight>.
+
+In a <Highlight color="yellow">**document database**</Highlight>, data is stored as <Highlight color="blue">documents containing multiple fields and values</Highlight>. The database <Highlight color="green">understands the internal structure</Highlight> of the document, so it can <Highlight color="blue">query and search inside individual fields</Highlight>. Document databases are <Highlight color="green">more flexible and descriptive</Highlight> than key-value stores.
+
+Key-value databases are best when the application needs <Highlight color="blue">fast lookup using a unique key</Highlight>, such as caching or session storage. Document databases are better when records contain multiple attributes and the application needs to <Highlight color="green">search by those attributes</Highlight>.
+
+**Example**
+
+- **Key-Value**: `101 -> "Laptop"`
+- **Document**:
+```json
+{
+  "id": 101,
+  "name": "Laptop",
+  "brand": "HP",
+  "price": 50000
+}
+```
+
+**Conclusion**
+
+Thus, key-value databases are best for <Highlight color="green">**simple fast lookups**</Highlight>, while document databases are better for <Highlight color="green">**flexible and queryable semi-structured data**</Highlight>.
+
+---
+
+### Q6. When it comes to Big Data, how does NoSQL achieve over RDBMS?
+
+<Highlight color="yellow">**<DatabaseBadge type="nosql" />**</Highlight> is often preferred over <Highlight color="yellow">**<DatabaseBadge type="rdbms" />**</Highlight> in big data applications because it handles <Highlight color="blue">**large volume, high velocity, and high variety of data**</Highlight> more effectively. Traditional <DatabaseBadge type="rdbms" text="relational databases" /> are strong for structured and transactional data, but they <Highlight color="red">face difficulties when data grows very large and distributed</Highlight>.
+
+One major advantage of NoSQL is <Highlight color="green">**horizontal scaling**</Highlight>. Instead of increasing the power of one machine, NoSQL systems can <Highlight color="green">scale by adding more servers</Highlight>. This makes them more suitable for large distributed environments.
+
+NoSQL databases also provide a <Highlight color="green">**flexible schema**</Highlight>, so they can store <Highlight color="blue">structured, semi-structured, and unstructured data</Highlight>. This is important in big data systems where <Highlight color="blue">data formats may change frequently</Highlight>. They are also designed for <Highlight color="green">**high availability**</Highlight> and <Highlight color="green">**distributed storage**</Highlight>, which allows them to <Highlight color="green">continue working even when some nodes fail</Highlight>.
+
+<DatabaseBadge type="rdbms" /> systems, on the other hand, usually have a <Highlight color="red">fixed schema, expensive joins, and more difficulty in scaling</Highlight> across many machines.
+
+**Conclusion**
+
+Hence, <DatabaseBadge type="nosql" /> achieves better <Highlight color="green">**scalability, flexibility, and availability**</Highlight> than <DatabaseBadge type="rdbms" /> in big data applications.
+
+---
+
+### Q7. What is Apache Cassandra? Describe its architecture and main components in detail.
+
+<Highlight color="yellow">**Apache Cassandra**</Highlight> is a <Highlight color="blue">distributed <DatabaseBadge type="nosql" text="NoSQL database" /></Highlight> designed for <Highlight color="green">high availability, fault tolerance, and linear scalability</Highlight>. It is used for applications that need to store huge volumes of data across multiple servers <Highlight color="green">without a single point of failure</Highlight>.
+
+Cassandra follows a <Highlight color="yellow">**peer-to-peer architecture**</Highlight>, unlike master-slave systems. In this design, <Highlight color="green">all nodes are equal</Highlight>, and <Highlight color="blue">any node can accept read or write requests</Highlight>. This <Highlight color="green">removes the dependency on a central master</Highlight> and improves availability and reliability. Nodes communicate using the <Highlight color="yellow">**gossip protocol**</Highlight>, which allows them to <Highlight color="blue">share health and state information without a central coordinator</Highlight>.
+
+**Main components of Cassandra**
+
+- A <Highlight color="yellow">**Node**</Highlight> is a single machine that stores data.
+- A <Highlight color="yellow">**Cluster**</Highlight> is a collection of nodes working together.
+- A <Highlight color="yellow">**Data Center**</Highlight> is a logical group of nodes, often based on physical location.
+- The <Highlight color="yellow">**Commit Log**</Highlight> <Highlight color="blue">records every write operation</Highlight> for durability.
+- A <Highlight color="yellow">**Memtable**</Highlight> <Highlight color="blue">stores recent writes temporarily in memory</Highlight>.
+- An <Highlight color="yellow">**SSTable**</Highlight> is the <Highlight color="green">permanent immutable file stored on disk</Highlight>.
+- The <Highlight color="yellow">**Partitioner**</Highlight> determines how <Highlight color="blue">data is distributed across nodes</Highlight>.
+- <Highlight color="yellow">**Replication**</Highlight> ensures <Highlight color="green">multiple copies of data are stored for fault tolerance</Highlight>.
+- The <Highlight color="yellow">**Gossip Protocol**</Highlight> allows nodes to <Highlight color="blue">exchange status information</Highlight>.
+
+**Working**
+
+When data is written, it is first recorded in the <Highlight color="blue">commit log and memtable</Highlight>. Later, it is <Highlight color="green">flushed to SSTables on disk</Highlight>. Since data is <Highlight color="green">partitioned and replicated across nodes</Highlight>, Cassandra remains available even if some nodes fail.
+
+**Conclusion**
+
+Hence, Cassandra is a highly available distributed NoSQL database that uses <Highlight color="blue">**peer-to-peer architecture, partitioning, replication, and decentralized communication**</Highlight>.
+
+---
+
+### Q8. Explain MongoDB data types with suitable examples.
+
+<Highlight color="yellow">**MongoDB**</Highlight> stores data in <Highlight color="blue">BSON documents</Highlight>, where BSON is a <Highlight color="blue">binary form of JSON</Highlight>. BSON supports many different data types, which makes MongoDB suitable for <Highlight color="green">semi-structured and flexible data storage</Highlight>.
+
+Some common MongoDB data types are <Highlight color="blue">String, Integer, Double, Boolean, Array, Object/Document, Date, Null</Highlight>, and <Highlight color="blue">ObjectId</Highlight>.
+
+**Example document**
+
+```json
+{
+  "_id": ObjectId("6610abcd1234abcd1234abcd"),
+  "name": "Amit",
+  "age": 21,
+  "active": true,
+  "skills": ["MongoDB", "NodeJS"],
+  "address": {"city": "Pune", "pin": 411001},
+  "marks": 85.5
+}
+```
+
+**Conclusion**
+
+Hence, MongoDB supports a variety of <Highlight color="blue">BSON data types</Highlight>, allowing data to be stored in a <Highlight color="green">flexible and nested document format</Highlight>.
+
+---
+
+### Q9. Distinguish between HBase and Hive with example.
+
+<Highlight color="yellow">**HBase**</Highlight> and <Highlight color="yellow">**Hive**</Highlight> are both important tools in the Hadoop ecosystem, but they are designed for different purposes. HBase is a <Highlight color="blue"><DatabaseBadge type="nosql" text="NoSQL database" /> used for fast random read and write operations</Highlight>, whereas Hive is a <Highlight color="blue">data warehouse tool used for batch querying and analysis</Highlight>.
+
+HBase is suitable when <Highlight color="green">low latency and real-time access</Highlight> are required. It stores data in <Highlight color="blue">column families</Highlight> and is used for <Highlight color="green">operational workloads</Highlight>. Hive, on the other hand, uses <Highlight color="blue">HiveQL</Highlight> (similar to SQL) and is mainly used for <Highlight color="green">reporting, summarization, and large-scale data analysis</Highlight>.
+
+**Main differences**
+
+- HBase is <Highlight color="yellow">**database-oriented**</Highlight>, while Hive is <Highlight color="yellow">**query-oriented**</Highlight>.
+- HBase is used for <Highlight color="green">real-time access</Highlight>, while Hive is used for <Highlight color="blue">batch analytics</Highlight>.
+- HBase provides <Highlight color="green">low-latency operations</Highlight>, whereas Hive is <Highlight color="red">slower but suitable for large analytical queries</Highlight>.
+
+**Example**
+
+- <Highlight color="green">HBase</Highlight>: Instantly retrieving customer profile data in an online system.
+- <Highlight color="blue">Hive</Highlight>: Calculating total yearly sales from a huge historical dataset.
+
+**Conclusion**
+
+Thus, HBase is used for <Highlight color="green">**fast operational access**</Highlight>, whereas Hive is used for <Highlight color="blue">**analytical querying on big data**</Highlight>.
+
+---
+
+### Q10. Explain CAP Theorem and compare it with ACID properties.
+
+The <Highlight color="yellow">**CAP Theorem**</Highlight> states that a distributed data system can only provide <Highlight color="red">two out of three</Highlight> guarantees at the same time: <Highlight color="blue">**Consistency (C)**</Highlight>, <Highlight color="blue">**Availability (A)**</Highlight>, and <Highlight color="blue">**Partition Tolerance (P)**</Highlight>.
+
+- <Highlight color="yellow">**Consistency (C)**</Highlight>: Ensures that <Highlight color="green">all nodes in the cluster see the same data at the same time</Highlight>.
+- <Highlight color="yellow">**Availability (A)**</Highlight>: Ensures that <Highlight color="green">every request gets a response, even if some nodes are down</Highlight>.
+- <Highlight color="yellow">**Partition Tolerance (P)**</Highlight>: Ensures that the system <Highlight color="green">continues to operate even if the network between nodes fails</Highlight>.
+
+In a distributed environment, <Highlight color="blue">Partition Tolerance (P) is usually mandatory</Highlight>, so NoSQL systems must choose between <Highlight color="blue">Consistency (CP)</Highlight> or <Highlight color="blue">Availability (AP)</Highlight>. For example, a <Highlight color="blue">banking system</Highlight> might prioritize consistency, while a <Highlight color="blue">social media feed</Highlight> might prioritize availability.
+
+In contrast, traditional <DatabaseBadge type="rdbms" text="relational databases" /> follow <Highlight color="yellow">**ACID properties**</Highlight> (Atomicity, Consistency, Isolation, Durability). ACID focuses on ensuring that <Highlight color="green">every transaction is reliable and complete</Highlight>, which is ideal for <Highlight color="blue">single-node systems</Highlight> where strong consistency is paramount.
+
+---
+
+### Q11. Discuss NoSQL Business Drivers and Characteristics.
+
+Business drivers are the operational requirements that lead organizations to adopt NoSQL. The key drivers include:
+
+1. <Highlight color="yellow">**Elastic Scalability & Cost-Effectiveness**</Highlight>: The ability to handle <Highlight color="green">traffic spikes using cheap commodity servers</Highlight> rather than <Highlight color="red">expensive vertical scaling</Highlight>.
+2. <Highlight color="yellow">**Schema Agility**</Highlight>: Allowing developers to <Highlight color="green">modify data structures on the fly</Highlight> without complex migrations.
+3. <Highlight color="yellow">**High Velocity Ingestion**</Highlight>: The capability to <Highlight color="blue">process massive, rapid data streams in real-time</Highlight>.
+4. <Highlight color="yellow">**Agility**</Highlight>: Supports <Highlight color="green">iterative development and DevOps</Highlight> by allowing rapid changes without rigid initial designs.
+
+**Key Characteristics of NoSQL:**
+- <Highlight color="yellow">**Schema-less Model**</Highlight>: Supports <Highlight color="blue">diverse data formats (documents, key-pairs, graphs)</Highlight>.
+- <Highlight color="yellow">**Horizontal Scalability**</Highlight>: Distributed across many nodes to <Highlight color="green">handle increased load</Highlight>.
+- <Highlight color="yellow">**Tunable Consistency**</Highlight>: Allows developers to <Highlight color="green">choose the consistency level</Highlight> based on application needs (Eventual vs. Strong).
+
+---
+
+### Q12. Explain NoSQL Architectural Patterns: Shared-Nothing, Master-Slave, and Peer-to-Peer.
+
+NoSQL systems use different architectural patterns to manage data distribution:
+
+**1. <Highlight color="yellow">Shared-Nothing Architecture</Highlight>**
+
+Every node in the cluster is entirely <Highlight color="green">self-sufficient</Highlight>, having its own <Highlight color="blue">local CPU, RAM, and Disk storage</Highlight>. Nodes communicate only via a high-speed network. This allows for <Highlight color="green">**Linear Scalability**</Highlight> — you simply add more cheap servers as data grows, <Highlight color="green">eliminating bottlenecks</Highlight>.
+
+**2. <Highlight color="yellow">Master-Slave (Primary-Replica) Replication</Highlight>**
+
+A <Highlight color="blue">master node handles all writes</Highlight> and replicates them to multiple slave nodes. <Highlight color="blue">Slave nodes handle read queries</Highlight>. This simplifies data consistency but the <Highlight color="red">master can become a bottleneck for writes</Highlight>.
+
+**3. <Highlight color="yellow">Peer-to-Peer (Leaderless) Architecture</Highlight>**
+
+<Highlight color="green">All nodes are equal</Highlight> and can accept both read and write operations. This <Highlight color="green">avoids any single point of failure</Highlight> and ensures high cluster availability (e.g., Cassandra). It uses <Highlight color="blue">**Gossip Protocols**</Highlight> to synchronize state across nodes.
+
+**Comparison Table: Master-Slave vs. Peer-to-Peer**
+
+| Feature | Master-Slave | Peer-to-Peer |
+|---------|--------------|--------------|
+| **Write Handling** | Only Master node | Any node |
+| **Consistency** | <Highlight color="green">Stronger / Easier to manage</Highlight> | <Highlight color="red">Eventual / Complex</Highlight> |
+| **Availability** | <Highlight color="red">Lower (Master is a SPOF)</Highlight> | <Highlight color="green">Very High</Highlight> |
+| **Fault Tolerance** | <Highlight color="red">Master failure stops writes</Highlight> | <Highlight color="green">Highly resilient</Highlight> |
+
+---
+
+### Q13. Explain how NoSQL systems handle Big Data problems.
+
+NoSQL systems employ several techniques to manage the <Highlight color="yellow">5Vs of Big Data</Highlight>:
+
+1. <Highlight color="yellow">**Horizontal Partitioning (Sharding)**</Highlight>: Distributing data across multiple servers to enable <Highlight color="green">parallel processing and easy scaling</Highlight>.
+2. <Highlight color="yellow">**Write-Optimized Storage**</Highlight>: Batching multiple writes into a single sequential operation to <Highlight color="green">handle high-velocity data</Highlight>.
+3. <Highlight color="yellow">**Eventual Consistency**</Highlight>: Updating replicas asynchronously to ensure <Highlight color="green">high availability and fast responses</Highlight>.
+4. <Highlight color="yellow">**Columnar Storage**</Highlight>: Storing data in columns rather than rows to <Highlight color="green">boost analytical query speed and improve data compression</Highlight> for massive datasets.

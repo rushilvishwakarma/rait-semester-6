@@ -1,0 +1,304 @@
+---
+title: Module 1
+description: Introduction to Big Data and Hadoop Ecosystem.
+---
+
+import { Highlight } from '@/components/highlight';
+import { QuestionDot } from '@/components/question-dot';
+import { DatabaseBadge } from '@/components/database-badge';
+import explainHdfsSvg from '../module-1/explain-hdfs.svg';
+
+
+# BIG DATA ANALYTICS (BDA)
+
+# Module 1: Introduction to Big Data
+
+### Q1. What is Big Data? Discuss different sources that generate big data. / What is Big data? Explain types of Big data. <QuestionDot color="cyan" text="Also in MSE-QB" />
+
+<Highlight color="yellow">**Big Data**</Highlight> refers to extremely large and complex datasets that are generated at a very high speed and <Highlight color="red">cannot be efficiently processed using traditional data processing systems</Highlight> such as <DatabaseBadge type="rdbms" text="relational databases" />. As digital technologies have advanced, data is being produced continuously from multiple sources, making it <Highlight color="red">difficult for conventional systems to store, manage, and analyze</Highlight> it effectively.
+
+The data becomes "Big Data" when its <Highlight color="blue">**size**, **speed of generation**, or **complexity**</Highlight> exceeds the capacity of traditional systems. Earlier systems were designed to handle structured data in limited volumes, whereas Big Data includes <Highlight color="blue">structured, semi-structured, and unstructured data</Highlight> such as text, images, videos, and sensor data.
+
+Big Data plays a crucial role in modern organizations because it enables <Highlight color="green">advanced analytics and data-driven decision-making</Highlight>. By analyzing Big Data, organizations can <Highlight color="green">identify hidden patterns, predict trends, and gain deeper insights</Highlight> into customer behavior and business operations.
+
+**Sources of Big Data:**
+
+Big Data is generated from a wide range of sources. One major source is <Highlight color="yellow">**banking and credit card transactions**</Highlight>, where millions of financial records are generated every second. Another significant source is <Highlight color="yellow">**social media platforms**</Highlight> such as Twitter, Facebook, and Instagram — generating enormous amounts of unstructured data. <Highlight color="yellow">**Web and e-commerce systems**</Highlight> also contribute heavily by recording user clicks, searches, and purchase histories.
+
+Additionally, <Highlight color="yellow">**mobile devices**</Highlight>, <Highlight color="yellow">**sensor technologies**</Highlight>, and <Highlight color="blue">**Internet of Things (IoT) networks**</Highlight> generate continuous streams of real-time data. <Highlight color="yellow">**Scientific instruments**</Highlight> and research experiments also produce large datasets.
+
+---
+
+### Q2. How much data does it take to be called Big Data? With example explain various data measures.
+
+In Big Data analytics, data is measured using hierarchical storage units. The smallest unit is a <Highlight color="yellow">**bit**</Highlight>, and eight bits form one <Highlight color="yellow">**byte**</Highlight>.
+
+| Unit | Equivalence | Example |
+|------|-------------|---------|
+| **Kilobyte (KB)** | 1024 Bytes | A short text file |
+| **Megabyte (MB)** | 1024 KB | An MP3 song |
+| **Gigabyte (GB)** | 1024 MB | A movie file |
+| **Terabyte (TB)** | 1024 GB | Large corporate database |
+| **Petabyte (PB)** | 1024 TB | Facebook daily data |
+| **Exabyte (EB)** | 1024 PB | Global internet traffic per month |
+| **Zettabyte (ZB)** | 1024 EB | All data created in a year globally |
+| **Yottabyte (YB)** | 1024 ZB | Theoretical large-scale data |
+
+In Big Data environments, data is commonly measured in <Highlight color="blue">**petabytes (PB)**, **exabytes (EB)**, **zettabytes (ZB)**, and **yottabytes (YB)**</Highlight>. Traditional data processing systems <Highlight color="red">struggle to handle such massive volumes</Highlight>, which is why Big Data technologies are required.
+
+---
+
+### Q3. With example explain types of Big Data. / What is Big data? Explain types of Big data. <QuestionDot color="cyan" text="Also in MSE-QB" />
+
+Big Data is classified into three types based on its format and organization:
+
+#### **1. <Highlight color="yellow">Structured Data</Highlight>**
+
+- **Definition:** Data that has a <Highlight color="green">fixed schema</Highlight> and is <Highlight color="green">organized</Highlight> into a <Highlight color="green">tabular format</Highlight> (rows and columns).
+- **Key Point:** It is <Highlight color="blue">easily searchable</Highlight> and <Highlight color="blue">managed using <DatabaseBadge type="rdbms" /></Highlight> (Relational Database Management Systems).
+- **Example:** SQL databases, Excel sheets, and Employee Payroll records.
+
+#### **2. <Highlight color="yellow">Semi-Structured Data</Highlight>**
+
+- **Definition:** Data that does <Highlight color="red">not have a formal structure</Highlight> like a table but contains <Highlight color="green">tags or markers</Highlight> to separate data elements.
+- **Key Point:** It is <Highlight color="blue">"self-describing"</Highlight> and sits between structured and unstructured data.
+- **Example:** **XML** files, **JSON** files (used in web APIs), and CSV files.
+
+#### **3. <Highlight color="yellow">Unstructured Data</Highlight>**
+
+- **Definition:** Data that has <Highlight color="red">no predefined data model</Highlight> or <Highlight color="red">organizational structure</Highlight>.
+- **Key Point:** This is the <Highlight color="blue">most common form of Big Data</Highlight> (approx. 80%) and is the <Highlight color="red">most difficult to analyze</Highlight>.
+- **Example:** Social media posts, YouTube videos, Satellite images, and PDF documents.
+
+---
+
+### Q4. What are the 5Vs of big data? Explain. / Explain Big data characteristics. / What are 5vs in Big Data / Explain Big Data characteristics and its types. Discuss about its challenges. <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="cyan" text="Also in MSE-QB" />
+
+<Callout title="Very Important"></Callout>
+
+Big Data is defined by five key characteristics commonly known as the <Highlight>**5 V's of Big Data**</Highlight>. These characteristics distinguish Big Data from traditional data systems.
+
+The first characteristic is <Highlight color="yellow">**Volume**</Highlight>, which refers to the massive amount of data generated from various sources such as social media, sensors, and online transactions. Data today is generated in terabytes and petabytes, <Highlight color="blue">far exceeding the capacity of traditional systems</Highlight>.
+
+The second characteristic is <Highlight color="yellow">**Velocity**</Highlight>, which indicates the <Highlight color="blue">speed at which data is generated, transmitted, and processed</Highlight>. Examples include real-time data from stock markets, social media feeds, and IoT devices.
+
+The third characteristic is <Highlight color="yellow">**Variety**</Highlight>, which represents the <Highlight color="blue">different forms of data</Highlight> such as structured, semi-structured, and unstructured data. Handling such diverse data types is a major challenge in Big Data analytics.
+
+The fourth characteristic is <Highlight color="yellow">**Veracity**</Highlight>, which <Highlight color="blue">deals with the quality, accuracy, and reliability of data</Highlight>. Big Data often contains <Highlight color="red">noise, inconsistencies, and uncertainty</Highlight>.
+
+The fifth characteristic is <Highlight color="yellow">**Value**</Highlight>, which refers to the <Highlight color="blue">ability to extract meaningful and useful insights</Highlight> from raw data. Without value, large volumes of data have no practical significance.
+
+---
+
+### Q5. Compare big data with traditional data. / Differentiate traditional data and big data. <QuestionDot color="cyan" text="Also in MSE-QB" />
+
+| **Feature**    | Traditional Data                                       | Big Data                                                                   |
+| ---------- | ------------------------------------------------------ | -------------------------------------------------------------------------- |
+| **Volume**     | Handles small to moderate amounts (MBs to GBs)         | Handles massive volumes (Petabytes to Zettabytes)                          |
+| **Data Type**  | Primarily structured data (rows/columns)               | Includes structured, semi-structured, and unstructured (video, logs, JSON) |
+| **Schema**     | Fixed schema (schema-on-write)                         | Dynamic schema (schema-on-read)                                            |
+| **Scaling**    | Vertical scaling (increase RAM/CPU of a single server) | Horizontal scaling (add more commodity servers to a cluster)               |
+| **Storage**    | Centralized databases (<DatabaseBadge type="rdbms" />)                          | Distributed storage systems (e.g., HDFS)                                   |
+| **Processing** | Optimized for routine transactions (OLTP)              | Optimized for large-scale analytics, mining, and discovery                 |
+| **Tools**      | MySQL, Oracle, MS Access, SQL Server                   | Hadoop, Apache Spark, <DatabaseBadge type="nosql" /> (MongoDB, Cassandra)                           |
+
+---
+
+### Q6. How big data approach is different from traditional warehouse approach. / Differentiate traditional and big data business approach. <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="cyan" text="Also in MSE-QB" />
+
+*Note: This answer is based on the comparison of Traditional Analytics vs Big Data Analytics.*
+
+<Highlight color="yellow">**Traditional analytics**</Highlight> focuses on analyzing <Highlight color="green">structured data</Highlight> using <Highlight color="green">predefined queries and reports</Highlight>. The analysis process is usually <Highlight color="blue">**repeatable and predictable**</Highlight>, and data preparation is handled primarily by IT teams. It aims to answer <Highlight color="blue">known business questions</Highlight> based on historical data.
+
+<Highlight color="yellow">**Big Data analytics**</Highlight>, on the other hand, is <Highlight color="blue">**exploratory and iterative**</Highlight> in nature. It allows analysts to explore large and diverse datasets to <Highlight color="green">discover unknown patterns and insights</Highlight>. Big Data analytics supports advanced techniques such as <Highlight color="blue">sentiment analysis, behavioral analysis, and predictive analytics</Highlight>.
+
+Unlike traditional analytics, Big Data analytics handles <Highlight color="blue">real-time and high-velocity data</Highlight> and enables organizations to <Highlight color="green">adapt quickly to changing business conditions</Highlight>.
+
+---
+
+### Q7. Discuss any 4 applications of big data in brief. / Big Data Applications in Different Sectors (10 Marks)
+
+Big Data refers to the use of large, complex datasets to extract insights and support decision-making. It is widely used across multiple sectors:
+
+**1. <Highlight color="yellow">Healthcare</Highlight>**
+Big Data is used to <Highlight color="blue">analyze patient records, medical history, and diagnostic data</Highlight>. It helps in <Highlight color="green">early disease detection, personalized treatment, and real-time patient monitoring</Highlight>.
+
+**2. <Highlight color="yellow">Finance</Highlight>**
+Big Data is used for <Highlight color="blue">fraud detection</Highlight> by identifying unusual transaction patterns. It also helps in <Highlight color="green">credit scoring, risk analysis, and algorithmic trading</Highlight>.
+
+**3. <Highlight color="yellow">E-commerce</Highlight>**
+E-commerce platforms use Big Data to provide <Highlight color="green">personalized product recommendations</Highlight> based on customer behavior. It is also used for <Highlight color="blue">dynamic pricing, customer segmentation, and demand forecasting</Highlight>.
+
+**4. <Highlight color="yellow">Transportation</Highlight>**
+Big Data helps in <Highlight color="blue">predicting traffic patterns, optimizing routes, and improving logistics</Highlight>. Ride-sharing services use it for <Highlight color="green">demand prediction and pricing strategies</Highlight>.
+
+**5. <Highlight color="yellow">Social Media</Highlight>**
+Social media platforms analyze user data to <Highlight color="green">recommend content, target advertisements, and improve user engagement</Highlight>. It also helps in <Highlight color="blue">trend analysis and sentiment analysis</Highlight>.
+
+**6. <Highlight color="yellow">Manufacturing</Highlight>**
+Big Data enables <Highlight color="green">predictive maintenance</Highlight> by analyzing machine data. It <Highlight color="blue">improves production efficiency, reduces downtime, and ensures better quality control</Highlight>.
+
+**Conclusion**
+Overall, Big Data plays a crucial role in <Highlight color="green">improving decision-making, efficiency, and innovation</Highlight> across various sectors.
+
+---
+
+### Q8. What are the key use cases of big data? Explain any one use case of your interest.
+
+**Key Use Cases:**
+- Fraud Detection in Banking
+- Predictive Maintenance in Manufacturing
+- Personalized Recommendations in Media (Netflix)
+- Customer Churn Prediction in Telecom
+- Precision Agriculture
+
+**Detailed Example: <Highlight color="yellow">Fraud Detection in Banking</Highlight>**
+
+Banks process millions of transactions daily. <Highlight color="red">Traditional rule-based systems often miss sophisticated fraud patterns</Highlight> or generate high false positives.
+
+- **Big Data Solution**: Banks ingest vast amounts of data — <Highlight color="blue">transaction history, location, device ID, spending behavior</Highlight>.
+- **Real-time Processing**: Using technologies like <Highlight color="green">**Spark Streaming**</Highlight> or <Highlight color="green">**Flink**</Highlight>, every transaction is scored against ML models trained on historical fraud data.
+- **Action**: If a transaction <Highlight color="red">deviates from the user's normal pattern</Highlight> (e.g., high value transaction in a different country), it is <Highlight color="blue">flagged instantly for verification</Highlight>.
+- **Benefit**: <Highlight color="green">Reduces financial loss and improves customer trust</Highlight> by preventing fraud before it settles.
+
+---
+
+
+### Q9. What is Hadoop? Explain Hadoop architecture with features and core components.
+
+<Highlight color="yellow">**Hadoop**</Highlight> is an <Highlight color="blue">open-source framework</Highlight> used for the <Highlight color="blue">distributed storage and processing of very large datasets</Highlight> using clusters of commodity computers. It is widely used in big data applications because it can <Highlight color="green">manage huge volumes of structured, semi-structured, and unstructured data</Highlight> in a reliable and scalable way.
+
+Hadoop follows a <Highlight color="yellow">**master-slave architecture**</Highlight>. The <Highlight color="green">master node manages metadata and system resources</Highlight>, while the <Highlight color="blue">slave nodes store the actual data and perform the processing tasks</Highlight>. The architecture is mainly built around three working layers — storage, resource management, and processing — implemented through HDFS, YARN, and MapReduce.
+
+**Core components of Hadoop**
+
+- <Highlight color="yellow">**Hadoop Common**</Highlight> provides the <Highlight color="blue">basic libraries and utilities</Highlight> required by all other Hadoop modules.
+- <Highlight color="yellow">**HDFS (Hadoop Distributed File System)**</Highlight> is the <Highlight color="green">storage layer</Highlight>. It divides large files into blocks and stores them across multiple DataNodes, making storage <Highlight color="green">distributed and fault tolerant</Highlight>.
+- <Highlight color="yellow">**YARN (Yet Another Resource Negotiator)**</Highlight> is the <Highlight color="green">resource management layer</Highlight>. It allocates CPU and memory resources and schedules jobs efficiently.
+- <Highlight color="yellow">**MapReduce**</Highlight> is the <Highlight color="green">processing layer</Highlight>. It processes large datasets in parallel by dividing the work into Map and Reduce tasks.
+
+**Features of Hadoop**
+
+- Hadoop is highly <Highlight color="green">**scalable**</Highlight> because more nodes can be added easily when data grows.
+- It is <Highlight color="green">**fault tolerant**</Highlight> because data blocks are replicated on multiple machines.
+- It supports <Highlight color="green">**distributed storage**</Highlight> and <Highlight color="green">**parallel processing**</Highlight>.
+- It offers <Highlight color="blue">**high throughput**</Highlight> for batch jobs and is <Highlight color="green">cost-effective</Highlight> because it works on commodity hardware.
+
+**Conclusion**
+
+Thus, Hadoop architecture combines <Highlight color="blue">**HDFS for storage, YARN for resource management, and MapReduce for distributed processing**</Highlight>.
+
+---
+
+### Q10. Discuss Hadoop ecosystem with core components.
+
+The <Highlight color="yellow">**Hadoop ecosystem**</Highlight> is the collection of tools and technologies built around Hadoop to support the complete lifecycle of big data. Hadoop itself provides the foundation, while the ecosystem tools <Highlight color="green">extend its capabilities</Highlight> for practical data engineering and analytics tasks.
+
+**Important ecosystem tools**
+
+- <Highlight color="yellow">**Hive**</Highlight> is a <Highlight color="blue">data warehouse tool</Highlight> that allows <Highlight color="green">SQL-like querying</Highlight> of large datasets stored in Hadoop.
+- <Highlight color="yellow">**Pig**</Highlight> provides a <Highlight color="blue">high-level scripting language</Highlight> for data transformation and analysis.
+- <Highlight color="yellow">**HBase**</Highlight> is a <Highlight color="blue"><DatabaseBadge type="nosql" /> column-family database</Highlight> that supports <Highlight color="green">fast random read and write operations</Highlight>.
+- <Highlight color="yellow">**Sqoop**</Highlight> is used to <Highlight color="blue">transfer data between <DatabaseBadge type="rdbms" text="relational databases" /> and Hadoop</Highlight>.
+- <Highlight color="yellow">**Flume**</Highlight> is used for <Highlight color="blue">collecting and loading log and streaming data</Highlight> into Hadoop.
+- <Highlight color="yellow">**ZooKeeper**</Highlight> provides <Highlight color="blue">coordination and synchronization services</Highlight> for distributed applications.
+- <Highlight color="yellow">**Mahout**</Highlight> supports <Highlight color="blue">scalable machine learning</Highlight> tasks.
+
+These tools work together to make Hadoop a <Highlight color="green">complete big data platform</Highlight> instead of just a storage system.
+
+**Conclusion**
+
+Hence, the Hadoop ecosystem provides an integrated set of tools for <Highlight color="green">storage, ingestion, processing, coordination, and analytics of big data</Highlight>.
+
+---
+
+### Q11. What is HDFS? Explain HDFS architecture.
+
+<Highlight color="yellow">**HDFS (Hadoop Distributed File System)**</Highlight> is the <Highlight color="blue">storage component of Hadoop</Highlight>. It is designed to store very large files across many machines in a <Highlight color="green">distributed and fault-tolerant</Highlight> manner. HDFS is optimized for <Highlight color="green">high throughput</Highlight> and is well suited for big data applications.
+
+HDFS follows a <Highlight color="yellow">**master-slave architecture**</Highlight>. Files are split into large blocks, and these blocks are stored across multiple DataNodes. To ensure fault tolerance, each block is <Highlight color="green">replicated on more than one machine</Highlight>. This means that even if one node fails, the data can still be recovered from another node.
+
+**Components of HDFS**
+
+- <Highlight color="yellow">**NameNode**</Highlight> is the <Highlight color="green">master node</Highlight>. It stores <Highlight color="blue">metadata</Highlight> such as file names, directory structure, permissions, and the mapping of blocks to DataNodes.
+- <Highlight color="yellow">**DataNode**</Highlight> is the <Highlight color="green">worker node</Highlight>. It stores the <Highlight color="blue">actual file blocks</Highlight> and performs read and write operations for clients.
+- <Highlight color="yellow">**Secondary NameNode**</Highlight> periodically creates <Highlight color="blue">checkpoints of metadata</Highlight> to keep the NameNode's metadata manageable. It is <Highlight color="red">not a direct backup</Highlight> of the NameNode.
+
+**Important points**
+
+- HDFS stores files as <Highlight color="blue">blocks rather than as complete files</Highlight>.
+- Blocks are <Highlight color="green">distributed across DataNodes</Highlight>.
+- Each block is <Highlight color="green">replicated, usually three times</Highlight>, for reliability.
+- HDFS is designed for <Highlight color="green">**high throughput**</Highlight>, <Highlight color="red">not low-latency access</Highlight>.
+
+**Conclusion**
+
+Thus, HDFS provides reliable distributed storage through <Highlight color="blue">block-based storage, replication, and the coordinated working of NameNode and DataNodes</Highlight>.
+
+<div className="mx-auto max-w-2xl" style={{ aspectRatio: '1041/563' }}>
+  <img src={explainHdfsSvg.src} alt="HDFS architecture diagram" className="w-full h-full block dark:invert dark:hue-rotate-180 dark:contrast-[1.05]" />
+</div>
+
+---
+
+### Q12. Explain the purpose of NameNode and DataNode in HDFS.
+
+<Highlight color="yellow">**NameNode**</Highlight> and <Highlight color="yellow">**DataNode**</Highlight> are the two most important components of HDFS. Together they manage the storage of files in a distributed Hadoop cluster.
+
+The <Highlight color="yellow">**NameNode**</Highlight> acts as the <Highlight color="green">master of HDFS</Highlight>. Its main job is to <Highlight color="blue">manage metadata</Highlight>. It keeps track of <Highlight color="blue">file names, directory structure, permissions, and the location of file blocks</Highlight> in the cluster. It <Highlight color="red">does not store user data itself</Highlight>, but stores all the information required to locate and manage that data.
+
+The <Highlight color="yellow">**DataNode**</Highlight> acts as the <Highlight color="green">worker node</Highlight>. It <Highlight color="blue">stores the actual data blocks</Highlight> of files and performs the read and write operations requested by the client. DataNodes also send <Highlight color="blue">heartbeat signals</Highlight> to the NameNode to show that they are active. If a DataNode fails, the NameNode <Highlight color="green">arranges replication of its lost blocks</Highlight> using other available DataNodes.
+
+**Summary of Roles**
+
+- <Highlight color="yellow">**NameNode**</Highlight>: <Highlight color="blue">Metadata management and control</Highlight>.
+- <Highlight color="yellow">**DataNode**</Highlight>: <Highlight color="green">Actual storage and data operations</Highlight>.
+
+**Conclusion**
+
+Hence, the NameNode acts as the <Highlight color="blue">**brain of HDFS**</Highlight>, while the DataNodes act as the <Highlight color="green">**storage workers that hold the actual file data**</Highlight>.
+
+---
+
+### Q13. Explain how files are written and read in HDFS.
+
+In HDFS, files are <Highlight color="red">not stored as a single unit</Highlight>. Instead, each file is <Highlight color="blue">divided into large blocks</Highlight>, and these blocks are stored across multiple DataNodes. Every block is <Highlight color="green">replicated on more than one node</Highlight> for fault tolerance.
+
+During the <Highlight color="yellow">**write operation**</Highlight>:
+1. The client sends a request to the <Highlight color="blue">NameNode to create a file</Highlight>.
+2. The NameNode checks permissions and returns the list of DataNodes.
+3. The client writes data to the first DataNode, which then <Highlight color="green">forwards the block via the replication pipeline</Highlight>.
+4. After all replicas are stored, <Highlight color="green">acknowledgment is sent back</Highlight> to the client.
+
+During the <Highlight color="yellow">**read operation**</Highlight>:
+1. The client contacts the <Highlight color="blue">NameNode and asks for block locations</Highlight>.
+2. The NameNode responds with the list of DataNodes.
+3. The client reads data directly from the <Highlight color="green">nearest available DataNode</Highlight> and assembles all blocks.
+
+**Conclusion**
+
+Thus, HDFS writes files through a <Highlight color="blue">replication pipeline</Highlight> and reads files directly from DataNodes, making storage <Highlight color="green">reliable and access efficient</Highlight>.
+
+---
+
+
+### Q17. Explain how files are stored in HDFS (as part of MapReduce context).
+
+*Note: This explanation focuses on HDFS storage as part of distributed processing.*
+
+HDFS is a <Highlight color="blue">distributed file system</Highlight> designed to store large datasets across multiple nodes in a Hadoop cluster. It divides files into <Highlight color="blue">fixed-size blocks</Highlight> and distributes them across DataNodes. Each block is <Highlight color="green">replicated, typically three times</Highlight>, to ensure fault tolerance.
+
+The <Highlight color="yellow">**NameNode**</Highlight> maintains metadata such as file names, block locations, and permissions, while <Highlight color="yellow">**DataNodes**</Highlight> handle the actual storage. HDFS is optimized for <Highlight color="green">high throughput</Highlight> rather than <Highlight color="red">low latency</Highlight> and is suitable for <Highlight color="blue">batch processing</Highlight> of large datasets.
+
+---
+
+
+### Q11. Explain Google File System.
+
+The <Highlight color="yellow">**Google File System (GFS)**</Highlight> is a <Highlight color="blue">proprietary distributed file system</Highlight> developed by Google to provide <Highlight color="green">efficient, reliable access to large volumes of data</Highlight> using clusters of commodity hardware. It was designed to handle files that are several terabytes in size and optimized for <Highlight color="green">large sequential reads and data appends</Highlight>.
+
+GFS operates on a <Highlight color="yellow">**Master-Slave architecture**</Highlight>, where a single <Highlight color="green">Master node manages all metadata</Highlight>, while multiple <Highlight color="blue">ChunkServers store the actual data</Highlight>. Files are divided into <Highlight color="blue">fixed-size chunks (64MB)</Highlight>, and each chunk is <Highlight color="green">replicated across at least three ChunkServers</Highlight> to ensure reliability and fault tolerance.
+
+The design of GFS focuses on <Highlight color="green">**High Throughput**</Highlight> rather than <Highlight color="red">low latency</Highlight>, making it suitable for data-intensive processing tasks. It assumes that <Highlight color="red">hardware failure is the norm</Highlight> rather than the exception, and thus includes <Highlight color="green">robust automated recovery mechanisms</Highlight>.
+
+Hence, GFS provided the <Highlight color="blue">architectural blueprint for HDFS</Highlight> and remains a milestone in the development of distributed storage systems.

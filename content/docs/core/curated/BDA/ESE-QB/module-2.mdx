@@ -1,0 +1,113 @@
+---
+title: Module 2
+description: MapReduce Framework and Algorithms for Big Data Processing.
+---
+
+import { Highlight } from '@/components/highlight';
+import { QuestionDot } from '@/components/question-dot';
+
+## Module 2: MapReduce Framework and Algorithms for Big Data Processing
+
+### Q1. What is MapReduce? Explain its stages with example.
+
+<Highlight color="yellow">**MapReduce**</Highlight> is a <Highlight color="blue">distributed programming model</Highlight> used in Hadoop for <Highlight color="green">processing large datasets in parallel</Highlight> across many machines. It breaks a large job into smaller tasks, processes them simultaneously, and combines the results to produce the final output.
+
+The execution of MapReduce takes place in several stages:
+
+1. The input data is divided into smaller parts called <Highlight color="yellow">**input splits**</Highlight>.
+2. In the <Highlight color="yellow">**Map phase**</Highlight>, each mapper processes its assigned split and <Highlight color="blue">generates intermediate key-value pairs</Highlight>.
+3. In the <Highlight color="yellow">**Shuffle and Sort phase**</Highlight>, the framework <Highlight color="blue">groups together all intermediate values having the same key</Highlight>.
+4. In the <Highlight color="yellow">**Reduce phase**</Highlight>, the reducer processes each group and <Highlight color="green">produces the final summarized result</Highlight>.
+5. Finally, the output is <Highlight color="green">written to HDFS</Highlight>.
+
+**Example: Word Count**
+
+Suppose the input is:
+`Apple Banana`
+`Apple Orange`
+
+The mapper emits:
+`<Apple,1>` `<Banana,1>` `<Apple,1>` `<Orange,1>`
+
+After shuffle and sort:
+`Apple → [1, 1]` `Banana → [1]` `Orange → [1]`
+
+Reducer output:
+`Apple → 2` `Banana → 1` `Orange → 1`
+
+**Conclusion**
+
+Hence, MapReduce processes large data efficiently through the <Highlight color="blue">**Map, Shuffle, and Reduce**</Highlight> stages.
+
+---
+
+### Q2. How do Combiners optimize MapReduce performance?
+
+A <Highlight color="yellow">**Combiner**</Highlight> is an <Highlight color="blue">optional mini-reducer</Highlight> used in MapReduce between the map phase and the reduce phase. Its purpose is to <Highlight color="green">perform local aggregation of the mapper output</Highlight> before the data is sent across the network to reducers. This helps in <Highlight color="green">improving the overall performance</Highlight> of the MapReduce job.
+
+In many applications such as word count, the mapper may produce many repeated keys. If all these intermediate key-value pairs are directly sent to reducers, <Highlight color="red">the amount of data transferred over the network becomes very large</Highlight>. The Combiner <Highlight color="green">reduces this intermediate data by summarizing it locally</Highlight> on the mapper side.
+
+**Example:**
+If the mapper produces: `<A,1> <A,1> <A,1> <B,1>`
+The combiner changes it into: `<A,3> <B,1>`
+
+This reduced output is then sent to the reducer, which <Highlight color="green">decreases network traffic and lowers shuffle time</Highlight>.
+
+**Advantages**
+
+- <Highlight color="green">Reduces intermediate data transfer</Highlight>
+- <Highlight color="green">Decreases network traffic</Highlight>
+- <Highlight color="green">Improves job execution time</Highlight>
+- Useful for operations like <Highlight color="blue">count, sum, min, and max</Highlight>
+
+**Important Constraint**
+
+A Combiner can only be used when the Reduce function is <Highlight color="yellow">**commutative and associative**</Highlight> (e.g., sum, count, max). It <Highlight color="red">cannot be used for operations like average directly</Highlight> because partial averages cannot be combined correctly.
+
+**Conclusion**
+
+Thus, Combiners optimize MapReduce by <Highlight color="blue">**locally aggregating mapper output before shuffle**</Highlight>, which improves performance significantly.
+
+---
+
+### Q3. Write the steps for matrix multiplication using MapReduce.
+
+<Highlight color="yellow">**Matrix multiplication**</Highlight> can be performed in MapReduce by <Highlight color="blue">generating partial products in the map phase</Highlight> and <Highlight color="green">summing them in the reduce phase</Highlight>. This allows many output cells to be computed in parallel.
+
+Suppose we want to compute $C = A \times B$. Each cell of the result matrix is obtained by multiplying corresponding elements from a row of matrix A and a column of matrix B, and then summing the products.
+
+**Steps**
+
+1. <Highlight color="yellow">**Input matrices**</Highlight>: Matrix A and Matrix B are given as input.
+
+2. <Highlight color="yellow">**Map phase**</Highlight>: The mapper reads elements of both matrices. For each element of matrix A, it emits values required for the corresponding result cells. For each element of matrix B, it also emits values needed for those result cells.
+
+3. <Highlight color="yellow">**Intermediate key**</Highlight>: The key is the <Highlight color="blue">position `(i,j)` of the result matrix cell</Highlight>.
+
+4. <Highlight color="yellow">**Shuffle and group**</Highlight>: All values related to the <Highlight color="blue">same result cell `(i,j)` are grouped together</Highlight>.
+
+5. <Highlight color="yellow">**Reduce phase**</Highlight>: The reducer <Highlight color="green">matches elements having the same common index, multiplies them, and adds all partial products</Highlight>.
+
+6. <Highlight color="yellow">**Output**</Highlight>: The final value of each result cell is produced as output.
+
+**Conclusion**
+
+Hence, MapReduce performs matrix multiplication by <Highlight color="blue">**creating partial products in the map phase and summing them in the reduce phase**</Highlight>.
+
+---
+
+### Q4. Explain Hadoop limitations.
+
+Although Hadoop is highly useful for big data storage and batch processing, it also has some <Highlight color="red">limitations</Highlight>.
+
+One major limitation is <Highlight color="red">**high latency**</Highlight>. Hadoop is designed mainly for <Highlight color="blue">batch processing</Highlight>, so it is <Highlight color="red">not suitable for applications that require instant or real-time responses</Highlight>.
+
+Another problem is the <Highlight color="red">**small files issue**</Highlight>. HDFS is efficient for large files, but <Highlight color="red">storing millions of small files creates heavy metadata load on the NameNode</Highlight>.
+
+Hadoop also performs poorly for <Highlight color="red">**iterative processing**</Highlight> because MapReduce <Highlight color="red">writes intermediate results to disk after each stage</Highlight>. This makes machine learning and repeated calculations slower compared to in-memory systems.
+
+In addition, <Highlight color="red">Hadoop cluster setup, tuning, and maintenance are complex</Highlight> and require skilled administration. Strong security also needs additional configuration, which <Highlight color="red">increases operational complexity</Highlight>.
+
+**Conclusion**
+
+Therefore, Hadoop is best for <Highlight color="green">**large-scale batch-oriented processing**</Highlight>, but it is <Highlight color="red">less suitable for real-time, low-latency, and highly iterative workloads</Highlight>.
