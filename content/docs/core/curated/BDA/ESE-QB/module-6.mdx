@@ -4,68 +4,124 @@ description: Big Data Models to Social Networking - Recommendation Systems, Page
 ---
 
 import { Highlight } from '@/components/highlight';
-import { QuestionDot } from '@/components/question-dot';
-import { DatabaseBadge } from '@/components/database-badge';
 import { Mermaid } from '@/components/mermaid';
 
 ## Module 6: Big Data Models to Social Networking
 
-### 1. Recommendation Systems: Types, Collaborative Filtering, Content-Based Filtering, and Applications
+---
+
+## 1. Recommendation Systems: Types, Collaborative Filtering, Content-Based Filtering, and Applications
 
 **Answer:**  
-A <Highlight color="yellow">**recommendation system**</Highlight> is a tool that suggests relevant items to users based on their preferences or behavior. It is used in platforms like <Highlight color="blue">Amazon, Netflix, YouTube, and Spotify</Highlight> to help users discover content.
+A <Highlight color="yellow">**recommendation system**</Highlight> is a software tool that suggests relevant items to users based on their interests, previous behavior, ratings, clicks, or purchase history. It helps users find useful content from a very large collection of items such as products, movies, songs, videos, books, and social media posts.
 
-The two main types are **Collaborative Filtering** and **Content-Based Filtering**.
+Recommendation systems are widely used in platforms such as <Highlight color="blue">Amazon, Netflix, YouTube, Spotify, and Instagram</Highlight>. Their main objective is to improve user experience, reduce search effort, and increase engagement and sales.
 
-1. <Highlight color="yellow">**Collaborative Filtering**</Highlight>: Recommends items based on the behavior of <Highlight color="blue">other similar users</Highlight>.
-   - *Logic*: If User A and User B liked the same 3 movies, and User B likes a 4th movie, it is recommended to User A.
-2. <Highlight color="yellow">**Content-Based Filtering**</Highlight>: Recommends items based on the <Highlight color="green">features of items</Highlight> the user already liked.
-   - *Logic*: If you watch sci-fi movies, the system recommends other movies with the same <Highlight color="blue">genre, actors, or theme</Highlight>.
+The two main types of recommendation systems are:
+
+### 1. Collaborative Filtering
+<Highlight color="yellow">**Collaborative Filtering**</Highlight> recommends items based on the behavior of other users with similar interests. It works on the idea that if two users liked similar items in the past, they are likely to like similar items in the future as well.
+
+**Example:**  
+If User A and User B both liked the same 3 movies, and User B also liked a 4th movie, then that 4th movie may be recommended to User A.
+
+### 2. Content-Based Filtering
+<Highlight color="yellow">**Content-Based Filtering**</Highlight> recommends items based on the features of items that the user already liked earlier. It studies item properties such as genre, author, brand, keywords, tags, or category.
+
+**Example:**  
+If a user watches science-fiction movies regularly, the system recommends other movies with similar <Highlight color="green">genre, actors, or theme</Highlight>.
 
 ### Comparison
 
 | Feature | Collaborative Filtering | Content-Based Filtering |
 | :--- | :--- | :--- |
-| **Focus** | <Highlight color="blue">Similar Users</Highlight> | <Highlight color="green">Similar Items</Highlight> |
-| **Data used** | User interactions (Likes, Ratings) | Item descriptions (Tags, Genre) |
-| **Advantage** | Can recommend <Highlight color="green">new/unexpected</Highlight> items | Doesn't need other users' data |
-| **Requirement** | Needs <Highlight color="red">many users</Highlight> to start | Needs detailed item attributes |
+| **Focus** | <Highlight color="blue">Similar Users / User behavior</Highlight> | <Highlight color="green">Similar Items / Item features</Highlight> |
+| **Data Used** | Ratings, clicks, purchases, likes | Tags, genre, keywords, category |
+| **Advantage** | Can suggest unexpected new items | Works well even without many users |
+| **Limitation** | Needs sufficient user interaction data | Limited to similar item types |
 
-**Conclusion**  
-Thus, recommendation systems help users find useful items quickly by analyzing either <Highlight color="blue">**user similarity**</Highlight> or <Highlight color="green">**item similarity**</Highlight>.
+### Applications
+- **E-commerce:** product recommendations such as "Customers also bought"
+- **Streaming platforms:** movie, music, and video suggestions
+- **Social media:** post, friend, and page recommendations
+- **Online learning:** recommending courses and study material
 
----
-
-### 2. Collaborative Filtering with Similarity
-
-**Answer:**  
-<Highlight color="yellow">**Collaborative filtering**</Highlight> works on the principle that <Highlight color="green">users with similar interests in the past will likely have similar interests in the future</Highlight>.
-
-**Steps in Collaborative Filtering:**
-1. **Data Collection**: Collect user behavior (likes, clicks, ratings).
-2. **User-Item Matrix**: Create a matrix where rows are users and columns are items.
-3. **Similarity Calculation**: Use mathematical measures to find similar users or items.
-
-**Common Similarity Measures:**
-- <Highlight color="blue">**Cosine Similarity**</Highlight>: Measures the angle between two user/item vectors.
-- <Highlight color="blue">**Pearson Correlation**</Highlight>: Measures how much two variables change together.
-- <Highlight color="blue">**Jaccard Similarity**</Highlight>: Measures the overlap between sets of items.
-
-**Two Main Forms:**
-- <Highlight color="yellow">**User-based**</Highlight>: Finds users similar to you and suggests what they liked.
-- <Highlight color="yellow">**Item-based**</Highlight>: Finds items similar to what you liked based on everyone's behavior.
-
-**Conclusion**  
-Hence, collaborative filtering uses <Highlight color="blue">**similarity scores**</Highlight> to generate highly personalized recommendations.
+**Conclusion:**  
+Thus, recommendation systems help users quickly discover relevant items by using either <Highlight color="blue">**user similarity**</Highlight> or <Highlight color="green">**item similarity**</Highlight>.
 
 ---
 
-### 3. PageRank Algorithm with Example and Importance
+## 2. Collaborative Filtering with Similarity
 
 **Answer:**  
-The <Highlight color="yellow">**PageRank algorithm**</Highlight> measures the importance of pages in a graph (like the Web). It was originally developed by Google.
+<Highlight color="yellow">**Collaborative filtering**</Highlight> is one of the most important recommendation techniques. It is based on the principle that <Highlight color="green">users with similar choices in the past are likely to have similar preferences in the future</Highlight>.
 
-**Core Idea:** A page is important if <Highlight color="green">many important pages link to it</Highlight>. It treats each link as a <Highlight color="blue">"Vote."</Highlight>
+This method does not depend mainly on item descriptions. Instead, it uses user behavior such as ratings, views, likes, purchases, and clicks.
+
+### Working of Collaborative Filtering
+
+1. **Collect user behavior**  
+   Data such as ratings, purchases, clicks, and likes is collected.
+
+2. **Construct a user-item matrix**  
+   Rows represent users and columns represent items. Values indicate interaction such as rating or purchase.
+
+3. **Calculate similarity**  
+   Similarity is measured between users or items.
+
+4. **Predict missing preferences**  
+   Based on similar users or similar items, the system predicts what the target user may like.
+
+5. **Recommend top items**  
+   The highest predicted items are recommended.
+
+### Common Similarity Measures
+- <Highlight color="blue">**Cosine Similarity**</Highlight> – compares vectors based on angle
+- <Highlight color="blue">**Pearson Correlation**</Highlight> – measures correlation in ratings
+- <Highlight color="blue">**Jaccard Similarity**</Highlight> – measures overlap between item sets
+
+### Types of Collaborative Filtering
+
+#### 1. User-Based Collaborative Filtering
+This method finds users similar to the target user and recommends items liked by those users.
+
+**Example:**  
+If User A and User B both liked Movies 1, 2, and 3, and User B also liked Movie 4, then Movie 4 may be recommended to User A.
+
+#### 2. Item-Based Collaborative Filtering
+This method finds items similar to the ones already liked by the user.
+
+**Example:**  
+If users who bought a laptop also bought a wireless mouse, then the mouse may be recommended to another laptop buyer.
+
+### Advantages
+- Personalized recommendations
+- Does not require detailed item features
+- Effective when enough user interaction data exists
+
+### Limitations
+- Cold start problem for new users/items
+- Sparse data problem
+- Can be expensive for very large datasets
+
+**Conclusion:**  
+Hence, collaborative filtering uses <Highlight color="blue">**similarity between users or items**</Highlight> to generate personalized recommendations.
+
+---
+
+## 3. PageRank Algorithm with Example and Importance
+
+**Answer:**  
+The <Highlight color="yellow">**PageRank algorithm**</Highlight> is used to measure the importance of web pages in a directed graph such as the World Wide Web. It was originally developed by Google to rank web pages in search results.
+
+In PageRank:
+- each web page is treated as a **node**
+- each hyperlink is treated as a **directed edge**
+
+The main idea is that a page is important if <Highlight color="green">many important pages link to it</Highlight>. A link is treated like a vote, but votes from important pages carry more value.
+
+### Working Principle
+Each page distributes its rank equally among all pages it links to. This transfer process is repeated many times. After several iterations, the rank values become stable.
 
 ### Example Scenario
 
@@ -77,56 +133,92 @@ graph LR
     C --> B
 `} />
 
-In this example, **Page B** might receive a higher rank because it has incoming links from both Page A and Page C.
+In this graph:
+- Page A links to B
+- Page B links to C
+- Page C links to A and B
 
-**Factors that Increase Rank:**
-- <Highlight color="green">**More Backlinks**</Highlight>: More pages linking to your site.
-- <Highlight color="green">**High-Quality Links**</Highlight>: A link from a popular site like Wikipedia is worth more than a link from a new blog.
-- <Highlight color="blue">**Better Link Structure**</Highlight>: Improving the hierarchy of incoming links.
+Here, **Page B** may receive a higher rank because it gets incoming links from both A and C.
 
-**Conclusion**  
-Thus, PageRank is a fundamental algorithm for ranking nodes based on the <Highlight color="green">**strength and quantity of incoming connections**</Highlight>.
+### Why PageRank is Important
+- Helps search engines rank web pages
+- Identifies influential nodes in a graph
+- Useful in web mining and social network analysis
+- Can be used in citation networks and recommendation systems
+
+### Can PageRank Increase?
+Yes, a page's rank can increase if:
+- more pages link to it
+- important pages link to it
+- the website has better internal and external link structure
+
+### Factors that Increase Rank
+- <Highlight color="green">More backlinks</Highlight>
+- <Highlight color="green">High-quality backlinks</Highlight>
+- <Highlight color="blue">Better link connectivity</Highlight>
+
+**Conclusion:**  
+Thus, PageRank is an important graph algorithm that ranks pages according to the <Highlight color="green">**number and quality of incoming links**</Highlight>.
 
 ---
 
-### 4. Jaccard Distance and Similarity in Datasets
+## 4. Jaccard Distance and Similarity in Datasets
 
 **Answer:**  
-<Highlight color="yellow">**Jaccard Similarity**</Highlight> measures how much two sets overlap. <Highlight color="yellow">**Jaccard Distance**</Highlight> measures how different they are.
+<Highlight color="yellow">**Jaccard Similarity**</Highlight> is used to measure how similar two sets are, while <Highlight color="yellow">**Jaccard Distance**</Highlight> is used to measure how different they are. It is commonly used in recommendation systems, clustering, duplicate detection, and document comparison.
 
-- **Similarity = 1**: The sets are identical.
-- **Similarity = 0**: The sets have nothing in common.
+If two datasets share many common elements, the Jaccard similarity will be high. If they share very few elements, the Jaccard distance will be high.
 
 ### Formula
-- <Highlight color="blue">**Jaccard Similarity**</Highlight> $= \frac{|A \cap B|}{|A \cup B|}$ (Intersection over Union)
-- <Highlight color="blue">**Jaccard Distance**</Highlight> $= 1 - \text{Jaccard Similarity}$
+
+**Jaccard Similarity**
+
+$$
+\text{Jaccard Similarity} = \frac{|A \cap B|}{|A \cup B|}
+$$
+
+**Jaccard Distance**
+
+$$
+\text{Jaccard Distance} = 1 - \text{Jaccard Similarity}
+$$
 
 ### Example
-Let $A = \{1, 2, 3, 4\}$ and $B = \{3, 4, 5, 6\}$.
-- **Intersection** ($A \cap B$) $= \{3, 4\}$ (Size = 2)
-- **Union** ($A \cup B$) $= \{1, 2, 3, 4, 5, 6\}$ (Size = 6)
-- **Similarity** $= \frac{2}{6} = 0.33$
-- **Distance** $= 1 - 0.33 = 0.67$
+Let:
 
-**Uses:**
-- Comparing text documents.
-- Finding similar users in recommendation systems.
-- <Highlight color="blue">Duplicate detection</Highlight> in massive datasets.
+$$
+A = \{1, 2, 3, 4\}
+$$
 
-**Conclusion**  
-Hence, Jaccard Distance is a simple and effective way to find <Highlight color="red">**dissimilarity**</Highlight> between two datasets.
+$$
+B = \{3, 4, 5, 6\}
+$$
 
----
+Then:
 
-## 🎯 Best Strategy for Study
+- **Intersection** $A \cap B = \{3,4\}$, so size = 2
+- **Union** $A \cup B = \{1,2,3,4,5,6\}$, so size = 6
 
-If you want **minimum questions with maximum coverage**, study these 4 answers. They cover:
-- Recommendation systems (Collaborative vs Content-based)
-- Similarity concepts (Cosine, Jaccard, etc.)
-- Applications of Big Data in Social Media
-- PageRank and Graph Mining
+So:
 
-### If you want just 3 questions only:
-1. **Recommendation Systems**: Collaborative vs Content-Based.
-2. **Collaborative Filtering**: The concept of Similarity.
-3. **PageRank + Jaccard Distance**: How graph ranking and set similarity work.
+$$
+\text{Jaccard Similarity} = \frac{2}{6} = 0.33
+$$
+
+$$
+\text{Jaccard Distance} = 1 - 0.33 = 0.67
+$$
+
+### Interpretation
+- Similarity close to **1** means sets are very similar
+- Similarity close to **0** means sets are very different
+
+### Uses
+- Comparing documents
+- Finding similar users in recommendation systems
+- Duplicate detection in large datasets
+- Clustering similar records
+- Market basket analysis
+
+**Conclusion:**  
+Hence, Jaccard Distance is a simple and effective way to measure <Highlight color="red">**dissimilarity between two datasets**</Highlight>.
