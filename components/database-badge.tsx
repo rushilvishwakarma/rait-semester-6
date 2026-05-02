@@ -2,7 +2,7 @@ export function DatabaseBadge({ type, text }: { type: 'rdbms' | 'nosql'; text?: 
   const displayText = text || (type === 'rdbms' ? 'RDBMS' : 'NoSQL');
   
   return (
-    <span className="inline-flex items-center gap-1.5 align-middle font-medium">
+    <span className="inline-flex items-center gap-1.5 align-baseline font-medium">
       <span>{displayText}</span>
       <span className="inline-flex items-center gap-1 translate-y-[1px]">
         {type === 'rdbms' ? (
