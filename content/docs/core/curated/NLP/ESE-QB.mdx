@@ -1,0 +1,1927 @@
+---
+title: End Semester Question Bank
+description: Module-wise priority questions for Endsem Exam
+---
+
+import { Highlight } from '@/components/highlight';
+import { Mermaid } from '@/components/mermaid';
+import { QuestionDot } from '@/components/question-dot';
+import { LongQuestion } from '@/components/question';
+
+## **Module 1: Introduction to NLP**
+
+<LongQuestion>
+### Q1. Explain NLP, its stages and generic NLP system with suitable example. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO1" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT / IT+ECE / AIDS" /> <QuestionDot color="orange" text="May 2023, Dec 2025, Nov 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+**Natural Language Processing (NLP)** is a branch of Artificial Intelligence that enables computers to understand, interpret, and generate human language (like English or Hindi).
+
+---
+
+**Generic NLP System:**
+
+A generic NLP system is a pipeline that takes raw text as input, processes it through multiple stages, and produces a meaningful output.
+
+```
+Raw Text → Morphological → Syntactic → Semantic → Discourse → Pragmatic → Output
+```
+
+**Components:**
+- **Input:** Raw text from a user (e.g., "Can you book a flight?")
+- **Preprocessor:** Tokenization — splits text into individual words/tokens
+- **Morphological Analyzer:** Breaks words into root forms
+- **Syntactic Analyzer:** Checks grammar structure
+- **Semantic Analyzer:** Extracts meaning
+- **Discourse/Pragmatic Analyzer:** Resolves pronouns and hidden intent
+- **Output:** The machine's understood response / action
+
+---
+
+**Five Stages of NLP:**
+
+Whenever text goes into an NLP system, it is processed through five sequential stages:
+
+1. **Morphological Analysis (Word Level):**
+   The computer breaks large words down into their smallest meaningful parts (morphemes).
+   *Example:* `Truthfulness` is split into `Truth` + `ful` + `ness`.
+
+2. **Syntactic Analysis (Grammar Level):**
+   The computer checks if the sentence follows strict language grammar rules using sentence parse trees. It checks if the verbs and nouns are correctly placed.
+
+3. **Semantic Analysis (Meaning Level):**
+   The computer figures out the literal dictionary meaning of the sentence and handles words that have multiple meanings.
+   *Example:* Decoding if "Apple" means the fruit or the technology company.
+
+4. **Discourse Analysis (Sentence Level):**
+   The computer connects the current sentence to the previous sentences to figure out pronouns.
+   *Example:* If sentence 1 is "Rahul bought a car" and sentence 2 is "He drove it", Discourse analysis connects "He" to "Rahul".
+
+5. **Pragmatic Analysis (Context Level):**
+   The computer uncovers the hidden intention of the sentence based on human situational context.
+   *Example:* If a user says "Can you pass the salt?", they aren't asking if you possess the physical capability to lift salt. They are requesting you to give it to them.
+
+<Mermaid chart={`graph LR
+    A[Morphological] --> B[Syntactic] --> C[Semantic] --> D[Discourse] --> E[Pragmatic]
+`} />
+
+
+<LongQuestion>
+### Q2. Discuss applications and challenges of NLP. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO1" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT / CSBS / AIML" /> <QuestionDot color="orange" text="May 2023, Nov 2025, Dec 2023" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+Natural Language Processing is used everywhere today to solve real world problems. Here are the main applications:
+
+1. **Machine Translation:**
+   Automatically translating text or spoken words from one human language to another (e.g., Google Translate converting English to Hindi).
+   
+2. **Chatbots & Virtual Assistants:**
+   AI agents that can understand human requests and talk back clearly. Examples include Apple Siri, Amazon Alexa, and ChatGPT.
+
+3. **Sentiment Analysis:**
+   Analyzing text to see if the emotion behind it is positive, negative, or neutral. Used deeply by companies to analyze Twitter/X or product reviews to see if customers are happy.
+
+4. **Information Extraction (IE):**
+   Scanning large paragraphs of unstructured text and pulling out structured data like names, dates, and locations automatically (also known as Named Entity Recognition).
+
+5. **Text Summarization:**
+   Taking a very long document (like a PDF research paper) and automatically creating a short, 1-paragraph summary that highlights the main points.
+
+6. **Search Engines (Information Retrieval):**
+   Understanding a user's typed question and searching a massive database to pull up the exact webpage that answers it (e.g., Google Search).
+
+**Challenges of NLP:**
+
+1. **Ambiguity:** A single word or sentence can have multiple meanings (e.g., "bank" = river bank or financial bank).
+2. **Sarcasm and Irony:** Computers struggle to detect sarcasm ("Oh great, another Monday!").
+3. **Contextual Understanding:** Understanding meaning that depends on prior conversation history.
+4. **Informal Language:** Slang, abbreviations, and typos are hard to process (e.g., "u r gr8").
+5. **Low-Resource Languages:** NLP works well for English but many world languages have insufficient training data.
+
+
+<LongQuestion>
+### Q3. Explain different types of ambiguities in NLP. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO1" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+<Highlight>**Ambiguity**</Highlight> happens when a sentence or a word has more than one meaning. It is one of the hardest challenges to solve in NLP.
+
+There are five major types of ambiguity:
+
+1. **Lexical / Morphological Ambiguity:**
+   When a single word has more than one meaning in the dictionary.
+   *Example:* The word "bat" can mean a flying bird/mammal, or it can mean wooden sports equipment used in cricket.
+
+2. **Phonetic Ambiguity:**
+   When two words have completely different spellings and completely different meanings, but sound exactly the same when spoken out loud.
+   *Example:* "write", "right", and "rite" are all pronounced the exact same way.
+
+3. **Semantic Ambiguity:**
+   When the grammar of a sentence is fully correct, but the meaning gives two different interpretations.
+   *Example:* "The chicken is ready to eat." 
+   Does this mean the animal is hungry and wants food? Or does this mean the food is cooked and ready on the table?
+
+4. **Syntactic (Parsing) Ambiguity:**
+   When a sentence can be parsed in multiple grammatical ways.
+   *Example:* "I saw a girl with a telescope."
+   Did I use a telescope to observe a girl from far away? Or did I look at a girl who was holding a telescope? 
+
+5. **Pragmatic Ambiguity:**
+   When the user's intentions are clear but only if you have contextual knowledge of the situation. Without knowing the context, the computer is confused.
+   *Example:* "Can you open the window?" — Is this a question about ability, or a polite request?
+
+
+<LongQuestion>
+### Q4. Explain role of probability in NLP tasks. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO1" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+Natural language is inherently ambiguous — a word can have multiple meanings, and a sentence can have multiple structures. **Probability** allows NLP systems to pick the most likely interpretation rather than guessing blindly.
+
+**Key Roles of Probability in NLP:**
+
+1. **Language Modeling (Sentence Probability):**
+   Probability is used to compute how likely a sentence is in a language.
+   $$P(\text{"I love NLP"}) = P(I) \times P(\text{love}|I) \times P(\text{NLP}|\text{love})$$
+   Used for autocomplete, spell correction, and speech recognition.
+
+2. **POS Tagging (HMM):**
+   Given a word like "book", probability determines whether it is more likely a Noun or a Verb based on context.
+   - P(NN | "Please give me the book") is high → tagged as Noun
+   - P(VB | "Can you book the flight?") is high → tagged as Verb
+
+3. **Word Sense Disambiguation:**
+   P(sense | context) determines the correct meaning of an ambiguous word.
+   - P(bank = financial | "deposit", "money") is very high.
+
+4. **Machine Translation:**
+   P(target sentence | source sentence) picks the most natural-sounding translation.
+
+5. **Named Entity Recognition:**
+   P(PERSON tag | "Barack Obama") is high because it has been seen as a person name many times in training data.
+
+**Summary:** Without probability, NLP systems would have no way to handle ambiguity. Probability converts the language problem into a math problem that computers can solve.
+
+
+<LongQuestion>
+### Q5. Explain how NLP is used in real-world applications. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
+</LongQuestion>
+
+NLP is used in many everyday applications that people use without realizing it:
+
+1. **Google Search (Information Retrieval):**
+   When you type a query, NLP interprets the meaning of your question, not just keywords, and returns the most relevant web pages. It uses tokenization, stop-word removal, and TF-IDF ranking.
+
+2. **Google Translate (Machine Translation):**
+   NLP automatically translates text from one language to another using Neural Machine Translation (NMT) models based on encoder-decoder architecture.
+
+3. **Gmail Smart Compose (Text Generation):**
+   When typing an email, NLP predicts and suggests the next phrase using language models trained on large text corpora.
+
+4. **Alexa / Siri (Virtual Assistants):**
+   NLP converts speech to text, interprets the intent (e.g., "Set alarm for 7am"), and generates a natural language response.
+
+5. **Amazon Reviews / Twitter Analysis (Sentiment Analysis):**
+   NLP classifies whether a review or tweet is positive, negative, or neutral, helping businesses understand customer feedback at scale.
+
+6. **News Apps (Text Summarization):**
+   NLP automatically shortens long news articles into 2-3 sentence summaries using extractive or abstractive methods.
+
+
+<LongQuestion>
+### Q6. (SKIP THIS FOR AIML) Discuss pipeline of text classification. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="May 2023" />
+</LongQuestion>
+
+---
+
+## **Module 2: Morphological Analysis**
+
+<LongQuestion>
+### Q1. Explain morphology, types of morphology and morphemes. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO2" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="CSBS / IT+ECE / AIDS" /> <QuestionDot color="orange" text="Nov 2025, Dec 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+**Morphology** is the deep study of how words are formed, created, and structured. 
+
+The smallest foundational unit behind morphology is called a **Morpheme**. A morpheme is the absolute smallest piece of a word that still carries its own meaning. Once you break a morpheme down any further, it's just random letters that mean nothing.
+
+For example, look at the word: **`unhappiness`**
+It has three morphemes:
+- `un` (prefix meaning 'not')
+- `happy` (the base root meaning joy)
+- `ness` (suffix meaning 'a state of')
+
+**Types of Morphemes:**
+
+| Type | Description | Example |
+|------|-------------|---------|
+| **Free Morpheme** | Can stand alone as a word | `book`, `happy`, `run` |
+| **Bound Morpheme** | Cannot stand alone; must attach to a root | `un-`, `-ness`, `-ing` |
+| **Prefix** | Bound morpheme at the beginning | `un`happy, `re`write |
+| **Suffix** | Bound morpheme at the end | happi`ness`, walk`ing` |
+
+**Types of Morphology:**
+
+1. **Inflectional Morphology:** Changes the grammatical form of a word without changing its core meaning or word class.
+   - *Example:* `walk` → `walks` (3rd person), `walked` (past tense), `walking` (present participle)
+
+2. **Derivational Morphology:** Creates a completely new word (often changing the word class) by adding a morpheme.
+   - *Example:* `happy` (adjective) + `-ness` → `happiness` (noun)
+   - `teach` (verb) + `-er` → `teacher` (noun)
+
+**Morphological Analysis** is the process where a computer actively takes large words and chops them down into their base morphemes so the computer can understand exactly what the root meaning of the word is. 
+*Example:* Chopping `walking` into `walk` + `ing`.
+
+
+<LongQuestion>
+### Q2. Differentiate between stemming and lemmatization with example. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO2" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="IT / AIML / IT+ECE" /> <QuestionDot color="orange" text="May 2023, Nov 2025, Dec 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+Both Stemming and Lemmatization are techniques used in NLP to chop the ends off of words to reduce them back to their base, root form. However, they do it in very different ways.
+
+| Stemming | Lemmatization |
+|----------|---------------|
+| **No Dictionary:** Stemming blindly chops endings off using basic math rules without checking a dictionary. | **Uses Dictionary:** Lemmatization carefully checks a language dictionary and grammar context. |
+| **Low Accuracy:** Because it blindly cuts, the output word is sometimes not a real English word. | **High Accuracy:** It always outputs a 100% valid, real English word. |
+| **Very Fast:** It is mathematically very simple and fast to run. | **Very Slow:** Because it searches a massive dictionary, it takes much longer to process. |
+| **Example 1:** `Studying` gets chopped poorly into `Studi` (Not a real word). | **Example 1:** `Studying` safely converts into `Study` (Real word). |
+| **Example 2:** `Happiness` becomes `Happi`. | **Example 2:** `Mice` safely translates perfectly back to `Mouse`. |
+| **Use When:** Speed is more important than accuracy. | **Use When:** Accuracy is critical (e.g., medical NLP). |
+
+
+<LongQuestion>
+### Q3. Explain Porter Stemmer algorithm. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO2" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT+ECE / AIML" /> <QuestionDot color="orange" text="Dec 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+The **Porter Stemmer** is the most famous and widely used algorithm to perform "Stemming" on text. Proposed by Martin Porter in 1980, it systematically removes suffixes from English words to reduce them to their stem/root form.
+
+**Core Concept — Measure (m):**
+Porter Stemmer classifies words using a pattern of Consonants (C) and Vowels (V). The **measure (m)** counts the number of VC sequences in a word's stem.
+- Format: `[C](VC)^m[V]`
+- *Example:* "tree" → m=0 (just vowels/consonants), "troubles" → m=1, "oaten" → m=2
+
+**Five-Step Process:**
+
+- **Step 1a:** Remove plural endings and -ed/-ing.
+  - `caresses` → `caress`, `ponies` → `poni`, `cats` → `cat`
+  - `matting` → `mat`, `agreed` → `agree`
+
+- **Step 1b:** Handle -ed and -ing (with conditions based on m > 0).
+  - `plastered` → `plaster`, `motoring` → `motor`
+  - If stem ends in double consonant → remove one: `hopping` → `hop`
+
+- **Step 1c:** Replace terminal y with i (if there is a vowel in the stem).
+  - `happy` → `happi`, `sky` → `sky` (no change, no vowel before y)
+
+- **Step 2 to 4:** Remove complex suffixes like `-ational`, `-ization`, `-ness`, `-ful`, etc.
+  - `relational` → `relate`, `digitizer` → `digitize`, `conformable` → `conform`
+  - `generalization` → `generalize` → `general`
+
+- **Step 5:** Final cleanup — remove trailing `e` or reduce `ll` to `l`.
+  - `probate` → `probat`, `rate` → `rate` (m=1, so protected)
+  - `controll` → `control`
+
+**Example Trace:**
+`happiness` → Step 1a: no change → Step 2: `happi` + `ness` → remove `ness` → `happi`
+
+**Limitations:**
+- Produces non-dictionary words (e.g., `studies` → `studi`)
+- Over-stemming: `universe` and `university` both → `univers` (different meanings merged)
+- Under-stemming: `alumnus` and `alumni` not merged
+
+
+<LongQuestion>
+### Q4. Explain N-gram model (bi-gram and tri-gram) with example. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO2" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT / AIML" /> <QuestionDot color="orange" text="May 2023, Nov 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+A <Highlight>**language model**</Highlight> goes through a text to calculate the probability of a word sequence. It answers the question: *"What is the most likely next word after this sentence?"*
+
+An **N-gram model** is a simple version of this. Instead of looking at the entire paragraph, it looks at only a fixed number of previous words (called the window). This helps the computer run much faster.
+
+**Different Types of N-grams:**
+
+1. **Unigram (N=1):** The model only looks at 1 word at a time. It ignores all previous words.  
+   *Example sentence "I love coding":* `[I]`, `[love]`, `[coding]`
+2. **Bigram (N=2):** The model looks at the current word and 1 previous word.  
+   *Example:* `[I love]`, `[love coding]`
+3. **Trigram (N=3):** The model looks at 2 previous words.  
+   *Example:* `[I love coding]`
+
+**How it works (The Formula):**
+To guess the next word in a Bigram model, it uses a simple probability formula based on how many times it saw the two words together in the past:
+
+$$
+P(word_2 \mid word_1) = \frac{\text{Count}(word_1, word_2)}{\text{Count}(word_1)}
+$$
+
+**Practical Example:**
+Corpus: "I love NLP. I love Python. I love coding."
+- P(love | I) = Count("I love") / Count("I") = 3/3 = **1.0**
+- P(NLP | love) = Count("love NLP") / Count("love") = 1/3 = **0.33**
+
+**Limitations & Solutions:**
+- **The Zero Probability Problem:** If an N-gram model has never seen a specific pair of words before (like "purple alien"), it will give a 0% probability, breaking the whole calculation.
+- **Solution:** We use **Smoothing** (like Laplace Add-1 smoothing) which gives a tiny bit of probability to unseen words so the system doesn't crash.
+
+
+<LongQuestion>
+### Q5. Explain smoothing in N-gram models. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO2" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+**Smoothing** is a technique used in N-gram language models to handle the **Zero Probability Problem**.
+
+**The Problem:**
+If an N-gram (a word sequence) was never seen in the training corpus, its count = 0:
+$$P(\text{alien} \mid \text{purple}) = \frac{\text{Count(purple alien)}}{\text{Count(purple)}} = \frac{0}{\text{n}} = 0$$
+
+Since sentence probability = product of all bigram probabilities, even **one zero makes the entire sentence probability = 0**. This breaks the model completely.
+
+**Solution 1: Laplace (Add-1) Smoothing:**
+Add 1 to the count of every possible N-gram — even ones we've never seen.
+
+$$P_{smooth}(w_2 \mid w_1) = \frac{\text{Count}(w_1, w_2) + 1}{\text{Count}(w_1) + V}$$
+
+where **V = vocabulary size** (total number of unique words).
+
+**Example:**
+- Corpus: "I love NLP. I love Python." → V = 4 unique words (I, love, NLP, Python)
+- Count("love alien") = 0, Count("love") = 2
+- **Without smoothing:** P(alien | love) = 0/2 = **0** ❌
+- **With Add-1:** P(alien | love) = (0+1)/(2+4) = **1/6 ≈ 0.167** ✅ (No longer zero!)
+
+**Solution 2: Add-k Smoothing:**
+Instead of adding 1, add a smaller fraction k (e.g., k = 0.5):
+$$P_{smooth}(w_2 \mid w_1) = \frac{\text{Count}(w_1, w_2) + k}{\text{Count}(w_1) + kV}$$
+
+**Solution 3: Good-Turing Smoothing:**
+Estimate the probability of unseen N-grams based on how often rare (seen-once) N-grams appeared. More accurate than Add-1 for large vocabulary.
+
+**Solution 4: Kneser-Ney Smoothing:**
+The state-of-the-art technique. Considers how likely a word is to appear in new contexts (not just its frequency).
+
+**Key Takeaway:** Smoothing is essential for any N-gram language model to work on real-world text, because no training corpus can cover every possible word combination.
+
+
+<LongQuestion>
+### Q6. Explain role of regular expressions and finite automata in NLP. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO2" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT / ECE" /> <QuestionDot color="orange" text="June 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+A **Regular Expression (RE)** is a <Highlight>**simple and formal language used to match text patterns**</Highlight> inside strings. Just like how we use a search box to find a file, NLP uses regular expressions to find specific words or letters in a large amount of text.
+
+They are very important in Natural Language Processing for tasks like searching text, cleaning data, and checking if a word fits a certain grammatical rule.
+
+**Basic rule operators and symbols:**
+
+| Operator | What it does | Example | Result |
+| :--- | :--- | :--- | :--- |
+| `[A-Z]` | Finds any capital letter | `[Ww]oodchuck` | Matches `Woodchuck` or `woodchuck` |
+| `[^A-Z]` | Negation (Finds anything EXCEPT capital letters) | `[^A-Z]at` | Matches `cat`, `bat`, but NOT `Cat` |
+| `[e^]` | Matches either the letter 'e' or the character '^' literally (since '^' is not at the start) | `m[e^]t` | Matches `met` or `m^t` |
+| `?` | Optional character (0 or 1 time) | `colou?r` | Matches `color` or `colour` |
+| `.` | Wildcard (Matches any single character) | `beg.n` | Matches `began`, `begin`, `begun` |
+| `*` | Zero or more times | `ab*` | Matches `a`, `ab`, `abb`, `abbb` |
+| `+` | One or more times | `ab+` | Matches `ab`, `abb`, `abbb` (but NOT just `a`) |
+| `\d` | Finds any digit | `\d\d` | Matches `12`, `99` |
+
+**Role of Finite Automata (FA) in NLP:**
+
+A **Finite Automaton** is a mathematical model with states and transitions. In NLP, it is used to implement regular expressions efficiently.
+
+- Each RE can be converted into a **Non-Deterministic FA (NFA)** and then into a **Deterministic FA (DFA)**.
+- The FA reads input text character by character, transitioning between states.
+- If the FA reaches an **accept state**, the pattern is matched.
+
+*Example:* The RE `colou?r` compiles to an FA that accepts both "color" and "colour".
+
+**Applications:**
+Regular expressions are widely used for finding emails in a text, cleaning up messy data, tokenization, and creating rules for morphological parsers.
+
+
+<LongQuestion>
+### Q7. What is language model and its importance in NLP? (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO2" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+A **Language Model (LM)** is a probability distribution over sequences of words. It answers the question: *"What is the probability that this sequence of words naturally occurs in this language?"*
+
+$$P(\text{"I love NLP"}) = P(I) \times P(\text{love} \mid I) \times P(\text{NLP} \mid \text{love})$$
+
+**Types of Language Models:**
+
+| Type | How it works | Example |
+|------|-------------|---------|
+| **Unigram** | Each word is independent of others | P(word) = Count(word)/Total words |
+| **Bigram** | Uses 1 previous word to predict next | P(w₂\|w₁) |
+| **Trigram** | Uses 2 previous words | P(w₃\|w₁,w₂) |
+| **Neural LM** | Deep learning model learns complex patterns | GPT, BERT |
+
+**Importance of Language Models in NLP:**
+
+1. **Next Word Prediction:** Powers keyboard autocomplete (e.g., "I am going to the ___" → "store").
+
+2. **Speech Recognition:** When audio is ambiguous, LM picks the more probable word sequence. E.g., "I scream" vs "Ice cream" — context decides.
+
+3. **Machine Translation:** LM ensures the translated output sounds fluent and grammatically natural in the target language.
+
+4. **Spell Correction:** LM helps choose between "there" and "their" based on sentence context.
+
+5. **Text Generation:** Powers ChatGPT, autocomplete in Gmail — generates coherent text word by word.
+
+6. **Chatbots:** Language models help chatbots generate natural, relevant responses.
+
+**Key Formula (Bigram Model):**
+$$P(w_2 \mid w_1) = \frac{\text{Count}(w_1, w_2)}{\text{Count}(w_1)}$$
+
+---
+
+## **Module 3: Syntactic Analysis**
+
+<LongQuestion>
+### Q1. Explain POS tagging and its approaches (rule-based, stochastic) with example. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT / CSBS / AIML" /> <QuestionDot color="orange" text="May 2023, Nov 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+<Highlight>**Part-of-Speech (POS) Tagging**</Highlight> is the process of identifying the correct grammatical category for every word in a sentence. It labels whether a word is a Noun (NN), Verb (VB), Adjective (JJ), Adverb (RB), etc.
+
+**Why is it needed?** By knowing the grammatical roles, a computer can understand the literal meaning of a sentence much better.
+
+**Common POS Tags (Penn Treebank):**
+
+| Tag | Meaning | Example |
+|-----|---------|---------|
+| NN | Noun (singular) | dog, book |
+| VB | Verb (base form) | run, eat |
+| JJ | Adjective | happy, big |
+| RB | Adverb | quickly, very |
+| DT | Determiner | the, a |
+| IN | Preposition | in, on, at |
+| PRP | Pronoun | he, she, it |
+
+**Categories of POS Tags:**
+- **Open Class words:** These change over time. Every year new words are invented. Examples: Nouns (laptop), Verbs (googling), Adjectives (awesome).
+- **Closed Class words:** These are fixed in the English language and rarely change. Examples: Prepositions (in, on), Pronouns (he, she), Conjunctions (and, but).
+
+---
+
+**Approach 1: Rule-Based POS Tagging**
+
+Uses a dictionary (lexicon) and a set of hand-written linguistic rules to assign and then disambiguate POS tags.
+
+**Steps:**
+1. Look up all possible tags for each word in a lexicon.
+2. Apply hand-written rules to eliminate incorrect tags.
+
+**Example Rules:**
+- If a word ends in **"-ing"** and is preceded by "is/was/are" → tag as **VBG** (present participle)
+- If a word ends in **"-ed"** → tag as **VBD** (past tense verb)
+- If a word ends in **"-ly"** → tag as **RB** (adverb)
+- If a word ends in **"-ness"** or **"-tion"** → tag as **NN** (noun)
+
+**Example:**  
+Sentence: "The cat is running."  
+- "The" → DT (rule: always DT)  
+- "cat" → NN (lexicon: noun)  
+- "is" → VBZ (rule: form of 'be')  
+- "running" → VBG (rule: ends in -ing + preceded by 'is')  
+
+**Advantages:** Interpretable, no training data needed.  
+**Disadvantages:** Expensive to write rules, hard to maintain, doesn't handle unseen words.
+
+---
+
+**Approach 2: Stochastic (HMM-Based) POS Tagging**
+
+Uses probability (statistics) instead of hand-written rules. Based on Hidden Markov Models (HMM).
+
+**Core Idea:** Find the sequence of tags T = t₁, t₂, ..., tₙ that maximizes:
+$$P(T \mid W) \propto \prod_{i} P(t_i \mid t_{i-1}) \times P(w_i \mid t_i)$$
+
+**Two Key Probabilities:**
+1. **Transition Probability** P(tᵢ | tᵢ₋₁): How likely is tag T2 to follow tag T1?  
+   - P(NN | DT) = high (Determiner is usually followed by Noun: "the dog")
+2. **Emission Probability** P(wᵢ | tᵢ): How likely is word w given tag t?  
+   - P("book" | NN) = 0.0003, P("book" | VB) = 0.0001
+
+The **Viterbi Algorithm** efficiently finds the best tag sequence.
+
+**Example:**  
+Sentence: "Book the flight"
+- "Book" → VB (probability of VB highest given context "the flight" follows)
+- "the" → DT
+- "flight" → NN ✅
+
+**Advantages:** Scalable, handles unseen words better, learns from large corpora.  
+**Disadvantages:** Needs large labeled training data, less interpretable.
+
+
+<LongQuestion>
+### Q2. Explain POS tagging ambiguity with example. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT+ECE" /> <QuestionDot color="orange" text="Dec 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+<Highlight>**POS tag ambiguity**</Highlight> occurs when one single word has the potential to belong to two or more different grammatical categories (Parts of Speech). Because computers initially don't understand context, this causes major confusion.
+
+**Examples of Ambiguous Words in English:**
+
+1. **Duck:**
+   - As a Noun: "Look at the cute **duck** in the pond." (An animal).
+   - As a Verb: "You need to **duck** to avoid the ball." (Action of lowering the head).
+
+2. **Watch:**
+   - As a Noun: "My gold **watch** is broken." (An object that tells time).
+   - As a Verb: "I will **watch** the movie tonight." (Action of looking).
+
+3. **Race:**
+   - As a Noun: "He won the car **race**." (An event).
+   - As a Verb: "I will **race** you to the end of the street." (An action).
+
+4. **Book:**
+   - As a Noun: "Please give me the **book**." (A physical object).
+   - As a Verb: "Can you **book** the tickets?" (Action of reserving).
+
+In all these cases, without understanding the surrounding words, it is impossible for an NLP system to know which form is being used.
+
+**Solutions to POS Ambiguity:**
+- Rule-based systems use context rules (e.g., a word after "the" is likely a Noun).
+- Stochastic systems use probability (HMM) to pick the most likely tag given context.
+
+
+<LongQuestion>
+### Q3. Explain CFG and construct parse tree. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT6" /> <QuestionDot color="purple" text="IT / AIML / AIDS" /> <QuestionDot color="orange" text="Dec 2023, Nov 2025" />
+</LongQuestion>
+
+**Context-Free Grammar (CFG)** is a formal grammar used to describe the grammatical structure of sentences in a language. It is called "context-free" because a non-terminal symbol can be expanded regardless of the context it appears in.
+
+**Components of a CFG (4 components):**
+
+| Component | Symbol | Description | Example |
+|-----------|--------|-------------|---------|
+| **Non-terminals** | N | Grammatical categories | S, NP, VP, Det, N, V |
+| **Terminals** | T | Actual words | "the", "dog", "runs" |
+| **Production Rules** | R | How non-terminals expand | S → NP VP |
+| **Start Symbol** | S | Top-level rule | S |
+
+**Example Grammar:**
+```
+S   → NP VP
+NP  → Det N
+VP  → V | V NP
+Det → "the" | "a"
+N   → "dog" | "cat" | "ball"
+V   → "chases" | "sees" | "eats"
+```
+
+**Parse Tree for "The dog chases a cat":**
+```
+           S
+          / \
+        NP    VP
+       / \   /  \
+     Det  N  V    NP
+      |   |  |   /  \
+     the dog chases Det  N
+                     |    |
+                     a   cat
+```
+
+**How to Construct a Parse Tree (Steps):**
+1. Start with the **Start Symbol S** at the top.
+2. Apply grammar rules to expand S → NP VP.
+3. Expand NP → Det N → "the" "dog".
+4. Expand VP → V NP → "chases" NP → "chases" Det N → "chases" "a" "cat".
+5. All leaf nodes must match the actual words of the sentence.
+
+**Another Example — "A cat sees the dog":**
+```
+           S
+          / \
+        NP    VP
+       / \   /  \
+     Det  N  V    NP
+      |   |  |   /  \
+      a  cat sees Det  N
+                   |   |
+                  the dog
+```
+
+**Ambiguity in CFG:**
+A sentence is **structurally ambiguous** if it has more than one valid parse tree.
+*Example:* "I saw a man with a telescope" has two valid parse trees.
+
+**Limitations of CFG:**
+- Cannot handle long-distance dependencies
+- Does not account for probability (solved by PCFG — Probabilistic CFG)
+
+
+<LongQuestion>
+### Q4. Explain HMM and compute emission and transition probabilities. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT5" /> <QuestionDot color="purple" text="IT / IT+ECE" /> <QuestionDot color="orange" text="Dec 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+<Highlight>**Hidden Markov Models (HMM)**</Highlight> represent the Statistical approach to POS Tagging. Instead of a human writing strict rules, the computer calculates the probability of what the tag should be, based on millions of past sentences it has read.
+
+HMM relies on two important probabilities:
+
+1. **Transition Probability:** 
+   What is the mathematical chance that one grammatical tag will follow another?
+   $$P(t_i \mid t_{i-1}) = \frac{\text{Count}(t_{i-1}, t_i)}{\text{Count}(t_{i-1})}$$
+   *Example:* What is the probability that a Noun comes after a Determiner? Very high (P(NN|DT) ≈ 0.85 because "the dog", "a cat" are common).
+
+2. **Emission Probability:** 
+   What is the mathematical chance that a specific part-of-speech tag will produce a specific word?
+   $$P(w_i \mid t_i) = \frac{\text{Count}(t_i \rightarrow w_i)}{\text{Count}(t_i)}$$
+   *Example:* Out of all the Nouns in the world, what is the probability that the Noun is exactly the word "dog"?
+
+**Example Calculation:**
+
+Given training corpus sentences:
+```
+the/DT dog/NN runs/VB
+the/DT cat/NN eats/VB
+a/DT dog/NN eats/VB
+```
+
+**Transition Probabilities:**
+- Count(DT→NN) = 3, Count(DT) = 3 → **P(NN|DT) = 3/3 = 1.0**
+- Count(NN→VB) = 3, Count(NN) = 3 → **P(VB|NN) = 3/3 = 1.0**
+
+**Emission Probabilities:**
+- Count(NN→dog) = 2, Count(NN) = 3 → **P(dog|NN) = 2/3 ≈ 0.67**
+- Count(NN→cat) = 1, Count(NN) = 3 → **P(cat|NN) = 1/3 ≈ 0.33**
+- Count(VB→runs) = 1, Count(VB) = 3 → **P(runs|VB) = 1/3 ≈ 0.33**
+- Count(VB→eats) = 2, Count(VB) = 3 → **P(eats|VB) = 2/3 ≈ 0.67**
+
+**How the model chooses the answer:**
+For an entire sentence, the computer multiplies these probabilities together across multiple different tag combinations. The combination that gives the **highest final mathematical score** is chosen as the final answer. It is fast, automated, and much cheaper than writing human rules.
+
+**Best tag sequence = argmax P(tags) = argmax ∏ P(tᵢ|tᵢ₋₁) × P(wᵢ|tᵢ)**
+
+
+<LongQuestion>
+### Q5. Differentiate top-down and bottom-up parsing. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="CSBS / IT+ECE" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+**Parsing** is the process of analyzing the grammatical structure of a sentence using a grammar (like CFG) and producing a parse tree.
+
+| Aspect | Top-Down Parsing | Bottom-Up Parsing |
+|--------|-----------------|-------------------|
+| **Starting Point** | Starts from **Start Symbol (S)** | Starts from **input words (leaves)** |
+| **Direction** | Expands rules from S downward | Reduces words upward to reach S |
+| **Strategy** | Hypothesis-driven: "What could this sentence be?" | Data-driven: "What can these words form?" |
+| **Process** | S → NP VP → match words | Words → NP, VP → combine to form S |
+| **Common Algorithm** | Recursive Descent Parser, Earley Parser | Shift-Reduce Parser, LR Parser |
+| **Advantage** | Intuitive, easy to implement | More efficient for many grammar types |
+| **Disadvantage** | May explore many wrong paths (backtracking) | Can be complex to implement |
+
+**Example for "The dog runs":**
+
+**Top-Down:**
+1. Start: S
+2. Expand: S → NP VP
+3. Expand: NP → Det N → match "The" "dog" ✅
+4. Expand: VP → V → match "runs" ✅
+
+**Bottom-Up:**
+1. Read "The" → shift onto stack
+2. Read "dog" → reduce: Det + N → NP ✅
+3. Read "runs" → reduce: V → VP ✅
+4. Combine: NP + VP → S ✅
+
+Both produce the same parse tree but in opposite directions.
+
+
+<LongQuestion>
+### Q6. (SKIP THIS FOR AIML) Explain PCFG and difference from CFG. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+<LongQuestion>
+### Q7. Assign POS tags / perform tagging using Viterbi algorithm. (10 Marks) <QuestionDot color="red" text="Priority 3" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="IT / ECE" /> <QuestionDot color="orange" text="June 2025" />
+</LongQuestion>
+
+The **Viterbi Algorithm** is a dynamic programming algorithm used with HMM to find the **most probable POS tag sequence** for a sentence efficiently.
+
+**Core Idea:** Instead of checking all possible tag combinations (exponential), Viterbi builds a table (trellis) and reuses earlier computed results.
+
+**Formula:**
+$$\delta_t(j) = \max_{i} \left[ \delta_{t-1}(i) \times P(t_j \mid t_i) \times P(w_t \mid t_j) \right]$$
+
+Where:
+- δₜ(j) = maximum probability of reaching tag j at position t
+- P(tⱼ | tᵢ) = transition probability
+- P(wₜ | tⱼ) = emission probability
+
+**Steps:**
+1. **Initialization:** For each tag t, compute δ₁(t) = P(t | START) × P(w₁ | t)
+2. **Recursion:** For each next word, compute δₜ(j) = max over all previous tags
+3. **Backtracking:** Trace back the path of tags with highest probability
+
+**Example:**
+Sentence: "the dog runs"
+Tags: DT (Determiner), NN (Noun), VB (Verb)
+
+Given:
+- P(DT|START) = 1.0, P(NN|DT) = 0.8, P(VB|NN) = 0.9
+- P("the"|DT) = 0.6, P("dog"|NN) = 0.5, P("runs"|VB) = 0.4
+
+**Trellis Calculation:**
+
+| Word | DT | NN | VB |
+|------|----|----|-----|
+| "the" | 1.0 × 0.6 = **0.6** | 0 | 0 |
+| "dog" | — | 0.6 × 0.8 × 0.5 = **0.24** | — |
+| "runs" | — | — | 0.24 × 0.9 × 0.4 = **0.0864** |
+
+**Backtrack:** runs→VB, dog→NN, the→DT
+
+**Result:** the/DT dog/NN runs/VB ✅
+
+---
+
+## **Module 4: Semantic Analysis**
+
+<LongQuestion>
+### Q1. Explain Word Sense Disambiguation (WSD) and its approaches (dictionary + ML). (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT / AIML / IT+ECE" /> <QuestionDot color="orange" text="May 2023, Dec 2025" />
+</LongQuestion>
+
+**Word Sense Disambiguation (WSD)** is the NLP task of determining **which sense (meaning) of an ambiguous word is intended** in a given context.
+
+*Example:*  
+- "I went to the **bank**." → Financial bank? Or river bank?  
+WSD determines the correct meaning based on surrounding context.
+
+**Why WSD is needed:**
+Most words in English have multiple meanings (polysemy). Without WSD, a computer cannot correctly translate, summarize, or understand text.
+
+*Example of importance:* In translation, "bank" in "river bank" should translate differently from "bank" in "savings bank."
+
+---
+
+**Approach 1: Dictionary-Based (Knowledge-Based) Approach**
+
+Uses an existing dictionary or lexical resource (like WordNet) to determine word sense.
+
+**Lesk Algorithm (Most Important):**
+- Compare the dictionary definition of each sense with the context (surrounding words).
+- The sense whose definition has the **most overlap** with the context words is chosen.
+
+*Example:*  
+Word: **"bank"**, Context: "She deposited her salary at the bank"  
+Context words: `{deposited, salary, money}`  
+- Sense 1 (Financial): definition = `{money, loan, deposit, financial institution}` → overlap: `{deposited, salary}` = **2** ✅  
+- Sense 2 (River): definition = `{river, water, slope, land}` → overlap: **0** ❌  
+→ **Winner: Financial bank** ✅
+
+**Advantage:** No training data needed.  
+**Disadvantage:** Limited by the quality of the dictionary; may fail if context and definition words don't match exactly.
+
+---
+
+**Approach 2: Machine Learning Based Approach**
+
+**Supervised Learning:**
+- Train a classifier on a **sense-tagged corpus** (manually labeled text where each word's correct sense is marked).
+- **Features used:** surrounding words (window of ±2 words), POS tags of surrounding words, collocations.
+- **Algorithms:** Naive Bayes, SVM, Decision Trees, k-NN.
+
+*Example:* From training data, the model learns:
+- When "bank" appears near "deposit", "money", "loan" → sense = FINANCIAL
+- When "bank" appears near "river", "shore", "water" → sense = RIVER
+
+**Unsupervised Learning:**
+- Groups similar word usages using clustering (no labeled data required).
+- Words that appear in similar contexts are grouped into the same sense cluster.
+
+**Neural/Deep Learning Approach:**
+- Modern models like **BERT** create context-sensitive word embeddings.
+- "bank" in "river bank" has a different vector representation than "bank" in "savings bank".
+- Enables very accurate WSD without handcrafted features.
+
+---
+
+**Comparison:**
+
+| Dictionary-Based | Supervised ML | Neural (BERT) |
+|-----------------|---------------|---------------|
+| No training data needed | Needs labeled data | Needs large unlabeled data |
+| Simple, fast | Accurate | Best accuracy |
+| Limited to dictionary | Language-independent features | Context-aware |
+
+
+<LongQuestion>
+### Q2. Explain Lesk algorithm for WSD with example. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Dec 2023" />
+</LongQuestion>
+
+**Lesk Algorithm** is a classic **dictionary-based** approach for Word Sense Disambiguation (WSD), proposed by Michael Lesk in 1986.
+
+**Core Idea:**
+The correct sense of a word is the one whose **dictionary definition has the maximum overlap** (common words) with the **context** (surrounding words in the sentence).
+
+**Algorithm Steps:**
+1. Identify the ambiguous word and extract surrounding **context words**.
+2. Look up all possible senses/definitions of that word from a dictionary (WordNet).
+3. For each sense, count the words that appear in **both** the definition AND the context.
+4. Select the sense with the **highest overlap count** as the correct meaning.
+
+**Example:**
+Sentence: "The bank can guarantee deposits will cover future tuition costs."  
+Ambiguous word: **"bank"**  
+Context words: `{guarantee, deposits, cover, tuition, costs}`
+
+| Sense | Dictionary Definition | Overlap with Context | Count |
+|-------|----------------------|----------------------|-------|
+| **Financial Bank** | financial institution that accepts deposits, makes loans | deposits | **1** |
+| **River Bank** | sloping land beside a river or lake | (none) | **0** |
+
+→ **Winner: Financial Bank (count = 1)** ✅
+
+**Another Example:**
+Sentence: "He paddled to the **bank** of the river."  
+Context words: `{paddled, river, water}`
+
+| Sense | Definition | Overlap | Count |
+|-------|-----------|---------|-------|
+| Financial Bank | deposits, loans, money | (none) | 0 |
+| **River Bank** | sloping land, river, water | `{river}` | **1** ✅ |
+
+→ **Winner: River Bank** ✅
+
+**Advantages:** Simple, no training data needed, interpretable.  
+**Disadvantages:** Sensitive to exact wording; definitions and context may not share many words even for correct sense (vocabulary mismatch).
+
+
+<LongQuestion>
+### Q3. Explain semantic relationships (synonymy, antonymy, polysemy, homonymy). (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="CSBS / AIML" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+**Lexical Semantics** studies the meaning of words and the relationships between them. These relationships are fundamental to NLP tasks like WSD, information retrieval, and machine translation.
+
+**Key Semantic Relationships:**
+
+1. **Synonymy:**  
+   Two or more words have the **same or very similar meaning**.  
+   *Example:* "happy" ↔ "joyful" ↔ "elated"  
+   *NLP Use:* Query expansion in search engines — searching "happy" also finds "joyful" documents.
+
+2. **Antonymy:**  
+   Two words have **opposite meanings**.  
+   *Example:* "hot" ↔ "cold", "day" ↔ "night", "buy" ↔ "sell"  
+   *NLP Use:* Sentiment analysis — understanding contrasting opinions.
+
+3. **Polysemy:**  
+   One word has **multiple related meanings** (same word, different but related senses).  
+   *Example:* "head" can mean:  
+   - Head of a body (anatomical)  
+   - Head of an organization (leadership)  
+   - Head of a coin (the face side)  
+   *NLP Use:* WSD resolves which sense is intended.
+
+4. **Homonymy:**  
+   Two words have **the same spelling and/or pronunciation but completely unrelated meanings**.  
+   *Example:* "bat" (cricket bat) vs "bat" (flying animal) — same word, no meaning relationship.  
+   *NLP Use:* Must be disambiguated from context.
+
+5. **Hyponymy (IS-A relationship):**  
+   One word is a **specific type** of another.  
+   *Example:* "rose" is a hyponym of "flower"; "dog" is a hyponym of "animal"  
+   *NLP Use:* WordNet hierarchy, ontology building.
+
+6. **Meronymy (PART-OF relationship):**  
+   One word is a **part** of another.  
+   *Example:* "wheel" is a meronym of "car"; "finger" is a meronym of "hand"  
+   *NLP Use:* Knowledge representation and question answering.
+
+
+<LongQuestion>
+### Q4. Explain WordNet dictionary. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="AIML / AIDS" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+**WordNet** is a large English **lexical database** developed at Princeton University. Unlike a regular dictionary, WordNet organizes words by **meaning** rather than alphabetically.
+
+**Key Concept — Synsets:**
+Words are grouped into **synsets (synonym sets)** — each synset represents one distinct concept or meaning.
+- *Example:* `{car, auto, automobile, motorcar}` is a synset — all these words share the same meaning.
+
+**Structure of WordNet:**
+
+| Relation | Description | Example |
+|----------|-------------|---------|
+| **Synonymy** | Words in the same synset | car ↔ automobile |
+| **Hypernymy** (IS-A general) | Parent concept | "vehicle" is hypernym of "car" |
+| **Hyponymy** (IS-A specific) | Child concept | "car" is hyponym of "vehicle" |
+| **Meronymy** (PART-OF) | Part-whole relationship | "wheel" is meronym of "car" |
+| **Antonymy** | Opposite meaning | "good" ↔ "bad" |
+
+**WordNet Hierarchy Example:**
+```
+entity → physical object → artifact → vehicle → car → sports car → Ferrari
+(most general)                                              (most specific)
+```
+
+**Coverage:**
+- ~117,000 synsets
+- Covers nouns, verbs, adjectives, and adverbs
+- Each synset has a **gloss** (definition) and example sentences
+
+**Applications of WordNet in NLP:**
+1. **Word Sense Disambiguation:** Lesk Algorithm uses WordNet definitions.
+2. **Semantic Similarity:** Measure how similar two words are by path distance in WordNet.
+3. **Information Retrieval:** Expand search queries with synonyms.
+4. **Machine Translation:** Find appropriate equivalent words.
+5. **Question Answering:** Understand semantic relationships between concepts.
+
+
+<LongQuestion>
+### Q5. (SKIP THIS FOR AIML) Explain lexical similarity (cosine similarity). (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
+</LongQuestion>
+
+<LongQuestion>
+### Q6. Explain attachment ambiguity. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="CSBS" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+**Attachment Ambiguity** (also called **Prepositional Phrase (PP) Attachment Ambiguity**) is a type of **syntactic ambiguity** that occurs when a prepositional phrase (PP) or modifier can be grammatically attached to **more than one constituent** in a sentence, resulting in two different meanings.
+
+**Example 1 (Classic):**  
+"**I saw the man with the telescope.**"
+
+- **Interpretation 1 — PP attaches to VP (verb phrase "saw"):**  
+  → I **used** a telescope to see the man.  
+  Parse: [I [saw [the man]] [with the telescope]]
+
+- **Interpretation 2 — PP attaches to NP (noun phrase "the man"):**  
+  → I saw the man who **had** a telescope.  
+  Parse: [I [saw [the man [with the telescope]]]]
+
+**Example 2:**  
+"**She ate the pizza with chopsticks.**"
+- VP attachment: She **used** chopsticks to eat the pizza. ✅ (more likely)
+- NP attachment: She ate the pizza that **had** chopsticks on it. ❌ (less likely)
+
+**Why is this a problem?**
+Different parse trees are generated for the same sentence, leading to completely different semantic interpretations. An NLP system must choose the correct one.
+
+**How to resolve attachment ambiguity:**
+
+| Method | Description |
+|--------|-------------|
+| **Statistical approach** | Use corpus frequency — pick the attachment seen more often in training data |
+| **Semantic plausibility** | Use world knowledge — "eat with chopsticks" makes more sense than "pizza with chopsticks" |
+| **WordNet-based** | Check if the preposition semantically fits the candidate head word |
+
+**Hindle and Rooth (1993):** Used lexical association scores from a corpus to resolve PP attachment automatically.
+
+---
+
+## **Module 5: Pragmatics & Discourse**
+
+<LongQuestion>
+### Q1. Explain reference resolution and coreference resolution problem. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT / AIML" /> <QuestionDot color="orange" text="Dec 2023" />
+</LongQuestion>
+
+**Reference Phenomenon:**
+In natural language, we frequently use pronouns and noun phrases to **refer** to something previously mentioned in the text. These are called **referring expressions**.
+
+*Example:* "**Rahul** bought a **car**. **He** drives **it** every day."  
+Here, "He" refers to Rahul, and "it" refers to the car.
+
+**Reference Resolution:**
+The NLP task of determining **what entity a referring expression (pronoun / NP) points to** in the text.
+
+**Coreference:**
+Two expressions **corefer** when they both refer to the **same real-world entity**.  
+*Example:* "Barack Obama", "the president", "he", "him" — all refer to the same person in a paragraph.
+
+**Coreference Resolution Problem:**
+The task of **clustering all mentions** of the same entity together.
+
+*Example of Difficulty:*  
+"**John** told **Bill** that **he** would come."  
+→ Does "he" = John or Bill? Without context, it is ambiguous!
+
+**Another Example:**  
+"The city council refused the demonstrators a permit because **they** were afraid of violence."  
+→ "they" = city council or demonstrators? Both are grammatically valid.
+
+**Why Coreference Resolution is Hard:**
+1. Pronouns are inherently ambiguous (he/she/it/they have multiple possible referents).
+2. Multiple candidate NPs exist in the discourse.
+3. Gender and number constraints help but are not always sufficient.
+4. Requires world knowledge in some cases.
+
+**Why it matters:**
+Coreference resolution is essential for:
+- Machine Translation (pronouns must map to correct entities)
+- Question Answering (must find what "it" refers to before answering)
+- Text Summarization (must know who/what is being discussed)
+
+
+<LongQuestion>
+### Q2. Explain Lappin and Leass algorithm for pronoun resolution. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="CSBS / AIDS" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+**Lappin and Leass (L&L) Algorithm (1994)** is a classic **rule-based algorithm** for resolving third-person pronouns (he, she, it, they, him, her, them) to their correct referents in text.
+
+**Core Idea:**
+Every Noun Phrase (NP) in the discourse is assigned a **salience score** (a numerical weight indicating how prominent/important it is). When a pronoun is encountered, it is resolved to the **NP with the highest salience score** that satisfies grammatical constraints.
+
+---
+
+**Salience Factors and Weights:**
+
+| Salience Factor | Weight |
+|----------------|--------|
+| Sentence Recency (appears in current/recent sentence) | 100 |
+| Subject emphasis (NP is subject of clause) | 80 |
+| Existential emphasis | 70 |
+| Accusative (direct object) emphasis | 50 |
+| Indirect object / oblique emphasis | 40 |
+| Head noun of NP | 80 |
+| Non-recursive NP (simple NP) | 50 |
+
+Multiple factors can apply simultaneously — their weights are **added together**.
+
+**Decay:**  
+NPs from older sentences have their salience multiplied by a **decay factor (0.5 per sentence)** to reduce their prominence over time.
+
+---
+
+**Algorithm Steps:**
+
+1. **Parse the sentences** using a syntactic parser to identify all Noun Phrases (NPs).
+2. **Assign initial salience weights** to each NP based on its syntactic role.
+3. **Apply decay** — for NPs from previous sentences, multiply salience by 0.5 for each sentence of distance.
+4. **Apply grammatical constraints** — filter out candidates that:
+   - Do not match the pronoun's **gender** (e.g., "she" cannot refer to a male entity)
+   - Do not match the pronoun's **number** (e.g., "they" cannot refer to a singular NP)
+   - Violate **binding constraints** (reflexive pronoun rules)
+5. **Select the NP with the highest remaining salience score** as the pronoun's referent.
+6. **Update salience scores** for the next sentence.
+
+---
+
+**Worked Example:**
+
+Sentence 1: "**John** saw **Bill**."
+- John (Subject of S1): 100 (recency) + 80 (subject) = **180**
+- Bill (Object of S1): 100 (recency) + 50 (accusative) = **150**
+
+Sentence 2: "**He** was tired."
+- Apply decay to S1 NPs: John = 180 × 0.5 = **90**, Bill = 150 × 0.5 = **75**
+- Pronoun "He" is masculine, singular → both John and Bill are valid
+- John (90) > Bill (75) → **"He" = John** ✅
+
+---
+
+**Strengths:**
+- No training data needed
+- Computationally efficient
+- Works well for simple intra-sentential and inter-sentential pronoun resolution
+
+**Limitations:**
+- Only handles third-person pronouns
+- Cannot resolve complex cases requiring world knowledge
+- Requires a syntactic parser
+
+
+<LongQuestion>
+### Q3. Explain syntactic and semantic constraints on coreference. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Dec 2023" />
+</LongQuestion>
+
+When resolving coreferences (determining what a pronoun or NP refers to), NLP systems apply two major types of constraints to eliminate impossible referents:
+
+---
+
+**A. Syntactic Constraints:**
+
+These are **grammar-based rules** that restrict which NPs can corefer with a given expression.
+
+**1. Number Agreement:**
+A pronoun must agree in number with its referent.
+- "The **boys** came. **They** were happy." → ✅ (plural matches plural)
+- "The **boy** came. **They** were happy." → ❌ (singular cannot take plural pronoun)
+
+**2. Gender Agreement:**
+The pronoun's gender must match the referent's gender.
+- "**Mary** is tired. **She** should rest." → ✅
+- "**John** is tired. **She** should rest." → ❌
+
+**3. Binding Constraint — Principle A (Reflexive Pronouns):**
+A reflexive pronoun (himself, herself, itself) **must** refer to its local subject.
+- "**John** hurt **himself**." → "himself" = John ✅ (must be the local subject)
+- "*John said that Bill hurt **himself**." → "himself" = Bill (the local subject) ✅
+
+**4. Binding Constraint — Principle B (Personal Pronouns):**
+A non-reflexive pronoun **cannot** refer to the subject of its own clause.
+- "John hurt **him**." → "him" ≠ John ✅ (must refer to someone else)
+- "John hurt **himself**." → must use reflexive if referring to John ✅
+
+**5. Clause-mate Constraint:**
+Two full NPs in the same clause typically cannot corefer.
+- "*He₁ said John₁ was tired." → "He" and "John" cannot corefer here.
+
+---
+
+**B. Semantic Constraints:**
+
+These use **meaning and world knowledge** to determine whether a coreference is plausible.
+
+**1. Selectional Restrictions:**
+Verbs place requirements on their arguments. An NP that doesn't fit the verb's requirements is unlikely to be the referent.
+- "The **stone** thinks deeply. **It** is brilliant." → semantically odd (stones don't think)
+- "The **professor** thinks deeply. **She** is brilliant." → semantically correct ✅
+
+**2. Animacy Constraint:**
+Pronouns like "he/she" typically refer to animate (living) entities; "it" refers to inanimate objects.
+- "The **table** was moved. **It** was heavy." → "it" = table (inanimate) ✅
+- "The **table** was moved. **He** was heavy." → ❌ (table is not animate)
+
+**3. World Knowledge:**
+Common-sense reasoning resolves difficult cases that syntax alone cannot.
+- "The **trophy** doesn't fit in the **suitcase** because **it** is too big."  
+  → "it" = trophy (trophies can be too big; suitcases are containers — world knowledge helps) ✅
+
+**Summary Table:**
+
+| Constraint Type | Rule | Example |
+|----------------|------|---------|
+| Number | Must agree in number | "they" → plural NP |
+| Gender | Must agree in gender | "she" → female entity |
+| Principle A | Reflexive must bind locally | "himself" = local subject |
+| Principle B | Personal pronoun ≠ local subject | "him" ≠ John in same clause |
+| Selectional restriction | Verb requirements | Only animate NP for "think" |
+| Animacy | he/she = animate; it = inanimate | "it" ≠ person |
+
+
+<LongQuestion>
+### Q4. Explain referring expressions (NPs, pronouns, etc.). (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="AIML" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+**Referring Expressions** are linguistic expressions that a speaker uses to identify or point to a specific **entity** (person, place, object, concept) in the world or in discourse.
+
+Understanding referring expressions is the first step in **reference resolution** and **coreference resolution**.
+
+**Types of Referring Expressions:**
+
+1. **Proper Nouns:**  
+   Names that directly and uniquely identify a specific entity.  
+   *Example:* "**Barack Obama** gave a speech." → refers uniquely to one specific person.  
+   - Most unambiguous form of reference.
+
+2. **Definite Noun Phrases:**  
+   NPs with "the" — refers to an entity assumed to be **already known** to the listener.  
+   *Example:* "**The president** spoke today." → assumes listener knows which president.  
+   - Signals that the referent has been mentioned before or is uniquely identifiable.
+
+3. **Indefinite Noun Phrases:**  
+   NPs with "a/an" — **introduces a new entity** into the discourse.  
+   *Example:* "**A dog** ran past." → introduces a new, previously unknown dog.  
+   - First mention of an entity uses indefinite NP; subsequent mentions use definite NP or pronoun.
+
+4. **Pronouns:**  
+   Short words (he, she, it, they, him, her) that replace a previously mentioned NP.  
+   *Example:* "**Priya** studied hard. **She** passed the exam." → "She" = Priya.  
+   - Most compact form; requires reference resolution to interpret.
+
+5. **Demonstratives:**  
+   Words like "this", "that", "these", "those" pointing to entities by proximity.  
+   *Example:* "**This** book is interesting." → points to a specific nearby book.
+
+6. **Zero Anaphora (in some languages):**  
+   The subject or object is omitted entirely (common in Hindi, Japanese).  
+   *Example (Hindi):* "Rahul gaya. [Ø] khush tha." → "Rahul went. [He] was happy."
+
+**Why Referring Expressions Matter in NLP:**
+- Pronoun resolution, coreference resolution
+- Machine translation (must carry referents correctly across languages)
+- Question answering ("Who is he?" requires knowing the referent)
+- Text summarization (must track entities through long documents)
+
+
+<LongQuestion>
+### Q5. Differentiate pragmatics and discourse analysis. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
+</LongQuestion>
+
+Both Pragmatics and Discourse Analysis are higher-level NLP stages that go beyond the literal meaning of individual sentences, but they focus on different aspects.
+
+| Aspect | Pragmatics | Discourse Analysis |
+|--------|------------|-------------------|
+| **Definition** | Study of how **context and speaker intention** affect meaning | Study of how **sentences relate to each other** across text |
+| **Focus** | The speaker's **hidden intent** beyond literal meaning | **Coherence and cohesion** between multiple sentences |
+| **Scope** | Single utterance analyzed in a situational context | Multiple sentences / entire paragraphs or conversation |
+| **Key Question** | "What does the speaker **mean** (not just say)?" | "How are these sentences **connected**?" |
+| **Key Concepts** | Speech acts, implicature, presupposition | Coreference, discourse markers, anaphora |
+| **Example** | "Can you pass the salt?" → literal: ability question; pragmatic: a request | "Rahul left. **He** was tired." → "He" = Rahul (coreference) |
+| **Challenges** | Sarcasm, indirect requests, cultural context | Pronoun resolution, reference tracking |
+
+**Example of Pragmatics:**  
+"It's cold in here." → Literally states the temperature. Pragmatically, it is a **request to close the window or turn on the heater**.
+
+**Example of Discourse Analysis:**  
+Sentence 1: "The professor entered the hall."  
+Sentence 2: "**She** began the lecture."  
+→ Discourse analysis connects "She" to "the professor" — this is **coreference resolution**.
+
+**Key Takeaway:**  
+Pragmatics focuses on **why** something is said; Discourse analysis focuses on **how** sentences are linked together.
+
+---
+
+## **Module 6: Applications**
+
+<LongQuestion>
+### Q1. Explain Machine Translation and its approaches (SMT vs NMT). (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT / AIML" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+**Machine Translation (MT)** is the task of **automatically translating text from one natural language to another** using a computer program, without human intervention.
+
+*Example:* "The sky is blue." → (English to French) → "Le ciel est bleu."
+
+**Approaches to Machine Translation:**
+
+**1. Rule-Based Machine Translation (RBMT):**
+- Uses hand-crafted **linguistic rules** and bilingual dictionaries.
+- Process: Parse source → Apply transfer rules → Generate target sentence.
+- *Example:* Translate English to Hindi using grammar rules and word-level dictionary.
+- **Advantage:** Accurate for specific, limited domains.
+- **Disadvantage:** Very expensive to build; cannot scale to all language pairs.
+
+**2. Statistical Machine Translation (SMT):**
+- Learns translation patterns from **large bilingual corpora** (parallel text in two languages).
+- Uses two models:
+  - **Translation Model:** P(source | target) — how likely is this word-level mapping?
+  - **Language Model:** P(target) — is the translated sentence fluent?
+- Final output = sentence that maximizes P(target) × P(source | target).
+- *Example tool:* Moses SMT toolkit, IBM Models.
+- **Advantage:** Scalable, no hand-written rules.
+- **Disadvantage:** Word-by-word approach; misses long-range sentence structure.
+
+**3. Neural Machine Translation (NMT):**
+- Uses **deep learning** with an encoder-decoder architecture and attention mechanism.
+- **Encoder:** Reads the entire source sentence and encodes it into a vector.
+- **Decoder:** Generates the target sentence word by word from the encoded vector.
+- **Attention mechanism:** Lets the decoder focus on relevant source words at each step.
+- *Example:* Google Translate, DeepL, Microsoft Translator.
+- **Advantage:** Best translation quality; handles long sentences; end-to-end training.
+- **Disadvantage:** Needs massive amounts of data; computationally expensive.
+
+**Comparison Table:**
+
+| Feature | RBMT | SMT | NMT |
+|---------|------|-----|-----|
+| Requires training data | No | Yes (parallel corpus) | Yes (large corpus) |
+| Accuracy | Limited | Moderate | Best |
+| Handles fluency | Manual rules | Language model | Attention mechanism |
+| Example | Early systems | Moses | Google Translate |
+
+
+<LongQuestion>
+### Q2. Explain Information Retrieval system and IR models. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="CSBS" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+**Information Retrieval (IR)** is the process of **finding relevant documents from a large collection** in response to a user's query.
+
+*Example:* Google Search — user types "NLP applications", Google returns relevant web pages.
+
+---
+
+**Architecture of an IR System:**
+
+```
+User Query → Query Processor → Matching Engine → Ranked Documents
+                  ↑                   ↑
+              Inverted Index ←←← Document Indexer ←←← Document Collection
+```
+
+**Key Components:**
+1. **Document Collection:** Database of all stored documents.
+2. **Indexer:** Preprocesses documents (tokenization, stop-word removal, stemming) and builds an **inverted index** (maps each word → list of documents containing it).
+3. **Query Processor:** Parses and preprocesses the user's query.
+4. **Retrieval Model:** Computes relevance score between query and each document.
+5. **Ranked Output:** Returns documents sorted by relevance score (most relevant first).
+
+---
+
+**IR Models:**
+
+**1. Boolean Model:**
+- Represents documents as sets of words.
+- Uses Boolean operators: **AND, OR, NOT**.
+- Documents either match (1) or don't (0) — no ranking.
+- *Example:* Query "NLP AND Python" → returns only docs containing BOTH words.
+- **Advantage:** Simple, exact matching.
+- **Disadvantage:** No relevance ranking; too strict.
+
+**2. Vector Space Model (VSM):**
+- Represents both documents and queries as **TF-IDF weighted vectors**.
+- **TF (Term Frequency):** How often a word appears in a document.  
+  $$TF(t,d) = \frac{\text{Count of term } t \text{ in doc } d}{\text{Total terms in doc } d}$$
+- **IDF (Inverse Document Frequency):** How rare/important the word is across all documents.  
+  $$IDF(t) = \log\frac{N}{\text{df}(t)}$$  
+  where N = total documents, df(t) = documents containing term t.
+- **TF-IDF = TF × IDF**
+- **Relevance = Cosine Similarity** between query vector and document vector.  
+  $$\text{sim}(q, d) = \frac{\vec{q} \cdot \vec{d}}{|\vec{q}||\vec{d}|}$$
+- **Advantage:** Produces ranked results; widely used.
+- **Disadvantage:** Ignores word order and semantics.
+
+**3. Probabilistic Model:**
+- Ranks documents by the probability they are relevant: **P(relevant | document, query)**.
+- *Example:* BM25 (Best Match 25) is a popular probabilistic model used in Elasticsearch and Solr.
+- More sophisticated than VSM; considers term frequency saturation.
+
+---
+
+**Evaluation Metrics:**
+
+| Metric | Formula | Meaning |
+|--------|---------|---------|
+| **Precision** | Relevant Retrieved / Total Retrieved | How many retrieved docs are actually relevant? |
+| **Recall** | Relevant Retrieved / Total Relevant | How many relevant docs were found? |
+| **F1-Score** | 2 × P × R / (P + R) | Harmonic mean of Precision and Recall |
+
+
+<LongQuestion>
+### Q3. Explain Named Entity Recognition (NER) with approaches. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT / ECE" /> <QuestionDot color="orange" text="June 2025" />
+</LongQuestion>
+
+**Named Entity Recognition (NER)** is the NLP task of **identifying and classifying named entities** (proper nouns) in text into predefined categories such as Person, Organization, Location, Date, etc.
+
+*Example:*  
+Input: "**Sundar Pichai** joined **Google** in **2004** in **Mountain View**."  
+Output:  
+- Sundar Pichai → **[PERSON]**  
+- Google → **[ORGANIZATION]**  
+- 2004 → **[DATE]**  
+- Mountain View → **[LOCATION]**
+
+**Named Entity Categories (IOB Tagging):**
+
+| Category | Examples |
+|----------|---------|
+| PERSON | Barack Obama, Elon Musk |
+| ORGANIZATION (ORG) | Google, MIT, RBI |
+| LOCATION (LOC) | India, Paris, Himalayas |
+| DATE / TIME | Monday, January 2024, 9 AM |
+| MONEY | $500, ₹1000 |
+| PERCENT | 20%, 3.5% |
+
+**Approaches to NER:**
+
+**1. Rule-Based Approach:**
+- Uses handwritten patterns: regular expressions, gazetteers (name lists), capitalization rules.
+- *Example Rule:* If a word starts with a capital letter and is in a names dictionary → tag as PERSON.
+- **Advantage:** Easy to implement, interpretable.
+- **Disadvantage:** Requires extensive manual effort; doesn't generalize well.
+
+**2. Machine Learning Approach:**
+- **Features:** word, POS tag, word shape (e.g., "Xx" for capitalized word), prefix/suffix.
+- **Models:** Conditional Random Fields (CRF) — the most popular classical NER model.
+- Trained on annotated corpora like CoNLL 2003.
+- **Advantage:** Generalizes from training data, handles unseen text.
+
+**3. Deep Learning Approach:**
+- **BiLSTM-CRF:** Bidirectional LSTM captures context from both directions + CRF handles labeling constraints.
+- **BERT-based NER:** Pre-trained BERT fine-tuned for NER tasks — state-of-the-art performance.
+- **Advantage:** Automatically learns features; best accuracy.
+
+**Applications:**
+- Information Extraction (extracting facts from news articles)
+- Question Answering (who/what/where questions)
+- Knowledge Graph construction
+
+
+<LongQuestion>
+### Q4. Explain text summarization. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT / AIML" /> <QuestionDot color="orange" text="Dec 2025" />
+</LongQuestion>
+
+**Text Summarization** is the NLP task of automatically creating a **shorter version of a document** that retains the most important information and the overall meaning of the original text.
+
+*Example:* A 10-page research paper → automatic 1-paragraph abstract.
+
+**Types of Summarization:**
+
+**1. Extractive Summarization:**
+- **Selects and copies** the most important sentences **directly from the original document** without modification.
+- No new sentences are generated — only existing sentences are selected.
+- *Example:* From a 10-sentence news article, pick sentences 2, 5, and 8 as the summary.
+
+**Methods:**
+- **TF-IDF Scoring:** Sentences containing high TF-IDF words are considered important.
+- **TextRank (Graph-Based):** Builds a graph where sentences are nodes; edges represent similarity. Most central sentences are selected (like PageRank for sentences).
+- **Luhn's Method:** Sentences with the highest density of significant words are selected.
+
+**Advantage:** Simple, reliable, factually accurate (uses original words).  
+**Disadvantage:** May lack coherence; cannot paraphrase.
+
+**2. Abstractive Summarization:**
+- **Generates entirely new sentences** that capture the gist of the text (like a human would write a summary).
+- The output may contain words and phrases NOT present in the original text.
+
+**Methods:**
+- **Sequence-to-Sequence models** with attention (encoder-decoder architecture)
+- **Transformer-based models:** T5 (Text-to-Text Transfer Transformer), BART, PEGASUS.
+
+**Advantage:** More fluent, concise, and human-like summaries.  
+**Disadvantage:** More complex; may introduce factual errors (hallucination).
+
+**Comparison:**
+
+| Feature | Extractive | Abstractive |
+|---------|------------|-------------|
+| Method | Copies sentences from text | Generates new sentences |
+| Accuracy | High (uses original words) | May hallucinate facts |
+| Complexity | Simple | Complex (deep learning) |
+| Fluency | May be disjointed | More natural |
+
+**Applications:** News apps (Inshorts), legal document review, medical record summarization, research paper abstracts.
+
+
+<LongQuestion>
+### Q5. Explain Information Extraction and Question Answering system. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
+</LongQuestion>
+
+**Information Extraction (IE):**
+
+IE is the task of automatically **extracting structured information (facts)** from unstructured or semi-structured text.
+
+*Example:*  
+Input: "**Tim Cook** is the **CEO** of **Apple**, founded in **1976**."  
+IE Output:
+- Entity 1: Tim Cook [PERSON]  
+- Relation: CEO of  
+- Entity 2: Apple [ORGANIZATION]  
+- Founded: 1976 [DATE]
+
+**Key IE Sub-tasks:**
+
+| Task | Description | Example |
+|------|-------------|---------|
+| **NER** | Identify named entities | "Apple" → ORG |
+| **Relation Extraction** | Find relationships between entities | Tim Cook — CEO of — Apple |
+| **Event Extraction** | Identify events and participants | "Election held on Nov 5" → ELECTION event |
+| **Template Filling** | Fill predefined slots from text | Who? Tim Cook, Role? CEO, Company? Apple |
+
+---
+
+**Question Answering (QA) System:**
+
+A QA system accepts a **natural language question** and returns a **precise, direct answer** (not a list of documents like IR).
+
+*Example:*  
+Q: "Who is the CEO of Apple?"  
+A: "Tim Cook"
+
+**Architecture of a QA System:**
+
+```
+User Question → Question Analyzer → Document Retrieval → Answer Extraction → Answer
+```
+
+**Components:**
+1. **Question Analyzer:** Classifies the question type:
+   - Who → PERSON, What → THING, When → DATE, Where → LOCATION
+2. **Document Retrieval (IR Module):** Finds top relevant documents from corpus.
+3. **Answer Extraction:** Extracts the specific answer span from retrieved documents.
+   - Uses NER, pattern matching, or deep learning (BERT extractive QA).
+4. **Answer Ranking:** If multiple candidates are found, ranks them and picks the best.
+
+**Types of QA Systems:**
+- **Closed-domain:** Answers questions on a specific topic (e.g., medical QA).
+- **Open-domain:** Answers any question (e.g., IBM Watson, ChatGPT).
+- **Extractive QA:** Extracts answer span from a given passage (e.g., SQuAD benchmark).
+
+
+<LongQuestion>
+### Q6. (SKIP THIS FOR AIML) Explain TF-IDF and its role in IR. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
+</LongQuestion>
+
+<LongQuestion>
+### Q7. (SKIP THIS FOR AIML) Explain topic modeling in NLP. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+<LongQuestion>
+### Q8. (SKIP THIS FOR AIML) Explain sentiment analysis. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="AIDS" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+<LongQuestion>
+### Q9. (SKIP THIS FOR AIML) Neural models in NLP (Perceptron, RNN). (10 Marks) <QuestionDot color="red" text="Priority 3" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+<LongQuestion>
+### Q10. (SKIP THIS FOR AIML) NMF topic extraction / embeddings. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+---
+
+# **Numericals**
+
+---
+
+## **Module 2 & 3**
+
+<LongQuestion>
+### Q1. Calculate probability using bi-gram model. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO2" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="May 2023" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+A <Highlight>**language model**</Highlight> goes through a text to calculate the probability of a word sequence. It answers the question: *"What is the most likely next word after this sentence?"*
+
+An **N-gram model** is a simple version of this. Instead of looking at the entire paragraph, it looks at only a fixed number of previous words (called the window). This helps the computer run much faster.
+
+**Different Types of N-grams:**
+
+1. **Unigram (N=1):** The model only looks at 1 word at a time. It ignores all previous words.  
+   *Example sentence "I love coding":* `[I]`, `[love]`, `[coding]`
+2. **Bigram (N=2):** The model looks at the current word and 1 previous word.  
+   *Example:* `[I love]`, `[love coding]`
+3. **Trigram (N=3):** The model looks at 2 previous words.  
+   *Example:* `[I love coding]`
+
+**How it works (The Formula):**
+To calculate a bigram probability:
+
+$$
+P(word_2 \mid word_1) = \frac{\text{Count}(word_1\ word_2)}{\text{Count}(word_1)}
+$$
+
+**Solved Example:**
+
+Corpus: "I am Sam. Sam I am. I do not like green eggs."
+
+Count table:
+| Bigram | Count |
+|--------|-------|
+| I am | 2 |
+| am Sam | 1 |
+| Sam I | 1 |
+| I do | 1 |
+
+Count("I") = 3, Count("am") = 2, Count("Sam") = 2
+
+- P(am | I) = 2/3 ≈ **0.67**
+- P(Sam | am) = 1/2 = **0.50**
+- P(I | Sam) = 1/2 = **0.50**
+
+**Limitations & Solutions:**
+- **The Zero Probability Problem:** If an N-gram model has never seen a specific pair of words before (like "purple alien"), it will give a 0% probability, breaking the whole calculation.
+- **Solution:** We use **Smoothing** (like Laplace Add-1 smoothing) which gives a tiny bit of probability (like 0.001) to unseen words so the system doesn't crash.
+
+
+<LongQuestion>
+### Q2. Predict next word using bigram model. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO2" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="IT / CSBS" /> <QuestionDot color="orange" text="Dec 2023, Nov 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+A <Highlight>**language model**</Highlight> goes through a text to calculate the probability of a word sequence. It answers the question: *"What is the most likely next word after this sentence?"*
+
+**How to Predict the Next Word — Step-by-Step:**
+
+**Step 1: Build Bigram Count Table from Corpus**
+
+Corpus: "I love NLP. I love Python. I enjoy NLP."
+
+| Word | I | love | enjoy | NLP | Python |
+|------|---|------|-------|-----|--------|
+| **I** | 0 | 2 | 1 | 0 | 0 |
+| **love** | 0 | 0 | 0 | 1 | 1 |
+| **enjoy** | 0 | 0 | 0 | 1 | 0 |
+
+**Step 2: Compute Bigram Probabilities**
+
+P(w₂|w₁) = Count(w₁ w₂) / Count(w₁)
+
+| Bigram | Count | Probability |
+|--------|-------|-------------|
+| P(love\|I) | 2/3 | **0.67** |
+| P(enjoy\|I) | 1/3 | **0.33** |
+| P(NLP\|love) | 1/2 | **0.50** |
+| P(Python\|love) | 1/2 | **0.50** |
+| P(NLP\|enjoy) | 1/1 | **1.00** |
+
+**Step 3: Predict next word after "I"**
+
+Candidates:
+- P(love | I) = 0.67 ← **Highest**
+- P(enjoy | I) = 0.33
+
+→ **Predicted next word: "love"** ✅
+
+**Step 4: Compute Full Sentence Probability**
+
+P("I love NLP") = P(I) × P(love|I) × P(NLP|love)
+$$= \frac{3}{9} \times \frac{2}{3} \times \frac{1}{2} = \frac{6}{54} = \frac{1}{9} \approx 0.111$$
+
+**Key Formula:**
+$$P(W_1 W_2 \ldots W_n) = \prod_{i=1}^{n} P(W_i \mid W_{i-1})$$
+
+
+<LongQuestion>
+### Q3. Compute emission and transition probabilities using HMM. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT5" /> <QuestionDot color="purple" text="IT+ECE" /> <QuestionDot color="orange" text="Dec 2025" />
+</LongQuestion>
+
+<QuestionDot color="blue" text="Part of IA-MSE QB already" />
+
+<Highlight>**Hidden Markov Models (HMM)**</Highlight> represent the Statistical approach to POS Tagging.
+
+**Given Training Corpus:**
+```
+the/DT dog/NN runs/VB
+the/DT cat/NN eats/VB
+a/DT dog/NN eats/VB
+a/DT cat/NN runs/VB
+```
+
+**Step 1: Count Tag Occurrences**
+
+| Tag | Count |
+|-----|-------|
+| DT | 4 |
+| NN | 4 |
+| VB | 4 |
+
+**Step 2: Compute Transition Probabilities**
+$$P(t_j \mid t_i) = \frac{\text{Count}(t_i \rightarrow t_j)}{\text{Count}(t_i)}$$
+
+| Transition | Count | Probability |
+|-----------|-------|-------------|
+| P(NN \| DT) | 4/4 | **1.0** |
+| P(VB \| NN) | 4/4 | **1.0** |
+| P(DT \| START) | 4/4 | **1.0** |
+
+**Step 3: Compute Emission Probabilities**
+$$P(w \mid t) = \frac{\text{Count}(t \rightarrow w)}{\text{Count}(t)}$$
+
+| Emission | Count | Probability |
+|---------|-------|-------------|
+| P("the" \| DT) | 2/4 | **0.5** |
+| P("a" \| DT) | 2/4 | **0.5** |
+| P("dog" \| NN) | 2/4 | **0.5** |
+| P("cat" \| NN) | 2/4 | **0.5** |
+| P("runs" \| VB) | 2/4 | **0.5** |
+| P("eats" \| VB) | 2/4 | **0.5** |
+
+**Step 4: Tag a New Sentence using computed probabilities**
+
+Sentence: "the dog eats"
+
+P(DT NN VB | "the dog eats")
+= P(DT|START) × P("the"|DT) × P(NN|DT) × P("dog"|NN) × P(VB|NN) × P("eats"|VB)
+= 1.0 × 0.5 × 1.0 × 0.5 × 1.0 × 0.5 = **0.125**
+
+→ Tagged: the/DT dog/NN eats/VB ✅
+
+
+<LongQuestion>
+### Q4. Compute sentence probability using bigram chain. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO2" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
+</LongQuestion>
+
+**Bigram Chain Rule for Sentence Probability:**
+
+$$P(W_1 W_2 \ldots W_n) = P(W_1) \times P(W_2 \mid W_1) \times P(W_3 \mid W_2) \times \ldots \times P(W_n \mid W_{n-1})$$
+
+**Solved Example:**
+
+Corpus:
+- "I am happy" (sentence 1)
+- "I am sad" (sentence 2)  
+- "I am tired" (sentence 3)
+
+**Step 1: Count Unigrams and Bigrams**
+
+| Word/Bigram | Count |
+|-------------|-------|
+| I | 3 |
+| am | 3 |
+| happy | 1 |
+| sad | 1 |
+| tired | 1 |
+| Total words | 9 |
+| "I am" | 3 |
+| "am happy" | 1 |
+| "am sad" | 1 |
+| "am tired" | 1 |
+
+**Step 2: Compute Bigram Probabilities**
+
+- P(I) = 3/9 = 1/3
+- P(am | I) = Count("I am") / Count("I") = 3/3 = **1.0**
+- P(happy | am) = Count("am happy") / Count("am") = 1/3 ≈ **0.333**
+- P(sad | am) = 1/3 ≈ **0.333**
+- P(tired | am) = 1/3 ≈ **0.333**
+
+**Step 3: Compute Sentence Probabilities**
+
+P("I am happy") = P(I) × P(am|I) × P(happy|am)
+$$= \frac{1}{3} \times 1.0 \times \frac{1}{3} = \frac{1}{9} \approx 0.111$$
+
+P("I am sad") = P(I) × P(am|I) × P(sad|am)
+$$= \frac{1}{3} \times 1.0 \times \frac{1}{3} = \frac{1}{9} \approx 0.111$$
+
+**All three sentences are equally probable** → consistent with the uniform corpus ✅
+
+**Key Note:**
+If we try P("I am cold") → P(cold|am) = 0 (never seen) → Use Laplace smoothing to avoid zero probability.
+
+
+<LongQuestion>
+### Q5. Explain Zipf's Law with numerical. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO1" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="May 2023" />
+</LongQuestion>
+
+**Zipf's Law** states that in any large natural language corpus, the **frequency of a word is inversely proportional to its rank** (when words are sorted by frequency from highest to lowest).
+
+$$\text{Frequency} \propto \frac{1}{\text{Rank}}$$
+
+Or equivalently: **Frequency × Rank = Constant (k)**
+
+$$f \times r = k$$
+
+**Key Observation:**
+- The most frequent word (rank 1) appears ~2× more than the 2nd most frequent word.
+- The 2nd most frequent word appears ~2× more than the 4th most frequent word.
+- This creates a **"long tail" distribution** in natural language.
+
+**Solved Numerical Example:**
+
+In a corpus, the word "the" (rank 1) appears **1000 times**.
+So constant k = 1000 × 1 = **1000**
+
+| Rank | Word (typical) | Predicted Frequency (k/rank) |
+|------|---------------|------------------------------|
+| 1 | "the" | 1000/1 = **1000** |
+| 2 | "is" | 1000/2 = **500** |
+| 4 | "of" | 1000/4 = **250** |
+| 5 | "and" | 1000/5 = **200** |
+| 10 | "a" | 1000/10 = **100** |
+| 50 | "book" | 1000/50 = **20** |
+| 100 | "walk" | 1000/100 = **10** |
+| 1000 | rare word | 1000/1000 = **1** |
+
+**Implications for NLP:**
+1. A **small vocabulary** of ~100 words covers ~50% of all text (function words: the, is, a, of).
+2. Thousands of **rare content words** (nouns, verbs) each appear very infrequently.
+3. Explains the **sparse data problem** in NLP — most word combinations are rarely seen.
+4. Justifies using **stop word removal** — very high-frequency words carry little information.
+
+
+<LongQuestion>
+### Q6. Calculate meaning-rank ratio using Zipf's Law. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="May 2023" />
+</LongQuestion>
+
+**Zipf's Law** establishes a relationship between a word's **rank** (position when sorted by frequency) and its **frequency**.
+
+**Formula:** $f \times r = k$ (constant)
+
+**Problem-Solving Steps:**
+
+**Step 1:** Find the constant k using the most frequent word (rank 1).  
+**Step 2:** Use k to find frequency at any rank, or find rank given a frequency.
+
+**Solved Example:**
+
+A corpus has 10,000 total word tokens. The most frequent word "the" appears 500 times.
+
+k = 500 × 1 = **500**
+
+**Find frequency of words at different ranks:**
+
+| Rank (r) | Frequency f = k/r | % of corpus |
+|----------|------------------|-------------|
+| 1 | 500/1 = **500** | 5.0% |
+| 2 | 500/2 = **250** | 2.5% |
+| 5 | 500/5 = **100** | 1.0% |
+| 10 | 500/10 = **50** | 0.5% |
+| 25 | 500/25 = **20** | 0.2% |
+| 50 | 500/50 = **10** | 0.1% |
+| 100 | 500/100 = **5** | 0.05% |
+| 500 | 500/500 = **1** | 0.01% |
+
+**Find rank given a frequency:**
+
+Q: A word appears 50 times. What is its rank?  
+r = k/f = 500/50 = **Rank 10**
+
+**Meaning-Rank Observation:**
+
+Zipf also observed that **number of meanings of a word** is proportional to its frequency (and inversely proportional to rank):
+- High-frequency words (low rank): many meanings → e.g., "run" has 70+ meanings
+- Low-frequency words (high rank): few meanings → e.g., "oscilloscope" has 1 meaning
+
+$$\text{Number of Meanings} \propto f \propto \frac{1}{r}$$
+
+**Summary:** Zipf's Law shows that natural language has an extremely uneven word distribution — a few words dominate, while most words are rare.
+
+
+<LongQuestion>
+### Q7. Naive Bayes text classification numerical. (10 Marks) <QuestionDot color="red" text="Priority 2" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT5" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
+</LongQuestion>
+
+**Naive Bayes Classifier** classifies documents by finding the class with maximum posterior probability using Bayes' theorem. It assumes all features (words) are **conditionally independent** given the class.
+
+**Bayes' Theorem:**
+$$P(class \mid doc) \propto P(class) \times \prod_{w \in doc} P(w \mid class)$$
+
+In practice (to avoid underflow), we use **log probabilities:**
+$$\text{Score}(class) = \log P(class) + \sum_{w \in doc} \log P(w \mid class)$$
+
+**Laplace (Add-1) Smoothing for word probabilities:**
+$$P(w \mid class) = \frac{\text{Count}(w \text{ in class}) + 1}{\text{Total words in class} + |V|}$$
+
+where |V| = vocabulary size.
+
+---
+
+**Solved Numerical Example:**
+
+**Training Data:**
+
+| Document | Words | Class |
+|----------|-------|-------|
+| D1 | "I love this movie" | Positive |
+| D2 | "great film excellent" | Positive |
+| D3 | "I hate this movie" | Negative |
+| D4 | "terrible film boring" | Negative |
+
+**Test Document:** "I love film"
+
+---
+
+**Step 1: Prior Probabilities**
+
+- P(Positive) = 2/4 = **0.5**
+- P(Negative) = 2/4 = **0.5**
+
+**Step 2: Build Vocabulary**
+
+V = `{I, love, this, movie, great, film, excellent, hate, terrible, boring}` → **|V| = 10**
+
+**Step 3: Word Counts per Class**
+
+| Word | Positive Count | Negative Count |
+|------|---------------|----------------|
+| I | 1 | 1 |
+| love | 1 | 0 |
+| this | 1 | 1 |
+| movie | 1 | 1 |
+| great | 1 | 0 |
+| film | 1 | 1 |
+| excellent | 1 | 0 |
+| hate | 0 | 1 |
+| terrible | 0 | 1 |
+| boring | 0 | 1 |
+| **Total** | **7** | **6** |
+
+**Step 4: Compute Likelihoods with Laplace Smoothing**
+
+For test words: **I, love, film**
+
+$$P(I \mid Pos) = \frac{1+1}{7+10} = \frac{2}{17} \approx 0.118$$
+
+$$P(love \mid Pos) = \frac{1+1}{7+10} = \frac{2}{17} \approx 0.118$$
+
+$$P(film \mid Pos) = \frac{1+1}{7+10} = \frac{2}{17} \approx 0.118$$
+
+$$P(I \mid Neg) = \frac{1+1}{6+10} = \frac{2}{16} = 0.125$$
+
+$$P(love \mid Neg) = \frac{0+1}{6+10} = \frac{1}{16} = 0.0625$$
+
+$$P(film \mid Neg) = \frac{1+1}{6+10} = \frac{2}{16} = 0.125$$
+
+**Step 5: Compute Class Scores**
+
+$$\text{Score(Positive)} = \log(0.5) + \log\frac{2}{17} + \log\frac{2}{17} + \log\frac{2}{17}$$
+$$= -0.301 + (-0.929) + (-0.929) + (-0.929) = -3.088$$
+
+$$\text{Score(Negative)} = \log(0.5) + \log\frac{2}{16} + \log\frac{1}{16} + \log\frac{2}{16}$$
+$$= -0.301 + (-0.903) + (-1.204) + (-0.903) = -3.311$$
+
+**Step 6: Compare Scores**
+
+| Class | Score |
+|-------|-------|
+| **Positive** | **-3.088** ← Higher |
+| Negative | -3.311 |
+
+**Score(Positive) > Score(Negative)**
+
+→ **Classification: POSITIVE** ✅
+
+"I love film" is correctly classified as a **Positive** document because the word "love" has higher probability in the Positive class.
