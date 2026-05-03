@@ -7,6 +7,7 @@ import { Highlight } from '@/components/highlight';
 import { Mermaid } from '@/components/mermaid';
 import { QuestionDot } from '@/components/question-dot';
 import { LongQuestion } from '@/components/question';
+import { Check, X } from 'lucide-react';
 
 ## **Module 1: Introduction to NLP**
 
@@ -191,9 +192,6 @@ NLP is used in many everyday applications that people use without realizing it:
    NLP automatically shortens long news articles into 2-3 sentence summaries using extractive or abstractive methods.
 
 
-<LongQuestion>
-### Q6. (SKIP THIS FOR AIML) Discuss pipeline of text classification. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="May 2023" />
-</LongQuestion>
 
 ---
 
@@ -358,8 +356,8 @@ where **V = vocabulary size** (total number of unique words).
 **Example:**
 - Corpus: "I love NLP. I love Python." → V = 4 unique words (I, love, NLP, Python)
 - Count("love alien") = 0, Count("love") = 2
-- **Without smoothing:** P(alien | love) = 0/2 = **0** ❌
-- **With Add-1:** P(alien | love) = (0+1)/(2+4) = **1/6 ≈ 0.167** ✅ (No longer zero!)
+- **Without smoothing:** P(alien | love) = 0/2 = **0** <X className="inline w-5 h-5 text-red-600 mb-0.5" />
+- **With Add-1:** P(alien | love) = (0+1)/(2+4) = **1/6 ≈ 0.167** <Check className="inline w-5 h-5 text-green-600 mb-0.5" /> (No longer zero!)
 
 **Solution 2: Add-k Smoothing:**
 Instead of adding 1, add a smaller fraction k (e.g., k = 0.5):
@@ -522,7 +520,7 @@ The **Viterbi Algorithm** efficiently finds the best tag sequence.
 Sentence: "Book the flight"
 - "Book" → VB (probability of VB highest given context "the flight" follows)
 - "the" → DT
-- "flight" → NN ✅
+- "flight" → NN <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 **Advantages:** Scalable, handles unseen words better, learns from large corpora.  
 **Disadvantages:** Needs large labeled training data, less interpretable.
@@ -694,21 +692,18 @@ For an entire sentence, the computer multiplies these probabilities together acr
 **Top-Down:**
 1. Start: S
 2. Expand: S → NP VP
-3. Expand: NP → Det N → match "The" "dog" ✅
-4. Expand: VP → V → match "runs" ✅
+3. Expand: NP → Det N → match "The" "dog" <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
+4. Expand: VP → V → match "runs" <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 **Bottom-Up:**
 1. Read "The" → shift onto stack
-2. Read "dog" → reduce: Det + N → NP ✅
-3. Read "runs" → reduce: V → VP ✅
-4. Combine: NP + VP → S ✅
+2. Read "dog" → reduce: Det + N → NP <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
+3. Read "runs" → reduce: V → VP <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
+4. Combine: NP + VP → S <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 Both produce the same parse tree but in opposite directions.
 
 
-<LongQuestion>
-### Q6. (SKIP THIS FOR AIML) Explain PCFG and difference from CFG. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
-</LongQuestion>
 
 <LongQuestion>
 ### Q7. Assign POS tags / perform tagging using Viterbi algorithm. (10 Marks) <QuestionDot color="red" text="Priority 3" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="IT / ECE" /> <QuestionDot color="orange" text="June 2025" />
@@ -749,7 +744,7 @@ Given:
 
 **Backtrack:** runs→VB, dog→NN, the→DT
 
-**Result:** the/DT dog/NN runs/VB ✅
+**Result:** the/DT dog/NN runs/VB <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 ---
 
@@ -783,9 +778,9 @@ Uses an existing dictionary or lexical resource (like WordNet) to determine word
 *Example:*  
 Word: **"bank"**, Context: "She deposited her salary at the bank"  
 Context words: `{deposited, salary, money}`  
-- Sense 1 (Financial): definition = `{money, loan, deposit, financial institution}` → overlap: `{deposited, salary}` = **2** ✅  
-- Sense 2 (River): definition = `{river, water, slope, land}` → overlap: **0** ❌  
-→ **Winner: Financial bank** ✅
+- Sense 1 (Financial): definition = `{money, loan, deposit, financial institution}` → overlap: `{deposited, salary}` = **2** <Check className="inline w-5 h-5 text-green-600 mb-0.5" />  
+- Sense 2 (River): definition = `{river, water, slope, land}` → overlap: **0** <X className="inline w-5 h-5 text-red-600 mb-0.5" />  
+→ **Winner: Financial bank** <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 **Advantage:** No training data needed.  
 **Disadvantage:** Limited by the quality of the dictionary; may fail if context and definition words don't match exactly.
@@ -848,7 +843,7 @@ Context words: `{guarantee, deposits, cover, tuition, costs}`
 | **Financial Bank** | financial institution that accepts deposits, makes loans | deposits | **1** |
 | **River Bank** | sloping land beside a river or lake | (none) | **0** |
 
-→ **Winner: Financial Bank (count = 1)** ✅
+→ **Winner: Financial Bank (count = 1)** <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 **Another Example:**
 Sentence: "He paddled to the **bank** of the river."  
@@ -857,9 +852,9 @@ Context words: `{paddled, river, water}`
 | Sense | Definition | Overlap | Count |
 |-------|-----------|---------|-------|
 | Financial Bank | deposits, loans, money | (none) | 0 |
-| **River Bank** | sloping land, river, water | `{river}` | **1** ✅ |
+| **River Bank** | sloping land, river, water | `{river}` | **1** <Check className="inline w-5 h-5 text-green-600 mb-0.5" /> |
 
-→ **Winner: River Bank** ✅
+→ **Winner: River Bank** <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 **Advantages:** Simple, no training data needed, interpretable.  
 **Disadvantages:** Sensitive to exact wording; definitions and context may not share many words even for correct sense (vocabulary mismatch).
@@ -946,9 +941,6 @@ entity → physical object → artifact → vehicle → car → sports car → F
 5. **Question Answering:** Understand semantic relationships between concepts.
 
 
-<LongQuestion>
-### Q5. (SKIP THIS FOR AIML) Explain lexical similarity (cosine similarity). (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
-</LongQuestion>
 
 <LongQuestion>
 ### Q6. Explain attachment ambiguity. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="CSBS" /> <QuestionDot color="orange" text="Nov 2025" />
@@ -971,8 +963,8 @@ entity → physical object → artifact → vehicle → car → sports car → F
 
 **Example 2:**  
 "**She ate the pizza with chopsticks.**"
-- VP attachment: She **used** chopsticks to eat the pizza. ✅ (more likely)
-- NP attachment: She ate the pizza that **had** chopsticks on it. ❌ (less likely)
+- VP attachment: She **used** chopsticks to eat the pizza. <Check className="inline w-5 h-5 text-green-600 mb-0.5" /> (more likely)
+- NP attachment: She ate the pizza that **had** chopsticks on it. <X className="inline w-5 h-5 text-red-600 mb-0.5" /> (less likely)
 
 **Why is this a problem?**
 Different parse trees are generated for the same sentence, leading to completely different semantic interpretations. An NLP system must choose the correct one.
@@ -1085,7 +1077,7 @@ Sentence 1: "**John** saw **Bill**."
 Sentence 2: "**He** was tired."
 - Apply decay to S1 NPs: John = 180 × 0.5 = **90**, Bill = 150 × 0.5 = **75**
 - Pronoun "He" is masculine, singular → both John and Bill are valid
-- John (90) > Bill (75) → **"He" = John** ✅
+- John (90) > Bill (75) → **"He" = John** <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 ---
 
@@ -1114,23 +1106,23 @@ These are **grammar-based rules** that restrict which NPs can corefer with a giv
 
 **1. Number Agreement:**
 A pronoun must agree in number with its referent.
-- "The **boys** came. **They** were happy." → ✅ (plural matches plural)
-- "The **boy** came. **They** were happy." → ❌ (singular cannot take plural pronoun)
+- "The **boys** came. **They** were happy." → <Check className="inline w-5 h-5 text-green-600 mb-0.5" /> (plural matches plural)
+- "The **boy** came. **They** were happy." → <X className="inline w-5 h-5 text-red-600 mb-0.5" /> (singular cannot take plural pronoun)
 
 **2. Gender Agreement:**
 The pronoun's gender must match the referent's gender.
-- "**Mary** is tired. **She** should rest." → ✅
-- "**John** is tired. **She** should rest." → ❌
+- "**Mary** is tired. **She** should rest." → <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
+- "**John** is tired. **She** should rest." → <X className="inline w-5 h-5 text-red-600 mb-0.5" />
 
 **3. Binding Constraint — Principle A (Reflexive Pronouns):**
 A reflexive pronoun (himself, herself, itself) **must** refer to its local subject.
-- "**John** hurt **himself**." → "himself" = John ✅ (must be the local subject)
-- "*John said that Bill hurt **himself**." → "himself" = Bill (the local subject) ✅
+- "**John** hurt **himself**." → "himself" = John <Check className="inline w-5 h-5 text-green-600 mb-0.5" /> (must be the local subject)
+- "*John said that Bill hurt **himself**." → "himself" = Bill (the local subject) <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 **4. Binding Constraint — Principle B (Personal Pronouns):**
 A non-reflexive pronoun **cannot** refer to the subject of its own clause.
-- "John hurt **him**." → "him" ≠ John ✅ (must refer to someone else)
-- "John hurt **himself**." → must use reflexive if referring to John ✅
+- "John hurt **him**." → "him" ≠ John <Check className="inline w-5 h-5 text-green-600 mb-0.5" /> (must refer to someone else)
+- "John hurt **himself**." → must use reflexive if referring to John <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 **5. Clause-mate Constraint:**
 Two full NPs in the same clause typically cannot corefer.
@@ -1145,17 +1137,17 @@ These use **meaning and world knowledge** to determine whether a coreference is 
 **1. Selectional Restrictions:**
 Verbs place requirements on their arguments. An NP that doesn't fit the verb's requirements is unlikely to be the referent.
 - "The **stone** thinks deeply. **It** is brilliant." → semantically odd (stones don't think)
-- "The **professor** thinks deeply. **She** is brilliant." → semantically correct ✅
+- "The **professor** thinks deeply. **She** is brilliant." → semantically correct <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 **2. Animacy Constraint:**
 Pronouns like "he/she" typically refer to animate (living) entities; "it" refers to inanimate objects.
-- "The **table** was moved. **It** was heavy." → "it" = table (inanimate) ✅
-- "The **table** was moved. **He** was heavy." → ❌ (table is not animate)
+- "The **table** was moved. **It** was heavy." → "it" = table (inanimate) <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
+- "The **table** was moved. **He** was heavy." → <X className="inline w-5 h-5 text-red-600 mb-0.5" /> (table is not animate)
 
 **3. World Knowledge:**
 Common-sense reasoning resolves difficult cases that syntax alone cannot.
 - "The **trophy** doesn't fit in the **suitcase** because **it** is too big."  
-  → "it" = trophy (trophies can be too big; suitcases are containers — world knowledge helps) ✅
+  → "it" = trophy (trophies can be too big; suitcases are containers — world knowledge helps) <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 **Summary Table:**
 
@@ -1508,25 +1500,7 @@ User Question → Question Analyzer → Document Retrieval → Answer Extraction
 - **Extractive QA:** Extracts answer span from a given passage (e.g., SQuAD benchmark).
 
 
-<LongQuestion>
-### Q6. (SKIP THIS FOR AIML) Explain TF-IDF and its role in IR. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
-</LongQuestion>
 
-<LongQuestion>
-### Q7. (SKIP THIS FOR AIML) Explain topic modeling in NLP. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
-</LongQuestion>
-
-<LongQuestion>
-### Q8. (SKIP THIS FOR AIML) Explain sentiment analysis. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="AIDS" /> <QuestionDot color="orange" text="Nov 2025" />
-</LongQuestion>
-
-<LongQuestion>
-### Q9. (SKIP THIS FOR AIML) Neural models in NLP (Perceptron, RNN). (10 Marks) <QuestionDot color="red" text="Priority 3" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
-</LongQuestion>
-
-<LongQuestion>
-### Q10. (SKIP THIS FOR AIML) NMF topic extraction / embeddings. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Nov 2025" />
-</LongQuestion>
 
 ---
 
@@ -1623,7 +1597,7 @@ Candidates:
 - P(love | I) = 0.67 ← **Highest**
 - P(enjoy | I) = 0.33
 
-→ **Predicted next word: "love"** ✅
+→ **Predicted next word: "love"** <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 **Step 4: Compute Full Sentence Probability**
 
@@ -1687,7 +1661,7 @@ P(DT NN VB | "the dog eats")
 = P(DT|START) × P("the"|DT) × P(NN|DT) × P("dog"|NN) × P(VB|NN) × P("eats"|VB)
 = 1.0 × 0.5 × 1.0 × 0.5 × 1.0 × 0.5 = **0.125**
 
-→ Tagged: the/DT dog/NN eats/VB ✅
+→ Tagged: the/DT dog/NN eats/VB <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 
 <LongQuestion>
@@ -1736,7 +1710,7 @@ $$= \frac{1}{3} \times 1.0 \times \frac{1}{3} = \frac{1}{9} \approx 0.111$$
 P("I am sad") = P(I) × P(am|I) × P(sad|am)
 $$= \frac{1}{3} \times 1.0 \times \frac{1}{3} = \frac{1}{9} \approx 0.111$$
 
-**All three sentences are equally probable** → consistent with the uniform corpus ✅
+**All three sentences are equally probable** → consistent with the uniform corpus <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 **Key Note:**
 If we try P("I am cold") → P(cold|am) = 0 (never seen) → Use Laplace smoothing to avoid zero probability.
@@ -1922,6 +1896,6 @@ $$= -0.301 + (-0.903) + (-1.204) + (-0.903) = -3.311$$
 
 **Score(Positive) > Score(Negative)**
 
-→ **Classification: POSITIVE** ✅
+→ **Classification: POSITIVE** <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 "I love film" is correctly classified as a **Positive** document because the word "love" has higher probability in the Positive class.
