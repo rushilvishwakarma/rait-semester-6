@@ -18,12 +18,7 @@ import { Check, X } from 'lucide-react';
 <QuestionDot color="blue" text="Part of IA-MSE QB already" />
 
 **Natural Language Processing (NLP)** is a branch of Artificial Intelligence that enables computers to understand, interpret, and generate human language (like English or Hindi).
-
----
-
-**Generic NLP System:**
-
-A generic NLP system is a pipeline that takes raw text as input, processes it through multiple stages, and produces a meaningful output.
+A **Generic NLP System** is a pipeline that takes raw text as input, processes it through multiple stages, and produces a meaningful output.
 
 ```
 Raw Text → Morphological → Syntactic → Semantic → Discourse → Pragmatic → Output
@@ -1100,14 +1095,14 @@ Pragmatics focuses on **why** something is said; Discourse analysis focuses on *
 
 **Approaches to Machine Translation:**
 
-**1. Rule-Based Machine Translation (RBMT):**
+## 1. Rule-Based Machine Translation (RBMT):
 - Uses hand-crafted **linguistic rules** and bilingual dictionaries.
 - Process: Parse source → Apply transfer rules → Generate target sentence.
 - *Example:* Translate English to Hindi using grammar rules and word-level dictionary.
 - **Advantage:** Accurate for specific, limited domains.
 - **Disadvantage:** Very expensive to build; cannot scale to all language pairs.
 
-**2. Statistical Machine Translation (SMT):**
+## 2. Statistical Machine Translation (SMT):
 - Learns translation patterns from **large bilingual corpora** (parallel text in two languages).
 - Uses two models:
   - **Translation Model:** P(source | target) — how likely is this word-level mapping?
@@ -1117,7 +1112,7 @@ Pragmatics focuses on **why** something is said; Discourse analysis focuses on *
 - **Advantage:** Scalable, no hand-written rules.
 - **Disadvantage:** Word-by-word approach; misses long-range sentence structure.
 
-**3. Neural Machine Translation (NMT):**
+## 3. Neural Machine Translation (NMT):
 - Uses **deep learning** with an encoder-decoder architecture and attention mechanism.
 - **Encoder:** Reads the entire source sentence and encodes it into a vector.
 - **Decoder:** Generates the target sentence word by word from the encoded vector.
