@@ -246,7 +246,7 @@ Both Stemming and Lemmatization are techniques used in NLP to chop the ends off 
 
 <QuestionDot color="blue" text="Part of IA-MSE QB already" />
 
-The **Porter Stemmer** is the most famous and widely used algorithm to perform "Stemming" on text. Proposed by Martin Porter in 1980, it systematically removes suffixes from English words to reduce them to their stem/root form.
+**Porter Stemmer** is a widely used algorithm for "Stemming". It works by removing the endings (suffixes) from words to find their base or root form.
 
 **Core Concept — Measure (m):**
 Porter Stemmer classifies words using a pattern of Consonants (C) and Vowels (V). The **measure (m)** counts the number of VC sequences in a word's stem.
@@ -780,7 +780,7 @@ Context words: `{deposited, salary, money}`
 ### Q2. Explain Lesk algorithm for WSD with example. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Dec 2023" />
 </LongQuestion>
 
-**Lesk Algorithm** is a classic **dictionary-based** approach for Word Sense Disambiguation (WSD), proposed by Michael Lesk in 1986.
+**Lesk Algorithm** is a **dictionary-based** way to find the correct meaning of a word that has multiple possible senses.
 
 **Core Idea:**
 The correct sense of a word is the one whose **dictionary definition has the maximum overlap** (common words) with the **context** (surrounding words in the sentence).
@@ -935,7 +935,7 @@ Different parse trees are generated for the same sentence, leading to completely
 | **Semantic plausibility** | Use world knowledge — "eat with chopsticks" makes more sense than "pizza with chopsticks" |
 | **WordNet-based** | Check if the preposition semantically fits the candidate head word |
 
-**Hindle and Rooth (1993):** Used lexical association scores from a corpus to resolve PP attachment automatically.
+**Lexical Association:** This method uses word connection scores from a large collection of text to automatically figure out where a phrase should attach.
 
 ---
 
@@ -945,8 +945,7 @@ Different parse trees are generated for the same sentence, leading to completely
 ### Q1. Explain reference resolution and coreference resolution problem. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT / AIML" /> <QuestionDot color="orange" text="Dec 2023" />
 </LongQuestion>
 
-**Reference Phenomenon:**
-In natural language, we frequently use pronouns and noun phrases to **refer** to something previously mentioned in the text. These are called **referring expressions**.
+**Reference:** This happens when we use words like "he", "she", or "it" to point back to something we already mentioned. These pointing words are called **referring expressions**.
 
 *Example:* "**Rahul** bought a **car**. **He** drives **it** every day."  
 Here, "He" refers to Rahul, and "it" refers to the car.
@@ -986,7 +985,7 @@ Coreference resolution is essential for:
 ### Q2. Explain Lappin and Leass algorithm for pronoun resolution. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="CSBS / AIDS" /> <QuestionDot color="orange" text="Nov 2025" />
 </LongQuestion>
 
-**Lappin and Leass (L&L) Algorithm (1994)** is a classic **rule-based algorithm** for resolving third-person pronouns (he, she, it, they, him, her, them) to their correct referents in text.
+**Lappin and Leass Algorithm** is a **rule-based** method used to find the correct noun that a pronoun (like "he" or "it") is referring to.
 
 **Core Idea:**
 Every Noun Phrase (NP) in the discourse is assigned a **salience score** (a numerical weight indicating how prominent/important it is). When a pronoun is encountered, it is resolved to the **NP with the highest salience score** that satisfies grammatical constraints.
@@ -1218,7 +1217,7 @@ Pragmatics focuses on **why** something is said; Discourse analysis focuses on *
   - **Translation Model:** P(source | target) — how likely is this word-level mapping?
   - **Language Model:** P(target) — is the translated sentence fluent?
 - Final output = sentence that maximizes P(target) × P(source | target).
-- *Example tool:* Moses SMT toolkit, IBM Models.
+- *Example tool:* Moses SMT toolkit, early statistical models.
 - **Advantage:** Scalable, no hand-written rules.
 - **Disadvantage:** Word-by-word approach; misses long-range sentence structure.
 
@@ -1314,12 +1313,12 @@ User Query → Query Processor → Matching Engine → Ranked Documents
 **Named Entity Recognition (NER)** is the NLP task of **identifying and classifying named entities** (proper nouns) in text into predefined categories such as Person, Organization, Location, Date, etc.
 
 *Example:*  
-Input: "**Sundar Pichai** joined **Google** in **2004** in **Mountain View**."  
+Input: "**John Doe** joined **Tech Corp** in **January** in **New York**."  
 Output:  
-- Sundar Pichai → **[PERSON]**  
-- Google → **[ORGANIZATION]**  
-- 2004 → **[DATE]**  
-- Mountain View → **[LOCATION]**
+- John Doe → **[PERSON]**  
+- Tech Corp → **[ORGANIZATION]**  
+- January → **[DATE]**  
+- New York → **[LOCATION]**
 
 **Named Entity Categories (IOB Tagging):**
 
@@ -1343,7 +1342,7 @@ Output:
 **2. Machine Learning Approach:**
 - **Features:** word, POS tag, word shape (e.g., "Xx" for capitalized word), prefix/suffix.
 - **Models:** Conditional Random Fields (CRF) — the most popular classical NER model.
-- Trained on annotated corpora like CoNLL 2003.
+- Trained on annotated corpora like CoNLL.
 - **Advantage:** Generalizes from training data, handles unseen text.
 
 **3. Deep Learning Approach:**
@@ -1375,7 +1374,7 @@ Output:
 **Methods:**
 - **TF-IDF Scoring:** Sentences containing high TF-IDF words are considered important.
 - **TextRank (Graph-Based):** Builds a graph where sentences are nodes; edges represent similarity. Most central sentences are selected (like PageRank for sentences).
-- **Luhn's Method:** Sentences with the highest density of significant words are selected.
+- **Frequency-Based Selection:** This method picks sentences that have many important words.
 
 **Advantage:** Simple, reliable, factually accurate (uses original words).  
 **Disadvantage:** May lack coherence; cannot paraphrase.
@@ -1412,12 +1411,12 @@ Output:
 IE is the task of automatically **extracting structured information (facts)** from unstructured or semi-structured text.
 
 *Example:*  
-Input: "**Tim Cook** is the **CEO** of **Apple**, founded in **1976**."  
+Input: "**Tim Cook** is the **CEO** of **Apple**, founded in the **past**."  
 IE Output:
 - Entity 1: Tim Cook [PERSON]  
 - Relation: CEO of  
 - Entity 2: Apple [ORGANIZATION]  
-- Founded: 1976 [DATE]
+- Founded: past [DATE]
 
 **Key IE Sub-tasks:**
 
@@ -1678,7 +1677,7 @@ If we try P("I am cold") → P(cold|am) = 0 (never seen) → Use Laplace smoothi
 ### Q5. Explain Zipf's Law with numerical. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO1" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="May 2023" />
 </LongQuestion>
 
-**Zipf's Law** states that in any large natural language corpus, the **frequency of a word is inversely proportional to its rank** (when words are sorted by frequency from highest to lowest).
+**Zipf's Law** says that in any large collection of text, a word's **frequency is related to its rank** (how common it is). The most common word appears roughly twice as often as the second most common word.
 
 $$\text{Frequency} \propto \frac{1}{\text{Rank}}$$
 
@@ -1718,7 +1717,7 @@ So constant k = 1000 × 1 = **1000**
 ### Q6. Calculate meaning-rank ratio using Zipf's Law. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="May 2023" />
 </LongQuestion>
 
-**Zipf's Law** establishes a relationship between a word's **rank** (position when sorted by frequency) and its **frequency**.
+**Zipf's Law** shows the relationship between a word's **rank** (its position in a list sorted by frequency) and how often it appears.
 
 **Formula:** $f \times r = k$ (constant)
 
@@ -1753,7 +1752,7 @@ r = k/f = 500/50 = **Rank 10**
 
 **Meaning-Rank Observation:**
 
-Zipf also observed that **number of meanings of a word** is proportional to its frequency (and inversely proportional to rank):
+It is also observed that the **number of meanings of a word** is related to how often it is used:
 - High-frequency words (low rank): many meanings → e.g., "run" has 70+ meanings
 - Low-frequency words (high rank): few meanings → e.g., "oscilloscope" has 1 meaning
 
