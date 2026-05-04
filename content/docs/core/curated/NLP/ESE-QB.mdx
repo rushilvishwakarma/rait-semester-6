@@ -672,33 +672,41 @@ For an entire sentence, the computer multiplies these probabilities together acr
 ### Q5. Differentiate top-down and bottom-up parsing. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="CSBS / IT+ECE" /> <QuestionDot color="orange" text="Nov 2025" />
 </LongQuestion>
 
-**Parsing** is the process of analyzing the grammatical structure of a sentence using a grammar (like CFG) and producing a parse tree.
+**Top-Down Parsing (The "Guessing" Approach):**
+- **Definition:** Starts from the very **top (Start Symbol S)** and tries to "expand" the rules downwards to match the actual words in the sentence.
+- **How it works:** It makes a "guess" about the sentence structure. If the guess doesn't match the words, it goes back (**backtracking**) and tries another rule.
+- **Common Algorithm:** Recursive Descent Parser.
+- **In simple words:** "I have the start symbol S. Can I turn it into the words 'The dog runs'?"
 
-| Aspect | Top-Down Parsing | Bottom-Up Parsing |
-|--------|-----------------|-------------------|
-| **Starting Point** | Starts from **Start Symbol (S)** | Starts from **input words (leaves)** |
-| **Direction** | Expands rules from S downward | Reduces words upward to reach S |
-| **Strategy** | Hypothesis-driven: "What could this sentence be?" | Data-driven: "What can these words form?" |
-| **Process** | S → NP VP → match words | Words → NP, VP → combine to form S |
-| **Common Algorithm** | Recursive Descent Parser, Earley Parser | Shift-Reduce Parser, LR Parser |
-| **Advantage** | Intuitive, easy to implement | More efficient for many grammar types |
-| **Disadvantage** | May explore many wrong paths (backtracking) | Can be complex to implement |
+<Mermaid chart={`graph TD
+    S["S (Start here)"] --> NP
+    S --> VP
+    NP --> Det
+    NP --> N
+    VP --> V
+    Det --> The
+    N --> dog
+    V --> runs
+`} />
 
-**Example for "The dog runs":**
+**Bottom-Up Parsing (The "Building" Approach):**
+- **Definition:** Starts from the **bottom (actual words)** and combines them into bigger groups until it reaches the **top (S)**.
+- **How it works:** It uses two main steps: **Shift** (picking up a word) and **Reduce** (combining words into a category like a Noun Phrase).
+- **Common Algorithm:** Shift-Reduce Parser.
+- **In simple words:** "I have the words 'The' and 'dog'. They combine to form a Noun Phrase (NP)."
 
-**Top-Down:**
-1. Start: S
-2. Expand: S → NP VP
-3. Expand: NP → Det N → match "The" "dog" <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
-4. Expand: VP → V → match "runs" <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
+<Mermaid chart={`graph TD
+    The["'The' (Start here)"] --> Det
+    dog["'dog' (Start here)"] --> N
+    runs["'runs' (Start here)"] --> V
+    Det --> NP
+    N --> NP
+    V --> VP
+    NP --> S
+    VP --> S
+`} />
 
-**Bottom-Up:**
-1. Read "The" → shift onto stack
-2. Read "dog" → reduce: Det + N → NP <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
-3. Read "runs" → reduce: V → VP <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
-4. Combine: NP + VP → S <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
-
-Both produce the same parse tree but in opposite directions.
+**Summary:** Top-Down is like a **map** (starting at the top), while Bottom-Up is like **building blocks** (starting from the bottom). Both are used by computers to understand sentence grammar.
 
 
 
