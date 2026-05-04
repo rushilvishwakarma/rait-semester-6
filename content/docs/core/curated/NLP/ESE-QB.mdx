@@ -448,13 +448,17 @@ $$P(w_2 \mid w_1) = \frac{\text{Count}(w_1, w_2)}{\text{Count}(w_1)}$$
 
 | Tag | Meaning | Example |
 |-----|---------|---------|
-| NN | Noun (singular) | dog, book |
-| VB | Verb (base form) | run, eat |
-| JJ | Adjective | happy, big |
-| RB | Adverb | quickly, very |
-| DT | Determiner | the, a |
-| IN | Preposition | in, on, at |
-| PRP | Pronoun | he, she, it |
+| **NN** | **N**oun (singular) | dog, book |
+| **VB** | **V**erb (base form) | run, eat |
+| **JJ** | Ad**j**ective | happy, big |
+| **RB** | Adve**rb** | quickly, very |
+| **DT** | **D**eterminer | the, a |
+| **PRP** | **P**ronoun | he, she, it |
+| **IN** | Preposition (**In**/On) | in, on, at |
+
+**Mnemonic to remember:**  
+**N**aughty **V**erbs **J**ust **R**un **D**own **P**rivate **I**slands.  
+(**N**N, **V**B, **J**J, **R**B, **D**T, **P**RP, **I**N)
 
 **Categories of POS Tags:**
 - **Open Class words:** These change over time. Every year new words are invented. Examples: Nouns (laptop), Verbs (googling), Adjectives (awesome).
@@ -717,117 +721,46 @@ For an entire sentence, the computer multiplies these probabilities together acr
 ## **Module 4: Semantic Analysis**
 
 <LongQuestion>
-### Q1. Explain Word Sense Disambiguation (WSD) and its approaches (dictionary + ML). (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT / AIML / IT+ECE" /> <QuestionDot color="orange" text="May 2023, Dec 2025" />
+### Q1. Explain Word Sense Disambiguation (WSD) and its approaches with Lesk algorithm example. (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT / AIML / IT+ECE" /> <QuestionDot color="orange" text="May 2023, Dec 2023, Dec 2025" />
 </LongQuestion>
 
 **Word Sense Disambiguation (WSD)** is the NLP task of determining **which sense (meaning) of an ambiguous word is intended** in a given context.
 
-*Example:*  
-- "I went to the **bank**." → Financial bank? Or river bank?  
-WSD determines the correct meaning based on surrounding context.
-
-**Why WSD is needed:**
-Most words in English have multiple meanings (polysemy). Without WSD, a computer cannot correctly translate, summarize, or understand text.
-
-*Example of importance:* In translation, "bank" in "river bank" should translate differently from "bank" in "savings bank."
+*Example:* "I went to the **bank**." → Financial bank? Or river bank? WSD determines the correct meaning based on surrounding context.
 
 ---
 
-**Approach 1: Dictionary-Based (Knowledge-Based) Approach**
+**Approach 1: Dictionary-Based (Knowledge-Based)**
 
-Uses an existing dictionary or lexical resource (like WordNet) to determine word sense.
+Uses an existing dictionary or lexical resource (like WordNet) to determine word sense. The most common method is the **Lesk Algorithm**.
 
-**Lesk Algorithm (Most Important):**
-- Compare the dictionary definition of each sense with the context (surrounding words).
-- The sense whose definition has the **most overlap** with the context words is chosen.
-
-*Example:*  
-Word: **"bank"**, Context: "She deposited her salary at the bank"  
-Context words: `{deposited, salary, money}`  
-- Sense 1 (Financial): definition = `{money, loan, deposit, financial institution}` → overlap: `{deposited, salary}` = **2** <Check className="inline w-5 h-5 text-green-600 mb-0.5" />  
-- Sense 2 (River): definition = `{river, water, slope, land}` → overlap: **0** <X className="inline w-5 h-5 text-red-600 mb-0.5" />  
-→ **Winner: Financial bank** <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
-
-**Advantage:** No training data needed.  
-**Disadvantage:** Limited by the quality of the dictionary; may fail if context and definition words don't match exactly.
-
----
-
-**Approach 2: Machine Learning Based Approach**
-
-**Supervised Learning:**
-- Train a classifier on a **sense-tagged corpus** (manually labeled text where each word's correct sense is marked).
-- **Features used:** surrounding words (window of ±2 words), POS tags of surrounding words, collocations.
-- **Algorithms:** Naive Bayes, SVM, Decision Trees, k-NN.
-
-*Example:* From training data, the model learns:
-- When "bank" appears near "deposit", "money", "loan" → sense = FINANCIAL
-- When "bank" appears near "river", "shore", "water" → sense = RIVER
-
-**Unsupervised Learning:**
-- Groups similar word usages using clustering (no labeled data required).
-- Words that appear in similar contexts are grouped into the same sense cluster.
-
-**Neural/Deep Learning Approach:**
-- Modern models like **BERT** create context-sensitive word embeddings.
-- "bank" in "river bank" has a different vector representation than "bank" in "savings bank".
-- Enables very accurate WSD without handcrafted features.
-
----
-
-**Comparison:**
-
-| Dictionary-Based | Supervised ML | Neural (BERT) |
-|-----------------|---------------|---------------|
-| No training data needed | Needs labeled data | Needs large unlabeled data |
-| Simple, fast | Accurate | Best accuracy |
-| Limited to dictionary | Language-independent features | Context-aware |
-
-
-<LongQuestion>
-### Q2. Explain Lesk algorithm for WSD with example. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="Dec 2023" />
-</LongQuestion>
-
-**Lesk Algorithm** is a **dictionary-based** way to find the correct meaning of a word that has multiple possible senses.
-
-**Core Idea:**
-The correct sense of a word is the one whose **dictionary definition has the maximum overlap** (common words) with the **context** (surrounding words in the sentence).
-
-**Algorithm Steps:**
-1. Identify the ambiguous word and extract surrounding **context words**.
-2. Look up all possible senses/definitions of that word from a dictionary (WordNet).
-3. For each sense, count the words that appear in **both** the definition AND the context.
-4. Select the sense with the **highest overlap count** as the correct meaning.
+**Lesk Algorithm (Core Idea):**
+The correct sense of a word is the one whose **dictionary definition has the maximum overlap** (common words) with the **context** (surrounding words).
 
 **Example:**
-Sentence: "The bank can guarantee deposits will cover future tuition costs."  
+Sentence: "The bank can guarantee deposits will cover costs."  
 Ambiguous word: **"bank"**  
-Context words: `{guarantee, deposits, cover, tuition, costs}`
+Context words: `{guarantee, deposits, cover, costs}`
 
 | Sense | Dictionary Definition | Overlap with Context | Count |
 |-------|----------------------|----------------------|-------|
-| **Financial Bank** | financial institution that accepts deposits, makes loans | deposits | **1** |
-| **River Bank** | sloping land beside a river or lake | (none) | **0** |
+| **Financial Bank** | institution that accepts **deposits**, makes loans | deposits | **1** <Check className="inline w-5 h-5 text-green-600 mb-0.5" /> |
+| **River Bank** | sloping land beside a river or lake | (none) | 0 |
 
-→ **Winner: Financial Bank (count = 1)** <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
+---
 
-**Another Example:**
-Sentence: "He paddled to the **bank** of the river."  
-Context words: `{paddled, river, water}`
+**Approach 2: Machine Learning Based**
 
-| Sense | Definition | Overlap | Count |
-|-------|-----------|---------|-------|
-| Financial Bank | deposits, loans, money | (none) | 0 |
-| **River Bank** | sloping land, river, water | `{river}` | **1** <Check className="inline w-5 h-5 text-green-600 mb-0.5" /> |
+- **Supervised Learning:** Train a classifier on a **sense-tagged corpus**.
+- **Features:** Surrounding words (window of ±2), POS tags, and collocations.
+- **Algorithms:** Naive Bayes, SVM, or Random Forest.
+- **Neural Approach (State-of-the-art):** Models like **BERT** create context-sensitive embeddings. "Bank" in "river bank" has a different mathematical vector than in "savings bank," allowing the model to "know" the meaning based on the entire sentence.
 
-→ **Winner: River Bank** <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
-
-**Advantages:** Simple, no training data needed, interpretable.  
-**Disadvantages:** Sensitive to exact wording; definitions and context may not share many words even for correct sense (vocabulary mismatch).
+**Study Tip:** Dictionary-based (Lesk) is fast but limited; Machine Learning is more accurate but needs large labeled datasets.
 
 
 <LongQuestion>
-### Q3. Explain semantic relationships (synonymy, antonymy, polysemy, homonymy). (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="CSBS / AIML" /> <QuestionDot color="orange" text="Nov 2025" />
+### Q2. Explain semantic relationships (synonymy, antonymy, polysemy, homonymy). (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="CSBS / AIML" /> <QuestionDot color="orange" text="Nov 2025" />
 </LongQuestion>
 
 **Lexical Semantics** studies the meaning of words and the relationships between them. These relationships are fundamental to NLP tasks like WSD, information retrieval, and machine translation.
@@ -869,7 +802,7 @@ Context words: `{paddled, river, water}`
 
 
 <LongQuestion>
-### Q4. Explain WordNet dictionary. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="AIML / AIDS" /> <QuestionDot color="orange" text="Nov 2025" />
+### Q3. Explain WordNet dictionary. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="AIML / AIDS" /> <QuestionDot color="orange" text="Nov 2025" />
 </LongQuestion>
 
 **WordNet** is a large English **lexical database** developed at Princeton University. Unlike a regular dictionary, WordNet organizes words by **meaning** rather than alphabetically.
@@ -909,7 +842,7 @@ entity → physical object → artifact → vehicle → car → sports car → F
 
 
 <LongQuestion>
-### Q6. Explain attachment ambiguity. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="CSBS" /> <QuestionDot color="orange" text="Nov 2025" />
+### Q4. Explain attachment ambiguity. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO4" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="CSBS" /> <QuestionDot color="orange" text="Nov 2025" />
 </LongQuestion>
 
 <QuestionDot color="blue" text="Part of IA-MSE QB already" />
@@ -950,43 +883,43 @@ Different parse trees are generated for the same sentence, leading to completely
 ## **Module 5: Pragmatics & Discourse**
 
 <LongQuestion>
-### Q1. Explain reference resolution and coreference resolution problem. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT / AIML" /> <QuestionDot color="orange" text="Dec 2023" />
+### Q1. Explain Reference Resolution and different types of referring expressions. (10 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT / AIML" /> <QuestionDot color="orange" text="Dec 2023, Nov 2025" />
 </LongQuestion>
 
-**Reference:** This happens when we use words like "he", "she", or "it" to point back to something we already mentioned. These pointing words are called **referring expressions**.
+**Referring Expressions** are the words we use to point to specific people or things. 
 
-*Example:* "**Rahul** bought a **car**. **He** drives **it** every day."  
-Here, "He" refers to Rahul, and "it" refers to the car.
+**Types of Referring Expressions:**
+1. **Proper Nouns:** Unique names like "Barack Obama".
+2. **Definite Noun Phrases:** Using "the" for things already known ("The president").
+3. **Indefinite Noun Phrases:** Using "a/an" to introduce something new ("A dog").
+4. **Pronouns:** Short words like "he", "she", "it" that replace a name.
+5. **Demonstratives:** Words like "this" or "that".
+
+---
 
 **Reference Resolution:**
-The NLP task of determining **what entity a referring expression (pronoun / NP) points to** in the text.
+The NLP task of determining **what entity a referring expression points to** in the text. 
 
-**Coreference:**
-Two expressions **corefer** when they both refer to the **same real-world entity**.  
-*Example:* "Barack Obama", "the president", "he", "him" — all refer to the same person in a paragraph.
+*Example:* "**Rahul** bought a **car**. **He** drives **it** every day."  
+- Resolution: "He" = Rahul, "it" = car.
+
+
 
 **Coreference Resolution Problem:**
 The task of **clustering all mentions** of the same entity together.
 
-*Example of Difficulty:*  
-"**John** told **Bill** that **he** would come."  
-→ Does "he" = John or Bill? Without context, it is ambiguous!
+**Coreference Resolution:**
+The task of **clustering all mentions** that refer to the **same real-world entity**.  
+*Example:* "Sundar Pichai", "the CEO", and "he" all clustered together.
 
-**Another Example:**  
-"The city council refused the demonstrators a permit because **they** were afraid of violence."  
-→ "they" = city council or demonstrators? Both are grammatically valid.
-
-**Why Coreference Resolution is Hard:**
-1. Pronouns are inherently ambiguous (he/she/it/they have multiple possible referents).
-2. Multiple candidate NPs exist in the discourse.
-3. Gender and number constraints help but are not always sufficient.
-4. Requires world knowledge in some cases.
+**Why it is challenging (Ambiguity):**
+- **Grammatical:** "John told Bill that **he** would come." (He = John or Bill?)
+- **World Knowledge:** "The trophy didn't fit in the suitcase because **it** was too big." (It = trophy because suitcases are for fitting things inside).
 
 **Why it matters:**
-Coreference resolution is essential for:
-- Machine Translation (pronouns must map to correct entities)
-- Text Summarization (must know who/what is being discussed)
-- Question Answering (must find what "it" refers to before answering)
+- **Machine Translation:** Pronouns must map to the correct gendered word in the target language.
+- **Text Summarization:** The system must track who is doing what throughout the story.
+- **Question Answering:** To answer "Who is he?", the system must resolve the reference.
 
 
 <LongQuestion>
@@ -1127,52 +1060,7 @@ Common-sense reasoning resolves difficult cases that syntax alone cannot.
 
 
 <LongQuestion>
-### Q4. Explain referring expressions (NPs, pronouns, etc.). (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="AIML" /> <QuestionDot color="orange" text="Nov 2025" />
-</LongQuestion>
-
-**Referring Expressions** are linguistic expressions that a speaker uses to identify or point to a specific **entity** (person, place, object, concept) in the world or in discourse.
-
-Understanding referring expressions is the first step in **reference resolution** and **coreference resolution**.
-
-**Types of Referring Expressions:**
-
-1. **Proper Nouns:**  
-   Names that directly and uniquely identify a specific entity.  
-   *Example:* "**Barack Obama** gave a speech." → refers uniquely to one specific person.  
-   - Most unambiguous form of reference.
-
-2. **Definite Noun Phrases:**  
-   NPs with "the" — refers to an entity assumed to be **already known** to the listener.  
-   *Example:* "**The president** spoke today." → assumes listener knows which president.  
-   - Signals that the referent has been mentioned before or is uniquely identifiable.
-
-3. **Indefinite Noun Phrases:**  
-   NPs with "a/an" — **introduces a new entity** into the discourse.  
-   *Example:* "**A dog** ran past." → introduces a new, previously unknown dog.  
-   - First mention of an entity uses indefinite NP; subsequent mentions use definite NP or pronoun.
-
-4. **Pronouns:**  
-   Short words (he, she, it, they, him, her) that replace a previously mentioned NP.  
-   *Example:* "**Priya** studied hard. **She** passed the exam." → "She" = Priya.  
-   - Most compact form; requires reference resolution to interpret.
-
-5. **Demonstratives:**  
-   Words like "this", "that", "these", "those" pointing to entities by proximity.  
-   *Example:* "**This** book is interesting." → points to a specific nearby book.
-
-6. **Zero Anaphora (in some languages):**  
-   The subject or object is omitted entirely (common in Hindi, Japanese).  
-   *Example (Hindi):* "Rahul gaya. [Ø] khush tha." → "Rahul went. [He] was happy."
-
-**Why Referring Expressions Matter in NLP:**
-- Pronoun resolution, coreference resolution
-- Machine translation (must carry referents correctly across languages)
-- Question answering ("Who is he?" requires knowing the referent)
-- Text summarization (must track entities through long documents)
-
-
-<LongQuestion>
-### Q5. Differentiate pragmatics and discourse analysis. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
+### Q4. Differentiate pragmatics and discourse analysis. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO5" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
 </LongQuestion>
 
 Both Pragmatics and Discourse Analysis are higher-level NLP stages that go beyond the literal meaning of individual sentences, but they focus on different aspects.
@@ -1315,53 +1203,46 @@ User Query → Query Processor → Matching Engine → Ranked Documents
 
 
 <LongQuestion>
-### Q3. Explain Named Entity Recognition (NER) with approaches. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT / ECE" /> <QuestionDot color="orange" text="June 2025" />
+### Q3. Explain Information Extraction (IE) and Named Entity Recognition (NER). (10 Marks) <QuestionDot color="red" text="Priority 1" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT / ECE / AIML" /> <QuestionDot color="orange" text="June 2025" />
 </LongQuestion>
 
-**Named Entity Recognition (NER)** is the NLP task of **identifying and classifying named entities** (proper nouns) in text into predefined categories such as Person, Organization, Location, Date, etc.
+**Information Extraction (IE)** is the task of automatically **extracting structured facts** from unstructured text. The most important first step of IE is **Named Entity Recognition (NER)**.
 
-*Example:*  
-Input: "**John Doe** joined **Tech Corp** in **January** in **New York**."  
-Output:  
-- John Doe → **[PERSON]**  
-- Tech Corp → **[ORGANIZATION]**  
-- January → **[DATE]**  
-- New York → **[LOCATION]**
+---
 
-**Named Entity Categories (IOB Tagging):**
+**1. Named Entity Recognition (NER):**
+Identifying and classifying proper nouns into categories.
 
-| Category | Examples |
-|----------|---------|
-| PERSON | Barack Obama, Elon Musk |
-| ORGANIZATION (ORG) | Google, MIT, RBI |
-| LOCATION (LOC) | India, Paris, Himalayas |
-| DATE / TIME | Monday, January 2024, 9 AM |
-| MONEY | $500, ₹1000 |
-| PERCENT | 20%, 3.5% |
+**NER Approaches:**
+- **Rule-Based:** Using name lists (gazetteers) and patterns (e.g., "Words starting with capital letters").
+- **Machine Learning:** Using models like **CRF (Conditional Random Fields)** that look at word shapes and POS tags.
+- **Deep Learning:** Using **BiLSTM-CRF** or **BERT** to automatically learn context.
 
-**Approaches to NER:**
+**NER Categories:**
+- **PERSON:** Elon Musk, **ORG:** Google, **LOC:** India, **DATE:** Jan 2024.
 
-**1. Rule-Based Approach:**
-- Uses handwritten patterns: regular expressions, gazetteers (name lists), capitalization rules.
-- *Example Rule:* If a word starts with a capital letter and is in a names dictionary → tag as PERSON.
-- **Advantage:** Easy to implement, interpretable.
-- **Disadvantage:** Requires extensive manual effort; doesn't generalize well.
+---
 
-**2. Machine Learning Approach:**
-- **Features:** word, POS tag, word shape (e.g., "Xx" for capitalized word), prefix/suffix.
-- **Models:** Conditional Random Fields (CRF) — the most popular classical NER model.
-- Trained on annotated corpora like CoNLL.
-- **Advantage:** Generalizes from training data, handles unseen text.
+**2. Beyond NER (Relation & Event Extraction):**
+Once entities are found, IE connects them to find facts.
+- **Relation Extraction:** Tim Cook **[CEO of]** Apple.
+- **Template Filling:** Automatically filling a form (Who? Tim Cook, Role? CEO, Company? Apple).
 
-**3. Deep Learning Approach:**
-- **BiLSTM-CRF:** Bidirectional LSTM captures context from both directions + CRF handles labeling constraints.
-- **BERT-based NER:** Pre-trained BERT fine-tuned for NER tasks — state-of-the-art performance.
-- **Advantage:** Automatically learns features; best accuracy.
+---
 
-**Applications:**
-- Information Extraction (extracting facts from news articles)
-- Question Answering (who/what/where questions)
-- Knowledge Graph construction
+**3. Question Answering (QA) Systems:**
+A QA system takes a natural language question and returns a **precise answer** (not just a list of links).
+
+**Architecture:**
+```
+User Question → Question Analyzer → Document Retrieval → Answer Extraction → Final Answer
+```
+- **Question Analyzer:** Determines what is being asked (Who? → Person, Where? → Location).
+- **Answer Extraction:** Uses NER and IE to pull the exact answer from a paragraph.
+
+**Example:**
+Q: "Where is the headquarters of Apple?"
+A: "Cupertino" (Extracted using IE from text).
 
 
 <LongQuestion>
@@ -1398,71 +1279,10 @@ Output:
 **Advantage:** More fluent, concise, and human-like summaries.  
 **Disadvantage:** More complex; may introduce factual errors (hallucination).
 
-**Comparison:**
-
-| Feature | Extractive | Abstractive |
-|---------|------------|-------------|
-| Method | Copies sentences from text | Generates new sentences |
-| Accuracy | High (uses original words) | May hallucinate facts |
-| Complexity | Simple | Complex (deep learning) |
-| Fluency | May be disjointed | More natural |
-
 **Applications:** News apps (Inshorts), legal document review, medical record summarization, research paper abstracts.
 
 
-<LongQuestion>
-### Q5. Explain Information Extraction and Question Answering system. (5 Marks) <QuestionDot color="green" text="Priority 2" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT3" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
-</LongQuestion>
 
-**Information Extraction (IE):**
-
-IE is the task of automatically **extracting structured information (facts)** from unstructured or semi-structured text.
-
-*Example:*  
-Input: "**Tim Cook** is the **CEO** of **Apple**, founded in the **past**."  
-IE Output:
-- Entity 1: Tim Cook [PERSON]  
-- Relation: CEO of  
-- Entity 2: Apple [ORGANIZATION]  
-- Founded: past [DATE]
-
-**Key IE Sub-tasks:**
-
-| Task | Description | Example |
-|------|-------------|---------|
-| **NER** | Identify named entities | "Apple" → ORG |
-| **Relation Extraction** | Find relationships between entities | Tim Cook — CEO of — Apple |
-| **Event Extraction** | Identify events and participants | "Election held on Nov 5" → ELECTION event |
-| **Template Filling** | Fill predefined slots from text | Who? Tim Cook, Role? CEO, Company? Apple |
-
----
-
-**Question Answering (QA) System:**
-
-A QA system accepts a **natural language question** and returns a **precise, direct answer** (not a list of documents like IR).
-
-*Example:*  
-Q: "Who is the CEO of Apple?"  
-A: "Tim Cook"
-
-**Architecture of a QA System:**
-
-```
-User Question → Question Analyzer → Document Retrieval → Answer Extraction → Answer
-```
-
-**Components:**
-1. **Question Analyzer:** Classifies the question type:
-   - Who → PERSON, What → THING, When → DATE, Where → LOCATION
-2. **Document Retrieval (IR Module):** Finds top relevant documents from corpus.
-3. **Answer Extraction:** Extracts the specific answer span from retrieved documents.
-   - Uses NER, pattern matching, or deep learning (BERT extractive QA).
-4. **Answer Ranking:** If multiple candidates are found, ranks them and picks the best.
-
-**Types of QA Systems:**
-- **Closed-domain:** Answers questions on a specific topic (e.g., medical QA).
-- **Open-domain:** Answers any question (e.g., IBM Watson, ChatGPT).
-- **Extractive QA:** Extracts answer span from a given passage (e.g., SQuAD benchmark).
 
 
 
