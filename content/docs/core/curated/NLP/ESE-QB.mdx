@@ -121,11 +121,11 @@ Natural Language Processing is used everywhere today to solve real-world problem
 2. **Text Generation (e.g., Gmail Smart Compose):**
    Predicting and suggesting the next phrase when typing an email using language models trained on large text corpora.
 
-3. **Information Extraction (IE):**
-   Scanning large paragraphs of unstructured text and pulling out structured data like names, dates, and locations automatically (also known as Named Entity Recognition).
-
-4. **Virtual Assistants & Chatbots (e.g., Siri, Alexa, ChatGPT):**
+3. **Virtual Assistants & Chatbots (e.g., Siri, Alexa, ChatGPT):**
    NLP converts speech to text, interprets the human intent (e.g., "Set alarm for 7am"), and generates a natural language response.
+
+4. **Information Extraction (IE):**
+   Scanning large paragraphs of unstructured text and pulling out structured data like names, dates, and locations automatically (also known as Named Entity Recognition).
 
 5. **Sentiment Analysis (e.g., Amazon Reviews, Twitter Analysis):**
    Analyzing text to classify the emotion behind it as positive, negative, or neutral, helping businesses understand customer feedback at scale.
@@ -415,17 +415,17 @@ $$P(\text{"I love NLP"}) = P(I) \times P(\text{love} \mid I) \times P(\text{NLP}
 
 **Importance of Language Models in NLP:**
 
-1. **Next Word Prediction:** Powers keyboard autocomplete (e.g., "I am going to the ___" → "store").
+1. **Machine Translation:** LM ensures the translated output sounds fluent and grammatically natural in the target language.
 
-2. **Speech Recognition:** When audio is ambiguous, LM picks the more probable word sequence. E.g., "I scream" vs "Ice cream" — context decides.
+2. **Text Generation:** Powers ChatGPT, autocomplete in Gmail — generates coherent text word by word.
 
-3. **Machine Translation:** LM ensures the translated output sounds fluent and grammatically natural in the target language.
+3. **Chatbots:** Language models help chatbots generate natural, relevant responses.
 
-4. **Spell Correction:** LM helps choose between "there" and "their" based on sentence context.
+4. **Next Word Prediction:** Powers keyboard autocomplete (e.g., "I am going to the ___" → "store").
 
-5. **Text Generation:** Powers ChatGPT, autocomplete in Gmail — generates coherent text word by word.
+5. **Spell Correction:** LM helps choose between "there" and "their" based on sentence context.
 
-6. **Chatbots:** Language models help chatbots generate natural, relevant responses.
+6. **Speech Recognition:** When audio is ambiguous, LM picks the more probable word sequence. E.g., "I scream" vs "Ice cream" — context decides.
 
 **Key Formula (Bigram Model):**
 $$P(w_2 \mid w_1) = \frac{\text{Count}(w_1, w_2)}{\text{Count}(w_1)}$$
@@ -892,11 +892,11 @@ entity → physical object → artifact → vehicle → car → sports car → F
 - Each synset has a **gloss** (definition) and example sentences
 
 **Applications of WordNet in NLP:**
-1. **Word Sense Disambiguation:** Lesk Algorithm uses WordNet definitions.
-2. **Semantic Similarity:** Measure how similar two words are by path distance in WordNet.
-3. **Information Retrieval:** Expand search queries with synonyms.
-4. **Machine Translation:** Find appropriate equivalent words.
-5. **Question Answering:** Understand semantic relationships between concepts.
+1. **Machine Translation:** Find appropriate equivalent words.
+2. **Information Retrieval:** Expand search queries with synonyms.
+3. **Question Answering:** Understand semantic relationships between concepts.
+4. **Word Sense Disambiguation:** Lesk Algorithm uses WordNet definitions.
+5. **Semantic Similarity:** Measure how similar two words are by path distance in WordNet.
 
 
 
@@ -977,8 +977,8 @@ The task of **clustering all mentions** of the same entity together.
 **Why it matters:**
 Coreference resolution is essential for:
 - Machine Translation (pronouns must map to correct entities)
-- Question Answering (must find what "it" refers to before answering)
 - Text Summarization (must know who/what is being discussed)
+- Question Answering (must find what "it" refers to before answering)
 
 
 <LongQuestion>
