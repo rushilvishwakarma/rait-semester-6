@@ -48,18 +48,21 @@ Whenever text goes into an NLP system, it is processed through five sequential s
    The computer breaks large words down into their smallest meaningful parts (morphemes).
    *Example:* `Truthfulness` is split into `Truth` + `ful` + `ness`.
 
-2. **Syntactic Analysis (Grammar Level):**
+2. **~~Phonetic Analysis (Sound Level)~~:**
+   *(Applies mostly to Speech Processing, generally skipped in text-based NLP).*
+
+3. **Syntactic Analysis (Grammar Level):**
    The computer checks if the sentence follows strict language grammar rules using sentence parse trees. It checks if the verbs and nouns are correctly placed.
 
-3. **Semantic Analysis (Meaning Level):**
+4. **Semantic Analysis (Meaning Level):**
    The computer figures out the literal dictionary meaning of the sentence and handles words that have multiple meanings.
    *Example:* Decoding if "Apple" means the fruit or the technology company.
 
-4. **Discourse Analysis (Sentence Level):**
+5. **Discourse Analysis (Sentence Level):**
    The computer connects the current sentence to the previous sentences to figure out pronouns.
    *Example:* If sentence 1 is "Rahul bought a car" and sentence 2 is "He drove it", Discourse analysis connects "He" to "Rahul".
 
-5. **Pragmatic Analysis (Context Level):**
+6. **Pragmatic Analysis (Context Level):**
    The computer uncovers the hidden intention of the sentence based on human situational context.
    *Example:* If a user says "Can you pass the salt?", they aren't asking if you possess the physical capability to lift salt. They are requesting you to give it to them.
 
@@ -69,30 +72,33 @@ Whenever text goes into an NLP system, it is processed through five sequential s
 
 
 <LongQuestion>
-### Q2. Discuss applications and challenges of NLP. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO1" /> <QuestionDot color="cyan" text="BT2" /> <QuestionDot color="purple" text="IT / CSBS / AIML" /> <QuestionDot color="orange" text="May 2023, Nov 2025, Dec 2023" />
+### Q2. Discuss applications / real-world use cases and challenges of NLP. (5 Marks) <QuestionDot color="green" text="Priority 1" /> <QuestionDot color="blue" text="CO1, CO6" /> <QuestionDot color="cyan" text="BT2, BT4" /> <QuestionDot color="purple" text="IT / CSBS / AIML" /> <QuestionDot color="orange" text="May 2023, Dec 2023, June 2025, Nov 2025" />
 </LongQuestion>
 
 <QuestionDot color="blue" text="Part of IA-MSE QB already" />
 
-Natural Language Processing is used everywhere today to solve real world problems. Here are the main applications:
+Natural Language Processing is used everywhere today to solve real-world problems. Here are the main applications:
 
-1. **Machine Translation:**
-   Automatically translating text or spoken words from one human language to another (e.g., Google Translate converting English to Hindi).
-   
-2. **Chatbots & Virtual Assistants:**
-   AI agents that can understand human requests and talk back clearly. Examples include Apple Siri, Amazon Alexa, and ChatGPT.
+1. **Machine Translation (e.g., Google Translate):**
+   Automatically translating text or spoken words from one human language to another using Neural Machine Translation (NMT) models.
 
-3. **Sentiment Analysis:**
-   Analyzing text to see if the emotion behind it is positive, negative, or neutral. Used deeply by companies to analyze Twitter/X or product reviews to see if customers are happy.
+2. **Text Generation (e.g., Gmail Smart Compose):**
+   Predicting and suggesting the next phrase when typing an email using language models trained on large text corpora.
 
-4. **Information Extraction (IE):**
+3. **Information Extraction (IE):**
    Scanning large paragraphs of unstructured text and pulling out structured data like names, dates, and locations automatically (also known as Named Entity Recognition).
 
-5. **Text Summarization:**
-   Taking a very long document (like a PDF research paper) and automatically creating a short, 1-paragraph summary that highlights the main points.
+4. **Virtual Assistants & Chatbots (e.g., Siri, Alexa, ChatGPT):**
+   NLP converts speech to text, interprets the human intent (e.g., "Set alarm for 7am"), and generates a natural language response.
 
-6. **Search Engines (Information Retrieval):**
-   Understanding a user's typed question and searching a massive database to pull up the exact webpage that answers it (e.g., Google Search).
+5. **Sentiment Analysis (e.g., Amazon Reviews, Twitter Analysis):**
+   Analyzing text to classify the emotion behind it as positive, negative, or neutral, helping businesses understand customer feedback at scale.
+
+6. **Information Retrieval (e.g., Google Search):**
+   When you type a query, NLP interprets the meaning of your question, not just keywords, and returns the most relevant web pages using tokenization and ranking.
+
+7. **Text Summarization (e.g., News Apps):**
+   Taking a very long document (like a PDF research paper) and automatically creating a short, 2-3 sentence summary that highlights the main points using extractive or abstractive methods.
 
 **Challenges of NLP:**
 
@@ -111,27 +117,30 @@ Natural Language Processing is used everywhere today to solve real world problem
 
 <Highlight>**Ambiguity**</Highlight> happens when a sentence or a word has more than one meaning. It is one of the hardest challenges to solve in NLP.
 
-There are five major types of ambiguity:
+There are six major types of ambiguity matching the levels of NLP:
 
-1. **Lexical / Morphological Ambiguity:**
+1. **Morphological / Lexical Ambiguity (Word Level):**
    When a single word has more than one meaning in the dictionary.
    *Example:* The word "bat" can mean a flying bird/mammal, or it can mean wooden sports equipment used in cricket.
 
-2. **Phonetic Ambiguity:**
+2. **Phonetic Ambiguity (Sound Level):**
    When two words have completely different spellings and completely different meanings, but sound exactly the same when spoken out loud.
    *Example:* "write", "right", and "rite" are all pronounced the exact same way.
 
-3. **Semantic Ambiguity:**
-   When the grammar of a sentence is fully correct, but the meaning gives two different interpretations.
-   *Example:* "The chicken is ready to eat." 
-   Does this mean the animal is hungry and wants food? Or does this mean the food is cooked and ready on the table?
-
-4. **Syntactic (Parsing) Ambiguity:**
+3. **Syntactic Ambiguity (Grammar Level):**
    When a sentence can be parsed in multiple grammatical ways.
    *Example:* "I saw a girl with a telescope."
    Did I use a telescope to observe a girl from far away? Or did I look at a girl who was holding a telescope? 
 
-5. **Pragmatic Ambiguity:**
+4. **Semantic Ambiguity (Meaning Level):**
+   When the grammar of a sentence is fully correct, but the meaning gives two different interpretations.
+   *Example:* "The chicken is ready to eat." 
+   Does this mean the animal is hungry and wants food? Or does this mean the food is cooked and ready on the table?
+
+5. **~~Discourse Ambiguity (Sentence Level)~~:**
+   *(Occurs when a pronoun's reference is unclear across sentences. Example: "Rahul hit Rohan. He was angry." - Who was angry?)*
+
+6. **Pragmatic Ambiguity (Context Level):**
    When the user's intentions are clear but only if you have contextual knowledge of the situation. Without knowing the context, the computer is confused.
    *Example:* "Can you open the window?" — Is this a question about ability, or a polite request?
 
@@ -144,52 +153,30 @@ Natural language is inherently ambiguous — a word can have multiple meanings, 
 
 **Key Roles of Probability in NLP:**
 
-1. **Language Modeling (Sentence Probability):**
+1. **Machine Translation:**
+   P(target sentence | source sentence) picks the most natural-sounding translation.
+
+2. **Language Modeling (Text Generation):**
    Probability is used to compute how likely a sentence is in a language.
    $$P(\text{"I love NLP"}) = P(I) \times P(\text{love}|I) \times P(\text{NLP}|\text{love})$$
    Used for autocomplete, spell correction, and speech recognition.
 
-2. **POS Tagging (HMM):**
+3. **Named Entity Recognition (Information Extraction):**
+   P(PERSON tag | "Barack Obama") is high because it has been seen as a person name many times in training data.
+
+4. **POS Tagging (HMM):**
    Given a word like "book", probability determines whether it is more likely a Noun or a Verb based on context.
    - P(NN | "Please give me the book") is high → tagged as Noun
    - P(VB | "Can you book the flight?") is high → tagged as Verb
 
-3. **Word Sense Disambiguation:**
+5. **Word Sense Disambiguation:**
    P(sense | context) determines the correct meaning of an ambiguous word.
    - P(bank = financial | "deposit", "money") is very high.
-
-4. **Machine Translation:**
-   P(target sentence | source sentence) picks the most natural-sounding translation.
-
-5. **Named Entity Recognition:**
-   P(PERSON tag | "Barack Obama") is high because it has been seen as a person name many times in training data.
 
 **Summary:** Without probability, NLP systems would have no way to handle ambiguity. Probability converts the language problem into a math problem that computers can solve.
 
 
-<LongQuestion>
-### Q5. Explain how NLP is used in real-world applications. (5 Marks) <QuestionDot color="green" text="Priority 3" /> <QuestionDot color="blue" text="CO6" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="IT" /> <QuestionDot color="orange" text="June 2025" />
-</LongQuestion>
 
-NLP is used in many everyday applications that people use without realizing it:
-
-1. **Google Search (Information Retrieval):**
-   When you type a query, NLP interprets the meaning of your question, not just keywords, and returns the most relevant web pages. It uses tokenization, stop-word removal, and TF-IDF ranking.
-
-2. **Google Translate (Machine Translation):**
-   NLP automatically translates text from one language to another using Neural Machine Translation (NMT) models based on encoder-decoder architecture.
-
-3. **Gmail Smart Compose (Text Generation):**
-   When typing an email, NLP predicts and suggests the next phrase using language models trained on large text corpora.
-
-4. **Alexa / Siri (Virtual Assistants):**
-   NLP converts speech to text, interprets the intent (e.g., "Set alarm for 7am"), and generates a natural language response.
-
-5. **Amazon Reviews / Twitter Analysis (Sentiment Analysis):**
-   NLP classifies whether a review or tweet is positive, negative, or neutral, helping businesses understand customer feedback at scale.
-
-6. **News Apps (Text Summarization):**
-   NLP automatically shortens long news articles into 2-3 sentence summaries using extractive or abstractive methods.
 
 
 
@@ -585,17 +572,22 @@ V   → "chases" | "sees" | "eats"
 ```
 
 **Parse Tree for "The dog chases a cat":**
-```
-           S
-          / \
-        NP    VP
-       / \   /  \
-     Det  N  V    NP
-      |   |  |   /  \
-     the dog chases Det  N
-                     |    |
-                     a   cat
-```
+
+<Mermaid chart={`graph TD
+    S --> NP1[NP]
+    S --> VP
+    NP1 --> Det1[Det]
+    NP1 --> N1[N]
+    Det1 --> the
+    N1 --> dog
+    VP --> V
+    VP --> NP2[NP]
+    V --> chases
+    NP2 --> Det2[Det]
+    NP2 --> N2[N]
+    Det2 --> a
+    N2 --> cat
+`} />
 
 **How to Construct a Parse Tree (Steps):**
 1. Start with the **Start Symbol S** at the top.
@@ -605,17 +597,22 @@ V   → "chases" | "sees" | "eats"
 5. All leaf nodes must match the actual words of the sentence.
 
 **Another Example — "A cat sees the dog":**
-```
-           S
-          / \
-        NP    VP
-       / \   /  \
-     Det  N  V    NP
-      |   |  |   /  \
-      a  cat sees Det  N
-                   |   |
-                  the dog
-```
+
+<Mermaid chart={`graph TD
+    S --> NP1[NP]
+    S --> VP
+    NP1 --> Det1[Det]
+    NP1 --> N1[N]
+    Det1 --> a
+    N1 --> cat
+    VP --> V
+    VP --> NP2[NP]
+    V --> sees
+    NP2 --> Det2[Det]
+    NP2 --> N2[N]
+    Det2 --> the
+    N2 --> dog
+`} />
 
 **Ambiguity in CFG:**
 A sentence is **structurally ambiguous** if it has more than one valid parse tree.
@@ -705,46 +702,7 @@ Both produce the same parse tree but in opposite directions.
 
 
 
-<LongQuestion>
-### Q7. Assign POS tags / perform tagging using Viterbi algorithm. (10 Marks) <QuestionDot color="red" text="Priority 3" /> <QuestionDot color="blue" text="CO3" /> <QuestionDot color="cyan" text="BT4" /> <QuestionDot color="purple" text="IT / ECE" /> <QuestionDot color="orange" text="June 2025" />
-</LongQuestion>
 
-The **Viterbi Algorithm** is a dynamic programming algorithm used with HMM to find the **most probable POS tag sequence** for a sentence efficiently.
-
-**Core Idea:** Instead of checking all possible tag combinations (exponential), Viterbi builds a table (trellis) and reuses earlier computed results.
-
-**Formula:**
-$$\delta_t(j) = \max_{i} \left[ \delta_{t-1}(i) \times P(t_j \mid t_i) \times P(w_t \mid t_j) \right]$$
-
-Where:
-- δₜ(j) = maximum probability of reaching tag j at position t
-- P(tⱼ | tᵢ) = transition probability
-- P(wₜ | tⱼ) = emission probability
-
-**Steps:**
-1. **Initialization:** For each tag t, compute δ₁(t) = P(t | START) × P(w₁ | t)
-2. **Recursion:** For each next word, compute δₜ(j) = max over all previous tags
-3. **Backtracking:** Trace back the path of tags with highest probability
-
-**Example:**
-Sentence: "the dog runs"
-Tags: DT (Determiner), NN (Noun), VB (Verb)
-
-Given:
-- P(DT|START) = 1.0, P(NN|DT) = 0.8, P(VB|NN) = 0.9
-- P("the"|DT) = 0.6, P("dog"|NN) = 0.5, P("runs"|VB) = 0.4
-
-**Trellis Calculation:**
-
-| Word | DT | NN | VB |
-|------|----|----|-----|
-| "the" | 1.0 × 0.6 = **0.6** | 0 | 0 |
-| "dog" | — | 0.6 × 0.8 × 0.5 = **0.24** | — |
-| "runs" | — | — | 0.24 × 0.9 × 0.4 = **0.0864** |
-
-**Backtrack:** runs→VB, dog→NN, the→DT
-
-**Result:** the/DT dog/NN runs/VB <Check className="inline w-5 h-5 text-green-600 mb-0.5" />
 
 ---
 
