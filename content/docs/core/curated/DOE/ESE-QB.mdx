@@ -255,7 +255,7 @@ Antagonistic interactions indicate conflict between factors and help identify co
 | **Meaning** | Result is **greater** than individual effects added up | Result is **less** than individual effects |
 | **Graph Lines** | Lines flare outward; factors amplify each other | Lines cross over; factors cancel each other |
 | **How to Use** | Maximize both inputs for best output | Find a safe "sweet spot" to avoid conflict |
-| **Example** | Heat + Good Catalyst = Enormous yield | Fast Speed + Deep Feed = Broken surface finish |
+| **Example** | Heat + Good Catalyst = Enormous yield | High speed + insufficient lubrication = overheating/burning of surface |
 
 **Important Rule:** On interaction graphs, <Highlight color="blue">**parallel lines mean no interaction**</Highlight>. If lines cross or angle away from each other, an interaction is present.
 
@@ -978,17 +978,11 @@ Despite these challenges, DoE remains a powerful tool for service optimization w
 
 **(10 Marks)**
 
-#### Part A — What is Six Sigma?
-
 <Highlight color="green">**Six Sigma**</Highlight> is a **data-driven quality improvement approach** focused on reducing defects and process variation. The target is to achieve no more than **3.4 defects per million opportunities (DPMO)**, representing a near-perfect process.
 
 Six Sigma was popularized by Motorola and GE and is used across manufacturing, healthcare, finance, and service industries.
 
----
-
-#### Part B — DMAIC Methodology
-
-The standard Six Sigma improvement framework is **DMAIC**:
+To achieve these goals, Six Sigma relies on a structured improvement framework known as **DMAIC**:
 
 <div className="flex gap-6 my-4 justify-left flex-wrap">
   <div className="flex flex-col items-center gap-2">
@@ -1021,22 +1015,9 @@ The standard Six Sigma improvement framework is **DMAIC**:
 | **Improve** | Develop and test solutions | **DOE is most heavily used here** |
 | **Control** | Sustain the improvements | Control charts, SOPs, poka-yoke (mistake-proofing) |
 
----
+Throughout the DMAIC cycle, Design of Experiments (DoE) acts as the experimental engine that links analysis to improvement and control. It helps quantify which factors and interactions drive the response during Analyze, identifies optimal factor combinations via factorial or fractional experiments in Improve, and provides confirmation and the procedures needed to lock in gains during Control. This continuous thread—from finding root causes to validating and standardizing solutions—ensures statistical analysis translates into durable process improvement.
 
-#### Part C — Role and Specific Stages Where DOE is Most Useful
-
-**1. Analyze Phase:**
-DoE **quantifies which factors significantly affect the response**. It separates the vital few root causes from the trivial many, giving the team clear targets.
-
-**2. Improve Phase (Highest Use):**
-DoE finds the **optimal combination of factor settings** that minimizes defects or maximizes performance. Factorial and fractional factorial designs are run at this stage to discover and confirm the best operating conditions.
-
-**3. Control Phase:**
-The optimum factor settings found through DoE become the new **standard operating procedure (SOP)**. Control charts monitor that these settings are maintained over time.
-
----
-
-#### Part D — How DOE Enables Data-Driven Decision Making
+**How DOE Enables Data-Driven Decision Making:**
 
 Without DoE, process improvement relies on experience, trial-and-error, or OVAT experiments — all of which miss interactions and are unreliable.
 
