@@ -1,0 +1,1122 @@
+---
+title: Question Bank - End Semester Exam
+description: DOE ESE solved answers (unofficial)
+---
+
+import { Highlight } from '@/components/highlight';
+import { QuestionDot } from '@/components/question-dot';
+import { LongQuestion } from '@/components/question';
+import {
+  Thermometer, CircleGauge, Timer, Snail, Trash2, RotateCw,
+  BadgeIndianRupee, Zap, ShieldAlert, CheckCircle2, TrendingUp,
+  Handshake, ShieldX, LineChart, Target, ListFilter,
+  Factory, Wrench, ClipboardList, BarChart2,
+  AlertTriangle, Users, Settings, Shuffle, Layers,
+  FlaskConical, Ban, Cpu, Clock, DollarSign
+} from 'lucide-react';
+
+---
+
+## Module 1 — Fundamentals of DOE (CO1)
+
+---
+
+<LongQuestion>
+### Q1. Explain why the One-Variable-at-a-Time (OVAT) approach is inefficient in experimentation.
+</LongQuestion>
+
+**(5 Marks)**
+
+The <Highlight color="pink">**One-Variable-at-a-Time (OVAT)**</Highlight> approach means changing **one factor at a time** while keeping all others fixed, and repeating this for every factor separately.
+
+**Why it is inefficient:**
+
+The first major problem is that OVAT **misses interactions between factors**. In real processes, two factors often influence each other. OVAT can never detect this because it never tests factors together simultaneously.
+
+The second problem is that OVAT **requires far more runs** than necessary. For example, studying 3 factors at 2 levels with OVAT needs many separate experiments, whereas a 2³ full factorial design covers all combinations in just **8 structured runs**.
+
+The third problem is that OVAT **cannot find the true optimum**. Since factor interactions are ignored, the best combination of factor settings is never discovered. The result found by OVAT may seem good but is rarely the global optimum.
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Ban className="size-6" />
+    <span className="text-sm font-medium">Misses Interactions</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Trash2 className="size-6" />
+    <span className="text-sm font-medium">More Runs Wasted</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <AlertTriangle className="size-6" />
+    <span className="text-sm font-medium">Wrong Optimum</span>
+  </div>
+</div>
+
+In contrast, DoE studies **all factors simultaneously** in a structured way, finds interactions, reaches the true optimum, and does it in far fewer runs. This is why OVAT is considered inefficient and DoE is preferred in industrial experimentation.
+
+---
+
+<LongQuestion>
+### Q2. Define randomization, replication, and blocking with suitable examples.
+</LongQuestion>
+
+**(5 Marks)**
+
+The basic principles of Design of Experiments (DoE) ensure that experiments are **efficient**, **reliable**, and **scientifically valid**.
+
+The first principle is <Highlight color="green">**Randomization**</Highlight>. This means doing experiments in a **random order** so that outside factors do not affect the results. For example, running tests randomly reduces problems caused by machine wear or changes in the environment over time.
+
+The second principle is <Highlight color="green">**Replication**</Highlight>. This means **repeating the same experiment** several times. Repeating trials helps us see how much the results vary and makes findings more accurate. For example, testing the strength of a product many times under the same conditions shows how consistent it is.
+
+The third principle is <Highlight color="green">**Blocking**</Highlight>. This involves **grouping similar experimental units** together to remove the effect of known factors that are not being studied. For example, grouping experiments by machine or work shift helps focus on the main factors being tested and prevents nuisance variation from distorting results.
+
+These three principles together improve the **reliability and validity** of experimental results in industrial applications.
+
+---
+
+<LongQuestion>
+### Q3. What are degrees of freedom? Illustrate with an example.
+</LongQuestion>
+
+**(5 Marks)**
+
+<Highlight color="pink">**Degrees of Freedom (DOF)**</Highlight> are the **number of independent pieces of information** available to estimate effects or error. In DoE, they indicate how many factor effects or interactions can be estimated independently.
+
+**For a two-factor, two-level (2²) design:**
+- Factors: A and B, each at 2 levels
+- Total runs: $2 \times 2 = 4$
+- Total DOF: $N - 1 = 4 - 1 = 3$
+- DOF for A: $2 - 1 = 1$
+- DOF for B: $2 - 1 = 1$
+- DOF for interaction AB: $(2-1)(2-1) = 1$
+
+So, $3 = 1 + 1 + 1$.
+
+With no replication, all degrees of freedom are used up by the main effects and the interaction, leaving **no pure error DOF**. Adding replication creates extra DOF which allows proper error estimation and significance testing.
+
+In general, more DOF means more information available, leading to more reliable experimental conclusions.
+
+---
+
+<LongQuestion>
+### Q4. What is confounding in DOE?
+</LongQuestion>
+
+**(5 Marks)**
+
+<Highlight color="pink">**Confounding**</Highlight> (also called **aliasing**) occurs when the effect of one factor is **mixed together** with the effect of another factor or interaction. Because their results are mathematically combined, it becomes impossible to tell which factor actually caused the change in the response.
+
+Confounding is a common trade-off. Engineers **accept it intentionally** when they use fractional designs (fewer test runs) to save time and money.
+
+**Confounding Severity — Design Resolution:**
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <ShieldAlert className="size-6" />
+    <span className="text-sm font-medium">Resolution III</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <ShieldAlert className="size-6" />
+    <span className="text-sm font-medium">Resolution IV</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <CheckCircle2 className="size-6" />
+    <span className="text-sm font-medium">Resolution V</span>
+  </div>
+</div>
+
+- **Resolution III:** Main effects are mixed with 2-factor interactions. (Use with caution.)
+- **Resolution IV:** Main effects are clear, but 2-factor interactions are mixed with each other.
+- **Resolution V:** Main effects and 2-factor interactions are all completely clear and unmixed.
+
+**Example:**
+In a fractional design, the estimated effect of Factor A may actually represent:
+
+`Estimated Effect = (True Effect of A) + (Interaction of B × C)`
+
+If the B×C interaction is strong, it inflates the estimate for A. An engineer who ignores confounding may mistakenly change Factor A in production and achieve nothing useful. This is why understanding confounding is essential before making process decisions.
+
+---
+
+<LongQuestion>
+### Q5. Explain the role of statistical thinking in industrial experimentation.
+</LongQuestion>
+
+**(5 Marks)**
+
+<Highlight color="green">**Statistical thinking**</Highlight> is the foundation of good industrial experimentation. It focuses on understanding **variation**, collecting evidence, and making decisions based on **data rather than assumptions**.
+
+In industrial processes, outputs always vary. Some variation comes from the factors being studied (signal), and some comes from random noise. Statistical thinking helps engineers **separate real effects from random noise**, so that only true cause-effect relationships are acted upon.
+
+Key roles of statistical thinking in DoE:
+
+- **Planning:** Helps choose the right design, number of runs, and factor levels to get reliable answers efficiently.
+- **Analysis:** Uses tools like ANOVA, regression, and probability plots to identify significant factors from data.
+- **Decision-making:** Supports conclusions with calculated confidence levels rather than gut feeling.
+- **Error estimation:** Quantifies how much variability exists in the process so that results are not over-interpreted.
+
+**Example:** In a plastic moulding process, statistical analysis of a factorial experiment shows that temperature has a p-value of 0.02 (significant) while cooling speed has a p-value of 0.45 (not significant). Without statistics, both factors might have been changed unnecessarily.
+
+Therefore, statistical thinking ensures that industrial experiments are **objective, reproducible, and cost-effective**.
+
+---
+
+## Module 2 — Interactions & Methodology (CO2)
+
+---
+
+<LongQuestion>
+### Q6. Differentiate between main effects and interaction effects.
+</LongQuestion>
+
+**(5 Marks)**
+
+**Main Effect:**
+
+A <Highlight color="green">**main effect**</Highlight> is the **individual impact of a single factor** on the response, averaged across all levels of other factors.
+
+It is calculated as:
+
+$$
+\text{Main Effect of A} = \overline{Y}_{A+} - \overline{Y}_{A-}
+$$
+
+(Average response when A is High) minus (Average response when A is Low).
+
+**Example:** If tensile strength is 70 at high temperature and 50 at low temperature, main effect of temperature = 70 − 50 = **+20**.
+
+---
+
+**Interaction Effect:**
+
+An <Highlight color="pink">**interaction effect**</Highlight> occurs when the **effect of one factor depends on the level of another factor**. Factors do not act independently — their combined influence on the response is different from the sum of their individual effects.
+
+**Example:** Temperature may improve strength by +20 at low pressure, but by only +5 at high pressure. This difference in behaviour is an interaction.
+
+| Feature | Main Effect | Interaction Effect |
+|---|---|---|
+| **Involves** | One factor | Two or more factors |
+| **Graph** | Simple bar or line | Lines that cross or diverge |
+| **Can be misleading if** | Interactions are present | Ignored in analysis |
+| **Estimated using** | Average difference | Product of sign columns |
+
+Ignoring interactions while focusing only on main effects can lead to **wrong process optimization decisions**. Therefore, both must always be studied together in DoE.
+
+---
+
+<LongQuestion>
+### Q7. Explain synergistic and antagonistic interactions with examples.
+</LongQuestion>
+
+**(5 or 10 Marks)**
+
+Interaction effects in DoE can be classified as **synergistic** or **antagonistic**, depending on how factors influence the response when combined.
+
+**Synergistic Interaction**
+
+A synergistic interaction occurs when the **combined effect of two factors is greater than the sum of their individual effects**. The factors reinforce each other and produce an enhanced response. For example, increasing both temperature and pressure together may significantly improve product strength more than expected from their individual effects alone.
+
+Synergistic interactions are desirable in many processes because they lead to improved performance and efficiency.
+
+---
+
+**Antagonistic Interaction**
+
+An antagonistic interaction occurs when the **combined effect of two factors is less than the sum of their individual effects**. One factor reduces or counteracts the effect of the other. For example, increasing temperature may improve yield, but when combined with high speed, the overall yield may actually decrease.
+
+Antagonistic interactions indicate conflict between factors and help identify combinations that should be avoided.
+
+---
+
+| Feature | Synergistic (Helpful) | Antagonistic (Harmful) |
+|---|---|---|
+| **Meaning** | Result is **greater** than individual effects added up | Result is **less** than individual effects |
+| **Graph Lines** | Lines flare outward; factors amplify each other | Lines cross over; factors cancel each other |
+| **How to Use** | Maximize both inputs for best output | Find a safe "sweet spot" to avoid conflict |
+| **Example** | Heat + Good Catalyst = Enormous yield | Fast Speed + Deep Feed = Broken surface finish |
+
+**Important Rule:** On interaction graphs, <Highlight color="blue">**parallel lines mean no interaction**</Highlight>. If lines cross or angle away from each other, an interaction is present.
+
+- **(Stop here for 5 marks)**
+
+**Conclusion**
+
+Understanding whether interactions are synergistic or antagonistic helps engineers select proper factor combinations, optimize processes, and avoid undesirable operating conditions. Hence, interaction analysis plays a crucial role in effective experimental design.
+
+- **(Continue till here for 10 marks)**
+
+---
+
+<LongQuestion>
+### Q8. Discuss barriers in successful application of DOE in industries.
+</LongQuestion>
+
+**(10 Marks)**
+
+DoE often fails in practice due to combined **statistical, technical, and sociological barriers**.
+
+**1. Statistical Barrier**
+
+Weak understanding of concepts like interaction, variance, and model assumptions. This causes wrong design choice or incorrect interpretation of results. Engineers may treat a confounded effect as a true main effect and make wrong process decisions.
+
+**2. Technical Barrier**
+
+Limited process control, poor measurement systems, or expensive experiments. If factors cannot be set precisely and repeatedly, DoE conclusions become unreliable. A poorly calibrated instrument alone can ruin an otherwise well-planned experiment.
+
+**3. Sociological Barrier**
+
+Resistance to change, low management support, and poor cross-team communication. Teams may prefer familiar trial-and-error over structured experiments. Without management buy-in, resources and time are not allocated for proper DoE.
+
+**Additional Barriers:**
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Clock className="size-6" />
+    <span className="text-sm font-medium">Time Pressure</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Users className="size-6" />
+    <span className="text-sm font-medium">Lack of Training</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <AlertTriangle className="size-6" />
+    <span className="text-sm font-medium">Poor Data Culture</span>
+  </div>
+</div>
+
+- **Time pressure:** Production schedules leave no room for controlled experiments.
+- **Lack of training:** Most shop-floor teams are not trained in statistical methods.
+- **Poor data culture:** Organizations do not collect or maintain reliable process data.
+
+**Conclusion:**
+
+Successful DoE needs **statistical competence**, **technical readiness**, and **organizational buy-in** working together. Addressing only one or two of these barriers while ignoring others will still result in failure.
+
+---
+
+<LongQuestion>
+### Q9 / Q10. Explain the systematic methodology for conducting a DOE study. / Describe analytical tools used in DOE (Pareto plots, interaction plots, normal probability plots).
+</LongQuestion>
+
+**(10 Marks)**
+
+#### Part A — Systematic Methodology for DoE
+
+A structured step-by-step approach is essential for any successful DoE study.
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Target className="size-6" />
+    <span className="text-sm font-medium">1. Define Objective</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Settings className="size-6" />
+    <span className="text-sm font-medium">2. Select Factors</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <ClipboardList className="size-6" />
+    <span className="text-sm font-medium">3. Choose Design</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Shuffle className="size-6" />
+    <span className="text-sm font-medium">4. Run Experiment</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <BarChart2 className="size-6" />
+    <span className="text-sm font-medium">5. Analyze Results</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <CheckCircle2 className="size-6" />
+    <span className="text-sm font-medium">6. Confirm & Implement</span>
+  </div>
+</div>
+
+**Step 1 — Define the Objective:** Clearly state what you want to improve or optimize (e.g., reduce surface roughness, increase yield).
+
+**Step 2 — Select Factors and Levels:** Identify which input variables to study and set their Low (−1) and High (+1) levels based on engineering knowledge.
+
+**Step 3 — Choose the Right Design:** Decide between full factorial, fractional factorial, or screening design based on the number of factors and available resources.
+
+**Step 4 — Run the Experiment:** Conduct runs in **random order** to avoid bias. Record the response variable accurately for each run.
+
+**Step 5 — Analyze Results:** Use statistical tools to identify significant factors and interactions.
+
+**Step 6 — Confirm and Implement:** Run a confirmation experiment at the optimum settings. If results match predictions, implement the settings in production.
+
+---
+
+#### Part B — Analytical Tools Used in DoE
+
+**1. Pareto Plot:**
+A bar chart showing factor effects ranked from largest to smallest. A reference line marks the boundary of statistical significance. Factors crossing the line are the **vital few** that truly matter.
+
+**2. Interaction Plot:**
+A line graph showing how the effect of one factor changes at different levels of another factor. **Parallel lines = no interaction. Crossing or diverging lines = interaction present.**
+
+**3. Normal Probability Plot:**
+Plots calculated effects on a normal probability scale. Effects that fall off the straight line are statistically significant and are not due to random noise.
+
+**4. ANOVA (Analysis of Variance):**
+Partitions total variation in the response into contributions from each factor and error. Produces **p-values** to formally test which factors are significant.
+
+**5. Main Effects Plot:**
+Shows the average response at each level of every factor. A steep slope means the factor has a large main effect.
+
+These tools together give a complete picture of which factors to control and at what levels to optimize the process.
+
+---
+
+## Module 3 — Screening & Full Factorial Designs (CO3)
+
+---
+
+<LongQuestion>
+### Q11 / Q12. Construct a 2² full factorial design and estimate main and interaction effects. / Construct a 2³ full factorial design and explain estimation of main effects.
+</LongQuestion>
+
+**(5 or 10 Marks)**
+
+#### Part A — 2² Full Factorial Design
+
+A **2² full factorial design** tests **2 factors** at **2 levels**, requiring **N = 2² = 4 runs**. It finds main effects and the interaction between the two factors.
+
+**Example:** Optimizing surface finish on a machining process.
+- **Factor A:** Cutting Speed (Low '−' / High '+')
+- **Factor B:** Feed Rate (Low '−' / High '+')
+- **Response:** Surface Roughness (Ra)
+
+**Design Matrix:**
+
+| Run | A | B | AB | Response (Ra) |
+|-----|---|---|----|---------------|
+| 1   | − | − | +  | y₁            |
+| 2   | + | − | −  | y₂            |
+| 3   | − | + | −  | y₃            |
+| 4   | + | + | +  | y₄            |
+
+*(+ = High, − = Low)*
+
+**Estimating Effects:**
+
+$$
+\text{Effect of A} = \frac{(y_2 + y_4) - (y_1 + y_3)}{2}
+$$
+
+$$
+\text{Effect of B} = \frac{(y_3 + y_4) - (y_1 + y_2)}{2}
+$$
+
+$$
+\text{Interaction AB} = \frac{(y_1 + y_4) - (y_2 + y_3)}{2}
+$$
+
+A negative interaction value means raising both factors together gives a **worse-than-expected** benefit — this is an <Highlight color="blue">**antagonistic interaction**</Highlight>.
+
+- **(Stop here for 5 marks)**
+
+---
+
+#### Part B — 2³ Full Factorial Design
+
+A **2³ full factorial design** tests **3 factors** at **2 levels**, requiring **N = 2³ = 8 runs**. It reveals all main effects and all two-factor and three-factor interactions.
+
+**Example:** Improving chemical yield with factors A (Temperature), B (Pressure), C (Catalyst).
+
+**Design Matrix:**
+
+<Callout type="info" title="Standard Alternating Pattern">
+- **Column A:** Changes every 1 row (`− + − + − + − +`)
+- **Column B:** Changes every 2 rows (`− − + + − − + +`)
+- **Column C:** Changes every 4 rows (`− − − − + + + +`)
+</Callout>
+
+| Run | A  | B  | C  | Response |
+|-----|----|----|----|----------|
+| 1   | −  | −  | −  | Y₁       |
+| 2   | +  | −  | −  | Y₂       |
+| 3   | −  | +  | −  | Y₃       |
+| 4   | +  | +  | −  | Y₄       |
+| 5   | −  | −  | +  | Y₅       |
+| 6   | +  | −  | +  | Y₆       |
+| 7   | −  | +  | +  | Y₇       |
+| 8   | +  | +  | +  | Y₈       |
+
+*(+ = High, − = Low)*
+
+**Estimating Main Effects:**
+
+$$
+\text{Effect of A} = \frac{(Y_2+Y_4+Y_6+Y_8)-(Y_1+Y_3+Y_5+Y_7)}{4}
+$$
+
+$$
+\text{Effect of B} = \frac{(Y_3+Y_4+Y_7+Y_8)-(Y_1+Y_2+Y_5+Y_6)}{4}
+$$
+
+$$
+\text{Effect of C} = \frac{(Y_5+Y_6+Y_7+Y_8)-(Y_1+Y_2+Y_3+Y_4)}{4}
+$$
+
+Each main effect = (average response at '+' level) − (average response at '−' level) for that factor. The factor with the **largest absolute effect value** is the most influential.
+
+- **(Continue till here for 10 marks)**
+
+---
+
+<LongQuestion>
+### Q13 / Q14. Explain the steps in designing a Plackett-Burman screening experiment. / Using a Plackett-Burman design, show how significant factors are identified.
+</LongQuestion>
+
+**(10 Marks)**
+
+**Plackett-Burman (P-B) designs** are two-level screening tests used to identify the most important factors quickly. The total number of runs **N is always a multiple of 4** (like 8, 12, 16). They allow studying up to **k = N − 1 factors** in exactly N runs using <Highlight color="green">**orthogonal arrays**</Highlight>.
+
+---
+
+#### Steps in Designing a P-B Experiment
+
+**Step 1 — Define the Objective:** State the response to be measured (e.g., product hardness, yield).
+
+**Step 2 — List All Potential Factors:** Brainstorm all variables that might affect the response. Suppose there are 7 factors (A to G).
+
+**Step 3 — Choose Run Size N:** Select the smallest N that is a multiple of 4 and satisfies N ≥ k + 1. For 7 factors, choose **N = 8**.
+
+**Step 4 — Construct the Design Matrix using the Cyclic Shift Method:**
+
+<Callout type="info" title="The '3-1-1-2' Rule for N = 8">
+- **Row 1:** Use the seed row: `+ + + − + − −`
+- **Rows 2 to 7:** Shift the previous row one step to the right (last element moves to front).
+- **Row 8:** All Low (`− − − − − − −`).
+</Callout>
+
+#### Complete 8-Run Matrix (7 Factors: A to G)
+
+| Run | A | B | C | D | E | F | G | Response |
+|-----|---|---|---|---|---|---|---|----------|
+| 1   | + | + | + | − | + | − | − | y₁ |
+| 2   | − | + | + | + | − | + | − | y₂ |
+| 3   | − | − | + | + | + | − | + | y₃ |
+| 4   | + | − | − | + | + | + | − | y₄ |
+| 5   | − | + | − | − | + | + | + | y₅ |
+| 6   | + | − | + | − | − | + | + | y₆ |
+| 7   | + | + | − | + | − | − | + | y₇ |
+| 8   | − | − | − | − | − | − | − | y₈ |
+
+*(+ = High, − = Low)*
+
+**Step 5 — Run the Experiment Randomly:** Conduct all 8 runs in random order and record the response.
+
+---
+
+#### How Significant Factors Are Identified
+
+**Step 6 — Calculate Main Effects:** For each factor, compute:
+
+$$
+\text{Effect} = \overline{Y}_{+} - \overline{Y}_{-}
+$$
+
+**Step 7 — Use a Pareto Plot or Normal Probability Plot:** Factors whose bars cross the significance reference line on the Pareto plot — or fall off the straight line on a normal plot — are identified as **significant**.
+
+**Step 8 — Focus on Vital Few Factors:** Only the significant factors (often 2 to 3 out of 7) are carried forward for detailed optimization.
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Zap className="size-6" />
+    <span className="text-sm font-medium">94% Run Reduction</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Target className="size-6" />
+    <span className="text-sm font-medium">Vital Few Identified</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <DollarSign className="size-6" />
+    <span className="text-sm font-medium">Cost Saved</span>
+  </div>
+</div>
+
+**Example:** An injection moulding engineer screens 7 variables in 8 runs. The Pareto plot reveals that only **Speed (A)** and **Temperature (C)** are significant. The other 5 factors are set at convenient levels, and a focused 2² design is then run for only A and C to find the optimum.
+
+---
+
+<LongQuestion>
+### Q15. Explain how variability in process yield can be analysed using a 2³ factorial design.
+</LongQuestion>
+
+**(5 Marks)**
+
+In a **2³ full factorial design**, three factors are each tested at two levels, giving **8 experimental runs**. By replicating the runs, it becomes possible to estimate both the **average response** and the **variability** at each set of conditions.
+
+**Steps to Analyse Variability in Yield:**
+
+**Step 1 — Replicate the Design:** Run the 8-run design at least twice (n = 2 replicates). This gives two yield observations at every factor combination.
+
+**Step 2 — Compute Mean and Variance per Run:** For each run, calculate the average yield $\bar{y}$ and the variance $s²$ across replicates.
+
+**Step 3 — Apply ANOVA:** Use Analysis of Variance to partition total variation in yield into:
+- Variation due to Factor A (e.g., Temperature)
+- Variation due to Factor B (e.g., Pressure)
+- Variation due to Factor C (e.g., Catalyst)
+- Variation due to interactions (AB, AC, BC, ABC)
+- Residual (random) error
+
+**Step 4 — Identify Variance Drivers:** Factors with large F-values and small p-values (p < 0.05) are statistically significant contributors to variability.
+
+**Step 5 — Optimise for Low Variability:** Set significant factors at levels that both **maximise average yield** and **minimise spread**. This leads to a robust process that performs consistently even under varying conditions.
+
+---
+
+## Module 4 — Fractional Factorial Designs (CO4)
+
+---
+
+<LongQuestion>
+### Q16. Explain design resolution in fractional factorial designs.
+</LongQuestion>
+
+**(5 Marks)**
+
+<Highlight color="pink">**Design Resolution**</Highlight> describes how much confounding (aliasing) exists between effects in a fractional factorial design. A **higher resolution** means that main effects and interactions are more clearly separated.
+
+Resolution is expressed in Roman numerals:
+
+| Resolution | What is Confounded | Practical Use |
+|---|---|---|
+| **III** | Main effects mixed with 2-factor interactions | Quick screening only — use with caution |
+| **IV** | Main effects are clear; 2-factor interactions mixed with each other | Moderate screening with safe main effects |
+| **V** | Main effects and 2-factor interactions are all clear | Suitable for optimization |
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <ShieldAlert className="size-6" />
+    <span className="text-sm font-medium">Resolution III</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <ShieldAlert className="size-6" />
+    <span className="text-sm font-medium">Resolution IV</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <CheckCircle2 className="size-6" />
+    <span className="text-sm font-medium">Resolution V</span>
+  </div>
+</div>
+
+**Key Rule:** The resolution equals the **length of the shortest word in the defining relation**. For example, if the defining relation is $I = ABCDE$, the design is Resolution V because ABCDE has 5 letters.
+
+**Example:** A 2⁷⁻⁴ design is Resolution III. Some main effects are aliased with 2-factor interactions. It is only suitable for initial screening where interactions are assumed small.
+
+Engineers choose resolution based on the trade-off between **run cost** and the **level of detail** needed from the experiment.
+
+---
+
+<LongQuestion>
+### Q17 / Q18. Illustrate the construction of a half-fractional factorial design. / Construct a 2⁽⁵⁻¹⁾ fractional factorial design and show alias structure.
+</LongQuestion>
+
+**(10 Marks)**
+
+A **fractional factorial design** uses a selected subset of full factorial runs to reduce effort while preserving key information about main effects and important interactions.
+
+---
+
+#### Constructing a 2⁽⁵⁻¹⁾ Half-Fraction Design
+
+For 5 factors at 2 levels:
+- Full factorial: $2^5 = 32$ runs
+- Half fraction: $2^{5-1} = 16$ runs (saves 50% of runs)
+
+**Step 1 — Build the Base Design:** Start with a standard $2^4$ full factorial design for the first 4 factors: **A, B, C, D** (16 runs).
+
+| Run | A | B | C | D |
+|-----|---|---|---|---|
+| 1   | − | − | − | − |
+| 2   | + | − | − | − |
+| 3   | − | + | − | − |
+| 4   | + | + | − | − |
+| ... | ... | ... | ... | ... |
+| 16  | + | + | + | + |
+
+**Step 2 — Define the 5th Factor:** Assign Factor **E** using the generator:
+
+$$E = ABCD$$
+
+Each run's sign for E is determined by multiplying the signs of A, B, C, and D for that run.
+
+**Step 3 — Write the Defining Relation:**
+
+$$I = ABCDE$$
+
+All aliasing information is derived from this defining relation.
+
+---
+
+#### Alias Structure
+
+To find the alias of any effect, multiply it by the defining relation $I = ABCDE$:
+
+$$A \times ABCDE = A^2BCDE = BCDE \quad \Rightarrow \quad A \text{ is aliased with } BCDE$$
+$$AB \times ABCDE = A^2B^2CDE = CDE \quad \Rightarrow \quad AB \text{ is aliased with } CDE$$
+
+**Summary of Key Aliases:**
+
+| Effect | Aliased With |
+|--------|-------------|
+| A      | BCDE (4-factor interaction) |
+| B      | ACDE |
+| C      | ABDE |
+| D      | ABCE |
+| E      | ABCD |
+| AB     | CDE (3-factor interaction) |
+| AC     | BDE |
+
+Since all main effects are only aliased with **4-factor interactions** (assumed negligible in practice), this is a **Resolution V** design. Main effects and all 2-factor interactions are estimable clearly.
+
+---
+
+#### Trade-off Summary
+
+| | Full 2⁵ | Half 2⁽⁵⁻¹⁾ |
+|---|---|---|
+| **Runs needed** | 32 | 16 |
+| **Cost** | High | Half |
+| **Information** | Complete | Main effects + 2FI all clear |
+| **Limitation** | None | Some higher-order aliasing |
+
+Fractional factorial designs are **ideal for early-stage experimentation** when resources are limited and higher-order interactions are assumed to be small.
+
+---
+
+<LongQuestion>
+### Q19. Explain the concept of aliasing/confounding in fractional factorial designs.
+</LongQuestion>
+
+**(5 Marks)**
+
+In a **fractional factorial design**, not all factor combinations are tested. To compensate for the missing runs, some effects are mathematically **merged together** — this is called <Highlight color="pink">**aliasing**</Highlight> or **confounding**.
+
+**How Aliasing Works:**
+
+When a design has the defining relation $I = ABCDE$, multiplying any effect by this relation gives its **alias** — the effect it is mixed with:
+
+$$A = A \times I = A \times ABCDE = BCDE$$
+
+So the estimated value for A actually contains both the true effect of A **and** the effect of the BCDE four-factor interaction.
+
+**Why It Is Acceptable:**
+
+In most industrial processes, **higher-order interactions (3-factor, 4-factor) are negligibly small**. So aliasing a main effect with a 4-factor interaction (Resolution V) is safe in practice.
+
+**When It Becomes a Problem:**
+
+In a **Resolution III design**, main effects are aliased with 2-factor interactions. If those 2-factor interactions are real and significant, the main effect estimate will be inflated and misleading — leading to wrong process decisions.
+
+**Key Principle:**
+
+Aliasing is a **deliberate trade-off** — fewer runs in exchange for some confounding. The engineer must use process knowledge to confirm whether the assumed negligible aliases are truly unimportant before accepting the results.
+
+---
+
+<LongQuestion>
+### Q20. Case Study: Explain how fractional factorial design helps in reducing scrap rate.
+</LongQuestion>
+
+**(10 Marks)**
+
+#### Case Study: Reducing Scrap Rate in an Injection Moulding Process
+
+**Problem:**
+A plastic components factory was generating a high scrap rate (~18%) due to dimensional defects. A full factorial experiment with 5 factors would require $2^5 = 32$ runs — too expensive and time-consuming on the production machine.
+
+---
+
+**Factors Selected:**
+
+| Factor | Variable | Low (−) | High (+) |
+|--------|----------|---------|---------|
+| A | Melt Temperature | 200°C | 240°C |
+| B | Injection Speed | Slow | Fast |
+| C | Holding Pressure | 40 bar | 80 bar |
+| D | Cooling Time | 10 s | 20 s |
+| E | Mould Temperature | 30°C | 50°C |
+
+**Response:** Scrap rate (% defective parts per batch)
+
+---
+
+**Design Used:** $2^{5-1}$ half-fraction design — **16 runs**, with generator $E = ABCD$ and defining relation $I = ABCDE$ — a **Resolution V** design. Main effects and 2-factor interactions are completely clear of each other.
+
+---
+
+**Analysis:** A **Pareto plot** of estimated effects revealed:
+- **Factor A (Melt Temperature)** — largest effect, highly significant.
+- **Factor C (Holding Pressure)** — second most significant.
+- **Interaction A×C** — strong synergistic interaction: high temperature + high pressure produced the lowest scrap.
+- **Factors B, D, E** — not significant; set to their most economical levels.
+
+---
+
+**Results:**
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Trash2 className="size-6" />
+    <span className="text-sm font-medium">Scrap: 18% → 4%</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <DollarSign className="size-6" />
+    <span className="text-sm font-medium">Cost Saved</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Zap className="size-6" />
+    <span className="text-sm font-medium">50% Fewer Runs</span>
+  </div>
+</div>
+
+- Scrap rate dropped from **18% to under 4%** after implementing optimum settings.
+- The team needed only **16 runs instead of 32**, saving machine time and material cost.
+- The significant interaction A×C would have been **completely missed** by a one-factor-at-a-time approach.
+
+This case study demonstrates that fractional factorial designs provide near-complete information at a fraction of the experimental cost, making them highly valuable for industrial quality improvement.
+
+---
+
+## Module 5 — DOE in Service Industry (CO5)
+
+---
+
+<LongQuestion>
+### Q21 / Q25. Discuss the role of DOE in service industry applications with examples. / Case Study: Application of DOE in service industry optimization.
+</LongQuestion>
+
+**(10 Marks)**
+
+DoE is useful in service industries because service outcomes also depend on **controllable factors**. It helps optimize operations through planned experiments instead of ad-hoc changes.
+
+**Role of DoE in the Service Industry:**
+
+Service outputs are things like **waiting time, customer satisfaction score, call resolution rate, or delivery accuracy**. DoE studies which controllable factors drive these outcomes and finds the best settings.
+
+DoE helps service organizations to:
+- Identify which process steps waste the most time.
+- Test new policies or layouts without fully committing to them.
+- Optimize staffing, scheduling, and workflow in a scientific way.
+
+---
+
+#### Case Study: Bank — Reducing Customer Waiting Time
+
+**Objective:** Reduce average customer waiting time at a bank branch.
+
+**Factors Selected:**
+
+| Factor | Variable | Low (−) | High (+) |
+|--------|----------|---------|---------|
+| A | Active counters open | 3 | 6 |
+| B | Staff skill mix | Junior-heavy | Senior-heavy |
+| C | Queue management system | Manual | Token-based |
+
+**Response:** Average customer waiting time (minutes)
+
+**Experiment:** A **2³ full factorial design** (8 runs) was conducted over 8 working days, with each run randomly assigned to avoid weekday bias.
+
+**Analysis and Results:**
+- **Factor A (counters open)** had the largest individual effect.
+- **Factor C (token system)** also had a strong positive effect independently.
+- A **synergistic interaction A×C** was found: more counters + token system reduced waiting far more than either change alone.
+- Factor B (skill mix) was not significant and could be decided on cost alone.
+
+**Expected Benefits:**
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Clock className="size-6" />
+    <span className="text-sm font-medium">Lower Wait Time</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Users className="size-6" />
+    <span className="text-sm font-medium">Better Satisfaction</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <DollarSign className="size-6" />
+    <span className="text-sm font-medium">Lower Operating Cost</span>
+  </div>
+</div>
+
+1. Lower waiting time and better customer satisfaction scores.
+2. Smarter staffing decisions without unnecessary over-staffing.
+3. Data-based improvements that can be **standardized and replicated** across all branches.
+
+This case study shows that DoE can be effectively adapted to service environments to produce measurable and sustainable improvements.
+
+---
+
+<LongQuestion>
+### Q22. Explain benefits and challenges of applying DOE in non-manufacturing industries.
+</LongQuestion>
+
+**(5 Marks)**
+
+**Benefits of DoE in Non-Manufacturing / Service Industries:**
+
+1. <Highlight color="green">**Systematic Improvement:**</Highlight> Instead of guesswork, DoE provides a structured way to test process changes and find the best settings for service delivery.
+
+2. <Highlight color="green">**Cost Reduction:**</Highlight> By identifying which factors truly matter, organizations stop wasting resources on changes that have no real impact.
+
+3. <Highlight color="green">**Customer Satisfaction:**</Highlight> Optimizing service factors (speed, accuracy, responsiveness) directly improves the customer experience.
+
+4. <Highlight color="green">**Replicability:**</Highlight> Once an optimum service process is found, it can be standardized and deployed across multiple locations or teams.
+
+---
+
+**Challenges of DoE in Non-Manufacturing Industries:**
+
+1. <Highlight color="pink">**Lack of Control:**</Highlight> Customer behaviour, emotions, and external events cannot be controlled the way machine settings can be in a factory.
+
+2. <Highlight color="pink">**Response Measurement Difficulty:**</Highlight> Service responses (satisfaction, experience quality) are often subjective and harder to measure numerically.
+
+3. <Highlight color="pink">**High Variability:**</Highlight> Human involvement introduces more variability, making it harder to isolate true effects of controlled factors.
+
+4. <Highlight color="pink">**Resistance to Experimentation:**</Highlight> Staff and management may resist structured experiments on live customers due to concern about disruption.
+
+Despite these challenges, DoE remains a powerful tool for service optimization when properly adapted to the human and process context of service environments.
+
+---
+
+<LongQuestion>
+### Q23. Suggest practical tips for making industrial experiments successful.
+</LongQuestion>
+
+**(5 Marks)**
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Target className="size-6" />
+    <span className="text-sm font-medium">Clear Objective</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Users className="size-6" />
+    <span className="text-sm font-medium">Team Involvement</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Wrench className="size-6" />
+    <span className="text-sm font-medium">Validate Instruments</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <CheckCircle2 className="size-6" />
+    <span className="text-sm font-medium">Confirm Results</span>
+  </div>
+</div>
+
+1. **Define a clear objective first:** Know exactly what you want to improve before selecting factors. Vague goals lead to poorly designed experiments.
+
+2. **Involve process experts early:** Engineers and operators who understand the process help identify the right factors, realistic levels, and practical constraints.
+
+3. **Validate the measurement system first:** Confirm that instruments are accurate and repeatable (Measurement System Analysis) before running experiments.
+
+4. **Randomize the run order:** Always run experiments in random order to prevent time-related biases such as machine warm-up or raw material variation from distorting results.
+
+5. **Start with a screening design:** For many factors, screen first to find the vital few, then optimize. Do not jump to a large full factorial design immediately.
+
+6. **Keep unused factors fixed and documented:** Factors not included in the design should be held constant and recorded, so results can be reproduced later.
+
+7. **Run a confirmation experiment:** After finding optimum settings, verify the predicted response with at least one confirmation run before implementing changes in production.
+
+8. **Communicate results simply:** Use Pareto charts and interaction plots to present findings clearly to management and shop-floor teams.
+
+---
+
+<LongQuestion>
+### Q24. Differentiate between manufacturing and service industry experimentation.
+</LongQuestion>
+
+**(5 Marks)**
+
+| Feature | Manufacturing Industry | Service Industry |
+|---|---|---|
+| **Output** | Physical product (dimensions, weight, strength) | Intangible service (waiting time, satisfaction score) |
+| **Factor Control** | High — machine settings set precisely and held constant | Low — human behaviour and customer demand hard to control |
+| **Response Measurement** | Easy — instruments like gauges and load cells | Harder — surveys and subjective ratings introduce noise |
+| **Variability Source** | Machines, materials, methods | People, customer variation, and environment |
+| **Experiment Disruption** | Dedicated test batches without affecting customers | Experiments run on live operations, risking customer impact |
+| **Replication** | Straightforward — repeat same machine run | Difficult — no two customer interactions are identical |
+| **Common DoE Designs** | Full factorial, fractional factorial, RSM | Factorial designs adapted for human and process factors |
+| **Example** | Optimizing cutting speed to reduce roughness | Reducing call resolution time in a support centre |
+
+**Conclusion:** Both industries benefit from DoE. However, service industry experimentation requires **greater flexibility, better response proxies, and stronger change management** compared to the more controlled environment of manufacturing.
+
+---
+
+## Module 6 — DOE in Six Sigma (CO6)
+
+---
+
+<LongQuestion>
+### Q26 / Q27 / Q28 / Q30. Explain Six Sigma and DMAIC methodology. / Discuss the role of DOE in Six Sigma projects. / Explain how DOE supports different phases of DMAIC. / Explain how DOE enables data-driven decision-making in process improvement.
+</LongQuestion>
+
+**(10 Marks)**
+
+#### Part A — What is Six Sigma?
+
+<Highlight color="green">**Six Sigma**</Highlight> is a **data-driven quality improvement approach** focused on reducing defects and process variation. The target is to achieve no more than **3.4 defects per million opportunities (DPMO)**, representing a near-perfect process.
+
+Six Sigma was popularized by Motorola and GE and is used across manufacturing, healthcare, finance, and service industries.
+
+---
+
+#### Part B — DMAIC Methodology
+
+The standard Six Sigma improvement framework is **DMAIC**:
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Target className="size-6" />
+    <span className="text-sm font-medium">Define</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <BarChart2 className="size-6" />
+    <span className="text-sm font-medium">Measure</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <LineChart className="size-6" />
+    <span className="text-sm font-medium">Analyze</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Wrench className="size-6" />
+    <span className="text-sm font-medium">Improve</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <CheckCircle2 className="size-6" />
+    <span className="text-sm font-medium">Control</span>
+  </div>
+</div>
+
+| Phase | Purpose | Key Activities |
+|---|---|---|
+| **Define** | Clarify the problem and scope | Project charter, customer CTQ requirements, process map |
+| **Measure** | Collect baseline data | Measurement system analysis, process capability (Cp, Cpk) |
+| **Analyze** | Find root causes | Fishbone diagrams, regression, hypothesis testing |
+| **Improve** | Develop and test solutions | **DOE is most heavily used here** |
+| **Control** | Sustain the improvements | Control charts, SOPs, poka-yoke (mistake-proofing) |
+
+---
+
+#### Part C — Role and Specific Stages Where DOE is Most Useful
+
+**1. Analyze Phase:**
+DoE **quantifies which factors significantly affect the response**. It separates the vital few root causes from the trivial many, giving the team clear targets.
+
+**2. Improve Phase (Highest Use):**
+DoE finds the **optimal combination of factor settings** that minimizes defects or maximizes performance. Factorial and fractional factorial designs are run at this stage to discover and confirm the best operating conditions.
+
+**3. Control Phase:**
+The optimum factor settings found through DoE become the new **standard operating procedure (SOP)**. Control charts monitor that these settings are maintained over time.
+
+---
+
+#### Part D — How DOE Enables Data-Driven Decision Making
+
+Without DoE, process improvement relies on experience, trial-and-error, or OVAT experiments — all of which miss interactions and are unreliable.
+
+With DoE integrated into Six Sigma:
+- Decisions are based on **statistically confirmed effects**, not intuition.
+- **Interactions between factors** are discovered, enabling true optimization.
+- Results are **reproducible and documentable**, supporting long-term process control.
+- Teams move faster from problem identification to verified solution with fewer wasted resources.
+
+**Conclusion:**
+
+Six Sigma provides the **overall improvement framework**, while DoE provides the **experimental engine** for reliable, efficient, and data-backed optimization. Together, they are one of the most powerful combinations in industrial process improvement.
+
+---
+
+<LongQuestion>
+### Q29. Case Study: Application of DOE to optimize weld strength or process performance.
+</LongQuestion>
+
+**(10 Marks)**
+
+#### Case Study: Optimizing Weld Strength Using a 2³ Full Factorial Design
+
+**Problem:**
+A fabrication company was producing welded steel joints with inconsistent tensile strength. Some joints passed quality inspection and others failed, leading to high rework costs. A DoE study was launched as part of a Six Sigma Improve phase.
+
+---
+
+**Factors Selected:**
+
+| Factor | Variable | Low (−) | High (+) |
+|--------|----------|---------|---------|
+| A | Welding Current | 150 A | 200 A |
+| B | Welding Speed | 20 cm/min | 30 cm/min |
+| C | Wire Feed Rate | 5 m/min | 8 m/min |
+
+**Response:** Tensile strength of weld joint (MPa)
+
+---
+
+**Design Used:** $2^3$ full factorial design — **8 runs**, all combinations covered.
+
+**Design Matrix:**
+
+<Callout type="info" title="Standard Alternating Pattern">
+- **Column A:** Changes every 1 row (`− + − + − + − +`)
+- **Column B:** Changes every 2 rows (`− − + + − − + +`)
+- **Column C:** Changes every 4 rows (`− − − − + + + +`)
+</Callout>
+
+| Run | A (Current) | B (Speed) | C (Wire Feed) | Strength (MPa) |
+|-----|-------------|-----------|---------------|----------------|
+| 1   | −           | −         | −             | y₁             |
+| 2   | +           | −         | −             | y₂             |
+| 3   | −           | +         | −             | y₃             |
+| 4   | +           | +         | −             | y₄             |
+| 5   | −           | −         | +             | y₅             |
+| 6   | +           | −         | +             | y₆             |
+| 7   | −           | +         | +             | y₇             |
+| 8   | +           | +         | +             | y₈             |
+
+*(Runs conducted in random order to eliminate time-based bias)*
+
+---
+
+**Analysis:**
+
+ANOVA and a Pareto chart of effects revealed:
+- **Factor A (Welding Current):** Largest main effect — higher current significantly increased weld strength.
+- **Factor C (Wire Feed Rate):** Significant positive effect — higher feed improved fusion quality.
+- **Interaction A×C:** Strong **synergistic interaction** — high current combined with high wire feed rate produced exceptionally strong welds, far better than either factor alone.
+- **Factor B (Welding Speed):** Not statistically significant at the tested levels.
+
+---
+
+**Optimal Settings Found:**
+- Current: **High (+)** — 200 A
+- Wire Feed Rate: **High (+)** — 8 m/min
+- Speed: Set at Low (−) for convenience (not significant)
+
+---
+
+**Results and Benefits:**
+
+<div className="flex gap-6 my-4 justify-left flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <TrendingUp className="size-6" />
+    <span className="text-sm font-medium">Strength +22%</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <RotateCw className="size-6" />
+    <span className="text-sm font-medium">Rework −65%</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <CheckCircle2 className="size-6" />
+    <span className="text-sm font-medium">Process Standardized</span>
+  </div>
+</div>
+
+- Average weld strength increased by **~22%** after implementing DoE-recommended settings.
+- Rework and rejection rate dropped by over **65%**, significantly reducing material and labour costs.
+- The new welding parameters were documented as a **Standard Operating Procedure** and monitored using control charts (Control phase of DMAIC).
+- The interaction A×C would have been **completely invisible** to a one-factor-at-a-time approach, confirming the value of structured DoE.
+
+This case study demonstrates how DoE, applied within the Six Sigma DMAIC framework, delivers measurable quality improvement through data-driven, systematic experimentation.
