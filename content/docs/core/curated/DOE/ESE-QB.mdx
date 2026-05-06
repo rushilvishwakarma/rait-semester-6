@@ -20,7 +20,7 @@ import {
 ---
 
 <LongQuestion>
-### Q1. Explain why the One-Variable-at-a-Time (OVAT) approach is inefficient in experimentation.
+### Q1. Explain why the One-Variable-at-a-Time (OVAT) approach is inefficient in experimentation. <QuestionDot color="orange" text="Important" />
 </LongQuestion>
 
 **(5 Marks)**
@@ -63,7 +63,7 @@ In contrast, DoE studies **all factors simultaneously** in a structured way, fin
 ---
 
 <LongQuestion>
-### Q2. Define randomization, replication, and blocking with suitable examples.
+### Q2. Define randomization, replication, and blocking with suitable examples. <QuestionDot color="orange" text="Important" />
 </LongQuestion>
 
 **(5 Marks)**
@@ -188,7 +188,7 @@ Therefore, statistical thinking ensures that industrial experiments are **object
 ---
 
 <LongQuestion>
-### Q6. Differentiate between main effects and interaction effects.
+### Q6. Differentiate between main effects and interaction effects. <QuestionDot color="orange" text="Important" />
 </LongQuestion>
 
 **(5 Marks)**
@@ -317,7 +317,7 @@ Successful DoE needs **statistical competence**, **technical readiness**, and **
 ---
 
 <LongQuestion>
-### Q9 / Q10. Explain the systematic methodology for conducting a DOE study. / Describe analytical tools used in DOE (Pareto plots, interaction plots, normal probability plots). <QuestionDot color="red" text="10 Marks" />
+### Q9 / Q10. Explain the systematic methodology for conducting a DOE study. / Describe analytical tools used in DOE (Pareto plots, interaction plots, normal probability plots). <QuestionDot color="orange" text="Important" /> <QuestionDot color="red" text="10 Marks" />
 </LongQuestion>
 
 **(10 Marks)**
@@ -393,7 +393,7 @@ These tools together give a complete picture of which factors to control and at 
 ---
 
 <LongQuestion>
-### Q11 / Q12. Construct a 2² full factorial design and estimate main and interaction effects. / Construct a 2³ full factorial design and explain estimation of main effects.
+### Q11 / Q12. Construct a 2² full factorial design and estimate main and interaction effects. / Construct a 2³ full factorial design and explain estimation of main effects. <QuestionDot color="orange" text="Important" />
 </LongQuestion>
 
 **(5 or 10 Marks)**
@@ -973,7 +973,7 @@ Despite these challenges, DoE remains a powerful tool for service optimization w
 ---
 
 <LongQuestion>
-### Q26 / Q27 / Q28 / Q30. Explain Six Sigma and DMAIC methodology. / Discuss the role of DOE in Six Sigma projects. / Explain how DOE supports different phases of DMAIC. / Explain how DOE enables data-driven decision-making in process improvement. <QuestionDot color="red" text="10 Marks" />
+### Q26 / Q27 / Q28 / Q30. Explain Six Sigma and DMAIC methodology. / Discuss the role of DOE in Six Sigma projects. / Explain how DOE supports different phases of DMAIC. / Explain how DOE enables data-driven decision-making in process improvement. <QuestionDot color="orange" text="Important" /> <QuestionDot color="red" text="10 Marks" />
 </LongQuestion>
 
 **(10 Marks)**
@@ -1142,3 +1142,82 @@ ANOVA and a Pareto chart of effects revealed:
 - The interaction A×C would have been **completely invisible** to a one-factor-at-a-time approach, confirming the value of structured DoE.
 
 This case study demonstrates how DoE, applied within the Six Sigma DMAIC framework, delivers measurable quality improvement through data-driven, systematic experimentation.
+
+---
+
+Previously asked Important Concepts/Questions
+
+---
+
+<LongQuestion>
+### Explain the importance of selecting quality characteristics for industrial experiments <QuestionDot color="orange" text="Important" /> <QuestionDot color="green" text="Asked in IA1" /> <QuestionDot color="blue" text="Asked in MSE" />
+</LongQuestion>
+
+**(5 Marks)**
+
+Selecting appropriate quality characteristics is a critical step in industrial experiments because it determines **what aspect of performance is being measured and improved**. Quality characteristics represent the response variables that reflect product performance, reliability, or customer satisfaction.
+
+If incorrect or irrelevant quality characteristics are chosen, the experiment may lead to misleading conclusions even if the design is statistically correct. Proper selection ensures that experimental results are **meaningful and aligned with business objectives** such as cost reduction, quality improvement, or process efficiency.
+
+Quality characteristics also help in evaluating the effect of input factors accurately and in comparing different process conditions. In manufacturing, characteristics such as strength, surface finish, dimensional accuracy, and defect rate are commonly used.
+
+Choosing the right quality characteristic ensures the experiment produces actionable conclusions.
+
+**Selection guidelines:**
+1. **Aligned to objective:** Must reflect the problem being solved.
+2. **Measurable and repeatable:** Data should be accurate and consistent.
+3. **Sensitive to factors:** Should change when factors change.
+4. **Business relevance:** Must impact quality, cost, time, or customer satisfaction.
+
+---
+
+<LongQuestion>
+### Explain geometric and non-geometric Plackett-Burman screening designs. For a case with many factors and limited runs, why is a P-B design useful? <QuestionDot color="orange" text="Important" /> <QuestionDot color="green" text="Asked in IA2" />
+</LongQuestion>
+
+**(10 Marks)**
+
+Plackett-Burman (P-B) designs are two-level screening designs used to identify important factors quickly when many factors are present.
+
+**Geometric view:** Regular $2^k$ factorial designs map to cube/hypercube geometry. A few small P-B cases may look similar, but this interpretation is limited.
+
+**Non-geometric view (practical P-B):** Most P-B designs are built from orthogonal/Hadamard-type matrices with run sizes like 8, 12, 16, 20 (multiples of 4), not necessarily powers of 2. They estimate main effects efficiently while assuming interactions are negligible during screening.
+
+**Why P-B is useful with many factors and limited runs:**
+1. **High efficiency:** Up to $N-1$ factors in $N$ runs.
+2. **Lower cost/time:** Major reduction in materials and machine time.
+3. **Fast prioritization:** Quickly separates critical factors from unimportant ones.
+4. **Better follow-up:** After screening, detailed optimization can focus only on significant factors.
+
+**Example:** 11 factors need 2048 runs in full $2^{11}$ design, but a 12-run P-B can screen them initially.
+
+---
+
+<LongQuestion>
+### For the successful application of an industrial designed experiment, we generally require the following skills <QuestionDot color="green" text="Asked in IA1" />
+</LongQuestion>
+
+**(5 Marks)**
+
+The successful application of a designed experiment in an <Highlight color="green">industrial environment</Highlight> requires a combination of **technical, statistical, and managerial skills**. One essential skill is <Highlight color="pink">**process knowledge**</Highlight>, which helps in understanding how the system works and identifying important factors that influence the response.
+
+Another important requirement is <Highlight color="pink">**statistical knowledge**</Highlight>, including understanding of experimental designs, data analysis, and interpretation of results. Engineers must also possess <Highlight color="pink">**problem-solving skills**</Highlight> to 
+
+<div className="flex gap-6 my-4 justify-lefts flex-wrap">
+  <div className="flex flex-col items-center gap-2">
+    <Thermometer className="size-6" />
+    <span className="text-sm font-medium">Clearly define Objectives</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <CircleGauge className="size-6" />
+    <span className="text-sm font-medium">Select appropriate responses</span>
+  </div>
+  <div className="flex flex-col items-center gap-2">
+    <Snail className="size-6" />
+    <span className="text-sm font-medium">Interpret outcomes</span>
+  </div>
+</div>
+
+- <Highlight color="green">Effective **planning and organizational skills**</Highlight> are needed to design experiments that minimize cost and disruption to production. In addition, **communication and teamwork skills** are essential, as DoE often involves collaboration between engineers, operators, and management.
+
+- Therefore, a balanced combination of technical expertise, statistical understanding, and coordination skills is required for successful industrial experiments.
