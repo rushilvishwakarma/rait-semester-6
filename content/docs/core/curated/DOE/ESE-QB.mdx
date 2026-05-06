@@ -27,15 +27,15 @@ import {
 
 **(5 Marks)**
 
-The <Highlight color="pink">**One-Variable-at-a-Time (OVAT)**</Highlight> approach means changing **one factor at a time** while keeping all others fixed, and repeating this for every factor separately.
+The <Highlight color="pink">**One-Variable-at-a-Time (OVAT)**</Highlight> approach means changing **one factor at a time** while keeping all others fixed, and repeating this separately for every factor.
 
 **Why it is inefficient:**
 
-The first major problem is that OVAT **misses interactions between factors**. In real processes, two factors often influence each other. OVAT can never detect this because it never tests factors together simultaneously.
+**Problem 1 - Misses Interactions:** In real processes, two factors often influence each other. OVAT can never detect this because it never tests factors **together** simultaneously. Missing an interaction means the findings are incomplete and potentially wrong.
 
-The second problem is that OVAT **requires far more runs** than necessary. For example, studying 3 factors at 2 levels with OVAT needs many separate experiments, whereas a 2³ full factorial design covers all combinations in just **8 structured runs**.
+**Problem 2 - More Runs Wasted:** OVAT requires far more experiments than necessary. For example, studying 3 factors at 2 levels with OVAT requires many separate test series, whereas a 2³ full factorial design covers **all combinations in just 8 structured runs**.
 
-The third problem is that OVAT **cannot find the true optimum**. Since factor interactions are ignored, the best combination of factor settings is never discovered. The result found by OVAT may seem good but is rarely the global optimum.
+**Problem 3 - Cannot Find the True Optimum:** Since interactions are ignored, the best combination of factor settings is never discovered. The result found by OVAT may look reasonable but is rarely the **global optimum**.
 
 <div className="flex gap-6 my-4 justify-left flex-wrap">
   <div className="flex flex-col items-center gap-2">
@@ -52,6 +52,14 @@ The third problem is that OVAT **cannot find the true optimum**. Since factor in
   </div>
 </div>
 
+**Quick OVAT vs DoE Summary (Exam Points):**
+
+- **Factor handling:** OVAT changes one factor at a time; DoE changes factors together in a planned pattern.
+- **Interaction detection:** OVAT cannot detect interactions; DoE identifies and quantifies interactions.
+- **Experimental effort:** OVAT usually needs many runs; DoE gives maximum information with fewer structured runs.
+- **Optimization quality:** OVAT often gives a local best setting; DoE is more likely to find the true optimum.
+- **Result reliability:** OVAT conclusions are weaker; DoE conclusions are statistically stronger and more reproducible.
+
 In contrast, DoE studies **all factors simultaneously** in a structured way, finds interactions, reaches the true optimum, and does it in far fewer runs. This is why OVAT is considered inefficient and DoE is preferred in industrial experimentation.
 
 ---
@@ -64,9 +72,9 @@ In contrast, DoE studies **all factors simultaneously** in a structured way, fin
 
 The basic principles of Design of Experiments (DoE) ensure that experiments are **efficient**, **reliable**, and **scientifically valid**.
 
-The first principle is <Highlight color="green">**Randomization**</Highlight>. This means doing experiments in a **random order** so that outside factors do not affect the results. For example, running tests randomly reduces problems caused by machine wear or changes in the environment over time.
+The first principle is <Highlight color="green">**Randomization**</Highlight>. This means doing experiments in a **random order** so that outside factors do not affect the results. For example, running tests randomly reduces problems caused by machine wear or changes in the environment over time. Without randomization, a factor that happens to be tested last may appear worse simply because the machine had warmed up.
 
-The second principle is <Highlight color="green">**Replication**</Highlight>. This means **repeating the same experiment** several times. Repeating trials helps us see how much the results vary and makes findings more accurate. For example, testing the strength of a product many times under the same conditions shows how consistent it is.
+The second principle is <Highlight color="green">**Replication**</Highlight>. This means **repeating the same experiment** several times. Repeating trials helps us see how much the results vary and makes findings more accurate. For example, testing the strength of a product many times under the same conditions shows how consistent it is and allows proper error estimation.
 
 The third principle is <Highlight color="green">**Blocking**</Highlight>. This involves **grouping similar experimental units** together to remove the effect of known factors that are not being studied. For example, grouping experiments by machine or work shift helps focus on the main factors being tested and prevents nuisance variation from distorting results.
 
@@ -82,6 +90,8 @@ These three principles together improve the **reliability and validity** of expe
 
 <Highlight color="pink">**Degrees of Freedom (DOF)**</Highlight> are the **number of independent pieces of information** available to estimate effects or error. In DoE, they indicate how many factor effects or interactions can be estimated independently.
 
+**General Rule:** DOF for a factor = (Number of levels of that factor) - 1.
+
 **For a two-factor, two-level (2²) design:**
 - Factors: A and B, each at 2 levels
 - Total runs: $2 \times 2 = 4$
@@ -92,7 +102,14 @@ These three principles together improve the **reliability and validity** of expe
 
 So, $3 = 1 + 1 + 1$.
 
-With no replication, all degrees of freedom are used up by the main effects and the interaction, leaving **no pure error DOF**. Adding replication creates extra DOF which allows proper error estimation and significance testing.
+**For a 2³ design (3 factors, 8 runs):**
+- Total DOF = $8 - 1 = 7$
+- DOF for A, B, C = 1 each (total 3)
+- DOF for AB, AC, BC = 1 each (total 3)
+- DOF for ABC = 1
+- Total = $3 + 3 + 1 = 7$ ✓
+
+With no replication, all degrees of freedom are used up by effects and interactions, leaving **no pure error DOF**. Adding replication creates extra DOF which allows proper error estimation and significance testing.
 
 In general, more DOF means more information available, leading to more reliable experimental conclusions.
 
@@ -125,16 +142,16 @@ Confounding is a common trade-off. Engineers **accept it intentionally** when th
   </div>
 </div>
 
-- **Resolution III:** Main effects are mixed with 2-factor interactions. (Use with caution.)
+- **Resolution III:** Main effects are mixed with 2-factor interactions. Use with caution - only good for initial screening.
 - **Resolution IV:** Main effects are clear, but 2-factor interactions are mixed with each other.
-- **Resolution V:** Main effects and 2-factor interactions are all completely clear and unmixed.
+- **Resolution V:** Main effects and 2-factor interactions are all completely clear and unmixed. Best choice when resources allow.
 
 **Example:**
 In a fractional design, the estimated effect of Factor A may actually represent:
 
 `Estimated Effect = (True Effect of A) + (Interaction of B × C)`
 
-If the B×C interaction is strong, it inflates the estimate for A. An engineer who ignores confounding may mistakenly change Factor A in production and achieve nothing useful. This is why understanding confounding is essential before making process decisions.
+If the B×C interaction is strong, it inflates the estimate for A. An engineer who ignores confounding may mistakenly change Factor A in production and achieve nothing useful. This is why understanding confounding is essential before making any process decisions.
 
 ---
 
@@ -148,12 +165,19 @@ If the B×C interaction is strong, it inflates the estimate for A. An engineer w
 
 In industrial processes, outputs always vary. Some variation comes from the factors being studied (signal), and some comes from random noise. Statistical thinking helps engineers **separate real effects from random noise**, so that only true cause-effect relationships are acted upon.
 
-Key roles of statistical thinking in DoE:
+**Key roles of statistical thinking in DoE:**
 
-- **Planning:** Helps choose the right design, number of runs, and factor levels to get reliable answers efficiently.
-- **Analysis:** Uses tools like ANOVA, regression, and probability plots to identify significant factors from data.
-- **Decision-making:** Supports conclusions with calculated confidence levels rather than gut feeling.
+- **Planning:** Helps choose the right design, number of runs, and factor levels to get reliable answers efficiently without wasting resources.
+- **Analysis:** Uses tools like ANOVA, regression, and probability plots to objectively identify significant factors from data.
+- **Decision-making:** Supports conclusions with calculated confidence levels (e.g., 95% confidence) rather than gut feeling.
 - **Error estimation:** Quantifies how much variability exists in the process so that results are not over-interpreted.
+- **Model Building:** Statistical thinking enables building a **prediction equation** (regression model) that links factor settings to the expected response value.
+
+**Statistical, Technical, and Sociological Dimensions:**
+DoE success depends on all three:
+- **Statistical dimension:** Correct design selection and valid analysis methods.
+- **Technical dimension:** Deep process knowledge to choose meaningful factors and levels.
+- **Sociological dimension:** Team cooperation, communication, and management support to implement findings.
 
 **Example:** In a plastic moulding process, statistical analysis of a factorial experiment shows that temperature has a p-value of 0.02 (significant) while cooling speed has a p-value of 0.45 (not significant). Without statistics, both factors might have been changed unnecessarily.
 
