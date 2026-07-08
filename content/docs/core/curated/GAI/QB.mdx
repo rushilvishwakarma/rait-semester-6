@@ -1,0 +1,441 @@
+---
+title: Question Bank - Generative AI
+---
+
+import { Highlight } from '@/components/highlight';
+import taxonomySvg from './generative_models_taxonomy.svg';
+
+# Module 1: Generative Modeling
+
+### Q1. (BT2-5) Generative vs. Discriminative Modeling
+
+The two paradigms differ in <Highlight color="blue">**what they model**</Highlight> and <Highlight color="blue">**what they can do**</Highlight> with that model.
+
+| Aspect | Discriminative | Generative |
+|---|---|---|
+| Models | $p(y \mid x)$ directly | $p(x)$ or joint $p(x,y)$ |
+| Goal | Learn a <Highlight color="red">**decision boundary**</Highlight> | Learn the <Highlight color="green">**data-generating process**</Highlight> |
+| Can sample new data? | No | Yes — $\hat{x} \sim p_{model}(x)$ |
+| Training data | Requires labeled pairs $(x,y)$ | Often unlabeled $x$ alone |
+| Objective | Minimize cross-entropy of $p(y\mid x)$ | Maximize $\sum_i \log p_\theta(x_i)$ (MLE) |
+| Examples | Logistic regression, SVM, CNN classifiers | Naive Bayes, GMM, VAE, GAN |
+
+A <Highlight color="blue">**discriminative model**</Highlight> parameterizes only the conditional $p(y\mid x)$ and never has to account for how $x$ itself arose. It spends all its capacity on <Highlight color="orange">**separating classes**</Highlight>, so it is simpler to train but cannot generate new data.
+
+A <Highlight color="blue">**generative model**</Highlight> must explain the full data manifold $p(x)$. This is a harder, higher-dimensional estimation problem, but it gains <Highlight color="green">**generation, imputation, and anomaly detection**</Highlight> as a byproduct.
+
+The two are linked through Bayes' rule:
+
+$$
+p(y \mid x) = \frac{p(x \mid y)\,p(y)}{p(x)}
+$$
+
+Thus a generative model can be turned into a classifier, but a discriminative model cannot generate data.
+
+---
+
+### Q2. (BT4-10) Structural Taxonomy of Generative Models
+
+**What is a Generative Model?** A <Highlight color="blue">**generative model**</Highlight> learns the pattern of training data so well that it can create new data which looks similar to the original data. For example, after training on many cat images, it can generate a new cat image that never existed before.
+
+To understand generative models properly, we classify them into a tree structure based on <Highlight>**how they handle the probability density function $p(x)$**</Highlight>. This is the main criterion used for classification.
+
+#### Classification Tree
+
+<div className="mx-auto max-w-2xl my-4">
+  <img src={taxonomySvg.src} alt="Taxonomy of generative models" className="w-full h-full block" />
+</div>
+
+#### 1. Explicit Density Models
+
+Here the model writes a <Highlight color="green">**clear mathematical formula for $p(x)$**</Highlight> and directly maximizes the likelihood of the training data.
+
+**(a) Tractable Density Models** — the exact value of $p(x)$ can be calculated without any approximation.
+
+- <Highlight color="orange">**PixelRNN / PixelCNN**</Highlight> — generates an image one pixel at a time, where each pixel's probability depends on all previous pixels (chain rule). Every term is computable, so the density is fully tractable, but generation is slow because pixels are produced one by one.
+- <Highlight color="orange">**Normalizing Flows**</Highlight> — use invertible functions so density is computed exactly through the change-of-variable formula.
+
+**(b) Approximate Density Models** — exact $p(x)$ is too hard, so the model uses an approximation.
+
+- <Highlight color="orange">**Variational Autoencoder (VAE)**</Highlight> — instead of the true $p(x)$, it maximizes a lower bound called the <Highlight>**ELBO (Evidence Lower Bound)**</Highlight>.
+- <Highlight color="orange">**Boltzmann Machine**</Highlight> — uses Markov Chain Monte Carlo (MCMC) sampling to approximate the density, since the exact formula is intractable.
+
+#### 2. Implicit Density Models
+
+Here the model writes <Highlight color="red">**no formula for $p(x)$ at all**</Highlight>. It only learns how to produce samples that look real.
+
+**(a) Direct Sampling** — a sample is generated in a single step.
+
+- <Highlight color="orange">**GAN (Generative Adversarial Network)**</Highlight> — a Generator maps random noise directly to a fake image in one forward pass. A Discriminator only gives feedback on how real the output looks; no probability is ever computed.
+
+**(b) Markov Chain based** — a sample is generated gradually, step by step.
+
+- <Highlight color="orange">**GSN (Generative Stochastic Network)**</Highlight> — refines noise into a realistic sample through several small stochastic steps.
+
+#### Conclusion
+
+This classification captures the core trade-off in generative modeling:
+
+- <Highlight color="green">**Tractable models**</Highlight> → exact likelihood but slow.
+- <Highlight color="orange">**Approximate models**</Highlight> → faster but less accurate.
+- <Highlight color="blue">**Implicit models (GAN)**</Highlight> → skip likelihood entirely and focus only on realistic samples, which is why GANs give the best image quality even though they never compute $p(x)$.
+
+---
+
+<LongQuestion>
+### Q3. (BT5-10) MLE for Bounding Box Distribution
+
+We have a 2D box defined by bottom-left corner $(\theta_1, \theta_2)$ and top-right corner $(\theta_3, \theta_4)$. Training data: $x_1=(2,3)$, $x_2=(5,7)$, $x_3=(4,6)$.
+
+- (a) Find $\theta^{*}$ using MLE.
+- (b) Write the Negative Log-Likelihood (NLL) objective function.
+</LongQuestion>
+
+#### Part (a): Finding θ*
+
+**Step 1 — Write the probability density function (PDF).** Assuming points are uniformly distributed inside the box:
+
+$$
+p_\theta(x) = \begin{cases} \dfrac{1}{(\theta_3-\theta_1)(\theta_4-\theta_2)} & \text{if } (x^{(1)}, x^{(2)}) \text{ lies inside the box} \\[6pt] 0 & \text{otherwise}\end{cases}
+$$
+
+Here $(\theta_3-\theta_1)(\theta_4-\theta_2)$ is simply the <Highlight color="blue">**Area of the rectangle**</Highlight>.
+
+**Step 2 — Write the likelihood for all 3 points.** Since the points are independent, the joint likelihood is the product of individual densities:
+
+$$
+L(\theta) = p_\theta(x_1)\cdot p_\theta(x_2)\cdot p_\theta(x_3) = \left(\frac{1}{\text{Area}}\right)^{3}
+$$
+
+**Step 3 — Understand what maximizes this likelihood.** Area is in the denominator, so:
+
+- <Highlight color="green">**Smaller Area → Larger Likelihood**</Highlight>
+- <Highlight color="red">**Larger Area → Smaller Likelihood**</Highlight>
+
+The model therefore wants the smallest possible box. But there is a constraint: <Highlight color="red">**if the box misses even one data point, the likelihood becomes exactly 0**</Highlight> (that point would get zero probability). Hence the MLE solution:
+
+> **Choose the smallest possible box that still contains every training point.**
+
+**Step 4 — Calculate θ* from the data.** Take the minimum and maximum of each coordinate:
+
+- $\theta_1$ (left) $= \min(2,5,4) = \mathbf{2}$
+- $\theta_2$ (bottom) $= \min(3,7,6) = \mathbf{3}$
+- $\theta_3$ (right) $= \max(2,5,4) = \mathbf{5}$
+- $\theta_4$ (top) $= \max(3,7,6) = \mathbf{7}$
+
+<Highlight color="green">**Final Answer: $\theta^{*} = (2, 3, 5, 7)$**</Highlight>
+
+This box exactly touches the extreme points $x_1=(2,3)$ and $x_2=(5,7)$, while $x_3=(4,6)$ lies safely inside. It is the tightest box possible, giving maximum likelihood.
+
+#### Part (b): Negative Log-Likelihood (NLL) Objective
+
+**Step 1 — Take the log of the likelihood:**
+
+$$
+\log L(\theta) = -N\log\big[(\theta_3-\theta_1)(\theta_4-\theta_2)\big]
+$$
+
+where $N$ = number of data points = 3.
+
+**Step 2 — Convert to NLL** (neural networks minimize loss, not maximize likelihood):
+
+$$
+NLL(\theta) = -\log L(\theta) = N\log\big[(\theta_3-\theta_1)(\theta_4-\theta_2)\big]
+$$
+
+**Step 3 — Add the constraint** that every training point stays inside the box:
+
+$$
+\theta_1 \le x_i^{(1)} \le \theta_3 \quad \text{and} \quad \theta_2 \le x_i^{(2)} \le \theta_4 \quad \text{for all } i
+$$
+
+**Final Objective:**
+
+$$
+\min_{\theta}\; N\log\big[(\theta_3-\theta_1)(\theta_4-\theta_2)\big] \quad \text{subject to all points lying inside the box}
+$$
+
+**In simple words:** the network shrinks the box as much as possible to minimize loss, but is not allowed to shrink it so far that any training point falls outside.
+
+---
+
+### Q4. (BT5-05) Joint Log-Likelihood and Intractability
+
+**(a) Formula for Joint Log-Likelihood**
+
+Given a dataset $X = \{x_1, x_2, \dots, x_N\}$ of independent observations and parameters $\theta$, the total probability is a <Highlight color="blue">**product**</Highlight> of the individual probabilities:
+
+$$
+L(\theta \mid X) = \prod_{i=1}^{N} p_\theta(x_i)
+$$
+
+Taking the log converts the product into a <Highlight color="green">**sum**</Highlight>, which is easier to optimize:
+
+$$
+\ell(\theta \mid X) = \log L(\theta \mid X) = \sum_{i=1}^{N} \log p_\theta(x_i)
+$$
+
+This is the standard objective for training almost all generative models by <Highlight>**Maximum Likelihood Estimation**</Highlight>.
+
+**(b) Why computing $p_\theta(x)$ becomes intractable in high dimensions**
+
+- Most models must be <Highlight color="orange">**normalized**</Highlight> so their total probability sums to 1, requiring a normalizing constant $Z(\theta)$:
+
+$$
+p_\theta(x) = \frac{\tilde{p}_\theta(x)}{Z(\theta)}, \qquad Z(\theta) = \int \tilde{p}_\theta(x)\, dx
+$$
+
+- $Z(\theta)$ requires integrating over <Highlight color="red">**every possible value $x$ can take**</Highlight>.
+- In 1D or 2D this is easy, but images have **thousands of dimensions** (one per pixel).
+- As dimensions grow, the number of combinations explodes exponentially — the <Highlight color="red">**curse of dimensionality**</Highlight>.
+- Computing $Z(\theta)$ exactly then becomes practically impossible.
+
+This is exactly why models like <Highlight color="blue">**GANs**</Highlight> are designed to avoid computing $p(x)$ altogether and instead learn to generate realistic samples directly.
+
+---
+
+### Q5. (BT2-05) Framework and Desirable Properties of a Generative Model
+
+**Core Framework:**
+
+- Real data (images, text, audio) comes from an unknown <Highlight color="blue">**true distribution $p_{data}$**</Highlight>. We only have samples from it, not the formula.
+- A generative model learns another distribution <Highlight color="blue">**$p_{model}$**</Highlight> from the training data.
+- The goal of training is to make <Highlight color="green">**$p_{model}$ as close as possible to $p_{data}$**</Highlight>, so samples from $p_{model}$ look just as realistic as real data.
+- This is achieved by adjusting parameters $\theta$ using Maximum Likelihood Estimation or similar methods.
+
+**Three Desirable Properties:**
+
+1. <Highlight color="cyan">**Density Estimation:**</Highlight> the model should estimate the probability $p(x)$ for any data point $x$, telling us how likely that point is.
+
+2. <Highlight color="cyan">**Sampling (Generation):**</Highlight> the model should generate brand-new data points that were not in the training set but still look realistic — e.g., a new human-like face.
+
+3. <Highlight color="cyan">**Unsupervised Feature Learning:**</Highlight> while modeling the data, the network automatically discovers useful hidden features without any labels. These features can be reused for tasks like classification.
+
+**In short:** a good generative model can estimate probability, generate new realistic data, and learn useful features — all without needing labeled data.
+
+---
+
+### Q6. (BT3-05) Representation Learning
+
+**Definition:** <Highlight color="blue">**Representation learning**</Highlight> means the model <Highlight color="green">**automatically learns the best features by itself**</Highlight> directly from raw data during training, instead of a human manually deciding which features matter (edges, shapes, colors).
+
+**Why it is important:**
+
+- In traditional machine learning, experts had to manually design features (<Highlight color="orange">**feature engineering**</Highlight>), which was slow and required domain knowledge.
+- Deep learning removes this need by learning features automatically, <Highlight>**layer by layer**</Highlight>, straight from raw data such as pixels.
+
+#### Example 1: CNN on Face Images
+
+When a Convolutional Neural Network is trained on many face images:
+
+- The <Highlight color="cyan">**first layer**</Highlight> learns simple features like edges and lines.
+- The <Highlight color="cyan">**middle layers**</Highlight> combine edges into shapes like eyes, nose, and mouth.
+- The <Highlight color="cyan">**deeper layers**</Highlight> combine shapes to recognize a full face or a specific identity.
+
+The network builds its own representation of a face, layer by layer, without anyone telling it what an eye or nose looks like.
+
+#### Example 2: Autoencoder
+
+An autoencoder compresses an image into a small vector (the <Highlight color="green">**latent representation**</Highlight>) and then reconstructs the image from it. This compact vector captures the most important information of the image in a learned form.
+
+**Conclusion:** representation learning lets deep models automatically discover meaningful patterns in data, which is one of the biggest reasons deep learning performs so well on images, speech, and text.
+
+---
+
+# Module 2: Generative Adversarial Networks (GANs)
+
+### Q7. (BT3-10) Generator & Discriminator: Inputs, Outputs, Layers, Activation Functions
+
+**Basic Idea of a GAN:** a GAN has two neural networks that compete in a game:
+
+- The <Highlight color="blue">**Generator (G)**</Highlight> tries to create fake data that looks real.
+- The <Highlight color="blue">**Discriminator (D)**</Highlight> tries to correctly detect whether data is real or fake.
+
+Through this competition, the Generator gradually becomes very good at producing realistic data.
+
+#### Inputs and Outputs
+
+| Feature | Generator (G) | Discriminator (D) |
+|---|---|---|
+| **Input** | Random noise vector $z$ (e.g., a 100-dim vector from a normal/uniform distribution) | An image — either real (from the dataset) or fake (from G) |
+| **Output** | A synthetic image of the same size as real images | A single number in $[0,1]$ = probability the input is real |
+| **Goal** | Fool D into thinking fake images are real | Correctly classify images as real or fake |
+
+#### Layers of the Generator (typical DCGAN)
+
+1. <Highlight color="cyan">**Dense (fully connected)**</Highlight> layer converts the small noise vector into a small feature map.
+2. **Reshape** into a small 3D tensor (a tiny image with many channels).
+3. Several <Highlight color="cyan">**Transposed Convolution**</Highlight> layers gradually upsample it into a full-sized image.
+4. <Highlight color="orange">**Batch Normalization**</Highlight> after each layer to stabilize training.
+5. <Highlight color="green">**ReLU**</Highlight> activation in all hidden layers.
+6. Final output layer uses <Highlight color="green">**Tanh**</Highlight>.
+
+#### Layers of the Discriminator (typical DCGAN)
+
+1. Several <Highlight color="cyan">**Convolution**</Highlight> layers gradually downsample the input image.
+2. <Highlight color="orange">**Batch Normalization**</Highlight> after most layers (except the first).
+3. <Highlight color="green">**LeakyReLU**</Highlight> activation in all hidden layers (instead of plain ReLU).
+4. **Flatten** the final feature map into a vector.
+5. **Dense** layer to produce a single output value.
+6. Final output layer uses <Highlight color="green">**Sigmoid**</Highlight>.
+
+#### Justification of Final-Layer Activations
+
+- <Highlight color="blue">**Generator uses Tanh:**</Highlight> Tanh squashes outputs into $(-1, 1)$. Training images are normalized to the same range, and this matching range makes training more stable. Tanh is also <Highlight>**zero-centered**</Highlight>, which helps gradients flow better than Sigmoid.
+
+- <Highlight color="blue">**Discriminator uses Sigmoid:**</Highlight> the Discriminator performs <Highlight color="orange">**binary classification**</Highlight> — real (1) or fake (0). Sigmoid squashes any input into $[0,1]$, directly interpretable as a probability, and is used with Binary Cross-Entropy loss.
+
+---
+
+### Q8. (BT2-05) DCGAN Training Steps (Diagram + Explanation)
+
+#### Diagram
+
+<Mermaid chart={`flowchart TD
+  Z["Random Noise (z)"] --> G["Generator (G)"]
+  G --> F["Fake Image"]
+  R["Real Image (dataset)"] --> D["Discriminator (D)"]
+  F --> D
+  D --> O["Output: Real or Fake (0 to 1)"]
+  O --> L["Loss Calculated"]
+  L --> B["Backpropagation"]
+  B --> W["Update Weights"]
+`} />
+
+#### Step-by-Step Training Process
+
+1. <Highlight color="cyan">**Prepare batches:**</Highlight> take a batch of real images and generate a batch of random noise vectors $z$.
+
+2. <Highlight color="cyan">**Generate fake images:**</Highlight> pass $z$ through the Generator to produce fake images.
+
+3. <Highlight color="cyan">**Train the Discriminator:**</Highlight>
+   - Feed real images with label = 1 and fake images with label = 0.
+   - Compute the Discriminator's Binary Cross-Entropy loss.
+   - Update <Highlight color="orange">**only the Discriminator's weights**</Highlight> (Generator is frozen).
+
+4. <Highlight color="cyan">**Train the Generator:**</Highlight>
+   - Freeze the Discriminator's weights.
+   - Pass fake images through D, but now G's goal is to make D output "1" (i.e., fool it).
+   - Compute the Generator's loss and update <Highlight color="orange">**only the Generator's weights**</Highlight>.
+
+5. <Highlight color="cyan">**Repeat:**</Highlight> steps 1–4 for many iterations. Over time G produces more realistic images, and ideally D's output approaches <Highlight color="green">**0.5**</Highlight> (it can no longer tell real from fake).
+
+---
+
+### Q9. (BT5-10) WGAN-GP vs DCGAN: How WGAN-GP Fixes DCGAN's Problems
+
+**Background — Problems in DCGAN training:** DCGAN often suffers from <Highlight color="red">**unstable training**</Highlight>, <Highlight color="red">**vanishing gradients**</Highlight> (when D becomes too confident, G stops learning), and <Highlight color="red">**mode collapse**</Highlight> (G produces very limited variety). WGAN-GP was introduced to fix these issues.
+
+#### Comparison Table
+
+| Category | DCGAN | WGAN-GP |
+|---|---|---|
+| **Loss metric & correlation with quality** | Uses <Highlight color="orange">**JS Divergence**</Highlight> via Binary Cross-Entropy. This loss often does **not** correlate with visual quality — it can look fine even when images are bad. | Uses <Highlight color="green">**Wasserstein Distance**</Highlight> (Earth Mover's Distance). This loss **correlates well** with quality, so a lower loss genuinely means better images — useful for monitoring progress. |
+| **Output activation of D / Critic** | Uses <Highlight color="orange">**Sigmoid**</Highlight>, restricting output to $[0,1]$ (a probability). | Uses <Highlight color="green">**no activation**</Highlight> (linear output). It outputs a real-valued "realness score," so it is called a <Highlight>**Critic**</Highlight>, not a Discriminator. |
+| **Target labels** | Uses hard binary labels: real = 1, fake = 0, with BCE loss. | Uses **no binary labels**. The Critic instead <Highlight color="green">**maximizes the score gap**</Highlight> between real and fake images. |
+| **Constraint on weights/gradients** | <Highlight color="red">**No constraint**</Highlight>, a major cause of instability and vanishing gradients. | Applies a <Highlight color="green">**Gradient Penalty**</Highlight> that keeps the Critic's gradient norm near 1, enforcing the <Highlight>**1-Lipschitz constraint**</Highlight> required by the Wasserstein formula. |
+
+#### Conclusion
+
+By replacing JS Divergence with Wasserstein Distance, removing the Sigmoid activation, dropping binary labels, and enforcing the Lipschitz constraint through Gradient Penalty, WGAN-GP solves DCGAN's biggest problems — <Highlight color="green">**vanishing gradients, training instability, and mode collapse**</Highlight> — giving far more stable and reliable training.
+
+---
+
+### Q10. (BT3-05) Lipschitz Constraint
+
+**Definition:** a function $f(x)$ is <Highlight color="blue">**K-Lipschitz continuous**</Highlight> if there exists a constant $K \ge 0$ such that, for any two inputs $x_1$ and $x_2$:
+
+$$
+|f(x_1) - f(x_2)| \le K \cdot |x_1 - x_2|
+$$
+
+**Meaning in simple words:** the output cannot change faster than a fixed rate $K$, no matter how the input changes. The function can never have an <Highlight color="red">**infinitely steep slope**</Highlight> — its rate of change (gradient) is always limited.
+
+**Special case — 1-Lipschitz ($K = 1$):**
+
+$$
+|f(x_1) - f(x_2)| \le |x_1 - x_2|
+$$
+
+The output cannot change by more than the input changes, so the gradient must satisfy $|f'(x)| \le 1$ everywhere.
+
+**Why this matters in WGAN-GP:** the formula for Wasserstein Distance (from <Highlight color="orange">**Kantorovich-Rubinstein duality**</Highlight>) is only valid if the Critic $D$ is <Highlight color="green">**1-Lipschitz continuous**</Highlight>. If this condition fails, the distance is computed incorrectly and training becomes unstable.
+
+To enforce it in practice, WGAN-GP uses a <Highlight color="blue">**Gradient Penalty**</Highlight> that adds a term pushing the Critic's gradient norm toward 1, thereby satisfying the 1-Lipschitz requirement.
+
+---
+
+### Q11. (BT4-05) Mode Collapse
+
+**Definition:** <Highlight color="red">**Mode collapse**</Highlight> is a failure mode of GAN training in which the Generator stops exploring the full diversity of $p_{data}$ and instead learns to produce only a <Highlight color="orange">**small number of distinct outputs**</Highlight> (or even a single output) that reliably fool the Discriminator.
+
+**Why it happens:**
+
+- The Generator's only objective is to <Highlight color="blue">**maximize the Discriminator's error**</Highlight>, not to cover the whole data distribution.
+- If G discovers one particular output that D consistently rates as "real," gradient descent pushes G to repeat that same output for every input noise vector $z$, since it is the easiest way to keep fooling D.
+- D then learns to reject that one mode, so G jumps to a different narrow mode — the two networks can cycle between a few modes instead of converging.
+- This is closely tied to the fact that the standard GAN's <Highlight color="orange">**JS Divergence**</Highlight> loss provides very little useful gradient once D becomes confident, so G has no signal pushing it back toward the missing modes.
+
+**Symptoms:**
+
+- Generated samples look realistic individually but show <Highlight color="red">**very low diversity**</Highlight> across a batch (e.g., a face generator producing near-identical faces).
+- Loss curves can look stable even though the outputs are not diverse — <Highlight>**loss alone does not detect mode collapse**</Highlight>.
+
+**Typical remedies:** Wasserstein loss (WGAN/WGAN-GP), minibatch discrimination, unrolled GANs, and feature matching — all of which give the Generator a stronger signal to cover the full data distribution instead of collapsing onto a few modes.
+
+---
+
+### Q12. (BT2-05) WGAN-GP Critic Training Process
+
+Unlike the Discriminator in a standard GAN, the <Highlight color="blue">**Critic**</Highlight> in WGAN-GP is trained to approximate the <Highlight color="green">**Wasserstein distance**</Highlight> between $p_{data}$ and $p_{model}$, subject to the 1-Lipschitz constraint. Its training loop differs from DCGAN in several ways:
+
+1. <Highlight color="cyan">**Train the Critic more often than the Generator:**</Highlight> the Critic is updated $n_{critic}$ times (typically 5) for every single Generator update, so it stays close to an optimal estimate of the Wasserstein distance before G is updated.
+
+2. <Highlight color="cyan">**Sample real, fake, and interpolated points:**</Highlight> for each Critic step, take a batch of real images $x$, generate fake images $\hat{x} = G(z)$, and construct interpolated samples
+   $$
+   \tilde{x} = \epsilon x + (1-\epsilon)\hat{x}, \qquad \epsilon \sim U[0,1]
+   $$
+
+3. <Highlight color="cyan">**Compute the Critic loss:**</Highlight> the loss has two parts — the Wasserstein term and the gradient penalty term:
+   $$
+   L = \underbrace{\mathbb{E}[D(\hat{x})] - \mathbb{E}[D(x)]}_{\text{Wasserstein term}} + \lambda\,\underbrace{\mathbb{E}\Big[\big(\lVert \nabla_{\tilde{x}} D(\tilde{x}) \rVert_2 - 1\big)^2\Big]}_{\text{Gradient Penalty}}
+   $$
+   The first term is minimized by pushing real scores up and fake scores down (no Sigmoid, no binary labels). The second term penalizes the Critic whenever the gradient norm at $\tilde{x}$ strays from 1, enforcing the 1-Lipschitz constraint.
+
+4. <Highlight color="cyan">**Update only the Critic's weights**</Highlight> via backpropagation on $L$; the Generator is frozen during these steps.
+
+5. <Highlight color="cyan">**Generator update:**</Highlight> after $n_{critic}$ Critic steps, the Critic is frozen and G is updated once to minimize $-\mathbb{E}[D(G(z))]$, i.e. to increase the score the Critic assigns to its fakes.
+
+6. <Highlight color="cyan">**Repeat**</Highlight> this $n_{critic}$-to-1 cycle for the whole training run. Because the Critic's loss now tracks the Wasserstein distance, it can be monitored directly as a meaningful measure of training progress.
+
+---
+
+### Q13. (BT6-05) From Unconditional WGAN-GP to Conditional GAN (CGAN)
+
+To control *which* attribute is generated (e.g. blond vs. non-blond hair) instead of leaving it to random noise alone, both networks must be given the <Highlight color="blue">**label/attribute information**</Highlight> $y$ as an extra input, alongside the usual WGAN-GP loss and gradient-penalty machinery.
+
+#### Generator modification
+
+- <Highlight color="cyan">**Input:**</Highlight> concatenate the noise vector $z$ with a label embedding of $y$ (e.g. a one-hot or learned embedding of "blond" / "not blond") before the first Dense layer:
+  $$
+  \text{input} = [z \,;\, \text{embed}(y)]
+  $$
+- All hidden layers (transposed convolutions, BatchNorm, ReLU, final Tanh) stay <Highlight color="green">**unchanged**</Highlight> — only the input dimensionality grows.
+
+#### Critic (Discriminator) modification
+
+- <Highlight color="cyan">**Input:**</Highlight> the label must also reach the Critic, otherwise it cannot judge whether an image matches its intended attribute. Two common approaches:
+  - Broadcast $y$ as extra constant channels concatenated to the image before the first convolution, or
+  - Concatenate an embedding of $y$ to the flattened feature vector just before the final Dense layer.
+- The Critic's convolutional stack, LeakyReLU activations, and linear (no-activation) output layer remain <Highlight color="green">**unchanged**</Highlight>.
+
+#### Loss and training loop
+
+- The <Highlight color="orange">**Wasserstein loss with Gradient Penalty**</Highlight> is unchanged in form — it is simply now computed conditioned on $y$:
+  $$
+  L = \mathbb{E}[D(\hat{x}, y)] - \mathbb{E}[D(x, y)] + \lambda\,\mathbb{E}\Big[\big(\lVert \nabla_{\tilde{x}} D(\tilde{x}, y) \rVert_2 - 1\big)^2\Big]
+  $$
+- The $n_{critic}$-updates-per-Generator-update schedule, interpolated samples $\tilde{x}$, and 1-Lipschitz enforcement via Gradient Penalty all carry over directly from WGAN-GP.
+- At generation time, a user picks the desired label $y$ (e.g. "blond") and samples $z$, so $G(z, y)$ produces a face with the requested attribute rather than a random one.
+
+**Summary:** turning WGAN-GP into a CGAN requires <Highlight color="green">**no change to the loss function or the Lipschitz-enforcement mechanism**</Highlight> — only that the label $y$ is concatenated into both the Generator's and the Critic's inputs, making every score and every generated sample conditional on $y$.
